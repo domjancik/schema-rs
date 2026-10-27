@@ -27,6 +27,7 @@ A ready release is trusted code from a local commit, not a sandboxed untrusted b
 ## Verification
 
 - `python tests/update_server_test.py` checks readiness/signatures/tampering, policy, durable queues/sequence and GUI authorization.
+- On Linux, `python tests/update_device_signature_test.py` verifies OpenSSL ingestion, tampered artifacts/signatures, stale sequences and nonblocking FIFO rejection using temporary data.
 - On Linux, `python tests/update_device_transaction_test.py` runs isolated fake-service transaction tests, including failed health checks and boot recovery. It never accesses the live controller paths/services.
 - `cargo test --test update_barrier` verifies held evaluation, HTTP/direct edit rejection, clock resumption and undo.
 - Full repository checks remain mandatory. Ready-build workflows execute them again against their committed source snapshot.
