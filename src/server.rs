@@ -576,7 +576,7 @@ async fn guard(State(state): State<AppState>, request: Request, next: Next) -> R
         "x-content-type-options",
         header::HeaderValue::from_static("nosniff"),
     );
-    response.headers_mut().insert("content-security-policy",header::HeaderValue::from_static("default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'"));
+    response.headers_mut().insert("content-security-policy",header::HeaderValue::from_static("default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' data: blob:; img-src 'self' blob: data:; frame-ancestors 'none'; base-uri 'none'"));
     response.headers_mut().insert(
         header::CACHE_CONTROL,
         header::HeaderValue::from_static("no-store"),
@@ -586,6 +586,7 @@ async fn guard(State(state): State<AppState>, request: Request, next: Next) -> R
 pub fn router(state: AppState) -> Router {
     Router::new()
         .merge(crate::web_product::routes())
+        .merge(crate::scene_preview::routes())
 .route("/output-core.js",get(||async{ ([(header::CONTENT_TYPE,"text/javascript")],include_str!("../web/output-core.js")) }))
 .route("/output-ui.js",get(||async{ ([(header::CONTENT_TYPE,"text/javascript")],include_str!("../web/output-ui.js")) }))
 .route("/output-design.css",get(||async{ ([(header::CONTENT_TYPE,"text/css")],include_str!("../web/output-design.css")) }))

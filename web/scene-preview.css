@@ -1,0 +1,226 @@
+#scene-preview-dialog {
+  box-sizing: border-box;
+  width: min(1380px, 97vw);
+  height: 94dvh;
+  max-width: none;
+  max-height: none;
+  margin: auto;
+  padding: 18px;
+  background: #11181d;
+  color: #dce7eb;
+  border: 1px solid #3c514a;
+  border-radius: 12px;
+  overflow: hidden;
+  font: 13px/1.5 system-ui;
+}
+#scene-preview-dialog[open] {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+#scene-preview-dialog::backdrop {
+  background: #000b;
+  backdrop-filter: blur(5px);
+}
+#scene-preview-dialog .preview-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#scene-preview-dialog h2 {
+  font-size: 23px;
+  font-weight: 450;
+  margin: 2px 0;
+  letter-spacing: -0.6px;
+}
+.preview-kicker {
+  font:
+    8px ui-monospace,
+    monospace;
+  letter-spacing: 2px;
+  color: #72dec2;
+}
+#scene-preview-dialog button,
+#scene-preview-dialog select,
+.preview-file {
+  font: inherit;
+  background: #1c2b27;
+  color: #e4efea;
+  border: 1px solid #3e5d50;
+  border-radius: 6px;
+  min-height: 38px;
+  padding: 7px 10px;
+  cursor: pointer;
+}
+#scene-preview-dialog #preview-close {
+  font-size: 23px;
+  width: 42px;
+  padding: 0;
+}
+#scene-preview-dialog label {
+  margin: 0;
+  color: #b7c8c0;
+}
+#scene-preview-dialog select {
+  margin-left: 6px;
+}
+#scene-preview-dialog input {
+  accent-color: #72dec2;
+}
+.preview-controls,
+.preview-settings {
+  display: flex;
+  gap: 9px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.preview-settings {
+  font-size: 11px;
+}
+.preview-settings label {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.preview-settings input[type="range"] {
+  width: 80px;
+}
+.preview-file input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+.preview-file:focus-within {
+  outline: 2px solid #72dec2;
+  outline-offset: 3px;
+}
+.preview-viewport {
+  position: relative;
+  flex: 1;
+  min-height: 100px;
+  background: #10171b;
+  isolation: isolate;
+  border: 1px solid #2d423a;
+  border-radius: 7px;
+  overflow: hidden;
+}
+.preview-viewport canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  outline: none;
+}
+#preview-loading {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  pointer-events: none;
+  padding: 25px;
+  color: #a6c2b6;
+  background: #11181da6;
+}
+#preview-loading[hidden] {
+  display: none;
+}
+#preview-selection {
+  position: absolute;
+  left: 12px;
+  bottom: 10px;
+  color: #72dec2;
+  font:
+    11px ui-monospace,
+    monospace;
+  pointer-events: none;
+}
+.preview-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  font:
+    10px ui-monospace,
+    monospace;
+  color: #94ac9f;
+}
+.preview-note {
+  font-size: 10px !important;
+  color: #829c8c !important;
+  margin: 0 !important;
+}
+#preview-review {
+  padding: 10px;
+  border: 1px solid #648168;
+  background: #263b2d;
+  border-radius: 7px;
+}
+#preview-review[hidden] {
+  display: none;
+}
+#preview-review p {
+  margin: 0 0 8px !important;
+  font-size: 12px;
+}
+.preview-controls label {
+  white-space: nowrap;
+}
+.preview-controls [hidden] {
+  display: none !important;
+}
+@media (max-width: 700px) {
+  #scene-preview-dialog {
+    width: 100vw;
+    height: 100dvh;
+    padding: 8px;
+    border: 0;
+    border-radius: 0;
+  }
+  #scene-preview-dialog[open] {
+    gap: 7px;
+  }
+  #scene-preview-dialog h2 {
+    font-size: 17px;
+  }
+  .preview-kicker {
+    display: none;
+  }
+  .preview-controls {
+    gap: 5px;
+    font-size: 10px;
+  }
+  .preview-controls label {
+    flex: 1 1 120px;
+  }
+  .preview-controls select {
+    max-width: calc(100% - 45px);
+    padding: 5px;
+    min-height: 34px;
+  }
+  .preview-controls button,
+  .preview-file {
+    min-height: 34px !important;
+    font-size: 10px !important;
+    padding: 6px !important;
+  }
+  .preview-settings {
+    gap: 5px 9px;
+    font-size: 10px;
+  }
+  .preview-settings input[type="range"] {
+    width: 60px;
+  }
+  .preview-foot {
+    font-size: 8px;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+  .preview-note {
+    font-size: 8px !important;
+  }
+  .preview-controls #preview-reset-model {
+    display: none;
+  }
+}

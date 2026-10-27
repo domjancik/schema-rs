@@ -28,3 +28,5 @@ pub mod project_library;
 mod web_product;
 
 pub mod desktop;
+
+mod scene_preview;

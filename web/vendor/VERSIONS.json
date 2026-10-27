@@ -1,0 +1,7 @@
+{
+  "three": "0.186.1",
+  "esbuild": "0.25.12",
+  "source": "https://github.com/mrdoob/three.js",
+  "sha256": "0224ce8bba04586e90a6d4f945af9e228a213461b20f5398755c4ac462955531",
+  "command": "node scripts/gpu/build-vendor.cjs"
+}

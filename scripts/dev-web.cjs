@@ -40,6 +40,22 @@ assets['/icons/plugin-component.svg']=['icons/plugin-component.svg','image/svg+x
 for(const [file,mime] of [['app.webmanifest','application/manifest+json'],['app-icon-192.png','image/png'],['app-icon-512.png','image/png'],['offline.html','text/html'],['install-ui.js','text/javascript'],['mobile-worker.js','text/javascript']])assets['/'+file]=[file,mime];
 assets['/welcome']=['welcome.html','text/html; charset=utf-8'];
 for(const file of ['landing.css','landing.js'])assets['/'+file]=[file,file.endsWith('.css')?'text/css; charset=utf-8':'text/javascript; charset=utf-8'];
+assets['/preview']=['preview.html','text/html'];
+assets['/scene-preview.css']=['scene-preview.css','text/css'];
+assets['/scene-preview-core.mjs']=['scene-preview-core.mjs','text/javascript'];
+assets['/scene-preview-renderer.mjs']=['scene-preview-renderer.mjs','text/javascript'];
+assets['/scene-preview-ui.mjs']=['scene-preview-ui.mjs','text/javascript'];
+assets['/scene-preview-launcher.js']=['scene-preview-launcher.js','text/javascript'];
+assets['/scene-preview-page.js']=['scene-preview-page.js','text/javascript'];
+assets['/vendor/scene-three.mjs']=['vendor/scene-three.mjs','text/javascript'];
+assets['/vendor/scene-three.mjs.LEGAL.txt']=['vendor/scene-three.mjs.LEGAL.txt','text/plain'];
+assets['/vendor/THREE-LICENSE.txt']=['vendor/THREE-LICENSE.txt','text/plain'];
+assets['/vendor/VERSIONS.json']=['vendor/VERSIONS.json','application/json'];
+assets['/scene-assets/carpushit.glb']=['scene-assets/carpushit.glb','model/gltf-binary'];
+assets['/scene-assets/carpushit.project.json']=['scene-assets/carpushit.project.json','application/json'];
+assets['/scene-assets/carpushit-reference.json']=['scene-assets/carpushit-reference.json','application/json'];
+assets['/scene-assets/carpushit-lights.json']=['scene-assets/carpushit-lights.json','application/json'];
+assets['/scene-assets/carpushit-provenance.json']=['scene-assets/carpushit-provenance.json','application/json'];
 assets['/favicon.ico']=['favicon.ico','image/x-icon'];
 assets['/inputs.js']=['inputs.js','text/javascript; charset=utf-8'];
 assets['/catalog-browser.js']=['catalog-browser.js','text/javascript; charset=utf-8'];
@@ -88,6 +104,6 @@ http.createServer((req,res)=>{
   forward();return;
  }
  const asset=assets[req.url.split('?')[0]];if(req.method!=='GET'||!asset){res.writeHead(404);res.end();return;}
- res.setHeader('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'");
+ res.setHeader('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' data: blob:; img-src 'self' blob: data:; frame-ancestors 'none'; base-uri 'none'");
  fs.readFile(path.join(__dirname,'../web',asset[0]),(error,data)=>{if(error){res.writeHead(500);res.end('Asset unavailable');return;}res.setHeader('Content-Type',asset[1]);res.end(data);});
 }).listen(port,bind,()=>console.log(`Live web UI: http://${hostAddress(bind)}:${port} → engine ${backend.origin}${accessKey?' (access key required)':''}`));

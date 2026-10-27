@@ -94,3 +94,5 @@ function renderCurveEditor(n,box){
 }
 
 function renderValueCurveEditor(n,box){const target={fixture:ui.fixture,layer:ui.layer,node:n.id};let revision=ui.data.snapshot.revision;ui.valueCurve=SchemaBezier.mount(box,{properties:{...ui.catalog.find(b=>b.key===n.behavior)?.defaults,...n.properties},drivers:n.drivers,onCommit:async(key,value)=>{const ok=await command({type:'set_property',...target,key,value},revision);if(ok)revision=ui.data.snapshot.revision;return ok;}});}
+
+SchemaScenePreview.configure({getFrame:()=>ui.data,onSelect:id=>{if(ui.data)selectFixture(id,false);},onLoadProject:project=>command({type:'replace_project',project}),status});$('scene-preview').onclick=()=>SchemaScenePreview.open();

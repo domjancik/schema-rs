@@ -15,6 +15,9 @@ def package(binary,output,version,commit,notices):
         zipped.writestr('Schema-s/Start Schema-s.cmd',LAUNCHER)
         zipped.write(ROOT/'docs/desktop.md','Schema-s/README.txt')
         zipped.write(ROOT/'LICENSE','Schema-s/LICENSE.txt')
+        zipped.write(ROOT/'web/vendor/THREE-LICENSE.txt','Schema-s/THIRD_PARTY_NOTICES/three/LICENSE.txt')
+        zipped.write(ROOT/'web/vendor/scene-three.mjs.LEGAL.txt','Schema-s/THIRD_PARTY_NOTICES/three/BUNDLE_NOTICES.txt')
+        zipped.write(ROOT/'web/scene-assets/carpushit-provenance.json','Schema-s/SCENE_ASSET_PROVENANCE.json')
         for notice in sorted(notices.rglob('*')):
             if notice.is_file():zipped.write(notice,'Schema-s/THIRD_PARTY_NOTICES/'+notice.relative_to(notices).as_posix())
     temporary.replace(archive)

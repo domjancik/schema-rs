@@ -63,6 +63,10 @@ Enter the same token in the web **Connection** dialog, or set SCHEMA_TOKEN for t
 
 The web palette, child-above-parent layout, fixture sidebar and progressive disclosure follow the sibling [Stack Lab design](../schema-stack-lab/README.md). This implementation adapts that direction to an engine-backed editor; it does not copy its browser-local evaluator or claim every prototype interaction.
 
+## GPU scene view
+
+Open **Scene preview** in Studio, **GPU** in schémaboy, or `/preview`. [The GPU view](docs/gpu-preview.md) supports WebGPU/WebGL2, basic fixture lighting, depth-aware volumetrics, SSGI, generic GLB scenery and a read-only Carpushit reference preset. Explicit project loading is undoable and starts with output disabled.
+
 ## Web controls
 
 Blocks support [copy/paste and driver transfers](docs/block-clipboard.md), including Ctrl/Cmd+C/X/V, explicit block/branch modes, and one-step undo for cross-layer moves.

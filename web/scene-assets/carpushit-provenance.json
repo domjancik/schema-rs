@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "name": "Carpushit private preview bundle",
+  "frozen": true,
+  "geometry": "carpushit-preview.glb",
+  "sha256": "26724b97b48a81d3530f22d80b13e5a873f8eb263be4a28ba76f787a91143b48",
+  "bytes": 4560244,
+  "triangles": 58533,
+  "mesh_primitives": 6,
+  "materials": 6,
+  "bounds_schema_m": {
+    "min": [
+      -2.773585557937622,
+      0.005646584555506706,
+      -2.2222657203674316
+    ],
+    "max": [
+      2.774566173553467,
+      2.6593875885009766,
+      2.2640621662139893
+    ]
+  },
+  "units": "metres",
+  "up": "Y",
+  "front": "-Z",
+  "transform": "Already transformed from sourceBlender[X,Y,Z] to Schema[X,Z,Y], winding reversed and normals regenerated. No further axis swap, reflection, recentering or rescaling.",
+  "source_blend": "Carpushit_lighting_v15.blend",
+  "source_blend_sha256": "7274bfb85ef2accdcc978916a4aea7a4864ce29ef8e809177293794618568d5a",
+  "source_frame": 57,
+  "rights": "User-provided Carpushit assembly. Current authorization covers local/private preset bundling. Asset is not relicensed by application MIT license; no public publication authorization assumed.",
+  "geometry_notes": "Static six-role merged LOD; approximate plain PBR materials; excludes source ground, old CAD pendant/cable/rope fixtures and light-study housings; no textures/animation/lights.",
+  "validation": "Fresh Blender import:finite bounds,58533 triangles,0invalid vertices/degeneratefaces/zero-length edges/missing-material faces; independent roundtrip byte-identical; six-view renders inspected.",
+  "sources": "preview-lights.json",
+  "reference_full": "reference-full.json"
+}
