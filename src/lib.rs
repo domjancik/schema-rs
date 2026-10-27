@@ -26,3 +26,5 @@ pub mod output_design;
 pub mod project_library;
 
 mod web_product;
+
+pub mod desktop;

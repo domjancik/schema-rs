@@ -38,6 +38,8 @@ for(const [route,file,mime] of [['/mobile','mobile.html','text/html; charset=utf
 for(const file of ['projects-ui.js','bezier-editor.js','bezier-editor.css','block-edit.js','block-ui.js','block-edit.css','plugins-ui.js','plugins.css','block-picker.js','block-picker.css','stack-layout.js','stack-editor.css','output-core.js','output-ui.js','output-design.css'])assets['/'+file]=[file,file.endsWith('.css')?'text/css; charset=utf-8':'text/javascript; charset=utf-8'];
 assets['/icons/plugin-component.svg']=['icons/plugin-component.svg','image/svg+xml'];
 for(const [file,mime] of [['app.webmanifest','application/manifest+json'],['app-icon-192.png','image/png'],['app-icon-512.png','image/png'],['offline.html','text/html'],['install-ui.js','text/javascript'],['mobile-worker.js','text/javascript']])assets['/'+file]=[file,mime];
+assets['/welcome']=['welcome.html','text/html; charset=utf-8'];
+for(const file of ['landing.css','landing.js'])assets['/'+file]=[file,file.endsWith('.css')?'text/css; charset=utf-8':'text/javascript; charset=utf-8'];
 assets['/favicon.ico']=['favicon.ico','image/x-icon'];
 assets['/inputs.js']=['inputs.js','text/javascript; charset=utf-8'];
 assets['/catalog-browser.js']=['catalog-browser.js','text/javascript; charset=utf-8'];
@@ -47,6 +49,14 @@ http.createServer((req,res)=>{
  const host=req.headers.host;
  if(!hosts.has(host?.toLowerCase())||req.headers.origin&&req.headers.origin!==`http://${host}`){res.writeHead(403);res.end();return;}
  res.setHeader('Cache-Control','no-store');res.setHeader('X-Content-Type-Options','nosniff');
+ const downloadPath=req.url.split('?')[0];
+ if(['/downloads/latest.json','/downloads/Schema-s-Windows-x64.zip','/downloads/SHA256SUMS.txt'].includes(downloadPath)){
+  const filename=downloadPath.slice('/downloads/'.length),file=path.join(__dirname,'../target/distribution/current',filename);
+  if(!fs.existsSync(file)){res.writeHead(filename==='latest.json'?200:404,{'Content-Type':'application/json'});res.end(JSON.stringify({available:false}));return;}
+  res.setHeader('Content-Type',filename.endsWith('.zip')?'application/zip':filename.endsWith('.json')?'application/json':'text/plain');
+  if(filename.endsWith('.zip'))res.setHeader('Content-Disposition','attachment; filename="Schema-s-Windows-x64.zip"');
+  const stream=fs.createReadStream(file);stream.on('error',()=>res.destroy());stream.pipe(res);return;
+ }
  if(req.url.startsWith('/api/')){
   if(!authenticate(req,res))return;
   const headers={...req.headers,host:backend.host};if(headers.origin)headers.origin=backend.origin;

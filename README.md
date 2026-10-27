@@ -4,6 +4,10 @@ A working headless Rust engine with a hosted web editor and a remote ASCII TUI. 
 
 The engine includes all 178 documented public node keys plus eight Rust extensions. Source-level behavior, adapters and remaining conformance limits are described in [the catalog port](docs/catalog-port.md). Native gamma XML project files are not imported.
 
+## Product and installation
+
+Open `/welcome` for the Schema-s product page, desktop download and phone installation guidance. Studio remains at `/`; schémaboy is `/mobile`. The [Windows portable package](docs/desktop.md) runs the Rust engine and opens the system browser. [Phone installation](docs/phone-installation.md) installs the controller UI and needs the hosted engine; full PWA installation needs HTTPS or localhost.
+
 ## Run
 
 Requires Rust 1.88+.

@@ -21,8 +21,16 @@ async fn run() -> Result<(), String> {
     };
     let token = std::env::var("SCHEMA_TOKEN").ok();
     match args.first().map(String::as_str).unwrap_or("serve") {
-        "serve" => {
-            let root = PathBuf::from(option("--project", "schema-project"));
+        "serve" | "desktop" => {
+            let desktop = args.first().is_some_and(|arg| arg == "desktop");
+            let default_root = if desktop {
+                schema_rs::desktop::project_root()?
+                    .to_string_lossy()
+                    .into_owned()
+            } else {
+                "schema-project".into()
+            };
+            let root = PathBuf::from(option("--project", &default_root));
             if ["--resume-state", "--resume-session", "--fresh-session"]
                 .iter()
                 .filter(|flag| args.contains(&flag.to_string()))
@@ -79,9 +87,16 @@ async fn run() -> Result<(), String> {
                 project.output.target = args.get(i + 1).ok_or("--artnet requires IP:port")?.clone();
                 project.output.enabled = true;
             }
-            let bind: SocketAddr = option("--bind", "127.0.0.1:8787")
-                .parse()
-                .map_err(|_| "Invalid bind address")?;
+            let bind: SocketAddr = option(
+                "--bind",
+                if desktop {
+                    "127.0.0.1:8797"
+                } else {
+                    "127.0.0.1:8787"
+                },
+            )
+            .parse()
+            .map_err(|_| "Invalid bind address")?;
             if !bind.ip().is_loopback() && token.as_ref().is_none_or(|t| t.len() < 16) {
                 return Err("LAN hosting requires SCHEMA_TOKEN with at least 16 characters".into());
             }
@@ -130,6 +145,18 @@ async fn run() -> Result<(), String> {
             let app_state = AppState::new(runtime.controller.clone(), root, token);
             app_state.plugins.set_initial_watch(plugin_watch);
             let plugin_watcher = app_state.start_plugin_watcher()?;
+            if desktop && !args.iter().any(|arg| arg == "--no-open") {
+                let url = format!(
+                    "http://{}/welcome",
+                    listener.local_addr().map_err(|e| e.to_string())?
+                );
+                tokio::task::spawn_blocking(move || {
+                    std::thread::sleep(std::time::Duration::from_millis(200));
+                    if let Err(error) = schema_rs::desktop::open_browser(&url) {
+                        eprintln!("Open {url} in your browser ({error})");
+                    }
+                });
+            }
             axum::serve(listener, router(app_state))
                 .with_graceful_shutdown(async {
                     let _ = tokio::signal::ctrl_c().await;
@@ -239,7 +266,7 @@ async fn run() -> Result<(), String> {
             Ok(())
         }
         _ => {
-            println!("schema-rs serve [--project DIR] [--bind IP:PORT] [--artnet IP:PORT] [--resume-session FILE | --fresh-session]\nschema-rs tui [--server HOST:PORT]\nschema-rs plugins list|load FOLDER|reload ID|unload ID|watch on|off [--server HOST:PORT]\nschema-rs init [--project DIR]\nschema-rs validate FILE\nschema-rs capture\nLAN API authentication: SCHEMA_TOKEN environment variable");
+            println!("schema-rs desktop [--project DIR] [--bind 127.0.0.1:PORT] [--no-open]\nschema-rs serve [--project DIR] [--bind IP:PORT] [--artnet IP:PORT] [--resume-session FILE | --fresh-session]\nschema-rs tui [--server HOST:PORT]\nschema-rs plugins list|load FOLDER|reload ID|unload ID|watch on|off [--server HOST:PORT]\nschema-rs init [--project DIR]\nschema-rs validate FILE\nschema-rs capture\nLAN API authentication: SCHEMA_TOKEN environment variable");
             Ok(())
         }
     }
