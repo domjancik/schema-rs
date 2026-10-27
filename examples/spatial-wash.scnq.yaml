@@ -1,0 +1,15 @@
+name: Spatial wash
+stack:
+  Modify.Color.Dim:
+    Amount:
+      Modify.Value.MapTo:
+        Minimum: 0.1
+        Maximum: 1.0
+        in:
+          - Spatial.Axis:
+              Axis: 0
+              Minimum: -5
+              Maximum: 5
+    in:
+      - Create.Color.Color:
+          Color: '#c7eb8b'

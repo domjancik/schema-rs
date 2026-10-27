@@ -1,0 +1,5 @@
+const test=require('node:test'),assert=require('node:assert/strict'),O=require('../web/output-core.js');
+const p={dmx_models:{uv:{slots:[{},{}]}},fixtures:[{id:'a',model:'dimmer',dmx_model:'uv',address:1,universe:0,pixel_positions:[[0,0,0]]},{id:'b',model:'dimmer',address:3,universe:0,pixel_positions:[[0,0,0]]}]};
+test('footprints reserve constant slots and universe usage includes every occupied byte',()=>{assert.equal(O.footprint(p,p.fixtures[0]),2);assert.deepEqual(O.usage(p,0).slice(0,4).map(f=>f?.id||null),['a','a','b',null]);});
+test('drag to a vacant address is exact and occupied destinations reindex atomically',()=>{let cmd=O.patch(p,'a',0,10);assert.equal(cmd.commands[0].fixture.address,10);cmd=O.patch(p,'b',0,1);assert.deepEqual(cmd.commands.map(c=>[c.fixture.id,c.fixture.address]),[['b',1],['a',2]]);assert.throws(()=>O.patch(p,'a',0,512),/512/);assert.equal(p.fixtures[0].address,1);});
+test('daily dimming preview wraps between the last and first keyframes',()=>{assert.equal(O.level({enabled:true,master:1,points:[{minute:360,level:0},{minute:1080,level:1}]},0),0.5);assert.equal(O.time(60),'01:00');assert.equal(O.minute('23:59'),1439);});

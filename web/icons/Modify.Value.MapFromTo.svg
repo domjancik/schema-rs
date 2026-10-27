@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none" role="img" aria-labelledby="title description">
+  <title id="title">Map source to target</title>
+  <desc id="description">Map one numeric interval into another.</desc>
+  <rect x="3" y="3" width="42" height="42" rx="11" fill="#192426" stroke="#3b5550"/>
+  <g stroke="#72dec2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 13h26M11 35h26m-22-25v6m18-6v6M9 32v6m30-6v6m-22-16 7 7 7-7m-7-7v14" stroke="#c6b6df"/></g>
+</svg>

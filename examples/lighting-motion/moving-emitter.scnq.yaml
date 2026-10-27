@@ -1,0 +1,17 @@
+name: Moving mint point light
+stack:
+  Light.Emitter:
+    Type: Point
+    Color: '#72dec2'
+    Intensity: 1.5
+    Range: 8
+    Falloff: 2
+    Channel: stage
+    in:
+      - Create.Position.Bezier:
+          P0: [-4, 2, -3]
+          P1: [-4, 5, 4]
+          P2: [4, 1, -4]
+          P3: [4, 2, 3]
+          Duration: 8
+          Ping Pong: true

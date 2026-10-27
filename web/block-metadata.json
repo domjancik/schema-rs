@@ -1,0 +1,4235 @@
+{
+  "Create.Value.Constant": {
+    "name": "Constant value",
+    "category": "Create",
+    "domain": "Value",
+    "summary": "Generate a fixed scalar value.",
+    "description": "Produces the configured Value on every update. Use it as a steady control signal, an arithmetic input, or a simple parameter driver. Other incoming channels remain available.",
+    "keywords": [
+      "number",
+      "fixed",
+      "scalar",
+      "source"
+    ],
+    "inputs": "Optional child channels",
+    "output": "Value",
+    "icon": "icons/Create.Value.Constant.svg",
+    "parameter_types": {
+      "Value": "Float32"
+    }
+  },
+  "Create.Value.LFO": {
+    "name": "Oscillator",
+    "category": "Create",
+    "domain": "Value",
+    "summary": "Generate a repeating sawtooth, triangle, or sine wave.",
+    "description": "Produces a scalar wave from the engine clock using Period and Type. Use it for repeating dimming, modulation, and parameter drivers. It continues independently of UI rendering.",
+    "keywords": [
+      "lfo",
+      "wave",
+      "sine",
+      "triangle",
+      "saw",
+      "periodic",
+      "animation",
+      "time"
+    ],
+    "inputs": "Optional child channels",
+    "output": "Value",
+    "icon": "icons/Create.Value.LFO.svg",
+    "options": {
+      "Type": [
+        "Sawtooth",
+        "Triangle",
+        "Sine"
+      ]
+    },
+    "parameter_types": {
+      "Period": "Float32",
+      "Type": "EnumIndex"
+    }
+  },
+  "Create.Color.Constant": {
+    "name": "Grayscale constant",
+    "category": "Create",
+    "domain": "Color",
+    "summary": "Fill the fixture with a fixed grayscale color.",
+    "description": "Converts Value into neutral gray lightness, from black toward white. This is a color source rather than a scalar Constant value, even though both expose a Value parameter.",
+    "keywords": [
+      "white",
+      "black",
+      "gray",
+      "brightness",
+      "lightness",
+      "source"
+    ],
+    "inputs": "Optional child channels",
+    "output": "Colors",
+    "icon": "icons/Create.Color.Constant.svg",
+    "parameter_types": {
+      "Value": "Float32"
+    }
+  },
+  "Create.Color.Color": {
+    "name": "Color",
+    "category": "Create",
+    "domain": "Color",
+    "summary": "Generate a chosen RGB color and alpha.",
+    "description": "Produces the selected Color as an output color. Use hexadecimal RGB or RGBA values. The color becomes a fixture result directly, or can feed dimming, inversion, and color combinations.",
+    "keywords": [
+      "rgb",
+      "rgba",
+      "palette",
+      "hex",
+      "tint",
+      "source"
+    ],
+    "inputs": "Optional child channels",
+    "output": "Colors",
+    "icon": "icons/Create.Color.Color.svg",
+    "parameter_types": {
+      "Color": "Color4"
+    }
+  },
+  "Create.Layer.Above": {
+    "name": "Layer above",
+    "category": "Create",
+    "domain": "Layers",
+    "summary": "Read the result of a higher fixture layer.",
+    "description": "Copies a previously evaluated higher-layer result into this stack. Layer 0 means the nearest layer above, not absolute attachment layer zero. Use it to modify another layer without replacing its program.",
+    "keywords": [
+      "stack",
+      "higher",
+      "previous",
+      "layering",
+      "inherit"
+    ],
+    "inputs": "Higher-layer result banks",
+    "output": "Bank",
+    "icon": "icons/Create.Layer.Above.svg",
+    "options": {
+      "Layer": [
+        "First",
+        "Second",
+        "Third",
+        "Fourth"
+      ]
+    },
+    "parameter_types": {
+      "Layer": "EnumIndex"
+    }
+  },
+  "Modify.Value.Invert": {
+    "name": "Invert value",
+    "category": "Modify",
+    "domain": "Value",
+    "summary": "Reverse a scalar value around one.",
+    "description": "Writes 1 minus the incoming Value. This turns a rising control into a falling one and reverses normalized modulation. It does not automatically clamp the result.",
+    "keywords": [
+      "reverse",
+      "opposite",
+      "one minus",
+      "flip"
+    ],
+    "inputs": "Value",
+    "output": "Value",
+    "icon": "icons/Modify.Value.Invert.svg",
+    "parameter_types": {}
+  },
+  "Modify.Value.Clamp": {
+    "name": "Clamp value",
+    "category": "Modify",
+    "domain": "Value",
+    "summary": "Keep a value inside a minimum and maximum.",
+    "description": "Restricts the incoming Value to the configured bounds. Values outside the interval stop at an endpoint. Use it to constrain a control range without rescaling values already inside that range.",
+    "keywords": [
+      "limit",
+      "bound",
+      "range",
+      "saturate"
+    ],
+    "inputs": "Value",
+    "output": "Value",
+    "icon": "icons/Modify.Value.Clamp.svg",
+    "parameter_types": {
+      "Minimum": "Float32",
+      "Maximum": "Float32"
+    }
+  },
+  "Modify.Value.MapTo": {
+    "name": "Map output range",
+    "category": "Modify",
+    "domain": "Value",
+    "summary": "Rescale a normalized value into another range.",
+    "description": "Maps the incoming 0–1 Value to Minimum–Maximum. The normalized input is clamped. Swap the endpoints to reverse the output direction, for example mapping distance intensity from one down to zero.",
+    "keywords": [
+      "remap",
+      "scale",
+      "range",
+      "minimum",
+      "maximum",
+      "normalize"
+    ],
+    "inputs": "Value in 0–1",
+    "output": "Value",
+    "icon": "icons/Modify.Value.MapTo.svg",
+    "parameter_types": {
+      "Minimum": "Float32",
+      "Maximum": "Float32"
+    }
+  },
+  "Modify.Value.MapFromTo": {
+    "name": "Map source to target",
+    "category": "Modify",
+    "domain": "Value",
+    "summary": "Map one numeric interval into another.",
+    "description": "Normalizes Value between Source Min and Source Max, then scales it between Minimum and Maximum. Use it for physical distances, controller ranges, and falloff. Out-of-range inputs clamp to the endpoints.",
+    "keywords": [
+      "remap",
+      "scale",
+      "normalize",
+      "distance",
+      "falloff",
+      "range",
+      "source"
+    ],
+    "inputs": "Value in source range",
+    "output": "Value in target range",
+    "icon": "icons/Modify.Value.MapFromTo.svg",
+    "parameter_types": {
+      "Source Min": "Float32",
+      "Source Max": "Float32",
+      "Minimum": "Float32",
+      "Maximum": "Float32"
+    }
+  },
+  "Modify.Value.Steps": {
+    "name": "Quantize steps",
+    "category": "Modify",
+    "domain": "Value",
+    "summary": "Turn a continuous value into discrete steps.",
+    "description": "Quantizes incoming Value using Count. Use it for stepped brightness or coarse control changes. This is a numeric transformation; it does not create a timed sequence or stop child evaluation.",
+    "keywords": [
+      "quantize",
+      "staircase",
+      "discrete",
+      "count",
+      "stepped"
+    ],
+    "inputs": "Value",
+    "output": "Value",
+    "icon": "icons/Modify.Value.Steps.svg",
+    "parameter_types": {
+      "Count": "Int32"
+    }
+  },
+  "Modify.Value.Integrate": {
+    "name": "Accumulate value",
+    "category": "Modify",
+    "domain": "Value",
+    "summary": "Add incoming values over successive updates.",
+    "description": "Retains an accumulator and adds Value on each evaluation. Reset clears it; Wrap/Clamp selects endpoint behavior. This follows per-update accumulation, not an automatic per-second time integral.",
+    "keywords": [
+      "integrator",
+      "sum",
+      "accumulator",
+      "memory",
+      "reset",
+      "wrap"
+    ],
+    "inputs": "Value",
+    "output": "Retained Value",
+    "icon": "icons/Modify.Value.Integrate.svg",
+    "parameter_types": {
+      "Reset": "Boolean",
+      "Wrap/Clamp": "Boolean"
+    }
+  },
+  "Modify.SampleAndHold": {
+    "name": "Sample and hold",
+    "category": "Modify",
+    "domain": "Timing",
+    "summary": "Capture an input bank and hold it.",
+    "description": "While Sample is true, stores the merged child result. While false, returns the held bank rather than fresh child channels. Children still evaluate; the held output starts empty.",
+    "keywords": [
+      "sample",
+      "hold",
+      "capture",
+      "freeze",
+      "memory",
+      "latch"
+    ],
+    "inputs": "Any supported channels",
+    "output": "Held bank",
+    "icon": "icons/Modify.SampleAndHold.svg",
+    "parameter_types": {
+      "Sample": "Boolean"
+    }
+  },
+  "Combine.Add": {
+    "name": "Add",
+    "category": "Combine",
+    "domain": "Value",
+    "summary": "Add matching channels from ordered inputs.",
+    "description": "Adds supported scalar, position, and color channels across child results. The first child determines which channels exist in the result. Use Merge when you want to join distinct channels without arithmetic.",
+    "keywords": [
+      "sum",
+      "plus",
+      "arithmetic",
+      "combine"
+    ],
+    "inputs": "Ordered input banks",
+    "output": "Combined bank",
+    "icon": "icons/Combine.Add.svg",
+    "parameter_types": {}
+  },
+  "Combine.Multiply": {
+    "name": "Multiply",
+    "category": "Combine",
+    "domain": "Value",
+    "summary": "Multiply matching channels from ordered inputs.",
+    "description": "Multiplies matching supported channels using the first child’s output domain. Use it to combine scalar modulation signals. For applying a scalar to RGB colors, use Dim color and its Amount driver.",
+    "keywords": [
+      "product",
+      "times",
+      "multiply",
+      "modulate",
+      "arithmetic"
+    ],
+    "inputs": "Ordered input banks",
+    "output": "Combined bank",
+    "icon": "icons/Combine.Multiply.svg",
+    "parameter_types": {}
+  },
+  "Combine.Crossfade": {
+    "name": "Crossfade",
+    "category": "Combine",
+    "domain": "Color",
+    "summary": "Blend between ordered input banks.",
+    "description": "Uses Fader to interpolate across all ordered inputs. At zero it selects the first end; at one it reaches the last. This engine supports linear Shape 0 for scalar, position, and color interpolation.",
+    "keywords": [
+      "blend",
+      "mix",
+      "interpolate",
+      "lerp",
+      "fade"
+    ],
+    "inputs": "Ordered input banks",
+    "output": "Interpolated bank",
+    "icon": "icons/Combine.Crossfade.svg",
+    "options": {
+      "Shape": [
+        "Linear",
+        "Sine",
+        "Quad",
+        "Cubic",
+        "Quart",
+        "Quint",
+        "Expo",
+        "Circular",
+        "Elastic",
+        "Back",
+        "Bounce"
+      ]
+    },
+    "parameter_types": {
+      "Fader": "Float32",
+      "Shape": "EnumIndex"
+    }
+  },
+  "Filter.Manual": {
+    "name": "Manual gate",
+    "category": "Filter",
+    "domain": "Value",
+    "summary": "Pass or suppress an input bank.",
+    "description": "Returns merged input while Open is true, otherwise an empty bank. A closed gate does not stop child oscillators or other retained processes from evaluating. Empty output is distinct from explicit zero.",
+    "keywords": [
+      "gate",
+      "open",
+      "close",
+      "enable",
+      "switch",
+      "filter"
+    ],
+    "inputs": "Any supported channels",
+    "output": "Bank or empty",
+    "icon": "icons/Filter.Manual.svg",
+    "parameter_types": {
+      "Open": "Boolean"
+    }
+  },
+  "Convert.Value.ToColor": {
+    "name": "Value to grayscale",
+    "category": "Convert",
+    "domain": "Color",
+    "summary": "Convert a scalar into a grayscale color.",
+    "description": "Writes a neutral grayscale color from incoming Value, retaining other supported channels. Place it after spatial falloff or scalar effects when the result should become visible fixture light.",
+    "keywords": [
+      "convert",
+      "grayscale",
+      "brightness",
+      "value to color",
+      "scalar"
+    ],
+    "inputs": "Value",
+    "output": "Colors",
+    "icon": "icons/Convert.Value.ToColor.svg",
+    "parameter_types": {}
+  },
+  "Tool.Merge": {
+    "name": "Merge channels",
+    "category": "Tool",
+    "domain": "Utility",
+    "summary": "Join child banks by overwriting matching channels.",
+    "description": "Combines distinct channels from ordered children into one bank. Later children overwrite earlier values of the same channel. This is not addition, crossfading, or automatic concatenation.",
+    "keywords": [
+      "join",
+      "merge",
+      "union",
+      "channels",
+      "overwrite"
+    ],
+    "inputs": "Ordered input banks",
+    "output": "Merged bank",
+    "icon": "icons/Tool.Merge.svg",
+    "parameter_types": {}
+  },
+  "Modify.Color.Invert": {
+    "name": "Invert color",
+    "category": "Modify",
+    "domain": "Color",
+    "summary": "Blend colors toward their inverse.",
+    "description": "Uses Value as the inversion amount. Zero keeps the input colors; one moves RGB to its inverse. Use a driver to animate the amount while preserving the rest of the bank.",
+    "keywords": [
+      "negative",
+      "opposite",
+      "complement",
+      "reverse",
+      "color"
+    ],
+    "inputs": "Colors",
+    "output": "Colors",
+    "icon": "icons/Modify.Color.Invert.svg",
+    "parameter_types": {
+      "Value": "Float32"
+    }
+  },
+  "Modify.Color.Dim": {
+    "name": "Dim color",
+    "category": "Modify",
+    "domain": "Color",
+    "summary": "Scale RGB brightness with a scalar amount.",
+    "description": "Multiplies incoming RGB by Amount clamped to 0–1 while preserving alpha. Attach a scalar driver to Amount for LFOs, spatial falloff, or custom control. This Rust extension is distinct from the fixture’s final dimmer.",
+    "keywords": [
+      "dimmer",
+      "brightness",
+      "intensity",
+      "fade",
+      "light",
+      "attenuate"
+    ],
+    "inputs": "Colors + Amount",
+    "output": "Colors",
+    "icon": "icons/Modify.Color.Dim.svg",
+    "parameter_types": {
+      "Value": "Float32"
+    }
+  },
+  "Create.Position.Constant": {
+    "name": "Position",
+    "category": "Create",
+    "domain": "Position",
+    "summary": "Write an XYZ position into the result bank.",
+    "description": "Produces a Position channel in metres. Reference-aware distance blocks prefer evaluated positions with setup fallback. A generated Position does not directly rewrite the fixture’s authored scene coordinates.",
+    "keywords": [
+      "xyz",
+      "vector",
+      "coordinates",
+      "location",
+      "position"
+    ],
+    "inputs": "Optional child channels",
+    "output": "Position",
+    "icon": "icons/Create.Position.Constant.svg",
+    "parameter_types": {
+      "Position": "Vector3"
+    }
+  },
+  "Create.Reference.Fixture": {
+    "name": "Fixture reference",
+    "category": "Create",
+    "domain": "References",
+    "summary": "Refer to another fixture for downstream blocks.",
+    "description": "Writes a fixture reference selected by stable ID or native-style name. Distance consumes an incoming reference before its own Fixture selector. This carries a reference, not a copy of the target’s colors.",
+    "keywords": [
+      "fixture",
+      "reference",
+      "target",
+      "link",
+      "other"
+    ],
+    "inputs": "Optional child channels",
+    "output": "Fixture reference",
+    "icon": "icons/Create.Reference.Fixture.svg",
+    "parameter_types": {
+      "Fixture": "String"
+    }
+  },
+  "Create.Value.Distance": {
+    "name": "Fixture distance",
+    "category": "Create",
+    "domain": "Spatial",
+    "summary": "Measure distance to a referenced fixture.",
+    "description": "Resolves an incoming fixture reference before its Fixture property. The target prefers evaluated Position, then scene position. Auto/Setup controls the source position. The result is Euclidean distance in metres.",
+    "keywords": [
+      "fixture",
+      "distance",
+      "reference",
+      "metres",
+      "proximity",
+      "falloff"
+    ],
+    "inputs": "Optional Position / fixture reference",
+    "output": "Value",
+    "icon": "icons/Create.Value.Distance.svg",
+    "parameter_types": {
+      "Auto/Setup": "Boolean",
+      "Fixture": "String"
+    }
+  },
+  "Spatial.Distance": {
+    "name": "Spatial distance",
+    "category": "Spatial",
+    "domain": "Spatial",
+    "summary": "Measure distance to a fixture or fixed point.",
+    "description": "Select a Fixture for live referenced distance, or leave it empty to use Position as a fixed point. An incoming reference takes precedence. The result follows scene movement and can be mapped into light falloff.",
+    "keywords": [
+      "distance",
+      "fixture",
+      "point",
+      "proximity",
+      "radius",
+      "falloff",
+      "metres"
+    ],
+    "inputs": "Optional Position / fixture reference",
+    "output": "Value",
+    "icon": "icons/Spatial.Distance.svg"
+  },
+  "Spatial.Axis": {
+    "name": "Axis position",
+    "category": "Spatial",
+    "domain": "Spatial",
+    "summary": "Normalize a fixture’s position along X, Y, or Z.",
+    "description": "Reads the fixture’s scene coordinate on the selected Axis and maps Minimum–Maximum into 0–1. Use it for directional gradients or to give fixtures different modulation based on their placement.",
+    "keywords": [
+      "axis",
+      "xyz",
+      "coordinate",
+      "gradient",
+      "position",
+      "normalize"
+    ],
+    "inputs": "Fixture scene position",
+    "output": "Value",
+    "icon": "icons/Spatial.Axis.svg"
+  },
+  "Script.Value": {
+    "name": "Script value",
+    "category": "Script",
+    "domain": "Value",
+    "summary": "Evaluate a bounded custom scalar script.",
+    "description": "Runs a compiled Rhai script with input, t, fixture x/y/z, index, and count. Returns a number under a fixed operation budget. Prefer native blocks for routine maps and effects; use scripting for custom math.",
+    "keywords": [
+      "rhai",
+      "script",
+      "code",
+      "expression",
+      "formula",
+      "custom"
+    ],
+    "inputs": "Value + clock / fixture context",
+    "output": "Value",
+    "icon": "icons/Script.Value.svg"
+  },
+  "Light.Emitter": {
+    "name": "Light emitter",
+    "category": "Spatial",
+    "domain": "Lighting",
+    "summary": "Publish a point, plane or spot light from this fixture.",
+    "description": "Declares a 3D light field attached to this fixture or incoming Position. Point is isotropic; Plane is a finite rectangular area; Spot is a cone. Receivers sample all matching scene emitters in the same frame. Range is finite, Falloff controls attenuation, and Direction sets the plane normal or spot axis. This analytic field does not simulate shadows or scattering.",
+    "keywords": [
+      "light",
+      "emitter",
+      "point",
+      "plane",
+      "spot",
+      "volumetric",
+      "source"
+    ],
+    "inputs": "Optional Position and Colors",
+    "output": "Light field declaration",
+    "icon": "icons/Light.Emitter.svg",
+    "options": {
+      "Type": [
+        "Point",
+        "Plane",
+        "Spot"
+      ]
+    }
+  },
+  "Light.Receiver": {
+    "name": "Light receiver",
+    "category": "Spatial",
+    "domain": "Lighting",
+    "summary": "Sample scene lights at a 3D position.",
+    "description": "Adds matching emitters at the incoming or evaluated fixture Position, including its height. Writes received RGB and scalar intensity. Channel filters light groups; Fixture can restrict the emitter by ID or name. Include Self controls lights on the same fixture. Gain scales the result. Emitters are sampled before receiver-dependent effects; recursive light feedback is not supported.",
+    "keywords": [
+      "light",
+      "receiver",
+      "volume",
+      "sample",
+      "illumination"
+    ],
+    "inputs": "Optional Position / fixture reference",
+    "output": "Value and Colors",
+    "icon": "icons/Light.Receiver.svg"
+  },
+  "Create.Position.Current": {
+    "name": "Fixture position",
+    "category": "Create",
+    "domain": "Position",
+    "summary": "Read this fixture’s authored scene position.",
+    "description": "Copies this fixture’s setup XYZ coordinates into Position while retaining other incoming channels. Use this as a starting point for spatial effects or to anchor an emitter to its scene placement.",
+    "keywords": [
+      "fixture",
+      "setup",
+      "xyz",
+      "spatial"
+    ],
+    "inputs": "Optional child channels",
+    "output": "Position",
+    "icon": "icons/Create.Position.Current.svg",
+    "parameter_types": {}
+  },
+  "Create.Position.XYZ": {
+    "name": "XYZ position",
+    "category": "Create",
+    "domain": "Position",
+    "summary": "Build Position from three independently driven coordinates.",
+    "description": "Writes a Position from X, Y and Z in metres. Each coordinate accepts a scalar property driver, so native oscillators, random values and Bézier values can animate motion independently on every axis.",
+    "keywords": [
+      "coordinates",
+      "motion",
+      "animate",
+      "vector"
+    ],
+    "inputs": "X / Y / Z property drivers",
+    "output": "Position",
+    "icon": "icons/Create.Position.XYZ.svg",
+    "parameter_types": {
+      "X": "Float32",
+      "Y": "Float32",
+      "Z": "Float32"
+    }
+  },
+  "Create.Position.Group.Center": {
+    "name": "Group center",
+    "category": "Create",
+    "domain": "Position",
+    "summary": "Find the center of a fixture group’s bounds.",
+    "description": "Computes the axis-aligned setup bounds of fixtures in Group and writes their midpoint. An empty Group selects all fixtures; a missing named group produces a diagnostic and no Position.",
+    "keywords": [
+      "bounds",
+      "group",
+      "center",
+      "anchor"
+    ],
+    "inputs": "Fixture group setup",
+    "output": "Position",
+    "icon": "icons/Create.Position.Group.Center.svg",
+    "parameter_types": {
+      "Group": "String"
+    }
+  },
+  "Create.Position.Group.XYZ": {
+    "name": "Position in group",
+    "category": "Create",
+    "domain": "Position",
+    "summary": "Map normalized XYZ through a group’s bounds.",
+    "description": "Maps X, Y and Z through the selected group’s setup bounds. Padding expands the bounds in metres and Reverse flips the normalized coordinates. Each coordinate can be driven. An empty Group uses all fixtures.",
+    "keywords": [
+      "bounds",
+      "group",
+      "map",
+      "coordinates",
+      "animate"
+    ],
+    "inputs": "Normalized X / Y / Z",
+    "output": "Position",
+    "icon": "icons/Create.Position.Group.XYZ.svg",
+    "parameter_types": {
+      "Reverse": "Boolean",
+      "Padding": "Float32",
+      "Group": "String",
+      "X": "Float32",
+      "Y": "Float32",
+      "Z": "Float32"
+    }
+  },
+  "Create.Position.Group.Slide": {
+    "name": "Slide through group",
+    "category": "Create",
+    "domain": "Position",
+    "summary": "Animate along one axis of a fixture group.",
+    "description": "Moves through the selected group’s bounds on Axis (X=0, Y=1, Z=2), retaining the other center coordinates. Speed maps 0–1 to a 100–0.5 second cycle. Reverse flips direction. The native Speed Audio field must remain zero because no audio provider is installed.",
+    "keywords": [
+      "slide",
+      "motion",
+      "group",
+      "axis",
+      "animation"
+    ],
+    "inputs": "Fixture group setup",
+    "output": "Position",
+    "icon": "icons/Create.Position.Group.Slide.svg",
+    "options": {
+      "Axis": [
+        "X",
+        "Y",
+        "Z"
+      ]
+    },
+    "driver_exclusions": [
+      "Seed",
+      "Speed Audio"
+    ],
+    "parameter_types": {
+      "Speed": "Float32",
+      "Speed Audio": "Float32",
+      "Reverse": "Boolean",
+      "Group": "String",
+      "Axis": "EnumIndex"
+    }
+  },
+  "Create.Position.Group.Random": {
+    "name": "Random group motion",
+    "category": "Create",
+    "domain": "Position",
+    "summary": "Move among seeded random points inside group bounds.",
+    "description": "Selects repeatable random targets inside expanded group bounds. Speed maps 0–1 to 100–0.2 seconds per target. Continuous interpolates between targets; disabling it jumps. Seed zero derives an independent fixture/node seed. Speed Audio must remain zero. Random sequence and interpolation are defined by this Rust port.",
+    "keywords": [
+      "random",
+      "group",
+      "motion",
+      "wander",
+      "animation"
+    ],
+    "inputs": "Fixture group setup",
+    "output": "Position",
+    "icon": "icons/Create.Position.Group.Random.svg",
+    "driver_exclusions": [
+      "Seed",
+      "Speed Audio"
+    ],
+    "parameter_types": {
+      "Group": "String",
+      "Speed": "Float32",
+      "Speed Audio": "Float32",
+      "Padding": "Float32",
+      "Continuous": "Boolean"
+    }
+  },
+  "Create.Value.Random": {
+    "name": "Random value",
+    "category": "Create",
+    "domain": "Value",
+    "summary": "Generate repeatable held or smoothly changing random values.",
+    "description": "Produces seeded values between zero and one. Interval controls target changes, Randomness jitters that interval, Filter Time interpolates toward each new target, and Pause freezes the generator. Seed zero derives a fixture/node seed; a nonzero seed is explicit. The Rust random sequence and filter are deterministic, not an exact clone of dependency-library randomness.",
+    "keywords": [
+      "random",
+      "noise",
+      "sample",
+      "hold",
+      "seed",
+      "generator"
+    ],
+    "inputs": "Optional child channels",
+    "output": "Value",
+    "icon": "icons/Create.Value.Random.svg",
+    "driver_exclusions": [
+      "Seed",
+      "Speed Audio"
+    ],
+    "parameter_types": {
+      "Interval": "Float32",
+      "Filter Time": "Float32",
+      "Pause": "Boolean",
+      "Randomness": "Float32"
+    }
+  },
+  "Modify.Value.RandomizeTrigger": {
+    "name": "Random trigger gate",
+    "category": "Modify",
+    "domain": "Value",
+    "summary": "Admit rising-edge triggers according to a probability.",
+    "description": "On each incoming Value rising above 0.5, draws a seeded random value and admits the pulse with Probability. Holds that decision until the input falls. Zero never admits and one always admits. Seed zero derives a fixture/node seed. Uses this port’s deterministic random sequence.",
+    "keywords": [
+      "random",
+      "probability",
+      "trigger",
+      "gate",
+      "seed"
+    ],
+    "inputs": "Value trigger",
+    "output": "Value (0 or 1)",
+    "icon": "icons/Modify.Value.RandomizeTrigger.svg",
+    "driver_exclusions": [
+      "Seed",
+      "Speed Audio"
+    ],
+    "parameter_types": {
+      "Probability": "Float32"
+    }
+  },
+  "Create.Position.Random": {
+    "name": "Random position",
+    "category": "Create",
+    "domain": "Position",
+    "summary": "Generate seeded 3D motion inside a box.",
+    "description": "Selects random XYZ targets between Minimum and Maximum. Interval controls target changes; Filter Time interpolates motion, Randomness jitters the interval, and Pause freezes it. Seed zero derives a fixture/node seed. This native Rust extension is useful for moving light emitters.",
+    "keywords": [
+      "random",
+      "position",
+      "box",
+      "wander",
+      "motion",
+      "seed"
+    ],
+    "inputs": "Optional child channels",
+    "output": "Position",
+    "icon": "icons/Create.Position.Random.svg",
+    "driver_exclusions": [
+      "Seed",
+      "Speed Audio"
+    ]
+  },
+  "Create.Position.Bezier": {
+    "name": "Bézier position",
+    "category": "Create",
+    "domain": "Position",
+    "summary": "Animate a cubic Bézier path through 3D space.",
+    "description": "Evaluates a cubic curve with endpoints P0/P3 and handles P1/P2, all in metres. Progress 0–1 selects a point explicitly; negative Progress uses incoming Value or engine time divided by Duration. Loop repeats and Ping Pong reverses alternate cycles. The inspector offers an X/Z curve editor; numeric vectors retain full 3D control.",
+    "keywords": [
+      "bezier",
+      "curve",
+      "path",
+      "motion",
+      "animation",
+      "cubic"
+    ],
+    "inputs": "Optional Value progress",
+    "output": "Position",
+    "icon": "icons/Create.Position.Bezier.svg"
+  },
+  "Create.Value.Bezier": {
+    "name": "Bézier value",
+    "category": "Create",
+    "domain": "Value",
+    "summary": "Animate a scalar cubic curve for easing and modulation.",
+    "description": "Evaluates a cubic from Start through Control1 and Control2 to End. Progress 0–1 selects an exact point; negative Progress uses incoming Value or engine time divided by Duration. Loop and Ping Pong control clock playback. Use it as an XYZ driver, dimming envelope or emitter parameter driver.",
+    "keywords": [
+      "bezier",
+      "curve",
+      "easing",
+      "envelope",
+      "animation",
+      "cubic"
+    ],
+    "inputs": "Optional Value progress",
+    "output": "Value",
+    "icon": "icons/Create.Value.Bezier.svg"
+  },
+  "Assign.Content": {
+    "name": "Content",
+    "category": "Assign",
+    "domain": "Utility",
+    "summary": "Appends a content-load command for a target group, rather than rendering content immediately.",
+    "description": "Appends a content-load command for a target group, rather than rendering content immediately. Named stacks and content come from the project registry. Assignments execute through engine commands after fixture and director evaluation.",
+    "keywords": [
+      "assign",
+      "content",
+      "utility",
+      "assign"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Deferred scene action",
+    "icon": "icons/Assign.Content.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Duration": "Float32",
+      "Content": "String",
+      "Group": "String",
+      "Transition": "String",
+      "Enabled": "Boolean"
+    }
+  },
+  "Assign.Director": {
+    "name": "Director",
+    "category": "Assign",
+    "domain": "Utility",
+    "summary": "Emits a director assignment command after merging children; Enabled controls command production.",
+    "description": "Emits a director assignment command after merging children; Enabled controls command production. Named stacks and content come from the project registry. Assignments execute through engine commands after fixture and director evaluation.",
+    "keywords": [
+      "assign",
+      "director",
+      "utility",
+      "assign"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Deferred scene action",
+    "icon": "icons/Assign.Director.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Stack": "String",
+      "Layer": "Int32",
+      "Enabled": "Boolean"
+    }
+  },
+  "Assign.Fixture": {
+    "name": "Fixture",
+    "category": "Assign",
+    "domain": "Utility",
+    "summary": "Appends a command to assign a named stack to a fixture on layer 0 when Enabled. Applying that command is a separate runtime operation.",
+    "description": "Appends a command to assign a named stack to a fixture on layer 0 when Enabled. Applying that command is a separate runtime operation. Named stacks and content come from the project registry. Assignments execute through engine commands after fixture and director evaluation.",
+    "keywords": [
+      "assign",
+      "fixture",
+      "utility",
+      "assign"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "A>Single",
+    "icon": "icons/Assign.Fixture.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Stack": "String",
+      "Fixture": "String",
+      "Transition": "String",
+      "Duration": "Float32",
+      "Enabled": "Boolean"
+    }
+  },
+  "Assign.Global.Color": {
+    "name": "Global Color",
+    "category": "Assign",
+    "domain": "Color",
+    "summary": "Removes local color output and appends a global color assignment with fade duration and slot selection.",
+    "description": "Removes local color output and appends a global color assignment with fade duration and slot selection. Named stacks and content come from the project registry. Assignments execute through engine commands after fixture and director evaluation.",
+    "keywords": [
+      "assign",
+      "global",
+      "color",
+      "color",
+      "assign"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Deferred scene action",
+    "icon": "icons/Assign.Global.Color.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Fade Duration": "Float32",
+      "Slot": "Int32",
+      "Default": "Color4"
+    }
+  },
+  "Assign.Group": {
+    "name": "Group",
+    "category": "Assign",
+    "domain": "Utility",
+    "summary": "Appends a group stack assignment carrying a selectable layer, transition, and duration.",
+    "description": "Appends a group stack assignment carrying a selectable layer, transition, and duration. Named stacks and content come from the project registry. Assignments execute through engine commands after fixture and director evaluation.",
+    "keywords": [
+      "assign",
+      "group",
+      "utility",
+      "assign"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Deferred scene action",
+    "icon": "icons/Assign.Group.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Duration": "Float32",
+      "Stack": "String",
+      "Group": "String",
+      "Transition": "String",
+      "Enabled": "Boolean",
+      "Layer": "Int32"
+    }
+  },
+  "Combine.Audio.Add": {
+    "name": "Audio Add",
+    "category": "Combine",
+    "domain": "Audio",
+    "summary": "Combines audio signals through the editable AddAudioOperator graph. Its constructor reference still names AudioAddOperator, a source naming mismatch.",
+    "description": "Combines audio signals through the editable AddAudioOperator graph. Its constructor reference still names AudioAddOperator, a source naming mismatch. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "combine",
+      "audio",
+      "add",
+      "audio",
+      "combine"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Selected or transformed result bank",
+    "icon": "icons/Combine.Audio.Add.svg",
+    "source_scope": "editable-only",
+    "parameter_types": {}
+  },
+  "Combine.Audio.Multiply": {
+    "name": "Audio Multiply",
+    "category": "Combine",
+    "domain": "Audio",
+    "summary": "Multiplies audio-signal inputs through the audio plugin graph rather than multiplying scalar property-bank Value fields.",
+    "description": "Multiplies audio-signal inputs through the audio plugin graph rather than multiplying scalar property-bank Value fields. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "combine",
+      "audio",
+      "multiply",
+      "audio",
+      "combine"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Selected or transformed result bank",
+    "icon": "icons/Combine.Audio.Multiply.svg",
+    "source_scope": "editable-only",
+    "parameter_types": {}
+  },
+  "Combine.Color.Distance": {
+    "name": "Color Distance",
+    "category": "Combine",
+    "domain": "Value",
+    "summary": "Calculates a color-space distance between selected child colors and stores a scalar Value while retaining merged context.",
+    "description": "Calculates a color-space distance between selected child colors and stores a scalar Value while retaining merged context. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "combine",
+      "color",
+      "distance",
+      "color",
+      "combine"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Value",
+    "icon": "icons/Combine.Color.Distance.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {}
+  },
+  "Combine.Color.Max": {
+    "name": "Color Max",
+    "category": "Combine",
+    "domain": "Color",
+    "summary": "Combines child colors through a MixRGB constructor variant registered as Max; preserve its constructor configuration separately from Mix.",
+    "description": "Combines child colors through a MixRGB constructor variant registered as Max; preserve its constructor configuration separately from Mix. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "combine",
+      "color",
+      "max",
+      "color",
+      "combine"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Colors",
+    "icon": "icons/Combine.Color.Max.svg",
+    "source_scope": "editable-only",
+    "parameter_types": {}
+  },
+  "Combine.Color.Mix": {
+    "name": "Color Mix",
+    "category": "Combine",
+    "domain": "Color",
+    "summary": "Combines child colors through the MixRGB graph; this registration shares a definition with Max but has a distinct constructor site.",
+    "description": "Combines child colors through the MixRGB graph; this registration shares a definition with Max but has a distinct constructor site. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "combine",
+      "color",
+      "mix",
+      "color",
+      "combine"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Colors",
+    "icon": "icons/Combine.Color.Mix.svg",
+    "source_scope": "editable-only",
+    "parameter_types": {}
+  },
+  "Combine.Texture.Multiply": {
+    "name": "Texture Multiply",
+    "category": "Combine",
+    "domain": "Texture",
+    "summary": "Multiplies texture inputs through the Surfaces texture-combination graph, separately from scalar/color multiplication.",
+    "description": "Multiplies texture inputs through the Surfaces texture-combination graph, separately from scalar/color multiplication. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "combine",
+      "texture",
+      "multiply",
+      "texture",
+      "combine"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Selected or transformed result bank",
+    "icon": "icons/Combine.Texture.Multiply.svg",
+    "source_scope": "editable-only",
+    "parameter_types": {}
+  },
+  "Combine.Value.Boolean": {
+    "name": "Value Boolean",
+    "category": "Combine",
+    "domain": "Value",
+    "summary": "Thresholds each child Value at greater than 0.5, combines the booleans with selected AND or OR, and writes 0 or 1.",
+    "description": "Thresholds each child Value at greater than 0.5, combines the booleans with selected AND or OR, and writes 0 or 1. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "combine",
+      "value",
+      "boolean",
+      "value",
+      "combine"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Value",
+    "icon": "icons/Combine.Value.Boolean.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "And/Or": "Boolean"
+    }
+  },
+  "Combine.Value.Compare": {
+    "name": "Value Compare",
+    "category": "Combine",
+    "domain": "Value",
+    "summary": "Compares the first two child Values with a selectable comparison operator, writing a numeric boolean into merged state.",
+    "description": "Compares the first two child Values with a selectable comparison operator, writing a numeric boolean into merged state. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "combine",
+      "value",
+      "compare",
+      "value",
+      "combine"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Value",
+    "icon": "icons/Combine.Value.Compare.svg",
+    "source_scope": "export-and-editable",
+    "options": {
+      "Operator": [
+        ">",
+        ">=",
+        "<",
+        "<=",
+        "="
+      ]
+    },
+    "parameter_types": {
+      "Operator": "EnumIndex",
+      "Epsilon": "Float32"
+    }
+  },
+  "Convert.Audio.Meter": {
+    "name": "Audio Meter",
+    "category": "Convert",
+    "domain": "Value",
+    "summary": "Derives metering data from an audio signal through the AudioMeterConvert graph.",
+    "description": "Derives metering data from an audio signal through the AudioMeterConvert graph. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "convert",
+      "audio",
+      "meter",
+      "audio",
+      "convert"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Value",
+    "icon": "icons/Convert.Audio.Meter.svg",
+    "source_scope": "editable-only",
+    "parameter_types": {}
+  },
+  "Convert.Speed.PositionToTarget": {
+    "name": "Speed PositionToTarget",
+    "category": "Convert",
+    "domain": "Speed",
+    "summary": "Convert the signed difference between two child values into Speed.",
+    "description": "The first child supplies the current value and the second supplies its target. A retained difference limiter bounds changes in magnitude; the sign indicates direction.",
+    "keywords": [
+      "convert",
+      "speed",
+      "positiontotarget",
+      "utility",
+      "convert"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Speed",
+    "icon": "icons/Convert.Speed.PositionToTarget.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {}
+  },
+  "Convert.Value.ToDuration": {
+    "name": "Value ToDuration",
+    "category": "Convert",
+    "domain": "Duration",
+    "summary": "Copies merged Value into Duration while preserving other merged channels.",
+    "description": "Copies merged Value into Duration while preserving other merged channels. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "convert",
+      "value",
+      "toduration",
+      "value",
+      "convert"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Duration",
+    "icon": "icons/Convert.Value.ToDuration.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {}
+  },
+  "Convert.Value.ToSpeed": {
+    "name": "Value ToSpeed",
+    "category": "Convert",
+    "domain": "Speed",
+    "summary": "Converts merged Value into Speed using the selected Range.",
+    "description": "Converts merged Value into Speed using the selected Range. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "convert",
+      "value",
+      "tospeed",
+      "value",
+      "convert"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Speed",
+    "icon": "icons/Convert.Value.ToSpeed.svg",
+    "source_scope": "export-and-editable",
+    "options": {
+      "Range": [
+        "Positive",
+        "Negative",
+        "Both"
+      ]
+    },
+    "parameter_types": {
+      "Range": "EnumIndex"
+    }
+  },
+  "Create.AnimationWheel.Position": {
+    "name": "AnimationWheel Position",
+    "category": "Create",
+    "domain": "Position",
+    "summary": "Writes an animation-wheel position to the selected slot.",
+    "description": "Writes an animation-wheel position to the selected slot. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "animationwheel",
+      "position",
+      "position",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Selected or transformed result bank",
+    "icon": "icons/Create.AnimationWheel.Position.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Value": "Float32",
+      "Slot": "Int32"
+    }
+  },
+  "Create.AnimationWheel.Rotation": {
+    "name": "AnimationWheel Rotation",
+    "category": "Create",
+    "domain": "Rotation",
+    "summary": "Writes an animation-wheel rotation to the selected slot.",
+    "description": "Writes an animation-wheel rotation to the selected slot. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "animationwheel",
+      "rotation",
+      "rotation",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Selected or transformed result bank",
+    "icon": "icons/Create.AnimationWheel.Rotation.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Value": "Float32",
+      "Slot": "Int32"
+    }
+  },
+  "Create.Audio.Input": {
+    "name": "Audio Input",
+    "category": "Create",
+    "domain": "Audio",
+    "summary": "Provides a live audio-input signal through the audio plugin source graph.",
+    "description": "Provides a live audio-input signal through the audio plugin source graph. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "audio",
+      "input",
+      "audio",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Selected or transformed result bank",
+    "icon": "icons/Create.Audio.Input.svg",
+    "source_scope": "editable-only",
+    "parameter_types": {
+      "Index": "Int32",
+      "Gain": "Float32"
+    }
+  },
+  "Create.Audio.OSC": {
+    "name": "Audio OSC",
+    "category": "Create",
+    "domain": "Audio",
+    "summary": "Obtains an audio-signal source through OSC/audio plugin context; this produces signal data rather than the scalar OSC Value blocks.",
+    "description": "Obtains an audio-signal source through OSC/audio plugin context; this produces signal data rather than the scalar OSC Value blocks. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "audio",
+      "osc",
+      "audio",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Selected or transformed result bank",
+    "icon": "icons/Create.Audio.OSC.svg",
+    "source_scope": "editable-only",
+    "parameter_types": {
+      "Frequency": "Float32",
+      "Gain": "Float32",
+      "Waveform": "EnumIndex",
+      "Symmetry": "Float32"
+    }
+  },
+  "Create.Audio.Sample": {
+    "name": "Audio Sample",
+    "category": "Create",
+    "domain": "Audio",
+    "summary": "Provides an audio sample/playback signal configured through the audio plugin source graph.",
+    "description": "Provides an audio sample/playback signal configured through the audio plugin source graph. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "audio",
+      "sample",
+      "audio",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Selected or transformed result bank",
+    "icon": "icons/Create.Audio.Sample.svg",
+    "source_scope": "editable-only",
+    "parameter_types": {
+      "Speed": "Float32",
+      "Play Restarts": "Boolean",
+      "Play": "Boolean",
+      "Gain": "Float32",
+      "Loop": "Boolean"
+    }
+  },
+  "Create.BeamShaper.Position": {
+    "name": "BeamShaper Position",
+    "category": "Create",
+    "domain": "Position",
+    "summary": "Writes a beam-shaper position into merged fixture state.",
+    "description": "Writes a beam-shaper position into merged fixture state. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "beamshaper",
+      "position",
+      "position",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Selected or transformed result bank",
+    "icon": "icons/Create.BeamShaper.Position.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Value": "Float32"
+    }
+  },
+  "Create.Blade.Position": {
+    "name": "Blade Position",
+    "category": "Create",
+    "domain": "Position",
+    "summary": "Writes a blade position to the selected blade slot.",
+    "description": "Writes a blade position to the selected blade slot. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "blade",
+      "position",
+      "position",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Selected or transformed result bank",
+    "icon": "icons/Create.Blade.Position.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Value": "Float32",
+      "Slot": "Int32"
+    }
+  },
+  "Create.Blade.Rotation": {
+    "name": "Blade Rotation",
+    "category": "Create",
+    "domain": "Rotation",
+    "summary": "Writes a blade rotation to the selected blade slot.",
+    "description": "Writes a blade rotation to the selected blade slot. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "blade",
+      "rotation",
+      "rotation",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Selected or transformed result bank",
+    "icon": "icons/Create.Blade.Rotation.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Value": "Float32",
+      "Slot": "Int32"
+    }
+  },
+  "Create.Color.Audio.FFTPixels": {
+    "name": "Color Audio FFTPixels",
+    "category": "Create",
+    "domain": "Color",
+    "summary": "Generates FFT-driven pixel color data in the AudioGeister/Geister sources; duplicate registration sites share this key.",
+    "description": "Generates FFT-driven pixel color data in the AudioGeister/Geister sources; duplicate registration sites share this key. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "color",
+      "audio",
+      "fftpixels",
+      "audio",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Colors",
+    "icon": "icons/Create.Color.Audio.FFTPixels.svg",
+    "source_scope": "editable-only",
+    "parameter_types": {
+      "Gain": "Float32",
+      "Linear/Spline": "Boolean"
+    }
+  },
+  "Create.Color.Audio.Level": {
+    "name": "Color Audio Level",
+    "category": "Create",
+    "domain": "Color",
+    "summary": "Generates pixel color from an audio level, with Value scaling and an invert-level option.",
+    "description": "Generates pixel color from an audio level, with Value scaling and an invert-level option. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "color",
+      "audio",
+      "level",
+      "audio",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Colors",
+    "icon": "icons/Create.Color.Audio.Level.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Value": "Float32",
+      "Invert Level": "Boolean",
+      "Slot": "Int32"
+    }
+  },
+  "Create.Color.External": {
+    "name": "Color External",
+    "category": "Create",
+    "domain": "Color",
+    "summary": "Slices a selected Global external-color slot using fixture pixel offset/count, with opaque-black fallback when the external spread is empty.",
+    "description": "Slices a selected Global external-color slot using fixture pixel offset/count, with opaque-black fallback when the external spread is empty. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "color",
+      "external",
+      "color",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Colors",
+    "icon": "icons/Create.Color.External.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Slot": "Int32"
+    }
+  },
+  "Create.Color.Flash.Beat": {
+    "name": "Color Flash Beat",
+    "category": "Create",
+    "domain": "Color",
+    "summary": "Generates a color flash envelope from selected audio beat/frequency events, probability, and threshold controls.",
+    "description": "Generates a color flash envelope from selected audio beat/frequency events, probability, and threshold controls. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "color",
+      "flash",
+      "beat",
+      "color",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Colors",
+    "icon": "icons/Create.Color.Flash.Beat.svg",
+    "source_scope": "export-and-editable",
+    "options": {
+      "Frequency": [
+        "Low",
+        "MidLow",
+        "MidHigh",
+        "High"
+      ]
+    },
+    "parameter_types": {
+      "Probability": "Float32",
+      "Attack": "Float32",
+      "Decay": "Float32",
+      "Threshold": "Float32",
+      "Slot": "Int32",
+      "Frequency": "EnumIndex"
+    }
+  },
+  "Create.Color.Flash.BPM": {
+    "name": "Color Flash BPM",
+    "category": "Create",
+    "domain": "Color",
+    "summary": "Generates a flash envelope from a retained oscillator driven by BPM and attack/decay settings.",
+    "description": "Generates a flash envelope from a retained oscillator driven by BPM and attack/decay settings. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "color",
+      "flash",
+      "bpm",
+      "color",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Colors",
+    "icon": "icons/Create.Color.Flash.BPM.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "BPM": "Int32",
+      "Attack": "Float32",
+      "Decay": "Float32"
+    }
+  },
+  "Create.Color.Flash.Timed": {
+    "name": "Color Flash Timed",
+    "category": "Create",
+    "domain": "Color",
+    "summary": "Generates timed color flashes with randomized intervals and an attack/decay envelope.",
+    "description": "Generates timed color flashes with randomized intervals and an attack/decay envelope. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "color",
+      "flash",
+      "timed",
+      "color",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Colors",
+    "icon": "icons/Create.Color.Flash.Timed.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Interval": "Float32",
+      "Randomness": "Float32",
+      "Attack": "Float32",
+      "Decay": "Float32"
+    }
+  },
+  "Create.Color.Global": {
+    "name": "Color Global",
+    "category": "Create",
+    "domain": "Color",
+    "summary": "Reads a slotted Global color and repeats it for the current fixture's pixel count.",
+    "description": "Reads a slotted Global color and repeats it for the current fixture's pixel count. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "color",
+      "global",
+      "color",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Colors",
+    "icon": "icons/Create.Color.Global.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Slot": "Int32"
+    }
+  },
+  "Create.Color.OSC": {
+    "name": "Color OSC",
+    "category": "Create",
+    "domain": "Color",
+    "summary": "Converts a named OSC payload into a color and repeats it across fixture pixels, using configured fallback color handling.",
+    "description": "Converts a named OSC payload into a color and repeats it across fixture pixels, using configured fallback color handling. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "color",
+      "osc",
+      "color",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Colors",
+    "icon": "icons/Create.Color.OSC.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Name": "String",
+      "Default": "Color4"
+    }
+  },
+  "Create.Color.Pixel.Distance.Axis": {
+    "name": "Color Pixel Distance Axis",
+    "category": "Create",
+    "domain": "Color",
+    "summary": "Generates per-pixel colors from an axis-oriented target distance with direction and radius controls.",
+    "description": "Generates per-pixel colors from an axis-oriented target distance with direction and radius controls. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "color",
+      "pixel",
+      "distance",
+      "axis",
+      "color",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Colors",
+    "icon": "icons/Create.Color.Pixel.Distance.Axis.svg",
+    "source_scope": "export-and-editable",
+    "options": {
+      "Direction": [
+        "Both",
+        "Above",
+        "Below"
+      ],
+      "Axis": [
+        "X",
+        "Y",
+        "Z"
+      ]
+    },
+    "parameter_types": {
+      "Radius": "Float32",
+      "Target/Local": "Boolean",
+      "Direction": "EnumIndex",
+      "Axis": "EnumIndex",
+      "Fixture": "String"
+    }
+  },
+  "Create.Color.Pixel.Distance.Plane": {
+    "name": "Color Pixel Distance Plane",
+    "category": "Create",
+    "domain": "Color",
+    "summary": "Transforms pixels into a target plane's local frame and generates colors using plane distance/radius/direction controls.",
+    "description": "Transforms pixels into a target plane's local frame and generates colors using plane distance/radius/direction controls. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "color",
+      "pixel",
+      "distance",
+      "plane",
+      "color",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Colors",
+    "icon": "icons/Create.Color.Pixel.Distance.Plane.svg",
+    "source_scope": "export-and-editable",
+    "options": {
+      "Direction": [
+        "Both",
+        "Above",
+        "Below"
+      ]
+    },
+    "parameter_types": {
+      "Radius": "Float32",
+      "Target/Local": "Boolean",
+      "Direction": "EnumIndex",
+      "Color From Target": "Boolean",
+      "Fixture": "String"
+    }
+  },
+  "Create.Color.Pixel.Distance.Point": {
+    "name": "Color Pixel Distance Point",
+    "category": "Create",
+    "domain": "Color",
+    "summary": "Generates per-pixel colors from distance to a target/reference point with radius and target/local controls.",
+    "description": "Generates per-pixel colors from distance to a target/reference point with radius and target/local controls. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "color",
+      "pixel",
+      "distance",
+      "point",
+      "color",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Colors",
+    "icon": "icons/Create.Color.Pixel.Distance.Point.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Radius": "Float32",
+      "Target/Local": "Boolean",
+      "Fixture": "String"
+    }
+  },
+  "Create.Color.Pixel.Pulse.Cannon": {
+    "name": "Color Pixel Pulse Cannon",
+    "category": "Create",
+    "domain": "Color",
+    "summary": "Spawns retained pixel pulses on Trigger, advances them with speed/direction, and combines overlapping pulses by channel maximum.",
+    "description": "Spawns retained pixel pulses on Trigger, advances them with speed/direction, and combines overlapping pulses by channel maximum. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "color",
+      "pixel",
+      "pulse",
+      "cannon",
+      "color",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Colors",
+    "icon": "icons/Create.Color.Pixel.Pulse.Cannon.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Width": "Float32",
+      "Speed": "Float32",
+      "Direction": "Boolean",
+      "Trigger": "Boolean"
+    }
+  },
+  "Create.Color.Pixel.Pulse.Manual": {
+    "name": "Color Pixel Pulse Manual",
+    "category": "Create",
+    "domain": "Color",
+    "summary": "Builds a pixel pulse at a directly controlled Position and Width, respecting fixture pixel direction.",
+    "description": "Builds a pixel pulse at a directly controlled Position and Width, respecting fixture pixel direction. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "color",
+      "pixel",
+      "pulse",
+      "manual",
+      "color",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Colors",
+    "icon": "icons/Create.Color.Pixel.Pulse.Manual.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Width": "Float32",
+      "Position": "Float32"
+    }
+  },
+  "Create.Color.Pixel.Pulse": {
+    "name": "Color Pixel Pulse",
+    "category": "Create",
+    "domain": "Color",
+    "summary": "Generates moving pixel pulses from audio-modulated width/speed and direction controls with retained phase/random state.",
+    "description": "Generates moving pixel pulses from audio-modulated width/speed and direction controls with retained phase/random state. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "color",
+      "pixel",
+      "pulse",
+      "color",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Value, Colors",
+    "icon": "icons/Create.Color.Pixel.Pulse.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Width": "Float32",
+      "Speed": "Float32",
+      "Width Audio": "Float32",
+      "Speed Audio": "Float32",
+      "Speed Random": "Float32",
+      "Reverse": "Boolean"
+    }
+  },
+  "Create.Color.Pixel.Rainbow": {
+    "name": "Color Pixel Rainbow",
+    "category": "Create",
+    "domain": "Color",
+    "summary": "Generates a spatial rainbow across fixture pixels from Width and Position, respecting pixel direction.",
+    "description": "Generates a spatial rainbow across fixture pixels from Width and Position, respecting pixel direction. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "color",
+      "pixel",
+      "rainbow",
+      "color",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Colors",
+    "icon": "icons/Create.Color.Pixel.Rainbow.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Width": "Float32",
+      "Position": "Float32"
+    }
+  },
+  "Create.Color.Pixel.Segment": {
+    "name": "Color Pixel Segment",
+    "category": "Create",
+    "domain": "Color",
+    "summary": "Constructs a pixel-color segment pattern from child colors, Repeat, and fixture direction.",
+    "description": "Constructs a pixel-color segment pattern from child colors, Repeat, and fixture direction. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "color",
+      "pixel",
+      "segment",
+      "color",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Colors",
+    "icon": "icons/Create.Color.Pixel.Segment.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Repeat": "Int32"
+    }
+  },
+  "Create.Color.Primary": {
+    "name": "Color Primary",
+    "category": "Create",
+    "domain": "Color",
+    "summary": "Fills the fixture pixel count with the primary color from Global, preserving the first child bank's other data.",
+    "description": "Fills the fixture pixel count with the primary color from Global, preserving the first child bank's other data. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "color",
+      "primary",
+      "color",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Colors",
+    "icon": "icons/Create.Color.Primary.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {}
+  },
+  "Create.Color.Universe": {
+    "name": "Color Universe",
+    "category": "Create",
+    "domain": "Color",
+    "summary": "Generates an HSL-derived pixel color from the fixture's universe number.",
+    "description": "Generates an HSL-derived pixel color from the fixture's universe number. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "color",
+      "universe",
+      "color",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Colors",
+    "icon": "icons/Create.Color.Universe.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {}
+  },
+  "Create.Copycat": {
+    "name": "Copycat",
+    "category": "Create",
+    "domain": "Color",
+    "summary": "Copy another fixture layer and resize its colors for this fixture.",
+    "description": "Select a fixture and layer to reuse its evaluated bank. Earlier fixtures are available in the same frame; later fixtures use their previous frame. Colors are resized to the destination pixel count.",
+    "keywords": [
+      "create",
+      "copycat",
+      "utility",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Colors",
+    "icon": "icons/Create.Copycat.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Layer": "Int32",
+      "Fixture": "String"
+    }
+  },
+  "Create.Duration.Constant": {
+    "name": "Duration Constant",
+    "category": "Create",
+    "domain": "Duration",
+    "summary": "Writes configured Value into the Duration state channel.",
+    "description": "Writes configured Value into the Duration state channel. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "duration",
+      "constant",
+      "utility",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Duration",
+    "icon": "icons/Create.Duration.Constant.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Value": "Float32"
+    }
+  },
+  "Create.Focus.Value": {
+    "name": "Focus Value",
+    "category": "Create",
+    "domain": "Value",
+    "summary": "Writes a configured focus value into merged fixture state.",
+    "description": "Writes a configured focus value into merged fixture state. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "focus",
+      "value",
+      "value",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Selected or transformed result bank",
+    "icon": "icons/Create.Focus.Value.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Value": "Float32"
+    }
+  },
+  "Create.Frost.Value": {
+    "name": "Frost Value",
+    "category": "Create",
+    "domain": "Value",
+    "summary": "Writes a configured frost amount to the selected slot.",
+    "description": "Writes a configured frost amount to the selected slot. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "frost",
+      "value",
+      "value",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Selected or transformed result bank",
+    "icon": "icons/Create.Frost.Value.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Value": "Float32",
+      "Slot": "Int32"
+    }
+  },
+  "Create.Gobo.Constant": {
+    "name": "Gobo Constant",
+    "category": "Create",
+    "domain": "Utility",
+    "summary": "Writes a gobo selection index to the selected slot.",
+    "description": "Writes a gobo selection index to the selected slot. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "gobo",
+      "constant",
+      "utility",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Selected or transformed result bank",
+    "icon": "icons/Create.Gobo.Constant.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Gobo": "Int32",
+      "Slot": "Int32"
+    }
+  },
+  "Create.Gobo.Rotate.Value": {
+    "name": "Gobo Rotate Value",
+    "category": "Create",
+    "domain": "Value",
+    "summary": "Writes a gobo rotation value to the selected slot.",
+    "description": "Writes a gobo rotation value to the selected slot. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "gobo",
+      "rotate",
+      "value",
+      "value",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Selected or transformed result bank",
+    "icon": "icons/Create.Gobo.Rotate.Value.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Value": "Float32",
+      "Slot": "Int32"
+    }
+  },
+  "Create.Gobo.Shake.Constant": {
+    "name": "Gobo Shake Constant",
+    "category": "Create",
+    "domain": "Utility",
+    "summary": "Writes a gobo-shake amount to the selected slot.",
+    "description": "Writes a gobo-shake amount to the selected slot. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "gobo",
+      "shake",
+      "constant",
+      "utility",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Selected or transformed result bank",
+    "icon": "icons/Create.Gobo.Shake.Constant.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Value": "Float32",
+      "Slot": "Int32"
+    }
+  },
+  "Create.Iris.Value": {
+    "name": "Iris Value",
+    "category": "Create",
+    "domain": "Value",
+    "summary": "Writes a configured iris value into merged fixture state.",
+    "description": "Writes a configured iris value into merged fixture state. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "iris",
+      "value",
+      "value",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Selected or transformed result bank",
+    "icon": "icons/Create.Iris.Value.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Value": "Float32"
+    }
+  },
+  "Create.Macro.Constant": {
+    "name": "Macro Constant",
+    "category": "Create",
+    "domain": "Utility",
+    "summary": "Adds a named fixture macro command/reference to merged state.",
+    "description": "Adds a named fixture macro command/reference to merged state. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "macro",
+      "constant",
+      "utility",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Selected or transformed result bank",
+    "icon": "icons/Create.Macro.Constant.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Macro": "String"
+    }
+  },
+  "Create.Prism.Rotate": {
+    "name": "Prism Rotate",
+    "category": "Create",
+    "domain": "Utility",
+    "summary": "Writes a prism rotation value to the selected slot.",
+    "description": "Writes a prism rotation value to the selected slot. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "prism",
+      "rotate",
+      "utility",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Selected or transformed result bank",
+    "icon": "icons/Create.Prism.Rotate.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Value": "Float32",
+      "Slot": "Int32"
+    }
+  },
+  "Create.Prism.Select": {
+    "name": "Prism Select",
+    "category": "Create",
+    "domain": "Utility",
+    "summary": "Writes a prism selection index to the selected slot.",
+    "description": "Writes a prism selection index to the selected slot. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "prism",
+      "select",
+      "utility",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Selected or transformed result bank",
+    "icon": "icons/Create.Prism.Select.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Index": "Int32",
+      "Slot": "Int32"
+    }
+  },
+  "Create.Radius.Constant": {
+    "name": "Radius Constant",
+    "category": "Create",
+    "domain": "Utility",
+    "summary": "Supply a fixed Radius channel.",
+    "description": "Writes Radius while preserving the first child bank. The original source calculates an audio-modulated radius but discards it; this port preserves the returned raw Radius behavior.",
+    "keywords": [
+      "create",
+      "radius",
+      "constant",
+      "utility",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Radius",
+    "icon": "icons/Create.Radius.Constant.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Radius": "Float32",
+      "Radius Audio": "Float32"
+    }
+  },
+  "Create.Reference.SequenceOffset": {
+    "name": "Reference SequenceOffset",
+    "category": "Create",
+    "domain": "Utility",
+    "summary": "Selects a fixture reference from sequence context after applying a configured Offset.",
+    "description": "Selects a fixture reference from sequence context after applying a configured Offset. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "reference",
+      "sequenceoffset",
+      "reference",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Selected or transformed result bank",
+    "icon": "icons/Create.Reference.SequenceOffset.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Offset": "Int32",
+      "Sequence": "String",
+      "Group": "String"
+    }
+  },
+  "Create.Remote": {
+    "name": "Remote",
+    "category": "Create",
+    "domain": "Utility",
+    "summary": "Reads remote/plugin-supplied state. Two editable source documents register this key with different Remote definitions, so context and registration order matter.",
+    "description": "Reads remote/plugin-supplied state. Two editable source documents register this key with different Remote definitions, so context and registration order matter. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "remote",
+      "utility",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Selected or transformed result bank",
+    "icon": "icons/Create.Remote.svg",
+    "source_scope": "editable-only",
+    "parameter_types": {
+      "Address": "String",
+      "Index": "Int32"
+    }
+  },
+  "Create.Resource.Constant": {
+    "name": "Resource Constant",
+    "category": "Create",
+    "domain": "Utility",
+    "summary": "Pass a named project resource to downstream blocks.",
+    "description": "Use Resource to name a file under the project resources folder. Feed a WAV resource into Create.Audio.Sample to play a bounded PCM sample.",
+    "keywords": [
+      "create",
+      "resource",
+      "constant",
+      "resource",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Selected or transformed result bank",
+    "icon": "icons/Create.Resource.Constant.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Resource": "String"
+    }
+  },
+  "Create.Rotation.Audio.Shake": {
+    "name": "Rotation Audio Shake",
+    "category": "Create",
+    "domain": "Rotation",
+    "summary": "Produces retained axis-oriented rotation shake from selected audio beat events, strength, probability, and time controls.",
+    "description": "Produces retained axis-oriented rotation shake from selected audio beat events, strength, probability, and time controls. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "rotation",
+      "audio",
+      "shake",
+      "audio",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Rotation",
+    "icon": "icons/Create.Rotation.Audio.Shake.svg",
+    "source_scope": "export-and-editable",
+    "options": {
+      "Frequency": [
+        "Low",
+        "MidLow",
+        "MidHigh",
+        "High"
+      ],
+      "Axis": [
+        "X",
+        "Y",
+        "Z"
+      ]
+    },
+    "parameter_types": {
+      "Strength": "Float32",
+      "Probability": "Float32",
+      "Time": "Float32",
+      "Frequency": "EnumIndex",
+      "Axis": "EnumIndex"
+    }
+  },
+  "Create.Rotation.Constant": {
+    "name": "Rotation Constant",
+    "category": "Create",
+    "domain": "Rotation",
+    "summary": "Writes the configured rotation vector into the first child-derived result.",
+    "description": "Writes the configured rotation vector into the first child-derived result. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "rotation",
+      "constant",
+      "rotation",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Rotation",
+    "icon": "icons/Create.Rotation.Constant.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Rotation": "Vector3"
+    }
+  },
+  "Create.Rotation.Follow": {
+    "name": "Rotation Follow",
+    "category": "Create",
+    "domain": "Rotation",
+    "summary": "Aim a fixture toward another fixture.",
+    "description": "The native source follows a fixture named Lantern. The Fixture setting extends that behavior so another target can be selected; live target position takes precedence over setup position.",
+    "keywords": [
+      "create",
+      "rotation",
+      "follow",
+      "rotation",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Rotation",
+    "icon": "icons/Create.Rotation.Follow.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Fixture": "String"
+    }
+  },
+  "Create.Rotation.PanTilt": {
+    "name": "Rotation PanTilt",
+    "category": "Create",
+    "domain": "Rotation",
+    "summary": "Builds a rotation vector from independent Pan and Tilt parameters and writes Rotation.",
+    "description": "Builds a rotation vector from independent Pan and Tilt parameters and writes Rotation. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "rotation",
+      "pantilt",
+      "rotation",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Rotation",
+    "icon": "icons/Create.Rotation.PanTilt.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Pan": "Float32",
+      "Tilt": "Float32"
+    }
+  },
+  "Create.Rotation.Perpendicular": {
+    "name": "Rotation Perpendicular",
+    "category": "Create",
+    "domain": "Rotation",
+    "summary": "Writes a predefined perpendicular rotation selected by Axis.",
+    "description": "Writes a predefined perpendicular rotation selected by Axis. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "rotation",
+      "perpendicular",
+      "rotation",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Rotation",
+    "icon": "icons/Create.Rotation.Perpendicular.svg",
+    "source_scope": "export-and-editable",
+    "options": {
+      "Axis": [
+        "X",
+        "Y",
+        "Z"
+      ]
+    },
+    "parameter_types": {
+      "Axis": "EnumIndex"
+    }
+  },
+  "Create.Rotation.Timed": {
+    "name": "Rotation Timed",
+    "category": "Create",
+    "domain": "Rotation",
+    "summary": "Advances a rotation along a selected axis using an audio-modulated speed and retained phase.",
+    "description": "Advances a rotation along a selected axis using an audio-modulated speed and retained phase. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "rotation",
+      "timed",
+      "rotation",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Rotation",
+    "icon": "icons/Create.Rotation.Timed.svg",
+    "source_scope": "export-and-editable",
+    "options": {
+      "Axis": [
+        "X",
+        "Y",
+        "Z"
+      ]
+    },
+    "parameter_types": {
+      "Speed": "Float32",
+      "Speed Audio": "Float32",
+      "Axis": "EnumIndex"
+    }
+  },
+  "Create.Rotation.XYZ": {
+    "name": "Rotation XYZ",
+    "category": "Create",
+    "domain": "Rotation",
+    "summary": "Writes Rotation from independently configured X, Y, and Z parameters.",
+    "description": "Writes Rotation from independently configured X, Y, and Z parameters. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "rotation",
+      "xyz",
+      "rotation",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Rotation",
+    "icon": "icons/Create.Rotation.XYZ.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "X": "Float32",
+      "Y": "Float32",
+      "Z": "Float32"
+    }
+  },
+  "Create.Shapes.ResourceMode.Constant": {
+    "name": "Shapes ResourceMode Constant",
+    "category": "Create",
+    "domain": "Utility",
+    "summary": "Writes the selected Shapes resource mode into merged state through the Shapes extension.",
+    "description": "Writes the selected Shapes resource mode into merged state through the Shapes extension. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "shapes",
+      "resourcemode",
+      "constant",
+      "utility",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Selected or transformed result bank",
+    "icon": "icons/Create.Shapes.ResourceMode.Constant.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "": "String",
+      "ShapesResourceMode": "String"
+    }
+  },
+  "Create.Speed.Constant": {
+    "name": "Speed Constant",
+    "category": "Create",
+    "domain": "Speed",
+    "summary": "Writes a configured Value into the selected speed-range representation.",
+    "description": "Writes a configured Value into the selected speed-range representation. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "speed",
+      "constant",
+      "utility",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Speed",
+    "icon": "icons/Create.Speed.Constant.svg",
+    "source_scope": "export-and-editable",
+    "options": {
+      "Range": [
+        "Positive",
+        "Negative",
+        "Both"
+      ]
+    },
+    "parameter_types": {
+      "Range": "EnumIndex",
+      "Value": "Float32"
+    }
+  },
+  "Create.Temperature.Constant": {
+    "name": "Temperature Constant",
+    "category": "Create",
+    "domain": "Utility",
+    "summary": "Writes configured Value into the Temperature state channel.",
+    "description": "Writes configured Value into the Temperature state channel. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "temperature",
+      "constant",
+      "utility",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Temperature",
+    "icon": "icons/Create.Temperature.Constant.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Value": "Float32"
+    }
+  },
+  "Create.Texture.Color": {
+    "name": "Texture Color",
+    "category": "Create",
+    "domain": "Color",
+    "summary": "Builds a color texture resource through the Surfaces plugin graph.",
+    "description": "Builds a color texture resource through the Surfaces plugin graph. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "texture",
+      "color",
+      "texture",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Selected or transformed result bank",
+    "icon": "icons/Create.Texture.Color.svg",
+    "source_scope": "editable-only",
+    "parameter_types": {}
+  },
+  "Create.Texture.Noise": {
+    "name": "Texture Noise",
+    "category": "Create",
+    "domain": "Texture",
+    "summary": "Builds a procedural noise texture through the Surfaces plugin graph.",
+    "description": "Builds a procedural noise texture through the Surfaces plugin graph. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "texture",
+      "noise",
+      "texture",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Selected or transformed result bank",
+    "icon": "icons/Create.Texture.Noise.svg",
+    "source_scope": "editable-only",
+    "parameter_types": {}
+  },
+  "Create.Value.Audio.Beat": {
+    "name": "Value Audio Beat",
+    "category": "Create",
+    "domain": "Value",
+    "summary": "Writes a numeric beat trigger from selected audio frequency events and probability controls.",
+    "description": "Writes a numeric beat trigger from selected audio frequency events and probability controls. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "value",
+      "audio",
+      "beat",
+      "audio",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Value",
+    "icon": "icons/Create.Value.Audio.Beat.svg",
+    "source_scope": "export-and-editable",
+    "options": {
+      "Frequency": [
+        "Low",
+        "MidLow",
+        "MidHigh",
+        "High"
+      ]
+    },
+    "parameter_types": {
+      "Probability": "Float32",
+      "Slot": "Int32",
+      "Frequency": "EnumIndex"
+    }
+  },
+  "Create.Value.Audio.FFT16": {
+    "name": "Value Audio FFT16",
+    "category": "Create",
+    "domain": "Value",
+    "summary": "An FFT-oriented scalar source in the AudioGeister/Geister sources; the same key is registered by two source documents.",
+    "description": "An FFT-oriented scalar source in the AudioGeister/Geister sources; the same key is registered by two source documents. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "value",
+      "audio",
+      "fft16",
+      "audio",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Value",
+    "icon": "icons/Create.Value.Audio.FFT16.svg",
+    "source_scope": "editable-only",
+    "parameter_types": {
+      "Gain": "Float32",
+      "Frequency Band": "Int32",
+      "Average/Max": "Boolean"
+    }
+  },
+  "Create.Value.Audio.Level": {
+    "name": "Value Audio Level",
+    "category": "Create",
+    "domain": "Value",
+    "summary": "Normalizes an audio-band/level selection between Low and High controls and writes Value.",
+    "description": "Normalizes an audio-band/level selection between Low and High controls and writes Value. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "value",
+      "audio",
+      "level",
+      "audio",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Value",
+    "icon": "icons/Create.Value.Audio.Level.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Low": "Float32",
+      "High": "Float32",
+      "Slot": "Int32"
+    }
+  },
+  "Create.Value.Audio.PeakPower": {
+    "name": "Value Audio PeakPower",
+    "category": "Create",
+    "domain": "Value",
+    "summary": "Copies Peak Power from the selected Global audio-state slot into Value.",
+    "description": "Copies Peak Power from the selected Global audio-state slot into Value. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "value",
+      "audio",
+      "peakpower",
+      "audio",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Value",
+    "icon": "icons/Create.Value.Audio.PeakPower.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Slot": "Int32"
+    }
+  },
+  "Create.Value.Audio.Pitch": {
+    "name": "Value Audio Pitch",
+    "category": "Create",
+    "domain": "Value",
+    "summary": "Copies Pitch from the selected Global audio-state slot into Value; pitch analysis occurs upstream.",
+    "description": "Copies Pitch from the selected Global audio-state slot into Value; pitch analysis occurs upstream. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "value",
+      "audio",
+      "pitch",
+      "audio",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Value",
+    "icon": "icons/Create.Value.Audio.Pitch.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Slot": "Int32"
+    }
+  },
+  "Create.Value.Audio.Power": {
+    "name": "Value Audio Power",
+    "category": "Create",
+    "domain": "Value",
+    "summary": "Writes the selected current/overall audio-power field into merged Value.",
+    "description": "Writes the selected current/overall audio-power field into merged Value. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "value",
+      "audio",
+      "power",
+      "audio",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Value",
+    "icon": "icons/Create.Value.Audio.Power.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Current/Overall": "Boolean",
+      "Slot": "Int32"
+    }
+  },
+  "Create.Value.Closeness": {
+    "name": "Value Closeness",
+    "category": "Create",
+    "domain": "Value",
+    "summary": "Resolves another fixture's position and generates a radius-dependent closeness value relative to the current position.",
+    "description": "Resolves another fixture's position and generates a radius-dependent closeness value relative to the current position. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "value",
+      "closeness",
+      "value",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Value",
+    "icon": "icons/Create.Value.Closeness.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Radius": "Float32",
+      "Fixture": "String"
+    }
+  },
+  "Create.Value.Control": {
+    "name": "Value Control",
+    "category": "Create",
+    "domain": "Value",
+    "summary": "Reads a controller channel with a configured fallback and label, writes Value, and maintains controller-label metadata.",
+    "description": "Reads a controller channel with a configured fallback and label, writes Value, and maintains controller-label metadata. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "value",
+      "control",
+      "value",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Value",
+    "icon": "icons/Create.Value.Control.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Index": "Int32",
+      "Learn": "Boolean",
+      "Default": "Float32",
+      "Label": "String"
+    }
+  },
+  "Create.Value.Controller.Pad": {
+    "name": "Value Controller Pad",
+    "category": "Create",
+    "domain": "Value",
+    "summary": "Read the pressed state of a controller pad.",
+    "description": "Select Pad 0–15 to produce Value 1 while pressed and 0 when released. Browser MIDI note events and the host input API supply pad state.",
+    "keywords": [
+      "create",
+      "value",
+      "controller",
+      "pad",
+      "value",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Selected or transformed result bank",
+    "icon": "icons/Create.Value.Controller.Pad.svg",
+    "source_scope": "editable-only",
+    "parameter_types": {
+      "Pad": "Int32"
+    }
+  },
+  "Create.Value.Controller.Value": {
+    "name": "Value Controller Value",
+    "category": "Create",
+    "domain": "Value",
+    "summary": "A legacy controller value source defined in Schema.Controllers1.vl.",
+    "description": "A legacy controller value source defined in Schema.Controllers1.vl. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "value",
+      "controller",
+      "value",
+      "value",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Value",
+    "icon": "icons/Create.Value.Controller.Value.svg",
+    "source_scope": "editable-only",
+    "parameter_types": {
+      "Index": "Int32",
+      "Learn": "Boolean",
+      "Label": "String"
+    }
+  },
+  "Create.Value.Expression": {
+    "name": "Value Expression",
+    "category": "Create",
+    "domain": "Value",
+    "summary": "Evaluate a mathematical expression using elapsed engine seconds as s.",
+    "description": "Supports bounded numeric expressions and NCalc-style math functions such as Sin, Cos and Pow. Evaluation errors retain the last successful Value. Expressions run on the engine clock.",
+    "keywords": [
+      "create",
+      "value",
+      "expression",
+      "value",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Value",
+    "icon": "icons/Create.Value.Expression.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Expression": "String"
+    }
+  },
+  "Create.Value.Fixture.IsSelected": {
+    "name": "Value Fixture IsSelected",
+    "category": "Create",
+    "domain": "Value",
+    "summary": "Writes 1 when the current fixture belongs to the current selection and 0 otherwise.",
+    "description": "Writes 1 when the current fixture belongs to the current selection and 0 otherwise. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "value",
+      "fixture",
+      "isselected",
+      "value",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Value",
+    "icon": "icons/Create.Value.Fixture.IsSelected.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {}
+  },
+  "Create.Value.Global": {
+    "name": "Value Global",
+    "category": "Create",
+    "domain": "Value",
+    "summary": "Reads a named Global Float32 value and writes it into merged Value.",
+    "description": "Reads a named Global Float32 value and writes it into merged Value. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "value",
+      "global",
+      "value",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Value",
+    "icon": "icons/Create.Value.Global.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Name": "String"
+    }
+  },
+  "Create.Value.Group.AxisPosition": {
+    "name": "Value Group AxisPosition",
+    "category": "Create",
+    "domain": "Value",
+    "summary": "Normalizes the current or child-supplied position against a named group's bounds on a selected axis.",
+    "description": "Normalizes the current or child-supplied position against a named group's bounds on a selected axis. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "value",
+      "group",
+      "axisposition",
+      "value",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Value",
+    "icon": "icons/Create.Value.Group.AxisPosition.svg",
+    "source_scope": "export-and-editable",
+    "options": {
+      "Axis": [
+        "X",
+        "Y",
+        "Z"
+      ]
+    },
+    "parameter_types": {
+      "Group": "String",
+      "Axis": "EnumIndex"
+    }
+  },
+  "Create.Value.Keyboard": {
+    "name": "Value Keyboard",
+    "category": "Create",
+    "domain": "Value",
+    "summary": "Produce a trigger while the selected keyboard key is held.",
+    "description": "Set Key Name to Space, Enter, an arrow key or a letter. The browser forwards keys while the editor has focus and releases them when focus leaves the window.",
+    "keywords": [
+      "create",
+      "value",
+      "keyboard",
+      "value",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Selected or transformed result bank",
+    "icon": "icons/Create.Value.Keyboard.svg",
+    "source_scope": "editable-only",
+    "parameter_types": {
+      "Key Name": "String"
+    }
+  },
+  "Create.Value.OSC": {
+    "name": "Value OSC",
+    "category": "Create",
+    "domain": "Value",
+    "summary": "Reads a named OSC message argument at Index and converts supported numeric/boolean payloads into Value with a configured fallback.",
+    "description": "Reads a named OSC message argument at Index and converts supported numeric/boolean payloads into Value with a configured fallback. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "value",
+      "osc",
+      "value",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Value",
+    "icon": "icons/Create.Value.OSC.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Name": "String",
+      "Default": "Float32",
+      "Index": "Int32"
+    }
+  },
+  "Create.Value.OSCReceived": {
+    "name": "Value OSCReceived",
+    "category": "Create",
+    "domain": "Value",
+    "summary": "Writes a numeric boolean when a named OSC address was received, or when the Simulate control is active.",
+    "description": "Writes a numeric boolean when a named OSC address was received, or when the Simulate control is active. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "value",
+      "oscreceived",
+      "value",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Value",
+    "icon": "icons/Create.Value.OSCReceived.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Name": "String",
+      "Simulate": "Boolean"
+    }
+  },
+  "Create.Value.SequenceIndex": {
+    "name": "Value SequenceIndex",
+    "category": "Create",
+    "domain": "Value",
+    "summary": "Normalizes the current sequence index by the sequence length using a guarded denominator and writes Value.",
+    "description": "Normalizes the current sequence index by the sequence length using a guarded denominator and writes Value. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "value",
+      "sequenceindex",
+      "value",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Value",
+    "icon": "icons/Create.Value.SequenceIndex.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Sequence": "String",
+      "Group": "String"
+    }
+  },
+  "Create.Value.System.FileExists": {
+    "name": "Value System FileExists",
+    "category": "Create",
+    "domain": "Value",
+    "summary": "Resolves a file-picker path and writes a numeric boolean indicating whether that file exists.",
+    "description": "Resolves a file-picker path and writes a numeric boolean indicating whether that file exists. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "value",
+      "system",
+      "fileexists",
+      "value",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Value",
+    "icon": "icons/Create.Value.System.FileExists.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "File": "String"
+    }
+  },
+  "Create.Value.Trigger": {
+    "name": "Value Trigger",
+    "category": "Create",
+    "domain": "Value",
+    "summary": "Generates retained interval-based triggers using randomness and hold controls.",
+    "description": "Generates retained interval-based triggers using randomness and hold controls. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "value",
+      "trigger",
+      "value",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Value",
+    "icon": "icons/Create.Value.Trigger.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Interval": "Float32",
+      "Randomness": "Float32",
+      "Hold": "Float32"
+    }
+  },
+  "Create.Value.XBox": {
+    "name": "Value XBox",
+    "category": "Create",
+    "domain": "Value",
+    "summary": "Selects an Xbox input from a constructed numeric input spread and writes it into Value.",
+    "description": "Selects an Xbox input from a constructed numeric input spread and writes it into Value. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "value",
+      "xbox",
+      "value",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Value",
+    "icon": "icons/Create.Value.XBox.svg",
+    "source_scope": "export-and-editable",
+    "options": {
+      "Input": [
+        "L Thumb X",
+        "L Thumb Y",
+        "R Thumb X",
+        "R Thumb Y",
+        "L Trigger",
+        "R Trigger",
+        "A",
+        "B",
+        "X",
+        "Y"
+      ]
+    },
+    "parameter_types": {
+      "Input": "EnumIndex"
+    }
+  },
+  "Create.Zoom.Value": {
+    "name": "Zoom Value",
+    "category": "Create",
+    "domain": "Value",
+    "summary": "Writes a configured zoom value into merged fixture state.",
+    "description": "Writes a configured zoom value into merged fixture state. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "create",
+      "zoom",
+      "value",
+      "value",
+      "create"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Selected or transformed result bank",
+    "icon": "icons/Create.Zoom.Value.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Value": "Float32"
+    }
+  },
+  "Filter.Audio.Power": {
+    "name": "Audio Power",
+    "category": "Filter",
+    "domain": "Audio",
+    "summary": "Passes or suppresses merged state according to selected audio power and a threshold/below-above condition.",
+    "description": "Passes or suppresses merged state according to selected audio power and a threshold/below-above condition. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "filter",
+      "audio",
+      "power",
+      "audio",
+      "filter"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Selected or transformed result bank",
+    "icon": "icons/Filter.Audio.Power.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Threshold": "Float32",
+      "Below/Above": "Boolean"
+    }
+  },
+  "Global.Set.Color": {
+    "name": "Set Color",
+    "category": "Global",
+    "domain": "Color",
+    "summary": "Converts child color state into a slotted global color assignment command with fade duration.",
+    "description": "Converts child color state into a slotted global color assignment command with fade duration. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "global",
+      "set",
+      "color",
+      "color",
+      "global"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Deferred scene action",
+    "icon": "icons/Global.Set.Color.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Fade Duration": "Float32",
+      "Slot": "Int32"
+    }
+  },
+  "Global.Set.Primary.FromColor": {
+    "name": "Set Primary FromColor",
+    "category": "Global",
+    "domain": "Utility",
+    "summary": "Uses child Colors to emit a global primary-color assignment command with fade duration.",
+    "description": "Uses child Colors to emit a global primary-color assignment command with fade duration. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "global",
+      "set",
+      "primary",
+      "fromcolor",
+      "utility",
+      "global"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Deferred scene action",
+    "icon": "icons/Global.Set.Primary.FromColor.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Fade Duration": "Float32",
+      "Color": "Color4"
+    }
+  },
+  "Modify.Color.Alpha.AsAlpha": {
+    "name": "Color Alpha AsAlpha",
+    "category": "Modify",
+    "domain": "Color",
+    "summary": "Reconstructs merged colors with alpha derived through the implementation's HSV/channel path.",
+    "description": "Reconstructs merged colors with alpha derived through the implementation's HSV/channel path. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "modify",
+      "color",
+      "alpha",
+      "asalpha",
+      "color",
+      "modify"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Colors",
+    "icon": "icons/Modify.Color.Alpha.AsAlpha.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {}
+  },
+  "Modify.Color.AttackDecay": {
+    "name": "Color AttackDecay",
+    "category": "Modify",
+    "domain": "Color",
+    "summary": "Runs separate retained attack/decay filters over color channels per pixel and rebuilds the color spread.",
+    "description": "Runs separate retained attack/decay filters over color channels per pixel and rebuilds the color spread. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "modify",
+      "color",
+      "attackdecay",
+      "color",
+      "modify"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Colors",
+    "icon": "icons/Modify.Color.AttackDecay.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Attack": "Float32",
+      "Decay": "Float32"
+    }
+  },
+  "Modify.Color.Blur": {
+    "name": "Color Blur",
+    "category": "Modify",
+    "domain": "Color",
+    "summary": "Averages neighboring pixel color channels over a Value-dependent window; boundary indexing is delegated to spread helpers.",
+    "description": "Averages neighboring pixel color channels over a Value-dependent window; boundary indexing is delegated to spread helpers. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "modify",
+      "color",
+      "blur",
+      "color",
+      "modify"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Colors",
+    "icon": "icons/Modify.Color.Blur.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Value": "Float32"
+    }
+  },
+  "Modify.Color.Clamp": {
+    "name": "Color Clamp",
+    "category": "Modify",
+    "domain": "Color",
+    "summary": "Clamps merged pixel colors between configured HSV-derived bounds.",
+    "description": "Clamps merged pixel colors between configured HSV-derived bounds. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "modify",
+      "color",
+      "clamp",
+      "color",
+      "modify"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Colors",
+    "icon": "icons/Modify.Color.Clamp.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Minimum": "Float32",
+      "Maximum": "Float32"
+    }
+  },
+  "Modify.Color.Complement": {
+    "name": "Color Complement",
+    "category": "Modify",
+    "domain": "Color",
+    "summary": "Transforms merged pixel colors using the complement operation and preserves other merged data.",
+    "description": "Transforms merged pixel colors using the complement operation and preserves other merged data. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "modify",
+      "color",
+      "complement",
+      "color",
+      "modify"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Colors",
+    "icon": "icons/Modify.Color.Complement.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {}
+  },
+  "Modify.Color.EvenOdd": {
+    "name": "Color EvenOdd",
+    "category": "Modify",
+    "domain": "Color",
+    "summary": "Applies odd/even visibility and flipping using fixture channel/pixel context.",
+    "description": "Applies odd/even visibility and flipping using fixture channel/pixel context. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "modify",
+      "color",
+      "evenodd",
+      "color",
+      "modify"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Colors",
+    "icon": "icons/Modify.Color.EvenOdd.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Flip Even": "Boolean",
+      "Show Odd": "Boolean",
+      "Show Even": "Boolean"
+    }
+  },
+  "Modify.Color.Flickerize": {
+    "name": "Color Flickerize",
+    "category": "Modify",
+    "domain": "Color",
+    "summary": "Applies an enabled, retained random/phase flicker effect to merged Colors; the editable source now registers it under a deprecated key.",
+    "description": "Applies an enabled, retained random/phase flicker effect to merged Colors; the editable source now registers it under a deprecated key. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "modify",
+      "color",
+      "flickerize",
+      "color",
+      "modify"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Colors",
+    "icon": "icons/Modify.Color.Flickerize.svg",
+    "source_scope": "export-only",
+    "parameter_types": {
+      "Enabled": "Boolean"
+    }
+  },
+  "Modify.Color.Hue.Rotate": {
+    "name": "Color Hue Rotate",
+    "category": "Modify",
+    "domain": "Color",
+    "summary": "Rotates the hue of merged pixel colors by Value.",
+    "description": "Rotates the hue of merged pixel colors by Value. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "modify",
+      "color",
+      "hue",
+      "rotate",
+      "color",
+      "modify"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Colors",
+    "icon": "icons/Modify.Color.Hue.Rotate.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Value": "Float32"
+    }
+  },
+  "Modify.Color.Paint.AlphaBased": {
+    "name": "Color Paint AlphaBased",
+    "category": "Modify",
+    "domain": "Color",
+    "summary": "Accumulates per-pixel color paint by alpha-based interpolation; Clear and pixel-count changes reset retained processing.",
+    "description": "Accumulates per-pixel color paint by alpha-based interpolation; Clear and pixel-count changes reset retained processing. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "modify",
+      "color",
+      "paint",
+      "alphabased",
+      "color",
+      "modify"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Colors",
+    "icon": "icons/Modify.Color.Paint.AlphaBased.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Clear": "Boolean"
+    }
+  },
+  "Modify.Color.Paint.BlackAndWhite": {
+    "name": "Color Paint BlackAndWhite",
+    "category": "Modify",
+    "domain": "Color",
+    "summary": "Maintains per-pixel paint state and can clear it; incoming colors influence retained HSV reconstruction.",
+    "description": "Maintains per-pixel paint state and can clear it; incoming colors influence retained HSV reconstruction. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "modify",
+      "color",
+      "paint",
+      "blackandwhite",
+      "color",
+      "modify"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Colors",
+    "icon": "icons/Modify.Color.Paint.BlackAndWhite.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Clear": "Boolean",
+      "Color": "Color4"
+    }
+  },
+  "Modify.Color.Rainbow": {
+    "name": "Color Rainbow",
+    "category": "Modify",
+    "domain": "Color",
+    "summary": "Offsets merged pixel colors using the fixture's position within a group's selected-axis bounds, Width, and Offset.",
+    "description": "Offsets merged pixel colors using the fixture's position within a group's selected-axis bounds, Width, and Offset. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "modify",
+      "color",
+      "rainbow",
+      "color",
+      "modify"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Colors",
+    "icon": "icons/Modify.Color.Rainbow.svg",
+    "source_scope": "export-and-editable",
+    "options": {
+      "Axis": [
+        "X",
+        "Y",
+        "Z"
+      ]
+    },
+    "parameter_types": {
+      "Width": "Float32",
+      "Offset": "Float32",
+      "Group": "String",
+      "Axis": "EnumIndex"
+    }
+  },
+  "Modify.Color.RangeSlice": {
+    "name": "Color RangeSlice",
+    "category": "Modify",
+    "domain": "Color",
+    "summary": "Extracts a parameterized range of the merged pixel-color spread using retained per-output processing.",
+    "description": "Extracts a parameterized range of the merged pixel-color spread using retained per-output processing. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "modify",
+      "color",
+      "rangeslice",
+      "color",
+      "modify"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Colors",
+    "icon": "icons/Modify.Color.RangeSlice.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "From": "Float32",
+      "To": "Float32"
+    }
+  },
+  "Modify.Color.Saturation.Set": {
+    "name": "Color Saturation Set",
+    "category": "Modify",
+    "domain": "Color",
+    "summary": "Converts merged colors through HSV and replaces saturation with Value.",
+    "description": "Converts merged colors through HSV and replaces saturation with Value. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "modify",
+      "color",
+      "saturation",
+      "set",
+      "color",
+      "modify"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Colors",
+    "icon": "icons/Modify.Color.Saturation.Set.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Value": "Float32"
+    }
+  },
+  "Modify.Color.Scramble": {
+    "name": "Color Scramble",
+    "category": "Modify",
+    "domain": "Color",
+    "summary": "Performs a seeded partial reordering of the merged pixel-color spread.",
+    "description": "Performs a seeded partial reordering of the merged pixel-color spread. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "modify",
+      "color",
+      "scramble",
+      "color",
+      "modify"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Colors",
+    "icon": "icons/Modify.Color.Scramble.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Value": "Float32",
+      "Seed": "Int32"
+    }
+  },
+  "Modify.Color.Shift": {
+    "name": "Color Shift",
+    "category": "Modify",
+    "domain": "Color",
+    "summary": "Shifts the merged color spread by a configurable Offset using a retained helper.",
+    "description": "Shifts the merged color spread by a configurable Offset using a retained helper. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "modify",
+      "color",
+      "shift",
+      "color",
+      "modify"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Colors",
+    "icon": "icons/Modify.Color.Shift.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Offset": "Float32"
+    }
+  },
+  "Modify.Color.Strobe": {
+    "name": "Color Strobe",
+    "category": "Modify",
+    "domain": "Color",
+    "summary": "Applies a strobe/timing gate to incoming pixel colors through the editable StrobeColor graph.",
+    "description": "Applies a strobe/timing gate to incoming pixel colors through the editable StrobeColor graph. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "modify",
+      "color",
+      "strobe",
+      "color",
+      "modify"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Colors",
+    "icon": "icons/Modify.Color.Strobe.svg",
+    "source_scope": "editable-only",
+    "parameter_types": {
+      "Enabled": "Boolean",
+      "Period": "Float32",
+      "Maximum Lightness": "Boolean"
+    }
+  },
+  "Modify.ColorWheel.Offset": {
+    "name": "ColorWheel Offset",
+    "category": "Modify",
+    "domain": "Utility",
+    "summary": "Adds Value to the incoming color-wheel channel and writes the result.",
+    "description": "Adds Value to the incoming color-wheel channel and writes the result. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "modify",
+      "colorwheel",
+      "offset",
+      "utility",
+      "modify"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Selected or transformed result bank",
+    "icon": "icons/Modify.ColorWheel.Offset.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Value": "Float32"
+    }
+  },
+  "Modify.Delay": {
+    "name": "Delay",
+    "category": "Modify",
+    "domain": "Utility",
+    "summary": "Delay the complete incoming result bank by Duration.",
+    "description": "Buffers evaluated child results and returns them after the requested duration. The bounded buffer retains up to 1024 frame samples; session checkpoints preserve it.",
+    "keywords": [
+      "modify",
+      "delay",
+      "utility",
+      "modify"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Selected or transformed result bank",
+    "icon": "icons/Modify.Delay.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Duration": "Float32"
+    }
+  },
+  "Modify.Deprecated.Color.Flickerize": {
+    "name": "Deprecated Color Flickerize",
+    "category": "Modify",
+    "domain": "Color",
+    "summary": "The editable source registers FlickerizeBee under an explicitly deprecated key; the selected export still uses Modify.Color.Flickerize.",
+    "description": "The editable source registers FlickerizeBee under an explicitly deprecated key; the selected export still uses Modify.Color.Flickerize. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "modify",
+      "deprecated",
+      "color",
+      "flickerize",
+      "color",
+      "modify"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Colors",
+    "icon": "icons/Modify.Deprecated.Color.Flickerize.svg",
+    "source_scope": "editable-only",
+    "parameter_types": {
+      "Enabled": "Boolean"
+    }
+  },
+  "Modify.Memorize": {
+    "name": "Memorize",
+    "category": "Modify",
+    "domain": "Utility",
+    "summary": "Saves or loads named child stacks through a deferred node operation while returning merged child state.",
+    "description": "Saves or loads named child stacks through a deferred node operation while returning merged child state. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "modify",
+      "memorize",
+      "utility",
+      "modify"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Selected or transformed result bank",
+    "icon": "icons/Modify.Memorize.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Save": "Boolean",
+      "Load": "Boolean",
+      "Name": "String",
+      "Slot": "Int32"
+    }
+  },
+  "Modify.Repeat": {
+    "name": "Repeat",
+    "category": "Modify",
+    "domain": "Utility",
+    "summary": "Records duplicated property banks and plays them back using retained index/mode controls; contains a recording-limit guard.",
+    "description": "Records duplicated property banks and plays them back using retained index/mode controls; contains a recording-limit guard. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "modify",
+      "repeat",
+      "utility",
+      "modify"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Selected or transformed result bank",
+    "icon": "icons/Modify.Repeat.svg",
+    "source_scope": "export-and-editable",
+    "options": {
+      "Mode": [
+        "Forward",
+        "PingPong",
+        "Reverse"
+      ]
+    },
+    "parameter_types": {
+      "Record": "Boolean",
+      "Play": "Boolean",
+      "Mode": "EnumIndex"
+    }
+  },
+  "Modify.Value.ADSR": {
+    "name": "Value ADSR",
+    "category": "Modify",
+    "domain": "Value",
+    "summary": "Uses a retained envelope triggered by Value thresholding, with attack/decay controls defined by the implementation.",
+    "description": "Uses a retained envelope triggered by Value thresholding, with attack/decay controls defined by the implementation. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "modify",
+      "value",
+      "adsr",
+      "value",
+      "modify"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Value",
+    "icon": "icons/Modify.Value.ADSR.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Attack": "Float32",
+      "Decay": "Float32"
+    }
+  },
+  "Modify.Value.AttackDecay": {
+    "name": "Value AttackDecay",
+    "category": "Modify",
+    "domain": "Value",
+    "summary": "Smooths changes in Value using separate attack and decay times through a retained AttackDecay helper.",
+    "description": "Smooths changes in Value using separate attack and decay times through a retained AttackDecay helper. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "modify",
+      "value",
+      "attackdecay",
+      "value",
+      "modify"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Value",
+    "icon": "icons/Modify.Value.AttackDecay.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Attack": "Float32",
+      "Decay": "Float32"
+    }
+  },
+  "Modify.Value.Cooldown": {
+    "name": "Value Cooldown",
+    "category": "Modify",
+    "domain": "Value",
+    "summary": "Gates thresholded Value using a retained cooldown helper; exposes a numeric pulse/result and cooldown progress.",
+    "description": "Gates thresholded Value using a retained cooldown helper; exposes a numeric pulse/result and cooldown progress. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "modify",
+      "value",
+      "cooldown",
+      "value",
+      "modify"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Value",
+    "icon": "icons/Modify.Value.Cooldown.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Duration": "Float32",
+      "Threshold": "Float32",
+      "Reset": "Boolean"
+    }
+  },
+  "Modify.Value.Damper": {
+    "name": "Value Damper",
+    "category": "Modify",
+    "domain": "Value",
+    "summary": "Runs merged Value through a retained damper configured by Time and writes its output back.",
+    "description": "Runs merged Value through a retained damper configured by Time and writes its output back. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "modify",
+      "value",
+      "damper",
+      "value",
+      "modify"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Value",
+    "icon": "icons/Modify.Value.Damper.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Time": "Float32"
+    }
+  },
+  "Modify.Value.Edge.Falling": {
+    "name": "Value Edge Falling",
+    "category": "Modify",
+    "domain": "Value",
+    "summary": "Outputs a scalar pulse for the falling edge of a thresholded input Value.",
+    "description": "Outputs a scalar pulse for the falling edge of a thresholded input Value. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "modify",
+      "value",
+      "edge",
+      "falling",
+      "value",
+      "modify"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Value",
+    "icon": "icons/Modify.Value.Edge.Falling.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Threshold": "Float32"
+    }
+  },
+  "Modify.Value.Edge.Rising": {
+    "name": "Value Edge Rising",
+    "category": "Modify",
+    "domain": "Value",
+    "summary": "Outputs a scalar pulse for the rising edge of a thresholded input Value.",
+    "description": "Outputs a scalar pulse for the rising edge of a thresholded input Value. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "modify",
+      "value",
+      "edge",
+      "rising",
+      "value",
+      "modify"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Value",
+    "icon": "icons/Modify.Value.Edge.Rising.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Threshold": "Float32"
+    }
+  },
+  "Modify.Value.Hold": {
+    "name": "Value Hold",
+    "category": "Modify",
+    "domain": "Value",
+    "summary": "Thresholds input Value and holds the resulting boolean pulse using the configured Time; writes a numeric boolean.",
+    "description": "Thresholds input Value and holds the resulting boolean pulse using the configured Time; writes a numeric boolean. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "modify",
+      "value",
+      "hold",
+      "value",
+      "modify"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Value",
+    "icon": "icons/Modify.Value.Hold.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Time": "Float32",
+      "Threshold": "Float32"
+    }
+  },
+  "Modify.Value.Map.HalfUpDown": {
+    "name": "Value Map HalfUpDown",
+    "category": "Modify",
+    "domain": "Value",
+    "summary": "Applies the selected clamped half-range up/down mapping to Value.",
+    "description": "Applies the selected clamped half-range up/down mapping to Value. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "modify",
+      "value",
+      "map",
+      "halfupdown",
+      "value",
+      "modify"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Value",
+    "icon": "icons/Modify.Value.Map.HalfUpDown.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Up/Down": "Boolean"
+    }
+  },
+  "Modify.Value.RunningMap": {
+    "name": "Value RunningMap",
+    "category": "Modify",
+    "domain": "Value",
+    "summary": "Uses a retained running-range helper to remap Value, with duration and filter-time controls, then clamps the result.",
+    "description": "Uses a retained running-range helper to remap Value, with duration and filter-time controls, then clamps the result. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "modify",
+      "value",
+      "runningmap",
+      "value",
+      "modify"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Value",
+    "icon": "icons/Modify.Value.RunningMap.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Duration": "Float32",
+      "Filter Time": "Float32",
+      "Minimum": "Float32",
+      "Maximum": "Float32",
+      "Clamp": "Boolean"
+    }
+  },
+  "Modify.Value.SelectRange": {
+    "name": "Value SelectRange",
+    "category": "Modify",
+    "domain": "Value",
+    "summary": "Maps the chosen input Min-to-Max interval into 0-to-1; optionally clamps the mapped result.",
+    "description": "Maps the chosen input Min-to-Max interval into 0-to-1; optionally clamps the mapped result. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "modify",
+      "value",
+      "selectrange",
+      "value",
+      "modify"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Value",
+    "icon": "icons/Modify.Value.SelectRange.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Min": "Float32",
+      "Max": "Float32",
+      "Clamp": "Boolean"
+    }
+  },
+  "Modify.Value.Shape": {
+    "name": "Value Shape",
+    "category": "Modify",
+    "domain": "Value",
+    "summary": "Applies a selected easing/tween shape and ease direction to input Value.",
+    "description": "Applies a selected easing/tween shape and ease direction to input Value. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "modify",
+      "value",
+      "shape",
+      "value",
+      "modify"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Value",
+    "icon": "icons/Modify.Value.Shape.svg",
+    "source_scope": "export-and-editable",
+    "options": {
+      "Shape": [
+        "Linear",
+        "Sine",
+        "Quad",
+        "Cubic",
+        "Quart",
+        "Quint",
+        "Expo",
+        "Circular",
+        "Elastic",
+        "Back",
+        "Bounce"
+      ],
+      "Ease": [
+        "In",
+        "Out",
+        "In/Out",
+        "Out/In"
+      ]
+    },
+    "parameter_types": {
+      "Shape": "EnumIndex",
+      "Ease": "EnumIndex"
+    }
+  },
+  "Modify.Value.Smooth": {
+    "name": "Value Smooth",
+    "category": "Modify",
+    "domain": "Value",
+    "summary": "Smooths scalar changes using retained up-speed/down-speed filtering.",
+    "description": "Smooths scalar changes using retained up-speed/down-speed filtering. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "modify",
+      "value",
+      "smooth",
+      "value",
+      "modify"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Value",
+    "icon": "icons/Modify.Value.Smooth.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Up Speed": "Float32",
+      "Down Speed": "Float32"
+    }
+  },
+  "Modify.Value.SmoothAcceleration": {
+    "name": "Value SmoothAcceleration",
+    "category": "Modify",
+    "domain": "Value",
+    "summary": "Smooths scalar changes using retained up/down acceleration controls.",
+    "description": "Smooths scalar changes using retained up/down acceleration controls. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "modify",
+      "value",
+      "smoothacceleration",
+      "value",
+      "modify"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Value",
+    "icon": "icons/Modify.Value.SmoothAcceleration.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Up Acceleration": "Float32",
+      "Down Acceleration": "Float32"
+    }
+  },
+  "Modify.Value.Toggle": {
+    "name": "Value Toggle",
+    "category": "Modify",
+    "domain": "Value",
+    "summary": "Flips retained boolean state from threshold events and writes the numeric toggle value.",
+    "description": "Flips retained boolean state from threshold events and writes the numeric toggle value. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "modify",
+      "value",
+      "toggle",
+      "value",
+      "modify"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Value",
+    "icon": "icons/Modify.Value.Toggle.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Threshold": "Float32"
+    }
+  },
+  "Modify.Value.Wave": {
+    "name": "Value Wave",
+    "category": "Modify",
+    "domain": "Value",
+    "summary": "Interprets Value as a waveform phase and applies Sawtooth, Triangle, Sine, Cosine, or Rectangle shaping.",
+    "description": "Interprets Value as a waveform phase and applies Sawtooth, Triangle, Sine, Cosine, or Rectangle shaping. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "modify",
+      "value",
+      "wave",
+      "value",
+      "modify"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Value",
+    "icon": "icons/Modify.Value.Wave.svg",
+    "source_scope": "export-and-editable",
+    "options": {
+      "Shape": [
+        "Sawtooth",
+        "Triangle",
+        "Sine",
+        "Cosine",
+        "Rectangle"
+      ]
+    },
+    "parameter_types": {
+      "Shape": "EnumIndex",
+      "Pulse Width": "Float32"
+    }
+  },
+  "Pick.Alternate": {
+    "name": "Alternate",
+    "category": "Pick",
+    "domain": "Value",
+    "summary": "Advances a retained child-selection counter over time, with randomness, pause, skip, and reverse controls.",
+    "description": "Advances a retained child-selection counter over time, with randomness, pause, skip, and reverse controls. Children continue to evaluate while selection chooses which result bank to return.",
+    "keywords": [
+      "pick",
+      "alternate",
+      "utility",
+      "pick"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Value",
+    "icon": "icons/Pick.Alternate.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Period": "Float32",
+      "Randomness": "Float32",
+      "Random": "Boolean",
+      "Pause": "Boolean",
+      "Skip": "Boolean",
+      "Reverse": "Boolean"
+    }
+  },
+  "Pick.Audio.Beat": {
+    "name": "Audio Beat",
+    "category": "Pick",
+    "domain": "Audio",
+    "summary": "Advances child selection from filtered audio beat events and retains the selected index.",
+    "description": "Advances child selection from filtered audio beat events and retains the selected index. Children continue to evaluate while selection chooses which result bank to return.",
+    "keywords": [
+      "pick",
+      "audio",
+      "beat",
+      "audio",
+      "pick"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "*",
+    "icon": "icons/Pick.Audio.Beat.svg",
+    "source_scope": "export-and-editable",
+    "options": {
+      "Frequency": [
+        "Low",
+        "MidLow",
+        "MidHigh",
+        "High"
+      ]
+    },
+    "parameter_types": {
+      "Probability": "Float32",
+      "Threshold": "Float32",
+      "Frequency": "EnumIndex"
+    }
+  },
+  "Pick.Audio.Power": {
+    "name": "Audio Power",
+    "category": "Pick",
+    "domain": "Value",
+    "summary": "Selects a child from per-child power thresholds, with retained waiting/state behavior.",
+    "description": "Selects a child from per-child power thresholds, with retained waiting/state behavior. Children continue to evaluate while selection chooses which result bank to return.",
+    "keywords": [
+      "pick",
+      "audio",
+      "power",
+      "audio",
+      "pick"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Value",
+    "icon": "icons/Pick.Audio.Power.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Power": "Float32",
+      "Wait": "Float32"
+    }
+  },
+  "Pick.BPM": {
+    "name": "BPM",
+    "category": "Pick",
+    "domain": "Utility",
+    "summary": "Selects a child according to per-child BPM thresholds and audio-state BPM.",
+    "description": "Selects a child according to per-child BPM thresholds and audio-state BPM. Children continue to evaluate while selection chooses which result bank to return.",
+    "keywords": [
+      "pick",
+      "bpm",
+      "utility",
+      "pick"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "*",
+    "icon": "icons/Pick.BPM.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "BPM": "Float32"
+    }
+  },
+  "Pick.Channel": {
+    "name": "Channel",
+    "category": "Pick",
+    "domain": "Utility",
+    "summary": "Selects a child result using the current fixture's channel context.",
+    "description": "Selects a child result using the current fixture's channel context. Children continue to evaluate while selection chooses which result bank to return.",
+    "keywords": [
+      "pick",
+      "channel",
+      "utility",
+      "pick"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "*",
+    "icon": "icons/Pick.Channel.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {}
+  },
+  "Pick.Controller": {
+    "name": "Controller",
+    "category": "Pick",
+    "domain": "Utility",
+    "summary": "A legacy controller-driven child selector defined in Schema.Controllers1.vl.",
+    "description": "A legacy controller-driven child selector defined in Schema.Controllers1.vl. Children continue to evaluate while selection chooses which result bank to return.",
+    "keywords": [
+      "pick",
+      "controller",
+      "utility",
+      "pick"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Selected or transformed result bank",
+    "icon": "icons/Pick.Controller.svg",
+    "source_scope": "editable-only",
+    "parameter_types": {}
+  },
+  "Pick.Group": {
+    "name": "Group",
+    "category": "Pick",
+    "domain": "Utility",
+    "summary": "Selects a child by matching fixture group membership against per-child Group parameters.",
+    "description": "Selects a child by matching fixture group membership against per-child Group parameters. Children continue to evaluate while selection chooses which result bank to return.",
+    "keywords": [
+      "pick",
+      "group",
+      "utility",
+      "pick"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "*",
+    "icon": "icons/Pick.Group.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Group": "String"
+    }
+  },
+  "Pick.LTP": {
+    "name": "LTP",
+    "category": "Pick",
+    "domain": "Utility",
+    "summary": "Selects among child results using the Geister LTPBee graph and its retained/context-dependent selection logic.",
+    "description": "Selects among child results using the Geister LTPBee graph and its retained/context-dependent selection logic. Children continue to evaluate while selection chooses which result bank to return.",
+    "keywords": [
+      "pick",
+      "ltp",
+      "utility",
+      "pick"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Selected or transformed result bank",
+    "icon": "icons/Pick.LTP.svg",
+    "source_scope": "editable-only",
+    "parameter_types": {
+      "AvoidZero": "Boolean"
+    }
+  },
+  "Pick.Time": {
+    "name": "Time",
+    "category": "Pick",
+    "domain": "Utility",
+    "summary": "Selects a child using per-child time-of-day thresholds; exact boundary comparisons are strict and Minutes metadata has a source inconsistency.",
+    "description": "Selects a child using per-child time-of-day thresholds; exact boundary comparisons are strict and Minutes metadata has a source inconsistency. Children continue to evaluate while selection chooses which result bank to return.",
+    "keywords": [
+      "pick",
+      "time",
+      "utility",
+      "pick"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "*",
+    "icon": "icons/Pick.Time.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Hour": "Float32",
+      "Minutes": "Float32"
+    }
+  },
+  "S.Pong.Paddle": {
+    "name": "Pong Paddle",
+    "category": "S",
+    "domain": "Color",
+    "summary": "A legacy Pong-paddle color/fixture behavior defined in VVVV.Schema.Pong.vl.",
+    "description": "A legacy Pong-paddle color/fixture behavior defined in VVVV.Schema.Pong.vl. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "s",
+      "pong",
+      "paddle",
+      "utility",
+      "s"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Colors",
+    "icon": "icons/S.Pong.Paddle.svg",
+    "source_scope": "editable-only",
+    "parameter_types": {}
+  },
+  "S.Pong.Position": {
+    "name": "Pong Position",
+    "category": "S",
+    "domain": "Position",
+    "summary": "A legacy Pong-position behavior defined in VVVV.Schema.Pong.vl.",
+    "description": "A legacy Pong-position behavior defined in VVVV.Schema.Pong.vl. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "s",
+      "pong",
+      "position",
+      "position",
+      "s"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Selected or transformed result bank",
+    "icon": "icons/S.Pong.Position.svg",
+    "source_scope": "editable-only",
+    "parameter_types": {}
+  },
+  "Setup.Pixels.Circle": {
+    "name": "Pixels Circle",
+    "category": "Setup",
+    "domain": "Utility",
+    "summary": "Constructs circular pixel positions from Count and Radius and emits a fixture setup operation alongside updated pixel metadata.",
+    "description": "Constructs circular pixel positions from Count and Radius and emits a fixture setup operation alongside updated pixel metadata. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "setup",
+      "pixels",
+      "circle",
+      "utility",
+      "setup"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Deferred scene action",
+    "icon": "icons/Setup.Pixels.Circle.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Count": "Int32",
+      "Radius": "Float32"
+    }
+  },
+  "Test.Widgets.FilePicker": {
+    "name": "Widgets FilePicker",
+    "category": "Test",
+    "domain": "Value",
+    "summary": "Choose a project resource path for a test widget.",
+    "description": "The File property retains the chosen path and exposes it in the result bank. Resource files are resolved inside the project resources folder.",
+    "keywords": [
+      "test",
+      "widgets",
+      "filepicker",
+      "utility",
+      "test"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Value",
+    "icon": "icons/Test.Widgets.FilePicker.svg",
+    "source_scope": "editable-only",
+    "parameter_types": {
+      "File": "String"
+    }
+  },
+  "Tool.Deprecated.Index.Counter": {
+    "name": "Deprecated Index Counter",
+    "category": "Tool",
+    "domain": "Utility",
+    "summary": "Maintains a legacy index counter using merged-state controls; explicitly registered as deprecated.",
+    "description": "Maintains a legacy index counter using merged-state controls; explicitly registered as deprecated. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "tool",
+      "deprecated",
+      "index",
+      "counter",
+      "utility",
+      "tool"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Selected or transformed result bank",
+    "icon": "icons/Tool.Deprecated.Index.Counter.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Period": "Int32"
+    }
+  },
+  "Tool.Deprecated.Pick.Index": {
+    "name": "Deprecated Pick Index",
+    "category": "Tool",
+    "domain": "Utility",
+    "summary": "Selects a child bank using an Index obtained from merged child state; explicitly registered as deprecated.",
+    "description": "Selects a child bank using an Index obtained from merged child state; explicitly registered as deprecated. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "tool",
+      "deprecated",
+      "pick",
+      "index",
+      "utility",
+      "tool"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Selected or transformed result bank",
+    "icon": "icons/Tool.Deprecated.Pick.Index.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {}
+  },
+  "Transition.Fade": {
+    "name": "Fade",
+    "category": "Transition",
+    "domain": "Utility",
+    "summary": "Blends supported color/vector fields between two child banks over Duration, then requests replacement of the transition node with its second child.",
+    "description": "Blends supported color/vector fields between two child banks over Duration, then requests replacement of the transition node with its second child. Use ordered child blocks to supply incoming channels, and property drivers to animate numeric or boolean settings.",
+    "keywords": [
+      "transition",
+      "fade",
+      "utility",
+      "transition"
+    ],
+    "inputs": "Ordered child result banks / typed property drivers",
+    "output": "Selected or transformed result bank",
+    "icon": "icons/Transition.Fade.svg",
+    "source_scope": "export-and-editable",
+    "parameter_types": {
+      "Duration": "Float32"
+    }
+  }
+}

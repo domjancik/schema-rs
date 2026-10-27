@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none" role="img" aria-labelledby="title description">
+  <title id="title">Merge channels</title>
+  <desc id="description">Join child banks by overwriting matching channels.</desc>
+  <rect x="3" y="3" width="42" height="42" rx="11" fill="#192426" stroke="#3b5550"/>
+  <g stroke="#72dec2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 12h8l6 12-6 12h-8m14-12h14m-9-5 5 5-5 5"/><path d="M10 24h14" stroke="#9bc4b2"/></g>
+</svg>

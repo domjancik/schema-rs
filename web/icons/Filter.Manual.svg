@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none" role="img" aria-labelledby="title description">
+  <title id="title">Manual gate</title>
+  <desc id="description">Pass or suppress an input bank.</desc>
+  <rect x="3" y="3" width="42" height="42" rx="11" fill="#192426" stroke="#3b5550"/>
+  <g stroke="#72dec2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 30h11m10 0h11M19 30l11-15"/><circle cx="19" cy="30" r="2"/><circle cx="29" cy="30" r="2" stroke="#e4b7c7"/></g>
+</svg>

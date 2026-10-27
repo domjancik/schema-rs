@@ -1,0 +1,13 @@
+name: Rectangular plane light
+stack:
+  Light.Emitter:
+    Type: Plane
+    Color: '#88b7db'
+    Direction: [0, -1, 0]
+    Width: 8
+    Height: 6
+    Range: 8
+    Two Sided: false
+    Channel: stage
+    in:
+      - Create.Position.XYZ: {X: 0, Y: 3, Z: 0}

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none" role="img" aria-labelledby="title description">
+  <title id="title">Sample and hold</title>
+  <desc id="description">Capture an input bank and hold it.</desc>
+  <rect x="3" y="3" width="42" height="42" rx="11" fill="#192426" stroke="#3b5550"/>
+  <g stroke="#72dec2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 32h9V17h13v15h9"/><path d="M18 12v26m13-26v26" stroke="#9ab9ad" stroke-dasharray="2 4"/></g>
+</svg>

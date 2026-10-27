@@ -1,0 +1,10 @@
+{
+  "web_errors": [],
+  "fixture_count": 8,
+  "scene_move": true,
+  "undo_redo": true,
+  "independent_engine_during_blocked_ui": true,
+  "yaml_import": true,
+  "independent_layer_edit": true,
+  "project_save": true
+}

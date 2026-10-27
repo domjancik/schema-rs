@@ -1,0 +1,2064 @@
+{
+  "Assign.Content": {
+    "defaults": {
+      "Duration": 2.0,
+      "Content": "Content",
+      "Group": "",
+      "Transition": "Transition.Fade",
+      "Enabled": false
+    },
+    "types": {
+      "Duration": "Float32",
+      "Content": "String",
+      "Group": "String",
+      "Transition": "String",
+      "Enabled": "Boolean"
+    },
+    "options": {}
+  },
+  "Assign.Director": {
+    "defaults": {
+      "Stack": "",
+      "Layer": 0,
+      "Enabled": false
+    },
+    "types": {
+      "Stack": "String",
+      "Layer": "Int32",
+      "Enabled": "Boolean"
+    },
+    "options": {}
+  },
+  "Assign.Fixture": {
+    "defaults": {
+      "Stack": "Select Stack",
+      "Fixture": "Select Fixture",
+      "Transition": "Transition.Fade",
+      "Duration": 2,
+      "Enabled": false
+    },
+    "types": {
+      "Stack": "String",
+      "Fixture": "String",
+      "Transition": "String",
+      "Duration": "Float32",
+      "Enabled": "Boolean"
+    },
+    "options": {}
+  },
+  "Assign.Global.Color": {
+    "defaults": {
+      "Fade Duration": 1.0,
+      "Slot": 0,
+      "Default": "#ffffff"
+    },
+    "types": {
+      "Fade Duration": "Float32",
+      "Slot": "Int32",
+      "Default": "Color4"
+    },
+    "options": {}
+  },
+  "Assign.Group": {
+    "defaults": {
+      "Duration": 2.0,
+      "Stack": "Stack",
+      "Group": "Group",
+      "Transition": "Transition.Fade",
+      "Enabled": false,
+      "Layer": 0
+    },
+    "types": {
+      "Duration": "Float32",
+      "Stack": "String",
+      "Group": "String",
+      "Transition": "String",
+      "Enabled": "Boolean",
+      "Layer": "Int32"
+    },
+    "options": {}
+  },
+  "Combine.Add": {
+    "defaults": {},
+    "types": {},
+    "options": {}
+  },
+  "Combine.Audio.Add": {
+    "defaults": {},
+    "types": {},
+    "options": {}
+  },
+  "Combine.Audio.Multiply": {
+    "defaults": {},
+    "types": {},
+    "options": {}
+  },
+  "Combine.Color.Distance": {
+    "defaults": {},
+    "types": {},
+    "options": {}
+  },
+  "Combine.Color.Max": {
+    "defaults": {},
+    "types": {},
+    "options": {}
+  },
+  "Combine.Color.Mix": {
+    "defaults": {},
+    "types": {},
+    "options": {}
+  },
+  "Combine.Crossfade": {
+    "defaults": {
+      "Fader": 0.0,
+      "Shape": 0
+    },
+    "types": {
+      "Fader": "Float32",
+      "Shape": "EnumIndex"
+    },
+    "options": {
+      "Shape": [
+        "Linear",
+        "Sine",
+        "Quad",
+        "Cubic",
+        "Quart",
+        "Quint",
+        "Expo",
+        "Circular",
+        "Elastic",
+        "Back",
+        "Bounce"
+      ]
+    }
+  },
+  "Combine.Multiply": {
+    "defaults": {},
+    "types": {},
+    "options": {}
+  },
+  "Combine.Texture.Multiply": {
+    "defaults": {},
+    "types": {},
+    "options": {}
+  },
+  "Combine.Value.Boolean": {
+    "defaults": {
+      "And/Or": false
+    },
+    "types": {
+      "And/Or": "Boolean"
+    },
+    "options": {}
+  },
+  "Combine.Value.Compare": {
+    "defaults": {
+      "Operator": 0,
+      "Epsilon": 0.0
+    },
+    "types": {
+      "Operator": "EnumIndex",
+      "Epsilon": "Float32"
+    },
+    "options": {
+      "Operator": [
+        ">",
+        ">=",
+        "<",
+        "<=",
+        "="
+      ]
+    }
+  },
+  "Convert.Audio.Meter": {
+    "defaults": {},
+    "types": {},
+    "options": {}
+  },
+  "Convert.Speed.PositionToTarget": {
+    "defaults": {},
+    "types": {},
+    "options": {}
+  },
+  "Convert.Value.ToColor": {
+    "defaults": {},
+    "types": {},
+    "options": {}
+  },
+  "Convert.Value.ToDuration": {
+    "defaults": {},
+    "types": {},
+    "options": {}
+  },
+  "Convert.Value.ToSpeed": {
+    "defaults": {
+      "Range": 0
+    },
+    "types": {
+      "Range": "EnumIndex"
+    },
+    "options": {
+      "Range": [
+        "Positive",
+        "Negative",
+        "Both"
+      ]
+    }
+  },
+  "Create.AnimationWheel.Position": {
+    "defaults": {
+      "Value": 0.0,
+      "Slot": 0
+    },
+    "types": {
+      "Value": "Float32",
+      "Slot": "Int32"
+    },
+    "options": {}
+  },
+  "Create.AnimationWheel.Rotation": {
+    "defaults": {
+      "Value": 0.5,
+      "Slot": 0
+    },
+    "types": {
+      "Value": "Float32",
+      "Slot": "Int32"
+    },
+    "options": {}
+  },
+  "Create.Audio.Input": {
+    "defaults": {
+      "Index": 0,
+      "Gain": 0.1
+    },
+    "types": {
+      "Index": "Int32",
+      "Gain": "Float32"
+    },
+    "options": {}
+  },
+  "Create.Audio.OSC": {
+    "defaults": {
+      "Frequency": 440,
+      "Gain": 0.1,
+      "Waveform": 0,
+      "Symmetry": 0.5
+    },
+    "types": {
+      "Frequency": "Float32",
+      "Gain": "Float32",
+      "Waveform": "EnumIndex",
+      "Symmetry": "Float32"
+    },
+    "options": {}
+  },
+  "Create.Audio.Sample": {
+    "defaults": {
+      "Speed": 1,
+      "Play Restarts": false,
+      "Play": false,
+      "Gain": 0.1,
+      "Loop": false
+    },
+    "types": {
+      "Speed": "Float32",
+      "Play Restarts": "Boolean",
+      "Play": "Boolean",
+      "Gain": "Float32",
+      "Loop": "Boolean"
+    },
+    "options": {}
+  },
+  "Create.BeamShaper.Position": {
+    "defaults": {
+      "Value": 0.5
+    },
+    "types": {
+      "Value": "Float32"
+    },
+    "options": {}
+  },
+  "Create.Blade.Position": {
+    "defaults": {
+      "Value": 0.0,
+      "Slot": 0
+    },
+    "types": {
+      "Value": "Float32",
+      "Slot": "Int32"
+    },
+    "options": {}
+  },
+  "Create.Blade.Rotation": {
+    "defaults": {
+      "Value": 0.5,
+      "Slot": 0
+    },
+    "types": {
+      "Value": "Float32",
+      "Slot": "Int32"
+    },
+    "options": {}
+  },
+  "Create.Color.Audio.FFTPixels": {
+    "defaults": {
+      "Gain": 1,
+      "Linear/Spline": false
+    },
+    "types": {
+      "Gain": "Float32",
+      "Linear/Spline": "Boolean"
+    },
+    "options": {}
+  },
+  "Create.Color.Audio.Level": {
+    "defaults": {
+      "Value": 0.0,
+      "Invert Level": false,
+      "Slot": 0
+    },
+    "types": {
+      "Value": "Float32",
+      "Invert Level": "Boolean",
+      "Slot": "Int32"
+    },
+    "options": {},
+    "basis": "first"
+  },
+  "Create.Color.Color": {
+    "defaults": {
+      "Color": "#ffffff"
+    },
+    "types": {
+      "Color": "Color4"
+    },
+    "options": {},
+    "basis": "first"
+  },
+  "Create.Color.Constant": {
+    "defaults": {
+      "Value": 1.0
+    },
+    "types": {
+      "Value": "Float32"
+    },
+    "options": {},
+    "basis": "first"
+  },
+  "Create.Color.External": {
+    "defaults": {
+      "Slot": 0
+    },
+    "types": {
+      "Slot": "Int32"
+    },
+    "options": {},
+    "basis": "first"
+  },
+  "Create.Color.Flash.Beat": {
+    "defaults": {
+      "Probability": 0.5,
+      "Attack": 0.0,
+      "Decay": 1.0,
+      "Threshold": 0.5,
+      "Slot": 0,
+      "Frequency": 0
+    },
+    "types": {
+      "Probability": "Float32",
+      "Attack": "Float32",
+      "Decay": "Float32",
+      "Threshold": "Float32",
+      "Slot": "Int32",
+      "Frequency": "EnumIndex"
+    },
+    "options": {
+      "Frequency": [
+        "Low",
+        "MidLow",
+        "MidHigh",
+        "High"
+      ]
+    }
+  },
+  "Create.Color.Flash.BPM": {
+    "defaults": {
+      "BPM": 126,
+      "Attack": 0.0,
+      "Decay": 1.0
+    },
+    "types": {
+      "BPM": "Int32",
+      "Attack": "Float32",
+      "Decay": "Float32"
+    },
+    "options": {},
+    "basis": "first"
+  },
+  "Create.Color.Flash.Timed": {
+    "defaults": {
+      "Interval": 2.0,
+      "Randomness": 0.5,
+      "Attack": 0.0,
+      "Decay": 1.0
+    },
+    "types": {
+      "Interval": "Float32",
+      "Randomness": "Float32",
+      "Attack": "Float32",
+      "Decay": "Float32"
+    },
+    "options": {},
+    "basis": "first"
+  },
+  "Create.Color.Global": {
+    "defaults": {
+      "Slot": 0
+    },
+    "types": {
+      "Slot": "Int32"
+    },
+    "options": {},
+    "basis": "first"
+  },
+  "Create.Color.OSC": {
+    "defaults": {
+      "Name": "Choose",
+      "Default": "#ffffff"
+    },
+    "types": {
+      "Name": "String",
+      "Default": "Color4"
+    },
+    "options": {}
+  },
+  "Create.Color.Pixel.Distance.Axis": {
+    "defaults": {
+      "Radius": 1.0,
+      "Target/Local": false,
+      "Direction": 0,
+      "Axis": 0,
+      "Fixture": "Fixture"
+    },
+    "types": {
+      "Radius": "Float32",
+      "Target/Local": "Boolean",
+      "Direction": "EnumIndex",
+      "Axis": "EnumIndex",
+      "Fixture": "String"
+    },
+    "options": {
+      "Direction": [
+        "Both",
+        "Above",
+        "Below"
+      ],
+      "Axis": [
+        "X",
+        "Y",
+        "Z"
+      ]
+    }
+  },
+  "Create.Color.Pixel.Distance.Plane": {
+    "defaults": {
+      "Radius": 1.0,
+      "Target/Local": false,
+      "Direction": 0,
+      "Color From Target": false,
+      "Fixture": "Fixture"
+    },
+    "types": {
+      "Radius": "Float32",
+      "Target/Local": "Boolean",
+      "Direction": "EnumIndex",
+      "Color From Target": "Boolean",
+      "Fixture": "String"
+    },
+    "options": {
+      "Direction": [
+        "Both",
+        "Above",
+        "Below"
+      ]
+    }
+  },
+  "Create.Color.Pixel.Distance.Point": {
+    "defaults": {
+      "Radius": 1.0,
+      "Target/Local": false,
+      "Fixture": "Fixture"
+    },
+    "types": {
+      "Radius": "Float32",
+      "Target/Local": "Boolean",
+      "Fixture": "String"
+    },
+    "options": {}
+  },
+  "Create.Color.Pixel.Pulse.Cannon": {
+    "defaults": {
+      "Width": 0.6,
+      "Speed": 0.5,
+      "Direction": false,
+      "Trigger": false
+    },
+    "types": {
+      "Width": "Float32",
+      "Speed": "Float32",
+      "Direction": "Boolean",
+      "Trigger": "Boolean"
+    },
+    "options": {}
+  },
+  "Create.Color.Pixel.Pulse.Manual": {
+    "defaults": {
+      "Width": 0.6,
+      "Position": 0.5
+    },
+    "types": {
+      "Width": "Float32",
+      "Position": "Float32"
+    },
+    "options": {}
+  },
+  "Create.Color.Pixel.Pulse": {
+    "defaults": {
+      "Width": 0.6,
+      "Speed": 0.5,
+      "Width Audio": 0.0,
+      "Speed Audio": 0.0,
+      "Speed Random": 0.0,
+      "Reverse": false
+    },
+    "types": {
+      "Width": "Float32",
+      "Speed": "Float32",
+      "Width Audio": "Float32",
+      "Speed Audio": "Float32",
+      "Speed Random": "Float32",
+      "Reverse": "Boolean"
+    },
+    "options": {},
+    "basis": "first"
+  },
+  "Create.Color.Pixel.Rainbow": {
+    "defaults": {
+      "Width": 0.6,
+      "Position": 0.5
+    },
+    "types": {
+      "Width": "Float32",
+      "Position": "Float32"
+    },
+    "options": {}
+  },
+  "Create.Color.Pixel.Segment": {
+    "defaults": {
+      "Repeat": 1
+    },
+    "types": {
+      "Repeat": "Int32"
+    },
+    "options": {},
+    "basis": "fresh"
+  },
+  "Create.Color.Primary": {
+    "defaults": {},
+    "types": {},
+    "options": {},
+    "basis": "first"
+  },
+  "Create.Color.Universe": {
+    "defaults": {},
+    "types": {},
+    "options": {},
+    "basis": "first"
+  },
+  "Create.Copycat": {
+    "defaults": {
+      "Layer": 1,
+      "Fixture": "Fixture"
+    },
+    "types": {
+      "Layer": "Int32",
+      "Fixture": "String"
+    },
+    "options": {}
+  },
+  "Create.Duration.Constant": {
+    "defaults": {
+      "Value": 1.0
+    },
+    "types": {
+      "Value": "Float32"
+    },
+    "options": {}
+  },
+  "Create.Focus.Value": {
+    "defaults": {
+      "Value": 0.0
+    },
+    "types": {
+      "Value": "Float32"
+    },
+    "options": {}
+  },
+  "Create.Frost.Value": {
+    "defaults": {
+      "Value": 0.0,
+      "Slot": 0
+    },
+    "types": {
+      "Value": "Float32",
+      "Slot": "Int32"
+    },
+    "options": {}
+  },
+  "Create.Gobo.Constant": {
+    "defaults": {
+      "Gobo": 0,
+      "Slot": 0
+    },
+    "types": {
+      "Gobo": "Int32",
+      "Slot": "Int32"
+    },
+    "options": {},
+    "basis": "first"
+  },
+  "Create.Gobo.Rotate.Value": {
+    "defaults": {
+      "Value": 0.0,
+      "Slot": 0
+    },
+    "types": {
+      "Value": "Float32",
+      "Slot": "Int32"
+    },
+    "options": {},
+    "basis": "first"
+  },
+  "Create.Gobo.Shake.Constant": {
+    "defaults": {
+      "Value": 0.0,
+      "Slot": 0
+    },
+    "types": {
+      "Value": "Float32",
+      "Slot": "Int32"
+    },
+    "options": {},
+    "basis": "first"
+  },
+  "Create.Iris.Value": {
+    "defaults": {
+      "Value": 0.0
+    },
+    "types": {
+      "Value": "Float32"
+    },
+    "options": {}
+  },
+  "Create.Layer.Above": {
+    "defaults": {
+      "Layer": 0
+    },
+    "types": {
+      "Layer": "EnumIndex"
+    },
+    "options": {
+      "Layer": [
+        "First",
+        "Second",
+        "Third",
+        "Fourth"
+      ]
+    }
+  },
+  "Create.Macro.Constant": {
+    "defaults": {
+      "Macro": "Macro"
+    },
+    "types": {
+      "Macro": "String"
+    },
+    "options": {}
+  },
+  "Create.Position.Constant": {
+    "defaults": {
+      "Position": [
+        0,
+        0,
+        0
+      ]
+    },
+    "types": {
+      "Position": "Vector3"
+    },
+    "options": {},
+    "basis": "first"
+  },
+  "Create.Position.Current": {
+    "defaults": {},
+    "types": {},
+    "options": {}
+  },
+  "Create.Position.Group.Center": {
+    "defaults": {
+      "Group": "Dancefloor"
+    },
+    "types": {
+      "Group": "String"
+    },
+    "options": {},
+    "basis": "first"
+  },
+  "Create.Position.Group.Random": {
+    "defaults": {
+      "Group": "Dancefloor",
+      "Speed": 0.5,
+      "Speed Audio": 0.0,
+      "Padding": 1.0,
+      "Continuous": true
+    },
+    "types": {
+      "Group": "String",
+      "Speed": "Float32",
+      "Speed Audio": "Float32",
+      "Padding": "Float32",
+      "Continuous": "Boolean"
+    },
+    "options": {},
+    "basis": "first"
+  },
+  "Create.Position.Group.Slide": {
+    "defaults": {
+      "Speed": 0.5,
+      "Speed Audio": 0.0,
+      "Reverse": false,
+      "Group": "Group",
+      "Axis": 0
+    },
+    "types": {
+      "Speed": "Float32",
+      "Speed Audio": "Float32",
+      "Reverse": "Boolean",
+      "Group": "String",
+      "Axis": "EnumIndex"
+    },
+    "options": {
+      "Axis": [
+        "X",
+        "Y",
+        "Z"
+      ]
+    },
+    "basis": "first"
+  },
+  "Create.Position.Group.XYZ": {
+    "defaults": {
+      "Reverse": false,
+      "Padding": 0.0,
+      "Group": "Group",
+      "X": 0.5,
+      "Y": 0.5,
+      "Z": 0.5
+    },
+    "types": {
+      "Reverse": "Boolean",
+      "Padding": "Float32",
+      "Group": "String",
+      "X": "Float32",
+      "Y": "Float32",
+      "Z": "Float32"
+    },
+    "options": {},
+    "basis": "first"
+  },
+  "Create.Position.XYZ": {
+    "defaults": {
+      "X": 0.0,
+      "Y": 0.0,
+      "Z": 0.0
+    },
+    "types": {
+      "X": "Float32",
+      "Y": "Float32",
+      "Z": "Float32"
+    },
+    "options": {},
+    "basis": "first"
+  },
+  "Create.Prism.Rotate": {
+    "defaults": {
+      "Value": 0.0,
+      "Slot": 0
+    },
+    "types": {
+      "Value": "Float32",
+      "Slot": "Int32"
+    },
+    "options": {},
+    "basis": "first"
+  },
+  "Create.Prism.Select": {
+    "defaults": {
+      "Index": 0,
+      "Slot": 0
+    },
+    "types": {
+      "Index": "Int32",
+      "Slot": "Int32"
+    },
+    "options": {},
+    "basis": "first"
+  },
+  "Create.Radius.Constant": {
+    "defaults": {
+      "Radius": 1.0,
+      "Radius Audio": 0.0
+    },
+    "types": {
+      "Radius": "Float32",
+      "Radius Audio": "Float32"
+    },
+    "options": {},
+    "basis": "first"
+  },
+  "Create.Reference.Fixture": {
+    "defaults": {
+      "Fixture": "Fixture"
+    },
+    "types": {
+      "Fixture": "String"
+    },
+    "options": {}
+  },
+  "Create.Reference.SequenceOffset": {
+    "defaults": {
+      "Offset": 0,
+      "Sequence": "BuiltIn.Name",
+      "Group": "Group"
+    },
+    "types": {
+      "Offset": "Int32",
+      "Sequence": "String",
+      "Group": "String"
+    },
+    "options": {}
+  },
+  "Create.Remote": {
+    "defaults": {
+      "Address": "Untitled",
+      "Index": 0
+    },
+    "types": {
+      "Address": "String",
+      "Index": "Int32"
+    },
+    "options": {}
+  },
+  "Create.Resource.Constant": {
+    "defaults": {
+      "Resource": ""
+    },
+    "types": {
+      "Resource": "String"
+    },
+    "options": {}
+  },
+  "Create.Rotation.Audio.Shake": {
+    "defaults": {
+      "Strength": 0.5,
+      "Probability": 0.5,
+      "Time": 0.0,
+      "Frequency": 0,
+      "Axis": 0
+    },
+    "types": {
+      "Strength": "Float32",
+      "Probability": "Float32",
+      "Time": "Float32",
+      "Frequency": "EnumIndex",
+      "Axis": "EnumIndex"
+    },
+    "options": {
+      "Frequency": [
+        "Low",
+        "MidLow",
+        "MidHigh",
+        "High"
+      ],
+      "Axis": [
+        "X",
+        "Y",
+        "Z"
+      ]
+    },
+    "basis": "first"
+  },
+  "Create.Rotation.Constant": {
+    "defaults": {
+      "Rotation": [
+        0,
+        0,
+        0
+      ]
+    },
+    "types": {
+      "Rotation": "Vector3"
+    },
+    "options": {},
+    "basis": "first"
+  },
+  "Create.Rotation.Follow": {
+    "defaults": {
+      "Fixture": "Lantern"
+    },
+    "types": {
+      "Fixture": "String"
+    },
+    "options": {},
+    "basis": "first"
+  },
+  "Create.Rotation.PanTilt": {
+    "defaults": {
+      "Pan": 0.5,
+      "Tilt": 0.5
+    },
+    "types": {
+      "Pan": "Float32",
+      "Tilt": "Float32"
+    },
+    "options": {},
+    "basis": "first"
+  },
+  "Create.Rotation.Perpendicular": {
+    "defaults": {
+      "Axis": 0
+    },
+    "types": {
+      "Axis": "EnumIndex"
+    },
+    "options": {
+      "Axis": [
+        "X",
+        "Y",
+        "Z"
+      ]
+    },
+    "basis": "first"
+  },
+  "Create.Rotation.Timed": {
+    "defaults": {
+      "Speed": 0.5,
+      "Speed Audio": 0.0,
+      "Axis": 0
+    },
+    "types": {
+      "Speed": "Float32",
+      "Speed Audio": "Float32",
+      "Axis": "EnumIndex"
+    },
+    "options": {
+      "Axis": [
+        "X",
+        "Y",
+        "Z"
+      ]
+    },
+    "basis": "first"
+  },
+  "Create.Rotation.XYZ": {
+    "defaults": {
+      "X": 0.0,
+      "Y": 0.0,
+      "Z": 0.0
+    },
+    "types": {
+      "X": "Float32",
+      "Y": "Float32",
+      "Z": "Float32"
+    },
+    "options": {}
+  },
+  "Create.Shapes.ResourceMode.Constant": {
+    "defaults": {
+      "": "",
+      "ShapesResourceMode": ""
+    },
+    "types": {
+      "": "String",
+      "ShapesResourceMode": "String"
+    },
+    "options": {}
+  },
+  "Create.Speed.Constant": {
+    "defaults": {
+      "Range": 0,
+      "Value": 1.0
+    },
+    "types": {
+      "Range": "EnumIndex",
+      "Value": "Float32"
+    },
+    "options": {
+      "Range": [
+        "Positive",
+        "Negative",
+        "Both"
+      ]
+    }
+  },
+  "Create.Temperature.Constant": {
+    "defaults": {
+      "Value": 0.5
+    },
+    "types": {
+      "Value": "Float32"
+    },
+    "options": {}
+  },
+  "Create.Texture.Color": {
+    "defaults": {},
+    "types": {},
+    "options": {}
+  },
+  "Create.Texture.Noise": {
+    "defaults": {},
+    "types": {},
+    "options": {}
+  },
+  "Create.Value.Audio.Beat": {
+    "defaults": {
+      "Probability": 0.5,
+      "Slot": 0,
+      "Frequency": 0
+    },
+    "types": {
+      "Probability": "Float32",
+      "Slot": "Int32",
+      "Frequency": "EnumIndex"
+    },
+    "options": {
+      "Frequency": [
+        "Low",
+        "MidLow",
+        "MidHigh",
+        "High"
+      ]
+    }
+  },
+  "Create.Value.Audio.FFT16": {
+    "defaults": {
+      "Gain": 1,
+      "Frequency Band": 0,
+      "Average/Max": false
+    },
+    "types": {
+      "Gain": "Float32",
+      "Frequency Band": "Int32",
+      "Average/Max": "Boolean"
+    },
+    "options": {}
+  },
+  "Create.Value.Audio.Level": {
+    "defaults": {
+      "Low": 0.0,
+      "High": 1.0,
+      "Slot": 0
+    },
+    "types": {
+      "Low": "Float32",
+      "High": "Float32",
+      "Slot": "Int32"
+    },
+    "options": {}
+  },
+  "Create.Value.Audio.PeakPower": {
+    "defaults": {
+      "Slot": 0
+    },
+    "types": {
+      "Slot": "Int32"
+    },
+    "options": {}
+  },
+  "Create.Value.Audio.Pitch": {
+    "defaults": {
+      "Slot": 0
+    },
+    "types": {
+      "Slot": "Int32"
+    },
+    "options": {}
+  },
+  "Create.Value.Audio.Power": {
+    "defaults": {
+      "Current/Overall": false,
+      "Slot": 0
+    },
+    "types": {
+      "Current/Overall": "Boolean",
+      "Slot": "Int32"
+    },
+    "options": {}
+  },
+  "Create.Value.Closeness": {
+    "defaults": {
+      "Radius": 1.0,
+      "Fixture": "Fixture"
+    },
+    "types": {
+      "Radius": "Float32",
+      "Fixture": "String"
+    },
+    "options": {}
+  },
+  "Create.Value.Constant": {
+    "defaults": {
+      "Value": 1.0
+    },
+    "types": {
+      "Value": "Float32"
+    },
+    "options": {}
+  },
+  "Create.Value.Control": {
+    "defaults": {
+      "Index": 0,
+      "Learn": false,
+      "Default": 0.0,
+      "Label": "Untitled"
+    },
+    "types": {
+      "Index": "Int32",
+      "Learn": "Boolean",
+      "Default": "Float32",
+      "Label": "String"
+    },
+    "options": {}
+  },
+  "Create.Value.Controller.Pad": {
+    "defaults": {
+      "Pad": 0
+    },
+    "types": {
+      "Pad": "Int32"
+    },
+    "options": {}
+  },
+  "Create.Value.Controller.Value": {
+    "defaults": {
+      "Index": 0,
+      "Learn": false,
+      "Label": "Untitled"
+    },
+    "types": {
+      "Index": "Int32",
+      "Learn": "Boolean",
+      "Label": "String"
+    },
+    "options": {}
+  },
+  "Create.Value.Distance": {
+    "defaults": {
+      "Auto/Setup": false,
+      "Fixture": "Fixture"
+    },
+    "types": {
+      "Auto/Setup": "Boolean",
+      "Fixture": "String"
+    },
+    "options": {}
+  },
+  "Create.Value.Expression": {
+    "defaults": {
+      "Expression": "s"
+    },
+    "types": {
+      "Expression": "String"
+    },
+    "options": {}
+  },
+  "Create.Value.Fixture.IsSelected": {
+    "defaults": {},
+    "types": {},
+    "options": {}
+  },
+  "Create.Value.Global": {
+    "defaults": {
+      "Name": "Value"
+    },
+    "types": {
+      "Name": "String"
+    },
+    "options": {}
+  },
+  "Create.Value.Group.AxisPosition": {
+    "defaults": {
+      "Group": "Group",
+      "Axis": 0
+    },
+    "types": {
+      "Group": "String",
+      "Axis": "EnumIndex"
+    },
+    "options": {
+      "Axis": [
+        "X",
+        "Y",
+        "Z"
+      ]
+    }
+  },
+  "Create.Value.Keyboard": {
+    "defaults": {
+      "Key Name": "Space"
+    },
+    "types": {
+      "Key Name": "String"
+    },
+    "options": {}
+  },
+  "Create.Value.LFO": {
+    "defaults": {
+      "Period": 1.0,
+      "Type": 0
+    },
+    "types": {
+      "Period": "Float32",
+      "Type": "EnumIndex"
+    },
+    "options": {
+      "Type": [
+        "Sawtooth",
+        "Triangle",
+        "Sine"
+      ]
+    }
+  },
+  "Create.Value.OSC": {
+    "defaults": {
+      "Name": "Choose",
+      "Default": 0.0,
+      "Index": 0
+    },
+    "types": {
+      "Name": "String",
+      "Default": "Float32",
+      "Index": "Int32"
+    },
+    "options": {}
+  },
+  "Create.Value.OSCReceived": {
+    "defaults": {
+      "Name": "Choose",
+      "Simulate": false
+    },
+    "types": {
+      "Name": "String",
+      "Simulate": "Boolean"
+    },
+    "options": {}
+  },
+  "Create.Value.Random": {
+    "defaults": {
+      "Interval": 1.0,
+      "Filter Time": 1.0,
+      "Pause": false,
+      "Randomness": 0.0
+    },
+    "types": {
+      "Interval": "Float32",
+      "Filter Time": "Float32",
+      "Pause": "Boolean",
+      "Randomness": "Float32"
+    },
+    "options": {}
+  },
+  "Create.Value.SequenceIndex": {
+    "defaults": {
+      "Sequence": "BuiltIn.Name",
+      "Group": "Group"
+    },
+    "types": {
+      "Sequence": "String",
+      "Group": "String"
+    },
+    "options": {}
+  },
+  "Create.Value.System.FileExists": {
+    "defaults": {
+      "File": "Choose File"
+    },
+    "types": {
+      "File": "String"
+    },
+    "options": {}
+  },
+  "Create.Value.Trigger": {
+    "defaults": {
+      "Interval": 1.0,
+      "Randomness": 0.5,
+      "Hold": 0.0
+    },
+    "types": {
+      "Interval": "Float32",
+      "Randomness": "Float32",
+      "Hold": "Float32"
+    },
+    "options": {}
+  },
+  "Create.Value.XBox": {
+    "defaults": {
+      "Input": 0
+    },
+    "types": {
+      "Input": "EnumIndex"
+    },
+    "options": {
+      "Input": [
+        "L Thumb X",
+        "L Thumb Y",
+        "R Thumb X",
+        "R Thumb Y",
+        "L Trigger",
+        "R Trigger",
+        "A",
+        "B",
+        "X",
+        "Y"
+      ]
+    }
+  },
+  "Create.Zoom.Value": {
+    "defaults": {
+      "Value": 0.0
+    },
+    "types": {
+      "Value": "Float32"
+    },
+    "options": {}
+  },
+  "Filter.Audio.Power": {
+    "defaults": {
+      "Threshold": 0.0,
+      "Below/Above": true
+    },
+    "types": {
+      "Threshold": "Float32",
+      "Below/Above": "Boolean"
+    },
+    "options": {}
+  },
+  "Filter.Manual": {
+    "defaults": {
+      "Open": true
+    },
+    "types": {
+      "Open": "Boolean"
+    },
+    "options": {}
+  },
+  "Global.Set.Color": {
+    "defaults": {
+      "Fade Duration": 1.0,
+      "Slot": 0
+    },
+    "types": {
+      "Fade Duration": "Float32",
+      "Slot": "Int32"
+    },
+    "options": {}
+  },
+  "Global.Set.Primary.FromColor": {
+    "defaults": {
+      "Fade Duration": 1.0,
+      "Color": "#ffffff"
+    },
+    "types": {
+      "Fade Duration": "Float32",
+      "Color": "Color4"
+    },
+    "options": {}
+  },
+  "Modify.Color.Alpha.AsAlpha": {
+    "defaults": {},
+    "types": {},
+    "options": {}
+  },
+  "Modify.Color.AttackDecay": {
+    "defaults": {
+      "Attack": 0.0,
+      "Decay": 0.0
+    },
+    "types": {
+      "Attack": "Float32",
+      "Decay": "Float32"
+    },
+    "options": {}
+  },
+  "Modify.Color.Blur": {
+    "defaults": {
+      "Value": 0.0
+    },
+    "types": {
+      "Value": "Float32"
+    },
+    "options": {}
+  },
+  "Modify.Color.Clamp": {
+    "defaults": {
+      "Minimum": 0.0,
+      "Maximum": 1.0
+    },
+    "types": {
+      "Minimum": "Float32",
+      "Maximum": "Float32"
+    },
+    "options": {}
+  },
+  "Modify.Color.Complement": {
+    "defaults": {},
+    "types": {},
+    "options": {}
+  },
+  "Modify.Color.Dim": {
+    "defaults": {
+      "Value": 1.0,
+      "Amount": 1.0
+    },
+    "types": {
+      "Value": "Float32"
+    },
+    "options": {}
+  },
+  "Modify.Color.EvenOdd": {
+    "defaults": {
+      "Flip Even": true,
+      "Show Odd": true,
+      "Show Even": true
+    },
+    "types": {
+      "Flip Even": "Boolean",
+      "Show Odd": "Boolean",
+      "Show Even": "Boolean"
+    },
+    "options": {}
+  },
+  "Modify.Color.Flickerize": {
+    "defaults": {
+      "Enabled": true
+    },
+    "types": {
+      "Enabled": "Boolean"
+    },
+    "options": {}
+  },
+  "Modify.Color.Hue.Rotate": {
+    "defaults": {
+      "Value": 0.0
+    },
+    "types": {
+      "Value": "Float32"
+    },
+    "options": {}
+  },
+  "Modify.Color.Invert": {
+    "defaults": {
+      "Value": 0.0
+    },
+    "types": {
+      "Value": "Float32"
+    },
+    "options": {}
+  },
+  "Modify.Color.Paint.AlphaBased": {
+    "defaults": {
+      "Clear": false
+    },
+    "types": {
+      "Clear": "Boolean"
+    },
+    "options": {}
+  },
+  "Modify.Color.Paint.BlackAndWhite": {
+    "defaults": {
+      "Clear": false,
+      "Color": "#ffffff"
+    },
+    "types": {
+      "Clear": "Boolean",
+      "Color": "Color4"
+    },
+    "options": {}
+  },
+  "Modify.Color.Rainbow": {
+    "defaults": {
+      "Width": 0.0,
+      "Offset": 0.0,
+      "Group": "Group",
+      "Axis": 0
+    },
+    "types": {
+      "Width": "Float32",
+      "Offset": "Float32",
+      "Group": "String",
+      "Axis": "EnumIndex"
+    },
+    "options": {
+      "Axis": [
+        "X",
+        "Y",
+        "Z"
+      ]
+    }
+  },
+  "Modify.Color.RangeSlice": {
+    "defaults": {
+      "From": 0.0,
+      "To": 1.0
+    },
+    "types": {
+      "From": "Float32",
+      "To": "Float32"
+    },
+    "options": {}
+  },
+  "Modify.Color.Saturation.Set": {
+    "defaults": {
+      "Value": 0.0
+    },
+    "types": {
+      "Value": "Float32"
+    },
+    "options": {}
+  },
+  "Modify.Color.Scramble": {
+    "defaults": {
+      "Value": 0.0,
+      "Seed": 0
+    },
+    "types": {
+      "Value": "Float32",
+      "Seed": "Int32"
+    },
+    "options": {}
+  },
+  "Modify.Color.Shift": {
+    "defaults": {
+      "Offset": 0.0
+    },
+    "types": {
+      "Offset": "Float32"
+    },
+    "options": {}
+  },
+  "Modify.Color.Strobe": {
+    "defaults": {
+      "Enabled": false,
+      "Period": 0.1,
+      "Maximum Lightness": false
+    },
+    "types": {
+      "Enabled": "Boolean",
+      "Period": "Float32",
+      "Maximum Lightness": "Boolean"
+    },
+    "options": {}
+  },
+  "Modify.ColorWheel.Offset": {
+    "defaults": {
+      "Value": -1.0
+    },
+    "types": {
+      "Value": "Float32"
+    },
+    "options": {}
+  },
+  "Modify.Delay": {
+    "defaults": {
+      "Duration": 1.0
+    },
+    "types": {
+      "Duration": "Float32"
+    },
+    "options": {}
+  },
+  "Modify.Deprecated.Color.Flickerize": {
+    "defaults": {
+      "Enabled": false
+    },
+    "types": {
+      "Enabled": "Boolean"
+    },
+    "options": {}
+  },
+  "Modify.Memorize": {
+    "defaults": {
+      "Save": false,
+      "Load": false,
+      "Name": "Memory",
+      "Slot": 0
+    },
+    "types": {
+      "Save": "Boolean",
+      "Load": "Boolean",
+      "Name": "String",
+      "Slot": "Int32"
+    },
+    "options": {}
+  },
+  "Modify.Repeat": {
+    "defaults": {
+      "Record": false,
+      "Play": true,
+      "Mode": 0
+    },
+    "types": {
+      "Record": "Boolean",
+      "Play": "Boolean",
+      "Mode": "EnumIndex"
+    },
+    "options": {
+      "Mode": [
+        "Forward",
+        "PingPong",
+        "Reverse"
+      ]
+    }
+  },
+  "Modify.SampleAndHold": {
+    "defaults": {
+      "Sample": false
+    },
+    "types": {
+      "Sample": "Boolean"
+    },
+    "options": {}
+  },
+  "Modify.Value.ADSR": {
+    "defaults": {
+      "Attack": 0.0,
+      "Decay": 1.0
+    },
+    "types": {
+      "Attack": "Float32",
+      "Decay": "Float32"
+    },
+    "options": {}
+  },
+  "Modify.Value.AttackDecay": {
+    "defaults": {
+      "Attack": 0.01,
+      "Decay": 0.01
+    },
+    "types": {
+      "Attack": "Float32",
+      "Decay": "Float32"
+    },
+    "options": {}
+  },
+  "Modify.Value.Clamp": {
+    "defaults": {
+      "Minimum": 0.0,
+      "Maximum": 1.0
+    },
+    "types": {
+      "Minimum": "Float32",
+      "Maximum": "Float32"
+    },
+    "options": {}
+  },
+  "Modify.Value.Cooldown": {
+    "defaults": {
+      "Duration": 2.0,
+      "Threshold": 0.5,
+      "Reset": false
+    },
+    "types": {
+      "Duration": "Float32",
+      "Threshold": "Float32",
+      "Reset": "Boolean"
+    },
+    "options": {}
+  },
+  "Modify.Value.Damper": {
+    "defaults": {
+      "Time": 0.0
+    },
+    "types": {
+      "Time": "Float32"
+    },
+    "options": {}
+  },
+  "Modify.Value.Edge.Falling": {
+    "defaults": {
+      "Threshold": 0.5
+    },
+    "types": {
+      "Threshold": "Float32"
+    },
+    "options": {}
+  },
+  "Modify.Value.Edge.Rising": {
+    "defaults": {
+      "Threshold": 0.5
+    },
+    "types": {
+      "Threshold": "Float32"
+    },
+    "options": {}
+  },
+  "Modify.Value.Hold": {
+    "defaults": {
+      "Time": 0.0,
+      "Threshold": 0.5
+    },
+    "types": {
+      "Time": "Float32",
+      "Threshold": "Float32"
+    },
+    "options": {}
+  },
+  "Modify.Value.Integrate": {
+    "defaults": {
+      "Reset": false,
+      "Wrap/Clamp": false
+    },
+    "types": {
+      "Reset": "Boolean",
+      "Wrap/Clamp": "Boolean"
+    },
+    "options": {}
+  },
+  "Modify.Value.Invert": {
+    "defaults": {},
+    "types": {},
+    "options": {}
+  },
+  "Modify.Value.Map.HalfUpDown": {
+    "defaults": {
+      "Up/Down": false
+    },
+    "types": {
+      "Up/Down": "Boolean"
+    },
+    "options": {}
+  },
+  "Modify.Value.MapFromTo": {
+    "defaults": {
+      "Source Min": 0.0,
+      "Source Max": 1.0,
+      "Minimum": 0.0,
+      "Maximum": 1.0
+    },
+    "types": {
+      "Source Min": "Float32",
+      "Source Max": "Float32",
+      "Minimum": "Float32",
+      "Maximum": "Float32"
+    },
+    "options": {}
+  },
+  "Modify.Value.MapTo": {
+    "defaults": {
+      "Minimum": 0.0,
+      "Maximum": 1.0
+    },
+    "types": {
+      "Minimum": "Float32",
+      "Maximum": "Float32"
+    },
+    "options": {}
+  },
+  "Modify.Value.RandomizeTrigger": {
+    "defaults": {
+      "Probability": 0.5
+    },
+    "types": {
+      "Probability": "Float32"
+    },
+    "options": {}
+  },
+  "Modify.Value.RunningMap": {
+    "defaults": {
+      "Duration": 2.0,
+      "Filter Time": 1.0,
+      "Minimum": 0.0,
+      "Maximum": 1.0,
+      "Clamp": true
+    },
+    "types": {
+      "Duration": "Float32",
+      "Filter Time": "Float32",
+      "Minimum": "Float32",
+      "Maximum": "Float32",
+      "Clamp": "Boolean"
+    },
+    "options": {}
+  },
+  "Modify.Value.SelectRange": {
+    "defaults": {
+      "Min": 0.0,
+      "Max": 1.0,
+      "Clamp": true
+    },
+    "types": {
+      "Min": "Float32",
+      "Max": "Float32",
+      "Clamp": "Boolean"
+    },
+    "options": {}
+  },
+  "Modify.Value.Shape": {
+    "defaults": {
+      "Shape": 0,
+      "Ease": 0
+    },
+    "types": {
+      "Shape": "EnumIndex",
+      "Ease": "EnumIndex"
+    },
+    "options": {
+      "Shape": [
+        "Linear",
+        "Sine",
+        "Quad",
+        "Cubic",
+        "Quart",
+        "Quint",
+        "Expo",
+        "Circular",
+        "Elastic",
+        "Back",
+        "Bounce"
+      ],
+      "Ease": [
+        "In",
+        "Out",
+        "In/Out",
+        "Out/In"
+      ]
+    }
+  },
+  "Modify.Value.Smooth": {
+    "defaults": {
+      "Up Speed": 0.0,
+      "Down Speed": 1.0
+    },
+    "types": {
+      "Up Speed": "Float32",
+      "Down Speed": "Float32"
+    },
+    "options": {}
+  },
+  "Modify.Value.SmoothAcceleration": {
+    "defaults": {
+      "Up Acceleration": 0.0,
+      "Down Acceleration": 1.0
+    },
+    "types": {
+      "Up Acceleration": "Float32",
+      "Down Acceleration": "Float32"
+    },
+    "options": {}
+  },
+  "Modify.Value.Steps": {
+    "defaults": {
+      "Count": 4
+    },
+    "types": {
+      "Count": "Int32"
+    },
+    "options": {}
+  },
+  "Modify.Value.Toggle": {
+    "defaults": {
+      "Threshold": 0.5
+    },
+    "types": {
+      "Threshold": "Float32"
+    },
+    "options": {}
+  },
+  "Modify.Value.Wave": {
+    "defaults": {
+      "Shape": 0,
+      "Pulse Width": 0.5
+    },
+    "types": {
+      "Shape": "EnumIndex",
+      "Pulse Width": "Float32"
+    },
+    "options": {
+      "Shape": [
+        "Sawtooth",
+        "Triangle",
+        "Sine",
+        "Cosine",
+        "Rectangle"
+      ]
+    }
+  },
+  "Pick.Alternate": {
+    "defaults": {
+      "Period": 2.0,
+      "Randomness": 0.0,
+      "Random": false,
+      "Pause": false,
+      "Skip": false,
+      "Reverse": false
+    },
+    "types": {
+      "Period": "Float32",
+      "Randomness": "Float32",
+      "Random": "Boolean",
+      "Pause": "Boolean",
+      "Skip": "Boolean",
+      "Reverse": "Boolean"
+    },
+    "options": {}
+  },
+  "Pick.Audio.Beat": {
+    "defaults": {
+      "Probability": 0.5,
+      "Threshold": 0.5,
+      "Frequency": 0
+    },
+    "types": {
+      "Probability": "Float32",
+      "Threshold": "Float32",
+      "Frequency": "EnumIndex"
+    },
+    "options": {
+      "Frequency": [
+        "Low",
+        "MidLow",
+        "MidHigh",
+        "High"
+      ]
+    }
+  },
+  "Pick.Audio.Power": {
+    "defaults": {
+      "Power": 0.5,
+      "Wait": 1.0
+    },
+    "types": {
+      "Power": "Float32",
+      "Wait": "Float32"
+    },
+    "options": {}
+  },
+  "Pick.BPM": {
+    "defaults": {
+      "BPM": 100.0
+    },
+    "types": {
+      "BPM": "Float32"
+    },
+    "options": {}
+  },
+  "Pick.Channel": {
+    "defaults": {},
+    "types": {},
+    "options": {}
+  },
+  "Pick.Controller": {
+    "defaults": {},
+    "types": {},
+    "options": {}
+  },
+  "Pick.Group": {
+    "defaults": {
+      "Group": "Group"
+    },
+    "types": {
+      "Group": "String"
+    },
+    "options": {}
+  },
+  "Pick.LTP": {
+    "defaults": {
+      "AvoidZero": false
+    },
+    "types": {
+      "AvoidZero": "Boolean"
+    },
+    "options": {}
+  },
+  "Pick.Time": {
+    "defaults": {
+      "Hour": 0.0,
+      "Minutes": 0.0
+    },
+    "types": {
+      "Hour": "Float32",
+      "Minutes": "Float32"
+    },
+    "options": {}
+  },
+  "S.Pong.Paddle": {
+    "defaults": {},
+    "types": {},
+    "options": {}
+  },
+  "S.Pong.Position": {
+    "defaults": {},
+    "types": {},
+    "options": {}
+  },
+  "Setup.Pixels.Circle": {
+    "defaults": {
+      "Count": 3,
+      "Radius": 1.0
+    },
+    "types": {
+      "Count": "Int32",
+      "Radius": "Float32"
+    },
+    "options": {}
+  },
+  "Test.Widgets.FilePicker": {
+    "defaults": {
+      "File": ""
+    },
+    "types": {
+      "File": "String"
+    },
+    "options": {}
+  },
+  "Tool.Deprecated.Index.Counter": {
+    "defaults": {
+      "Period": 0
+    },
+    "types": {
+      "Period": "Int32"
+    },
+    "options": {}
+  },
+  "Tool.Deprecated.Pick.Index": {
+    "defaults": {},
+    "types": {},
+    "options": {}
+  },
+  "Tool.Merge": {
+    "defaults": {},
+    "types": {},
+    "options": {}
+  },
+  "Transition.Fade": {
+    "defaults": {
+      "Duration": 2.0
+    },
+    "types": {
+      "Duration": "Float32"
+    },
+    "options": {}
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "api_version": 1, "id": "demo", "version": "1.0.0",
+  "components": [{
+    "name": "Gain", "description": "Scale incoming values using a native map. Children supply the input; Gain can be edited or driven independently.",
+    "category": "Plugin", "domain": "Value", "defaults": {"Gain": 2.0},
+    "graph": {"Modify.Value.MapTo": {"Minimum": 0.0, "Maximum": "$Gain", "in": [{"Plugin.Input": null}]}}
+  }]
+}

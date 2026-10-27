@@ -1,0 +1,12 @@
+name: Point falloff
+stack:
+  Convert.Value.ToColor:
+    in:
+      - Modify.Value.MapFromTo:
+          Source Min: 0
+          Source Max: 10
+          Minimum: 1
+          Maximum: 0
+          in:
+            - Spatial.Distance:
+                Position: [0, 0, 0]

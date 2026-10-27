@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none" role="img" aria-labelledby="title description">
+  <title id="title">Invert color</title>
+  <desc id="description">Blend colors toward their inverse.</desc>
+  <rect x="3" y="3" width="42" height="42" rx="11" fill="#192426" stroke="#3b5550"/>
+  <g stroke="#72dec2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="13"/><path d="M24 11a13 13 0 0 0 0 26Z" fill="#72dec2"/><path d="M24 11v26" stroke="#b6a0d4"/></g>
+</svg>

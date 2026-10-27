@@ -1,0 +1,2166 @@
+{
+  "Assign.Content": {
+    "implementation": "src/native/actions.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Blocks.Assign.Group.vl/Schema.Blocks.Assign.Group.vl.1.cs",
+      "symbol": "_Schema_Blocks_Assign_Group_.Schema.Blocks.Assign.ContentAssign_C.Update_",
+      "line_hint": 362,
+      "sha256": "7536f5d0fe17b2cd08ecaa18d128e829e523727c875a57397e8b94b7ca925238"
+    }
+  },
+  "Assign.Director": {
+    "implementation": "src/native/actions.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Blocks.Assign.Director.vl/Schema.Blocks.Assign.Director.vl.1.cs",
+      "symbol": "_Schema_Blocks_Assign_Director_.Schema.Blocks.Assign.DirectorAssign_C.Update_",
+      "line_hint": 74,
+      "sha256": "d1c890be6a1fbcac9c335f54b7e56582037586f5f801e59d17d873056be2b0e8"
+    }
+  },
+  "Assign.Fixture": {
+    "implementation": "src/native/actions.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Blocks.Assign.Single.vl/Schema.Blocks.Assign.Single.vl.1.cs",
+      "symbol": "SingleAssign_C.Update_",
+      "line_hint": 73,
+      "sha256": "d6954dd6d2d03593eed1fea56c3d0230a4fdfa278088f87ae027399f0ae595f2"
+    }
+  },
+  "Assign.Global.Color": {
+    "implementation": "src/native/actions.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Blocks.Assign.Global.Color.vl/Schema.Blocks.Assign.Global.Color.vl.1.cs",
+      "symbol": "_Schema_Blocks_Assign_Global_Color_.Schema.Blocks.Assign.Global.GlobalColorAssign_C.Update_",
+      "line_hint": 79,
+      "sha256": "1153469d2a9c3d33660c253638ef49d8ec3545a6419bd7c98da4079e2e42da95"
+    }
+  },
+  "Assign.Group": {
+    "implementation": "src/native/actions.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Blocks.Assign.Group.vl/Schema.Blocks.Assign.Group.vl.1.cs",
+      "symbol": "_Schema_Blocks_Assign_Group_.Schema.Blocks.Assign.GroupAssign_C.Update_",
+      "line_hint": 74,
+      "sha256": "7536f5d0fe17b2cd08ecaa18d128e829e523727c875a57397e8b94b7ca925238"
+    }
+  },
+  "Combine.Add": {
+    "implementation": "src/engine.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.2.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.AddBee_C.Update_",
+      "line_hint": 1676,
+      "sha256": "fc1d25d7743cce96cbf04be40b9c1a23f02d3585adbb0bacceca9446c5d1602f"
+    }
+  },
+  "Combine.Audio.Add": {
+    "implementation": "src/native/providers.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": null
+  },
+  "Combine.Audio.Multiply": {
+    "implementation": "src/native/providers.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": null
+  },
+  "Combine.Color.Distance": {
+    "implementation": "src/native/mod.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Blocks.Operator.Color.Distance.vl/Schema.Blocks.Operator.Color.Distance.vl.1.cs",
+      "symbol": "_Schema_Blocks_Operator_Color_Distance_.Schema.Blocks.Operator.Color.Distance_C.Update_",
+      "line_hint": 76,
+      "sha256": "560deabe573931060f8e40fa5998013f9c3767f73ee31a9db6ae548da2f85c2c"
+    }
+  },
+  "Combine.Color.Max": {
+    "implementation": "src/native/pixels.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": null
+  },
+  "Combine.Color.Mix": {
+    "implementation": "src/native/pixels.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": null
+  },
+  "Combine.Crossfade": {
+    "implementation": "src/engine.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.4.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.Block.Behavior.Operator.Crossfade_C.Update_",
+      "line_hint": 9446,
+      "sha256": "205088bcc9bf5c5812e36d182e4fde805d54bbc26c12c3b0c65762d2994d6f01"
+    }
+  },
+  "Combine.Multiply": {
+    "implementation": "src/engine.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.1.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.MultiplyBee_C.Update_",
+      "line_hint": 10388,
+      "sha256": "efb885264aef6fc1cacdf5ede772fc7bec5851d8a1a9d564fc659db4b05c6b23"
+    }
+  },
+  "Combine.Texture.Multiply": {
+    "implementation": "src/native/providers.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": null
+  },
+  "Combine.Value.Boolean": {
+    "implementation": "src/native/mod.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Blocks.Operator.Value.Boolean.vl/Schema.Blocks.Operator.Value.Boolean.vl.1.cs",
+      "symbol": "_Schema_Blocks_Operator_Value_Boolean_.Schema.Blocks.Operator.Color.BooleanCombine_C.Update_",
+      "line_hint": 78,
+      "sha256": "cbf37306fcdeb3ba9e44e0a1f72008daaec497a5faef0baddd19f074f702a4f1"
+    }
+  },
+  "Combine.Value.Compare": {
+    "implementation": "src/native/mod.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Blocks.Operator.Value.Compare.vl/Schema.Blocks.Operator.Value.Compare.vl.1.cs",
+      "symbol": "_Schema_Blocks_Operator_Value_Compare_.Schema.Blocks.Operator.Value.CompareCombine_C.Update_",
+      "line_hint": 79,
+      "sha256": "f034e10b7062812da514b23477348a2f84b1dd4184377551028e2846c8a7de59"
+    }
+  },
+  "Convert.Audio.Meter": {
+    "implementation": "src/native/providers.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": null
+  },
+  "Convert.Speed.PositionToTarget": {
+    "implementation": "src/native/timed.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.4.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.Block.Behavior.Convert.Speed.PositionToTarget_C.Update_",
+      "line_hint": 8866,
+      "sha256": "205088bcc9bf5c5812e36d182e4fde805d54bbc26c12c3b0c65762d2994d6f01"
+    }
+  },
+  "Convert.Value.ToColor": {
+    "implementation": "src/engine.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.4.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.Block.Behavior.Convert.Color.FromValueColor_C.Update_",
+      "line_hint": 9257,
+      "sha256": "205088bcc9bf5c5812e36d182e4fde805d54bbc26c12c3b0c65762d2994d6f01"
+    }
+  },
+  "Convert.Value.ToDuration": {
+    "implementation": "src/native/mod.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.4.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.Block.Behavior.Convert.Duration.FromValue_C.Update_",
+      "line_hint": 9066,
+      "sha256": "205088bcc9bf5c5812e36d182e4fde805d54bbc26c12c3b0c65762d2994d6f01"
+    }
+  },
+  "Convert.Value.ToSpeed": {
+    "implementation": "src/native/mod.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.4.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.Block.Behavior.Convert.Speed.FromValue_C.Update_",
+      "line_hint": 8620,
+      "sha256": "205088bcc9bf5c5812e36d182e4fde805d54bbc26c12c3b0c65762d2994d6f01"
+    }
+  },
+  "Create.AnimationWheel.Position": {
+    "implementation": "src/native/mod.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.MovingHeads.Blocks.vl/Schema.MovingHeads.Blocks.vl.1.cs",
+      "symbol": "_Schema_MovingHeads_Blocks_.Schema.MovingHeads.Blocks.Source.AnimationWheel.Position_C.Update_",
+      "line_hint": 2922,
+      "sha256": "c711631a59d192b5287b8b79c44b686c13f76c9bc9f714762d3de5a2fa6cd61a"
+    }
+  },
+  "Create.AnimationWheel.Rotation": {
+    "implementation": "src/native/mod.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.MovingHeads.Blocks.vl/Schema.MovingHeads.Blocks.vl.1.cs",
+      "symbol": "_Schema_MovingHeads_Blocks_.Schema.MovingHeads.Blocks.Source.AnimationWheel.Rotation_C.Update_",
+      "line_hint": 3131,
+      "sha256": "c711631a59d192b5287b8b79c44b686c13f76c9bc9f714762d3de5a2fa6cd61a"
+    }
+  },
+  "Create.Audio.Input": {
+    "implementation": "src/native/providers.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": null
+  },
+  "Create.Audio.OSC": {
+    "implementation": "src/native/providers.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": null
+  },
+  "Create.Audio.Sample": {
+    "implementation": "src/native/providers.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": null
+  },
+  "Create.BeamShaper.Position": {
+    "implementation": "src/native/mod.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.MovingHeads.Blocks.vl/Schema.MovingHeads.Blocks.vl.1.cs",
+      "symbol": "_Schema_MovingHeads_Blocks_.Schema.MovingHeads.Blocks.Source.BeamShaper.Position_C.Update_",
+      "line_hint": 2722,
+      "sha256": "c711631a59d192b5287b8b79c44b686c13f76c9bc9f714762d3de5a2fa6cd61a"
+    }
+  },
+  "Create.Blade.Position": {
+    "implementation": "src/native/mod.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.MovingHeads.Blocks.vl/Schema.MovingHeads.Blocks.vl.1.cs",
+      "symbol": "_Schema_MovingHeads_Blocks_.Schema.MovingHeads.Blocks.Source.Blade.Position_C.Update_",
+      "line_hint": 2301,
+      "sha256": "c711631a59d192b5287b8b79c44b686c13f76c9bc9f714762d3de5a2fa6cd61a"
+    }
+  },
+  "Create.Blade.Rotation": {
+    "implementation": "src/native/mod.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.MovingHeads.Blocks.vl/Schema.MovingHeads.Blocks.vl.1.cs",
+      "symbol": "_Schema_MovingHeads_Blocks_.Schema.MovingHeads.Blocks.Source.Blade.Rotation_C.Update_",
+      "line_hint": 2510,
+      "sha256": "c711631a59d192b5287b8b79c44b686c13f76c9bc9f714762d3de5a2fa6cd61a"
+    }
+  },
+  "Create.Color.Audio.FFTPixels": {
+    "implementation": "src/native/providers.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": null
+  },
+  "Create.Color.Audio.Level": {
+    "implementation": "src/native/providers.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.3.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.FillLevelBee_C.Update_",
+      "line_hint": 1903,
+      "sha256": "9e2690d766c7129a5b64a8672f09e61b0c97e94e7f8dec4d1d3f09a2e8c6e944"
+    }
+  },
+  "Create.Color.Color": {
+    "implementation": "src/engine.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.3.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.FillColorBee_C.Update_",
+      "line_hint": 1326,
+      "sha256": "9e2690d766c7129a5b64a8672f09e61b0c97e94e7f8dec4d1d3f09a2e8c6e944"
+    }
+  },
+  "Create.Color.Constant": {
+    "implementation": "src/engine.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.2.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.ConstantBee_C.Update_",
+      "line_hint": 4888,
+      "sha256": "fc1d25d7743cce96cbf04be40b9c1a23f02d3585adbb0bacceca9446c5d1602f"
+    }
+  },
+  "Create.Color.External": {
+    "implementation": "src/native/providers.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.1.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.FillExternalBee_C.Update_",
+      "line_hint": 9540,
+      "sha256": "efb885264aef6fc1cacdf5ede772fc7bec5851d8a1a9d564fc659db4b05c6b23"
+    }
+  },
+  "Create.Color.Flash.Beat": {
+    "implementation": "src/native/providers.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.3.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.BeatFlashBee_C.Update_",
+      "line_hint": 1516,
+      "sha256": "9e2690d766c7129a5b64a8672f09e61b0c97e94e7f8dec4d1d3f09a2e8c6e944"
+    }
+  },
+  "Create.Color.Flash.BPM": {
+    "implementation": "src/native/timed.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.3.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.BPMFlashBee_C.Update_",
+      "line_hint": 7390,
+      "sha256": "9e2690d766c7129a5b64a8672f09e61b0c97e94e7f8dec4d1d3f09a2e8c6e944"
+    }
+  },
+  "Create.Color.Flash.Timed": {
+    "implementation": "src/native/timed.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.2.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.FlashBee_C.Update_",
+      "line_hint": 1324,
+      "sha256": "fc1d25d7743cce96cbf04be40b9c1a23f02d3585adbb0bacceca9446c5d1602f"
+    }
+  },
+  "Create.Color.Global": {
+    "implementation": "src/native/providers.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.4.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.Block.Behavior.Source.Color.GlobalColorSource_C.Update_",
+      "line_hint": 3166,
+      "sha256": "205088bcc9bf5c5812e36d182e4fde805d54bbc26c12c3b0c65762d2994d6f01"
+    }
+  },
+  "Create.Color.OSC": {
+    "implementation": "src/native/providers.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Plugins.OSCReceiver.vl/Schema.Plugins.OSCReceiver.vl.1.cs",
+      "symbol": "_Schema_Plugins_OSCReceiver_.Schema.Plugins.OSCReceiver.Block.Behavior.Source.Color.OSCColorSource_C.Update_",
+      "line_hint": 1452,
+      "sha256": "5f2e1257f21cfbd780c2232a47a4b98c3c3e5b9bf2f744964d4302c3edcc0988"
+    }
+  },
+  "Create.Color.Pixel.Distance.Axis": {
+    "implementation": "src/native/spatial.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.4.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.Block.Behavior.Source.Color.Pixel.AxisDistanceColorSource_C.Update_",
+      "line_hint": 2271,
+      "sha256": "205088bcc9bf5c5812e36d182e4fde805d54bbc26c12c3b0c65762d2994d6f01"
+    }
+  },
+  "Create.Color.Pixel.Distance.Plane": {
+    "implementation": "src/native/spatial.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.4.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.Block.Behavior.Source.Color.Pixel.PlaneDistanceColorSource_C.Update_",
+      "line_hint": 2589,
+      "sha256": "205088bcc9bf5c5812e36d182e4fde805d54bbc26c12c3b0c65762d2994d6f01"
+    }
+  },
+  "Create.Color.Pixel.Distance.Point": {
+    "implementation": "src/native/spatial.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.4.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.Block.Behavior.Source.Color.Pixel.PointDistanceColorSource_C.Update_",
+      "line_hint": 1998,
+      "sha256": "205088bcc9bf5c5812e36d182e4fde805d54bbc26c12c3b0c65762d2994d6f01"
+    }
+  },
+  "Create.Color.Pixel.Pulse.Cannon": {
+    "implementation": "src/native/spatial.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Blocks.Source.Color.Pixel.PulseCannon.vl/Schema.Blocks.Source.Color.Pixel.PulseCannon.vl.1.cs",
+      "symbol": "_Schema_Blocks_Source_Color_Pixel_PulseCannon_.Schema.Blocks.Color.Pixel.PulseCannon_C.Update_",
+      "line_hint": 88,
+      "sha256": "0a7bf2fac21e10fbb3486db7555e6a3efe88d3758a9743b6027adc880b2b5d5a"
+    }
+  },
+  "Create.Color.Pixel.Pulse.Manual": {
+    "implementation": "src/native/pixels.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Blocks.Source.Color.Pixel.PulseManual.vl/Schema.Blocks.Source.Color.Pixel.PulseManual.vl.1.cs",
+      "symbol": "_Schema_Blocks_Source_Color_Pixel_PulseManual_.Schema.Blocks.Color.Pixel.PulseManual_C.Update_",
+      "line_hint": 73,
+      "sha256": "527f2f50885768fa7eb93b1ffa912e2dd2479d34fa6795c7a26c1cd188ea3473"
+    }
+  },
+  "Create.Color.Pixel.Pulse": {
+    "implementation": "src/native/spatial.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.3.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.PulseBee_C.Update_",
+      "line_hint": 3660,
+      "sha256": "9e2690d766c7129a5b64a8672f09e61b0c97e94e7f8dec4d1d3f09a2e8c6e944"
+    }
+  },
+  "Create.Color.Pixel.Rainbow": {
+    "implementation": "src/native/pixels.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Blocks.Source.Color.Pixel.Rainbow.vl/Schema.Blocks.Source.Color.Pixel.Rainbow.vl.1.cs",
+      "symbol": "_Schema_Blocks_Source_Color_Pixel_Rainbow_.Schema.Blocks.Color.Pixel.Rainbow_C.Update_",
+      "line_hint": 82,
+      "sha256": "b32cee5a553970d7a90abe1a747f10f2df5d247e1404b4610a83ba41c9dbfbad"
+    }
+  },
+  "Create.Color.Pixel.Segment": {
+    "implementation": "src/native/pixels.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.4.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.Block.Behavior.Source.Color.Pixel.Segment_C.Update_",
+      "line_hint": 1740,
+      "sha256": "205088bcc9bf5c5812e36d182e4fde805d54bbc26c12c3b0c65762d2994d6f01"
+    }
+  },
+  "Create.Color.Primary": {
+    "implementation": "src/native/providers.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.1.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.FillPrimaryBee_C.Update_",
+      "line_hint": 7545,
+      "sha256": "efb885264aef6fc1cacdf5ede772fc7bec5851d8a1a9d564fc659db4b05c6b23"
+    }
+  },
+  "Create.Color.Universe": {
+    "implementation": "src/native/providers.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.1.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.UniverseColorBee_C.Update_",
+      "line_hint": 9379,
+      "sha256": "efb885264aef6fc1cacdf5ede772fc7bec5851d8a1a9d564fc659db4b05c6b23"
+    }
+  },
+  "Create.Copycat": {
+    "implementation": "src/native/spatial.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Blocks.Source.Generic.Copycat.vl/Schema.Blocks.Source.Generic.Copycat.vl.1.cs",
+      "symbol": "_Schema_Blocks_Source_Generic_Copycat_.Schema.Blocks.Source.Generic.Copycat_C.Update_",
+      "line_hint": 86,
+      "sha256": "40884670559873e57dcbbd4fd2e43b71e56f7c861f8c2230ada77d5d18112ef2"
+    }
+  },
+  "Create.Duration.Constant": {
+    "implementation": "src/native/mod.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.4.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.Block.Behavior.Source.Duration.Constant_C.Update_",
+      "line_hint": 4961,
+      "sha256": "205088bcc9bf5c5812e36d182e4fde805d54bbc26c12c3b0c65762d2994d6f01"
+    }
+  },
+  "Create.Focus.Value": {
+    "implementation": "src/native/mod.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.MovingHeads.Blocks.vl/Schema.MovingHeads.Blocks.vl.1.cs",
+      "symbol": "_Schema_MovingHeads_Blocks_.Schema.MovingHeads.Blocks.Source.Focus.ConstantFocusSource_C.Update_",
+      "line_hint": 500,
+      "sha256": "c711631a59d192b5287b8b79c44b686c13f76c9bc9f714762d3de5a2fa6cd61a"
+    }
+  },
+  "Create.Frost.Value": {
+    "implementation": "src/native/mod.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.MovingHeads.Blocks.vl/Schema.MovingHeads.Blocks.vl.1.cs",
+      "symbol": "_Schema_MovingHeads_Blocks_.Schema.MovingHeads.Blocks.Source.Frost.Value_C.Update_",
+      "line_hint": 1920,
+      "sha256": "c711631a59d192b5287b8b79c44b686c13f76c9bc9f714762d3de5a2fa6cd61a"
+    }
+  },
+  "Create.Gobo.Constant": {
+    "implementation": "src/native/mod.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.MovingHeads.Blocks.vl/Schema.MovingHeads.Blocks.vl.1.cs",
+      "symbol": "_Schema_MovingHeads_Blocks_.Schema.MovingHeads.Blocks.Source.Gobo.SetGoboBee_C.Update_",
+      "line_hint": 1101,
+      "sha256": "c711631a59d192b5287b8b79c44b686c13f76c9bc9f714762d3de5a2fa6cd61a"
+    }
+  },
+  "Create.Gobo.Rotate.Value": {
+    "implementation": "src/native/mod.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.MovingHeads.Blocks.vl/Schema.MovingHeads.Blocks.vl.1.cs",
+      "symbol": "_Schema_MovingHeads_Blocks_.Schema.MovingHeads.Blocks.Source.Gobo.Rotate_C.Update_",
+      "line_hint": 900,
+      "sha256": "c711631a59d192b5287b8b79c44b686c13f76c9bc9f714762d3de5a2fa6cd61a"
+    }
+  },
+  "Create.Gobo.Shake.Constant": {
+    "implementation": "src/native/mod.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.MovingHeads.Blocks.vl/Schema.MovingHeads.Blocks.vl.1.cs",
+      "symbol": "_Schema_MovingHeads_Blocks_.Schema.MovingHeads.Blocks.Source.Gobo.Shake.SetShakeBee_C.Update_",
+      "line_hint": 1308,
+      "sha256": "c711631a59d192b5287b8b79c44b686c13f76c9bc9f714762d3de5a2fa6cd61a"
+    }
+  },
+  "Create.Iris.Value": {
+    "implementation": "src/native/mod.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.MovingHeads.Blocks.vl/Schema.MovingHeads.Blocks.vl.1.cs",
+      "symbol": "_Schema_MovingHeads_Blocks_.Schema.MovingHeads.Blocks.Source.Iris.ConstantIrisSource_C.Update_",
+      "line_hint": 700,
+      "sha256": "c711631a59d192b5287b8b79c44b686c13f76c9bc9f714762d3de5a2fa6cd61a"
+    }
+  },
+  "Create.Layer.Above": {
+    "implementation": "src/engine.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.4.cs",
+      "symbol": "Above_C.Update_",
+      "line_hint": 4462,
+      "sha256": "205088bcc9bf5c5812e36d182e4fde805d54bbc26c12c3b0c65762d2994d6f01"
+    }
+  },
+  "Create.Macro.Constant": {
+    "implementation": "src/native/mod.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.MovingHeads.Blocks.vl/Schema.MovingHeads.Blocks.vl.1.cs",
+      "symbol": "_Schema_MovingHeads_Blocks_.Schema.MovingHeads.Blocks.Source.Macro.Constant_C.Update_",
+      "line_hint": 2131,
+      "sha256": "c711631a59d192b5287b8b79c44b686c13f76c9bc9f714762d3de5a2fa6cd61a"
+    }
+  },
+  "Create.Position.Constant": {
+    "implementation": "src/engine.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.3.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.PosConstantBee_C.Update_",
+      "line_hint": 5403,
+      "sha256": "9e2690d766c7129a5b64a8672f09e61b0c97e94e7f8dec4d1d3f09a2e8c6e944"
+    }
+  },
+  "Create.Position.Current": {
+    "implementation": "src/engine.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.4.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.Block.Behavior.Source.Position.Current_C.Update_",
+      "line_hint": 1406,
+      "sha256": "205088bcc9bf5c5812e36d182e4fde805d54bbc26c12c3b0c65762d2994d6f01"
+    }
+  },
+  "Create.Position.Group.Center": {
+    "implementation": "src/engine.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.3.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.PosCenterBee_C.Update_",
+      "line_hint": 4708,
+      "sha256": "9e2690d766c7129a5b64a8672f09e61b0c97e94e7f8dec4d1d3f09a2e8c6e944"
+    }
+  },
+  "Create.Position.Group.Random": {
+    "implementation": "src/engine.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.3.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.PosRandomBee_C.Update_",
+      "line_hint": 6400,
+      "sha256": "9e2690d766c7129a5b64a8672f09e61b0c97e94e7f8dec4d1d3f09a2e8c6e944"
+    }
+  },
+  "Create.Position.Group.Slide": {
+    "implementation": "src/engine.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.3.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.PosSlideBee_C.Update_",
+      "line_hint": 4903,
+      "sha256": "9e2690d766c7129a5b64a8672f09e61b0c97e94e7f8dec4d1d3f09a2e8c6e944"
+    }
+  },
+  "Create.Position.Group.XYZ": {
+    "implementation": "src/engine.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.4.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.Block.Behavior.Source.Position.Group.XYZGroupPositionSource_C.Update_",
+      "line_hint": 1122,
+      "sha256": "205088bcc9bf5c5812e36d182e4fde805d54bbc26c12c3b0c65762d2994d6f01"
+    }
+  },
+  "Create.Position.XYZ": {
+    "implementation": "src/engine.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.4.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.Block.Behavior.Source.Position.XYZPositionSource_C.Update_",
+      "line_hint": 1556,
+      "sha256": "205088bcc9bf5c5812e36d182e4fde805d54bbc26c12c3b0c65762d2994d6f01"
+    }
+  },
+  "Create.Prism.Rotate": {
+    "implementation": "src/native/mod.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.MovingHeads.Blocks.vl/Schema.MovingHeads.Blocks.vl.1.cs",
+      "symbol": "_Schema_MovingHeads_Blocks_.Schema.MovingHeads.Blocks.Source.Prism.Rotate_C.Update_",
+      "line_hint": 1512,
+      "sha256": "c711631a59d192b5287b8b79c44b686c13f76c9bc9f714762d3de5a2fa6cd61a"
+    }
+  },
+  "Create.Prism.Select": {
+    "implementation": "src/native/mod.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.MovingHeads.Blocks.vl/Schema.MovingHeads.Blocks.vl.1.cs",
+      "symbol": "_Schema_MovingHeads_Blocks_.Schema.MovingHeads.Blocks.Source.Prism.Select_C.Update_",
+      "line_hint": 1713,
+      "sha256": "c711631a59d192b5287b8b79c44b686c13f76c9bc9f714762d3de5a2fa6cd61a"
+    }
+  },
+  "Create.Radius.Constant": {
+    "implementation": "src/native/spatial.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.3.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.RadiusBee_C.Update_",
+      "line_hint": 6187,
+      "sha256": "9e2690d766c7129a5b64a8672f09e61b0c97e94e7f8dec4d1d3f09a2e8c6e944"
+    }
+  },
+  "Create.Reference.Fixture": {
+    "implementation": "src/engine.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Blocks.Source.Reference.Fixture.vl/Schema.Blocks.Source.Reference.Fixture.vl.1.cs",
+      "symbol": "_Schema_Blocks_Source_Reference_Fixture_.Schema.Blocks.Source.Reference.FixtureReference_C.Update_",
+      "line_hint": 73,
+      "sha256": "5a0efe504e75c66292007bb6c2d813d0cfdbaaafff040c15a888b694b011c6bd"
+    }
+  },
+  "Create.Reference.SequenceOffset": {
+    "implementation": "src/native/providers.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Plugins.Sequences.vl/Schema.Blocks.Source.Reference.SequenceOffset.vl.1.cs",
+      "symbol": "_Schema_Blocks_Source_Reference_SequenceOffset_.Schema.Plugins.Sequences.Blocks.Source.Reference.SequenceOffset_C.Update_",
+      "line_hint": 75,
+      "sha256": "1d0978b8462d3802923b0fcb60ee0d25b8cac6e1d142cd1f86939f148659e0b3"
+    }
+  },
+  "Create.Remote": {
+    "implementation": "src/native/providers.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": null
+  },
+  "Create.Resource.Constant": {
+    "implementation": "src/native/mod.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Blocks.Source.Resource.Constant.vl/Schema.Blocks.Source.Resource.Constant.vl.1.cs",
+      "symbol": "_Schema_Blocks_Source_Resource_Constant_.Schema.Blocks.Source.Resource.ConstantResourceSource_C.Update_",
+      "line_hint": 74,
+      "sha256": "ccc866fba01808040a53fa17cfcfcf132ccb741bb91f9d0df2db39899a06209f"
+    }
+  },
+  "Create.Rotation.Audio.Shake": {
+    "implementation": "src/native/spatial.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.3.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.RotBeatShakeBee_C.Update_",
+      "line_hint": 5838,
+      "sha256": "9e2690d766c7129a5b64a8672f09e61b0c97e94e7f8dec4d1d3f09a2e8c6e944"
+    }
+  },
+  "Create.Rotation.Constant": {
+    "implementation": "src/native/mod.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.3.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.RotConstantBee_C.Update_",
+      "line_hint": 5198,
+      "sha256": "9e2690d766c7129a5b64a8672f09e61b0c97e94e7f8dec4d1d3f09a2e8c6e944"
+    }
+  },
+  "Create.Rotation.Follow": {
+    "implementation": "src/native/spatial.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.MovingHeads.Blocks.Source.Rotation.RotPTFollowBee.vl/Schema.MovingHeads.Blocks.Source.Rotation.RotPTFollowBee.vl.1.cs",
+      "symbol": "_Schema_MovingHeads_Blocks_Source_Rotation_RotPTFollowBee_.Schema.MovingHeads.Blocks.Source.Rotation.RotPTFollowBee_C.Update_",
+      "line_hint": 85,
+      "sha256": "d96d7ebd2f27968d76c66cdc6f0f3ada57015cf01271d467d481d84e5c142e32"
+    }
+  },
+  "Create.Rotation.PanTilt": {
+    "implementation": "src/native/mod.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.MovingHeads.Blocks.vl/Schema.MovingHeads.Blocks.vl.1.cs",
+      "symbol": "_Schema_MovingHeads_Blocks_.Schema.MovingHeads.Blocks.Source.Rotation.SourceRotationPanTiltBee_C.Update_",
+      "line_hint": 88,
+      "sha256": "c711631a59d192b5287b8b79c44b686c13f76c9bc9f714762d3de5a2fa6cd61a"
+    }
+  },
+  "Create.Rotation.Perpendicular": {
+    "implementation": "src/native/mod.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.3.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.RotPerpendicularBee_C.Update_",
+      "line_hint": 5627,
+      "sha256": "9e2690d766c7129a5b64a8672f09e61b0c97e94e7f8dec4d1d3f09a2e8c6e944"
+    }
+  },
+  "Create.Rotation.Timed": {
+    "implementation": "src/native/timed.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.3.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.RotateBee_C.Update_",
+      "line_hint": 4452,
+      "sha256": "9e2690d766c7129a5b64a8672f09e61b0c97e94e7f8dec4d1d3f09a2e8c6e944"
+    }
+  },
+  "Create.Rotation.XYZ": {
+    "implementation": "src/native/mod.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.4.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.Block.Behavior.Source.Rotation.XYZ_C.Update_",
+      "line_hint": 840,
+      "sha256": "205088bcc9bf5c5812e36d182e4fde805d54bbc26c12c3b0c65762d2994d6f01"
+    }
+  },
+  "Create.Shapes.ResourceMode.Constant": {
+    "implementation": "src/native/mod.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Plugins.Shapes.Blocks.Source.ResourceMode.Constant.vl/Schema.Plugins.Shapes.Blocks.Source.ResourceMode.Constant.vl.1.cs",
+      "symbol": "_Schema_Plugins_Shapes_Blocks_Source_ResourceMode_Constant_.Schema.Plugins.Shapes.Blocks.Source.ResourceMode.ConstantResourceModeSource_C.Update_",
+      "line_hint": 74,
+      "sha256": "3561bd313247d7607e771842295f40cd9a5a587290366328c914b2c37305f3d3"
+    }
+  },
+  "Create.Speed.Constant": {
+    "implementation": "src/native/mod.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.4.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.Block.Behavior.Source.Speed.Constant_C.Update_",
+      "line_hint": 4702,
+      "sha256": "205088bcc9bf5c5812e36d182e4fde805d54bbc26c12c3b0c65762d2994d6f01"
+    }
+  },
+  "Create.Temperature.Constant": {
+    "implementation": "src/native/mod.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.4.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.Block.Behavior.Source.Temperature.Constant_C.Update_",
+      "line_hint": 5166,
+      "sha256": "205088bcc9bf5c5812e36d182e4fde805d54bbc26c12c3b0c65762d2994d6f01"
+    }
+  },
+  "Create.Texture.Color": {
+    "implementation": "src/native/providers.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": null
+  },
+  "Create.Texture.Noise": {
+    "implementation": "src/native/providers.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": null
+  },
+  "Create.Value.Audio.Beat": {
+    "implementation": "src/native/providers.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.4.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.Block.Behavior.Source.Value.Beat_C.Update_",
+      "line_hint": 3375,
+      "sha256": "205088bcc9bf5c5812e36d182e4fde805d54bbc26c12c3b0c65762d2994d6f01"
+    }
+  },
+  "Create.Value.Audio.FFT16": {
+    "implementation": "src/native/providers.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": null
+  },
+  "Create.Value.Audio.Level": {
+    "implementation": "src/native/providers.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.4.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.Block.Behavior.Source.Value.Audio.Level_C.Update_",
+      "line_hint": 4082,
+      "sha256": "205088bcc9bf5c5812e36d182e4fde805d54bbc26c12c3b0c65762d2994d6f01"
+    }
+  },
+  "Create.Value.Audio.PeakPower": {
+    "implementation": "src/native/providers.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Blocks.Source.Value.Audio.PeakPower.vl/Schema.Blocks.Source.Value.Audio.PeakPower.vl.1.cs",
+      "symbol": "_Schema_Blocks_Source_Value_Audio_PeakPower_.Schema.Blocks.Source.Value.Audio.PeakPower_C.Update_",
+      "line_hint": 73,
+      "sha256": "dece3752d5782cb942a3545c2420f0850bba4115645d6f16302a22b99f392bf5"
+    }
+  },
+  "Create.Value.Audio.Pitch": {
+    "implementation": "src/native/providers.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Blocks.Source.Value.Audio.Pitch.vl/Schema.Blocks.Source.Value.Audio.Pitch.vl.1.cs",
+      "symbol": "_Schema_Blocks_Source_Value_Audio_Pitch_.Schema.Blocks.Source.Value.Audio.Pitch_C.Update_",
+      "line_hint": 73,
+      "sha256": "f2c0be512ed28ffb2f0599587a30b8b401631ab0137d3a89a709c79f415b36cd"
+    }
+  },
+  "Create.Value.Audio.Power": {
+    "implementation": "src/native/providers.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.3.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.ValueAudioLevelBee_C.Update_",
+      "line_hint": 9952,
+      "sha256": "9e2690d766c7129a5b64a8672f09e61b0c97e94e7f8dec4d1d3f09a2e8c6e944"
+    }
+  },
+  "Create.Value.Closeness": {
+    "implementation": "src/native/spatial.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.4.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.ValueDistanceBee_C.Update_",
+      "line_hint": 156,
+      "sha256": "205088bcc9bf5c5812e36d182e4fde805d54bbc26c12c3b0c65762d2994d6f01"
+    }
+  },
+  "Create.Value.Constant": {
+    "implementation": "src/engine.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.3.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.ValueConstantBee_C.Update_",
+      "line_hint": 8806,
+      "sha256": "9e2690d766c7129a5b64a8672f09e61b0c97e94e7f8dec4d1d3f09a2e8c6e944"
+    }
+  },
+  "Create.Value.Control": {
+    "implementation": "src/native/providers.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Plugins.Controllers.vl/Schema.Plugins.Controllers.vl.1.cs",
+      "symbol": "_Schema_Plugins_Controllers_.Schema.Controllers2.Blocks.Source.Value.ControlValue_C.Update_",
+      "line_hint": 2797,
+      "sha256": "b8479daa813b76293ca99734abc540db15c825c4d221573e4fb2f7e7ede4cf10"
+    }
+  },
+  "Create.Value.Controller.Pad": {
+    "implementation": "src/native/providers.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": null
+  },
+  "Create.Value.Controller.Value": {
+    "implementation": "src/native/providers.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": null
+  },
+  "Create.Value.Distance": {
+    "implementation": "src/engine.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Blocks.Source.Value.Distance.vl/Schema.Blocks.Source.Value.Distance.vl.1.cs",
+      "symbol": "_Schema_Blocks_Source_Value_Distance_.Schema.Blocks.Source.Value.DistanceValue_C.Update_",
+      "line_hint": 82,
+      "sha256": "7da183fe4b8d10038f8a00e4a17d903bb9baff8221e028ab2163b10bf711bc9d"
+    }
+  },
+  "Create.Value.Expression": {
+    "implementation": "src/native/spatial.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Blocks.Source.Value.Expression.vl/Schema.Blocks.Source.Value.Expression.vl.1.cs",
+      "symbol": "_Schema_Blocks_Source_Value_Expression_.Schema.Blocks.Source.Value.ExpressionValue_C.Update_",
+      "line_hint": 84,
+      "sha256": "a9f3a48d6dd9f63e49dc728a839dc6b63c02a1dcd232949be29c98b7e6e0fc0f"
+    }
+  },
+  "Create.Value.Fixture.IsSelected": {
+    "implementation": "src/native/providers.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Blocks.Source.Value.Fixture.IsSelected.vl/Schema.Blocks.Source.Value.Fixture.IsSelected.vl.1.cs",
+      "symbol": "_Schema_Blocks_Source_Value_Fixture_IsSelected_.Schema.Blocks.Source.Value.Fixture.IsSelected.FixtureIsSelectedValueSource_C.Update_",
+      "line_hint": 77,
+      "sha256": "75eb2fe5590257fc86c4baffb70b24f8ffd3c3539c74efbb959c5bdc3ff79910"
+    }
+  },
+  "Create.Value.Global": {
+    "implementation": "src/native/providers.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.4.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.Block.Behavior.Source.Value.Global_C.Update_",
+      "line_hint": 3907,
+      "sha256": "205088bcc9bf5c5812e36d182e4fde805d54bbc26c12c3b0c65762d2994d6f01"
+    }
+  },
+  "Create.Value.Group.AxisPosition": {
+    "implementation": "src/native/spatial.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Blocks.Source.Value.Group.AxisPosition.vl/Schema.Blocks.Source.Value.Group.AxisPosition.vl.1.cs",
+      "symbol": "_Schema_Blocks_Source_Value_Group_AxisPosition_.Main.AxisPosition_C.Update_",
+      "line_hint": 79,
+      "sha256": "b46972d5767635af9fd39ed41fb3ae11ee9a1a10129a75be959aec48db26a742"
+    }
+  },
+  "Create.Value.Keyboard": {
+    "implementation": "src/native/providers.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": null
+  },
+  "Create.Value.LFO": {
+    "implementation": "src/engine.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.3.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.ValueLFOBee_C.Update_",
+      "line_hint": 9362,
+      "sha256": "9e2690d766c7129a5b64a8672f09e61b0c97e94e7f8dec4d1d3f09a2e8c6e944"
+    }
+  },
+  "Create.Value.OSC": {
+    "implementation": "src/native/providers.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Plugins.OSCReceiver.vl/Schema.Plugins.OSCReceiver.vl.1.cs",
+      "symbol": "_Schema_Plugins_OSCReceiver_.Schema.Plugins.OSCReceiver.Block.Behavior.Source.Value.OSCValueSource_C.Update_",
+      "line_hint": 919,
+      "sha256": "5f2e1257f21cfbd780c2232a47a4b98c3c3e5b9bf2f744964d4302c3edcc0988"
+    }
+  },
+  "Create.Value.OSCReceived": {
+    "implementation": "src/native/providers.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Plugins.OSCReceiver.vl/Schema.Plugins.OSCReceiver.vl.1.cs",
+      "symbol": "_Schema_Plugins_OSCReceiver_.Schema.Plugins.OSCReceiver.Block.Behavior.Source.Value.OSCReceivedValueSource_C.Update_",
+      "line_hint": 1223,
+      "sha256": "5f2e1257f21cfbd780c2232a47a4b98c3c3e5b9bf2f744964d4302c3edcc0988"
+    }
+  },
+  "Create.Value.Random": {
+    "implementation": "src/engine.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.4.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.ValueRandomBee_C.Update_",
+      "line_hint": 394,
+      "sha256": "205088bcc9bf5c5812e36d182e4fde805d54bbc26c12c3b0c65762d2994d6f01"
+    }
+  },
+  "Create.Value.SequenceIndex": {
+    "implementation": "src/native/providers.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Plugins.Sequences.vl/Schema.Blocks.Source.Value.SequenceIndex.vl.1.cs",
+      "symbol": "_Schema_Blocks_Source_Value_SequenceIndex_.Schema.Plugins.Sequences.Blocks.Source.Value.SequenceIndex_C.Update_",
+      "line_hint": 77,
+      "sha256": "9bab2864304930b2feecdea17d8f94232cbe4130f731ec368b0cc1b0c2e72ac7"
+    }
+  },
+  "Create.Value.System.FileExists": {
+    "implementation": "src/native/providers.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Blocks.Source.System.FileExists.vl/Schema.Blocks.Source.System.FileExists.vl.1.cs",
+      "symbol": "_Schema_Blocks_Source_System_FileExists_.Schema.Blocks.Source.Value.System.FileExistsValueSource_C.Update_",
+      "line_hint": 74,
+      "sha256": "6c64f75e68fb6d76b1522fb0d568cb7ac67f7ce14c05e6b11dd39a439340fee7"
+    }
+  },
+  "Create.Value.Trigger": {
+    "implementation": "src/native/timed.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.4.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.Block.Behavior.Source.Value.TriggerValueSource_C.Update_",
+      "line_hint": 3598,
+      "sha256": "205088bcc9bf5c5812e36d182e4fde805d54bbc26c12c3b0c65762d2994d6f01"
+    }
+  },
+  "Create.Value.XBox": {
+    "implementation": "src/native/providers.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Plugins.XBoxController.vl/Schema.Plugins.XBoxController.vl.1.cs",
+      "symbol": "_Schema_Plugins_XBoxController_.Schema.Plugins.XBoxController.Blocks.Source.Value.ValueXbox360Bee_C.Update_",
+      "line_hint": 347,
+      "sha256": "1101d2e07614c10ff180be67ec7613d4a9a3bfe3eac4b430891428c3ca7a8793"
+    }
+  },
+  "Create.Zoom.Value": {
+    "implementation": "src/native/mod.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.MovingHeads.Blocks.vl/Schema.MovingHeads.Blocks.vl.1.cs",
+      "symbol": "_Schema_MovingHeads_Blocks_.Schema.MovingHeads.Blocks.Source.Zoom.ConstantZoomSource_C.Update_",
+      "line_hint": 300,
+      "sha256": "c711631a59d192b5287b8b79c44b686c13f76c9bc9f714762d3de5a2fa6cd61a"
+    }
+  },
+  "Filter.Audio.Power": {
+    "implementation": "src/native/providers.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.3.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.AudioPowerGateBee_C.Update_",
+      "line_hint": 2149,
+      "sha256": "9e2690d766c7129a5b64a8672f09e61b0c97e94e7f8dec4d1d3f09a2e8c6e944"
+    }
+  },
+  "Filter.Manual": {
+    "implementation": "src/engine.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.2.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.GatekeeperBee_C.Update_",
+      "line_hint": 4648,
+      "sha256": "fc1d25d7743cce96cbf04be40b9c1a23f02d3585adbb0bacceca9446c5d1602f"
+    }
+  },
+  "Global.Set.Color": {
+    "implementation": "src/native/actions.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.4.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.Block.Behavior.Global.Set.Color_C.Update_",
+      "line_hint": 10247,
+      "sha256": "205088bcc9bf5c5812e36d182e4fde805d54bbc26c12c3b0c65762d2994d6f01"
+    }
+  },
+  "Global.Set.Primary.FromColor": {
+    "implementation": "src/native/actions.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.4.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.Block.Behavior.Global.Set.PrimaryFromColor_C.Update_",
+      "line_hint": 10007,
+      "sha256": "205088bcc9bf5c5812e36d182e4fde805d54bbc26c12c3b0c65762d2994d6f01"
+    }
+  },
+  "Modify.Color.Alpha.AsAlpha": {
+    "implementation": "src/native/mod.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.4.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.Block.Behavior.Effect.Color.Alpha.AsAlpha_C.Update_",
+      "line_hint": 7933,
+      "sha256": "205088bcc9bf5c5812e36d182e4fde805d54bbc26c12c3b0c65762d2994d6f01"
+    }
+  },
+  "Modify.Color.AttackDecay": {
+    "implementation": "src/native/timed.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Blocks.Effects.Color.AttackDecay.vl/Schema.Blocks.Effects.Color.AttackDecay.vl.1.cs",
+      "symbol": "_Schema_Blocks_Effects_Color_AttackDecay_.Schema.Blocks.Effects.Color.AttackDecayColor_C.Update_",
+      "line_hint": 82,
+      "sha256": "3c0aced989751dfb679d9b70a5c6241ec02748f93104d743619e0e3c2e0f0076"
+    }
+  },
+  "Modify.Color.Blur": {
+    "implementation": "src/native/pixels.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Blocks.Effects.Color.Blur.vl/Schema.Blocks.Effects.Color.Blur.vl.1.cs",
+      "symbol": "_Schema_Blocks_Effects_Color_Blur_.Schema.Blocks.Effects.Blur.BlurColor_C.Update_",
+      "line_hint": 86,
+      "sha256": "9d8128d7de267289c241f32671f5ae232c8b675d35af979a6e49ca3ff4adbe88"
+    }
+  },
+  "Modify.Color.Clamp": {
+    "implementation": "src/native/mod.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Blocks.Effects.Color.Clamp.vl/Schema.Blocks.Effects.Color.Clamp.vl.1.cs",
+      "symbol": "_Schema_Blocks_Effects_Color_Clamp_.Schema.Blocks.Effects.Color.ClampColorEffect_C.Update_",
+      "line_hint": 76,
+      "sha256": "b980ec76cd0925487eb1f9e9b60cbfc4ed824e439a77e281d860102f1015ce67"
+    }
+  },
+  "Modify.Color.Complement": {
+    "implementation": "src/native/pixels.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.3.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.ComplementBee_C.Update_",
+      "line_hint": 557,
+      "sha256": "9e2690d766c7129a5b64a8672f09e61b0c97e94e7f8dec4d1d3f09a2e8c6e944"
+    }
+  },
+  "Modify.Color.Dim": {
+    "implementation": "src/engine.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.4.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.Block.Behavior.Effect.Color.Dim_C.Update_",
+      "line_hint": 8115,
+      "sha256": "205088bcc9bf5c5812e36d182e4fde805d54bbc26c12c3b0c65762d2994d6f01"
+    }
+  },
+  "Modify.Color.EvenOdd": {
+    "implementation": "src/native/pixels.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.2.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.EvenOddBee_C.Update_",
+      "line_hint": 3283,
+      "sha256": "fc1d25d7743cce96cbf04be40b9c1a23f02d3585adbb0bacceca9446c5d1602f"
+    }
+  },
+  "Modify.Color.Flickerize": {
+    "implementation": "src/native/timed.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.3.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.FlickerizeBee_C.Update_",
+      "line_hint": 10165,
+      "sha256": "9e2690d766c7129a5b64a8672f09e61b0c97e94e7f8dec4d1d3f09a2e8c6e944"
+    }
+  },
+  "Modify.Color.Hue.Rotate": {
+    "implementation": "src/native/mod.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.4.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.Block.Behavior.Effect.Color.Hue.RotateHue_C.Update_",
+      "line_hint": 6941,
+      "sha256": "205088bcc9bf5c5812e36d182e4fde805d54bbc26c12c3b0c65762d2994d6f01"
+    }
+  },
+  "Modify.Color.Invert": {
+    "implementation": "src/engine.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Blocks.Effects.Color.Invert.vl/Schema.Blocks.Effects.Color.Invert.vl.1.cs",
+      "symbol": "_Schema_Blocks_Effects_Color_Invert_.Schema.Blocks.Effects.Color.InvertColor_C.Update_",
+      "line_hint": 74,
+      "sha256": "1cd5bc091f74b7500748d642c4a694a5fdb8d5b868c43b5882ae97695159ca60"
+    }
+  },
+  "Modify.Color.Paint.AlphaBased": {
+    "implementation": "src/native/timed.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.4.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.Block.Behavior.Effect.Color.Paint.AlphaBased_C.Update_",
+      "line_hint": 7625,
+      "sha256": "205088bcc9bf5c5812e36d182e4fde805d54bbc26c12c3b0c65762d2994d6f01"
+    }
+  },
+  "Modify.Color.Paint.BlackAndWhite": {
+    "implementation": "src/native/timed.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.4.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.Block.Behavior.Effect.Color.Paint.BlackAndWhite_C.Update_",
+      "line_hint": 7371,
+      "sha256": "205088bcc9bf5c5812e36d182e4fde805d54bbc26c12c3b0c65762d2994d6f01"
+    }
+  },
+  "Modify.Color.Rainbow": {
+    "implementation": "src/native/spatial.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.3.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.RainbowBee_C.Update_",
+      "line_hint": 8082,
+      "sha256": "9e2690d766c7129a5b64a8672f09e61b0c97e94e7f8dec4d1d3f09a2e8c6e944"
+    }
+  },
+  "Modify.Color.RangeSlice": {
+    "implementation": "src/native/pixels.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Blocks.Effects.Color.RangeSlice.vl/Schema.Blocks.Effects.Color.RangeSlice.vl.1.cs",
+      "symbol": "_Schema_Blocks_Effects_Color_RangeSlice_.Schema.Blocks.Effects.Color.RangeSliceColor_C.Update_",
+      "line_hint": 85,
+      "sha256": "2ad6a49aa1a5f9c1d42f8fff0427d32b4100ff26bbd029d42de3c67c0f3fa6d5"
+    }
+  },
+  "Modify.Color.Saturation.Set": {
+    "implementation": "src/native/mod.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.4.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.Block.Behavior.Effect.Color.Saturation.Set_C.Update_",
+      "line_hint": 7141,
+      "sha256": "205088bcc9bf5c5812e36d182e4fde805d54bbc26c12c3b0c65762d2994d6f01"
+    }
+  },
+  "Modify.Color.Scramble": {
+    "implementation": "src/native/pixels.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Blocks.Effects.Color.Scramble.vl/Schema.Blocks.Effects.Color.Scramble.vl.1.cs",
+      "symbol": "_Schema_Blocks_Effects_Color_Scramble_.Schema.Blocks.Effects.Color.ScrambleColor_C.Update_",
+      "line_hint": 76,
+      "sha256": "b708ce7a504f7fad0554260cad6494587580206f2c1a944519ad9ddb883774b9"
+    }
+  },
+  "Modify.Color.Shift": {
+    "implementation": "src/native/pixels.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Blocks.Effects.Color.Shift.vl/Schema.Blocks.Effects.Color.Shift.vl.1.cs",
+      "symbol": "_Schema_Blocks_Effects_Color_Shift_.Schema.Blocks.Effects.Color.ShiftColor_C.Update_",
+      "line_hint": 76,
+      "sha256": "7af988645257e5839bb1f000ab48b1ca63ac4dfa6783117cb7f924d3a33df8b0"
+    }
+  },
+  "Modify.Color.Strobe": {
+    "implementation": "src/native/timed.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": null
+  },
+  "Modify.ColorWheel.Offset": {
+    "implementation": "src/native/mod.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.MovingHeads.Blocks.vl/Schema.MovingHeads.Blocks.vl.1.cs",
+      "symbol": "_Schema_MovingHeads_Blocks_.Schema.MovingHeads.Blocks.Effects.ColorWheel.Offset_C.Update_",
+      "line_hint": 3343,
+      "sha256": "c711631a59d192b5287b8b79c44b686c13f76c9bc9f714762d3de5a2fa6cd61a"
+    }
+  },
+  "Modify.Delay": {
+    "implementation": "src/native/timed.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Blocks.Effects.Generic.Delay.vl/Schema.Blocks.Effects.Generic.Delay.vl.1.cs",
+      "symbol": "_Schema_Blocks_Effects_Generic_Delay_.Schema.Blocks.Effects.Generic.DelayEffect_C.Update_",
+      "line_hint": 77,
+      "sha256": "0d1e79bcb48dab4bd2105c0ef224dcc5c02f8a7f69ad45d7f369cf24319125da"
+    }
+  },
+  "Modify.Deprecated.Color.Flickerize": {
+    "implementation": "src/native/timed.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": null
+  },
+  "Modify.Memorize": {
+    "implementation": "src/native/actions.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.4.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.Block.Behavior.Effect.Memorize_C.Update_",
+      "line_hint": 8334,
+      "sha256": "205088bcc9bf5c5812e36d182e4fde805d54bbc26c12c3b0c65762d2994d6f01"
+    }
+  },
+  "Modify.Repeat": {
+    "implementation": "src/native/timed.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.3.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.RepeatBee_C.Update_",
+      "line_hint": 10412,
+      "sha256": "9e2690d766c7129a5b64a8672f09e61b0c97e94e7f8dec4d1d3f09a2e8c6e944"
+    }
+  },
+  "Modify.SampleAndHold": {
+    "implementation": "src/engine.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Blocks.Effects.Generic.SampleAndHold.vl/Schema.Blocks.Effects.Generic.SampleAndHold.vl.1.cs",
+      "symbol": "SampleAndHoldEffect_C.Update_",
+      "line_hint": 73,
+      "sha256": "1f537bd2b11970363d61806f4b6ade50606acd072797e0b8d9955f510d076dcd"
+    }
+  },
+  "Modify.Value.ADSR": {
+    "implementation": "src/native/timed.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.3.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.ValueEffectADSRBee_C.Update_",
+      "line_hint": 9713,
+      "sha256": "9e2690d766c7129a5b64a8672f09e61b0c97e94e7f8dec4d1d3f09a2e8c6e944"
+    }
+  },
+  "Modify.Value.AttackDecay": {
+    "implementation": "src/native/timed.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Blocks.Effects.Value.AttackDecay.vl/Schema.Blocks.Effects.Value.AttackDecay.vl.1.cs",
+      "symbol": "_Schema_Blocks_Effects_Value_AttackDecay_.Schema.Blocks.Effects.Value.AttackDecayValue_C.Update_",
+      "line_hint": 80,
+      "sha256": "697b5f892dc03140d42b1cbb941500f650c4206b6cb775bc79f1c26e1a9f0881"
+    }
+  },
+  "Modify.Value.Clamp": {
+    "implementation": "src/engine.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.4.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.Block.Behavior.Effect.Value.Clamp_C.Update_",
+      "line_hint": 6292,
+      "sha256": "205088bcc9bf5c5812e36d182e4fde805d54bbc26c12c3b0c65762d2994d6f01"
+    }
+  },
+  "Modify.Value.Cooldown": {
+    "implementation": "src/native/timed.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Blocks.Effects.Value.Cooldown.vl/Schema.Blocks.Effects.Value.Cooldown.vl.1.cs",
+      "symbol": "_Schema_Blocks_Effects_Value_Cooldown_.Schema.Blocks.Effects.Value.CooldownValueEffect_C.Update_",
+      "line_hint": 78,
+      "sha256": "d1306d613ee304fa53c693e74c6d9eb8e923287cff5e4cc42be2060e992df05b"
+    }
+  },
+  "Modify.Value.Damper": {
+    "implementation": "src/native/timed.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Blocks.Effects.Value.Damper.vl/Schema.Blocks.Effects.Value.Damper.vl.1.cs",
+      "symbol": "_Schema_Blocks_Effects_Value_Damper_.Schema.Blocks.Effects.Value.DamperEffect_C.Update_",
+      "line_hint": 77,
+      "sha256": "a6edae3bb9c0c097cf49d150d497f52a41f653e5776436c38ce7baaa56f8e294"
+    }
+  },
+  "Modify.Value.Edge.Falling": {
+    "implementation": "src/native/timed.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Blocks.Effects.Value.Edge.vl/Schema.Blocks.Effects.Value.Edge.vl.1.cs",
+      "symbol": "_Schema_Blocks_Effects_Value_Edge_.Schema.Blocks.Effects.Value.Edge.Falling_C.Update_",
+      "line_hint": 446,
+      "sha256": "ed953635eeaf54b98ca7df6ceef82924b6ee75cdb25b18e4b6f454ec2e0bfe7a"
+    }
+  },
+  "Modify.Value.Edge.Rising": {
+    "implementation": "src/native/timed.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Blocks.Effects.Value.Edge.vl/Schema.Blocks.Effects.Value.Edge.vl.1.cs",
+      "symbol": "_Schema_Blocks_Effects_Value_Edge_.Schema.Blocks.Effects.Value.Edge.Rising_C.Update_",
+      "line_hint": 74,
+      "sha256": "ed953635eeaf54b98ca7df6ceef82924b6ee75cdb25b18e4b6f454ec2e0bfe7a"
+    }
+  },
+  "Modify.Value.Hold": {
+    "implementation": "src/native/timed.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Blocks.Effects.Value.Hold.vl/Schema.Blocks.Effects.Value.Hold.vl.1.cs",
+      "symbol": "_Schema_Blocks_Effects_Value_Hold_.Schema.Blocks.Effects.Value.HoldValueEffect_C.Update_",
+      "line_hint": 76,
+      "sha256": "3f11b077a28b8d86ef4e4e0a9cd66e76f296f4e0cedaceb4825bf74fad9c6da5"
+    }
+  },
+  "Modify.Value.Integrate": {
+    "implementation": "src/engine.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.4.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.Block.Behavior.Effect.Value.Integrate_C.Update_",
+      "line_hint": 6064,
+      "sha256": "205088bcc9bf5c5812e36d182e4fde805d54bbc26c12c3b0c65762d2994d6f01"
+    }
+  },
+  "Modify.Value.Invert": {
+    "implementation": "src/engine.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": null
+  },
+  "Modify.Value.Map.HalfUpDown": {
+    "implementation": "src/native/spatial.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.4.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.Block.Behavior.Effect.Value.Map.HalfUpDown_C.Update_",
+      "line_hint": 5366,
+      "sha256": "205088bcc9bf5c5812e36d182e4fde805d54bbc26c12c3b0c65762d2994d6f01"
+    }
+  },
+  "Modify.Value.MapFromTo": {
+    "implementation": "src/engine.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Blocks.Effects.Value.Map.vl/Schema.Blocks.Effects.Value.Map.vl.1.cs",
+      "symbol": "_Schema_Blocks_Effects_Value_Map_.Schema.Blocks.Effects.Value.MapFromToValueEffect_C.Update_",
+      "line_hint": 353,
+      "sha256": "374c37db72513f16f6351634ce7b6e09016111393ec685d88d1368e3d94d4463"
+    }
+  },
+  "Modify.Value.MapTo": {
+    "implementation": "src/engine.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Blocks.Effects.Value.Map.vl/Schema.Blocks.Effects.Value.Map.vl.1.cs",
+      "symbol": "_Schema_Blocks_Effects_Value_Map_.Schema.Blocks.Effects.Value.MapToValueEffect_C.Update_",
+      "line_hint": 76,
+      "sha256": "374c37db72513f16f6351634ce7b6e09016111393ec685d88d1368e3d94d4463"
+    }
+  },
+  "Modify.Value.RandomizeTrigger": {
+    "implementation": "src/engine.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.4.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.Block.Behavior.Effect.Value.RandomizeTrigger_C.Update_",
+      "line_hint": 6507,
+      "sha256": "205088bcc9bf5c5812e36d182e4fde805d54bbc26c12c3b0c65762d2994d6f01"
+    }
+  },
+  "Modify.Value.RunningMap": {
+    "implementation": "src/native/timed.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Blocks.Effects.Value.RunningMap.vl/Schema.Blocks.Effects.Value.RunningMap.vl.1.cs",
+      "symbol": "_Schema_Blocks_Effects_Value_RunningMap_.Schema.Blocks.Effects.Value.RunningMapValueEffect_C.Update_",
+      "line_hint": 89,
+      "sha256": "56d8d16be3696a00ab808a7c932a8e0c1bdaca808868bdcae4acf5d5730102e9"
+    }
+  },
+  "Modify.Value.SelectRange": {
+    "implementation": "src/native/mod.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Blocks.Effects.Value.SelectRange.vl/Schema.Blocks.Effects.Value.SelectRange.vl.1.cs",
+      "symbol": "_Schema_Blocks_Effects_Value_SelectRange_.Schema.Blocks.Effects.Value.SelectRange_C.Update_",
+      "line_hint": 76,
+      "sha256": "fa37365a9ab787da83708c60eae1c42a69fb06f989088692fa8866077e98d1d6"
+    }
+  },
+  "Modify.Value.Shape": {
+    "implementation": "src/native/timed.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Blocks.Effects.Value.Shape.vl/Schema.Blocks.Effects.Value.Shape.vl.1.cs",
+      "symbol": "_Schema_Blocks_Effects_Value_Shape_.Schema.Blocks.Effects.Value.ShapeValueModify_C.Update_",
+      "line_hint": 81,
+      "sha256": "f17d6fd389bcd5d4cca87552c8d56894b600bb3977f09d4cbf1f307eabe66bfa"
+    }
+  },
+  "Modify.Value.Smooth": {
+    "implementation": "src/native/timed.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.4.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.Block.Behavior.Effect.Value.Smooth_C.Update_",
+      "line_hint": 5827,
+      "sha256": "205088bcc9bf5c5812e36d182e4fde805d54bbc26c12c3b0c65762d2994d6f01"
+    }
+  },
+  "Modify.Value.SmoothAcceleration": {
+    "implementation": "src/native/timed.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.4.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.Block.Behavior.Effect.Value.SmoothAcceleration_C.Update_",
+      "line_hint": 6701,
+      "sha256": "205088bcc9bf5c5812e36d182e4fde805d54bbc26c12c3b0c65762d2994d6f01"
+    }
+  },
+  "Modify.Value.Steps": {
+    "implementation": "src/engine.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Blocks.Effects.Value.Steps.vl/Schema.Blocks.Effects.Value.Steps.vl.1.cs",
+      "symbol": "_Schema_Blocks_Effects_Value_Steps_.Schema.Blocks.Effects.Value.Steps_C.Update_",
+      "line_hint": 74,
+      "sha256": "ef0dea74427ed7271b61e751f9d2413b710cbbfda55cd0b558dd9004d65c020c"
+    }
+  },
+  "Modify.Value.Toggle": {
+    "implementation": "src/native/timed.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.4.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.Block.Behavior.Effect.Value.ToggleEffect_C.Update_",
+      "line_hint": 5585,
+      "sha256": "205088bcc9bf5c5812e36d182e4fde805d54bbc26c12c3b0c65762d2994d6f01"
+    }
+  },
+  "Modify.Value.Wave": {
+    "implementation": "src/native/mod.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Blocks.Effects.Value.Shape.vl/Schema.Blocks.Effects.Value.Shape.vl.1.cs",
+      "symbol": "_Schema_Blocks_Effects_Value_Shape_.Schema.Blocks.Effects.Value.WaveValueModify_C.Update_",
+      "line_hint": 386,
+      "sha256": "f17d6fd389bcd5d4cca87552c8d56894b600bb3977f09d4cbf1f307eabe66bfa"
+    }
+  },
+  "Pick.Alternate": {
+    "implementation": "src/native/timed.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.3.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.CounterPickBee_C.Update_",
+      "line_hint": 716,
+      "sha256": "9e2690d766c7129a5b64a8672f09e61b0c97e94e7f8dec4d1d3f09a2e8c6e944"
+    }
+  },
+  "Pick.Audio.Beat": {
+    "implementation": "src/native/providers.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.3.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.BeatPickBee_C.Update_",
+      "line_hint": 4063,
+      "sha256": "9e2690d766c7129a5b64a8672f09e61b0c97e94e7f8dec4d1d3f09a2e8c6e944"
+    }
+  },
+  "Pick.Audio.Power": {
+    "implementation": "src/native/providers.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.3.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.AudioPowerPickBee_C.Update_",
+      "line_hint": 2940,
+      "sha256": "9e2690d766c7129a5b64a8672f09e61b0c97e94e7f8dec4d1d3f09a2e8c6e944"
+    }
+  },
+  "Pick.BPM": {
+    "implementation": "src/native/providers.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.3.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.BPMPickBee_C.Update_",
+      "line_hint": 2376,
+      "sha256": "9e2690d766c7129a5b64a8672f09e61b0c97e94e7f8dec4d1d3f09a2e8c6e944"
+    }
+  },
+  "Pick.Channel": {
+    "implementation": "src/native/pixels.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.3.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.ChannelPickBee_C.Update_",
+      "line_hint": 377,
+      "sha256": "9e2690d766c7129a5b64a8672f09e61b0c97e94e7f8dec4d1d3f09a2e8c6e944"
+    }
+  },
+  "Pick.Controller": {
+    "implementation": "src/native/providers.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": null
+  },
+  "Pick.Group": {
+    "implementation": "src/native/spatial.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.4.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.Block.Behavior.Pick.Group_C.Update_",
+      "line_hint": 9785,
+      "sha256": "205088bcc9bf5c5812e36d182e4fde805d54bbc26c12c3b0c65762d2994d6f01"
+    }
+  },
+  "Pick.LTP": {
+    "implementation": "src/native/spatial.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": null
+  },
+  "Pick.Time": {
+    "implementation": "src/native/providers.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.3.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.TimePickBee_C.Update_",
+      "line_hint": 3327,
+      "sha256": "9e2690d766c7129a5b64a8672f09e61b0c97e94e7f8dec4d1d3f09a2e8c6e944"
+    }
+  },
+  "S.Pong.Paddle": {
+    "implementation": "src/native/providers.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": null
+  },
+  "S.Pong.Position": {
+    "implementation": "src/native/providers.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": null
+  },
+  "Setup.Pixels.Circle": {
+    "implementation": "src/native/pixels.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/Schema.Blocks.Setup.Pixels.Circle.vl/Schema.Blocks.Setup.Pixels.Circle.vl.1.cs",
+      "symbol": "_Schema_Blocks_Setup_Pixels_Circle_.Schema.Blocks.Setup.Pixels.Circle_C.Update_",
+      "line_hint": 75,
+      "sha256": "abe6c7e42c54a70ff6365dfb998b8358bf83250f2879f09d86925506821f7200"
+    }
+  },
+  "Test.Widgets.FilePicker": {
+    "implementation": "src/native/providers.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": null
+  },
+  "Tool.Deprecated.Index.Counter": {
+    "implementation": "src/native/spatial.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.2.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.IndexCounterBee_C.Update_",
+      "line_hint": 3666,
+      "sha256": "fc1d25d7743cce96cbf04be40b9c1a23f02d3585adbb0bacceca9446c5d1602f"
+    }
+  },
+  "Tool.Deprecated.Pick.Index": {
+    "implementation": "src/native/pixels.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.2.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.IndexPickBee_C.Update_",
+      "line_hint": 3517,
+      "sha256": "fc1d25d7743cce96cbf04be40b9c1a23f02d3585adbb0bacceca9446c5d1602f"
+    }
+  },
+  "Tool.Merge": {
+    "implementation": "src/engine.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.1.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.PassthroughBee_C.Update_",
+      "line_hint": 8282,
+      "sha256": "efb885264aef6fc1cacdf5ede772fc7bec5851d8a1a9d564fc659db4b05c6b23"
+    }
+  },
+  "Transition.Fade": {
+    "implementation": "src/native/actions.rs",
+    "catalog_default_and_session_continuity": "tested",
+    "numerical_semantics": "focused family tests; exhaustive per-key goldens unverified",
+    "original_runtime_equivalence": "unverified",
+    "evidence": {
+      "kind": "source",
+      "path": "Main/Exports/src/VVVV.Schema.Core.vl/VVVV.Schema.Core.vl.2.cs",
+      "symbol": "_VVVV_Schema_Core_.VVVV.Schema.FadeBee_C.Update_",
+      "line_hint": 4295,
+      "sha256": "fc1d25d7743cce96cbf04be40b9c1a23f02d3585adbb0bacceca9446c5d1602f"
+    }
+  }
+}

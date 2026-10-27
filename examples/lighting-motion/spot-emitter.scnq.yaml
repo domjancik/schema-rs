@@ -1,0 +1,12 @@
+name: Downward spotlight
+stack:
+  Light.Emitter:
+    Type: Spot
+    Color: '#ffffff'
+    Direction: [0, -1, 0]
+    Angle: 80
+    Softness: 0.3
+    Range: 10
+    Channel: stage
+    in:
+      - Create.Position.XYZ: {X: 0, Y: 4, Z: 0}

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none" role="img" aria-labelledby="title description">
+  <title id="title">Clamp value</title>
+  <desc id="description">Keep a value inside a minimum and maximum.</desc>
+  <rect x="3" y="3" width="42" height="42" rx="11" fill="#192426" stroke="#3b5550"/>
+  <g stroke="#72dec2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12v24m24-24v24M8 30h8l16-12h8"/><path d="M12 9h4m16 30h4" stroke="#c5b0e2"/></g>
+</svg>

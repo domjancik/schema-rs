@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none" role="img" aria-labelledby="title description">
+  <title id="title">Grayscale constant</title>
+  <desc id="description">Fill the fixture with a fixed grayscale color.</desc>
+  <rect x="3" y="3" width="42" height="42" rx="11" fill="#192426" stroke="#3b5550"/>
+  <g stroke="#72dec2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="12" y="12" width="24" height="24" rx="5"/><path d="M24 12v24"/><path d="M13 18h10m-10 6h10m-10 6h10" stroke="#91a78b"/></g>
+</svg>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none" role="img" aria-labelledby="title description">
+  <title id="title">Color</title>
+  <desc id="description">Generate a chosen RGB color and alpha.</desc>
+  <rect x="3" y="3" width="42" height="42" rx="11" fill="#192426" stroke="#3b5550"/>
+  <g stroke="#72dec2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="19" r="8" stroke="#e1a296"/><circle cx="29" cy="20" r="8" stroke="#93c5b7"/><circle cx="24" cy="29" r="8" stroke="#c3b2dd"/></g>
+</svg>

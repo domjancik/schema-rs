@@ -1,0 +1,6 @@
+name: Scripted wave
+stack:
+  Convert.Value.ToColor:
+    in:
+      - Script.Value:
+          Code: '0.5 + 0.5 * (t + x * 0.3).sin()'

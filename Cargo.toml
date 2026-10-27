@@ -1,0 +1,27 @@
+[package]
+name = "schema-rs"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.88"
+license = "MIT"
+description = "Headless ScenicScript engine with scene editing, web and terminal clients"
+
+[dependencies]
+serde = { version = "1", features = ["derive", "rc"] }
+serde_json = { version = "1", features = ["unbounded_depth"] }
+serde_yaml = "0.9"
+axum = "0.8"
+tokio = { version = "1", features = ["rt-multi-thread", "net", "macros", "signal"] }
+crossterm = "0.28.1"
+rhai = { version = "1", features = ["sync", "no_module"] }
+
+[dev-dependencies]
+tower = { version = "0.5", features = ["util"] }
+http-body-util = "0.1"
+[profile.dev]
+debug = 0
+incremental = false
+
+[profile.test]
+debug = 0
+incremental = false

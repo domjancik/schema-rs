@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none" role="img" aria-labelledby="title description">
+  <title id="title">Fixture distance</title>
+  <desc id="description">Measure distance to a referenced fixture.</desc>
+  <rect x="3" y="3" width="42" height="42" rx="11" fill="#192426" stroke="#3b5550"/>
+  <g stroke="#72dec2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="18" width="10" height="12" rx="3"/><rect x="30" y="18" width="10" height="12" rx="3"/><path d="M18 24h12m-9-3-3 3 3 3m6-6 3 3-3 3" stroke="#96c4b5"/></g>
+</svg>

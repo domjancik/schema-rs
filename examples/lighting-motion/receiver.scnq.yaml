@@ -1,0 +1,5 @@
+name: Receive stage lights
+stack:
+  Light.Receiver:
+    Channel: stage
+    Gain: 1

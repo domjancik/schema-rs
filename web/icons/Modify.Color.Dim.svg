@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none" role="img" aria-labelledby="title description">
+  <title id="title">Dim color</title>
+  <desc id="description">Scale RGB brightness with a scalar amount.</desc>
+  <rect x="3" y="3" width="42" height="42" rx="11" fill="#192426" stroke="#3b5550"/>
+  <g stroke="#72dec2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 31c0-5-6-7-6-13a12 12 0 0 1 24 0c0 6-6 8-6 13m-12 0h12m-11 5h10m-8 4h6"/><path d="M24 11v12m-4-4 4 4 4-4" stroke="#cfb4e3"/></g>
+</svg>

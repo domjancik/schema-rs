@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none" role="img" aria-labelledby="title description">
+  <title id="title">Accumulate value</title>
+  <desc id="description">Add incoming values over successive updates.</desc>
+  <rect x="3" y="3" width="42" height="42" rx="11" fill="#192426" stroke="#3b5550"/>
+  <g stroke="#72dec2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M30 10c-9-4-10 7-10 14s-1 18-10 14"/><path d="M29 23h10m-5-5v10" stroke="#c6b6df"/></g>
+</svg>

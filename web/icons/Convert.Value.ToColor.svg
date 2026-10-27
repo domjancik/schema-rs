@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none" role="img" aria-labelledby="title description">
+  <title id="title">Value to grayscale</title>
+  <desc id="description">Convert a scalar into a grayscale color.</desc>
+  <rect x="3" y="3" width="42" height="42" rx="11" fill="#192426" stroke="#3b5550"/>
+  <g stroke="#72dec2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 16h10v16H9m0-8h10m4 0h9m-4-4 4 4-4 4"/><circle cx="37" cy="24" r="5" fill="#72dec2"/></g>
+</svg>

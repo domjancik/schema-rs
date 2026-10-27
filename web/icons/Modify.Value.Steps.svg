@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none" role="img" aria-labelledby="title description">
+  <title id="title">Quantize steps</title>
+  <desc id="description">Turn a continuous value into discrete steps.</desc>
+  <rect x="3" y="3" width="42" height="42" rx="11" fill="#192426" stroke="#3b5550"/>
+  <g stroke="#72dec2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 36v-7h7v-7h7v-7h7V9h7"/><path d="M10 40h29" stroke="#b8a1d2"/></g>
+</svg>
