@@ -200,8 +200,19 @@ impl Runtime {
         }
         Self::start_engine(engine, None)
     }
-    pub fn start_engine(mut engine: Engine, session_path: Option<PathBuf>) -> Result<Self> {
-        engine.tick(0.);
+    pub fn start_engine(engine: Engine, session_path: Option<PathBuf>) -> Result<Self> {
+        Self::start_engine_guarded(engine, session_path, None)
+    }
+    /// A startup-only barrier lets the installer verify restored history before runtime actions resume.
+    pub fn start_engine_guarded(
+        mut engine: Engine,
+        session_path: Option<PathBuf>,
+        barrier: Option<PathBuf>,
+    ) -> Result<Self> {
+        let mut updating = barrier.as_ref().is_some_and(|path| path.exists());
+        if !updating {
+            engine.tick(0.);
+        }
         let session_store = session_path.map(|p| Arc::new(crate::session::Store::new(p)));
         let latest_session = Arc::new(RwLock::new(Arc::new(engine.checkpoint())));
         let published = Arc::new(RwLock::new(Arc::new(Published {
@@ -236,6 +247,9 @@ impl Runtime {
                     (engine.paused_for_session(), engine.blackout_for_session());
                 let mut checkpoint_time = Instant::now();
                 while !stopping.load(Ordering::Relaxed) {
+                    if updating {
+                        updating = barrier.as_ref().is_some_and(|path| path.exists());
+                    }
                     let mut checkpoint_replies = Vec::new();
                     let mut replies = Vec::new();
                     for _ in 0..4 {
@@ -246,15 +260,19 @@ impl Runtime {
                                 continue;
                             }
                             RequestMessage::Plugins(update, reply) => {
-                                let result = engine.install_plugin_update(*update);
+                                let result = if updating {
+                                    Err("Engine updating; retry shortly".into())
+                                } else {
+                                    engine.install_plugin_update(*update)
+                                };
                                 replies.push((reply, result));
                                 continue;
                             }
                             RequestMessage::Edit(message) => *message,
                         };
-                        let result = if message.plugin_generation
-                            != engine.plugins().state.generation
-                        {
+                        let result = if updating {
+                            Err("Engine updating; retry shortly".into())
+                        } else if message.plugin_generation != engine.plugins().state.generation {
                             Err("Revision conflict: plugin registry changed; retry the edit".into())
                         } else if message.expected.is_some_and(|r| r != engine.revision()) {
                             Err("Revision conflict: refresh state before editing".into())
@@ -268,7 +286,9 @@ impl Runtime {
                     let now = Instant::now();
                     let dt = now.duration_since(previous).as_secs_f64();
                     previous = now;
-                    engine.tick(dt);
+                    if !updating {
+                        engine.tick(dt);
+                    }
                     let mut snapshot = engine.snapshot();
                     snapshot.output_status = engine_status
                         .read()
@@ -280,7 +300,7 @@ impl Runtime {
                         project: engine.project().clone(),
                         snapshot,
                     });
-                    if !next.snapshot.actions.is_empty() {
+                    if !updating && !next.snapshot.actions.is_empty() {
                         let _ = action_tx.try_send(next.clone());
                     }
                     *state.write().unwrap_or_else(|e| e.into_inner()) = next;
@@ -570,6 +590,17 @@ async fn guard(State(state): State<AppState>, request: Request, next: Next) -> R
                 return StatusCode::UNAUTHORIZED.into_response();
             }
         }
+    }
+    if request.uri().path().starts_with("/api/")
+        && request.method() != axum::http::Method::GET
+        && request.method() != axum::http::Method::HEAD
+        && state.root.join(".update-in-progress").exists()
+    {
+        return (
+            StatusCode::SERVICE_UNAVAILABLE,
+            Json(serde_json::json!({"error":"Engine updating; retry shortly"})),
+        )
+            .into_response();
     }
     let mut response = next.run(request).await;
     response.headers_mut().insert(

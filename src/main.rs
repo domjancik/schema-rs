@@ -129,7 +129,11 @@ async fn run() -> Result<(), String> {
             let listener = tokio::net::TcpListener::bind(bind)
                 .await
                 .map_err(|e| e.to_string())?;
-            let runtime = Runtime::start_engine(engine, Some(session_path))?;
+            let runtime = Runtime::start_engine_guarded(
+                engine,
+                Some(session_path),
+                Some(root.join(".update-in-progress")),
+            )?;
             let osc = args
                 .iter()
                 .position(|a| a == "--osc")
