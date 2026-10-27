@@ -1,0 +1,674 @@
+{
+  "repeat": [
+    {
+      "controls": [
+        {
+          "center_hit": true,
+          "height": 151.2109375,
+          "id": "scene",
+          "in_view": true,
+          "width": 298.33331298828125,
+          "x": 10.833333015441896,
+          "y": 62.2265625
+        },
+        {
+          "center_hit": true,
+          "height": 63.99739456176758,
+          "id": "encoder",
+          "in_view": true,
+          "width": 63.99739456176758,
+          "x": 136.9921875,
+          "y": 420.0260314941406
+        },
+        {
+          "center_hit": true,
+          "height": 41.9921875,
+          "id": "action-a",
+          "in_view": true,
+          "width": 41.9921875,
+          "x": 268.0078125,
+          "y": 416.3541564941406
+        },
+        {
+          "center_hit": true,
+          "height": 41.9921875,
+          "id": "action-b",
+          "in_view": true,
+          "width": 41.9921875,
+          "x": 220,
+          "y": 454.8697814941406
+        },
+        {
+          "center_hit": true,
+          "height": 35.98958206176758,
+          "id": "hold",
+          "in_view": true,
+          "width": 51.45833206176758,
+          "x": 10,
+          "y": 524.3489379882812
+        },
+        {
+          "center_hit": true,
+          "height": 35.98958206176758,
+          "id": "save",
+          "in_view": true,
+          "width": 57.3828125,
+          "x": 252.6171875,
+          "y": 524.3489379882812
+        },
+        {
+          "center_hit": true,
+          "height": 15.15625,
+          "id": "layer-cycle",
+          "in_view": true,
+          "width": 50.13020706176758,
+          "x": 259.8697814941406,
+          "y": 255.49478149414065
+        },
+        {
+          "center_hit": true,
+          "height": 30,
+          "id": "selection-meta",
+          "in_view": true,
+          "width": 101.62760162353516,
+          "x": 10,
+          "y": 248.07290649414065
+        }
+      ],
+      "document": {
+        "height": 568,
+        "width": 320
+      },
+      "viewport": {
+        "height": 568,
+        "width": 320
+      }
+    },
+    {
+      "controls": [
+        {
+          "center_hit": true,
+          "height": 229.55728149414065,
+          "id": "scene",
+          "in_view": true,
+          "width": 354.1666564941406,
+          "x": 10.833333015441896,
+          "y": 69.16666412353516
+        },
+        {
+          "center_hit": true,
+          "height": 63.99739456176758,
+          "id": "encoder",
+          "in_view": true,
+          "width": 63.99739456176758,
+          "x": 160.9114532470703,
+          "y": 519.1926879882812
+        },
+        {
+          "center_hit": true,
+          "height": 41.9921875,
+          "id": "action-a",
+          "in_view": true,
+          "width": 41.9921875,
+          "x": 323.84112548828125,
+          "y": 515.5208129882812
+        },
+        {
+          "center_hit": true,
+          "height": 41.9921875,
+          "id": "action-b",
+          "in_view": true,
+          "width": 41.9921875,
+          "x": 267.8385314941406,
+          "y": 554.0364379882812
+        },
+        {
+          "center_hit": true,
+          "height": 35.98958206176758,
+          "id": "hold",
+          "in_view": true,
+          "width": 51.45833206176758,
+          "x": 10,
+          "y": 623.515625
+        },
+        {
+          "center_hit": true,
+          "height": 35.98958206176758,
+          "id": "save",
+          "in_view": true,
+          "width": 57.3828125,
+          "x": 308.45050048828125,
+          "y": 623.515625
+        },
+        {
+          "center_hit": true,
+          "height": 15.15625,
+          "id": "layer-cycle",
+          "in_view": true,
+          "width": 50.13020706176758,
+          "x": 315.703125,
+          "y": 354.66143798828125
+        },
+        {
+          "center_hit": true,
+          "height": 30,
+          "id": "selection-meta",
+          "in_view": true,
+          "width": 101.62760162353516,
+          "x": 10,
+          "y": 347.23956298828125
+        }
+      ],
+      "document": {
+        "height": 667,
+        "width": 376
+      },
+      "viewport": {
+        "height": 667,
+        "width": 376
+      }
+    },
+    {
+      "controls": [
+        {
+          "center_hit": true,
+          "height": 369.1275939941406,
+          "id": "scene",
+          "in_view": true,
+          "width": 369.1666564941406,
+          "x": 10.833333015441896,
+          "y": 81.5234375
+        },
+        {
+          "center_hit": true,
+          "height": 63.99739456176758,
+          "id": "encoder",
+          "in_view": true,
+          "width": 63.99739456176758,
+          "x": 168.4114532470703,
+          "y": 695.859375
+        },
+        {
+          "center_hit": true,
+          "height": 41.9921875,
+          "id": "action-a",
+          "in_view": true,
+          "width": 41.9921875,
+          "x": 338.84112548828125,
+          "y": 692.1875
+        },
+        {
+          "center_hit": true,
+          "height": 41.9921875,
+          "id": "action-b",
+          "in_view": true,
+          "width": 41.9921875,
+          "x": 282.8385314941406,
+          "y": 730.703125
+        },
+        {
+          "center_hit": true,
+          "height": 35.98958206176758,
+          "id": "hold",
+          "in_view": true,
+          "width": 51.45833206176758,
+          "x": 10,
+          "y": 800.1822509765625
+        },
+        {
+          "center_hit": true,
+          "height": 35.98958206176758,
+          "id": "save",
+          "in_view": true,
+          "width": 57.3828125,
+          "x": 323.45050048828125,
+          "y": 800.1822509765625
+        },
+        {
+          "center_hit": true,
+          "height": 15.15625,
+          "id": "layer-cycle",
+          "in_view": true,
+          "width": 50.13020706176758,
+          "x": 330.703125,
+          "y": 531.328125
+        },
+        {
+          "center_hit": true,
+          "height": 30,
+          "id": "selection-meta",
+          "in_view": true,
+          "width": 101.62760162353516,
+          "x": 10,
+          "y": 523.90625
+        }
+      ],
+      "document": {
+        "height": 844,
+        "width": 391
+      },
+      "viewport": {
+        "height": 844,
+        "width": 391
+      }
+    },
+    {
+      "controls": [
+        {
+          "center_hit": true,
+          "height": 266.3671875,
+          "id": "scene",
+          "in_view": true,
+          "width": 460.0520629882813,
+          "x": 12.825520515441896,
+          "y": 68.42447662353516
+        },
+        {
+          "center_hit": true,
+          "height": 63.99739456176758,
+          "id": "encoder",
+          "in_view": true,
+          "width": 63.99739456176758,
+          "x": 623.9453125,
+          "y": 227.25259399414065
+        },
+        {
+          "center_hit": true,
+          "height": 41.9921875,
+          "id": "action-a",
+          "in_view": true,
+          "width": 41.9921875,
+          "x": 790.1822509765625,
+          "y": 225.57290649414065
+        },
+        {
+          "center_hit": true,
+          "height": 41.9921875,
+          "id": "action-b",
+          "in_view": true,
+          "width": 41.9921875,
+          "x": 734.1796875,
+          "y": 260.09112548828125
+        },
+        {
+          "center_hit": true,
+          "height": 35.98958206176758,
+          "id": "hold",
+          "in_view": true,
+          "width": 51.45833206176758,
+          "x": 487.7083129882813,
+          "y": 346.84893798828125
+        },
+        {
+          "center_hit": true,
+          "height": 35.98958206176758,
+          "id": "save",
+          "in_view": true,
+          "width": 57.3828125,
+          "x": 774.7916259765625,
+          "y": 346.84893798828125
+        },
+        {
+          "center_hit": true,
+          "height": 15.15625,
+          "id": "layer-cycle",
+          "in_view": true,
+          "width": 50.13020706176758,
+          "x": 782.0442504882812,
+          "y": 51.41926956176758
+        },
+        {
+          "center_hit": true,
+          "height": 30,
+          "id": "selection-meta",
+          "in_view": true,
+          "width": 101.62760162353516,
+          "x": 487.7083129882813,
+          "y": 43.99739456176758
+        }
+      ],
+      "document": {
+        "height": 391,
+        "width": 844
+      },
+      "viewport": {
+        "height": 391,
+        "width": 844
+      }
+    }
+  ],
+  "mint": [
+    {
+      "controls": [
+        {
+          "id": "scene",
+          "in_view": true
+        },
+        {
+          "id": "encoder",
+          "in_view": true
+        },
+        {
+          "id": "action-a",
+          "in_view": true
+        },
+        {
+          "id": "action-b",
+          "in_view": true
+        },
+        {
+          "id": "hold",
+          "in_view": true
+        },
+        {
+          "id": "save",
+          "in_view": true
+        },
+        {
+          "id": "layer-cycle",
+          "in_view": true
+        },
+        {
+          "id": "selection-meta",
+          "in_view": true
+        }
+      ],
+      "document": {
+        "height": 568,
+        "width": 320
+      },
+      "viewport": {
+        "height": 568,
+        "width": 320
+      }
+    },
+    {
+      "controls": [
+        {
+          "id": "scene",
+          "in_view": true
+        },
+        {
+          "id": "encoder",
+          "in_view": true
+        },
+        {
+          "id": "action-a",
+          "in_view": true
+        },
+        {
+          "id": "action-b",
+          "in_view": true
+        },
+        {
+          "id": "hold",
+          "in_view": true
+        },
+        {
+          "id": "save",
+          "in_view": true
+        },
+        {
+          "id": "layer-cycle",
+          "in_view": true
+        },
+        {
+          "id": "selection-meta",
+          "in_view": true
+        }
+      ],
+      "document": {
+        "height": 391,
+        "width": 844
+      },
+      "viewport": {
+        "height": 391,
+        "width": 844
+      }
+    }
+  ],
+  "uv": [
+    {
+      "controls": [
+        {
+          "id": "scene",
+          "in_view": true
+        },
+        {
+          "id": "encoder",
+          "in_view": true
+        },
+        {
+          "id": "action-a",
+          "in_view": true
+        },
+        {
+          "id": "action-b",
+          "in_view": true
+        },
+        {
+          "id": "hold",
+          "in_view": true
+        },
+        {
+          "id": "save",
+          "in_view": true
+        },
+        {
+          "id": "layer-cycle",
+          "in_view": true
+        },
+        {
+          "id": "selection-meta",
+          "in_view": true
+        }
+      ],
+      "document": {
+        "height": 568,
+        "width": 320
+      },
+      "viewport": {
+        "height": 568,
+        "width": 320
+      }
+    },
+    {
+      "controls": [
+        {
+          "id": "scene",
+          "in_view": true
+        },
+        {
+          "id": "encoder",
+          "in_view": true
+        },
+        {
+          "id": "action-a",
+          "in_view": true
+        },
+        {
+          "id": "action-b",
+          "in_view": true
+        },
+        {
+          "id": "hold",
+          "in_view": true
+        },
+        {
+          "id": "save",
+          "in_view": true
+        },
+        {
+          "id": "layer-cycle",
+          "in_view": true
+        },
+        {
+          "id": "selection-meta",
+          "in_view": true
+        }
+      ],
+      "document": {
+        "height": 391,
+        "width": 844
+      },
+      "viewport": {
+        "height": 391,
+        "width": 844
+      }
+    }
+  ],
+  "long_labels": [
+    {
+      "controls": [
+        {
+          "height": 136.6015625,
+          "id": "scene",
+          "in_view": true,
+          "width": 298.33331298828125,
+          "x": 10.833333015441896,
+          "y": 60.92447662353515
+        },
+        {
+          "height": 63.99739456176758,
+          "id": "encoder",
+          "in_view": true,
+          "width": 63.99739456176758,
+          "x": 136.9921875,
+          "y": 420.0260314941406
+        },
+        {
+          "height": 41.9921875,
+          "id": "action-a",
+          "in_view": true,
+          "width": 41.9921875,
+          "x": 268.0078125,
+          "y": 416.3541564941406
+        },
+        {
+          "height": 41.9921875,
+          "id": "action-b",
+          "in_view": true,
+          "width": 41.9921875,
+          "x": 220,
+          "y": 454.8697814941406
+        },
+        {
+          "height": 35.98958206176758,
+          "id": "hold",
+          "in_view": true,
+          "width": 51.45833206176758,
+          "x": 10,
+          "y": 524.3489379882812
+        },
+        {
+          "height": 35.98958206176758,
+          "id": "save",
+          "in_view": true,
+          "width": 57.3828125,
+          "x": 252.6171875,
+          "y": 524.3489379882812
+        },
+        {
+          "height": 15.15625,
+          "id": "layer-cycle",
+          "in_view": true,
+          "width": 50.13020706176758,
+          "x": 259.8697814941406,
+          "y": 236.9921875
+        },
+        {
+          "height": 30,
+          "id": "selection-meta",
+          "in_view": true,
+          "width": 69.54426574707031,
+          "x": 10,
+          "y": 229.5703125
+        }
+      ],
+      "document": {
+        "height": 568,
+        "width": 320
+      },
+      "viewport": {
+        "height": 568,
+        "width": 320
+      }
+    },
+    {
+      "controls": [
+        {
+          "height": 266.3671875,
+          "id": "scene",
+          "in_view": true,
+          "width": 460.0520629882813,
+          "x": 12.825520515441896,
+          "y": 68.42447662353516
+        },
+        {
+          "height": 63.99739456176758,
+          "id": "encoder",
+          "in_view": true,
+          "width": 63.99739456176758,
+          "x": 623.9453125,
+          "y": 237.7473907470703
+        },
+        {
+          "height": 41.9921875,
+          "id": "action-a",
+          "in_view": true,
+          "width": 41.9921875,
+          "x": 790.1822509765625,
+          "y": 236.08071899414065
+        },
+        {
+          "height": 41.9921875,
+          "id": "action-b",
+          "in_view": true,
+          "width": 41.9921875,
+          "x": 734.1796875,
+          "y": 270.59893798828125
+        },
+        {
+          "height": 35.98958206176758,
+          "id": "hold",
+          "in_view": true,
+          "width": 51.45833206176758,
+          "x": 487.7083129882813,
+          "y": 346.84893798828125
+        },
+        {
+          "height": 35.98958206176758,
+          "id": "save",
+          "in_view": true,
+          "width": 57.3828125,
+          "x": 774.7916259765625,
+          "y": 346.84893798828125
+        },
+        {
+          "height": 15.15625,
+          "id": "layer-cycle",
+          "in_view": true,
+          "width": 50.13020706176758,
+          "x": 782.0442504882812,
+          "y": 51.41926956176758
+        },
+        {
+          "height": 30,
+          "id": "selection-meta",
+          "in_view": true,
+          "width": 69.54426574707031,
+          "x": 487.7083129882813,
+          "y": 43.99739456176758
+        }
+      ],
+      "document": {
+        "height": 391,
+        "width": 844
+      },
+      "viewport": {
+        "height": 391,
+        "width": 844
+      }
+    }
+  ]
+}

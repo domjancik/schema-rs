@@ -29,3 +29,17 @@ Baseline source HEAD at intake: `9427a13ba623ec661a3c08a1067aa5f0684fcf16`. Date
 All three scenes retained complete authored state in named roundtrips and fresh CLI project loads. Five daily clock probes and 24 spatial sample comparisons passed. Repeat's selected playback sample matched exactly. Studio fixture rename/undo and schémaboy Duration 8→6→undo worked. [Guide and evidence](initial-batch.md).
 
 Automation encountered stale AX element IDs when snapshot-driven property lists re-rendered; stable role/name selectors succeeded. This was an automation targeting limitation, not filed as an application bug. Phone-width and physical-touch behavior were not exercised by this batch. No claim is made about every authoring gesture or catalog node.
+
+## SL-003 — Output-panel tab labels overlap at 320-pixel portrait width
+
+- Kind: confirmed UI defect. Severity: P3. Status: fix implemented; awaiting lab verification.
+- Baseline: requested release 278832c; source HEAD at executable copy 7a2e40e1b97a071a6c4a15818bb95cb9f613c10a. Existing copied binary SHA256 032D5DFED65F2C994130F3222AFED90A255BAB1EAB4E8A4995FF9BBADBAA88CF. Latest subsequent long-value CSS refinement was not included in this copied binary.
+- Reproduce: serve a scratch copy of uv-midnight with output disabled, open /mobile at 320×568, then ••• → Output & DMX. Switch to Universe patch to see the same problem on that tab.
+- Expected: Daily dimming, DMX models and Universe patch have independently readable labels and usable hit targets within the panel.
+- Actual: `#output-design-dialog nav button` shrinks each tab to 29.6615 CSS pixels, clientWidth 28; labels have scrollWidth 69/59/67 and overflow into neighboring tabs. Buttons still open the selected section; the scene data is unaffected.
+- Exact tab rectangles (x,y,width,height): Daily (20.8203,113.8151,29.6615,41.9922); DMX (66.4714,113.8151,29.6615,41.9922); Universe (112.1224,113.8151,29.6615,41.9922). Dialog rect (0,0,320,568.3333); its client/scroll width is 303.
+- Evidence: [Daily panel](evidence/retest-uv-output.png), [Universe panel](evidence/retest-uv-patch.png), [retest report](mobile-retest-278832c.md).
+- Implementation update: implementation reports a CSS fix in web/output-design.css with natural tab width, >=44px touch sizes and wrapping, plus its regression passing at 320x568/390x844/844x390. This lab has not yet verified that newer CSS, so the finding stays open pending lab verification. No source fix by the scene lab.
+- Requested addition: keep output navigation tabs at readable widths, wrapping/stacking within the panel if needed; check shared mobile nav/grid CSS selectors for unintended influence. Exact measurements and screenshots were sent to implementation immediately.
+
+Implementation fix reference: `8dbdbc4` adds natural-width/wrapping Output tabs and `tests/output-mobile-tabs.cjs`. Implementation independently reproduced RED and verified GREEN at 320×568, 390×844 and 844×390. Keep the lab-verification status above distinct from implementation regression evidence.

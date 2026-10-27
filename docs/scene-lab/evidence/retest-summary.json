@@ -1,0 +1,50 @@
+{
+  "engine": "127.0.0.1:18797",
+  "long_labels": "scratch mint variant; all controls remain in bounds",
+  "source_head_at_copy": "7a2e40e1b97a071a6c4a15818bb95cb9f613c10a",
+  "final_output_enabled": false,
+  "edits": [
+    {
+      "after": 6,
+      "revision": 1,
+      "undo_revision": 2,
+      "before": 8,
+      "property": "Duration"
+    },
+    {
+      "after": [
+        -3,
+        3,
+        -2
+      ],
+      "revision": 3,
+      "undo_revision": 4,
+      "before": [
+        -3,
+        2,
+        -2
+      ],
+      "property": "P1"
+    },
+    {
+      "after": 2,
+      "revision": 5,
+      "undo_revision": 6,
+      "before": 1,
+      "property": "Mode"
+    },
+    {
+      "after": 0.11,
+      "revision": 7,
+      "undo_revision": 8,
+      "before": 0.1,
+      "property": "Control1"
+    }
+  ],
+  "scope": "browser viewport emulation with mouse/keyboard; no physical phone",
+  "requested_release": "278832c",
+  "date": "2026-10-27",
+  "final_diagnostics": [],
+  "binary_sha256": "032D5DFED65F2C994130F3222AFED90A255BAB1EAB4E8A4995FF9BBADBAA88CF",
+  "workspace": "target/scene-lab/retest-278832c"
+}
