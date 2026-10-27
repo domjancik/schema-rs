@@ -43,3 +43,13 @@ Automation encountered stale AX element IDs when snapshot-driven property lists 
 - Requested addition: keep output navigation tabs at readable widths, wrapping/stacking within the panel if needed; check shared mobile nav/grid CSS selectors for unintended influence. Exact measurements and screenshots were sent to implementation immediately.
 
 Implementation fix reference: `8dbdbc4` adds natural-width/wrapping Output tabs and `tests/output-mobile-tabs.cjs`. Implementation independently reproduced RED and verified GREEN at 320×568, 390×844 and 844×390. Keep the lab-verification status above distinct from implementation regression evidence.
+
+## SL-004 — Carpushit preset library selector and cue timeline editor
+
+- Kind: explicitly requested missing capability. Priority: P2 for the new Carpushit workflow; not a regression in the prior product release. Status: pending implementation; concrete data contract handed off.
+- Human request: discoverable preset/stored-content selection, loadable per group, recallable on a timeline, with exterior twinkle independently controlled.
+- Observed current behavior: Studio Apply to… has a free-text saved-content name and optional group. The user can recall a known name, but cannot browse the stored library or author timeline cues through a dedicated editor. Implementation confirms neither UI exists.
+- Expected addition: library listing/selector with readable preset labels and target-group controls, preserving sparse layers and stable fixture-ID scope; an authored persisted cue timeline/transport with a concrete validated clock/recall contract. No unsupported fields were added by the lab.
+- Verified interim workflow: eight content presets in examples/scene-lab/carpushit/registry/content, native disarmed120-second Director recall graph, actual UI group load, API group recall, .8-second native fade and accelerated five-window validation. This is not labeled as the new selector/timeline editor.
+- Evidence/contract: [Carpushit guide](carpushit.md), [preset catalog](../../examples/scene-lab/carpushit/preset-catalog.json), [native cue validation](evidence/carpushit/native-cue-validation.json), [UI group recall](evidence/carpushit/ui-group-recall.json).
+- Coordination: implementation is actively handling a human UI correction and a GPU preview request, and explicitly cannot take the larger selector/cue editor in this batch. It retains the stable IDs/sparse-layer contract. No source changes by the lab; this requirement remains visibly unfinished until implemented and independently verified.

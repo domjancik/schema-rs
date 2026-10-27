@@ -1,0 +1,29 @@
+name: Carpushit output compositor
+stack:
+  Tool.Merge:
+    in:
+    - Modify.Color.Dim:
+        Amount:
+          Modify.Value.Clamp:
+            Maximum: 1.0
+            Minimum: 0.0
+            in:
+            - Combine.Add:
+                in:
+                - Create.Layer.Above:
+                    Layer: 0
+                - Create.Layer.Above:
+                    Layer: 1
+        in:
+        - Create.Color.Color:
+            Color: '#ffd19a'
+    - Modify.Value.Clamp:
+        Maximum: 1.0
+        Minimum: 0.0
+        in:
+        - Combine.Add:
+            in:
+            - Create.Layer.Above:
+                Layer: 0
+            - Create.Layer.Above:
+                Layer: 1

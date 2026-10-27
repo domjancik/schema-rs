@@ -1,0 +1,58 @@
+[
+  {
+    "fixture": "ear-left",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit ears-blink",
+      "root": {
+        "id": 2,
+        "behavior": "Modify.Value.Wave",
+        "properties": {
+          "Shape": 4,
+          "Pulse Width": 0.5
+        },
+        "children": [
+          {
+            "id": 1,
+            "behavior": "Create.Value.LFO",
+            "properties": {
+              "Period": 1.5,
+              "Type": 0
+            },
+            "children": [],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "ear-right",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit ears-blink",
+      "root": {
+        "id": 2,
+        "behavior": "Modify.Value.Wave",
+        "properties": {
+          "Shape": 4,
+          "Pulse Width": 0.5
+        },
+        "children": [
+          {
+            "id": 1,
+            "behavior": "Create.Value.LFO",
+            "properties": {
+              "Period": 1.5,
+              "Type": 0
+            },
+            "children": [],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  }
+]

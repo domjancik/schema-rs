@@ -1,0 +1,485 @@
+{
+  "source_chat": "Design oscillating 4W light assembly",
+  "thread_id": "01a0bfc8-5889-7ca3-ae12-b162769fb299",
+  "source_blend": "Carpushit_lighting_v15.blend",
+  "source_blend_sha256": "7274bfb85ef2accdcc978916a4aea7a4864ce29ef8e809177293794618568d5a",
+  "export_manifest": "C:\\Users\\magne\\Documents\\ChatGPT\\Carpushit\\mechanics\\optical-simulator\\assets\\carpushit-scene.json",
+  "export_manifest_sha256": "8686581fa8a708efd8ef5e218ebb4d2024be08497f1c3440b8465ff725402d06",
+  "up": "Schema Y",
+  "transform": "Blender [X,Y,Z] -> Schema [X,Z,Y], metres; front is Schema negative Z",
+  "assembly_bounds_blender": {
+    "min": [
+      -2.773585557937622,
+      -2.2222700119018555,
+      -0.016876596957445145
+    ],
+    "max": [
+      2.773585557937622,
+      2.2635223865509033,
+      2.658953905105591
+    ]
+  },
+  "count_interpretation": "Front3 pairs + front-side2 pairs + wing3 pairs =16 scattered fixtures; pending user correction",
+  "fixtures": [
+    {
+      "id": "bulb-left-01",
+      "family": "bulbs",
+      "side": "left",
+      "source": "authored on exported v15 assembly coordinates",
+      "strip_path": null,
+      "color": "#ffd19a"
+    },
+    {
+      "id": "bulb-left-02",
+      "family": "bulbs",
+      "side": "left",
+      "source": "authored on exported v15 assembly coordinates",
+      "strip_path": null,
+      "color": "#ffd19a"
+    },
+    {
+      "id": "bulb-left-03",
+      "family": "bulbs",
+      "side": "left",
+      "source": "authored on exported v15 assembly coordinates",
+      "strip_path": null,
+      "color": "#ffd19a"
+    },
+    {
+      "id": "bulb-left-04",
+      "family": "bulbs",
+      "side": "left",
+      "source": "authored on exported v15 assembly coordinates",
+      "strip_path": null,
+      "color": "#ffd19a"
+    },
+    {
+      "id": "bulb-left-05",
+      "family": "bulbs",
+      "side": "left",
+      "source": "authored on exported v15 assembly coordinates",
+      "strip_path": null,
+      "color": "#ffd19a"
+    },
+    {
+      "id": "bulb-right-01",
+      "family": "bulbs",
+      "side": "right",
+      "source": "authored on exported v15 assembly coordinates",
+      "strip_path": null,
+      "color": "#ffd19a"
+    },
+    {
+      "id": "bulb-right-02",
+      "family": "bulbs",
+      "side": "right",
+      "source": "authored on exported v15 assembly coordinates",
+      "strip_path": null,
+      "color": "#ffd19a"
+    },
+    {
+      "id": "bulb-right-03",
+      "family": "bulbs",
+      "side": "right",
+      "source": "authored on exported v15 assembly coordinates",
+      "strip_path": null,
+      "color": "#ffd19a"
+    },
+    {
+      "id": "bulb-right-04",
+      "family": "bulbs",
+      "side": "right",
+      "source": "authored on exported v15 assembly coordinates",
+      "strip_path": null,
+      "color": "#ffd19a"
+    },
+    {
+      "id": "bulb-right-05",
+      "family": "bulbs",
+      "side": "right",
+      "source": "authored on exported v15 assembly coordinates",
+      "strip_path": null,
+      "color": "#ffd19a"
+    },
+    {
+      "id": "uv-left-rail",
+      "family": "roof-uv",
+      "side": "left",
+      "source": "authored on exported v15 assembly coordinates",
+      "strip_path": [
+        [
+          -0.67,
+          2.1588,
+          -0.78
+        ],
+        [
+          -0.67,
+          2.1098,
+          -0.45
+        ],
+        [
+          -0.67,
+          1.9914,
+          0
+        ],
+        [
+          -0.67,
+          1.8517,
+          0.35
+        ],
+        [
+          -0.67,
+          1.7131,
+          0.65
+        ]
+      ],
+      "color": "#862bff"
+    },
+    {
+      "id": "uv-right-rail",
+      "family": "roof-uv",
+      "side": "right",
+      "source": "authored on exported v15 assembly coordinates",
+      "strip_path": [
+        [
+          0.67,
+          2.1588,
+          -0.78
+        ],
+        [
+          0.67,
+          2.1098,
+          -0.45
+        ],
+        [
+          0.67,
+          1.9914,
+          0
+        ],
+        [
+          0.67,
+          1.8517,
+          0.35
+        ],
+        [
+          0.67,
+          1.7131,
+          0.65
+        ]
+      ],
+      "color": "#862bff"
+    },
+    {
+      "id": "uv-roof-spine",
+      "family": "roof-uv",
+      "side": "centre",
+      "source": "authored on exported v15 assembly coordinates",
+      "strip_path": [
+        [
+          0,
+          2.2975,
+          -0.78
+        ],
+        [
+          0,
+          2.2485,
+          -0.45
+        ],
+        [
+          0,
+          2.1301,
+          0
+        ],
+        [
+          0,
+          2.0214,
+          0.35
+        ],
+        [
+          0,
+          1.8518,
+          0.65
+        ]
+      ],
+      "color": "#862bff"
+    },
+    {
+      "id": "uv-cross-01",
+      "family": "roof-uv",
+      "side": "centre",
+      "source": "authored on exported v15 assembly coordinates",
+      "strip_path": [
+        [
+          -0.67,
+          2.1373,
+          -0.6
+        ],
+        [
+          -0.34,
+          2.2413,
+          -0.6
+        ],
+        [
+          0,
+          2.276,
+          -0.6
+        ],
+        [
+          0.34,
+          2.2413,
+          -0.6
+        ],
+        [
+          0.67,
+          2.1373,
+          -0.6
+        ]
+      ],
+      "color": "#862bff"
+    },
+    {
+      "id": "uv-cross-02",
+      "family": "roof-uv",
+      "side": "centre",
+      "source": "authored on exported v15 assembly coordinates",
+      "strip_path": [
+        [
+          -0.67,
+          1.9914,
+          0
+        ],
+        [
+          -0.34,
+          2.0955,
+          0
+        ],
+        [
+          0,
+          2.1301,
+          0
+        ],
+        [
+          0.34,
+          2.0955,
+          0
+        ],
+        [
+          0.67,
+          1.9914,
+          0
+        ]
+      ],
+      "color": "#862bff"
+    },
+    {
+      "id": "uv-cross-03",
+      "family": "roof-uv",
+      "side": "centre",
+      "source": "authored on exported v15 assembly coordinates",
+      "strip_path": [
+        [
+          -0.67,
+          1.7854,
+          0.52
+        ],
+        [
+          -0.34,
+          1.8894,
+          0.52
+        ],
+        [
+          0,
+          1.9241,
+          0.52
+        ],
+        [
+          0.34,
+          1.8894,
+          0.52
+        ],
+        [
+          0.67,
+          1.7854,
+          0.52
+        ]
+      ],
+      "color": "#862bff"
+    },
+    {
+      "id": "front-left-01",
+      "family": "front",
+      "side": "left",
+      "source": "authored on exported v15 assembly coordinates",
+      "strip_path": null,
+      "color": "#fff2db"
+    },
+    {
+      "id": "front-left-02",
+      "family": "front",
+      "side": "left",
+      "source": "authored on exported v15 assembly coordinates",
+      "strip_path": null,
+      "color": "#fff2db"
+    },
+    {
+      "id": "front-left-03",
+      "family": "front",
+      "side": "left",
+      "source": "authored on exported v15 assembly coordinates",
+      "strip_path": null,
+      "color": "#fff2db"
+    },
+    {
+      "id": "front-side-left-01",
+      "family": "front-sides",
+      "side": "left",
+      "source": "authored on exported v15 assembly coordinates",
+      "strip_path": null,
+      "color": "#fff2db"
+    },
+    {
+      "id": "front-side-left-02",
+      "family": "front-sides",
+      "side": "left",
+      "source": "authored on exported v15 assembly coordinates",
+      "strip_path": null,
+      "color": "#fff2db"
+    },
+    {
+      "id": "wing-left-01",
+      "family": "wings",
+      "side": "left",
+      "source": "authored on exported v15 assembly coordinates",
+      "strip_path": null,
+      "color": "#fff2db"
+    },
+    {
+      "id": "wing-left-02",
+      "family": "wings",
+      "side": "left",
+      "source": "authored on exported v15 assembly coordinates",
+      "strip_path": null,
+      "color": "#fff2db"
+    },
+    {
+      "id": "wing-left-03",
+      "family": "wings",
+      "side": "left",
+      "source": "authored on exported v15 assembly coordinates",
+      "strip_path": null,
+      "color": "#fff2db"
+    },
+    {
+      "id": "eye-left",
+      "family": "eyes",
+      "side": "left",
+      "source": "authored on exported v15 assembly coordinates",
+      "strip_path": null,
+      "color": "#fff2db"
+    },
+    {
+      "id": "ear-left",
+      "family": "ears",
+      "side": "left",
+      "source": "authored on exported v15 assembly coordinates",
+      "strip_path": null,
+      "color": "#ffc75f"
+    },
+    {
+      "id": "watcher-left",
+      "family": "rear-watchers",
+      "side": "left",
+      "source": "authored on exported v15 assembly coordinates",
+      "strip_path": null,
+      "color": "#90d7e6"
+    },
+    {
+      "id": "front-right-01",
+      "family": "front",
+      "side": "right",
+      "source": "authored on exported v15 assembly coordinates",
+      "strip_path": null,
+      "color": "#fff2db"
+    },
+    {
+      "id": "front-right-02",
+      "family": "front",
+      "side": "right",
+      "source": "authored on exported v15 assembly coordinates",
+      "strip_path": null,
+      "color": "#fff2db"
+    },
+    {
+      "id": "front-right-03",
+      "family": "front",
+      "side": "right",
+      "source": "authored on exported v15 assembly coordinates",
+      "strip_path": null,
+      "color": "#fff2db"
+    },
+    {
+      "id": "front-side-right-01",
+      "family": "front-sides",
+      "side": "right",
+      "source": "authored on exported v15 assembly coordinates",
+      "strip_path": null,
+      "color": "#fff2db"
+    },
+    {
+      "id": "front-side-right-02",
+      "family": "front-sides",
+      "side": "right",
+      "source": "authored on exported v15 assembly coordinates",
+      "strip_path": null,
+      "color": "#fff2db"
+    },
+    {
+      "id": "wing-right-01",
+      "family": "wings",
+      "side": "right",
+      "source": "authored on exported v15 assembly coordinates",
+      "strip_path": null,
+      "color": "#fff2db"
+    },
+    {
+      "id": "wing-right-02",
+      "family": "wings",
+      "side": "right",
+      "source": "authored on exported v15 assembly coordinates",
+      "strip_path": null,
+      "color": "#fff2db"
+    },
+    {
+      "id": "wing-right-03",
+      "family": "wings",
+      "side": "right",
+      "source": "authored on exported v15 assembly coordinates",
+      "strip_path": null,
+      "color": "#fff2db"
+    },
+    {
+      "id": "eye-right",
+      "family": "eyes",
+      "side": "right",
+      "source": "authored on exported v15 assembly coordinates",
+      "strip_path": null,
+      "color": "#fff2db"
+    },
+    {
+      "id": "ear-right",
+      "family": "ears",
+      "side": "right",
+      "source": "authored on exported v15 assembly coordinates",
+      "strip_path": null,
+      "color": "#ffc75f"
+    },
+    {
+      "id": "watcher-right",
+      "family": "rear-watchers",
+      "side": "right",
+      "source": "authored on exported v15 assembly coordinates",
+      "strip_path": null,
+      "color": "#90d7e6"
+    }
+  ]
+}

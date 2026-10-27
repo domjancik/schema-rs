@@ -1,0 +1,354 @@
+[
+  {
+    "fixture": "front-left-01",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-left-02",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-left-03",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-side-left-01",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-side-left-02",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "wing-left-01",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "wing-left-02",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "wing-left-03",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "eye-left",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "ear-left",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "watcher-left",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-right-01",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-right-02",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-right-03",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-side-right-01",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-side-right-02",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "wing-right-01",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "wing-right-02",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "wing-right-03",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "eye-right",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "ear-right",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "watcher-right",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  }
+]

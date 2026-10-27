@@ -1,0 +1,9 @@
+name: Carpushit ears-blink
+stack:
+  Modify.Value.Wave:
+    Pulse Width: 0.5
+    Shape: 4
+    in:
+    - Create.Value.LFO:
+        Period: 1.5
+        Type: 0

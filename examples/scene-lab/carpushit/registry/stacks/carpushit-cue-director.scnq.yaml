@@ -1,0 +1,171 @@
+name: Carpushit 120 second native recall - DISARMED
+stack:
+  Filter.Manual:
+    Open: false
+    in:
+    - Tool.Merge:
+        in:
+        - Assign.Content:
+            Content: carpushit-full
+            Duration: 0.8
+            Enabled:
+              Combine.Value.Boolean:
+                And/Or: false
+                in:
+                - Combine.Value.Compare:
+                    Operator: 1
+                    in:
+                    - Create.Value.LFO:
+                        Period: 120.0
+                        Type: 0
+                    - Create.Value.Constant:
+                        Value: 0.0
+                - Combine.Value.Compare:
+                    Operator: 2
+                    in:
+                    - Create.Value.LFO:
+                        Period: 120.0
+                        Type: 0
+                    - Create.Value.Constant:
+                        Value: 0.2
+            Group: all
+            Transition: Transition.Fade
+        - Assign.Content:
+            Content: carpushit-slow-pulse
+            Duration: 1.2
+            Enabled:
+              Combine.Value.Boolean:
+                And/Or: false
+                in:
+                - Combine.Value.Compare:
+                    Operator: 1
+                    in:
+                    - Create.Value.LFO:
+                        Period: 120.0
+                        Type: 0
+                    - Create.Value.Constant:
+                        Value: 0.2
+                - Combine.Value.Compare:
+                    Operator: 2
+                    in:
+                    - Create.Value.LFO:
+                        Period: 120.0
+                        Type: 0
+                    - Create.Value.Constant:
+                        Value: 0.4
+            Group: all
+            Transition: Transition.Fade
+        - Assign.Content:
+            Content: carpushit-alternate
+            Duration: 1.2
+            Enabled:
+              Combine.Value.Boolean:
+                And/Or: false
+                in:
+                - Combine.Value.Compare:
+                    Operator: 1
+                    in:
+                    - Create.Value.LFO:
+                        Period: 120.0
+                        Type: 0
+                    - Create.Value.Constant:
+                        Value: 0.4
+                - Combine.Value.Compare:
+                    Operator: 2
+                    in:
+                    - Create.Value.LFO:
+                        Period: 120.0
+                        Type: 0
+                    - Create.Value.Constant:
+                        Value: 0.6
+            Group: all
+            Transition: Transition.Fade
+        - Assign.Content:
+            Content: carpushit-chase
+            Duration: 0.8
+            Enabled:
+              Combine.Value.Boolean:
+                And/Or: false
+                in:
+                - Combine.Value.Compare:
+                    Operator: 1
+                    in:
+                    - Create.Value.LFO:
+                        Period: 120.0
+                        Type: 0
+                    - Create.Value.Constant:
+                        Value: 0.6
+                - Combine.Value.Compare:
+                    Operator: 2
+                    in:
+                    - Create.Value.LFO:
+                        Period: 120.0
+                        Type: 0
+                    - Create.Value.Constant:
+                        Value: 0.8
+            Group: all
+            Transition: Transition.Fade
+        - Assign.Content:
+            Content: carpushit-twinkle
+            Duration: 1.0
+            Enabled:
+              Combine.Value.Boolean:
+                And/Or: false
+                in:
+                - Combine.Value.Compare:
+                    Operator: 1
+                    in:
+                    - Create.Value.LFO:
+                        Period: 120.0
+                        Type: 0
+                    - Create.Value.Constant:
+                        Value: 0.8
+                - Combine.Value.Compare:
+                    Operator: 2
+                    in:
+                    - Create.Value.LFO:
+                        Period: 120.0
+                        Type: 0
+                    - Create.Value.Constant:
+                        Value: 1.0
+            Group: outside
+            Transition: Transition.Fade
+        - Assign.Content:
+            Content: carpushit-slow-pulse
+            Duration: 1.0
+            Enabled:
+              Combine.Value.Boolean:
+                And/Or: false
+                in:
+                - Combine.Value.Compare:
+                    Operator: 1
+                    in:
+                    - Create.Value.LFO:
+                        Period: 120.0
+                        Type: 0
+                    - Create.Value.Constant:
+                        Value: 0.8
+                - Combine.Value.Compare:
+                    Operator: 2
+                    in:
+                    - Create.Value.LFO:
+                        Period: 120.0
+                        Type: 0
+                    - Create.Value.Constant:
+                        Value: 1.0
+            Group: bulbs
+            Transition: Transition.Fade
+        - Assign.Content:
+            Content: carpushit-twinkle-off
+            Duration: 0.8
+            Enabled:
+              Combine.Value.Compare:
+                Operator: 2
+                in:
+                - Create.Value.LFO:
+                    Period: 120.0
+                    Type: 0
+                - Create.Value.Constant:
+                    Value: 0.2
+            Group: outside
+            Transition: Transition.Fade

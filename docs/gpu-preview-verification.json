@@ -1,0 +1,34 @@
+{
+  "source_commit": "337234a2dd36",
+  "windows_release": {
+    "available": true,
+    "version": "0.1.0-preview",
+    "commit": "337234a2dd36",
+    "sha256": "debada14f8e2bf4dfe72184d43b49c202f88ab5e06e016231a7a2d43b11ccdd5",
+    "bytes": 6507769,
+    "filename": "Schema-s-Windows-x64.zip"
+  },
+  "geometry_sha256": "26724b97b48a81d3530f22d80b13e5a873f8eb263be4a28ba76f787a91143b48",
+  "geometry_triangles": 58533,
+  "fixtures": 38,
+  "backends": [
+    "WebGPU (native Chrome)",
+    "WebGL2 (software and native Chrome)"
+  ],
+  "checks": [
+    "capture adapter and immutability",
+    "point/plane/spot emission",
+    "SSGI/volumetrics/temporal AA shader paths",
+    "read-only Carpushit reference",
+    "explicit revisioned load (intercepted in browser test)",
+    "GLB import failure recovery",
+    "closed-view lifecycle",
+    "limited-float-target basic lighting",
+    "lost WebGL context reopening",
+    "Studio and schemaboy viewport integration",
+    "extracted Windows executable GPU rendering",
+    "Pi asset/hash/project/undo/redo/OLA validation"
+  ],
+  "hardware_output_tested": false,
+  "physical_optics": false
+}

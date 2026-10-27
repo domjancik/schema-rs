@@ -1,0 +1,75 @@
+{
+  "schema_version": 2,
+  "evidence_settings_version": 2,
+  "studio": {
+    "presentation": "dark",
+    "floor_color": [
+      0.009,
+      0.012,
+      0.018,
+      1.0
+    ],
+    "light_powers": [
+      12312.796112485012,
+      4925.118444994005,
+      18469.194168727518
+    ],
+    "camera_distance": 12.760749530792236,
+    "ortho_scale": 8.044820356369017,
+    "floor_size": 1109.6303939819336,
+    "floor_offset": 0.033288911819458006,
+    "clip_start": 0.0055481519699096685,
+    "clip_end": 5548.151969909668
+  },
+  "requested_presentation": "dark",
+  "subject_luminance_hint": 0.5161525472992515,
+  "render_engine": "BLENDER_EEVEE",
+  "view_transform": "AgX",
+  "exposure": 0.0,
+  "input": "C:\\Users\\magne\\dev\\schema-rs\\examples\\scene-lab\\carpushit\\assets\\carpushit-preview.glb",
+  "blender_version": "5.2.1 LTS",
+  "resolution": 384,
+  "requested_views": [
+    "perspective",
+    "front",
+    "back",
+    "left",
+    "right",
+    "top"
+  ],
+  "evidence_scope": "full_multiview",
+  "focus_objects": [],
+  "geometry_hidden_for_focus": false,
+  "underside_floor_hidden": false,
+  "material_mode": "source",
+  "hidden_objects": [],
+  "head_texture": null,
+  "bounds": {
+    "min": [
+      -2.773586,
+      -2.264062,
+      0.005647
+    ],
+    "max": [
+      2.774566,
+      2.222266,
+      2.659388
+    ],
+    "dimensions": [
+      5.548152,
+      4.486328,
+      2.653741
+    ]
+  },
+  "views": [
+    "C:\\Users\\magne\\dev\\schema-rs\\docs\\scene-lab\\evidence\\carpushit\\geometry-views\\perspective.png",
+    "C:\\Users\\magne\\dev\\schema-rs\\docs\\scene-lab\\evidence\\carpushit\\geometry-views\\front.png",
+    "C:\\Users\\magne\\dev\\schema-rs\\docs\\scene-lab\\evidence\\carpushit\\geometry-views\\back.png",
+    "C:\\Users\\magne\\dev\\schema-rs\\docs\\scene-lab\\evidence\\carpushit\\geometry-views\\left.png",
+    "C:\\Users\\magne\\dev\\schema-rs\\docs\\scene-lab\\evidence\\carpushit\\geometry-views\\right.png",
+    "C:\\Users\\magne\\dev\\schema-rs\\docs\\scene-lab\\evidence\\carpushit\\geometry-views\\top.png"
+  ],
+  "contact_sheet": "C:\\Users\\magne\\dev\\schema-rs\\docs\\scene-lab\\evidence\\carpushit\\geometry-views\\contact_sheet.png",
+  "animation_frames": [],
+  "animation_contact_sheet": null
+}

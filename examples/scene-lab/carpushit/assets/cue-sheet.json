@@ -1,0 +1,64 @@
+{
+  "implementation": "native Assign.Content enabled by LFO/comparison drivers; no custom project field",
+  "clock": "global engine animation seconds modulo120; enabling joins current phase",
+  "loop_seconds": 120,
+  "default_armed": false,
+  "cue_windows": [
+    {
+      "id": "open",
+      "at_seconds": 0,
+      "end_seconds": 24,
+      "content_id": "carpushit-full",
+      "group": "all",
+      "transition": "Transition.Fade",
+      "duration": 0.8
+    },
+    {
+      "id": "breathe",
+      "at_seconds": 24,
+      "end_seconds": 48,
+      "content_id": "carpushit-slow-pulse",
+      "group": "all",
+      "transition": "Transition.Fade",
+      "duration": 1.2
+    },
+    {
+      "id": "answer",
+      "at_seconds": 48,
+      "end_seconds": 72,
+      "content_id": "carpushit-alternate",
+      "group": "all",
+      "transition": "Transition.Fade",
+      "duration": 1.2
+    },
+    {
+      "id": "travel",
+      "at_seconds": 72,
+      "end_seconds": 96,
+      "content_id": "carpushit-chase",
+      "group": "all",
+      "transition": "Transition.Fade",
+      "duration": 0.8
+    },
+    {
+      "id": "outside-stars",
+      "at_seconds": 96,
+      "end_seconds": 120,
+      "content_id": "carpushit-twinkle",
+      "group": "outside",
+      "transition": "Transition.Fade",
+      "duration": 1.0
+    },
+    {
+      "id": "inside-breathe",
+      "at_seconds": 96,
+      "end_seconds": 120,
+      "content_id": "carpushit-slow-pulse",
+      "group": "bulbs",
+      "transition": "Transition.Fade",
+      "duration": 1.0
+    }
+  ],
+  "reset_overlay": "carpushit-twinkle-off on outside during first24 seconds",
+  "ui_selector": "pending implementation; current Apply dialog accepts stored content name/group"
+}

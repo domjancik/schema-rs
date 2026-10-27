@@ -1,0 +1,777 @@
+{
+  "version": 1,
+  "read_only_reference": true,
+  "name": "FULL / bulbs127cap",
+  "geometry": "carpushit-preview.glb",
+  "fixture_project": "../carpushit.project.json",
+  "render_sources": "preview-lights.json",
+  "snapshot_semantics": "Static representative software capture. Selecting this asset must not issue engine commands or load/enable project/output. Live preview must use published engine snapshots,never evaluate programs in UI.",
+  "output_enabled": false,
+  "director_armed": false,
+  "fixtures": [
+    {
+      "fixture_id": "bulb-left-01",
+      "position_m": [
+        -0.55,
+        1.35,
+        -0.65
+      ],
+      "groups": [
+        "all",
+        "bulbs",
+        "left",
+        "bulbs-left",
+        "interior",
+        "pair-bulb-01"
+      ],
+      "color_srgb": "#ffd19a",
+      "encoded_intensity": 0.4980392156862745,
+      "captured_byte": 127,
+      "universe": 0,
+      "address_1_based": 1
+    },
+    {
+      "fixture_id": "bulb-left-02",
+      "position_m": [
+        -0.55,
+        1.15,
+        -0.32
+      ],
+      "groups": [
+        "all",
+        "bulbs",
+        "left",
+        "bulbs-left",
+        "interior",
+        "pair-bulb-02"
+      ],
+      "color_srgb": "#ffd19a",
+      "encoded_intensity": 0.4980392156862745,
+      "captured_byte": 127,
+      "universe": 0,
+      "address_1_based": 2
+    },
+    {
+      "fixture_id": "bulb-left-03",
+      "position_m": [
+        -0.55,
+        1.45,
+        0.02
+      ],
+      "groups": [
+        "all",
+        "bulbs",
+        "left",
+        "bulbs-left",
+        "interior",
+        "pair-bulb-03"
+      ],
+      "color_srgb": "#ffd19a",
+      "encoded_intensity": 0.4980392156862745,
+      "captured_byte": 127,
+      "universe": 0,
+      "address_1_based": 3
+    },
+    {
+      "fixture_id": "bulb-left-04",
+      "position_m": [
+        -0.55,
+        1.2,
+        0.36
+      ],
+      "groups": [
+        "all",
+        "bulbs",
+        "left",
+        "bulbs-left",
+        "interior",
+        "pair-bulb-04"
+      ],
+      "color_srgb": "#ffd19a",
+      "encoded_intensity": 0.4980392156862745,
+      "captured_byte": 127,
+      "universe": 0,
+      "address_1_based": 4
+    },
+    {
+      "fixture_id": "bulb-left-05",
+      "position_m": [
+        -0.55,
+        1.35,
+        0.7
+      ],
+      "groups": [
+        "all",
+        "bulbs",
+        "left",
+        "bulbs-left",
+        "interior",
+        "pair-bulb-05"
+      ],
+      "color_srgb": "#ffd19a",
+      "encoded_intensity": 0.4980392156862745,
+      "captured_byte": 127,
+      "universe": 0,
+      "address_1_based": 5
+    },
+    {
+      "fixture_id": "bulb-right-01",
+      "position_m": [
+        0.55,
+        1.35,
+        -0.65
+      ],
+      "groups": [
+        "all",
+        "bulbs",
+        "right",
+        "bulbs-right",
+        "interior",
+        "pair-bulb-01"
+      ],
+      "color_srgb": "#ffd19a",
+      "encoded_intensity": 0.4980392156862745,
+      "captured_byte": 127,
+      "universe": 0,
+      "address_1_based": 6
+    },
+    {
+      "fixture_id": "bulb-right-02",
+      "position_m": [
+        0.55,
+        1.15,
+        -0.32
+      ],
+      "groups": [
+        "all",
+        "bulbs",
+        "right",
+        "bulbs-right",
+        "interior",
+        "pair-bulb-02"
+      ],
+      "color_srgb": "#ffd19a",
+      "encoded_intensity": 0.4980392156862745,
+      "captured_byte": 127,
+      "universe": 0,
+      "address_1_based": 7
+    },
+    {
+      "fixture_id": "bulb-right-03",
+      "position_m": [
+        0.55,
+        1.45,
+        0.02
+      ],
+      "groups": [
+        "all",
+        "bulbs",
+        "right",
+        "bulbs-right",
+        "interior",
+        "pair-bulb-03"
+      ],
+      "color_srgb": "#ffd19a",
+      "encoded_intensity": 0.4980392156862745,
+      "captured_byte": 127,
+      "universe": 0,
+      "address_1_based": 8
+    },
+    {
+      "fixture_id": "bulb-right-04",
+      "position_m": [
+        0.55,
+        1.2,
+        0.36
+      ],
+      "groups": [
+        "all",
+        "bulbs",
+        "right",
+        "bulbs-right",
+        "interior",
+        "pair-bulb-04"
+      ],
+      "color_srgb": "#ffd19a",
+      "encoded_intensity": 0.4980392156862745,
+      "captured_byte": 127,
+      "universe": 0,
+      "address_1_based": 9
+    },
+    {
+      "fixture_id": "bulb-right-05",
+      "position_m": [
+        0.55,
+        1.35,
+        0.7
+      ],
+      "groups": [
+        "all",
+        "bulbs",
+        "right",
+        "bulbs-right",
+        "interior",
+        "pair-bulb-05"
+      ],
+      "color_srgb": "#ffd19a",
+      "encoded_intensity": 0.4980392156862745,
+      "captured_byte": 127,
+      "universe": 0,
+      "address_1_based": 10
+    },
+    {
+      "fixture_id": "uv-left-rail",
+      "position_m": [
+        -0.67,
+        1.9914,
+        0.0
+      ],
+      "groups": [
+        "all",
+        "roof-uv",
+        "left",
+        "interior"
+      ],
+      "color_srgb": "#862bff",
+      "encoded_intensity": 1.0,
+      "captured_byte": 255,
+      "universe": 0,
+      "address_1_based": 11
+    },
+    {
+      "fixture_id": "uv-right-rail",
+      "position_m": [
+        0.67,
+        1.9914,
+        0.0
+      ],
+      "groups": [
+        "all",
+        "roof-uv",
+        "right",
+        "interior"
+      ],
+      "color_srgb": "#862bff",
+      "encoded_intensity": 1.0,
+      "captured_byte": 255,
+      "universe": 0,
+      "address_1_based": 12
+    },
+    {
+      "fixture_id": "uv-roof-spine",
+      "position_m": [
+        0.0,
+        2.1301,
+        0.0
+      ],
+      "groups": [
+        "all",
+        "roof-uv",
+        "centre",
+        "interior"
+      ],
+      "color_srgb": "#862bff",
+      "encoded_intensity": 1.0,
+      "captured_byte": 255,
+      "universe": 0,
+      "address_1_based": 13
+    },
+    {
+      "fixture_id": "uv-cross-01",
+      "position_m": [
+        0.0,
+        2.276,
+        -0.6
+      ],
+      "groups": [
+        "all",
+        "roof-uv",
+        "centre",
+        "interior"
+      ],
+      "color_srgb": "#862bff",
+      "encoded_intensity": 1.0,
+      "captured_byte": 255,
+      "universe": 0,
+      "address_1_based": 14
+    },
+    {
+      "fixture_id": "uv-cross-02",
+      "position_m": [
+        0.0,
+        2.1301,
+        0.0
+      ],
+      "groups": [
+        "all",
+        "roof-uv",
+        "centre",
+        "interior"
+      ],
+      "color_srgb": "#862bff",
+      "encoded_intensity": 1.0,
+      "captured_byte": 255,
+      "universe": 0,
+      "address_1_based": 15
+    },
+    {
+      "fixture_id": "uv-cross-03",
+      "position_m": [
+        0.0,
+        1.9241,
+        0.52
+      ],
+      "groups": [
+        "all",
+        "roof-uv",
+        "centre",
+        "interior"
+      ],
+      "color_srgb": "#862bff",
+      "encoded_intensity": 1.0,
+      "captured_byte": 255,
+      "universe": 0,
+      "address_1_based": 16
+    },
+    {
+      "fixture_id": "front-left-01",
+      "position_m": [
+        -0.38,
+        0.95,
+        -1.96
+      ],
+      "groups": [
+        "all",
+        "front",
+        "left",
+        "outside",
+        "pair-front-01"
+      ],
+      "color_srgb": "#fff2db",
+      "encoded_intensity": 1.0,
+      "captured_byte": 255,
+      "universe": 0,
+      "address_1_based": 17
+    },
+    {
+      "fixture_id": "front-left-02",
+      "position_m": [
+        -0.8,
+        1.28,
+        -1.86
+      ],
+      "groups": [
+        "all",
+        "front",
+        "left",
+        "outside",
+        "pair-front-02"
+      ],
+      "color_srgb": "#fff2db",
+      "encoded_intensity": 1.0,
+      "captured_byte": 255,
+      "universe": 0,
+      "address_1_based": 18
+    },
+    {
+      "fixture_id": "front-left-03",
+      "position_m": [
+        -1.2,
+        1.55,
+        -1.72
+      ],
+      "groups": [
+        "all",
+        "front",
+        "left",
+        "outside",
+        "pair-front-03"
+      ],
+      "color_srgb": "#fff2db",
+      "encoded_intensity": 1.0,
+      "captured_byte": 255,
+      "universe": 0,
+      "address_1_based": 19
+    },
+    {
+      "fixture_id": "front-side-left-01",
+      "position_m": [
+        -1.17,
+        1.5,
+        -1.25
+      ],
+      "groups": [
+        "all",
+        "front-sides",
+        "left",
+        "outside",
+        "pair-front-side-01"
+      ],
+      "color_srgb": "#fff2db",
+      "encoded_intensity": 1.0,
+      "captured_byte": 255,
+      "universe": 0,
+      "address_1_based": 20
+    },
+    {
+      "fixture_id": "front-side-left-02",
+      "position_m": [
+        -1.2,
+        1.78,
+        -0.7
+      ],
+      "groups": [
+        "all",
+        "front-sides",
+        "left",
+        "outside",
+        "pair-front-side-02"
+      ],
+      "color_srgb": "#fff2db",
+      "encoded_intensity": 1.0,
+      "captured_byte": 255,
+      "universe": 0,
+      "address_1_based": 21
+    },
+    {
+      "fixture_id": "wing-left-01",
+      "position_m": [
+        -1.15,
+        2.72,
+        -0.62
+      ],
+      "groups": [
+        "all",
+        "wings",
+        "left",
+        "outside",
+        "pair-wing-01"
+      ],
+      "color_srgb": "#fff2db",
+      "encoded_intensity": 1.0,
+      "captured_byte": 255,
+      "universe": 0,
+      "address_1_based": 22
+    },
+    {
+      "fixture_id": "wing-left-02",
+      "position_m": [
+        -1.72,
+        2.78,
+        -0.26
+      ],
+      "groups": [
+        "all",
+        "wings",
+        "left",
+        "outside",
+        "pair-wing-02"
+      ],
+      "color_srgb": "#fff2db",
+      "encoded_intensity": 1.0,
+      "captured_byte": 255,
+      "universe": 0,
+      "address_1_based": 23
+    },
+    {
+      "fixture_id": "wing-left-03",
+      "position_m": [
+        -2.35,
+        2.7,
+        0.18
+      ],
+      "groups": [
+        "all",
+        "wings",
+        "left",
+        "outside",
+        "pair-wing-03"
+      ],
+      "color_srgb": "#fff2db",
+      "encoded_intensity": 1.0,
+      "captured_byte": 255,
+      "universe": 0,
+      "address_1_based": 24
+    },
+    {
+      "fixture_id": "eye-left",
+      "position_m": [
+        -0.6563,
+        1.7615,
+        -1.43
+      ],
+      "groups": [
+        "all",
+        "eyes",
+        "left",
+        "outside",
+        "pair-eyes"
+      ],
+      "color_srgb": "#fff2db",
+      "encoded_intensity": 1.0,
+      "captured_byte": 255,
+      "universe": 0,
+      "address_1_based": 25
+    },
+    {
+      "fixture_id": "ear-left",
+      "position_m": [
+        -1.02,
+        2.1,
+        -0.64
+      ],
+      "groups": [
+        "all",
+        "ears",
+        "left",
+        "outside",
+        "pair-ears"
+      ],
+      "color_srgb": "#ffc75f",
+      "encoded_intensity": 1.0,
+      "captured_byte": 255,
+      "universe": 0,
+      "address_1_based": 26
+    },
+    {
+      "fixture_id": "watcher-left",
+      "position_m": [
+        -0.72,
+        1.25,
+        1.72
+      ],
+      "groups": [
+        "all",
+        "rear-watchers",
+        "left",
+        "outside",
+        "pair-watchers"
+      ],
+      "color_srgb": "#90d7e6",
+      "encoded_intensity": 1.0,
+      "captured_byte": 255,
+      "universe": 0,
+      "address_1_based": 27
+    },
+    {
+      "fixture_id": "front-right-01",
+      "position_m": [
+        0.38,
+        0.95,
+        -1.96
+      ],
+      "groups": [
+        "all",
+        "front",
+        "right",
+        "outside",
+        "pair-front-01"
+      ],
+      "color_srgb": "#fff2db",
+      "encoded_intensity": 1.0,
+      "captured_byte": 255,
+      "universe": 0,
+      "address_1_based": 28
+    },
+    {
+      "fixture_id": "front-right-02",
+      "position_m": [
+        0.8,
+        1.28,
+        -1.86
+      ],
+      "groups": [
+        "all",
+        "front",
+        "right",
+        "outside",
+        "pair-front-02"
+      ],
+      "color_srgb": "#fff2db",
+      "encoded_intensity": 1.0,
+      "captured_byte": 255,
+      "universe": 0,
+      "address_1_based": 29
+    },
+    {
+      "fixture_id": "front-right-03",
+      "position_m": [
+        1.2,
+        1.55,
+        -1.72
+      ],
+      "groups": [
+        "all",
+        "front",
+        "right",
+        "outside",
+        "pair-front-03"
+      ],
+      "color_srgb": "#fff2db",
+      "encoded_intensity": 1.0,
+      "captured_byte": 255,
+      "universe": 0,
+      "address_1_based": 30
+    },
+    {
+      "fixture_id": "front-side-right-01",
+      "position_m": [
+        1.17,
+        1.5,
+        -1.25
+      ],
+      "groups": [
+        "all",
+        "front-sides",
+        "right",
+        "outside",
+        "pair-front-side-01"
+      ],
+      "color_srgb": "#fff2db",
+      "encoded_intensity": 1.0,
+      "captured_byte": 255,
+      "universe": 0,
+      "address_1_based": 31
+    },
+    {
+      "fixture_id": "front-side-right-02",
+      "position_m": [
+        1.2,
+        1.78,
+        -0.7
+      ],
+      "groups": [
+        "all",
+        "front-sides",
+        "right",
+        "outside",
+        "pair-front-side-02"
+      ],
+      "color_srgb": "#fff2db",
+      "encoded_intensity": 1.0,
+      "captured_byte": 255,
+      "universe": 0,
+      "address_1_based": 32
+    },
+    {
+      "fixture_id": "wing-right-01",
+      "position_m": [
+        1.15,
+        2.72,
+        -0.62
+      ],
+      "groups": [
+        "all",
+        "wings",
+        "right",
+        "outside",
+        "pair-wing-01"
+      ],
+      "color_srgb": "#fff2db",
+      "encoded_intensity": 1.0,
+      "captured_byte": 255,
+      "universe": 0,
+      "address_1_based": 33
+    },
+    {
+      "fixture_id": "wing-right-02",
+      "position_m": [
+        1.72,
+        2.78,
+        -0.26
+      ],
+      "groups": [
+        "all",
+        "wings",
+        "right",
+        "outside",
+        "pair-wing-02"
+      ],
+      "color_srgb": "#fff2db",
+      "encoded_intensity": 1.0,
+      "captured_byte": 255,
+      "universe": 0,
+      "address_1_based": 34
+    },
+    {
+      "fixture_id": "wing-right-03",
+      "position_m": [
+        2.35,
+        2.7,
+        0.18
+      ],
+      "groups": [
+        "all",
+        "wings",
+        "right",
+        "outside",
+        "pair-wing-03"
+      ],
+      "color_srgb": "#fff2db",
+      "encoded_intensity": 1.0,
+      "captured_byte": 255,
+      "universe": 0,
+      "address_1_based": 35
+    },
+    {
+      "fixture_id": "eye-right",
+      "position_m": [
+        0.6563,
+        1.7615,
+        -1.43
+      ],
+      "groups": [
+        "all",
+        "eyes",
+        "right",
+        "outside",
+        "pair-eyes"
+      ],
+      "color_srgb": "#fff2db",
+      "encoded_intensity": 1.0,
+      "captured_byte": 255,
+      "universe": 0,
+      "address_1_based": 36
+    },
+    {
+      "fixture_id": "ear-right",
+      "position_m": [
+        1.02,
+        2.1,
+        -0.64
+      ],
+      "groups": [
+        "all",
+        "ears",
+        "right",
+        "outside",
+        "pair-ears"
+      ],
+      "color_srgb": "#ffc75f",
+      "encoded_intensity": 1.0,
+      "captured_byte": 255,
+      "universe": 0,
+      "address_1_based": 37
+    },
+    {
+      "fixture_id": "watcher-right",
+      "position_m": [
+        0.72,
+        1.25,
+        1.72
+      ],
+      "groups": [
+        "all",
+        "rear-watchers",
+        "right",
+        "outside",
+        "pair-watchers"
+      ],
+      "color_srgb": "#90d7e6",
+      "encoded_intensity": 1.0,
+      "captured_byte": 255,
+      "universe": 0,
+      "address_1_based": 38
+    }
+  ]
+}

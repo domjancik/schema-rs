@@ -1,0 +1,762 @@
+{
+  "probe": "native director cloned for6second loop and zero fades; authored version120second loop/defaultdisarmed",
+  "windows_observed": {
+    "3": {
+      "time": 154.6444336999998,
+      "phase": 4.644433699999809,
+      "window": 3,
+      "revision": 45,
+      "left_bulb": "Carpushit chase",
+      "right_bulb": "Carpushit chase",
+      "outside_primary": "Carpushit chase",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    "4": {
+      "time": 155.77161149999978,
+      "phase": 5.7716114999997785,
+      "window": 4,
+      "revision": 46,
+      "left_bulb": "Carpushit slow-pulse",
+      "right_bulb": "Carpushit slow-pulse",
+      "outside_primary": "Carpushit off",
+      "outside_overlay": "Carpushit outside twinkle"
+    },
+    "0": {
+      "time": 157.02485299999967,
+      "phase": 1.0248529999996663,
+      "window": 0,
+      "revision": 47,
+      "left_bulb": "Carpushit full",
+      "right_bulb": "Carpushit full",
+      "outside_primary": "Carpushit full",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    "1": {
+      "time": 152.24252329999993,
+      "phase": 2.242523299999931,
+      "window": 1,
+      "revision": 43,
+      "left_bulb": "Carpushit slow-pulse",
+      "right_bulb": "Carpushit slow-pulse",
+      "outside_primary": "Carpushit slow-pulse",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    "2": {
+      "time": 153.42006599999988,
+      "phase": 3.4200659999998777,
+      "window": 2,
+      "revision": 44,
+      "left_bulb": "Carpushit alternate",
+      "right_bulb": "Carpushit alternate right",
+      "outside_primary": "Carpushit alternate",
+      "outside_overlay": "Carpushit twinkle off"
+    }
+  },
+  "sample_frames": [
+    {
+      "time": 148.61316329999983,
+      "phase": 4.613163299999826,
+      "window": 3,
+      "revision": 40,
+      "left_bulb": "Carpushit chase",
+      "right_bulb": "Carpushit chase",
+      "outside_primary": "Carpushit chase",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 148.97684479999987,
+      "phase": 4.976844799999867,
+      "window": 4,
+      "revision": 41,
+      "left_bulb": "Carpushit slow-pulse",
+      "right_bulb": "Carpushit slow-pulse",
+      "outside_primary": "Carpushit off",
+      "outside_overlay": "Carpushit outside twinkle"
+    },
+    {
+      "time": 149.06002529999986,
+      "phase": 5.0600252999998645,
+      "window": 4,
+      "revision": 41,
+      "left_bulb": "Carpushit slow-pulse",
+      "right_bulb": "Carpushit slow-pulse",
+      "outside_primary": "Carpushit off",
+      "outside_overlay": "Carpushit outside twinkle"
+    },
+    {
+      "time": 149.16013979999985,
+      "phase": 5.160139799999854,
+      "window": 4,
+      "revision": 41,
+      "left_bulb": "Carpushit slow-pulse",
+      "right_bulb": "Carpushit slow-pulse",
+      "outside_primary": "Carpushit off",
+      "outside_overlay": "Carpushit outside twinkle"
+    },
+    {
+      "time": 149.24345699999986,
+      "phase": 5.243456999999864,
+      "window": 4,
+      "revision": 41,
+      "left_bulb": "Carpushit slow-pulse",
+      "right_bulb": "Carpushit slow-pulse",
+      "outside_primary": "Carpushit off",
+      "outside_overlay": "Carpushit outside twinkle"
+    },
+    {
+      "time": 149.32708669999988,
+      "phase": 5.327086699999882,
+      "window": 4,
+      "revision": 41,
+      "left_bulb": "Carpushit slow-pulse",
+      "right_bulb": "Carpushit slow-pulse",
+      "outside_primary": "Carpushit off",
+      "outside_overlay": "Carpushit outside twinkle"
+    },
+    {
+      "time": 149.42708229999985,
+      "phase": 5.427082299999853,
+      "window": 4,
+      "revision": 41,
+      "left_bulb": "Carpushit slow-pulse",
+      "right_bulb": "Carpushit slow-pulse",
+      "outside_primary": "Carpushit off",
+      "outside_overlay": "Carpushit outside twinkle"
+    },
+    {
+      "time": 149.51033929999986,
+      "phase": 5.510339299999856,
+      "window": 4,
+      "revision": 41,
+      "left_bulb": "Carpushit slow-pulse",
+      "right_bulb": "Carpushit slow-pulse",
+      "outside_primary": "Carpushit off",
+      "outside_overlay": "Carpushit outside twinkle"
+    },
+    {
+      "time": 149.61002459999986,
+      "phase": 5.610024599999861,
+      "window": 4,
+      "revision": 41,
+      "left_bulb": "Carpushit slow-pulse",
+      "right_bulb": "Carpushit slow-pulse",
+      "outside_primary": "Carpushit off",
+      "outside_overlay": "Carpushit outside twinkle"
+    },
+    {
+      "time": 149.69360889999984,
+      "phase": 5.693608899999845,
+      "window": 4,
+      "revision": 41,
+      "left_bulb": "Carpushit slow-pulse",
+      "right_bulb": "Carpushit slow-pulse",
+      "outside_primary": "Carpushit off",
+      "outside_overlay": "Carpushit outside twinkle"
+    },
+    {
+      "time": 149.79404679999985,
+      "phase": 5.7940467999998475,
+      "window": 4,
+      "revision": 41,
+      "left_bulb": "Carpushit slow-pulse",
+      "right_bulb": "Carpushit slow-pulse",
+      "outside_primary": "Carpushit off",
+      "outside_overlay": "Carpushit outside twinkle"
+    },
+    {
+      "time": 150.15137299999986,
+      "phase": 0.15137299999986453,
+      "window": 0,
+      "revision": 42,
+      "left_bulb": "Carpushit full",
+      "right_bulb": "Carpushit full",
+      "outside_primary": "Carpushit full",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 150.2512144999999,
+      "phase": 0.25121449999988954,
+      "window": 0,
+      "revision": 42,
+      "left_bulb": "Carpushit full",
+      "right_bulb": "Carpushit full",
+      "outside_primary": "Carpushit full",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 150.3347155999999,
+      "phase": 0.3347155999998961,
+      "window": 0,
+      "revision": 42,
+      "left_bulb": "Carpushit full",
+      "right_bulb": "Carpushit full",
+      "outside_primary": "Carpushit full",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 150.4178221999999,
+      "phase": 0.4178221999999039,
+      "window": 0,
+      "revision": 42,
+      "left_bulb": "Carpushit full",
+      "right_bulb": "Carpushit full",
+      "outside_primary": "Carpushit full",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 150.51811179999993,
+      "phase": 0.5181117999999287,
+      "window": 0,
+      "revision": 42,
+      "left_bulb": "Carpushit full",
+      "right_bulb": "Carpushit full",
+      "outside_primary": "Carpushit full",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 150.60107229999994,
+      "phase": 0.6010722999999416,
+      "window": 0,
+      "revision": 42,
+      "left_bulb": "Carpushit full",
+      "right_bulb": "Carpushit full",
+      "outside_primary": "Carpushit full",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 150.68465199999991,
+      "phase": 0.6846519999999146,
+      "window": 0,
+      "revision": 42,
+      "left_bulb": "Carpushit full",
+      "right_bulb": "Carpushit full",
+      "outside_primary": "Carpushit full",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 150.78474919999994,
+      "phase": 0.7847491999999363,
+      "window": 0,
+      "revision": 42,
+      "left_bulb": "Carpushit full",
+      "right_bulb": "Carpushit full",
+      "outside_primary": "Carpushit full",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 150.86783809999997,
+      "phase": 0.8678380999999717,
+      "window": 0,
+      "revision": 42,
+      "left_bulb": "Carpushit full",
+      "right_bulb": "Carpushit full",
+      "outside_primary": "Carpushit full",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 150.96956199999997,
+      "phase": 0.9695619999999678,
+      "window": 0,
+      "revision": 42,
+      "left_bulb": "Carpushit full",
+      "right_bulb": "Carpushit full",
+      "outside_primary": "Carpushit full",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 151.4093863,
+      "phase": 1.4093862999999942,
+      "window": 1,
+      "revision": 43,
+      "left_bulb": "Carpushit slow-pulse",
+      "right_bulb": "Carpushit slow-pulse",
+      "outside_primary": "Carpushit slow-pulse",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 151.50907349999997,
+      "phase": 1.509073499999971,
+      "window": 1,
+      "revision": 43,
+      "left_bulb": "Carpushit slow-pulse",
+      "right_bulb": "Carpushit slow-pulse",
+      "outside_primary": "Carpushit slow-pulse",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 151.5922369,
+      "phase": 1.592236899999989,
+      "window": 1,
+      "revision": 43,
+      "left_bulb": "Carpushit slow-pulse",
+      "right_bulb": "Carpushit slow-pulse",
+      "outside_primary": "Carpushit slow-pulse",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 151.69223649999998,
+      "phase": 1.6922364999999786,
+      "window": 1,
+      "revision": 43,
+      "left_bulb": "Carpushit slow-pulse",
+      "right_bulb": "Carpushit slow-pulse",
+      "outside_primary": "Carpushit slow-pulse",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 151.7760678,
+      "phase": 1.7760677999999928,
+      "window": 1,
+      "revision": 43,
+      "left_bulb": "Carpushit slow-pulse",
+      "right_bulb": "Carpushit slow-pulse",
+      "outside_primary": "Carpushit slow-pulse",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 151.8589449,
+      "phase": 1.8589449000000116,
+      "window": 1,
+      "revision": 43,
+      "left_bulb": "Carpushit slow-pulse",
+      "right_bulb": "Carpushit slow-pulse",
+      "outside_primary": "Carpushit slow-pulse",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 151.97589680000002,
+      "phase": 1.9758968000000152,
+      "window": 1,
+      "revision": 43,
+      "left_bulb": "Carpushit slow-pulse",
+      "right_bulb": "Carpushit slow-pulse",
+      "outside_primary": "Carpushit slow-pulse",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 152.0593085,
+      "phase": 2.059308499999986,
+      "window": 1,
+      "revision": 43,
+      "left_bulb": "Carpushit slow-pulse",
+      "right_bulb": "Carpushit slow-pulse",
+      "outside_primary": "Carpushit slow-pulse",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 152.1427067,
+      "phase": 2.142706699999991,
+      "window": 1,
+      "revision": 43,
+      "left_bulb": "Carpushit slow-pulse",
+      "right_bulb": "Carpushit slow-pulse",
+      "outside_primary": "Carpushit slow-pulse",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 152.24252329999993,
+      "phase": 2.242523299999931,
+      "window": 1,
+      "revision": 43,
+      "left_bulb": "Carpushit slow-pulse",
+      "right_bulb": "Carpushit slow-pulse",
+      "outside_primary": "Carpushit slow-pulse",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 152.6203040999999,
+      "phase": 2.620304099999913,
+      "window": 2,
+      "revision": 44,
+      "left_bulb": "Carpushit alternate",
+      "right_bulb": "Carpushit alternate right",
+      "outside_primary": "Carpushit alternate",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 152.70336419999992,
+      "phase": 2.7033641999999247,
+      "window": 2,
+      "revision": 44,
+      "left_bulb": "Carpushit alternate",
+      "right_bulb": "Carpushit alternate right",
+      "outside_primary": "Carpushit alternate",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 152.80325419999994,
+      "phase": 2.803254199999941,
+      "window": 2,
+      "revision": 44,
+      "left_bulb": "Carpushit alternate",
+      "right_bulb": "Carpushit alternate right",
+      "outside_primary": "Carpushit alternate",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 152.88687499999995,
+      "phase": 2.8868749999999466,
+      "window": 2,
+      "revision": 44,
+      "left_bulb": "Carpushit alternate",
+      "right_bulb": "Carpushit alternate right",
+      "outside_primary": "Carpushit alternate",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 152.9865575999999,
+      "phase": 2.9865575999999123,
+      "window": 2,
+      "revision": 44,
+      "left_bulb": "Carpushit alternate",
+      "right_bulb": "Carpushit alternate right",
+      "outside_primary": "Carpushit alternate",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 153.0700824999999,
+      "phase": 3.0700824999998986,
+      "window": 2,
+      "revision": 44,
+      "left_bulb": "Carpushit alternate",
+      "right_bulb": "Carpushit alternate right",
+      "outside_primary": "Carpushit alternate",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 153.15347929999987,
+      "phase": 3.153479299999873,
+      "window": 2,
+      "revision": 44,
+      "left_bulb": "Carpushit alternate",
+      "right_bulb": "Carpushit alternate right",
+      "outside_primary": "Carpushit alternate",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 153.25328009999987,
+      "phase": 3.25328009999987,
+      "window": 2,
+      "revision": 44,
+      "left_bulb": "Carpushit alternate",
+      "right_bulb": "Carpushit alternate right",
+      "outside_primary": "Carpushit alternate",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 153.33651989999987,
+      "phase": 3.336519899999871,
+      "window": 2,
+      "revision": 44,
+      "left_bulb": "Carpushit alternate",
+      "right_bulb": "Carpushit alternate right",
+      "outside_primary": "Carpushit alternate",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 153.42006599999988,
+      "phase": 3.4200659999998777,
+      "window": 2,
+      "revision": 44,
+      "left_bulb": "Carpushit alternate",
+      "right_bulb": "Carpushit alternate right",
+      "outside_primary": "Carpushit alternate",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 153.80081899999985,
+      "phase": 3.800818999999848,
+      "window": 3,
+      "revision": 45,
+      "left_bulb": "Carpushit chase",
+      "right_bulb": "Carpushit chase",
+      "outside_primary": "Carpushit chase",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 153.88407249999983,
+      "phase": 3.8840724999998315,
+      "window": 3,
+      "revision": 45,
+      "left_bulb": "Carpushit chase",
+      "right_bulb": "Carpushit chase",
+      "outside_primary": "Carpushit chase",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 153.98409679999983,
+      "phase": 3.9840967999998327,
+      "window": 3,
+      "revision": 45,
+      "left_bulb": "Carpushit chase",
+      "right_bulb": "Carpushit chase",
+      "outside_primary": "Carpushit chase",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 154.08409929999982,
+      "phase": 4.084099299999821,
+      "window": 3,
+      "revision": 45,
+      "left_bulb": "Carpushit chase",
+      "right_bulb": "Carpushit chase",
+      "outside_primary": "Carpushit chase",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 154.18429579999986,
+      "phase": 4.184295799999859,
+      "window": 3,
+      "revision": 45,
+      "left_bulb": "Carpushit chase",
+      "right_bulb": "Carpushit chase",
+      "outside_primary": "Carpushit chase",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 154.25364989999983,
+      "phase": 4.253649899999829,
+      "window": 3,
+      "revision": 45,
+      "left_bulb": "Carpushit chase",
+      "right_bulb": "Carpushit chase",
+      "outside_primary": "Carpushit chase",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 154.3777717999998,
+      "phase": 4.377771799999806,
+      "window": 3,
+      "revision": 45,
+      "left_bulb": "Carpushit chase",
+      "right_bulb": "Carpushit chase",
+      "outside_primary": "Carpushit chase",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 154.4613726999998,
+      "phase": 4.461372699999799,
+      "window": 3,
+      "revision": 45,
+      "left_bulb": "Carpushit chase",
+      "right_bulb": "Carpushit chase",
+      "outside_primary": "Carpushit chase",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 154.56117129999978,
+      "phase": 4.561171299999785,
+      "window": 3,
+      "revision": 45,
+      "left_bulb": "Carpushit chase",
+      "right_bulb": "Carpushit chase",
+      "outside_primary": "Carpushit chase",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 154.6444336999998,
+      "phase": 4.644433699999809,
+      "window": 3,
+      "revision": 45,
+      "left_bulb": "Carpushit chase",
+      "right_bulb": "Carpushit chase",
+      "outside_primary": "Carpushit chase",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 155.0212361999998,
+      "phase": 5.021236199999805,
+      "window": 4,
+      "revision": 46,
+      "left_bulb": "Carpushit slow-pulse",
+      "right_bulb": "Carpushit slow-pulse",
+      "outside_primary": "Carpushit off",
+      "outside_overlay": "Carpushit outside twinkle"
+    },
+    {
+      "time": 155.1215809999998,
+      "phase": 5.121580999999793,
+      "window": 4,
+      "revision": 46,
+      "left_bulb": "Carpushit slow-pulse",
+      "right_bulb": "Carpushit slow-pulse",
+      "outside_primary": "Carpushit off",
+      "outside_overlay": "Carpushit outside twinkle"
+    },
+    {
+      "time": 155.20536729999978,
+      "phase": 5.205367299999779,
+      "window": 4,
+      "revision": 46,
+      "left_bulb": "Carpushit slow-pulse",
+      "right_bulb": "Carpushit slow-pulse",
+      "outside_primary": "Carpushit off",
+      "outside_overlay": "Carpushit outside twinkle"
+    },
+    {
+      "time": 155.30467549999977,
+      "phase": 5.3046754999997745,
+      "window": 4,
+      "revision": 46,
+      "left_bulb": "Carpushit slow-pulse",
+      "right_bulb": "Carpushit slow-pulse",
+      "outside_primary": "Carpushit off",
+      "outside_overlay": "Carpushit outside twinkle"
+    },
+    {
+      "time": 155.40478119999975,
+      "phase": 5.404781199999746,
+      "window": 4,
+      "revision": 46,
+      "left_bulb": "Carpushit slow-pulse",
+      "right_bulb": "Carpushit slow-pulse",
+      "outside_primary": "Carpushit off",
+      "outside_overlay": "Carpushit outside twinkle"
+    },
+    {
+      "time": 155.48817589999973,
+      "phase": 5.488175899999732,
+      "window": 4,
+      "revision": 46,
+      "left_bulb": "Carpushit slow-pulse",
+      "right_bulb": "Carpushit slow-pulse",
+      "outside_primary": "Carpushit off",
+      "outside_overlay": "Carpushit outside twinkle"
+    },
+    {
+      "time": 155.58797379999976,
+      "phase": 5.587973799999759,
+      "window": 4,
+      "revision": 46,
+      "left_bulb": "Carpushit slow-pulse",
+      "right_bulb": "Carpushit slow-pulse",
+      "outside_primary": "Carpushit off",
+      "outside_overlay": "Carpushit outside twinkle"
+    },
+    {
+      "time": 155.67134799999977,
+      "phase": 5.671347999999767,
+      "window": 4,
+      "revision": 46,
+      "left_bulb": "Carpushit slow-pulse",
+      "right_bulb": "Carpushit slow-pulse",
+      "outside_primary": "Carpushit off",
+      "outside_overlay": "Carpushit outside twinkle"
+    },
+    {
+      "time": 155.77161149999978,
+      "phase": 5.7716114999997785,
+      "window": 4,
+      "revision": 46,
+      "left_bulb": "Carpushit slow-pulse",
+      "right_bulb": "Carpushit slow-pulse",
+      "outside_primary": "Carpushit off",
+      "outside_overlay": "Carpushit outside twinkle"
+    },
+    {
+      "time": 156.22515289999973,
+      "phase": 0.22515289999972765,
+      "window": 0,
+      "revision": 47,
+      "left_bulb": "Carpushit full",
+      "right_bulb": "Carpushit full",
+      "outside_primary": "Carpushit full",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 156.30816529999973,
+      "phase": 0.30816529999972886,
+      "window": 0,
+      "revision": 47,
+      "left_bulb": "Carpushit full",
+      "right_bulb": "Carpushit full",
+      "outside_primary": "Carpushit full",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 156.40838099999968,
+      "phase": 0.4083809999996788,
+      "window": 0,
+      "revision": 47,
+      "left_bulb": "Carpushit full",
+      "right_bulb": "Carpushit full",
+      "outside_primary": "Carpushit full",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 156.4915002999997,
+      "phase": 0.4915002999997,
+      "window": 0,
+      "revision": 47,
+      "left_bulb": "Carpushit full",
+      "right_bulb": "Carpushit full",
+      "outside_primary": "Carpushit full",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 156.57480609999968,
+      "phase": 0.5748060999996767,
+      "window": 0,
+      "revision": 47,
+      "left_bulb": "Carpushit full",
+      "right_bulb": "Carpushit full",
+      "outside_primary": "Carpushit full",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 156.67521169999966,
+      "phase": 0.6752116999996645,
+      "window": 0,
+      "revision": 47,
+      "left_bulb": "Carpushit full",
+      "right_bulb": "Carpushit full",
+      "outside_primary": "Carpushit full",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 156.75843789999965,
+      "phase": 0.7584378999996488,
+      "window": 0,
+      "revision": 47,
+      "left_bulb": "Carpushit full",
+      "right_bulb": "Carpushit full",
+      "outside_primary": "Carpushit full",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 156.84176849999966,
+      "phase": 0.8417684999996595,
+      "window": 0,
+      "revision": 47,
+      "left_bulb": "Carpushit full",
+      "right_bulb": "Carpushit full",
+      "outside_primary": "Carpushit full",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 156.9252165999997,
+      "phase": 0.9252165999996862,
+      "window": 0,
+      "revision": 47,
+      "left_bulb": "Carpushit full",
+      "right_bulb": "Carpushit full",
+      "outside_primary": "Carpushit full",
+      "outside_overlay": "Carpushit twinkle off"
+    },
+    {
+      "time": 157.02485299999967,
+      "phase": 1.0248529999996663,
+      "window": 0,
+      "revision": 47,
+      "left_bulb": "Carpushit full",
+      "right_bulb": "Carpushit full",
+      "outside_primary": "Carpushit full",
+      "outside_overlay": "Carpushit twinkle off"
+    }
+  ],
+  "fixture_patch_retained": true,
+  "all_compositors_retained": true,
+  "output_enabled": false,
+  "diagnostics": [],
+  "revision_conflict": "A control submitted immediately after enabling recalled content returned409; refreshed state used. This is expected optimistic concurrency."
+}

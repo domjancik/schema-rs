@@ -1,0 +1,39 @@
+id,name,x_m,height_m,z_m,universe,address,channels,maximum_byte,groups
+bulb-left-01,Left bulb 1,-0.55,1.35,-0.65,0,1,1,127,all;bulbs;left;bulbs-left;interior;pair-bulb-01
+bulb-left-02,Left bulb 2,-0.55,1.15,-0.32,0,2,1,127,all;bulbs;left;bulbs-left;interior;pair-bulb-02
+bulb-left-03,Left bulb 3,-0.55,1.45,0.02,0,3,1,127,all;bulbs;left;bulbs-left;interior;pair-bulb-03
+bulb-left-04,Left bulb 4,-0.55,1.2,0.36,0,4,1,127,all;bulbs;left;bulbs-left;interior;pair-bulb-04
+bulb-left-05,Left bulb 5,-0.55,1.35,0.7,0,5,1,127,all;bulbs;left;bulbs-left;interior;pair-bulb-05
+bulb-right-01,Right bulb 1,0.55,1.35,-0.65,0,6,1,127,all;bulbs;right;bulbs-right;interior;pair-bulb-01
+bulb-right-02,Right bulb 2,0.55,1.15,-0.32,0,7,1,127,all;bulbs;right;bulbs-right;interior;pair-bulb-02
+bulb-right-03,Right bulb 3,0.55,1.45,0.02,0,8,1,127,all;bulbs;right;bulbs-right;interior;pair-bulb-03
+bulb-right-04,Right bulb 4,0.55,1.2,0.36,0,9,1,127,all;bulbs;right;bulbs-right;interior;pair-bulb-04
+bulb-right-05,Right bulb 5,0.55,1.35,0.7,0,10,1,127,all;bulbs;right;bulbs-right;interior;pair-bulb-05
+uv-left-rail,UV left roof rail,-0.67,1.9914,0,0,11,1,255,all;roof-uv;left;interior
+uv-right-rail,UV right roof rail,0.67,1.9914,0,0,12,1,255,all;roof-uv;right;interior
+uv-roof-spine,UV roof spine,0,2.1301,0,0,13,1,255,all;roof-uv;centre;interior
+uv-cross-01,UV roof cross 1,0,2.276,-0.6,0,14,1,255,all;roof-uv;centre;interior
+uv-cross-02,UV roof cross 2,0,2.1301,0,0,15,1,255,all;roof-uv;centre;interior
+uv-cross-03,UV roof cross 3,0,1.9241,0.52,0,16,1,255,all;roof-uv;centre;interior
+front-left-01,Front left 1,-0.38,0.95,-1.96,0,17,1,255,all;front;left;outside;pair-front-01
+front-left-02,Front left 2,-0.8,1.28,-1.86,0,18,1,255,all;front;left;outside;pair-front-02
+front-left-03,Front left 3,-1.2,1.55,-1.72,0,19,1,255,all;front;left;outside;pair-front-03
+front-side-left-01,Front side left 1,-1.17,1.5,-1.25,0,20,1,255,all;front-sides;left;outside;pair-front-side-01
+front-side-left-02,Front side left 2,-1.2,1.78,-0.7,0,21,1,255,all;front-sides;left;outside;pair-front-side-02
+wing-left-01,Above wing left 1,-1.15,2.72,-0.62,0,22,1,255,all;wings;left;outside;pair-wing-01
+wing-left-02,Above wing left 2,-1.72,2.78,-0.26,0,23,1,255,all;wings;left;outside;pair-wing-02
+wing-left-03,Above wing left 3,-2.35,2.7,0.18,0,24,1,255,all;wings;left;outside;pair-wing-03
+eye-left,Left eye headlight,-0.6563,1.7615,-1.43,0,25,1,255,all;eyes;left;outside;pair-eyes
+ear-left,Left ear blinker,-1.02,2.1,-0.64,0,26,1,255,all;ears;left;outside;pair-ears
+watcher-left,Left rear watcher,-0.72,1.25,1.72,0,27,1,255,all;rear-watchers;left;outside;pair-watchers
+front-right-01,Front right 1,0.38,0.95,-1.96,0,28,1,255,all;front;right;outside;pair-front-01
+front-right-02,Front right 2,0.8,1.28,-1.86,0,29,1,255,all;front;right;outside;pair-front-02
+front-right-03,Front right 3,1.2,1.55,-1.72,0,30,1,255,all;front;right;outside;pair-front-03
+front-side-right-01,Front side right 1,1.17,1.5,-1.25,0,31,1,255,all;front-sides;right;outside;pair-front-side-01
+front-side-right-02,Front side right 2,1.2,1.78,-0.7,0,32,1,255,all;front-sides;right;outside;pair-front-side-02
+wing-right-01,Above wing right 1,1.15,2.72,-0.62,0,33,1,255,all;wings;right;outside;pair-wing-01
+wing-right-02,Above wing right 2,1.72,2.78,-0.26,0,34,1,255,all;wings;right;outside;pair-wing-02
+wing-right-03,Above wing right 3,2.35,2.7,0.18,0,35,1,255,all;wings;right;outside;pair-wing-03
+eye-right,Right eye headlight,0.6563,1.7615,-1.43,0,36,1,255,all;eyes;right;outside;pair-eyes
+ear-right,Right ear blinker,1.02,2.1,-0.64,0,37,1,255,all;ears;right;outside;pair-ears
+watcher-right,Right rear watcher,0.72,1.25,1.72,0,38,1,255,all;rear-watchers;right;outside;pair-watchers

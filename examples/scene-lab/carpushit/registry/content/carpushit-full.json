@@ -1,0 +1,610 @@
+[
+  {
+    "fixture": "bulb-left-01",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-left-02",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-left-03",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-left-04",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-left-05",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-right-01",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-right-02",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-right-03",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-right-04",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-right-05",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "uv-left-rail",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "uv-right-rail",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "uv-roof-spine",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "uv-cross-01",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "uv-cross-02",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "uv-cross-03",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-left-01",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-left-02",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-left-03",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-side-left-01",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-side-left-02",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "wing-left-01",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "wing-left-02",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "wing-left-03",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "eye-left",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "ear-left",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "watcher-left",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-right-01",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-right-02",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-right-03",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-side-right-01",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-side-right-02",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "wing-right-01",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "wing-right-02",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "wing-right-03",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "eye-right",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "ear-right",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "watcher-right",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  }
+]

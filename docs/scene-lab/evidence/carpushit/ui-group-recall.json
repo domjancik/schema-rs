@@ -1,0 +1,14 @@
+{
+  "output_enabled": false,
+  "content": "carpushit-slow-pulse",
+  "group": "bulbs-left",
+  "revision": 60,
+  "changed": [
+    "bulb-left-01",
+    "bulb-left-02",
+    "bulb-left-03",
+    "bulb-left-04",
+    "bulb-left-05"
+  ],
+  "other_fixtures": 33
+}

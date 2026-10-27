@@ -1,0 +1,9 @@
+name: Carpushit alternate
+stack:
+  Modify.Value.MapTo:
+    Maximum: 1.0
+    Minimum: 0.08
+    in:
+    - Create.Value.LFO:
+        Period: 12.0
+        Type: 2

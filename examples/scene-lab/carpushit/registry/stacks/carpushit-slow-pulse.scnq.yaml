@@ -1,0 +1,9 @@
+name: Carpushit slow-pulse
+stack:
+  Modify.Value.MapTo:
+    Maximum: 1.0
+    Minimum: 0.1
+    in:
+    - Create.Value.LFO:
+        Period: 10.0
+        Type: 2

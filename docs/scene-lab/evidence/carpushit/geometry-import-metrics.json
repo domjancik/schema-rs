@@ -1,0 +1,575 @@
+{
+  "actions": [],
+  "blender": {
+    "background": true,
+    "build_hash": "9e2066aef7ef",
+    "version": "5.2.1 LTS",
+    "version_tuple": [
+      5,
+      2,
+      1
+    ]
+  },
+  "hard_gate_pass": true,
+  "input": "C:\\Users\\magne\\dev\\schema-rs\\examples\\scene-lab\\carpushit\\assets\\carpushit-preview.glb",
+  "issues": [],
+  "material_details": [
+    {
+      "image_texture_nodes": 0,
+      "images": [],
+      "name": "lattice",
+      "node_count": 2,
+      "use_nodes": true
+    },
+    {
+      "image_texture_nodes": 0,
+      "images": [],
+      "name": "metal",
+      "node_count": 2,
+      "use_nodes": true
+    },
+    {
+      "image_texture_nodes": 0,
+      "images": [],
+      "name": "reflectors",
+      "node_count": 2,
+      "use_nodes": true
+    },
+    {
+      "image_texture_nodes": 0,
+      "images": [],
+      "name": "shell",
+      "node_count": 2,
+      "use_nodes": true
+    },
+    {
+      "image_texture_nodes": 0,
+      "images": [],
+      "name": "wing-detail",
+      "node_count": 2,
+      "use_nodes": true
+    },
+    {
+      "image_texture_nodes": 0,
+      "images": [],
+      "name": "wings",
+      "node_count": 2,
+      "use_nodes": true
+    }
+  ],
+  "materials": [
+    "lattice",
+    "metal",
+    "reflectors",
+    "shell",
+    "wing-detail",
+    "wings"
+  ],
+  "meshes": [
+    {
+      "boundary_edges": 53802,
+      "connected_components": 17934,
+      "data_name": "lattice",
+      "degenerate_faces": 0,
+      "edges": 53802,
+      "flat_polygons": 17043,
+      "invalid_vertices": 0,
+      "isolated_vertices": 0,
+      "material_slots": [
+        "lattice"
+      ],
+      "missing_material_faces": 0,
+      "modifiers": [],
+      "name": "Carpushit / lattice",
+      "non_manifold_edges": 53802,
+      "polygons": 17934,
+      "refinement_modifiers": [],
+      "shape_keys": 0,
+      "smooth_polygon_ratio": 0.049682,
+      "smooth_polygons": 891,
+      "source_polygons": 17934,
+      "source_vertices": 53802,
+      "triangles": 17934,
+      "uv_layers": 0,
+      "vertex_groups": 0,
+      "vertices": 53802,
+      "weighted_vertices": 0,
+      "wire_edges": 0,
+      "world_bounds": [
+        [
+          -1.770554,
+          -2.264062,
+          0.005647
+        ],
+        [
+          1.770554,
+          2.177507,
+          1.71656
+        ]
+      ],
+      "zero_length_edges": 0
+    },
+    {
+      "boundary_edges": 216,
+      "connected_components": 72,
+      "data_name": "metal",
+      "degenerate_faces": 0,
+      "edges": 216,
+      "flat_polygons": 70,
+      "invalid_vertices": 0,
+      "isolated_vertices": 0,
+      "material_slots": [
+        "metal"
+      ],
+      "missing_material_faces": 0,
+      "modifiers": [],
+      "name": "Carpushit / metal",
+      "non_manifold_edges": 216,
+      "polygons": 72,
+      "refinement_modifiers": [],
+      "shape_keys": 0,
+      "smooth_polygon_ratio": 0.027778,
+      "smooth_polygons": 2,
+      "source_polygons": 72,
+      "source_vertices": 216,
+      "triangles": 72,
+      "uv_layers": 0,
+      "vertex_groups": 0,
+      "vertices": 216,
+      "weighted_vertices": 0,
+      "wire_edges": 0,
+      "world_bounds": [
+        [
+          -0.935491,
+          -1.459542,
+          0.049591
+        ],
+        [
+          0.937704,
+          1.179756,
+          2.471573
+        ]
+      ],
+      "zero_length_edges": 0
+    },
+    {
+      "boundary_edges": 5522,
+      "connected_components": 1840,
+      "data_name": "reflectors",
+      "degenerate_faces": 0,
+      "edges": 5524,
+      "flat_polygons": 1733,
+      "invalid_vertices": 0,
+      "isolated_vertices": 0,
+      "material_slots": [
+        "reflectors"
+      ],
+      "missing_material_faces": 0,
+      "modifiers": [],
+      "name": "Carpushit / reflectors",
+      "non_manifold_edges": 5522,
+      "polygons": 1842,
+      "refinement_modifiers": [],
+      "shape_keys": 0,
+      "smooth_polygon_ratio": 0.059175,
+      "smooth_polygons": 109,
+      "source_polygons": 1842,
+      "source_vertices": 5522,
+      "triangles": 1842,
+      "uv_layers": 0,
+      "vertex_groups": 0,
+      "vertices": 5522,
+      "weighted_vertices": 0,
+      "wire_edges": 0,
+      "world_bounds": [
+        [
+          -0.898322,
+          1.259731,
+          1.553396
+        ],
+        [
+          0.898335,
+          1.557564,
+          1.970146
+        ]
+      ],
+      "zero_length_edges": 0
+    },
+    {
+      "boundary_edges": 39252,
+      "connected_components": 13015,
+      "data_name": "shell",
+      "degenerate_faces": 0,
+      "edges": 39459,
+      "flat_polygons": 12580,
+      "invalid_vertices": 0,
+      "isolated_vertices": 0,
+      "material_slots": [
+        "shell"
+      ],
+      "missing_material_faces": 0,
+      "modifiers": [],
+      "name": "Carpushit / shell",
+      "non_manifold_edges": 39252,
+      "polygons": 13222,
+      "refinement_modifiers": [],
+      "shape_keys": 0,
+      "smooth_polygon_ratio": 0.048555,
+      "smooth_polygons": 642,
+      "source_polygons": 13222,
+      "source_vertices": 39252,
+      "triangles": 13222,
+      "uv_layers": 0,
+      "vertex_groups": 0,
+      "vertices": 39252,
+      "weighted_vertices": 0,
+      "wire_edges": 0,
+      "world_bounds": [
+        [
+          -1.819691,
+          -2.247909,
+          0.019883
+        ],
+        [
+          1.819419,
+          2.222266,
+          2.600637
+        ]
+      ],
+      "zero_length_edges": 0
+    },
+    {
+      "boundary_edges": 19008,
+      "connected_components": 6336,
+      "data_name": "wing-detail",
+      "degenerate_faces": 0,
+      "edges": 19008,
+      "flat_polygons": 6043,
+      "invalid_vertices": 0,
+      "isolated_vertices": 0,
+      "material_slots": [
+        "wing-detail"
+      ],
+      "missing_material_faces": 0,
+      "modifiers": [],
+      "name": "Carpushit / wing-detail",
+      "non_manifold_edges": 19008,
+      "polygons": 6336,
+      "refinement_modifiers": [],
+      "shape_keys": 0,
+      "smooth_polygon_ratio": 0.046244,
+      "smooth_polygons": 293,
+      "source_polygons": 6336,
+      "source_vertices": 19008,
+      "triangles": 6336,
+      "uv_layers": 0,
+      "vertex_groups": 0,
+      "vertices": 19008,
+      "weighted_vertices": 0,
+      "wire_edges": 0,
+      "world_bounds": [
+        [
+          -2.73567,
+          -0.288799,
+          1.50357
+        ],
+        [
+          2.735759,
+          1.733553,
+          2.55272
+        ]
+      ],
+      "zero_length_edges": 0
+    },
+    {
+      "boundary_edges": 57333,
+      "connected_components": 19103,
+      "data_name": "wings",
+      "degenerate_faces": 0,
+      "edges": 57357,
+      "flat_polygons": 18284,
+      "invalid_vertices": 0,
+      "isolated_vertices": 0,
+      "material_slots": [
+        "wings"
+      ],
+      "missing_material_faces": 0,
+      "modifiers": [],
+      "name": "Carpushit / wings",
+      "non_manifold_edges": 57333,
+      "polygons": 19127,
+      "refinement_modifiers": [],
+      "shape_keys": 0,
+      "smooth_polygon_ratio": 0.044074,
+      "smooth_polygons": 843,
+      "source_polygons": 19127,
+      "source_vertices": 57333,
+      "triangles": 19127,
+      "uv_layers": 0,
+      "vertex_groups": 0,
+      "vertices": 57333,
+      "weighted_vertices": 0,
+      "wire_edges": 0,
+      "world_bounds": [
+        [
+          -2.773586,
+          -0.396854,
+          1.415207
+        ],
+        [
+          2.774566,
+          1.858784,
+          2.659388
+        ]
+      ],
+      "zero_length_edges": 0
+    }
+  ],
+  "objects": [
+    {
+      "action": null,
+      "collections": [
+        "Scene Collection"
+      ],
+      "dimensions": [
+        3.541109,
+        4.441569,
+        1.710914
+      ],
+      "hidden_render": false,
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "name": "Carpushit / lattice",
+      "parent": null,
+      "rotation_euler": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "transform_is_finite": true,
+      "type": "MESH"
+    },
+    {
+      "action": null,
+      "collections": [
+        "Scene Collection"
+      ],
+      "dimensions": [
+        1.873195,
+        2.639297,
+        2.421982
+      ],
+      "hidden_render": false,
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "name": "Carpushit / metal",
+      "parent": null,
+      "rotation_euler": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "transform_is_finite": true,
+      "type": "MESH"
+    },
+    {
+      "action": null,
+      "collections": [
+        "Scene Collection"
+      ],
+      "dimensions": [
+        1.796658,
+        0.297833,
+        0.41675
+      ],
+      "hidden_render": false,
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "name": "Carpushit / reflectors",
+      "parent": null,
+      "rotation_euler": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "transform_is_finite": true,
+      "type": "MESH"
+    },
+    {
+      "action": null,
+      "collections": [
+        "Scene Collection"
+      ],
+      "dimensions": [
+        3.63911,
+        4.470175,
+        2.580755
+      ],
+      "hidden_render": false,
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "name": "Carpushit / shell",
+      "parent": null,
+      "rotation_euler": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "transform_is_finite": true,
+      "type": "MESH"
+    },
+    {
+      "action": null,
+      "collections": [
+        "Scene Collection"
+      ],
+      "dimensions": [
+        5.471429,
+        2.022352,
+        1.04915
+      ],
+      "hidden_render": false,
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "name": "Carpushit / wing-detail",
+      "parent": null,
+      "rotation_euler": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "transform_is_finite": true,
+      "type": "MESH"
+    },
+    {
+      "action": null,
+      "collections": [
+        "Scene Collection"
+      ],
+      "dimensions": [
+        5.548152,
+        2.255638,
+        1.244181
+      ],
+      "hidden_render": false,
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "name": "Carpushit / wings",
+      "parent": null,
+      "rotation_euler": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "transform_is_finite": true,
+      "type": "MESH"
+    }
+  ],
+  "scene": {
+    "bounds": {
+      "dimensions": [
+        5.548152,
+        4.486328,
+        2.653741
+      ],
+      "max": [
+        2.774566,
+        2.222266,
+        2.659388
+      ],
+      "min": [
+        -2.773586,
+        -2.264062,
+        0.005647
+      ]
+    },
+    "fps": 24.0,
+    "frame_end": 250,
+    "frame_start": 1,
+    "name": "Scene"
+  },
+  "schema_version": 3,
+  "totals": {
+    "actions": 0,
+    "armatures": 0,
+    "bones": 0,
+    "boundary_edges": 175133,
+    "cameras": 0,
+    "constraints": 0,
+    "degenerate_faces": 0,
+    "edges": 175366,
+    "flat_polygons": 55753,
+    "geometry_nodes_modifiers": 0,
+    "images": 0,
+    "invalid_vertices": 0,
+    "isolated_vertices": 0,
+    "lights": 0,
+    "materials": 6,
+    "mesh_objects": 6,
+    "missing_material_faces": 0,
+    "node_materials": 6,
+    "non_manifold_edges": 175133,
+    "objects": 6,
+    "polygons": 58533,
+    "refinement_modifiers": 0,
+    "rigid_body_objects": 0,
+    "shape_keys": 0,
+    "simulation_modifiers": 0,
+    "smooth_polygons": 2780,
+    "textured_materials": 0,
+    "triangles": 58533,
+    "uv_mapped_meshes": 0,
+    "vertices": 175133,
+    "weighted_meshes": 0,
+    "wire_edges": 0,
+    "zero_length_edges": 0
+  }
+}

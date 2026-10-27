@@ -1,0 +1,94 @@
+{
+  "format": "scene-lab catalog metadata; pending discoverable app selector",
+  "presets": [
+    {
+      "content_id": "carpushit-full",
+      "title": "Full",
+      "description": "Steady full; bulbs limited to127/255 in model.",
+      "api_layers": [
+        1
+      ],
+      "authored_scope": "all",
+      "path": "registry/content/carpushit-full.json",
+      "retargets_arbitrary_fixture_ids": false
+    },
+    {
+      "content_id": "carpushit-slow-pulse",
+      "title": "Slow pulsing",
+      "description": "10 second sine,10 to100 percent.",
+      "api_layers": [
+        1
+      ],
+      "authored_scope": "all",
+      "path": "registry/content/carpushit-slow-pulse.json",
+      "retargets_arbitrary_fixture_ids": false
+    },
+    {
+      "content_id": "carpushit-alternate",
+      "title": "Alternating groups",
+      "description": "12 second opposed left/right sine,8 to100 percent.",
+      "api_layers": [
+        1
+      ],
+      "authored_scope": "all",
+      "path": "registry/content/carpushit-alternate.json",
+      "retargets_arbitrary_fixture_ids": false
+    },
+    {
+      "content_id": "carpushit-chase",
+      "title": "Sliding through",
+      "description": "14 second front-to-rear cosine stripe,4 to100 percent.",
+      "api_layers": [
+        1
+      ],
+      "authored_scope": "all",
+      "path": "registry/content/carpushit-chase.json",
+      "retargets_arbitrary_fixture_ids": false
+    },
+    {
+      "content_id": "carpushit-twinkle",
+      "title": "Faint outside twinkle",
+      "description": "Turns outside primary off and fades seeded outside twinkle12 to75 per1000.",
+      "api_layers": [
+        1,
+        2
+      ],
+      "authored_scope": "outside",
+      "path": "registry/content/carpushit-twinkle.json",
+      "retargets_arbitrary_fixture_ids": false
+    },
+    {
+      "content_id": "carpushit-twinkle-on",
+      "title": "Overlay on",
+      "description": "Independent faint outside layer; retains primary presets.",
+      "api_layers": [
+        2
+      ],
+      "authored_scope": "outside",
+      "path": "registry/content/carpushit-twinkle-on.json",
+      "retargets_arbitrary_fixture_ids": false
+    },
+    {
+      "content_id": "carpushit-twinkle-off",
+      "title": "Overlay off",
+      "description": "Independent outside layer zero; retains primary presets.",
+      "api_layers": [
+        2
+      ],
+      "authored_scope": "outside",
+      "path": "registry/content/carpushit-twinkle-off.json",
+      "retargets_arbitrary_fixture_ids": false
+    },
+    {
+      "content_id": "carpushit-ears-blink",
+      "title": "Ear blinkers",
+      "description": "1.5 second rectangular cycle on ears.",
+      "api_layers": [
+        1
+      ],
+      "authored_scope": "ears",
+      "path": "registry/content/carpushit-ears-blink.json",
+      "retargets_arbitrary_fixture_ids": false
+    }
+  ]
+}

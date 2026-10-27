@@ -1,0 +1,1231 @@
+{
+  "baseline_source_head": "8dbdbc49de76b3be06b25698aa0d1e5edab49042",
+  "binary_sha256": "e7b05c8f2f86c4c9b10e153a6d2f62d86891ce015a1debc349ee6ff75f415e06",
+  "checks": [
+    {
+      "name": "named-save-load",
+      "exact_project_equal": true,
+      "fixture_count": 38,
+      "full_channels": [
+        127,
+        127,
+        127,
+        127,
+        127,
+        127,
+        127,
+        127,
+        127,
+        127,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "yaml-validate",
+      "file": "carpushit-output.scnq.yaml",
+      "output": "Valid: Carpushit output compositor"
+    },
+    {
+      "name": "yaml-validate",
+      "file": "carpushit-full.scnq.yaml",
+      "output": "Valid: Carpushit full"
+    },
+    {
+      "name": "yaml-validate",
+      "file": "carpushit-cue-director.scnq.yaml",
+      "output": "Valid: Carpushit 120 second native recall - DISARMED"
+    },
+    {
+      "name": "full-numeric",
+      "time": 74.46487269999999,
+      "fixtures_compared": 38,
+      "samples": [
+        {
+          "fixture": "bulb-left-01",
+          "actual": 1.0,
+          "expected": 1.0
+        },
+        {
+          "fixture": "bulb-left-02",
+          "actual": 1.0,
+          "expected": 1.0
+        },
+        {
+          "fixture": "bulb-left-03",
+          "actual": 1.0,
+          "expected": 1.0
+        },
+        {
+          "fixture": "bulb-left-04",
+          "actual": 1.0,
+          "expected": 1.0
+        },
+        {
+          "fixture": "bulb-left-05",
+          "actual": 1.0,
+          "expected": 1.0
+        },
+        {
+          "fixture": "bulb-right-01",
+          "actual": 1.0,
+          "expected": 1.0
+        },
+        {
+          "fixture": "bulb-right-02",
+          "actual": 1.0,
+          "expected": 1.0
+        },
+        {
+          "fixture": "bulb-right-03",
+          "actual": 1.0,
+          "expected": 1.0
+        },
+        {
+          "fixture": "bulb-right-04",
+          "actual": 1.0,
+          "expected": 1.0
+        },
+        {
+          "fixture": "bulb-right-05",
+          "actual": 1.0,
+          "expected": 1.0
+        },
+        {
+          "fixture": "uv-left-rail",
+          "actual": 1.0,
+          "expected": 1.0
+        },
+        {
+          "fixture": "uv-right-rail",
+          "actual": 1.0,
+          "expected": 1.0
+        },
+        {
+          "fixture": "uv-roof-spine",
+          "actual": 1.0,
+          "expected": 1.0
+        },
+        {
+          "fixture": "uv-cross-01",
+          "actual": 1.0,
+          "expected": 1.0
+        },
+        {
+          "fixture": "uv-cross-02",
+          "actual": 1.0,
+          "expected": 1.0
+        },
+        {
+          "fixture": "uv-cross-03",
+          "actual": 1.0,
+          "expected": 1.0
+        },
+        {
+          "fixture": "front-left-01",
+          "actual": 1.0,
+          "expected": 1.0
+        },
+        {
+          "fixture": "front-left-02",
+          "actual": 1.0,
+          "expected": 1.0
+        },
+        {
+          "fixture": "front-left-03",
+          "actual": 1.0,
+          "expected": 1.0
+        },
+        {
+          "fixture": "front-side-left-01",
+          "actual": 1.0,
+          "expected": 1.0
+        },
+        {
+          "fixture": "front-side-left-02",
+          "actual": 1.0,
+          "expected": 1.0
+        },
+        {
+          "fixture": "wing-left-01",
+          "actual": 1.0,
+          "expected": 1.0
+        },
+        {
+          "fixture": "wing-left-02",
+          "actual": 1.0,
+          "expected": 1.0
+        },
+        {
+          "fixture": "wing-left-03",
+          "actual": 1.0,
+          "expected": 1.0
+        },
+        {
+          "fixture": "eye-left",
+          "actual": 1.0,
+          "expected": 1.0
+        },
+        {
+          "fixture": "ear-left",
+          "actual": 1.0,
+          "expected": 1.0
+        },
+        {
+          "fixture": "watcher-left",
+          "actual": 1.0,
+          "expected": 1.0
+        },
+        {
+          "fixture": "front-right-01",
+          "actual": 1.0,
+          "expected": 1.0
+        },
+        {
+          "fixture": "front-right-02",
+          "actual": 1.0,
+          "expected": 1.0
+        },
+        {
+          "fixture": "front-right-03",
+          "actual": 1.0,
+          "expected": 1.0
+        },
+        {
+          "fixture": "front-side-right-01",
+          "actual": 1.0,
+          "expected": 1.0
+        },
+        {
+          "fixture": "front-side-right-02",
+          "actual": 1.0,
+          "expected": 1.0
+        },
+        {
+          "fixture": "wing-right-01",
+          "actual": 1.0,
+          "expected": 1.0
+        },
+        {
+          "fixture": "wing-right-02",
+          "actual": 1.0,
+          "expected": 1.0
+        },
+        {
+          "fixture": "wing-right-03",
+          "actual": 1.0,
+          "expected": 1.0
+        },
+        {
+          "fixture": "eye-right",
+          "actual": 1.0,
+          "expected": 1.0
+        },
+        {
+          "fixture": "ear-right",
+          "actual": 1.0,
+          "expected": 1.0
+        },
+        {
+          "fixture": "watcher-right",
+          "actual": 1.0,
+          "expected": 1.0
+        }
+      ]
+    },
+    {
+      "name": "slow-pulse-numeric",
+      "time": 74.46487269999999,
+      "fixtures_compared": 38,
+      "samples": [
+        {
+          "fixture": "bulb-left-01",
+          "actual": 0.9748022849437551,
+          "expected": 0.9748022849437545
+        },
+        {
+          "fixture": "bulb-left-02",
+          "actual": 0.9748022849437551,
+          "expected": 0.9748022849437545
+        },
+        {
+          "fixture": "bulb-left-03",
+          "actual": 0.9748022849437551,
+          "expected": 0.9748022849437545
+        },
+        {
+          "fixture": "bulb-left-04",
+          "actual": 0.9748022849437551,
+          "expected": 0.9748022849437545
+        },
+        {
+          "fixture": "bulb-left-05",
+          "actual": 0.9748022849437551,
+          "expected": 0.9748022849437545
+        },
+        {
+          "fixture": "bulb-right-01",
+          "actual": 0.9748022849437551,
+          "expected": 0.9748022849437545
+        },
+        {
+          "fixture": "bulb-right-02",
+          "actual": 0.9748022849437551,
+          "expected": 0.9748022849437545
+        },
+        {
+          "fixture": "bulb-right-03",
+          "actual": 0.9748022849437551,
+          "expected": 0.9748022849437545
+        },
+        {
+          "fixture": "bulb-right-04",
+          "actual": 0.9748022849437551,
+          "expected": 0.9748022849437545
+        },
+        {
+          "fixture": "bulb-right-05",
+          "actual": 0.9748022849437551,
+          "expected": 0.9748022849437545
+        },
+        {
+          "fixture": "uv-left-rail",
+          "actual": 0.9748022849437551,
+          "expected": 0.9748022849437545
+        },
+        {
+          "fixture": "uv-right-rail",
+          "actual": 0.9748022849437551,
+          "expected": 0.9748022849437545
+        },
+        {
+          "fixture": "uv-roof-spine",
+          "actual": 0.9748022849437551,
+          "expected": 0.9748022849437545
+        },
+        {
+          "fixture": "uv-cross-01",
+          "actual": 0.9748022849437551,
+          "expected": 0.9748022849437545
+        },
+        {
+          "fixture": "uv-cross-02",
+          "actual": 0.9748022849437551,
+          "expected": 0.9748022849437545
+        },
+        {
+          "fixture": "uv-cross-03",
+          "actual": 0.9748022849437551,
+          "expected": 0.9748022849437545
+        },
+        {
+          "fixture": "front-left-01",
+          "actual": 0.9748022849437551,
+          "expected": 0.9748022849437545
+        },
+        {
+          "fixture": "front-left-02",
+          "actual": 0.9748022849437551,
+          "expected": 0.9748022849437545
+        },
+        {
+          "fixture": "front-left-03",
+          "actual": 0.9748022849437551,
+          "expected": 0.9748022849437545
+        },
+        {
+          "fixture": "front-side-left-01",
+          "actual": 0.9748022849437551,
+          "expected": 0.9748022849437545
+        },
+        {
+          "fixture": "front-side-left-02",
+          "actual": 0.9748022849437551,
+          "expected": 0.9748022849437545
+        },
+        {
+          "fixture": "wing-left-01",
+          "actual": 0.9748022849437551,
+          "expected": 0.9748022849437545
+        },
+        {
+          "fixture": "wing-left-02",
+          "actual": 0.9748022849437551,
+          "expected": 0.9748022849437545
+        },
+        {
+          "fixture": "wing-left-03",
+          "actual": 0.9748022849437551,
+          "expected": 0.9748022849437545
+        },
+        {
+          "fixture": "eye-left",
+          "actual": 0.9748022849437551,
+          "expected": 0.9748022849437545
+        },
+        {
+          "fixture": "ear-left",
+          "actual": 0.9748022849437551,
+          "expected": 0.9748022849437545
+        },
+        {
+          "fixture": "watcher-left",
+          "actual": 0.9748022849437551,
+          "expected": 0.9748022849437545
+        },
+        {
+          "fixture": "front-right-01",
+          "actual": 0.9748022849437551,
+          "expected": 0.9748022849437545
+        },
+        {
+          "fixture": "front-right-02",
+          "actual": 0.9748022849437551,
+          "expected": 0.9748022849437545
+        },
+        {
+          "fixture": "front-right-03",
+          "actual": 0.9748022849437551,
+          "expected": 0.9748022849437545
+        },
+        {
+          "fixture": "front-side-right-01",
+          "actual": 0.9748022849437551,
+          "expected": 0.9748022849437545
+        },
+        {
+          "fixture": "front-side-right-02",
+          "actual": 0.9748022849437551,
+          "expected": 0.9748022849437545
+        },
+        {
+          "fixture": "wing-right-01",
+          "actual": 0.9748022849437551,
+          "expected": 0.9748022849437545
+        },
+        {
+          "fixture": "wing-right-02",
+          "actual": 0.9748022849437551,
+          "expected": 0.9748022849437545
+        },
+        {
+          "fixture": "wing-right-03",
+          "actual": 0.9748022849437551,
+          "expected": 0.9748022849437545
+        },
+        {
+          "fixture": "eye-right",
+          "actual": 0.9748022849437551,
+          "expected": 0.9748022849437545
+        },
+        {
+          "fixture": "ear-right",
+          "actual": 0.9748022849437551,
+          "expected": 0.9748022849437545
+        },
+        {
+          "fixture": "watcher-right",
+          "actual": 0.9748022849437551,
+          "expected": 0.9748022849437545
+        }
+      ]
+    },
+    {
+      "name": "alternate-numeric",
+      "time": 74.46487269999999,
+      "fixtures_compared": 38,
+      "samples": [
+        {
+          "fixture": "bulb-left-01",
+          "actual": 0.41279152399931585,
+          "expected": 0.41279152399931657
+        },
+        {
+          "fixture": "bulb-left-02",
+          "actual": 0.41279152399931585,
+          "expected": 0.41279152399931657
+        },
+        {
+          "fixture": "bulb-left-03",
+          "actual": 0.41279152399931585,
+          "expected": 0.41279152399931657
+        },
+        {
+          "fixture": "bulb-left-04",
+          "actual": 0.41279152399931585,
+          "expected": 0.41279152399931657
+        },
+        {
+          "fixture": "bulb-left-05",
+          "actual": 0.41279152399931585,
+          "expected": 0.41279152399931657
+        },
+        {
+          "fixture": "bulb-right-01",
+          "actual": 0.6672084760006842,
+          "expected": 0.6672084760006834
+        },
+        {
+          "fixture": "bulb-right-02",
+          "actual": 0.6672084760006842,
+          "expected": 0.6672084760006834
+        },
+        {
+          "fixture": "bulb-right-03",
+          "actual": 0.6672084760006842,
+          "expected": 0.6672084760006834
+        },
+        {
+          "fixture": "bulb-right-04",
+          "actual": 0.6672084760006842,
+          "expected": 0.6672084760006834
+        },
+        {
+          "fixture": "bulb-right-05",
+          "actual": 0.6672084760006842,
+          "expected": 0.6672084760006834
+        },
+        {
+          "fixture": "uv-left-rail",
+          "actual": 0.41279152399931585,
+          "expected": 0.41279152399931657
+        },
+        {
+          "fixture": "uv-right-rail",
+          "actual": 0.6672084760006842,
+          "expected": 0.6672084760006834
+        },
+        {
+          "fixture": "uv-roof-spine",
+          "actual": 0.41279152399931585,
+          "expected": 0.41279152399931657
+        },
+        {
+          "fixture": "uv-cross-01",
+          "actual": 0.41279152399931585,
+          "expected": 0.41279152399931657
+        },
+        {
+          "fixture": "uv-cross-02",
+          "actual": 0.41279152399931585,
+          "expected": 0.41279152399931657
+        },
+        {
+          "fixture": "uv-cross-03",
+          "actual": 0.41279152399931585,
+          "expected": 0.41279152399931657
+        },
+        {
+          "fixture": "front-left-01",
+          "actual": 0.41279152399931585,
+          "expected": 0.41279152399931657
+        },
+        {
+          "fixture": "front-left-02",
+          "actual": 0.41279152399931585,
+          "expected": 0.41279152399931657
+        },
+        {
+          "fixture": "front-left-03",
+          "actual": 0.41279152399931585,
+          "expected": 0.41279152399931657
+        },
+        {
+          "fixture": "front-side-left-01",
+          "actual": 0.41279152399931585,
+          "expected": 0.41279152399931657
+        },
+        {
+          "fixture": "front-side-left-02",
+          "actual": 0.41279152399931585,
+          "expected": 0.41279152399931657
+        },
+        {
+          "fixture": "wing-left-01",
+          "actual": 0.41279152399931585,
+          "expected": 0.41279152399931657
+        },
+        {
+          "fixture": "wing-left-02",
+          "actual": 0.41279152399931585,
+          "expected": 0.41279152399931657
+        },
+        {
+          "fixture": "wing-left-03",
+          "actual": 0.41279152399931585,
+          "expected": 0.41279152399931657
+        },
+        {
+          "fixture": "eye-left",
+          "actual": 0.41279152399931585,
+          "expected": 0.41279152399931657
+        },
+        {
+          "fixture": "ear-left",
+          "actual": 0.41279152399931585,
+          "expected": 0.41279152399931657
+        },
+        {
+          "fixture": "watcher-left",
+          "actual": 0.41279152399931585,
+          "expected": 0.41279152399931657
+        },
+        {
+          "fixture": "front-right-01",
+          "actual": 0.6672084760006842,
+          "expected": 0.6672084760006834
+        },
+        {
+          "fixture": "front-right-02",
+          "actual": 0.6672084760006842,
+          "expected": 0.6672084760006834
+        },
+        {
+          "fixture": "front-right-03",
+          "actual": 0.6672084760006842,
+          "expected": 0.6672084760006834
+        },
+        {
+          "fixture": "front-side-right-01",
+          "actual": 0.6672084760006842,
+          "expected": 0.6672084760006834
+        },
+        {
+          "fixture": "front-side-right-02",
+          "actual": 0.6672084760006842,
+          "expected": 0.6672084760006834
+        },
+        {
+          "fixture": "wing-right-01",
+          "actual": 0.6672084760006842,
+          "expected": 0.6672084760006834
+        },
+        {
+          "fixture": "wing-right-02",
+          "actual": 0.6672084760006842,
+          "expected": 0.6672084760006834
+        },
+        {
+          "fixture": "wing-right-03",
+          "actual": 0.6672084760006842,
+          "expected": 0.6672084760006834
+        },
+        {
+          "fixture": "eye-right",
+          "actual": 0.6672084760006842,
+          "expected": 0.6672084760006834
+        },
+        {
+          "fixture": "ear-right",
+          "actual": 0.6672084760006842,
+          "expected": 0.6672084760006834
+        },
+        {
+          "fixture": "watcher-right",
+          "actual": 0.6672084760006842,
+          "expected": 0.6672084760006834
+        }
+      ]
+    },
+    {
+      "name": "chase-numeric",
+      "time": 74.46487269999999,
+      "fixtures_compared": 38,
+      "samples": [
+        {
+          "fixture": "bulb-left-01",
+          "actual": 0.9629897406611613,
+          "expected": 0.9629897406611613
+        },
+        {
+          "fixture": "bulb-left-02",
+          "actual": 0.5877031315334468,
+          "expected": 0.5877031315334471
+        },
+        {
+          "fixture": "bulb-left-03",
+          "actual": 0.04,
+          "expected": 0.04
+        },
+        {
+          "fixture": "bulb-left-04",
+          "actual": 0.04,
+          "expected": 0.04
+        },
+        {
+          "fixture": "bulb-left-05",
+          "actual": 0.04,
+          "expected": 0.04
+        },
+        {
+          "fixture": "bulb-right-01",
+          "actual": 0.9629897406611613,
+          "expected": 0.9629897406611613
+        },
+        {
+          "fixture": "bulb-right-02",
+          "actual": 0.5877031315334468,
+          "expected": 0.5877031315334471
+        },
+        {
+          "fixture": "bulb-right-03",
+          "actual": 0.04,
+          "expected": 0.04
+        },
+        {
+          "fixture": "bulb-right-04",
+          "actual": 0.04,
+          "expected": 0.04
+        },
+        {
+          "fixture": "bulb-right-05",
+          "actual": 0.04,
+          "expected": 0.04
+        },
+        {
+          "fixture": "uv-left-rail",
+          "actual": 0.04,
+          "expected": 0.04
+        },
+        {
+          "fixture": "uv-right-rail",
+          "actual": 0.04,
+          "expected": 0.04
+        },
+        {
+          "fixture": "uv-roof-spine",
+          "actual": 0.04,
+          "expected": 0.04
+        },
+        {
+          "fixture": "uv-cross-01",
+          "actual": 0.9311473163093513,
+          "expected": 0.9311473163093513
+        },
+        {
+          "fixture": "uv-cross-02",
+          "actual": 0.04,
+          "expected": 0.04
+        },
+        {
+          "fixture": "uv-cross-03",
+          "actual": 0.04,
+          "expected": 0.04
+        },
+        {
+          "fixture": "front-left-01",
+          "actual": 0.04,
+          "expected": 0.04
+        },
+        {
+          "fixture": "front-left-02",
+          "actual": 0.04,
+          "expected": 0.04
+        },
+        {
+          "fixture": "front-left-03",
+          "actual": 0.04,
+          "expected": 0.04
+        },
+        {
+          "fixture": "front-side-left-01",
+          "actual": 0.5922995014453347,
+          "expected": 0.5922995014453345
+        },
+        {
+          "fixture": "front-side-left-02",
+          "actual": 0.9851129245701375,
+          "expected": 0.9851129245701379
+        },
+        {
+          "fixture": "wing-left-01",
+          "actual": 0.9450373201402844,
+          "expected": 0.9450373201402847
+        },
+        {
+          "fixture": "wing-left-02",
+          "actual": 0.48243062337007686,
+          "expected": 0.48243062337007714
+        },
+        {
+          "fixture": "wing-left-03",
+          "actual": 0.04,
+          "expected": 0.04
+        },
+        {
+          "fixture": "eye-left",
+          "actual": 0.2519719734672915,
+          "expected": 0.25197197346729117
+        },
+        {
+          "fixture": "ear-left",
+          "actual": 0.957392383630259,
+          "expected": 0.9573923836302592
+        },
+        {
+          "fixture": "watcher-left",
+          "actual": 0.04,
+          "expected": 0.04
+        },
+        {
+          "fixture": "front-right-01",
+          "actual": 0.04,
+          "expected": 0.04
+        },
+        {
+          "fixture": "front-right-02",
+          "actual": 0.04,
+          "expected": 0.04
+        },
+        {
+          "fixture": "front-right-03",
+          "actual": 0.04,
+          "expected": 0.04
+        },
+        {
+          "fixture": "front-side-right-01",
+          "actual": 0.5922995014453347,
+          "expected": 0.5922995014453345
+        },
+        {
+          "fixture": "front-side-right-02",
+          "actual": 0.9851129245701375,
+          "expected": 0.9851129245701379
+        },
+        {
+          "fixture": "wing-right-01",
+          "actual": 0.9450373201402844,
+          "expected": 0.9450373201402847
+        },
+        {
+          "fixture": "wing-right-02",
+          "actual": 0.48243062337007686,
+          "expected": 0.48243062337007714
+        },
+        {
+          "fixture": "wing-right-03",
+          "actual": 0.04,
+          "expected": 0.04
+        },
+        {
+          "fixture": "eye-right",
+          "actual": 0.2519719734672915,
+          "expected": 0.25197197346729117
+        },
+        {
+          "fixture": "ear-right",
+          "actual": 0.957392383630259,
+          "expected": 0.9573923836302592
+        },
+        {
+          "fixture": "watcher-right",
+          "actual": 0.04,
+          "expected": 0.04
+        }
+      ]
+    },
+    {
+      "name": "group-sparse-load",
+      "changed_fixture_ids": [
+        "bulb-left-01",
+        "bulb-left-02",
+        "bulb-left-03",
+        "bulb-left-04",
+        "bulb-left-05"
+      ],
+      "other_fixtures_unchanged": 33,
+      "compositors_and_overlay_unchanged": true
+    },
+    {
+      "name": "outside-twinkle-isolation",
+      "changed": [
+        "front-left-01",
+        "front-left-02",
+        "front-left-03",
+        "front-side-left-01",
+        "front-side-left-02",
+        "wing-left-01",
+        "wing-left-02",
+        "wing-left-03",
+        "eye-left",
+        "ear-left",
+        "watcher-left",
+        "front-right-01",
+        "front-right-02",
+        "front-right-03",
+        "front-side-right-01",
+        "front-side-right-02",
+        "wing-right-01",
+        "wing-right-02",
+        "wing-right-03",
+        "eye-right",
+        "ear-right",
+        "watcher-right"
+      ],
+      "interior_untouched": 16
+    },
+    {
+      "name": "outside-twinkle-runtime",
+      "sample_frames": [
+        {
+          "time": 74.7650833,
+          "values": {
+            "front-left-01": 0.032311994311530104,
+            "front-left-02": 0.04772322404995026,
+            "front-left-03": 0.06663727818702839,
+            "front-side-left-01": 0.033315831736399,
+            "front-side-left-02": 0.03991903007954056,
+            "wing-left-01": 0.052916862473893156,
+            "wing-left-02": 0.06920819328083558,
+            "wing-left-03": 0.06399453733969872,
+            "eye-left": 0.04745732222531086,
+            "ear-left": 0.07422932157382851,
+            "watcher-left": 0.07324040224958188,
+            "front-right-01": 0.07432461377150167,
+            "front-right-02": 0.07050266471444658,
+            "front-right-03": 0.049076064598281,
+            "front-side-right-01": 0.07424666790232975,
+            "front-side-right-02": 0.032822917798173035,
+            "wing-right-01": 0.024024206930646944,
+            "wing-right-02": 0.06337854339891803,
+            "wing-right-03": 0.027174698037029908,
+            "eye-right": 0.041213009398746475,
+            "ear-right": 0.028345640787713313,
+            "watcher-right": 0.07499385655948437
+          }
+        },
+        {
+          "time": 75.0651852,
+          "values": {
+            "front-left-01": 0.032311994311530104,
+            "front-left-02": 0.04772322404995026,
+            "front-left-03": 0.06663727818702839,
+            "front-side-left-01": 0.033315831736399,
+            "front-side-left-02": 0.03991903007954056,
+            "wing-left-01": 0.052916862473893156,
+            "wing-left-02": 0.06920819328083558,
+            "wing-left-03": 0.06399453733969872,
+            "eye-left": 0.04745732222531086,
+            "ear-left": 0.07422932157382851,
+            "watcher-left": 0.07324040224958188,
+            "front-right-01": 0.07432461377150167,
+            "front-right-02": 0.07050266471444658,
+            "front-right-03": 0.049076064598281,
+            "front-side-right-01": 0.07424666790232975,
+            "front-side-right-02": 0.032822917798173035,
+            "wing-right-01": 0.024024206930646944,
+            "wing-right-02": 0.06337854339891803,
+            "wing-right-03": 0.027174698037029908,
+            "eye-right": 0.041213009398746475,
+            "ear-right": 0.028345640787713313,
+            "watcher-right": 0.07499385655948437
+          }
+        },
+        {
+          "time": 75.34845150000002,
+          "values": {
+            "front-left-01": 0.032311994311530104,
+            "front-left-02": 0.04772322404995026,
+            "front-left-03": 0.06663727818702839,
+            "front-side-left-01": 0.033315831736399,
+            "front-side-left-02": 0.03991903007954056,
+            "wing-left-01": 0.052916862473893156,
+            "wing-left-02": 0.06920819328083558,
+            "wing-left-03": 0.06399453733969872,
+            "eye-left": 0.04745732222531086,
+            "ear-left": 0.07422932157382851,
+            "watcher-left": 0.07324040224958188,
+            "front-right-01": 0.07432461377150167,
+            "front-right-02": 0.07050266471444658,
+            "front-right-03": 0.049076064598281,
+            "front-side-right-01": 0.07424666790232975,
+            "front-side-right-02": 0.032822917798173035,
+            "wing-right-01": 0.024024206930646944,
+            "wing-right-02": 0.06337854339891803,
+            "wing-right-03": 0.027174698037029908,
+            "eye-right": 0.041213009398746475,
+            "ear-right": 0.028345640787713313,
+            "watcher-right": 0.07499385655948437
+          }
+        },
+        {
+          "time": 75.64856820000003,
+          "values": {
+            "front-left-01": 0.032311994311530104,
+            "front-left-02": 0.04772322404995026,
+            "front-left-03": 0.06663727818702839,
+            "front-side-left-01": 0.033315831736399,
+            "front-side-left-02": 0.03991903007954056,
+            "wing-left-01": 0.052916862473893156,
+            "wing-left-02": 0.06920819328083558,
+            "wing-left-03": 0.06399453733969872,
+            "eye-left": 0.04745732222531086,
+            "ear-left": 0.07422932157382851,
+            "watcher-left": 0.07324040224958188,
+            "front-right-01": 0.07432461377150167,
+            "front-right-02": 0.07050266471444658,
+            "front-right-03": 0.049076064598281,
+            "front-side-right-01": 0.07424666790232975,
+            "front-side-right-02": 0.032822917798173035,
+            "wing-right-01": 0.024024206930646944,
+            "wing-right-02": 0.06337854339891803,
+            "wing-right-03": 0.027174698037029908,
+            "eye-right": 0.041213009398746475,
+            "ear-right": 0.028345640787713313,
+            "watcher-right": 0.07499385655948437
+          }
+        },
+        {
+          "time": 75.93184740000002,
+          "values": {
+            "front-left-01": 0.032311994311530104,
+            "front-left-02": 0.04772322404995026,
+            "front-left-03": 0.06663727818702839,
+            "front-side-left-01": 0.033315831736399,
+            "front-side-left-02": 0.03991903007954056,
+            "wing-left-01": 0.052916862473893156,
+            "wing-left-02": 0.06920819328083558,
+            "wing-left-03": 0.06399453733969872,
+            "eye-left": 0.04745732222531086,
+            "ear-left": 0.07422932157382851,
+            "watcher-left": 0.07324040224958188,
+            "front-right-01": 0.07432461377150167,
+            "front-right-02": 0.07050266471444658,
+            "front-right-03": 0.049076064598281,
+            "front-side-right-01": 0.07424666790232975,
+            "front-side-right-02": 0.032822917798173035,
+            "wing-right-01": 0.024024206930646944,
+            "wing-right-02": 0.06337854339891803,
+            "wing-right-03": 0.027174698037029908,
+            "eye-right": 0.041213009398746475,
+            "ear-right": 0.028345640787713313,
+            "watcher-right": 0.07499385655948437
+          }
+        },
+        {
+          "time": 76.23169950000002,
+          "values": {
+            "front-left-01": 0.032311994311530104,
+            "front-left-02": 0.04772322404995026,
+            "front-left-03": 0.06663727818702839,
+            "front-side-left-01": 0.033315831736399,
+            "front-side-left-02": 0.03991903007954056,
+            "wing-left-01": 0.052916862473893156,
+            "wing-left-02": 0.06920819328083558,
+            "wing-left-03": 0.06399453733969872,
+            "eye-left": 0.04745732222531086,
+            "ear-left": 0.07422932157382851,
+            "watcher-left": 0.07324040224958188,
+            "front-right-01": 0.07432461377150167,
+            "front-right-02": 0.07050266471444658,
+            "front-right-03": 0.049076064598281,
+            "front-side-right-01": 0.07424666790232975,
+            "front-side-right-02": 0.032822917798173035,
+            "wing-right-01": 0.024024206930646944,
+            "wing-right-02": 0.06337854339891803,
+            "wing-right-03": 0.027174698037029908,
+            "eye-right": 0.041213009398746475,
+            "ear-right": 0.028345640787713313,
+            "watcher-right": 0.07499385655948437
+          }
+        },
+        {
+          "time": 76.5151238,
+          "values": {
+            "front-left-01": 0.032311994311530104,
+            "front-left-02": 0.04772322404995026,
+            "front-left-03": 0.06663727818702839,
+            "front-side-left-01": 0.033315831736399,
+            "front-side-left-02": 0.03991903007954056,
+            "wing-left-01": 0.052916862473893156,
+            "wing-left-02": 0.06920819328083558,
+            "wing-left-03": 0.06399453733969872,
+            "eye-left": 0.04745732222531086,
+            "ear-left": 0.07422932157382851,
+            "watcher-left": 0.07324040224958188,
+            "front-right-01": 0.07432461377150167,
+            "front-right-02": 0.07050266471444658,
+            "front-right-03": 0.049076064598281,
+            "front-side-right-01": 0.07424666790232975,
+            "front-side-right-02": 0.032822917798173035,
+            "wing-right-01": 0.024024206930646944,
+            "wing-right-02": 0.06337854339891803,
+            "wing-right-03": 0.027174698037029908,
+            "eye-right": 0.041213009398746475,
+            "ear-right": 0.028345640787713313,
+            "watcher-right": 0.07499385655948437
+          }
+        },
+        {
+          "time": 76.8150137,
+          "values": {
+            "front-left-01": 0.032311994311530104,
+            "front-left-02": 0.04772322404995026,
+            "front-left-03": 0.06663727818702839,
+            "front-side-left-01": 0.033315831736399,
+            "front-side-left-02": 0.03991903007954056,
+            "wing-left-01": 0.052916862473893156,
+            "wing-left-02": 0.06920819328083558,
+            "wing-left-03": 0.06399453733969872,
+            "eye-left": 0.04745732222531086,
+            "ear-left": 0.07422932157382851,
+            "watcher-left": 0.07324040224958188,
+            "front-right-01": 0.07432461377150167,
+            "front-right-02": 0.07050266471444658,
+            "front-right-03": 0.049076064598281,
+            "front-side-right-01": 0.07424666790232975,
+            "front-side-right-02": 0.032822917798173035,
+            "wing-right-01": 0.024024206930646944,
+            "wing-right-02": 0.06337854339891803,
+            "wing-right-03": 0.027174698037029908,
+            "eye-right": 0.041213009398746475,
+            "ear-right": 0.028345640787713313,
+            "watcher-right": 0.07499385655948437
+          }
+        },
+        {
+          "time": 77.10037629999997,
+          "values": {
+            "front-left-01": 0.032311994311530104,
+            "front-left-02": 0.04772322404995026,
+            "front-left-03": 0.06663727818702839,
+            "front-side-left-01": 0.033315831736399,
+            "front-side-left-02": 0.03991903007954056,
+            "wing-left-01": 0.052916862473893156,
+            "wing-left-02": 0.06920819328083558,
+            "wing-left-03": 0.06399453733969872,
+            "eye-left": 0.04745732222531086,
+            "ear-left": 0.07422932157382851,
+            "watcher-left": 0.07324040224958188,
+            "front-right-01": 0.07432461377150167,
+            "front-right-02": 0.07050266471444658,
+            "front-right-03": 0.049076064598281,
+            "front-side-right-01": 0.07424666790232975,
+            "front-side-right-02": 0.032822917798173035,
+            "wing-right-01": 0.024024206930646944,
+            "wing-right-02": 0.06337854339891803,
+            "wing-right-03": 0.027174698037029908,
+            "eye-right": 0.041213009398746475,
+            "ear-right": 0.028345640787713313,
+            "watcher-right": 0.07499385655948437
+          }
+        },
+        {
+          "time": 77.39861269999997,
+          "values": {
+            "front-left-01": 0.032311994311530104,
+            "front-left-02": 0.04772322404995026,
+            "front-left-03": 0.06663727818702839,
+            "front-side-left-01": 0.033315831736399,
+            "front-side-left-02": 0.03991903007954056,
+            "wing-left-01": 0.052916862473893156,
+            "wing-left-02": 0.06920819328083558,
+            "wing-left-03": 0.06399453733969872,
+            "eye-left": 0.04745732222531086,
+            "ear-left": 0.07422932157382851,
+            "watcher-left": 0.07324040224958188,
+            "front-right-01": 0.07432461377150167,
+            "front-right-02": 0.07050266471444658,
+            "front-right-03": 0.049076064598281,
+            "front-side-right-01": 0.07424666790232975,
+            "front-side-right-02": 0.032822917798173035,
+            "wing-right-01": 0.024024206930646944,
+            "wing-right-02": 0.06337854339891803,
+            "wing-right-03": 0.027174698037029908,
+            "eye-right": 0.041213009398746475,
+            "ear-right": 0.028345640787713313,
+            "watcher-right": 0.07499385655948437
+          }
+        },
+        {
+          "time": 77.69812399999999,
+          "values": {
+            "front-left-01": 0.03248136929803745,
+            "front-left-02": 0.047457508680377944,
+            "front-left-03": 0.06623412327077291,
+            "front-side-left-01": 0.03341150070576532,
+            "front-side-left-02": 0.040111433433910715,
+            "wing-left-01": 0.052366842078318265,
+            "wing-left-02": 0.06855256777265126,
+            "wing-left-03": 0.06408605253809108,
+            "eye-left": 0.04770220752209449,
+            "ear-left": 0.07401063685691463,
+            "watcher-left": 0.07263342258359005,
+            "front-right-01": 0.0739383975699635,
+            "front-right-02": 0.07015317142405879,
+            "front-right-03": 0.04928039234489391,
+            "front-side-right-01": 0.07421746462436592,
+            "front-side-right-02": 0.03306760625772455,
+            "wing-right-01": 0.024602717330806358,
+            "wing-right-02": 0.06277691371354996,
+            "wing-right-03": 0.02739666713228548,
+            "eye-right": 0.04084011611046465,
+            "ear-right": 0.028711157956360936,
+            "watcher-right": 0.07432251127383646
+          }
+        },
+        {
+          "time": 77.9816541,
+          "values": {
+            "front-left-01": 0.03392561078218752,
+            "front-left-02": 0.045191783571694594,
+            "front-left-03": 0.06279646658603,
+            "front-side-left-01": 0.03422725926110978,
+            "front-side-left-02": 0.04175203522406315,
+            "wing-left-01": 0.04767687994873644,
+            "wing-left-02": 0.06296212271041252,
+            "wing-left-03": 0.0648663923549313,
+            "eye-left": 0.04979031693993924,
+            "ear-left": 0.0721459368405226,
+            "watcher-left": 0.06745777515336622,
+            "front-right-01": 0.07064517540289869,
+            "front-right-02": 0.06717308139530921,
+            "front-right-03": 0.05102267208824017,
+            "front-side-right-01": 0.07396845155355623,
+            "front-side-right-02": 0.035154037266601754,
+            "wing-right-01": 0.02953561052921402,
+            "wing-right-02": 0.05764688496714454,
+            "wing-right-03": 0.029289372673864663,
+            "eye-right": 0.03766049692818124,
+            "ear-right": 0.03182788179507884,
+            "watcher-right": 0.06859802543495945
+          }
+        }
+      ],
+      "bounds": [
+        0.012,
+        0.075
+      ]
+    },
+    {
+      "name": "twinkle-off-preserves-primary",
+      "passed": true
+    }
+  ]
+}

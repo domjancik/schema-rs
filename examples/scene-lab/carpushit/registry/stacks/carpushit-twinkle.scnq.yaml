@@ -1,0 +1,15 @@
+name: Carpushit outside twinkle
+stack:
+  Combine.Multiply:
+    in:
+    - Modify.Value.MapTo:
+        Maximum: 0.075
+        Minimum: 0.012
+        in:
+        - Create.Value.Random:
+            Filter Time: 2.4
+            Interval: 3.2
+            Randomness: 0.12
+            Seed: 4116
+    - Create.Value.Constant:
+        Value: 1.0

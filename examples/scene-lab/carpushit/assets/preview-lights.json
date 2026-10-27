@@ -1,0 +1,1347 @@
+{
+  "version": 1,
+  "name": "Carpushit / assembly preview sources",
+  "geometry": "carpushit-preview.glb",
+  "coordinates": "Schema metres; X lateral, Y up, front -Z; GLB already transformed",
+  "fixture_project": "../carpushit.project.json",
+  "sources": [
+    {
+      "fixture_id": "bulb-left-01",
+      "role": "bulbs",
+      "kind": "point",
+      "position_m": [
+        -0.55,
+        1.35,
+        -0.65
+      ],
+      "direction": null,
+      "target_m": null,
+      "color_srgb": "#ffd19a",
+      "range_m": 2.5,
+      "outer_angle_degrees": 360,
+      "softness": 0.25,
+      "source_radius_m": 0.045,
+      "nominal_preview_gain": 1.0,
+      "encoded_intensity": {
+        "universe": 0,
+        "address_1_based": 1,
+        "formula": "captured_slot_byte/255; includes project gain, fixture gain, bulb model ceiling and blackout"
+      },
+      "line_points_m": null,
+      "preview_only": true
+    },
+    {
+      "fixture_id": "bulb-left-02",
+      "role": "bulbs",
+      "kind": "point",
+      "position_m": [
+        -0.55,
+        1.15,
+        -0.32
+      ],
+      "direction": null,
+      "target_m": null,
+      "color_srgb": "#ffd19a",
+      "range_m": 2.5,
+      "outer_angle_degrees": 360,
+      "softness": 0.25,
+      "source_radius_m": 0.045,
+      "nominal_preview_gain": 1.0,
+      "encoded_intensity": {
+        "universe": 0,
+        "address_1_based": 2,
+        "formula": "captured_slot_byte/255; includes project gain, fixture gain, bulb model ceiling and blackout"
+      },
+      "line_points_m": null,
+      "preview_only": true
+    },
+    {
+      "fixture_id": "bulb-left-03",
+      "role": "bulbs",
+      "kind": "point",
+      "position_m": [
+        -0.55,
+        1.45,
+        0.02
+      ],
+      "direction": null,
+      "target_m": null,
+      "color_srgb": "#ffd19a",
+      "range_m": 2.5,
+      "outer_angle_degrees": 360,
+      "softness": 0.25,
+      "source_radius_m": 0.045,
+      "nominal_preview_gain": 1.0,
+      "encoded_intensity": {
+        "universe": 0,
+        "address_1_based": 3,
+        "formula": "captured_slot_byte/255; includes project gain, fixture gain, bulb model ceiling and blackout"
+      },
+      "line_points_m": null,
+      "preview_only": true
+    },
+    {
+      "fixture_id": "bulb-left-04",
+      "role": "bulbs",
+      "kind": "point",
+      "position_m": [
+        -0.55,
+        1.2,
+        0.36
+      ],
+      "direction": null,
+      "target_m": null,
+      "color_srgb": "#ffd19a",
+      "range_m": 2.5,
+      "outer_angle_degrees": 360,
+      "softness": 0.25,
+      "source_radius_m": 0.045,
+      "nominal_preview_gain": 1.0,
+      "encoded_intensity": {
+        "universe": 0,
+        "address_1_based": 4,
+        "formula": "captured_slot_byte/255; includes project gain, fixture gain, bulb model ceiling and blackout"
+      },
+      "line_points_m": null,
+      "preview_only": true
+    },
+    {
+      "fixture_id": "bulb-left-05",
+      "role": "bulbs",
+      "kind": "point",
+      "position_m": [
+        -0.55,
+        1.35,
+        0.7
+      ],
+      "direction": null,
+      "target_m": null,
+      "color_srgb": "#ffd19a",
+      "range_m": 2.5,
+      "outer_angle_degrees": 360,
+      "softness": 0.25,
+      "source_radius_m": 0.045,
+      "nominal_preview_gain": 1.0,
+      "encoded_intensity": {
+        "universe": 0,
+        "address_1_based": 5,
+        "formula": "captured_slot_byte/255; includes project gain, fixture gain, bulb model ceiling and blackout"
+      },
+      "line_points_m": null,
+      "preview_only": true
+    },
+    {
+      "fixture_id": "bulb-right-01",
+      "role": "bulbs",
+      "kind": "point",
+      "position_m": [
+        0.55,
+        1.35,
+        -0.65
+      ],
+      "direction": null,
+      "target_m": null,
+      "color_srgb": "#ffd19a",
+      "range_m": 2.5,
+      "outer_angle_degrees": 360,
+      "softness": 0.25,
+      "source_radius_m": 0.045,
+      "nominal_preview_gain": 1.0,
+      "encoded_intensity": {
+        "universe": 0,
+        "address_1_based": 6,
+        "formula": "captured_slot_byte/255; includes project gain, fixture gain, bulb model ceiling and blackout"
+      },
+      "line_points_m": null,
+      "preview_only": true
+    },
+    {
+      "fixture_id": "bulb-right-02",
+      "role": "bulbs",
+      "kind": "point",
+      "position_m": [
+        0.55,
+        1.15,
+        -0.32
+      ],
+      "direction": null,
+      "target_m": null,
+      "color_srgb": "#ffd19a",
+      "range_m": 2.5,
+      "outer_angle_degrees": 360,
+      "softness": 0.25,
+      "source_radius_m": 0.045,
+      "nominal_preview_gain": 1.0,
+      "encoded_intensity": {
+        "universe": 0,
+        "address_1_based": 7,
+        "formula": "captured_slot_byte/255; includes project gain, fixture gain, bulb model ceiling and blackout"
+      },
+      "line_points_m": null,
+      "preview_only": true
+    },
+    {
+      "fixture_id": "bulb-right-03",
+      "role": "bulbs",
+      "kind": "point",
+      "position_m": [
+        0.55,
+        1.45,
+        0.02
+      ],
+      "direction": null,
+      "target_m": null,
+      "color_srgb": "#ffd19a",
+      "range_m": 2.5,
+      "outer_angle_degrees": 360,
+      "softness": 0.25,
+      "source_radius_m": 0.045,
+      "nominal_preview_gain": 1.0,
+      "encoded_intensity": {
+        "universe": 0,
+        "address_1_based": 8,
+        "formula": "captured_slot_byte/255; includes project gain, fixture gain, bulb model ceiling and blackout"
+      },
+      "line_points_m": null,
+      "preview_only": true
+    },
+    {
+      "fixture_id": "bulb-right-04",
+      "role": "bulbs",
+      "kind": "point",
+      "position_m": [
+        0.55,
+        1.2,
+        0.36
+      ],
+      "direction": null,
+      "target_m": null,
+      "color_srgb": "#ffd19a",
+      "range_m": 2.5,
+      "outer_angle_degrees": 360,
+      "softness": 0.25,
+      "source_radius_m": 0.045,
+      "nominal_preview_gain": 1.0,
+      "encoded_intensity": {
+        "universe": 0,
+        "address_1_based": 9,
+        "formula": "captured_slot_byte/255; includes project gain, fixture gain, bulb model ceiling and blackout"
+      },
+      "line_points_m": null,
+      "preview_only": true
+    },
+    {
+      "fixture_id": "bulb-right-05",
+      "role": "bulbs",
+      "kind": "point",
+      "position_m": [
+        0.55,
+        1.35,
+        0.7
+      ],
+      "direction": null,
+      "target_m": null,
+      "color_srgb": "#ffd19a",
+      "range_m": 2.5,
+      "outer_angle_degrees": 360,
+      "softness": 0.25,
+      "source_radius_m": 0.045,
+      "nominal_preview_gain": 1.0,
+      "encoded_intensity": {
+        "universe": 0,
+        "address_1_based": 10,
+        "formula": "captured_slot_byte/255; includes project gain, fixture gain, bulb model ceiling and blackout"
+      },
+      "line_points_m": null,
+      "preview_only": true
+    },
+    {
+      "fixture_id": "uv-left-rail",
+      "role": "roof-uv",
+      "kind": "line",
+      "position_m": [
+        -0.67,
+        1.9914,
+        0
+      ],
+      "direction": [
+        0,
+        -1,
+        0
+      ],
+      "target_m": [
+        -0.67,
+        0.9914000000000001,
+        0
+      ],
+      "color_srgb": "#862bff",
+      "range_m": 2.8,
+      "outer_angle_degrees": 120,
+      "softness": 0.25,
+      "source_radius_m": 0.025,
+      "nominal_preview_gain": 1.0,
+      "encoded_intensity": {
+        "universe": 0,
+        "address_1_based": 11,
+        "formula": "captured_slot_byte/255; includes project gain, fixture gain, bulb model ceiling and blackout"
+      },
+      "line_points_m": [
+        [
+          -0.67,
+          2.1588,
+          -0.78
+        ],
+        [
+          -0.67,
+          2.1098,
+          -0.45
+        ],
+        [
+          -0.67,
+          1.9914,
+          0
+        ],
+        [
+          -0.67,
+          1.8517,
+          0.35
+        ],
+        [
+          -0.67,
+          1.7131,
+          0.65
+        ]
+      ],
+      "preview_only": true
+    },
+    {
+      "fixture_id": "uv-right-rail",
+      "role": "roof-uv",
+      "kind": "line",
+      "position_m": [
+        0.67,
+        1.9914,
+        0
+      ],
+      "direction": [
+        0,
+        -1,
+        0
+      ],
+      "target_m": [
+        0.67,
+        0.9914000000000001,
+        0
+      ],
+      "color_srgb": "#862bff",
+      "range_m": 2.8,
+      "outer_angle_degrees": 120,
+      "softness": 0.25,
+      "source_radius_m": 0.025,
+      "nominal_preview_gain": 1.0,
+      "encoded_intensity": {
+        "universe": 0,
+        "address_1_based": 12,
+        "formula": "captured_slot_byte/255; includes project gain, fixture gain, bulb model ceiling and blackout"
+      },
+      "line_points_m": [
+        [
+          0.67,
+          2.1588,
+          -0.78
+        ],
+        [
+          0.67,
+          2.1098,
+          -0.45
+        ],
+        [
+          0.67,
+          1.9914,
+          0
+        ],
+        [
+          0.67,
+          1.8517,
+          0.35
+        ],
+        [
+          0.67,
+          1.7131,
+          0.65
+        ]
+      ],
+      "preview_only": true
+    },
+    {
+      "fixture_id": "uv-roof-spine",
+      "role": "roof-uv",
+      "kind": "line",
+      "position_m": [
+        0,
+        2.1301,
+        0
+      ],
+      "direction": [
+        0,
+        -1,
+        0
+      ],
+      "target_m": [
+        0,
+        1.1301,
+        0
+      ],
+      "color_srgb": "#862bff",
+      "range_m": 2.8,
+      "outer_angle_degrees": 120,
+      "softness": 0.25,
+      "source_radius_m": 0.025,
+      "nominal_preview_gain": 1.0,
+      "encoded_intensity": {
+        "universe": 0,
+        "address_1_based": 13,
+        "formula": "captured_slot_byte/255; includes project gain, fixture gain, bulb model ceiling and blackout"
+      },
+      "line_points_m": [
+        [
+          0,
+          2.2975,
+          -0.78
+        ],
+        [
+          0,
+          2.2485,
+          -0.45
+        ],
+        [
+          0,
+          2.1301,
+          0
+        ],
+        [
+          0,
+          2.0214,
+          0.35
+        ],
+        [
+          0,
+          1.8518,
+          0.65
+        ]
+      ],
+      "preview_only": true
+    },
+    {
+      "fixture_id": "uv-cross-01",
+      "role": "roof-uv",
+      "kind": "line",
+      "position_m": [
+        0,
+        2.276,
+        -0.6
+      ],
+      "direction": [
+        0,
+        -1,
+        0
+      ],
+      "target_m": [
+        0,
+        1.2759999999999998,
+        -0.6
+      ],
+      "color_srgb": "#862bff",
+      "range_m": 2.8,
+      "outer_angle_degrees": 120,
+      "softness": 0.25,
+      "source_radius_m": 0.025,
+      "nominal_preview_gain": 1.0,
+      "encoded_intensity": {
+        "universe": 0,
+        "address_1_based": 14,
+        "formula": "captured_slot_byte/255; includes project gain, fixture gain, bulb model ceiling and blackout"
+      },
+      "line_points_m": [
+        [
+          -0.67,
+          2.1373,
+          -0.6
+        ],
+        [
+          -0.34,
+          2.2413,
+          -0.6
+        ],
+        [
+          0,
+          2.276,
+          -0.6
+        ],
+        [
+          0.34,
+          2.2413,
+          -0.6
+        ],
+        [
+          0.67,
+          2.1373,
+          -0.6
+        ]
+      ],
+      "preview_only": true
+    },
+    {
+      "fixture_id": "uv-cross-02",
+      "role": "roof-uv",
+      "kind": "line",
+      "position_m": [
+        0,
+        2.1301,
+        0
+      ],
+      "direction": [
+        0,
+        -1,
+        0
+      ],
+      "target_m": [
+        0,
+        1.1301,
+        0
+      ],
+      "color_srgb": "#862bff",
+      "range_m": 2.8,
+      "outer_angle_degrees": 120,
+      "softness": 0.25,
+      "source_radius_m": 0.025,
+      "nominal_preview_gain": 1.0,
+      "encoded_intensity": {
+        "universe": 0,
+        "address_1_based": 15,
+        "formula": "captured_slot_byte/255; includes project gain, fixture gain, bulb model ceiling and blackout"
+      },
+      "line_points_m": [
+        [
+          -0.67,
+          1.9914,
+          0
+        ],
+        [
+          -0.34,
+          2.0955,
+          0
+        ],
+        [
+          0,
+          2.1301,
+          0
+        ],
+        [
+          0.34,
+          2.0955,
+          0
+        ],
+        [
+          0.67,
+          1.9914,
+          0
+        ]
+      ],
+      "preview_only": true
+    },
+    {
+      "fixture_id": "uv-cross-03",
+      "role": "roof-uv",
+      "kind": "line",
+      "position_m": [
+        0,
+        1.9241,
+        0.52
+      ],
+      "direction": [
+        0,
+        -1,
+        0
+      ],
+      "target_m": [
+        0,
+        0.9240999999999999,
+        0.52
+      ],
+      "color_srgb": "#862bff",
+      "range_m": 2.8,
+      "outer_angle_degrees": 120,
+      "softness": 0.25,
+      "source_radius_m": 0.025,
+      "nominal_preview_gain": 1.0,
+      "encoded_intensity": {
+        "universe": 0,
+        "address_1_based": 16,
+        "formula": "captured_slot_byte/255; includes project gain, fixture gain, bulb model ceiling and blackout"
+      },
+      "line_points_m": [
+        [
+          -0.67,
+          1.7854,
+          0.52
+        ],
+        [
+          -0.34,
+          1.8894,
+          0.52
+        ],
+        [
+          0,
+          1.9241,
+          0.52
+        ],
+        [
+          0.34,
+          1.8894,
+          0.52
+        ],
+        [
+          0.67,
+          1.7854,
+          0.52
+        ]
+      ],
+      "preview_only": true
+    },
+    {
+      "fixture_id": "front-left-01",
+      "role": "front",
+      "kind": "spot",
+      "position_m": [
+        -0.38,
+        0.95,
+        -1.96
+      ],
+      "direction": [
+        -0.129025,
+        0.161281,
+        0.978438
+      ],
+      "target_m": [
+        -0.5,
+        1.1,
+        -1.05
+      ],
+      "color_srgb": "#fff2db",
+      "range_m": 5,
+      "outer_angle_degrees": 65,
+      "softness": 0.25,
+      "source_radius_m": 0.025,
+      "nominal_preview_gain": 1.0,
+      "encoded_intensity": {
+        "universe": 0,
+        "address_1_based": 17,
+        "formula": "captured_slot_byte/255; includes project gain, fixture gain, bulb model ceiling and blackout"
+      },
+      "line_points_m": null,
+      "preview_only": true
+    },
+    {
+      "fixture_id": "front-left-02",
+      "role": "front",
+      "kind": "spot",
+      "position_m": [
+        -0.8,
+        1.28,
+        -1.86
+      ],
+      "direction": [
+        0.34001,
+        -0.204006,
+        0.918028
+      ],
+      "target_m": [
+        -0.5,
+        1.1,
+        -1.05
+      ],
+      "color_srgb": "#fff2db",
+      "range_m": 5,
+      "outer_angle_degrees": 65,
+      "softness": 0.25,
+      "source_radius_m": 0.025,
+      "nominal_preview_gain": 1.0,
+      "encoded_intensity": {
+        "universe": 0,
+        "address_1_based": 18,
+        "formula": "captured_slot_byte/255; includes project gain, fixture gain, bulb model ceiling and blackout"
+      },
+      "line_points_m": null,
+      "preview_only": true
+    },
+    {
+      "fixture_id": "front-left-03",
+      "role": "front",
+      "kind": "spot",
+      "position_m": [
+        -1.2,
+        1.55,
+        -1.72
+      ],
+      "direction": [
+        0.655208,
+        -0.421205,
+        0.627128
+      ],
+      "target_m": [
+        -0.5,
+        1.1,
+        -1.05
+      ],
+      "color_srgb": "#fff2db",
+      "range_m": 5,
+      "outer_angle_degrees": 65,
+      "softness": 0.25,
+      "source_radius_m": 0.025,
+      "nominal_preview_gain": 1.0,
+      "encoded_intensity": {
+        "universe": 0,
+        "address_1_based": 19,
+        "formula": "captured_slot_byte/255; includes project gain, fixture gain, bulb model ceiling and blackout"
+      },
+      "line_points_m": null,
+      "preview_only": true
+    },
+    {
+      "fixture_id": "front-side-left-01",
+      "role": "front-sides",
+      "kind": "spot",
+      "position_m": [
+        -1.17,
+        1.5,
+        -1.25
+      ],
+      "direction": [
+        0.70583,
+        -0.600706,
+        0.375441
+      ],
+      "target_m": [
+        -0.7,
+        1.1,
+        -1.0
+      ],
+      "color_srgb": "#fff2db",
+      "range_m": 5,
+      "outer_angle_degrees": 65,
+      "softness": 0.25,
+      "source_radius_m": 0.025,
+      "nominal_preview_gain": 1.0,
+      "encoded_intensity": {
+        "universe": 0,
+        "address_1_based": 20,
+        "formula": "captured_slot_byte/255; includes project gain, fixture gain, bulb model ceiling and blackout"
+      },
+      "line_points_m": null,
+      "preview_only": true
+    },
+    {
+      "fixture_id": "front-side-left-02",
+      "role": "front-sides",
+      "kind": "spot",
+      "position_m": [
+        -1.2,
+        1.78,
+        -0.7
+      ],
+      "direction": [
+        0.567998,
+        -0.772478,
+        0.283999
+      ],
+      "target_m": [
+        -0.7,
+        1.1,
+        -0.44999999999999996
+      ],
+      "color_srgb": "#fff2db",
+      "range_m": 5,
+      "outer_angle_degrees": 65,
+      "softness": 0.25,
+      "source_radius_m": 0.025,
+      "nominal_preview_gain": 1.0,
+      "encoded_intensity": {
+        "universe": 0,
+        "address_1_based": 21,
+        "formula": "captured_slot_byte/255; includes project gain, fixture gain, bulb model ceiling and blackout"
+      },
+      "line_points_m": null,
+      "preview_only": true
+    },
+    {
+      "fixture_id": "wing-left-01",
+      "role": "wings",
+      "kind": "spot",
+      "position_m": [
+        -1.15,
+        2.72,
+        -0.62
+      ],
+      "direction": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "target_m": [
+        -1.15,
+        1.6700000000000002,
+        -0.62
+      ],
+      "color_srgb": "#fff2db",
+      "range_m": 5,
+      "outer_angle_degrees": 80,
+      "softness": 0.25,
+      "source_radius_m": 0.025,
+      "nominal_preview_gain": 1.0,
+      "encoded_intensity": {
+        "universe": 0,
+        "address_1_based": 22,
+        "formula": "captured_slot_byte/255; includes project gain, fixture gain, bulb model ceiling and blackout"
+      },
+      "line_points_m": null,
+      "preview_only": true
+    },
+    {
+      "fixture_id": "wing-left-02",
+      "role": "wings",
+      "kind": "spot",
+      "position_m": [
+        -1.72,
+        2.78,
+        -0.26
+      ],
+      "direction": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "target_m": [
+        -1.72,
+        1.7299999999999998,
+        -0.26
+      ],
+      "color_srgb": "#fff2db",
+      "range_m": 5,
+      "outer_angle_degrees": 80,
+      "softness": 0.25,
+      "source_radius_m": 0.025,
+      "nominal_preview_gain": 1.0,
+      "encoded_intensity": {
+        "universe": 0,
+        "address_1_based": 23,
+        "formula": "captured_slot_byte/255; includes project gain, fixture gain, bulb model ceiling and blackout"
+      },
+      "line_points_m": null,
+      "preview_only": true
+    },
+    {
+      "fixture_id": "wing-left-03",
+      "role": "wings",
+      "kind": "spot",
+      "position_m": [
+        -2.35,
+        2.7,
+        0.18
+      ],
+      "direction": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "target_m": [
+        -2.35,
+        1.6500000000000001,
+        0.18
+      ],
+      "color_srgb": "#fff2db",
+      "range_m": 5,
+      "outer_angle_degrees": 80,
+      "softness": 0.25,
+      "source_radius_m": 0.025,
+      "nominal_preview_gain": 1.0,
+      "encoded_intensity": {
+        "universe": 0,
+        "address_1_based": 24,
+        "formula": "captured_slot_byte/255; includes project gain, fixture gain, bulb model ceiling and blackout"
+      },
+      "line_points_m": null,
+      "preview_only": true
+    },
+    {
+      "fixture_id": "eye-left",
+      "role": "eyes",
+      "kind": "spot",
+      "position_m": [
+        -0.6563,
+        1.7615,
+        -1.43
+      ],
+      "direction": [
+        0.0,
+        -0.037474,
+        -0.999298
+      ],
+      "target_m": [
+        -0.6563,
+        1.6115000000000002,
+        -5.43
+      ],
+      "color_srgb": "#fff2db",
+      "range_m": 6,
+      "outer_angle_degrees": 40,
+      "softness": 0.25,
+      "source_radius_m": 0.025,
+      "nominal_preview_gain": 1.0,
+      "encoded_intensity": {
+        "universe": 0,
+        "address_1_based": 25,
+        "formula": "captured_slot_byte/255; includes project gain, fixture gain, bulb model ceiling and blackout"
+      },
+      "line_points_m": null,
+      "preview_only": true
+    },
+    {
+      "fixture_id": "ear-left",
+      "role": "ears",
+      "kind": "spot",
+      "position_m": [
+        -1.02,
+        2.1,
+        -0.64
+      ],
+      "direction": [
+        -0.998752,
+        -0.049938,
+        0.0
+      ],
+      "target_m": [
+        -3.02,
+        2.0,
+        -0.64
+      ],
+      "color_srgb": "#ffc75f",
+      "range_m": 3,
+      "outer_angle_degrees": 95,
+      "softness": 0.25,
+      "source_radius_m": 0.025,
+      "nominal_preview_gain": 1.0,
+      "encoded_intensity": {
+        "universe": 0,
+        "address_1_based": 26,
+        "formula": "captured_slot_byte/255; includes project gain, fixture gain, bulb model ceiling and blackout"
+      },
+      "line_points_m": null,
+      "preview_only": true
+    },
+    {
+      "fixture_id": "watcher-left",
+      "role": "rear-watchers",
+      "kind": "spot",
+      "position_m": [
+        -0.72,
+        1.25,
+        1.72
+      ],
+      "direction": [
+        0.0,
+        -0.083045,
+        0.996546
+      ],
+      "target_m": [
+        -0.72,
+        1.0,
+        4.72
+      ],
+      "color_srgb": "#90d7e6",
+      "range_m": 5,
+      "outer_angle_degrees": 55,
+      "softness": 0.25,
+      "source_radius_m": 0.025,
+      "nominal_preview_gain": 1.0,
+      "encoded_intensity": {
+        "universe": 0,
+        "address_1_based": 27,
+        "formula": "captured_slot_byte/255; includes project gain, fixture gain, bulb model ceiling and blackout"
+      },
+      "line_points_m": null,
+      "preview_only": true
+    },
+    {
+      "fixture_id": "front-right-01",
+      "role": "front",
+      "kind": "spot",
+      "position_m": [
+        0.38,
+        0.95,
+        -1.96
+      ],
+      "direction": [
+        0.129025,
+        0.161281,
+        0.978438
+      ],
+      "target_m": [
+        0.5,
+        1.1,
+        -1.05
+      ],
+      "color_srgb": "#fff2db",
+      "range_m": 5,
+      "outer_angle_degrees": 65,
+      "softness": 0.25,
+      "source_radius_m": 0.025,
+      "nominal_preview_gain": 1.0,
+      "encoded_intensity": {
+        "universe": 0,
+        "address_1_based": 28,
+        "formula": "captured_slot_byte/255; includes project gain, fixture gain, bulb model ceiling and blackout"
+      },
+      "line_points_m": null,
+      "preview_only": true
+    },
+    {
+      "fixture_id": "front-right-02",
+      "role": "front",
+      "kind": "spot",
+      "position_m": [
+        0.8,
+        1.28,
+        -1.86
+      ],
+      "direction": [
+        -0.34001,
+        -0.204006,
+        0.918028
+      ],
+      "target_m": [
+        0.5,
+        1.1,
+        -1.05
+      ],
+      "color_srgb": "#fff2db",
+      "range_m": 5,
+      "outer_angle_degrees": 65,
+      "softness": 0.25,
+      "source_radius_m": 0.025,
+      "nominal_preview_gain": 1.0,
+      "encoded_intensity": {
+        "universe": 0,
+        "address_1_based": 29,
+        "formula": "captured_slot_byte/255; includes project gain, fixture gain, bulb model ceiling and blackout"
+      },
+      "line_points_m": null,
+      "preview_only": true
+    },
+    {
+      "fixture_id": "front-right-03",
+      "role": "front",
+      "kind": "spot",
+      "position_m": [
+        1.2,
+        1.55,
+        -1.72
+      ],
+      "direction": [
+        -0.655208,
+        -0.421205,
+        0.627128
+      ],
+      "target_m": [
+        0.5,
+        1.1,
+        -1.05
+      ],
+      "color_srgb": "#fff2db",
+      "range_m": 5,
+      "outer_angle_degrees": 65,
+      "softness": 0.25,
+      "source_radius_m": 0.025,
+      "nominal_preview_gain": 1.0,
+      "encoded_intensity": {
+        "universe": 0,
+        "address_1_based": 30,
+        "formula": "captured_slot_byte/255; includes project gain, fixture gain, bulb model ceiling and blackout"
+      },
+      "line_points_m": null,
+      "preview_only": true
+    },
+    {
+      "fixture_id": "front-side-right-01",
+      "role": "front-sides",
+      "kind": "spot",
+      "position_m": [
+        1.17,
+        1.5,
+        -1.25
+      ],
+      "direction": [
+        -0.70583,
+        -0.600706,
+        0.375441
+      ],
+      "target_m": [
+        0.7,
+        1.1,
+        -1.0
+      ],
+      "color_srgb": "#fff2db",
+      "range_m": 5,
+      "outer_angle_degrees": 65,
+      "softness": 0.25,
+      "source_radius_m": 0.025,
+      "nominal_preview_gain": 1.0,
+      "encoded_intensity": {
+        "universe": 0,
+        "address_1_based": 31,
+        "formula": "captured_slot_byte/255; includes project gain, fixture gain, bulb model ceiling and blackout"
+      },
+      "line_points_m": null,
+      "preview_only": true
+    },
+    {
+      "fixture_id": "front-side-right-02",
+      "role": "front-sides",
+      "kind": "spot",
+      "position_m": [
+        1.2,
+        1.78,
+        -0.7
+      ],
+      "direction": [
+        -0.567998,
+        -0.772478,
+        0.283999
+      ],
+      "target_m": [
+        0.7,
+        1.1,
+        -0.44999999999999996
+      ],
+      "color_srgb": "#fff2db",
+      "range_m": 5,
+      "outer_angle_degrees": 65,
+      "softness": 0.25,
+      "source_radius_m": 0.025,
+      "nominal_preview_gain": 1.0,
+      "encoded_intensity": {
+        "universe": 0,
+        "address_1_based": 32,
+        "formula": "captured_slot_byte/255; includes project gain, fixture gain, bulb model ceiling and blackout"
+      },
+      "line_points_m": null,
+      "preview_only": true
+    },
+    {
+      "fixture_id": "wing-right-01",
+      "role": "wings",
+      "kind": "spot",
+      "position_m": [
+        1.15,
+        2.72,
+        -0.62
+      ],
+      "direction": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "target_m": [
+        1.15,
+        1.6700000000000002,
+        -0.62
+      ],
+      "color_srgb": "#fff2db",
+      "range_m": 5,
+      "outer_angle_degrees": 80,
+      "softness": 0.25,
+      "source_radius_m": 0.025,
+      "nominal_preview_gain": 1.0,
+      "encoded_intensity": {
+        "universe": 0,
+        "address_1_based": 33,
+        "formula": "captured_slot_byte/255; includes project gain, fixture gain, bulb model ceiling and blackout"
+      },
+      "line_points_m": null,
+      "preview_only": true
+    },
+    {
+      "fixture_id": "wing-right-02",
+      "role": "wings",
+      "kind": "spot",
+      "position_m": [
+        1.72,
+        2.78,
+        -0.26
+      ],
+      "direction": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "target_m": [
+        1.72,
+        1.7299999999999998,
+        -0.26
+      ],
+      "color_srgb": "#fff2db",
+      "range_m": 5,
+      "outer_angle_degrees": 80,
+      "softness": 0.25,
+      "source_radius_m": 0.025,
+      "nominal_preview_gain": 1.0,
+      "encoded_intensity": {
+        "universe": 0,
+        "address_1_based": 34,
+        "formula": "captured_slot_byte/255; includes project gain, fixture gain, bulb model ceiling and blackout"
+      },
+      "line_points_m": null,
+      "preview_only": true
+    },
+    {
+      "fixture_id": "wing-right-03",
+      "role": "wings",
+      "kind": "spot",
+      "position_m": [
+        2.35,
+        2.7,
+        0.18
+      ],
+      "direction": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "target_m": [
+        2.35,
+        1.6500000000000001,
+        0.18
+      ],
+      "color_srgb": "#fff2db",
+      "range_m": 5,
+      "outer_angle_degrees": 80,
+      "softness": 0.25,
+      "source_radius_m": 0.025,
+      "nominal_preview_gain": 1.0,
+      "encoded_intensity": {
+        "universe": 0,
+        "address_1_based": 35,
+        "formula": "captured_slot_byte/255; includes project gain, fixture gain, bulb model ceiling and blackout"
+      },
+      "line_points_m": null,
+      "preview_only": true
+    },
+    {
+      "fixture_id": "eye-right",
+      "role": "eyes",
+      "kind": "spot",
+      "position_m": [
+        0.6563,
+        1.7615,
+        -1.43
+      ],
+      "direction": [
+        0.0,
+        -0.037474,
+        -0.999298
+      ],
+      "target_m": [
+        0.6563,
+        1.6115000000000002,
+        -5.43
+      ],
+      "color_srgb": "#fff2db",
+      "range_m": 6,
+      "outer_angle_degrees": 40,
+      "softness": 0.25,
+      "source_radius_m": 0.025,
+      "nominal_preview_gain": 1.0,
+      "encoded_intensity": {
+        "universe": 0,
+        "address_1_based": 36,
+        "formula": "captured_slot_byte/255; includes project gain, fixture gain, bulb model ceiling and blackout"
+      },
+      "line_points_m": null,
+      "preview_only": true
+    },
+    {
+      "fixture_id": "ear-right",
+      "role": "ears",
+      "kind": "spot",
+      "position_m": [
+        1.02,
+        2.1,
+        -0.64
+      ],
+      "direction": [
+        0.998752,
+        -0.049938,
+        0.0
+      ],
+      "target_m": [
+        3.02,
+        2.0,
+        -0.64
+      ],
+      "color_srgb": "#ffc75f",
+      "range_m": 3,
+      "outer_angle_degrees": 95,
+      "softness": 0.25,
+      "source_radius_m": 0.025,
+      "nominal_preview_gain": 1.0,
+      "encoded_intensity": {
+        "universe": 0,
+        "address_1_based": 37,
+        "formula": "captured_slot_byte/255; includes project gain, fixture gain, bulb model ceiling and blackout"
+      },
+      "line_points_m": null,
+      "preview_only": true
+    },
+    {
+      "fixture_id": "watcher-right",
+      "role": "rear-watchers",
+      "kind": "spot",
+      "position_m": [
+        0.72,
+        1.25,
+        1.72
+      ],
+      "direction": [
+        0.0,
+        -0.083045,
+        0.996546
+      ],
+      "target_m": [
+        0.72,
+        1.0,
+        4.72
+      ],
+      "color_srgb": "#90d7e6",
+      "range_m": 5,
+      "outer_angle_degrees": 55,
+      "softness": 0.25,
+      "source_radius_m": 0.025,
+      "nominal_preview_gain": 1.0,
+      "encoded_intensity": {
+        "universe": 0,
+        "address_1_based": 38,
+        "formula": "captured_slot_byte/255; includes project gain, fixture gain, bulb model ceiling and blackout"
+      },
+      "line_points_m": null,
+      "preview_only": true
+    }
+  ],
+  "status": "authored adapter metadata; not an extra engine Project field",
+  "limitations": [
+    "Artist preview directions/ranges, not measured photometry.",
+    "UV is a visible violet proxy; no fluorescence or spectral response.",
+    "GLB excludes old lamp/cable fixtures; display new fixture markers/sources using this file.",
+    "No headlight/ear motor control or animation is implied.",
+    "Lighting gain should follow captured channel bytes even when physical output is disabled."
+  ]
+}

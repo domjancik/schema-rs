@@ -1,0 +1,3080 @@
+[
+  {
+    "fixture": "bulb-left-01",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit chase",
+      "root": {
+        "id": 7,
+        "behavior": "Modify.Value.Clamp",
+        "properties": {
+          "Minimum": 0.04,
+          "Maximum": 1.0
+        },
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Value.MapFromTo",
+            "properties": {
+              "Source Min": 0.65,
+              "Source Max": 1.0,
+              "Minimum": 0.04,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 5,
+                "behavior": "Modify.Value.Wave",
+                "properties": {
+                  "Shape": 3
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 3,
+                        "behavior": "Create.Value.LFO",
+                        "properties": {
+                          "Period": 14.0,
+                          "Type": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 2,
+                        "behavior": "Modify.Value.MapTo",
+                        "properties": {
+                          "Minimum": 0.0,
+                          "Maximum": -1.0
+                        },
+                        "children": [
+                          {
+                            "id": 1,
+                            "behavior": "Spatial.Axis",
+                            "properties": {
+                              "Axis": 2,
+                              "Minimum": -1.96,
+                              "Maximum": 1.72
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-left-02",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit chase",
+      "root": {
+        "id": 7,
+        "behavior": "Modify.Value.Clamp",
+        "properties": {
+          "Minimum": 0.04,
+          "Maximum": 1.0
+        },
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Value.MapFromTo",
+            "properties": {
+              "Source Min": 0.65,
+              "Source Max": 1.0,
+              "Minimum": 0.04,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 5,
+                "behavior": "Modify.Value.Wave",
+                "properties": {
+                  "Shape": 3
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 3,
+                        "behavior": "Create.Value.LFO",
+                        "properties": {
+                          "Period": 14.0,
+                          "Type": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 2,
+                        "behavior": "Modify.Value.MapTo",
+                        "properties": {
+                          "Minimum": 0.0,
+                          "Maximum": -1.0
+                        },
+                        "children": [
+                          {
+                            "id": 1,
+                            "behavior": "Spatial.Axis",
+                            "properties": {
+                              "Axis": 2,
+                              "Minimum": -1.96,
+                              "Maximum": 1.72
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-left-03",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit chase",
+      "root": {
+        "id": 7,
+        "behavior": "Modify.Value.Clamp",
+        "properties": {
+          "Minimum": 0.04,
+          "Maximum": 1.0
+        },
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Value.MapFromTo",
+            "properties": {
+              "Source Min": 0.65,
+              "Source Max": 1.0,
+              "Minimum": 0.04,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 5,
+                "behavior": "Modify.Value.Wave",
+                "properties": {
+                  "Shape": 3
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 3,
+                        "behavior": "Create.Value.LFO",
+                        "properties": {
+                          "Period": 14.0,
+                          "Type": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 2,
+                        "behavior": "Modify.Value.MapTo",
+                        "properties": {
+                          "Minimum": 0.0,
+                          "Maximum": -1.0
+                        },
+                        "children": [
+                          {
+                            "id": 1,
+                            "behavior": "Spatial.Axis",
+                            "properties": {
+                              "Axis": 2,
+                              "Minimum": -1.96,
+                              "Maximum": 1.72
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-left-04",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit chase",
+      "root": {
+        "id": 7,
+        "behavior": "Modify.Value.Clamp",
+        "properties": {
+          "Minimum": 0.04,
+          "Maximum": 1.0
+        },
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Value.MapFromTo",
+            "properties": {
+              "Source Min": 0.65,
+              "Source Max": 1.0,
+              "Minimum": 0.04,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 5,
+                "behavior": "Modify.Value.Wave",
+                "properties": {
+                  "Shape": 3
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 3,
+                        "behavior": "Create.Value.LFO",
+                        "properties": {
+                          "Period": 14.0,
+                          "Type": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 2,
+                        "behavior": "Modify.Value.MapTo",
+                        "properties": {
+                          "Minimum": 0.0,
+                          "Maximum": -1.0
+                        },
+                        "children": [
+                          {
+                            "id": 1,
+                            "behavior": "Spatial.Axis",
+                            "properties": {
+                              "Axis": 2,
+                              "Minimum": -1.96,
+                              "Maximum": 1.72
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-left-05",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit chase",
+      "root": {
+        "id": 7,
+        "behavior": "Modify.Value.Clamp",
+        "properties": {
+          "Minimum": 0.04,
+          "Maximum": 1.0
+        },
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Value.MapFromTo",
+            "properties": {
+              "Source Min": 0.65,
+              "Source Max": 1.0,
+              "Minimum": 0.04,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 5,
+                "behavior": "Modify.Value.Wave",
+                "properties": {
+                  "Shape": 3
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 3,
+                        "behavior": "Create.Value.LFO",
+                        "properties": {
+                          "Period": 14.0,
+                          "Type": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 2,
+                        "behavior": "Modify.Value.MapTo",
+                        "properties": {
+                          "Minimum": 0.0,
+                          "Maximum": -1.0
+                        },
+                        "children": [
+                          {
+                            "id": 1,
+                            "behavior": "Spatial.Axis",
+                            "properties": {
+                              "Axis": 2,
+                              "Minimum": -1.96,
+                              "Maximum": 1.72
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-right-01",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit chase",
+      "root": {
+        "id": 7,
+        "behavior": "Modify.Value.Clamp",
+        "properties": {
+          "Minimum": 0.04,
+          "Maximum": 1.0
+        },
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Value.MapFromTo",
+            "properties": {
+              "Source Min": 0.65,
+              "Source Max": 1.0,
+              "Minimum": 0.04,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 5,
+                "behavior": "Modify.Value.Wave",
+                "properties": {
+                  "Shape": 3
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 3,
+                        "behavior": "Create.Value.LFO",
+                        "properties": {
+                          "Period": 14.0,
+                          "Type": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 2,
+                        "behavior": "Modify.Value.MapTo",
+                        "properties": {
+                          "Minimum": 0.0,
+                          "Maximum": -1.0
+                        },
+                        "children": [
+                          {
+                            "id": 1,
+                            "behavior": "Spatial.Axis",
+                            "properties": {
+                              "Axis": 2,
+                              "Minimum": -1.96,
+                              "Maximum": 1.72
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-right-02",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit chase",
+      "root": {
+        "id": 7,
+        "behavior": "Modify.Value.Clamp",
+        "properties": {
+          "Minimum": 0.04,
+          "Maximum": 1.0
+        },
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Value.MapFromTo",
+            "properties": {
+              "Source Min": 0.65,
+              "Source Max": 1.0,
+              "Minimum": 0.04,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 5,
+                "behavior": "Modify.Value.Wave",
+                "properties": {
+                  "Shape": 3
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 3,
+                        "behavior": "Create.Value.LFO",
+                        "properties": {
+                          "Period": 14.0,
+                          "Type": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 2,
+                        "behavior": "Modify.Value.MapTo",
+                        "properties": {
+                          "Minimum": 0.0,
+                          "Maximum": -1.0
+                        },
+                        "children": [
+                          {
+                            "id": 1,
+                            "behavior": "Spatial.Axis",
+                            "properties": {
+                              "Axis": 2,
+                              "Minimum": -1.96,
+                              "Maximum": 1.72
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-right-03",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit chase",
+      "root": {
+        "id": 7,
+        "behavior": "Modify.Value.Clamp",
+        "properties": {
+          "Minimum": 0.04,
+          "Maximum": 1.0
+        },
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Value.MapFromTo",
+            "properties": {
+              "Source Min": 0.65,
+              "Source Max": 1.0,
+              "Minimum": 0.04,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 5,
+                "behavior": "Modify.Value.Wave",
+                "properties": {
+                  "Shape": 3
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 3,
+                        "behavior": "Create.Value.LFO",
+                        "properties": {
+                          "Period": 14.0,
+                          "Type": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 2,
+                        "behavior": "Modify.Value.MapTo",
+                        "properties": {
+                          "Minimum": 0.0,
+                          "Maximum": -1.0
+                        },
+                        "children": [
+                          {
+                            "id": 1,
+                            "behavior": "Spatial.Axis",
+                            "properties": {
+                              "Axis": 2,
+                              "Minimum": -1.96,
+                              "Maximum": 1.72
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-right-04",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit chase",
+      "root": {
+        "id": 7,
+        "behavior": "Modify.Value.Clamp",
+        "properties": {
+          "Minimum": 0.04,
+          "Maximum": 1.0
+        },
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Value.MapFromTo",
+            "properties": {
+              "Source Min": 0.65,
+              "Source Max": 1.0,
+              "Minimum": 0.04,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 5,
+                "behavior": "Modify.Value.Wave",
+                "properties": {
+                  "Shape": 3
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 3,
+                        "behavior": "Create.Value.LFO",
+                        "properties": {
+                          "Period": 14.0,
+                          "Type": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 2,
+                        "behavior": "Modify.Value.MapTo",
+                        "properties": {
+                          "Minimum": 0.0,
+                          "Maximum": -1.0
+                        },
+                        "children": [
+                          {
+                            "id": 1,
+                            "behavior": "Spatial.Axis",
+                            "properties": {
+                              "Axis": 2,
+                              "Minimum": -1.96,
+                              "Maximum": 1.72
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-right-05",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit chase",
+      "root": {
+        "id": 7,
+        "behavior": "Modify.Value.Clamp",
+        "properties": {
+          "Minimum": 0.04,
+          "Maximum": 1.0
+        },
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Value.MapFromTo",
+            "properties": {
+              "Source Min": 0.65,
+              "Source Max": 1.0,
+              "Minimum": 0.04,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 5,
+                "behavior": "Modify.Value.Wave",
+                "properties": {
+                  "Shape": 3
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 3,
+                        "behavior": "Create.Value.LFO",
+                        "properties": {
+                          "Period": 14.0,
+                          "Type": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 2,
+                        "behavior": "Modify.Value.MapTo",
+                        "properties": {
+                          "Minimum": 0.0,
+                          "Maximum": -1.0
+                        },
+                        "children": [
+                          {
+                            "id": 1,
+                            "behavior": "Spatial.Axis",
+                            "properties": {
+                              "Axis": 2,
+                              "Minimum": -1.96,
+                              "Maximum": 1.72
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "uv-left-rail",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit chase",
+      "root": {
+        "id": 7,
+        "behavior": "Modify.Value.Clamp",
+        "properties": {
+          "Minimum": 0.04,
+          "Maximum": 1.0
+        },
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Value.MapFromTo",
+            "properties": {
+              "Source Min": 0.65,
+              "Source Max": 1.0,
+              "Minimum": 0.04,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 5,
+                "behavior": "Modify.Value.Wave",
+                "properties": {
+                  "Shape": 3
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 3,
+                        "behavior": "Create.Value.LFO",
+                        "properties": {
+                          "Period": 14.0,
+                          "Type": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 2,
+                        "behavior": "Modify.Value.MapTo",
+                        "properties": {
+                          "Minimum": 0.0,
+                          "Maximum": -1.0
+                        },
+                        "children": [
+                          {
+                            "id": 1,
+                            "behavior": "Spatial.Axis",
+                            "properties": {
+                              "Axis": 2,
+                              "Minimum": -1.96,
+                              "Maximum": 1.72
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "uv-right-rail",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit chase",
+      "root": {
+        "id": 7,
+        "behavior": "Modify.Value.Clamp",
+        "properties": {
+          "Minimum": 0.04,
+          "Maximum": 1.0
+        },
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Value.MapFromTo",
+            "properties": {
+              "Source Min": 0.65,
+              "Source Max": 1.0,
+              "Minimum": 0.04,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 5,
+                "behavior": "Modify.Value.Wave",
+                "properties": {
+                  "Shape": 3
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 3,
+                        "behavior": "Create.Value.LFO",
+                        "properties": {
+                          "Period": 14.0,
+                          "Type": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 2,
+                        "behavior": "Modify.Value.MapTo",
+                        "properties": {
+                          "Minimum": 0.0,
+                          "Maximum": -1.0
+                        },
+                        "children": [
+                          {
+                            "id": 1,
+                            "behavior": "Spatial.Axis",
+                            "properties": {
+                              "Axis": 2,
+                              "Minimum": -1.96,
+                              "Maximum": 1.72
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "uv-roof-spine",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit chase",
+      "root": {
+        "id": 7,
+        "behavior": "Modify.Value.Clamp",
+        "properties": {
+          "Minimum": 0.04,
+          "Maximum": 1.0
+        },
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Value.MapFromTo",
+            "properties": {
+              "Source Min": 0.65,
+              "Source Max": 1.0,
+              "Minimum": 0.04,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 5,
+                "behavior": "Modify.Value.Wave",
+                "properties": {
+                  "Shape": 3
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 3,
+                        "behavior": "Create.Value.LFO",
+                        "properties": {
+                          "Period": 14.0,
+                          "Type": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 2,
+                        "behavior": "Modify.Value.MapTo",
+                        "properties": {
+                          "Minimum": 0.0,
+                          "Maximum": -1.0
+                        },
+                        "children": [
+                          {
+                            "id": 1,
+                            "behavior": "Spatial.Axis",
+                            "properties": {
+                              "Axis": 2,
+                              "Minimum": -1.96,
+                              "Maximum": 1.72
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "uv-cross-01",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit chase",
+      "root": {
+        "id": 7,
+        "behavior": "Modify.Value.Clamp",
+        "properties": {
+          "Minimum": 0.04,
+          "Maximum": 1.0
+        },
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Value.MapFromTo",
+            "properties": {
+              "Source Min": 0.65,
+              "Source Max": 1.0,
+              "Minimum": 0.04,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 5,
+                "behavior": "Modify.Value.Wave",
+                "properties": {
+                  "Shape": 3
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 3,
+                        "behavior": "Create.Value.LFO",
+                        "properties": {
+                          "Period": 14.0,
+                          "Type": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 2,
+                        "behavior": "Modify.Value.MapTo",
+                        "properties": {
+                          "Minimum": 0.0,
+                          "Maximum": -1.0
+                        },
+                        "children": [
+                          {
+                            "id": 1,
+                            "behavior": "Spatial.Axis",
+                            "properties": {
+                              "Axis": 2,
+                              "Minimum": -1.96,
+                              "Maximum": 1.72
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "uv-cross-02",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit chase",
+      "root": {
+        "id": 7,
+        "behavior": "Modify.Value.Clamp",
+        "properties": {
+          "Minimum": 0.04,
+          "Maximum": 1.0
+        },
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Value.MapFromTo",
+            "properties": {
+              "Source Min": 0.65,
+              "Source Max": 1.0,
+              "Minimum": 0.04,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 5,
+                "behavior": "Modify.Value.Wave",
+                "properties": {
+                  "Shape": 3
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 3,
+                        "behavior": "Create.Value.LFO",
+                        "properties": {
+                          "Period": 14.0,
+                          "Type": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 2,
+                        "behavior": "Modify.Value.MapTo",
+                        "properties": {
+                          "Minimum": 0.0,
+                          "Maximum": -1.0
+                        },
+                        "children": [
+                          {
+                            "id": 1,
+                            "behavior": "Spatial.Axis",
+                            "properties": {
+                              "Axis": 2,
+                              "Minimum": -1.96,
+                              "Maximum": 1.72
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "uv-cross-03",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit chase",
+      "root": {
+        "id": 7,
+        "behavior": "Modify.Value.Clamp",
+        "properties": {
+          "Minimum": 0.04,
+          "Maximum": 1.0
+        },
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Value.MapFromTo",
+            "properties": {
+              "Source Min": 0.65,
+              "Source Max": 1.0,
+              "Minimum": 0.04,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 5,
+                "behavior": "Modify.Value.Wave",
+                "properties": {
+                  "Shape": 3
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 3,
+                        "behavior": "Create.Value.LFO",
+                        "properties": {
+                          "Period": 14.0,
+                          "Type": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 2,
+                        "behavior": "Modify.Value.MapTo",
+                        "properties": {
+                          "Minimum": 0.0,
+                          "Maximum": -1.0
+                        },
+                        "children": [
+                          {
+                            "id": 1,
+                            "behavior": "Spatial.Axis",
+                            "properties": {
+                              "Axis": 2,
+                              "Minimum": -1.96,
+                              "Maximum": 1.72
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-left-01",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit chase",
+      "root": {
+        "id": 7,
+        "behavior": "Modify.Value.Clamp",
+        "properties": {
+          "Minimum": 0.04,
+          "Maximum": 1.0
+        },
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Value.MapFromTo",
+            "properties": {
+              "Source Min": 0.65,
+              "Source Max": 1.0,
+              "Minimum": 0.04,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 5,
+                "behavior": "Modify.Value.Wave",
+                "properties": {
+                  "Shape": 3
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 3,
+                        "behavior": "Create.Value.LFO",
+                        "properties": {
+                          "Period": 14.0,
+                          "Type": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 2,
+                        "behavior": "Modify.Value.MapTo",
+                        "properties": {
+                          "Minimum": 0.0,
+                          "Maximum": -1.0
+                        },
+                        "children": [
+                          {
+                            "id": 1,
+                            "behavior": "Spatial.Axis",
+                            "properties": {
+                              "Axis": 2,
+                              "Minimum": -1.96,
+                              "Maximum": 1.72
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-left-02",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit chase",
+      "root": {
+        "id": 7,
+        "behavior": "Modify.Value.Clamp",
+        "properties": {
+          "Minimum": 0.04,
+          "Maximum": 1.0
+        },
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Value.MapFromTo",
+            "properties": {
+              "Source Min": 0.65,
+              "Source Max": 1.0,
+              "Minimum": 0.04,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 5,
+                "behavior": "Modify.Value.Wave",
+                "properties": {
+                  "Shape": 3
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 3,
+                        "behavior": "Create.Value.LFO",
+                        "properties": {
+                          "Period": 14.0,
+                          "Type": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 2,
+                        "behavior": "Modify.Value.MapTo",
+                        "properties": {
+                          "Minimum": 0.0,
+                          "Maximum": -1.0
+                        },
+                        "children": [
+                          {
+                            "id": 1,
+                            "behavior": "Spatial.Axis",
+                            "properties": {
+                              "Axis": 2,
+                              "Minimum": -1.96,
+                              "Maximum": 1.72
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-left-03",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit chase",
+      "root": {
+        "id": 7,
+        "behavior": "Modify.Value.Clamp",
+        "properties": {
+          "Minimum": 0.04,
+          "Maximum": 1.0
+        },
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Value.MapFromTo",
+            "properties": {
+              "Source Min": 0.65,
+              "Source Max": 1.0,
+              "Minimum": 0.04,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 5,
+                "behavior": "Modify.Value.Wave",
+                "properties": {
+                  "Shape": 3
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 3,
+                        "behavior": "Create.Value.LFO",
+                        "properties": {
+                          "Period": 14.0,
+                          "Type": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 2,
+                        "behavior": "Modify.Value.MapTo",
+                        "properties": {
+                          "Minimum": 0.0,
+                          "Maximum": -1.0
+                        },
+                        "children": [
+                          {
+                            "id": 1,
+                            "behavior": "Spatial.Axis",
+                            "properties": {
+                              "Axis": 2,
+                              "Minimum": -1.96,
+                              "Maximum": 1.72
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-side-left-01",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit chase",
+      "root": {
+        "id": 7,
+        "behavior": "Modify.Value.Clamp",
+        "properties": {
+          "Minimum": 0.04,
+          "Maximum": 1.0
+        },
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Value.MapFromTo",
+            "properties": {
+              "Source Min": 0.65,
+              "Source Max": 1.0,
+              "Minimum": 0.04,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 5,
+                "behavior": "Modify.Value.Wave",
+                "properties": {
+                  "Shape": 3
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 3,
+                        "behavior": "Create.Value.LFO",
+                        "properties": {
+                          "Period": 14.0,
+                          "Type": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 2,
+                        "behavior": "Modify.Value.MapTo",
+                        "properties": {
+                          "Minimum": 0.0,
+                          "Maximum": -1.0
+                        },
+                        "children": [
+                          {
+                            "id": 1,
+                            "behavior": "Spatial.Axis",
+                            "properties": {
+                              "Axis": 2,
+                              "Minimum": -1.96,
+                              "Maximum": 1.72
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-side-left-02",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit chase",
+      "root": {
+        "id": 7,
+        "behavior": "Modify.Value.Clamp",
+        "properties": {
+          "Minimum": 0.04,
+          "Maximum": 1.0
+        },
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Value.MapFromTo",
+            "properties": {
+              "Source Min": 0.65,
+              "Source Max": 1.0,
+              "Minimum": 0.04,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 5,
+                "behavior": "Modify.Value.Wave",
+                "properties": {
+                  "Shape": 3
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 3,
+                        "behavior": "Create.Value.LFO",
+                        "properties": {
+                          "Period": 14.0,
+                          "Type": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 2,
+                        "behavior": "Modify.Value.MapTo",
+                        "properties": {
+                          "Minimum": 0.0,
+                          "Maximum": -1.0
+                        },
+                        "children": [
+                          {
+                            "id": 1,
+                            "behavior": "Spatial.Axis",
+                            "properties": {
+                              "Axis": 2,
+                              "Minimum": -1.96,
+                              "Maximum": 1.72
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "wing-left-01",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit chase",
+      "root": {
+        "id": 7,
+        "behavior": "Modify.Value.Clamp",
+        "properties": {
+          "Minimum": 0.04,
+          "Maximum": 1.0
+        },
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Value.MapFromTo",
+            "properties": {
+              "Source Min": 0.65,
+              "Source Max": 1.0,
+              "Minimum": 0.04,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 5,
+                "behavior": "Modify.Value.Wave",
+                "properties": {
+                  "Shape": 3
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 3,
+                        "behavior": "Create.Value.LFO",
+                        "properties": {
+                          "Period": 14.0,
+                          "Type": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 2,
+                        "behavior": "Modify.Value.MapTo",
+                        "properties": {
+                          "Minimum": 0.0,
+                          "Maximum": -1.0
+                        },
+                        "children": [
+                          {
+                            "id": 1,
+                            "behavior": "Spatial.Axis",
+                            "properties": {
+                              "Axis": 2,
+                              "Minimum": -1.96,
+                              "Maximum": 1.72
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "wing-left-02",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit chase",
+      "root": {
+        "id": 7,
+        "behavior": "Modify.Value.Clamp",
+        "properties": {
+          "Minimum": 0.04,
+          "Maximum": 1.0
+        },
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Value.MapFromTo",
+            "properties": {
+              "Source Min": 0.65,
+              "Source Max": 1.0,
+              "Minimum": 0.04,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 5,
+                "behavior": "Modify.Value.Wave",
+                "properties": {
+                  "Shape": 3
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 3,
+                        "behavior": "Create.Value.LFO",
+                        "properties": {
+                          "Period": 14.0,
+                          "Type": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 2,
+                        "behavior": "Modify.Value.MapTo",
+                        "properties": {
+                          "Minimum": 0.0,
+                          "Maximum": -1.0
+                        },
+                        "children": [
+                          {
+                            "id": 1,
+                            "behavior": "Spatial.Axis",
+                            "properties": {
+                              "Axis": 2,
+                              "Minimum": -1.96,
+                              "Maximum": 1.72
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "wing-left-03",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit chase",
+      "root": {
+        "id": 7,
+        "behavior": "Modify.Value.Clamp",
+        "properties": {
+          "Minimum": 0.04,
+          "Maximum": 1.0
+        },
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Value.MapFromTo",
+            "properties": {
+              "Source Min": 0.65,
+              "Source Max": 1.0,
+              "Minimum": 0.04,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 5,
+                "behavior": "Modify.Value.Wave",
+                "properties": {
+                  "Shape": 3
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 3,
+                        "behavior": "Create.Value.LFO",
+                        "properties": {
+                          "Period": 14.0,
+                          "Type": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 2,
+                        "behavior": "Modify.Value.MapTo",
+                        "properties": {
+                          "Minimum": 0.0,
+                          "Maximum": -1.0
+                        },
+                        "children": [
+                          {
+                            "id": 1,
+                            "behavior": "Spatial.Axis",
+                            "properties": {
+                              "Axis": 2,
+                              "Minimum": -1.96,
+                              "Maximum": 1.72
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "eye-left",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit chase",
+      "root": {
+        "id": 7,
+        "behavior": "Modify.Value.Clamp",
+        "properties": {
+          "Minimum": 0.04,
+          "Maximum": 1.0
+        },
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Value.MapFromTo",
+            "properties": {
+              "Source Min": 0.65,
+              "Source Max": 1.0,
+              "Minimum": 0.04,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 5,
+                "behavior": "Modify.Value.Wave",
+                "properties": {
+                  "Shape": 3
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 3,
+                        "behavior": "Create.Value.LFO",
+                        "properties": {
+                          "Period": 14.0,
+                          "Type": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 2,
+                        "behavior": "Modify.Value.MapTo",
+                        "properties": {
+                          "Minimum": 0.0,
+                          "Maximum": -1.0
+                        },
+                        "children": [
+                          {
+                            "id": 1,
+                            "behavior": "Spatial.Axis",
+                            "properties": {
+                              "Axis": 2,
+                              "Minimum": -1.96,
+                              "Maximum": 1.72
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "ear-left",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit chase",
+      "root": {
+        "id": 7,
+        "behavior": "Modify.Value.Clamp",
+        "properties": {
+          "Minimum": 0.04,
+          "Maximum": 1.0
+        },
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Value.MapFromTo",
+            "properties": {
+              "Source Min": 0.65,
+              "Source Max": 1.0,
+              "Minimum": 0.04,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 5,
+                "behavior": "Modify.Value.Wave",
+                "properties": {
+                  "Shape": 3
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 3,
+                        "behavior": "Create.Value.LFO",
+                        "properties": {
+                          "Period": 14.0,
+                          "Type": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 2,
+                        "behavior": "Modify.Value.MapTo",
+                        "properties": {
+                          "Minimum": 0.0,
+                          "Maximum": -1.0
+                        },
+                        "children": [
+                          {
+                            "id": 1,
+                            "behavior": "Spatial.Axis",
+                            "properties": {
+                              "Axis": 2,
+                              "Minimum": -1.96,
+                              "Maximum": 1.72
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "watcher-left",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit chase",
+      "root": {
+        "id": 7,
+        "behavior": "Modify.Value.Clamp",
+        "properties": {
+          "Minimum": 0.04,
+          "Maximum": 1.0
+        },
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Value.MapFromTo",
+            "properties": {
+              "Source Min": 0.65,
+              "Source Max": 1.0,
+              "Minimum": 0.04,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 5,
+                "behavior": "Modify.Value.Wave",
+                "properties": {
+                  "Shape": 3
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 3,
+                        "behavior": "Create.Value.LFO",
+                        "properties": {
+                          "Period": 14.0,
+                          "Type": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 2,
+                        "behavior": "Modify.Value.MapTo",
+                        "properties": {
+                          "Minimum": 0.0,
+                          "Maximum": -1.0
+                        },
+                        "children": [
+                          {
+                            "id": 1,
+                            "behavior": "Spatial.Axis",
+                            "properties": {
+                              "Axis": 2,
+                              "Minimum": -1.96,
+                              "Maximum": 1.72
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-right-01",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit chase",
+      "root": {
+        "id": 7,
+        "behavior": "Modify.Value.Clamp",
+        "properties": {
+          "Minimum": 0.04,
+          "Maximum": 1.0
+        },
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Value.MapFromTo",
+            "properties": {
+              "Source Min": 0.65,
+              "Source Max": 1.0,
+              "Minimum": 0.04,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 5,
+                "behavior": "Modify.Value.Wave",
+                "properties": {
+                  "Shape": 3
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 3,
+                        "behavior": "Create.Value.LFO",
+                        "properties": {
+                          "Period": 14.0,
+                          "Type": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 2,
+                        "behavior": "Modify.Value.MapTo",
+                        "properties": {
+                          "Minimum": 0.0,
+                          "Maximum": -1.0
+                        },
+                        "children": [
+                          {
+                            "id": 1,
+                            "behavior": "Spatial.Axis",
+                            "properties": {
+                              "Axis": 2,
+                              "Minimum": -1.96,
+                              "Maximum": 1.72
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-right-02",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit chase",
+      "root": {
+        "id": 7,
+        "behavior": "Modify.Value.Clamp",
+        "properties": {
+          "Minimum": 0.04,
+          "Maximum": 1.0
+        },
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Value.MapFromTo",
+            "properties": {
+              "Source Min": 0.65,
+              "Source Max": 1.0,
+              "Minimum": 0.04,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 5,
+                "behavior": "Modify.Value.Wave",
+                "properties": {
+                  "Shape": 3
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 3,
+                        "behavior": "Create.Value.LFO",
+                        "properties": {
+                          "Period": 14.0,
+                          "Type": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 2,
+                        "behavior": "Modify.Value.MapTo",
+                        "properties": {
+                          "Minimum": 0.0,
+                          "Maximum": -1.0
+                        },
+                        "children": [
+                          {
+                            "id": 1,
+                            "behavior": "Spatial.Axis",
+                            "properties": {
+                              "Axis": 2,
+                              "Minimum": -1.96,
+                              "Maximum": 1.72
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-right-03",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit chase",
+      "root": {
+        "id": 7,
+        "behavior": "Modify.Value.Clamp",
+        "properties": {
+          "Minimum": 0.04,
+          "Maximum": 1.0
+        },
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Value.MapFromTo",
+            "properties": {
+              "Source Min": 0.65,
+              "Source Max": 1.0,
+              "Minimum": 0.04,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 5,
+                "behavior": "Modify.Value.Wave",
+                "properties": {
+                  "Shape": 3
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 3,
+                        "behavior": "Create.Value.LFO",
+                        "properties": {
+                          "Period": 14.0,
+                          "Type": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 2,
+                        "behavior": "Modify.Value.MapTo",
+                        "properties": {
+                          "Minimum": 0.0,
+                          "Maximum": -1.0
+                        },
+                        "children": [
+                          {
+                            "id": 1,
+                            "behavior": "Spatial.Axis",
+                            "properties": {
+                              "Axis": 2,
+                              "Minimum": -1.96,
+                              "Maximum": 1.72
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-side-right-01",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit chase",
+      "root": {
+        "id": 7,
+        "behavior": "Modify.Value.Clamp",
+        "properties": {
+          "Minimum": 0.04,
+          "Maximum": 1.0
+        },
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Value.MapFromTo",
+            "properties": {
+              "Source Min": 0.65,
+              "Source Max": 1.0,
+              "Minimum": 0.04,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 5,
+                "behavior": "Modify.Value.Wave",
+                "properties": {
+                  "Shape": 3
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 3,
+                        "behavior": "Create.Value.LFO",
+                        "properties": {
+                          "Period": 14.0,
+                          "Type": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 2,
+                        "behavior": "Modify.Value.MapTo",
+                        "properties": {
+                          "Minimum": 0.0,
+                          "Maximum": -1.0
+                        },
+                        "children": [
+                          {
+                            "id": 1,
+                            "behavior": "Spatial.Axis",
+                            "properties": {
+                              "Axis": 2,
+                              "Minimum": -1.96,
+                              "Maximum": 1.72
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-side-right-02",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit chase",
+      "root": {
+        "id": 7,
+        "behavior": "Modify.Value.Clamp",
+        "properties": {
+          "Minimum": 0.04,
+          "Maximum": 1.0
+        },
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Value.MapFromTo",
+            "properties": {
+              "Source Min": 0.65,
+              "Source Max": 1.0,
+              "Minimum": 0.04,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 5,
+                "behavior": "Modify.Value.Wave",
+                "properties": {
+                  "Shape": 3
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 3,
+                        "behavior": "Create.Value.LFO",
+                        "properties": {
+                          "Period": 14.0,
+                          "Type": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 2,
+                        "behavior": "Modify.Value.MapTo",
+                        "properties": {
+                          "Minimum": 0.0,
+                          "Maximum": -1.0
+                        },
+                        "children": [
+                          {
+                            "id": 1,
+                            "behavior": "Spatial.Axis",
+                            "properties": {
+                              "Axis": 2,
+                              "Minimum": -1.96,
+                              "Maximum": 1.72
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "wing-right-01",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit chase",
+      "root": {
+        "id": 7,
+        "behavior": "Modify.Value.Clamp",
+        "properties": {
+          "Minimum": 0.04,
+          "Maximum": 1.0
+        },
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Value.MapFromTo",
+            "properties": {
+              "Source Min": 0.65,
+              "Source Max": 1.0,
+              "Minimum": 0.04,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 5,
+                "behavior": "Modify.Value.Wave",
+                "properties": {
+                  "Shape": 3
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 3,
+                        "behavior": "Create.Value.LFO",
+                        "properties": {
+                          "Period": 14.0,
+                          "Type": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 2,
+                        "behavior": "Modify.Value.MapTo",
+                        "properties": {
+                          "Minimum": 0.0,
+                          "Maximum": -1.0
+                        },
+                        "children": [
+                          {
+                            "id": 1,
+                            "behavior": "Spatial.Axis",
+                            "properties": {
+                              "Axis": 2,
+                              "Minimum": -1.96,
+                              "Maximum": 1.72
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "wing-right-02",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit chase",
+      "root": {
+        "id": 7,
+        "behavior": "Modify.Value.Clamp",
+        "properties": {
+          "Minimum": 0.04,
+          "Maximum": 1.0
+        },
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Value.MapFromTo",
+            "properties": {
+              "Source Min": 0.65,
+              "Source Max": 1.0,
+              "Minimum": 0.04,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 5,
+                "behavior": "Modify.Value.Wave",
+                "properties": {
+                  "Shape": 3
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 3,
+                        "behavior": "Create.Value.LFO",
+                        "properties": {
+                          "Period": 14.0,
+                          "Type": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 2,
+                        "behavior": "Modify.Value.MapTo",
+                        "properties": {
+                          "Minimum": 0.0,
+                          "Maximum": -1.0
+                        },
+                        "children": [
+                          {
+                            "id": 1,
+                            "behavior": "Spatial.Axis",
+                            "properties": {
+                              "Axis": 2,
+                              "Minimum": -1.96,
+                              "Maximum": 1.72
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "wing-right-03",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit chase",
+      "root": {
+        "id": 7,
+        "behavior": "Modify.Value.Clamp",
+        "properties": {
+          "Minimum": 0.04,
+          "Maximum": 1.0
+        },
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Value.MapFromTo",
+            "properties": {
+              "Source Min": 0.65,
+              "Source Max": 1.0,
+              "Minimum": 0.04,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 5,
+                "behavior": "Modify.Value.Wave",
+                "properties": {
+                  "Shape": 3
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 3,
+                        "behavior": "Create.Value.LFO",
+                        "properties": {
+                          "Period": 14.0,
+                          "Type": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 2,
+                        "behavior": "Modify.Value.MapTo",
+                        "properties": {
+                          "Minimum": 0.0,
+                          "Maximum": -1.0
+                        },
+                        "children": [
+                          {
+                            "id": 1,
+                            "behavior": "Spatial.Axis",
+                            "properties": {
+                              "Axis": 2,
+                              "Minimum": -1.96,
+                              "Maximum": 1.72
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "eye-right",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit chase",
+      "root": {
+        "id": 7,
+        "behavior": "Modify.Value.Clamp",
+        "properties": {
+          "Minimum": 0.04,
+          "Maximum": 1.0
+        },
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Value.MapFromTo",
+            "properties": {
+              "Source Min": 0.65,
+              "Source Max": 1.0,
+              "Minimum": 0.04,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 5,
+                "behavior": "Modify.Value.Wave",
+                "properties": {
+                  "Shape": 3
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 3,
+                        "behavior": "Create.Value.LFO",
+                        "properties": {
+                          "Period": 14.0,
+                          "Type": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 2,
+                        "behavior": "Modify.Value.MapTo",
+                        "properties": {
+                          "Minimum": 0.0,
+                          "Maximum": -1.0
+                        },
+                        "children": [
+                          {
+                            "id": 1,
+                            "behavior": "Spatial.Axis",
+                            "properties": {
+                              "Axis": 2,
+                              "Minimum": -1.96,
+                              "Maximum": 1.72
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "ear-right",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit chase",
+      "root": {
+        "id": 7,
+        "behavior": "Modify.Value.Clamp",
+        "properties": {
+          "Minimum": 0.04,
+          "Maximum": 1.0
+        },
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Value.MapFromTo",
+            "properties": {
+              "Source Min": 0.65,
+              "Source Max": 1.0,
+              "Minimum": 0.04,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 5,
+                "behavior": "Modify.Value.Wave",
+                "properties": {
+                  "Shape": 3
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 3,
+                        "behavior": "Create.Value.LFO",
+                        "properties": {
+                          "Period": 14.0,
+                          "Type": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 2,
+                        "behavior": "Modify.Value.MapTo",
+                        "properties": {
+                          "Minimum": 0.0,
+                          "Maximum": -1.0
+                        },
+                        "children": [
+                          {
+                            "id": 1,
+                            "behavior": "Spatial.Axis",
+                            "properties": {
+                              "Axis": 2,
+                              "Minimum": -1.96,
+                              "Maximum": 1.72
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "watcher-right",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit chase",
+      "root": {
+        "id": 7,
+        "behavior": "Modify.Value.Clamp",
+        "properties": {
+          "Minimum": 0.04,
+          "Maximum": 1.0
+        },
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Value.MapFromTo",
+            "properties": {
+              "Source Min": 0.65,
+              "Source Max": 1.0,
+              "Minimum": 0.04,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 5,
+                "behavior": "Modify.Value.Wave",
+                "properties": {
+                  "Shape": 3
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 3,
+                        "behavior": "Create.Value.LFO",
+                        "properties": {
+                          "Period": 14.0,
+                          "Type": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 2,
+                        "behavior": "Modify.Value.MapTo",
+                        "properties": {
+                          "Minimum": 0.0,
+                          "Maximum": -1.0
+                        },
+                        "children": [
+                          {
+                            "id": 1,
+                            "behavior": "Spatial.Axis",
+                            "properties": {
+                              "Axis": 2,
+                              "Minimum": -1.96,
+                              "Maximum": 1.72
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  }
+]

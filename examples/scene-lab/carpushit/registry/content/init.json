@@ -1,0 +1,5930 @@
+[
+  {
+    "fixture": "bulb-left-01",
+    "layer": 0,
+    "stack": {
+      "name": "Carpushit output compositor",
+      "root": {
+        "id": 11,
+        "behavior": "Tool.Merge",
+        "properties": {},
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 1.0
+            },
+            "children": [
+              {
+                "id": 1,
+                "behavior": "Create.Color.Color",
+                "properties": {
+                  "Color": "#ffd19a"
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {
+              "Amount": {
+                "id": 5,
+                "behavior": "Modify.Value.Clamp",
+                "properties": {
+                  "Minimum": 0.0,
+                  "Maximum": 1.0
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 2,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 3,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 1
+                        },
+                        "children": [],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            }
+          },
+          {
+            "id": 10,
+            "behavior": "Modify.Value.Clamp",
+            "properties": {
+              "Minimum": 0.0,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 9,
+                "behavior": "Combine.Add",
+                "properties": {},
+                "children": [
+                  {
+                    "id": 7,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 0
+                    },
+                    "children": [],
+                    "drivers": {}
+                  },
+                  {
+                    "id": 8,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 1
+                    },
+                    "children": [],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-left-01",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-left-01",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-left-02",
+    "layer": 0,
+    "stack": {
+      "name": "Carpushit output compositor",
+      "root": {
+        "id": 11,
+        "behavior": "Tool.Merge",
+        "properties": {},
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 1.0
+            },
+            "children": [
+              {
+                "id": 1,
+                "behavior": "Create.Color.Color",
+                "properties": {
+                  "Color": "#ffd19a"
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {
+              "Amount": {
+                "id": 5,
+                "behavior": "Modify.Value.Clamp",
+                "properties": {
+                  "Minimum": 0.0,
+                  "Maximum": 1.0
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 2,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 3,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 1
+                        },
+                        "children": [],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            }
+          },
+          {
+            "id": 10,
+            "behavior": "Modify.Value.Clamp",
+            "properties": {
+              "Minimum": 0.0,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 9,
+                "behavior": "Combine.Add",
+                "properties": {},
+                "children": [
+                  {
+                    "id": 7,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 0
+                    },
+                    "children": [],
+                    "drivers": {}
+                  },
+                  {
+                    "id": 8,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 1
+                    },
+                    "children": [],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-left-02",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-left-02",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-left-03",
+    "layer": 0,
+    "stack": {
+      "name": "Carpushit output compositor",
+      "root": {
+        "id": 11,
+        "behavior": "Tool.Merge",
+        "properties": {},
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 1.0
+            },
+            "children": [
+              {
+                "id": 1,
+                "behavior": "Create.Color.Color",
+                "properties": {
+                  "Color": "#ffd19a"
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {
+              "Amount": {
+                "id": 5,
+                "behavior": "Modify.Value.Clamp",
+                "properties": {
+                  "Minimum": 0.0,
+                  "Maximum": 1.0
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 2,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 3,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 1
+                        },
+                        "children": [],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            }
+          },
+          {
+            "id": 10,
+            "behavior": "Modify.Value.Clamp",
+            "properties": {
+              "Minimum": 0.0,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 9,
+                "behavior": "Combine.Add",
+                "properties": {},
+                "children": [
+                  {
+                    "id": 7,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 0
+                    },
+                    "children": [],
+                    "drivers": {}
+                  },
+                  {
+                    "id": 8,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 1
+                    },
+                    "children": [],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-left-03",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-left-03",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-left-04",
+    "layer": 0,
+    "stack": {
+      "name": "Carpushit output compositor",
+      "root": {
+        "id": 11,
+        "behavior": "Tool.Merge",
+        "properties": {},
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 1.0
+            },
+            "children": [
+              {
+                "id": 1,
+                "behavior": "Create.Color.Color",
+                "properties": {
+                  "Color": "#ffd19a"
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {
+              "Amount": {
+                "id": 5,
+                "behavior": "Modify.Value.Clamp",
+                "properties": {
+                  "Minimum": 0.0,
+                  "Maximum": 1.0
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 2,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 3,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 1
+                        },
+                        "children": [],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            }
+          },
+          {
+            "id": 10,
+            "behavior": "Modify.Value.Clamp",
+            "properties": {
+              "Minimum": 0.0,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 9,
+                "behavior": "Combine.Add",
+                "properties": {},
+                "children": [
+                  {
+                    "id": 7,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 0
+                    },
+                    "children": [],
+                    "drivers": {}
+                  },
+                  {
+                    "id": 8,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 1
+                    },
+                    "children": [],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-left-04",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-left-04",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-left-05",
+    "layer": 0,
+    "stack": {
+      "name": "Carpushit output compositor",
+      "root": {
+        "id": 11,
+        "behavior": "Tool.Merge",
+        "properties": {},
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 1.0
+            },
+            "children": [
+              {
+                "id": 1,
+                "behavior": "Create.Color.Color",
+                "properties": {
+                  "Color": "#ffd19a"
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {
+              "Amount": {
+                "id": 5,
+                "behavior": "Modify.Value.Clamp",
+                "properties": {
+                  "Minimum": 0.0,
+                  "Maximum": 1.0
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 2,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 3,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 1
+                        },
+                        "children": [],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            }
+          },
+          {
+            "id": 10,
+            "behavior": "Modify.Value.Clamp",
+            "properties": {
+              "Minimum": 0.0,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 9,
+                "behavior": "Combine.Add",
+                "properties": {},
+                "children": [
+                  {
+                    "id": 7,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 0
+                    },
+                    "children": [],
+                    "drivers": {}
+                  },
+                  {
+                    "id": 8,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 1
+                    },
+                    "children": [],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-left-05",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-left-05",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-right-01",
+    "layer": 0,
+    "stack": {
+      "name": "Carpushit output compositor",
+      "root": {
+        "id": 11,
+        "behavior": "Tool.Merge",
+        "properties": {},
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 1.0
+            },
+            "children": [
+              {
+                "id": 1,
+                "behavior": "Create.Color.Color",
+                "properties": {
+                  "Color": "#ffd19a"
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {
+              "Amount": {
+                "id": 5,
+                "behavior": "Modify.Value.Clamp",
+                "properties": {
+                  "Minimum": 0.0,
+                  "Maximum": 1.0
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 2,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 3,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 1
+                        },
+                        "children": [],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            }
+          },
+          {
+            "id": 10,
+            "behavior": "Modify.Value.Clamp",
+            "properties": {
+              "Minimum": 0.0,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 9,
+                "behavior": "Combine.Add",
+                "properties": {},
+                "children": [
+                  {
+                    "id": 7,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 0
+                    },
+                    "children": [],
+                    "drivers": {}
+                  },
+                  {
+                    "id": 8,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 1
+                    },
+                    "children": [],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-right-01",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-right-01",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-right-02",
+    "layer": 0,
+    "stack": {
+      "name": "Carpushit output compositor",
+      "root": {
+        "id": 11,
+        "behavior": "Tool.Merge",
+        "properties": {},
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 1.0
+            },
+            "children": [
+              {
+                "id": 1,
+                "behavior": "Create.Color.Color",
+                "properties": {
+                  "Color": "#ffd19a"
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {
+              "Amount": {
+                "id": 5,
+                "behavior": "Modify.Value.Clamp",
+                "properties": {
+                  "Minimum": 0.0,
+                  "Maximum": 1.0
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 2,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 3,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 1
+                        },
+                        "children": [],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            }
+          },
+          {
+            "id": 10,
+            "behavior": "Modify.Value.Clamp",
+            "properties": {
+              "Minimum": 0.0,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 9,
+                "behavior": "Combine.Add",
+                "properties": {},
+                "children": [
+                  {
+                    "id": 7,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 0
+                    },
+                    "children": [],
+                    "drivers": {}
+                  },
+                  {
+                    "id": 8,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 1
+                    },
+                    "children": [],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-right-02",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-right-02",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-right-03",
+    "layer": 0,
+    "stack": {
+      "name": "Carpushit output compositor",
+      "root": {
+        "id": 11,
+        "behavior": "Tool.Merge",
+        "properties": {},
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 1.0
+            },
+            "children": [
+              {
+                "id": 1,
+                "behavior": "Create.Color.Color",
+                "properties": {
+                  "Color": "#ffd19a"
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {
+              "Amount": {
+                "id": 5,
+                "behavior": "Modify.Value.Clamp",
+                "properties": {
+                  "Minimum": 0.0,
+                  "Maximum": 1.0
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 2,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 3,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 1
+                        },
+                        "children": [],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            }
+          },
+          {
+            "id": 10,
+            "behavior": "Modify.Value.Clamp",
+            "properties": {
+              "Minimum": 0.0,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 9,
+                "behavior": "Combine.Add",
+                "properties": {},
+                "children": [
+                  {
+                    "id": 7,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 0
+                    },
+                    "children": [],
+                    "drivers": {}
+                  },
+                  {
+                    "id": 8,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 1
+                    },
+                    "children": [],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-right-03",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-right-03",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-right-04",
+    "layer": 0,
+    "stack": {
+      "name": "Carpushit output compositor",
+      "root": {
+        "id": 11,
+        "behavior": "Tool.Merge",
+        "properties": {},
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 1.0
+            },
+            "children": [
+              {
+                "id": 1,
+                "behavior": "Create.Color.Color",
+                "properties": {
+                  "Color": "#ffd19a"
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {
+              "Amount": {
+                "id": 5,
+                "behavior": "Modify.Value.Clamp",
+                "properties": {
+                  "Minimum": 0.0,
+                  "Maximum": 1.0
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 2,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 3,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 1
+                        },
+                        "children": [],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            }
+          },
+          {
+            "id": 10,
+            "behavior": "Modify.Value.Clamp",
+            "properties": {
+              "Minimum": 0.0,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 9,
+                "behavior": "Combine.Add",
+                "properties": {},
+                "children": [
+                  {
+                    "id": 7,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 0
+                    },
+                    "children": [],
+                    "drivers": {}
+                  },
+                  {
+                    "id": 8,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 1
+                    },
+                    "children": [],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-right-04",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-right-04",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-right-05",
+    "layer": 0,
+    "stack": {
+      "name": "Carpushit output compositor",
+      "root": {
+        "id": 11,
+        "behavior": "Tool.Merge",
+        "properties": {},
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 1.0
+            },
+            "children": [
+              {
+                "id": 1,
+                "behavior": "Create.Color.Color",
+                "properties": {
+                  "Color": "#ffd19a"
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {
+              "Amount": {
+                "id": 5,
+                "behavior": "Modify.Value.Clamp",
+                "properties": {
+                  "Minimum": 0.0,
+                  "Maximum": 1.0
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 2,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 3,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 1
+                        },
+                        "children": [],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            }
+          },
+          {
+            "id": 10,
+            "behavior": "Modify.Value.Clamp",
+            "properties": {
+              "Minimum": 0.0,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 9,
+                "behavior": "Combine.Add",
+                "properties": {},
+                "children": [
+                  {
+                    "id": 7,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 0
+                    },
+                    "children": [],
+                    "drivers": {}
+                  },
+                  {
+                    "id": 8,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 1
+                    },
+                    "children": [],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-right-05",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "bulb-right-05",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "uv-left-rail",
+    "layer": 0,
+    "stack": {
+      "name": "Carpushit output compositor",
+      "root": {
+        "id": 11,
+        "behavior": "Tool.Merge",
+        "properties": {},
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 1.0
+            },
+            "children": [
+              {
+                "id": 1,
+                "behavior": "Create.Color.Color",
+                "properties": {
+                  "Color": "#862bff"
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {
+              "Amount": {
+                "id": 5,
+                "behavior": "Modify.Value.Clamp",
+                "properties": {
+                  "Minimum": 0.0,
+                  "Maximum": 1.0
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 2,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 3,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 1
+                        },
+                        "children": [],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            }
+          },
+          {
+            "id": 10,
+            "behavior": "Modify.Value.Clamp",
+            "properties": {
+              "Minimum": 0.0,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 9,
+                "behavior": "Combine.Add",
+                "properties": {},
+                "children": [
+                  {
+                    "id": 7,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 0
+                    },
+                    "children": [],
+                    "drivers": {}
+                  },
+                  {
+                    "id": 8,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 1
+                    },
+                    "children": [],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "uv-left-rail",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "uv-left-rail",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "uv-right-rail",
+    "layer": 0,
+    "stack": {
+      "name": "Carpushit output compositor",
+      "root": {
+        "id": 11,
+        "behavior": "Tool.Merge",
+        "properties": {},
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 1.0
+            },
+            "children": [
+              {
+                "id": 1,
+                "behavior": "Create.Color.Color",
+                "properties": {
+                  "Color": "#862bff"
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {
+              "Amount": {
+                "id": 5,
+                "behavior": "Modify.Value.Clamp",
+                "properties": {
+                  "Minimum": 0.0,
+                  "Maximum": 1.0
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 2,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 3,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 1
+                        },
+                        "children": [],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            }
+          },
+          {
+            "id": 10,
+            "behavior": "Modify.Value.Clamp",
+            "properties": {
+              "Minimum": 0.0,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 9,
+                "behavior": "Combine.Add",
+                "properties": {},
+                "children": [
+                  {
+                    "id": 7,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 0
+                    },
+                    "children": [],
+                    "drivers": {}
+                  },
+                  {
+                    "id": 8,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 1
+                    },
+                    "children": [],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "uv-right-rail",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "uv-right-rail",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "uv-roof-spine",
+    "layer": 0,
+    "stack": {
+      "name": "Carpushit output compositor",
+      "root": {
+        "id": 11,
+        "behavior": "Tool.Merge",
+        "properties": {},
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 1.0
+            },
+            "children": [
+              {
+                "id": 1,
+                "behavior": "Create.Color.Color",
+                "properties": {
+                  "Color": "#862bff"
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {
+              "Amount": {
+                "id": 5,
+                "behavior": "Modify.Value.Clamp",
+                "properties": {
+                  "Minimum": 0.0,
+                  "Maximum": 1.0
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 2,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 3,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 1
+                        },
+                        "children": [],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            }
+          },
+          {
+            "id": 10,
+            "behavior": "Modify.Value.Clamp",
+            "properties": {
+              "Minimum": 0.0,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 9,
+                "behavior": "Combine.Add",
+                "properties": {},
+                "children": [
+                  {
+                    "id": 7,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 0
+                    },
+                    "children": [],
+                    "drivers": {}
+                  },
+                  {
+                    "id": 8,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 1
+                    },
+                    "children": [],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "uv-roof-spine",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "uv-roof-spine",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "uv-cross-01",
+    "layer": 0,
+    "stack": {
+      "name": "Carpushit output compositor",
+      "root": {
+        "id": 11,
+        "behavior": "Tool.Merge",
+        "properties": {},
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 1.0
+            },
+            "children": [
+              {
+                "id": 1,
+                "behavior": "Create.Color.Color",
+                "properties": {
+                  "Color": "#862bff"
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {
+              "Amount": {
+                "id": 5,
+                "behavior": "Modify.Value.Clamp",
+                "properties": {
+                  "Minimum": 0.0,
+                  "Maximum": 1.0
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 2,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 3,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 1
+                        },
+                        "children": [],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            }
+          },
+          {
+            "id": 10,
+            "behavior": "Modify.Value.Clamp",
+            "properties": {
+              "Minimum": 0.0,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 9,
+                "behavior": "Combine.Add",
+                "properties": {},
+                "children": [
+                  {
+                    "id": 7,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 0
+                    },
+                    "children": [],
+                    "drivers": {}
+                  },
+                  {
+                    "id": 8,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 1
+                    },
+                    "children": [],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "uv-cross-01",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "uv-cross-01",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "uv-cross-02",
+    "layer": 0,
+    "stack": {
+      "name": "Carpushit output compositor",
+      "root": {
+        "id": 11,
+        "behavior": "Tool.Merge",
+        "properties": {},
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 1.0
+            },
+            "children": [
+              {
+                "id": 1,
+                "behavior": "Create.Color.Color",
+                "properties": {
+                  "Color": "#862bff"
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {
+              "Amount": {
+                "id": 5,
+                "behavior": "Modify.Value.Clamp",
+                "properties": {
+                  "Minimum": 0.0,
+                  "Maximum": 1.0
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 2,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 3,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 1
+                        },
+                        "children": [],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            }
+          },
+          {
+            "id": 10,
+            "behavior": "Modify.Value.Clamp",
+            "properties": {
+              "Minimum": 0.0,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 9,
+                "behavior": "Combine.Add",
+                "properties": {},
+                "children": [
+                  {
+                    "id": 7,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 0
+                    },
+                    "children": [],
+                    "drivers": {}
+                  },
+                  {
+                    "id": 8,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 1
+                    },
+                    "children": [],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "uv-cross-02",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "uv-cross-02",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "uv-cross-03",
+    "layer": 0,
+    "stack": {
+      "name": "Carpushit output compositor",
+      "root": {
+        "id": 11,
+        "behavior": "Tool.Merge",
+        "properties": {},
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 1.0
+            },
+            "children": [
+              {
+                "id": 1,
+                "behavior": "Create.Color.Color",
+                "properties": {
+                  "Color": "#862bff"
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {
+              "Amount": {
+                "id": 5,
+                "behavior": "Modify.Value.Clamp",
+                "properties": {
+                  "Minimum": 0.0,
+                  "Maximum": 1.0
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 2,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 3,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 1
+                        },
+                        "children": [],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            }
+          },
+          {
+            "id": 10,
+            "behavior": "Modify.Value.Clamp",
+            "properties": {
+              "Minimum": 0.0,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 9,
+                "behavior": "Combine.Add",
+                "properties": {},
+                "children": [
+                  {
+                    "id": 7,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 0
+                    },
+                    "children": [],
+                    "drivers": {}
+                  },
+                  {
+                    "id": 8,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 1
+                    },
+                    "children": [],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "uv-cross-03",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "uv-cross-03",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-left-01",
+    "layer": 0,
+    "stack": {
+      "name": "Carpushit output compositor",
+      "root": {
+        "id": 11,
+        "behavior": "Tool.Merge",
+        "properties": {},
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 1.0
+            },
+            "children": [
+              {
+                "id": 1,
+                "behavior": "Create.Color.Color",
+                "properties": {
+                  "Color": "#fff2db"
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {
+              "Amount": {
+                "id": 5,
+                "behavior": "Modify.Value.Clamp",
+                "properties": {
+                  "Minimum": 0.0,
+                  "Maximum": 1.0
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 2,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 3,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 1
+                        },
+                        "children": [],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            }
+          },
+          {
+            "id": 10,
+            "behavior": "Modify.Value.Clamp",
+            "properties": {
+              "Minimum": 0.0,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 9,
+                "behavior": "Combine.Add",
+                "properties": {},
+                "children": [
+                  {
+                    "id": 7,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 0
+                    },
+                    "children": [],
+                    "drivers": {}
+                  },
+                  {
+                    "id": 8,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 1
+                    },
+                    "children": [],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-left-01",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-left-01",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-left-02",
+    "layer": 0,
+    "stack": {
+      "name": "Carpushit output compositor",
+      "root": {
+        "id": 11,
+        "behavior": "Tool.Merge",
+        "properties": {},
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 1.0
+            },
+            "children": [
+              {
+                "id": 1,
+                "behavior": "Create.Color.Color",
+                "properties": {
+                  "Color": "#fff2db"
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {
+              "Amount": {
+                "id": 5,
+                "behavior": "Modify.Value.Clamp",
+                "properties": {
+                  "Minimum": 0.0,
+                  "Maximum": 1.0
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 2,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 3,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 1
+                        },
+                        "children": [],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            }
+          },
+          {
+            "id": 10,
+            "behavior": "Modify.Value.Clamp",
+            "properties": {
+              "Minimum": 0.0,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 9,
+                "behavior": "Combine.Add",
+                "properties": {},
+                "children": [
+                  {
+                    "id": 7,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 0
+                    },
+                    "children": [],
+                    "drivers": {}
+                  },
+                  {
+                    "id": 8,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 1
+                    },
+                    "children": [],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-left-02",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-left-02",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-left-03",
+    "layer": 0,
+    "stack": {
+      "name": "Carpushit output compositor",
+      "root": {
+        "id": 11,
+        "behavior": "Tool.Merge",
+        "properties": {},
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 1.0
+            },
+            "children": [
+              {
+                "id": 1,
+                "behavior": "Create.Color.Color",
+                "properties": {
+                  "Color": "#fff2db"
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {
+              "Amount": {
+                "id": 5,
+                "behavior": "Modify.Value.Clamp",
+                "properties": {
+                  "Minimum": 0.0,
+                  "Maximum": 1.0
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 2,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 3,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 1
+                        },
+                        "children": [],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            }
+          },
+          {
+            "id": 10,
+            "behavior": "Modify.Value.Clamp",
+            "properties": {
+              "Minimum": 0.0,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 9,
+                "behavior": "Combine.Add",
+                "properties": {},
+                "children": [
+                  {
+                    "id": 7,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 0
+                    },
+                    "children": [],
+                    "drivers": {}
+                  },
+                  {
+                    "id": 8,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 1
+                    },
+                    "children": [],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-left-03",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-left-03",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-side-left-01",
+    "layer": 0,
+    "stack": {
+      "name": "Carpushit output compositor",
+      "root": {
+        "id": 11,
+        "behavior": "Tool.Merge",
+        "properties": {},
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 1.0
+            },
+            "children": [
+              {
+                "id": 1,
+                "behavior": "Create.Color.Color",
+                "properties": {
+                  "Color": "#fff2db"
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {
+              "Amount": {
+                "id": 5,
+                "behavior": "Modify.Value.Clamp",
+                "properties": {
+                  "Minimum": 0.0,
+                  "Maximum": 1.0
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 2,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 3,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 1
+                        },
+                        "children": [],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            }
+          },
+          {
+            "id": 10,
+            "behavior": "Modify.Value.Clamp",
+            "properties": {
+              "Minimum": 0.0,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 9,
+                "behavior": "Combine.Add",
+                "properties": {},
+                "children": [
+                  {
+                    "id": 7,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 0
+                    },
+                    "children": [],
+                    "drivers": {}
+                  },
+                  {
+                    "id": 8,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 1
+                    },
+                    "children": [],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-side-left-01",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-side-left-01",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-side-left-02",
+    "layer": 0,
+    "stack": {
+      "name": "Carpushit output compositor",
+      "root": {
+        "id": 11,
+        "behavior": "Tool.Merge",
+        "properties": {},
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 1.0
+            },
+            "children": [
+              {
+                "id": 1,
+                "behavior": "Create.Color.Color",
+                "properties": {
+                  "Color": "#fff2db"
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {
+              "Amount": {
+                "id": 5,
+                "behavior": "Modify.Value.Clamp",
+                "properties": {
+                  "Minimum": 0.0,
+                  "Maximum": 1.0
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 2,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 3,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 1
+                        },
+                        "children": [],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            }
+          },
+          {
+            "id": 10,
+            "behavior": "Modify.Value.Clamp",
+            "properties": {
+              "Minimum": 0.0,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 9,
+                "behavior": "Combine.Add",
+                "properties": {},
+                "children": [
+                  {
+                    "id": 7,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 0
+                    },
+                    "children": [],
+                    "drivers": {}
+                  },
+                  {
+                    "id": 8,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 1
+                    },
+                    "children": [],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-side-left-02",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-side-left-02",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "wing-left-01",
+    "layer": 0,
+    "stack": {
+      "name": "Carpushit output compositor",
+      "root": {
+        "id": 11,
+        "behavior": "Tool.Merge",
+        "properties": {},
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 1.0
+            },
+            "children": [
+              {
+                "id": 1,
+                "behavior": "Create.Color.Color",
+                "properties": {
+                  "Color": "#fff2db"
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {
+              "Amount": {
+                "id": 5,
+                "behavior": "Modify.Value.Clamp",
+                "properties": {
+                  "Minimum": 0.0,
+                  "Maximum": 1.0
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 2,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 3,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 1
+                        },
+                        "children": [],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            }
+          },
+          {
+            "id": 10,
+            "behavior": "Modify.Value.Clamp",
+            "properties": {
+              "Minimum": 0.0,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 9,
+                "behavior": "Combine.Add",
+                "properties": {},
+                "children": [
+                  {
+                    "id": 7,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 0
+                    },
+                    "children": [],
+                    "drivers": {}
+                  },
+                  {
+                    "id": 8,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 1
+                    },
+                    "children": [],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "wing-left-01",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "wing-left-01",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "wing-left-02",
+    "layer": 0,
+    "stack": {
+      "name": "Carpushit output compositor",
+      "root": {
+        "id": 11,
+        "behavior": "Tool.Merge",
+        "properties": {},
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 1.0
+            },
+            "children": [
+              {
+                "id": 1,
+                "behavior": "Create.Color.Color",
+                "properties": {
+                  "Color": "#fff2db"
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {
+              "Amount": {
+                "id": 5,
+                "behavior": "Modify.Value.Clamp",
+                "properties": {
+                  "Minimum": 0.0,
+                  "Maximum": 1.0
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 2,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 3,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 1
+                        },
+                        "children": [],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            }
+          },
+          {
+            "id": 10,
+            "behavior": "Modify.Value.Clamp",
+            "properties": {
+              "Minimum": 0.0,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 9,
+                "behavior": "Combine.Add",
+                "properties": {},
+                "children": [
+                  {
+                    "id": 7,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 0
+                    },
+                    "children": [],
+                    "drivers": {}
+                  },
+                  {
+                    "id": 8,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 1
+                    },
+                    "children": [],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "wing-left-02",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "wing-left-02",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "wing-left-03",
+    "layer": 0,
+    "stack": {
+      "name": "Carpushit output compositor",
+      "root": {
+        "id": 11,
+        "behavior": "Tool.Merge",
+        "properties": {},
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 1.0
+            },
+            "children": [
+              {
+                "id": 1,
+                "behavior": "Create.Color.Color",
+                "properties": {
+                  "Color": "#fff2db"
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {
+              "Amount": {
+                "id": 5,
+                "behavior": "Modify.Value.Clamp",
+                "properties": {
+                  "Minimum": 0.0,
+                  "Maximum": 1.0
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 2,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 3,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 1
+                        },
+                        "children": [],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            }
+          },
+          {
+            "id": 10,
+            "behavior": "Modify.Value.Clamp",
+            "properties": {
+              "Minimum": 0.0,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 9,
+                "behavior": "Combine.Add",
+                "properties": {},
+                "children": [
+                  {
+                    "id": 7,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 0
+                    },
+                    "children": [],
+                    "drivers": {}
+                  },
+                  {
+                    "id": 8,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 1
+                    },
+                    "children": [],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "wing-left-03",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "wing-left-03",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "eye-left",
+    "layer": 0,
+    "stack": {
+      "name": "Carpushit output compositor",
+      "root": {
+        "id": 11,
+        "behavior": "Tool.Merge",
+        "properties": {},
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 1.0
+            },
+            "children": [
+              {
+                "id": 1,
+                "behavior": "Create.Color.Color",
+                "properties": {
+                  "Color": "#fff2db"
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {
+              "Amount": {
+                "id": 5,
+                "behavior": "Modify.Value.Clamp",
+                "properties": {
+                  "Minimum": 0.0,
+                  "Maximum": 1.0
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 2,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 3,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 1
+                        },
+                        "children": [],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            }
+          },
+          {
+            "id": 10,
+            "behavior": "Modify.Value.Clamp",
+            "properties": {
+              "Minimum": 0.0,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 9,
+                "behavior": "Combine.Add",
+                "properties": {},
+                "children": [
+                  {
+                    "id": 7,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 0
+                    },
+                    "children": [],
+                    "drivers": {}
+                  },
+                  {
+                    "id": 8,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 1
+                    },
+                    "children": [],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "eye-left",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "eye-left",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "ear-left",
+    "layer": 0,
+    "stack": {
+      "name": "Carpushit output compositor",
+      "root": {
+        "id": 11,
+        "behavior": "Tool.Merge",
+        "properties": {},
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 1.0
+            },
+            "children": [
+              {
+                "id": 1,
+                "behavior": "Create.Color.Color",
+                "properties": {
+                  "Color": "#ffc75f"
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {
+              "Amount": {
+                "id": 5,
+                "behavior": "Modify.Value.Clamp",
+                "properties": {
+                  "Minimum": 0.0,
+                  "Maximum": 1.0
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 2,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 3,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 1
+                        },
+                        "children": [],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            }
+          },
+          {
+            "id": 10,
+            "behavior": "Modify.Value.Clamp",
+            "properties": {
+              "Minimum": 0.0,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 9,
+                "behavior": "Combine.Add",
+                "properties": {},
+                "children": [
+                  {
+                    "id": 7,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 0
+                    },
+                    "children": [],
+                    "drivers": {}
+                  },
+                  {
+                    "id": 8,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 1
+                    },
+                    "children": [],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "ear-left",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "ear-left",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "watcher-left",
+    "layer": 0,
+    "stack": {
+      "name": "Carpushit output compositor",
+      "root": {
+        "id": 11,
+        "behavior": "Tool.Merge",
+        "properties": {},
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 1.0
+            },
+            "children": [
+              {
+                "id": 1,
+                "behavior": "Create.Color.Color",
+                "properties": {
+                  "Color": "#90d7e6"
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {
+              "Amount": {
+                "id": 5,
+                "behavior": "Modify.Value.Clamp",
+                "properties": {
+                  "Minimum": 0.0,
+                  "Maximum": 1.0
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 2,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 3,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 1
+                        },
+                        "children": [],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            }
+          },
+          {
+            "id": 10,
+            "behavior": "Modify.Value.Clamp",
+            "properties": {
+              "Minimum": 0.0,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 9,
+                "behavior": "Combine.Add",
+                "properties": {},
+                "children": [
+                  {
+                    "id": 7,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 0
+                    },
+                    "children": [],
+                    "drivers": {}
+                  },
+                  {
+                    "id": 8,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 1
+                    },
+                    "children": [],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "watcher-left",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "watcher-left",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-right-01",
+    "layer": 0,
+    "stack": {
+      "name": "Carpushit output compositor",
+      "root": {
+        "id": 11,
+        "behavior": "Tool.Merge",
+        "properties": {},
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 1.0
+            },
+            "children": [
+              {
+                "id": 1,
+                "behavior": "Create.Color.Color",
+                "properties": {
+                  "Color": "#fff2db"
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {
+              "Amount": {
+                "id": 5,
+                "behavior": "Modify.Value.Clamp",
+                "properties": {
+                  "Minimum": 0.0,
+                  "Maximum": 1.0
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 2,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 3,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 1
+                        },
+                        "children": [],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            }
+          },
+          {
+            "id": 10,
+            "behavior": "Modify.Value.Clamp",
+            "properties": {
+              "Minimum": 0.0,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 9,
+                "behavior": "Combine.Add",
+                "properties": {},
+                "children": [
+                  {
+                    "id": 7,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 0
+                    },
+                    "children": [],
+                    "drivers": {}
+                  },
+                  {
+                    "id": 8,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 1
+                    },
+                    "children": [],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-right-01",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-right-01",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-right-02",
+    "layer": 0,
+    "stack": {
+      "name": "Carpushit output compositor",
+      "root": {
+        "id": 11,
+        "behavior": "Tool.Merge",
+        "properties": {},
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 1.0
+            },
+            "children": [
+              {
+                "id": 1,
+                "behavior": "Create.Color.Color",
+                "properties": {
+                  "Color": "#fff2db"
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {
+              "Amount": {
+                "id": 5,
+                "behavior": "Modify.Value.Clamp",
+                "properties": {
+                  "Minimum": 0.0,
+                  "Maximum": 1.0
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 2,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 3,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 1
+                        },
+                        "children": [],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            }
+          },
+          {
+            "id": 10,
+            "behavior": "Modify.Value.Clamp",
+            "properties": {
+              "Minimum": 0.0,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 9,
+                "behavior": "Combine.Add",
+                "properties": {},
+                "children": [
+                  {
+                    "id": 7,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 0
+                    },
+                    "children": [],
+                    "drivers": {}
+                  },
+                  {
+                    "id": 8,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 1
+                    },
+                    "children": [],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-right-02",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-right-02",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-right-03",
+    "layer": 0,
+    "stack": {
+      "name": "Carpushit output compositor",
+      "root": {
+        "id": 11,
+        "behavior": "Tool.Merge",
+        "properties": {},
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 1.0
+            },
+            "children": [
+              {
+                "id": 1,
+                "behavior": "Create.Color.Color",
+                "properties": {
+                  "Color": "#fff2db"
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {
+              "Amount": {
+                "id": 5,
+                "behavior": "Modify.Value.Clamp",
+                "properties": {
+                  "Minimum": 0.0,
+                  "Maximum": 1.0
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 2,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 3,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 1
+                        },
+                        "children": [],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            }
+          },
+          {
+            "id": 10,
+            "behavior": "Modify.Value.Clamp",
+            "properties": {
+              "Minimum": 0.0,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 9,
+                "behavior": "Combine.Add",
+                "properties": {},
+                "children": [
+                  {
+                    "id": 7,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 0
+                    },
+                    "children": [],
+                    "drivers": {}
+                  },
+                  {
+                    "id": 8,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 1
+                    },
+                    "children": [],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-right-03",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-right-03",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-side-right-01",
+    "layer": 0,
+    "stack": {
+      "name": "Carpushit output compositor",
+      "root": {
+        "id": 11,
+        "behavior": "Tool.Merge",
+        "properties": {},
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 1.0
+            },
+            "children": [
+              {
+                "id": 1,
+                "behavior": "Create.Color.Color",
+                "properties": {
+                  "Color": "#fff2db"
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {
+              "Amount": {
+                "id": 5,
+                "behavior": "Modify.Value.Clamp",
+                "properties": {
+                  "Minimum": 0.0,
+                  "Maximum": 1.0
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 2,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 3,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 1
+                        },
+                        "children": [],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            }
+          },
+          {
+            "id": 10,
+            "behavior": "Modify.Value.Clamp",
+            "properties": {
+              "Minimum": 0.0,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 9,
+                "behavior": "Combine.Add",
+                "properties": {},
+                "children": [
+                  {
+                    "id": 7,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 0
+                    },
+                    "children": [],
+                    "drivers": {}
+                  },
+                  {
+                    "id": 8,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 1
+                    },
+                    "children": [],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-side-right-01",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-side-right-01",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-side-right-02",
+    "layer": 0,
+    "stack": {
+      "name": "Carpushit output compositor",
+      "root": {
+        "id": 11,
+        "behavior": "Tool.Merge",
+        "properties": {},
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 1.0
+            },
+            "children": [
+              {
+                "id": 1,
+                "behavior": "Create.Color.Color",
+                "properties": {
+                  "Color": "#fff2db"
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {
+              "Amount": {
+                "id": 5,
+                "behavior": "Modify.Value.Clamp",
+                "properties": {
+                  "Minimum": 0.0,
+                  "Maximum": 1.0
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 2,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 3,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 1
+                        },
+                        "children": [],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            }
+          },
+          {
+            "id": 10,
+            "behavior": "Modify.Value.Clamp",
+            "properties": {
+              "Minimum": 0.0,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 9,
+                "behavior": "Combine.Add",
+                "properties": {},
+                "children": [
+                  {
+                    "id": 7,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 0
+                    },
+                    "children": [],
+                    "drivers": {}
+                  },
+                  {
+                    "id": 8,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 1
+                    },
+                    "children": [],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-side-right-02",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "front-side-right-02",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "wing-right-01",
+    "layer": 0,
+    "stack": {
+      "name": "Carpushit output compositor",
+      "root": {
+        "id": 11,
+        "behavior": "Tool.Merge",
+        "properties": {},
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 1.0
+            },
+            "children": [
+              {
+                "id": 1,
+                "behavior": "Create.Color.Color",
+                "properties": {
+                  "Color": "#fff2db"
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {
+              "Amount": {
+                "id": 5,
+                "behavior": "Modify.Value.Clamp",
+                "properties": {
+                  "Minimum": 0.0,
+                  "Maximum": 1.0
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 2,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 3,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 1
+                        },
+                        "children": [],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            }
+          },
+          {
+            "id": 10,
+            "behavior": "Modify.Value.Clamp",
+            "properties": {
+              "Minimum": 0.0,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 9,
+                "behavior": "Combine.Add",
+                "properties": {},
+                "children": [
+                  {
+                    "id": 7,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 0
+                    },
+                    "children": [],
+                    "drivers": {}
+                  },
+                  {
+                    "id": 8,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 1
+                    },
+                    "children": [],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "wing-right-01",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "wing-right-01",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "wing-right-02",
+    "layer": 0,
+    "stack": {
+      "name": "Carpushit output compositor",
+      "root": {
+        "id": 11,
+        "behavior": "Tool.Merge",
+        "properties": {},
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 1.0
+            },
+            "children": [
+              {
+                "id": 1,
+                "behavior": "Create.Color.Color",
+                "properties": {
+                  "Color": "#fff2db"
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {
+              "Amount": {
+                "id": 5,
+                "behavior": "Modify.Value.Clamp",
+                "properties": {
+                  "Minimum": 0.0,
+                  "Maximum": 1.0
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 2,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 3,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 1
+                        },
+                        "children": [],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            }
+          },
+          {
+            "id": 10,
+            "behavior": "Modify.Value.Clamp",
+            "properties": {
+              "Minimum": 0.0,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 9,
+                "behavior": "Combine.Add",
+                "properties": {},
+                "children": [
+                  {
+                    "id": 7,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 0
+                    },
+                    "children": [],
+                    "drivers": {}
+                  },
+                  {
+                    "id": 8,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 1
+                    },
+                    "children": [],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "wing-right-02",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "wing-right-02",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "wing-right-03",
+    "layer": 0,
+    "stack": {
+      "name": "Carpushit output compositor",
+      "root": {
+        "id": 11,
+        "behavior": "Tool.Merge",
+        "properties": {},
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 1.0
+            },
+            "children": [
+              {
+                "id": 1,
+                "behavior": "Create.Color.Color",
+                "properties": {
+                  "Color": "#fff2db"
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {
+              "Amount": {
+                "id": 5,
+                "behavior": "Modify.Value.Clamp",
+                "properties": {
+                  "Minimum": 0.0,
+                  "Maximum": 1.0
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 2,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 3,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 1
+                        },
+                        "children": [],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            }
+          },
+          {
+            "id": 10,
+            "behavior": "Modify.Value.Clamp",
+            "properties": {
+              "Minimum": 0.0,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 9,
+                "behavior": "Combine.Add",
+                "properties": {},
+                "children": [
+                  {
+                    "id": 7,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 0
+                    },
+                    "children": [],
+                    "drivers": {}
+                  },
+                  {
+                    "id": 8,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 1
+                    },
+                    "children": [],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "wing-right-03",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "wing-right-03",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "eye-right",
+    "layer": 0,
+    "stack": {
+      "name": "Carpushit output compositor",
+      "root": {
+        "id": 11,
+        "behavior": "Tool.Merge",
+        "properties": {},
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 1.0
+            },
+            "children": [
+              {
+                "id": 1,
+                "behavior": "Create.Color.Color",
+                "properties": {
+                  "Color": "#fff2db"
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {
+              "Amount": {
+                "id": 5,
+                "behavior": "Modify.Value.Clamp",
+                "properties": {
+                  "Minimum": 0.0,
+                  "Maximum": 1.0
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 2,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 3,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 1
+                        },
+                        "children": [],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            }
+          },
+          {
+            "id": 10,
+            "behavior": "Modify.Value.Clamp",
+            "properties": {
+              "Minimum": 0.0,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 9,
+                "behavior": "Combine.Add",
+                "properties": {},
+                "children": [
+                  {
+                    "id": 7,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 0
+                    },
+                    "children": [],
+                    "drivers": {}
+                  },
+                  {
+                    "id": 8,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 1
+                    },
+                    "children": [],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "eye-right",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "eye-right",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "ear-right",
+    "layer": 0,
+    "stack": {
+      "name": "Carpushit output compositor",
+      "root": {
+        "id": 11,
+        "behavior": "Tool.Merge",
+        "properties": {},
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 1.0
+            },
+            "children": [
+              {
+                "id": 1,
+                "behavior": "Create.Color.Color",
+                "properties": {
+                  "Color": "#ffc75f"
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {
+              "Amount": {
+                "id": 5,
+                "behavior": "Modify.Value.Clamp",
+                "properties": {
+                  "Minimum": 0.0,
+                  "Maximum": 1.0
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 2,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 3,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 1
+                        },
+                        "children": [],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            }
+          },
+          {
+            "id": 10,
+            "behavior": "Modify.Value.Clamp",
+            "properties": {
+              "Minimum": 0.0,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 9,
+                "behavior": "Combine.Add",
+                "properties": {},
+                "children": [
+                  {
+                    "id": 7,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 0
+                    },
+                    "children": [],
+                    "drivers": {}
+                  },
+                  {
+                    "id": 8,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 1
+                    },
+                    "children": [],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "ear-right",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "ear-right",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "watcher-right",
+    "layer": 0,
+    "stack": {
+      "name": "Carpushit output compositor",
+      "root": {
+        "id": 11,
+        "behavior": "Tool.Merge",
+        "properties": {},
+        "children": [
+          {
+            "id": 6,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 1.0
+            },
+            "children": [
+              {
+                "id": 1,
+                "behavior": "Create.Color.Color",
+                "properties": {
+                  "Color": "#90d7e6"
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {
+              "Amount": {
+                "id": 5,
+                "behavior": "Modify.Value.Clamp",
+                "properties": {
+                  "Minimum": 0.0,
+                  "Maximum": 1.0
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Combine.Add",
+                    "properties": {},
+                    "children": [
+                      {
+                        "id": 2,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 3,
+                        "behavior": "Create.Layer.Above",
+                        "properties": {
+                          "Layer": 1
+                        },
+                        "children": [],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            }
+          },
+          {
+            "id": 10,
+            "behavior": "Modify.Value.Clamp",
+            "properties": {
+              "Minimum": 0.0,
+              "Maximum": 1.0
+            },
+            "children": [
+              {
+                "id": 9,
+                "behavior": "Combine.Add",
+                "properties": {},
+                "children": [
+                  {
+                    "id": 7,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 0
+                    },
+                    "children": [],
+                    "drivers": {}
+                  },
+                  {
+                    "id": 8,
+                    "behavior": "Create.Layer.Above",
+                    "properties": {
+                      "Layer": 1
+                    },
+                    "children": [],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "watcher-right",
+    "layer": 1,
+    "stack": {
+      "name": "Carpushit full",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 1.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "watcher-right",
+    "layer": 2,
+    "stack": {
+      "name": "Carpushit twinkle off",
+      "root": {
+        "id": 1,
+        "behavior": "Create.Value.Constant",
+        "properties": {
+          "Value": 0.0
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "__director",
+    "layer": 0,
+    "stack": {
+      "name": "Carpushit 120 second native recall - DISARMED",
+      "root": {
+        "id": 54,
+        "behavior": "Filter.Manual",
+        "properties": {
+          "Open": false
+        },
+        "children": [
+          {
+            "id": 53,
+            "behavior": "Tool.Merge",
+            "properties": {},
+            "children": [
+              {
+                "id": 8,
+                "behavior": "Assign.Content",
+                "properties": {
+                  "Content": "carpushit-full",
+                  "Group": "all",
+                  "Duration": 0.8,
+                  "Transition": "Transition.Fade",
+                  "Enabled": false
+                },
+                "children": [],
+                "drivers": {
+                  "Enabled": {
+                    "id": 7,
+                    "behavior": "Combine.Value.Boolean",
+                    "properties": {
+                      "And/Or": false
+                    },
+                    "children": [
+                      {
+                        "id": 3,
+                        "behavior": "Combine.Value.Compare",
+                        "properties": {
+                          "Operator": 1
+                        },
+                        "children": [
+                          {
+                            "id": 1,
+                            "behavior": "Create.Value.LFO",
+                            "properties": {
+                              "Period": 120.0,
+                              "Type": 0
+                            },
+                            "children": [],
+                            "drivers": {}
+                          },
+                          {
+                            "id": 2,
+                            "behavior": "Create.Value.Constant",
+                            "properties": {
+                              "Value": 0.0
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 6,
+                        "behavior": "Combine.Value.Compare",
+                        "properties": {
+                          "Operator": 2
+                        },
+                        "children": [
+                          {
+                            "id": 4,
+                            "behavior": "Create.Value.LFO",
+                            "properties": {
+                              "Period": 120.0,
+                              "Type": 0
+                            },
+                            "children": [],
+                            "drivers": {}
+                          },
+                          {
+                            "id": 5,
+                            "behavior": "Create.Value.Constant",
+                            "properties": {
+                              "Value": 0.2
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                }
+              },
+              {
+                "id": 16,
+                "behavior": "Assign.Content",
+                "properties": {
+                  "Content": "carpushit-slow-pulse",
+                  "Group": "all",
+                  "Duration": 1.2,
+                  "Transition": "Transition.Fade",
+                  "Enabled": false
+                },
+                "children": [],
+                "drivers": {
+                  "Enabled": {
+                    "id": 15,
+                    "behavior": "Combine.Value.Boolean",
+                    "properties": {
+                      "And/Or": false
+                    },
+                    "children": [
+                      {
+                        "id": 11,
+                        "behavior": "Combine.Value.Compare",
+                        "properties": {
+                          "Operator": 1
+                        },
+                        "children": [
+                          {
+                            "id": 9,
+                            "behavior": "Create.Value.LFO",
+                            "properties": {
+                              "Period": 120.0,
+                              "Type": 0
+                            },
+                            "children": [],
+                            "drivers": {}
+                          },
+                          {
+                            "id": 10,
+                            "behavior": "Create.Value.Constant",
+                            "properties": {
+                              "Value": 0.2
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 14,
+                        "behavior": "Combine.Value.Compare",
+                        "properties": {
+                          "Operator": 2
+                        },
+                        "children": [
+                          {
+                            "id": 12,
+                            "behavior": "Create.Value.LFO",
+                            "properties": {
+                              "Period": 120.0,
+                              "Type": 0
+                            },
+                            "children": [],
+                            "drivers": {}
+                          },
+                          {
+                            "id": 13,
+                            "behavior": "Create.Value.Constant",
+                            "properties": {
+                              "Value": 0.4
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                }
+              },
+              {
+                "id": 24,
+                "behavior": "Assign.Content",
+                "properties": {
+                  "Content": "carpushit-alternate",
+                  "Group": "all",
+                  "Duration": 1.2,
+                  "Transition": "Transition.Fade",
+                  "Enabled": false
+                },
+                "children": [],
+                "drivers": {
+                  "Enabled": {
+                    "id": 23,
+                    "behavior": "Combine.Value.Boolean",
+                    "properties": {
+                      "And/Or": false
+                    },
+                    "children": [
+                      {
+                        "id": 19,
+                        "behavior": "Combine.Value.Compare",
+                        "properties": {
+                          "Operator": 1
+                        },
+                        "children": [
+                          {
+                            "id": 17,
+                            "behavior": "Create.Value.LFO",
+                            "properties": {
+                              "Period": 120.0,
+                              "Type": 0
+                            },
+                            "children": [],
+                            "drivers": {}
+                          },
+                          {
+                            "id": 18,
+                            "behavior": "Create.Value.Constant",
+                            "properties": {
+                              "Value": 0.4
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 22,
+                        "behavior": "Combine.Value.Compare",
+                        "properties": {
+                          "Operator": 2
+                        },
+                        "children": [
+                          {
+                            "id": 20,
+                            "behavior": "Create.Value.LFO",
+                            "properties": {
+                              "Period": 120.0,
+                              "Type": 0
+                            },
+                            "children": [],
+                            "drivers": {}
+                          },
+                          {
+                            "id": 21,
+                            "behavior": "Create.Value.Constant",
+                            "properties": {
+                              "Value": 0.6
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                }
+              },
+              {
+                "id": 32,
+                "behavior": "Assign.Content",
+                "properties": {
+                  "Content": "carpushit-chase",
+                  "Group": "all",
+                  "Duration": 0.8,
+                  "Transition": "Transition.Fade",
+                  "Enabled": false
+                },
+                "children": [],
+                "drivers": {
+                  "Enabled": {
+                    "id": 31,
+                    "behavior": "Combine.Value.Boolean",
+                    "properties": {
+                      "And/Or": false
+                    },
+                    "children": [
+                      {
+                        "id": 27,
+                        "behavior": "Combine.Value.Compare",
+                        "properties": {
+                          "Operator": 1
+                        },
+                        "children": [
+                          {
+                            "id": 25,
+                            "behavior": "Create.Value.LFO",
+                            "properties": {
+                              "Period": 120.0,
+                              "Type": 0
+                            },
+                            "children": [],
+                            "drivers": {}
+                          },
+                          {
+                            "id": 26,
+                            "behavior": "Create.Value.Constant",
+                            "properties": {
+                              "Value": 0.6
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 30,
+                        "behavior": "Combine.Value.Compare",
+                        "properties": {
+                          "Operator": 2
+                        },
+                        "children": [
+                          {
+                            "id": 28,
+                            "behavior": "Create.Value.LFO",
+                            "properties": {
+                              "Period": 120.0,
+                              "Type": 0
+                            },
+                            "children": [],
+                            "drivers": {}
+                          },
+                          {
+                            "id": 29,
+                            "behavior": "Create.Value.Constant",
+                            "properties": {
+                              "Value": 0.8
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                }
+              },
+              {
+                "id": 40,
+                "behavior": "Assign.Content",
+                "properties": {
+                  "Content": "carpushit-twinkle",
+                  "Group": "outside",
+                  "Duration": 1.0,
+                  "Transition": "Transition.Fade",
+                  "Enabled": false
+                },
+                "children": [],
+                "drivers": {
+                  "Enabled": {
+                    "id": 39,
+                    "behavior": "Combine.Value.Boolean",
+                    "properties": {
+                      "And/Or": false
+                    },
+                    "children": [
+                      {
+                        "id": 35,
+                        "behavior": "Combine.Value.Compare",
+                        "properties": {
+                          "Operator": 1
+                        },
+                        "children": [
+                          {
+                            "id": 33,
+                            "behavior": "Create.Value.LFO",
+                            "properties": {
+                              "Period": 120.0,
+                              "Type": 0
+                            },
+                            "children": [],
+                            "drivers": {}
+                          },
+                          {
+                            "id": 34,
+                            "behavior": "Create.Value.Constant",
+                            "properties": {
+                              "Value": 0.8
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 38,
+                        "behavior": "Combine.Value.Compare",
+                        "properties": {
+                          "Operator": 2
+                        },
+                        "children": [
+                          {
+                            "id": 36,
+                            "behavior": "Create.Value.LFO",
+                            "properties": {
+                              "Period": 120.0,
+                              "Type": 0
+                            },
+                            "children": [],
+                            "drivers": {}
+                          },
+                          {
+                            "id": 37,
+                            "behavior": "Create.Value.Constant",
+                            "properties": {
+                              "Value": 1.0
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                }
+              },
+              {
+                "id": 48,
+                "behavior": "Assign.Content",
+                "properties": {
+                  "Content": "carpushit-slow-pulse",
+                  "Group": "bulbs",
+                  "Duration": 1.0,
+                  "Transition": "Transition.Fade",
+                  "Enabled": false
+                },
+                "children": [],
+                "drivers": {
+                  "Enabled": {
+                    "id": 47,
+                    "behavior": "Combine.Value.Boolean",
+                    "properties": {
+                      "And/Or": false
+                    },
+                    "children": [
+                      {
+                        "id": 43,
+                        "behavior": "Combine.Value.Compare",
+                        "properties": {
+                          "Operator": 1
+                        },
+                        "children": [
+                          {
+                            "id": 41,
+                            "behavior": "Create.Value.LFO",
+                            "properties": {
+                              "Period": 120.0,
+                              "Type": 0
+                            },
+                            "children": [],
+                            "drivers": {}
+                          },
+                          {
+                            "id": 42,
+                            "behavior": "Create.Value.Constant",
+                            "properties": {
+                              "Value": 0.8
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 46,
+                        "behavior": "Combine.Value.Compare",
+                        "properties": {
+                          "Operator": 2
+                        },
+                        "children": [
+                          {
+                            "id": 44,
+                            "behavior": "Create.Value.LFO",
+                            "properties": {
+                              "Period": 120.0,
+                              "Type": 0
+                            },
+                            "children": [],
+                            "drivers": {}
+                          },
+                          {
+                            "id": 45,
+                            "behavior": "Create.Value.Constant",
+                            "properties": {
+                              "Value": 1.0
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                }
+              },
+              {
+                "id": 52,
+                "behavior": "Assign.Content",
+                "properties": {
+                  "Content": "carpushit-twinkle-off",
+                  "Group": "outside",
+                  "Duration": 0.8,
+                  "Transition": "Transition.Fade",
+                  "Enabled": false
+                },
+                "children": [],
+                "drivers": {
+                  "Enabled": {
+                    "id": 51,
+                    "behavior": "Combine.Value.Compare",
+                    "properties": {
+                      "Operator": 2
+                    },
+                    "children": [
+                      {
+                        "id": 49,
+                        "behavior": "Create.Value.LFO",
+                        "properties": {
+                          "Period": 120.0,
+                          "Type": 0
+                        },
+                        "children": [],
+                        "drivers": {}
+                      },
+                      {
+                        "id": 50,
+                        "behavior": "Create.Value.Constant",
+                        "properties": {
+                          "Value": 0.2
+                        },
+                        "children": [],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                }
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "__director",
+    "layer": 1,
+    "stack": null
+  },
+  {
+    "fixture": "__director",
+    "layer": 2,
+    "stack": null
+  }
+]

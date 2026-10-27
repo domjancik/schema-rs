@@ -1,0 +1,39 @@
+{
+  "cleanup": "The exporter omitted128 faces from the58661 authored count. Actual GLB declares58533 triangles. Fresh import validates unchanged and re-export is byte-identical.",
+  "meshes": [
+    {
+      "name": "Carpushit / lattice",
+      "triangles": 17934,
+      "validate_changed": false
+    },
+    {
+      "name": "Carpushit / metal",
+      "triangles": 72,
+      "validate_changed": false
+    },
+    {
+      "name": "Carpushit / reflectors",
+      "triangles": 1842,
+      "validate_changed": false
+    },
+    {
+      "name": "Carpushit / shell",
+      "triangles": 13222,
+      "validate_changed": false
+    },
+    {
+      "name": "Carpushit / wing-detail",
+      "triangles": 6336,
+      "validate_changed": false
+    },
+    {
+      "name": "Carpushit / wings",
+      "triangles": 19127,
+      "validate_changed": false
+    }
+  ],
+  "triangles": 58533,
+  "bytes": 4560244,
+  "sha256": "26724b97b48a81d3530f22d80b13e5a873f8eb263be4a28ba76f787a91143b48",
+  "file": "C:\\Users\\magne\\dev\\schema-rs\\target\\scene-lab\\carpushit\\carpushit-preview-final.glb"
+}

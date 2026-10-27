@@ -1,0 +1,148 @@
+{
+  "transition_observed": true,
+  "completed_adoption_observed": true,
+  "non_target_bulbs_right_retained": true,
+  "duration": 0.8,
+  "sample_frames": [
+    {
+      "time": 237.24152819999972,
+      "revision": 50,
+      "root": "Transition.Fade",
+      "left_byte": 125,
+      "right_byte": 127
+    },
+    {
+      "time": 237.32528759999974,
+      "revision": 50,
+      "root": "Transition.Fade",
+      "left_byte": 119,
+      "right_byte": 127
+    },
+    {
+      "time": 237.42489699999973,
+      "revision": 50,
+      "root": "Transition.Fade",
+      "left_byte": 112,
+      "right_byte": 127
+    },
+    {
+      "time": 237.52524939999972,
+      "revision": 50,
+      "root": "Transition.Fade",
+      "left_byte": 103,
+      "right_byte": 127
+    },
+    {
+      "time": 237.62499139999971,
+      "revision": 50,
+      "root": "Transition.Fade",
+      "left_byte": 94,
+      "right_byte": 127
+    },
+    {
+      "time": 237.7086399999997,
+      "revision": 50,
+      "root": "Transition.Fade",
+      "left_byte": 86,
+      "right_byte": 127
+    },
+    {
+      "time": 237.80862549999966,
+      "revision": 50,
+      "root": "Transition.Fade",
+      "left_byte": 75,
+      "right_byte": 127
+    },
+    {
+      "time": 237.89189589999967,
+      "revision": 50,
+      "root": "Transition.Fade",
+      "left_byte": 66,
+      "right_byte": 127
+    },
+    {
+      "time": 237.99158909999966,
+      "revision": 50,
+      "root": "Transition.Fade",
+      "left_byte": 53,
+      "right_byte": 127
+    },
+    {
+      "time": 238.0884272999996,
+      "revision": 52,
+      "root": "Modify.Value.MapTo",
+      "left_byte": 49,
+      "right_byte": 127
+    },
+    {
+      "time": 238.1742738999996,
+      "revision": 54,
+      "root": "Modify.Value.MapTo",
+      "left_byte": 46,
+      "right_byte": 127
+    },
+    {
+      "time": 238.2702012999996,
+      "revision": 55,
+      "root": "Modify.Value.MapTo",
+      "left_byte": 43,
+      "right_byte": 127
+    },
+    {
+      "time": 238.3701418999996,
+      "revision": 55,
+      "root": "Modify.Value.MapTo",
+      "left_byte": 40,
+      "right_byte": 127
+    },
+    {
+      "time": 238.4535599999996,
+      "revision": 55,
+      "root": "Modify.Value.MapTo",
+      "left_byte": 38,
+      "right_byte": 127
+    },
+    {
+      "time": 238.55375769999958,
+      "revision": 55,
+      "root": "Modify.Value.MapTo",
+      "left_byte": 35,
+      "right_byte": 127
+    },
+    {
+      "time": 238.65364559999958,
+      "revision": 55,
+      "root": "Modify.Value.MapTo",
+      "left_byte": 32,
+      "right_byte": 127
+    },
+    {
+      "time": 238.73694409999956,
+      "revision": 55,
+      "root": "Modify.Value.MapTo",
+      "left_byte": 30,
+      "right_byte": 127
+    },
+    {
+      "time": 238.83691499999955,
+      "revision": 55,
+      "root": "Modify.Value.MapTo",
+      "left_byte": 27,
+      "right_byte": 127
+    },
+    {
+      "time": 238.93703109999956,
+      "revision": 55,
+      "root": "Modify.Value.MapTo",
+      "left_byte": 25,
+      "right_byte": 127
+    },
+    {
+      "time": 239.02018389999955,
+      "revision": 55,
+      "root": "Modify.Value.MapTo",
+      "left_byte": 23,
+      "right_byte": 127
+    }
+  ]
+}

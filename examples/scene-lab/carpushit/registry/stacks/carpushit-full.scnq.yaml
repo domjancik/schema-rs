@@ -1,0 +1,4 @@
+name: Carpushit full
+stack:
+  Create.Value.Constant:
+    Value: 1.0
