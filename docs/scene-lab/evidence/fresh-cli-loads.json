@@ -1,0 +1,29 @@
+[
+  {
+    "fixtures": 6,
+    "id": "uv-midnight",
+    "port": 18798,
+    "output_enabled": false,
+    "equal_authored_project": true,
+    "diagnostics": [],
+    "frame": 2666
+  },
+  {
+    "fixtures": 9,
+    "id": "mint-chase",
+    "port": 18799,
+    "output_enabled": false,
+    "equal_authored_project": true,
+    "diagnostics": [],
+    "frame": 2678
+  },
+  {
+    "fixtures": 4,
+    "id": "repeat-bezier",
+    "port": 18800,
+    "output_enabled": false,
+    "equal_authored_project": true,
+    "diagnostics": [],
+    "frame": 2681
+  }
+]

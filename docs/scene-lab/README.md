@@ -35,3 +35,9 @@ For examples, record the intended effect, fixture arrangement and patch, require
 - Repeat/Bezier: reusable independent layers and property drivers.
 
 Start from the actual catalog and compatibility documentation, and explicitly report unsupported requirements.
+
+## Verified examples and guides
+
+The [initial batch guide](initial-batch.md) covers three complete output-disabled projects, seven ScenicScript stacks, save/reload checks, numerical field/timeline samples, Repeat playback and session recovery. Loadable authored data is in `examples/scene-lab/`.
+
+[Findings](findings.md) records two P3 requests: SL-001 for explicit Repeat runtime feedback; SL-002 for portable recorded clips or clearer scene-versus-session guidance. Implementation triage accepts both as useful follow-up requests. Neither is a confirmed defect in the current documented behavior; no semantic changes were made in the product/install release.

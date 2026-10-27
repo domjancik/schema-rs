@@ -1,0 +1,5 @@
+name: UV native constant wash
+stack:
+  Create.Value.Constant:
+    Value: 0.8
+

@@ -1,0 +1,14 @@
+name: Rose composite with layer driver
+stack:
+  Tool.Merge:
+    in:
+    - Create.Layer.Above:
+        Layer: 0
+    - Modify.Color.Dim:
+        Amount:
+          Create.Layer.Above:
+            Layer: 1
+        in:
+        - Create.Color.Color:
+            Color: '#ee88aa'
+

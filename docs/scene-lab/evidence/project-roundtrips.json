@@ -1,0 +1,29 @@
+[
+  {
+    "output_enabled": false,
+    "after_revision": 17,
+    "id": "uv-midnight",
+    "equal_authored_project": true,
+    "fixtures": 6,
+    "before_revision": 16,
+    "diagnostics": []
+  },
+  {
+    "output_enabled": false,
+    "after_revision": 19,
+    "id": "mint-chase",
+    "equal_authored_project": true,
+    "fixtures": 9,
+    "before_revision": 18,
+    "diagnostics": []
+  },
+  {
+    "output_enabled": false,
+    "after_revision": 21,
+    "id": "repeat-bezier",
+    "equal_authored_project": true,
+    "fixtures": 4,
+    "before_revision": 20,
+    "diagnostics": []
+  }
+]

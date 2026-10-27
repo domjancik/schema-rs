@@ -1,0 +1,179 @@
+[
+  {
+    "source_position": [
+      -4.0,
+      1.0,
+      0.0
+    ],
+    "progress": 0,
+    "samples": [
+      {
+        "red": 0.14693425815477051,
+        "distance": 1.4361406616345072,
+        "expected_red": 0.14693425815477051,
+        "id": "sample-1"
+      },
+      {
+        "red": 0.01841583374069024,
+        "distance": 3.092329219213245,
+        "expected_red": 0.01841583374069024,
+        "id": "sample-2"
+      },
+      {
+        "red": 0.0,
+        "distance": 5.437140792732887,
+        "expected_red": 0.0,
+        "id": "sample-3"
+      },
+      {
+        "red": 0.0,
+        "distance": 7.877975628294365,
+        "expected_red": 0.0,
+        "id": "sample-4"
+      },
+      {
+        "red": 0.5127718676730986,
+        "distance": 1.4361406616345072,
+        "expected_red": 0.5127718676730986,
+        "id": "sample-5"
+      },
+      {
+        "red": 0.18153415615735097,
+        "distance": 3.092329219213245,
+        "expected_red": 0.18153415615735097,
+        "id": "sample-6"
+      },
+      {
+        "red": 0.0,
+        "distance": 5.437140792732887,
+        "expected_red": 0.0,
+        "id": "sample-7"
+      },
+      {
+        "red": 0.0,
+        "distance": 7.877975628294365,
+        "expected_red": 0.0,
+        "id": "sample-8"
+      }
+    ],
+    "revision": 5
+  },
+  {
+    "source_position": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "progress": 0.5,
+    "samples": [
+      {
+        "red": 0.0,
+        "distance": 4.00780488547035,
+        "expected_red": 0.0,
+        "id": "sample-1"
+      },
+      {
+        "red": 0.09975740171730767,
+        "distance": 1.8874586088176875,
+        "expected_red": 0.09975740171730767,
+        "id": "sample-2"
+      },
+      {
+        "red": 0.09975740171730767,
+        "distance": 1.8874586088176875,
+        "expected_red": 0.09975740171730767,
+        "id": "sample-3"
+      },
+      {
+        "red": 0.0,
+        "distance": 4.00780488547035,
+        "expected_red": 0.0,
+        "id": "sample-4"
+      },
+      {
+        "red": 0.0,
+        "distance": 4.00780488547035,
+        "expected_red": 0.0,
+        "id": "sample-5"
+      },
+      {
+        "red": 0.42250827823646253,
+        "distance": 1.8874586088176875,
+        "expected_red": 0.42250827823646253,
+        "id": "sample-6"
+      },
+      {
+        "red": 0.42250827823646253,
+        "distance": 1.8874586088176875,
+        "expected_red": 0.42250827823646253,
+        "id": "sample-7"
+      },
+      {
+        "red": 0.0,
+        "distance": 4.00780488547035,
+        "expected_red": 0.0,
+        "id": "sample-8"
+      }
+    ],
+    "revision": 6
+  },
+  {
+    "source_position": [
+      4.0,
+      1.0,
+      0.0
+    ],
+    "progress": 1,
+    "samples": [
+      {
+        "red": 0.0,
+        "distance": 7.877975628294365,
+        "expected_red": 0.0,
+        "id": "sample-1"
+      },
+      {
+        "red": 0.0,
+        "distance": 5.437140792732887,
+        "expected_red": 0.0,
+        "id": "sample-2"
+      },
+      {
+        "red": 0.01841583374069024,
+        "distance": 3.092329219213245,
+        "expected_red": 0.01841583374069024,
+        "id": "sample-3"
+      },
+      {
+        "red": 0.14693425815477051,
+        "distance": 1.4361406616345072,
+        "expected_red": 0.14693425815477051,
+        "id": "sample-4"
+      },
+      {
+        "red": 0.0,
+        "distance": 7.877975628294365,
+        "expected_red": 0.0,
+        "id": "sample-5"
+      },
+      {
+        "red": 0.0,
+        "distance": 5.437140792732887,
+        "expected_red": 0.0,
+        "id": "sample-6"
+      },
+      {
+        "red": 0.18153415615735097,
+        "distance": 3.092329219213245,
+        "expected_red": 0.18153415615735097,
+        "id": "sample-7"
+      },
+      {
+        "red": 0.5127718676730986,
+        "distance": 1.4361406616345072,
+        "expected_red": 0.5127718676730986,
+        "id": "sample-8"
+      }
+    ],
+    "revision": 7
+  }
+]

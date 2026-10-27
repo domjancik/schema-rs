@@ -1,0 +1,24 @@
+{
+  "studio": {
+    "committed_revision": 10,
+    "screenshot": "repeat-studio.png",
+    "restored_name": "Recorded rose 1",
+    "undo_revision": 11,
+    "action": "rename Recorded rose 1 to Recorded rose 1 lab check",
+    "fixture": "repeat-1"
+  },
+  "output_enabled": false,
+  "schemaboy": {
+    "viewport": "desktop, not physical phone",
+    "property": "Duration",
+    "fixture": "repeat-1",
+    "input": "mouse and exact numeric dialog",
+    "after": 6,
+    "layer_api": 1,
+    "screenshot": "repeat-mobile.png",
+    "node": 10,
+    "undo": 8,
+    "before": 8
+  },
+  "baseline": "9427a13"
+}

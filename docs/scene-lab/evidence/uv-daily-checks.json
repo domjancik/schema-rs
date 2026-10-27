@@ -1,0 +1,117 @@
+[
+  {
+    "channels": [
+      122,
+      0,
+      122,
+      0,
+      122,
+      0,
+      122,
+      0,
+      122,
+      0,
+      122,
+      0
+    ],
+    "revision": 2,
+    "case": {
+      "label": "local-00",
+      "seconds": 79200,
+      "expected": 122
+    },
+    "frame": 7692
+  },
+  {
+    "channels": [
+      41,
+      0,
+      41,
+      0,
+      41,
+      0,
+      41,
+      0,
+      41,
+      0,
+      41,
+      0
+    ],
+    "revision": 2,
+    "case": {
+      "label": "local-06",
+      "seconds": 14400,
+      "expected": 41
+    },
+    "frame": 7694
+  },
+  {
+    "channels": [
+      204,
+      0,
+      204,
+      0,
+      204,
+      0,
+      204,
+      0,
+      204,
+      0,
+      204,
+      0
+    ],
+    "revision": 2,
+    "case": {
+      "label": "local-18",
+      "seconds": 57600,
+      "expected": 204
+    },
+    "frame": 7695
+  },
+  {
+    "channels": [
+      123,
+      0,
+      123,
+      0,
+      123,
+      0,
+      123,
+      0,
+      123,
+      0,
+      123,
+      0
+    ],
+    "revision": 2,
+    "case": {
+      "label": "local-23-59",
+      "seconds": 79140,
+      "expected": 123
+    },
+    "frame": 7696
+  },
+  {
+    "channels": [
+      122,
+      0,
+      122,
+      0,
+      122,
+      0,
+      122,
+      0,
+      122,
+      0,
+      122,
+      0
+    ],
+    "revision": 2,
+    "case": {
+      "label": "local-00-01",
+      "seconds": 79260,
+      "expected": 122
+    },
+    "frame": 7697
+  }
+]

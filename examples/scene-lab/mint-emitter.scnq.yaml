@@ -1,0 +1,30 @@
+name: Mint source path
+stack:
+  Light.Emitter:
+    Channel: mint
+    Color: '#72dec2'
+    Falloff: 2
+    Intensity: 1
+    Range: 4
+    Type: 0
+    in:
+    - Create.Position.Bezier:
+        Duration: 8
+        P0:
+        - -4
+        - 1
+        - 0
+        P1:
+        - -4
+        - 1
+        - 0
+        P2:
+        - 4
+        - 1
+        - 0
+        P3:
+        - 4
+        - 1
+        - 0
+        Ping Pong: true
+

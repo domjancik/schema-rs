@@ -1,0 +1,92 @@
+{
+  "index": 4100,
+  "minimum": 0.15910484644780482,
+  "revision": 10,
+  "last_samples": [
+    [
+      207.2695998999989,
+      {
+        "rotation": null,
+        "speed": null,
+        "duration": null,
+        "position": null,
+        "fixture_reference": null,
+        "value": 0.17906637379315127,
+        "colors": null
+      }
+    ],
+    [
+      207.2862144999989,
+      {
+        "rotation": null,
+        "speed": null,
+        "duration": null,
+        "position": null,
+        "fixture_reference": null,
+        "value": 0.17574827644144042,
+        "colors": null
+      }
+    ],
+    [
+      207.30351099999888,
+      {
+        "rotation": null,
+        "speed": null,
+        "duration": null,
+        "position": null,
+        "fixture_reference": null,
+        "value": 0.17235766250481724,
+        "colors": null
+      }
+    ]
+  ],
+  "can_undo": true,
+  "output": {
+    "enabled": false,
+    "target": "127.0.0.1:6454",
+    "fps": 40
+  },
+  "count": 402,
+  "restored_from_session": true,
+  "latch": true,
+  "first_samples": [
+    [
+      200.625299599999,
+      {
+        "rotation": null,
+        "speed": null,
+        "duration": null,
+        "position": null,
+        "fixture_reference": null,
+        "value": 0.15910484644780482,
+        "colors": null
+      }
+    ],
+    [
+      200.628117899999,
+      {
+        "rotation": null,
+        "speed": null,
+        "duration": null,
+        "position": null,
+        "fixture_reference": null,
+        "value": 0.15960755985583855,
+        "colors": null
+      }
+    ],
+    [
+      200.644813099999,
+      {
+        "rotation": null,
+        "speed": null,
+        "duration": null,
+        "position": null,
+        "fixture_reference": null,
+        "value": 0.16262314401853348,
+        "colors": null
+      }
+    ]
+  ],
+  "maximum": 0.9999970826864492,
+  "time": 275.89620929999825
+}

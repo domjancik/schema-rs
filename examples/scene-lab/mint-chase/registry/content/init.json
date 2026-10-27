@@ -1,0 +1,507 @@
+[
+  {
+    "fixture": "sample-1",
+    "layer": 0,
+    "stack": {
+      "name": "Mint receiver",
+      "root": {
+        "id": 1,
+        "behavior": "Modify.Color.Dim",
+        "properties": {
+          "Amount": 0.8
+        },
+        "children": [
+          {
+            "id": 2,
+            "behavior": "Light.Receiver",
+            "properties": {
+              "Channel": "mint",
+              "Fixture": "source",
+              "Gain": 1
+            },
+            "children": [],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "sample-1",
+    "layer": 1,
+    "stack": null
+  },
+  {
+    "fixture": "sample-1",
+    "layer": 2,
+    "stack": null
+  },
+  {
+    "fixture": "sample-2",
+    "layer": 0,
+    "stack": {
+      "name": "Mint receiver",
+      "root": {
+        "id": 1,
+        "behavior": "Modify.Color.Dim",
+        "properties": {
+          "Amount": 0.8
+        },
+        "children": [
+          {
+            "id": 2,
+            "behavior": "Light.Receiver",
+            "properties": {
+              "Channel": "mint",
+              "Fixture": "source",
+              "Gain": 1
+            },
+            "children": [],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "sample-2",
+    "layer": 1,
+    "stack": null
+  },
+  {
+    "fixture": "sample-2",
+    "layer": 2,
+    "stack": null
+  },
+  {
+    "fixture": "sample-3",
+    "layer": 0,
+    "stack": {
+      "name": "Mint receiver",
+      "root": {
+        "id": 1,
+        "behavior": "Modify.Color.Dim",
+        "properties": {
+          "Amount": 0.8
+        },
+        "children": [
+          {
+            "id": 2,
+            "behavior": "Light.Receiver",
+            "properties": {
+              "Channel": "mint",
+              "Fixture": "source",
+              "Gain": 1
+            },
+            "children": [],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "sample-3",
+    "layer": 1,
+    "stack": null
+  },
+  {
+    "fixture": "sample-3",
+    "layer": 2,
+    "stack": null
+  },
+  {
+    "fixture": "sample-4",
+    "layer": 0,
+    "stack": {
+      "name": "Mint receiver",
+      "root": {
+        "id": 1,
+        "behavior": "Modify.Color.Dim",
+        "properties": {
+          "Amount": 0.8
+        },
+        "children": [
+          {
+            "id": 2,
+            "behavior": "Light.Receiver",
+            "properties": {
+              "Channel": "mint",
+              "Fixture": "source",
+              "Gain": 1
+            },
+            "children": [],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "sample-4",
+    "layer": 1,
+    "stack": null
+  },
+  {
+    "fixture": "sample-4",
+    "layer": 2,
+    "stack": null
+  },
+  {
+    "fixture": "sample-5",
+    "layer": 0,
+    "stack": {
+      "name": "Clamped fixture distance",
+      "root": {
+        "id": 1,
+        "behavior": "Modify.Color.Dim",
+        "properties": {
+          "Amount": 0.8
+        },
+        "children": [
+          {
+            "id": 2,
+            "behavior": "Convert.Value.ToColor",
+            "properties": {},
+            "children": [
+              {
+                "id": 3,
+                "behavior": "Modify.Value.Clamp",
+                "properties": {
+                  "Maximum": 1,
+                  "Minimum": 0
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Modify.Value.MapFromTo",
+                    "properties": {
+                      "Maximum": 0,
+                      "Minimum": 1,
+                      "Source Max": 4,
+                      "Source Min": 0
+                    },
+                    "children": [
+                      {
+                        "id": 5,
+                        "behavior": "Create.Value.Distance",
+                        "properties": {
+                          "Auto/Setup": false,
+                          "Fixture": "source"
+                        },
+                        "children": [],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "sample-5",
+    "layer": 1,
+    "stack": null
+  },
+  {
+    "fixture": "sample-5",
+    "layer": 2,
+    "stack": null
+  },
+  {
+    "fixture": "sample-6",
+    "layer": 0,
+    "stack": {
+      "name": "Clamped fixture distance",
+      "root": {
+        "id": 1,
+        "behavior": "Modify.Color.Dim",
+        "properties": {
+          "Amount": 0.8
+        },
+        "children": [
+          {
+            "id": 2,
+            "behavior": "Convert.Value.ToColor",
+            "properties": {},
+            "children": [
+              {
+                "id": 3,
+                "behavior": "Modify.Value.Clamp",
+                "properties": {
+                  "Maximum": 1,
+                  "Minimum": 0
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Modify.Value.MapFromTo",
+                    "properties": {
+                      "Maximum": 0,
+                      "Minimum": 1,
+                      "Source Max": 4,
+                      "Source Min": 0
+                    },
+                    "children": [
+                      {
+                        "id": 5,
+                        "behavior": "Create.Value.Distance",
+                        "properties": {
+                          "Auto/Setup": false,
+                          "Fixture": "source"
+                        },
+                        "children": [],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "sample-6",
+    "layer": 1,
+    "stack": null
+  },
+  {
+    "fixture": "sample-6",
+    "layer": 2,
+    "stack": null
+  },
+  {
+    "fixture": "sample-7",
+    "layer": 0,
+    "stack": {
+      "name": "Clamped fixture distance",
+      "root": {
+        "id": 1,
+        "behavior": "Modify.Color.Dim",
+        "properties": {
+          "Amount": 0.8
+        },
+        "children": [
+          {
+            "id": 2,
+            "behavior": "Convert.Value.ToColor",
+            "properties": {},
+            "children": [
+              {
+                "id": 3,
+                "behavior": "Modify.Value.Clamp",
+                "properties": {
+                  "Maximum": 1,
+                  "Minimum": 0
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Modify.Value.MapFromTo",
+                    "properties": {
+                      "Maximum": 0,
+                      "Minimum": 1,
+                      "Source Max": 4,
+                      "Source Min": 0
+                    },
+                    "children": [
+                      {
+                        "id": 5,
+                        "behavior": "Create.Value.Distance",
+                        "properties": {
+                          "Auto/Setup": false,
+                          "Fixture": "source"
+                        },
+                        "children": [],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "sample-7",
+    "layer": 1,
+    "stack": null
+  },
+  {
+    "fixture": "sample-7",
+    "layer": 2,
+    "stack": null
+  },
+  {
+    "fixture": "sample-8",
+    "layer": 0,
+    "stack": {
+      "name": "Clamped fixture distance",
+      "root": {
+        "id": 1,
+        "behavior": "Modify.Color.Dim",
+        "properties": {
+          "Amount": 0.8
+        },
+        "children": [
+          {
+            "id": 2,
+            "behavior": "Convert.Value.ToColor",
+            "properties": {},
+            "children": [
+              {
+                "id": 3,
+                "behavior": "Modify.Value.Clamp",
+                "properties": {
+                  "Maximum": 1,
+                  "Minimum": 0
+                },
+                "children": [
+                  {
+                    "id": 4,
+                    "behavior": "Modify.Value.MapFromTo",
+                    "properties": {
+                      "Maximum": 0,
+                      "Minimum": 1,
+                      "Source Max": 4,
+                      "Source Min": 0
+                    },
+                    "children": [
+                      {
+                        "id": 5,
+                        "behavior": "Create.Value.Distance",
+                        "properties": {
+                          "Auto/Setup": false,
+                          "Fixture": "source"
+                        },
+                        "children": [],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "sample-8",
+    "layer": 1,
+    "stack": null
+  },
+  {
+    "fixture": "sample-8",
+    "layer": 2,
+    "stack": null
+  },
+  {
+    "fixture": "source",
+    "layer": 0,
+    "stack": {
+      "name": "Mint source path",
+      "root": {
+        "id": 1,
+        "behavior": "Light.Emitter",
+        "properties": {
+          "Channel": "mint",
+          "Color": "#72dec2",
+          "Falloff": 2,
+          "Intensity": 1,
+          "Range": 4,
+          "Type": 0
+        },
+        "children": [
+          {
+            "id": 2,
+            "behavior": "Create.Position.Bezier",
+            "properties": {
+              "Duration": 8,
+              "P0": [
+                -4,
+                1,
+                0
+              ],
+              "P1": [
+                -4,
+                1,
+                0
+              ],
+              "P2": [
+                4,
+                1,
+                0
+              ],
+              "P3": [
+                4,
+                1,
+                0
+              ],
+              "Ping Pong": true
+            },
+            "children": [],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "source",
+    "layer": 1,
+    "stack": null
+  },
+  {
+    "fixture": "source",
+    "layer": 2,
+    "stack": null
+  },
+  {
+    "fixture": "__director",
+    "layer": 0,
+    "stack": null
+  },
+  {
+    "fixture": "__director",
+    "layer": 1,
+    "stack": null
+  },
+  {
+    "fixture": "__director",
+    "layer": 2,
+    "stack": null
+  }
+]

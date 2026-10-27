@@ -1,0 +1,509 @@
+[
+  {
+    "fixture": "repeat-1",
+    "layer": 0,
+    "stack": {
+      "name": "Rose composite with layer driver",
+      "root": {
+        "id": 1,
+        "behavior": "Tool.Merge",
+        "properties": {},
+        "children": [
+          {
+            "id": 2,
+            "behavior": "Create.Layer.Above",
+            "properties": {
+              "Layer": 0
+            },
+            "children": [],
+            "drivers": {}
+          },
+          {
+            "id": 3,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 1
+            },
+            "children": [
+              {
+                "id": 5,
+                "behavior": "Create.Color.Color",
+                "properties": {
+                  "Color": "#ee88aa"
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {
+              "Amount": {
+                "id": 4,
+                "behavior": "Create.Layer.Above",
+                "properties": {
+                  "Layer": 1
+                },
+                "children": [],
+                "drivers": {}
+              }
+            }
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "repeat-1",
+    "layer": 1,
+    "stack": {
+      "name": "Independent XYZ Bezier",
+      "root": {
+        "id": 10,
+        "behavior": "Create.Position.Bezier",
+        "properties": {
+          "Duration": 8,
+          "P0": [
+            -3,
+            0,
+            -2
+          ],
+          "P1": [
+            -3,
+            2,
+            -2
+          ],
+          "P2": [
+            -3,
+            2,
+            2
+          ],
+          "P3": [
+            -3,
+            0,
+            2
+          ],
+          "Ping Pong": true
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "repeat-1",
+    "layer": 2,
+    "stack": {
+      "name": "Recorded scalar PingPong",
+      "root": {
+        "id": 20,
+        "behavior": "Modify.Repeat",
+        "properties": {
+          "Mode": 1,
+          "Play": true,
+          "Record": true
+        },
+        "children": [
+          {
+            "id": 21,
+            "behavior": "Create.Value.Bezier",
+            "properties": {
+              "Control1": 0.1,
+              "Control2": 1,
+              "Duration": 4,
+              "End": 1,
+              "Ping Pong": true,
+              "Start": 0.1
+            },
+            "children": [],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "repeat-2",
+    "layer": 0,
+    "stack": {
+      "name": "Rose composite with layer driver",
+      "root": {
+        "id": 1,
+        "behavior": "Tool.Merge",
+        "properties": {},
+        "children": [
+          {
+            "id": 2,
+            "behavior": "Create.Layer.Above",
+            "properties": {
+              "Layer": 0
+            },
+            "children": [],
+            "drivers": {}
+          },
+          {
+            "id": 3,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 1
+            },
+            "children": [
+              {
+                "id": 5,
+                "behavior": "Create.Color.Color",
+                "properties": {
+                  "Color": "#ee88aa"
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {
+              "Amount": {
+                "id": 4,
+                "behavior": "Create.Layer.Above",
+                "properties": {
+                  "Layer": 1
+                },
+                "children": [],
+                "drivers": {}
+              }
+            }
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "repeat-2",
+    "layer": 1,
+    "stack": {
+      "name": "Independent XYZ Bezier",
+      "root": {
+        "id": 10,
+        "behavior": "Create.Position.Bezier",
+        "properties": {
+          "Duration": 8,
+          "P0": [
+            -1,
+            0,
+            -2
+          ],
+          "P1": [
+            -1,
+            2,
+            -2
+          ],
+          "P2": [
+            -1,
+            2,
+            2
+          ],
+          "P3": [
+            -1,
+            0,
+            2
+          ],
+          "Ping Pong": true
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "repeat-2",
+    "layer": 2,
+    "stack": {
+      "name": "Recorded scalar PingPong",
+      "root": {
+        "id": 20,
+        "behavior": "Modify.Repeat",
+        "properties": {
+          "Mode": 1,
+          "Play": true,
+          "Record": true
+        },
+        "children": [
+          {
+            "id": 21,
+            "behavior": "Create.Value.Bezier",
+            "properties": {
+              "Control1": 0.1,
+              "Control2": 1,
+              "Duration": 4,
+              "End": 1,
+              "Ping Pong": true,
+              "Start": 0.1
+            },
+            "children": [],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "repeat-3",
+    "layer": 0,
+    "stack": {
+      "name": "Rose composite with layer driver",
+      "root": {
+        "id": 1,
+        "behavior": "Tool.Merge",
+        "properties": {},
+        "children": [
+          {
+            "id": 2,
+            "behavior": "Create.Layer.Above",
+            "properties": {
+              "Layer": 0
+            },
+            "children": [],
+            "drivers": {}
+          },
+          {
+            "id": 3,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 1
+            },
+            "children": [
+              {
+                "id": 5,
+                "behavior": "Create.Color.Color",
+                "properties": {
+                  "Color": "#ee88aa"
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {
+              "Amount": {
+                "id": 4,
+                "behavior": "Create.Layer.Above",
+                "properties": {
+                  "Layer": 1
+                },
+                "children": [],
+                "drivers": {}
+              }
+            }
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "repeat-3",
+    "layer": 1,
+    "stack": {
+      "name": "Independent XYZ Bezier",
+      "root": {
+        "id": 10,
+        "behavior": "Create.Position.Bezier",
+        "properties": {
+          "Duration": 8,
+          "P0": [
+            1,
+            0,
+            -2
+          ],
+          "P1": [
+            1,
+            2,
+            -2
+          ],
+          "P2": [
+            1,
+            2,
+            2
+          ],
+          "P3": [
+            1,
+            0,
+            2
+          ],
+          "Ping Pong": true
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "repeat-3",
+    "layer": 2,
+    "stack": {
+      "name": "Recorded scalar PingPong",
+      "root": {
+        "id": 20,
+        "behavior": "Modify.Repeat",
+        "properties": {
+          "Mode": 1,
+          "Play": true,
+          "Record": true
+        },
+        "children": [
+          {
+            "id": 21,
+            "behavior": "Create.Value.Bezier",
+            "properties": {
+              "Control1": 0.1,
+              "Control2": 1,
+              "Duration": 4,
+              "End": 1,
+              "Ping Pong": true,
+              "Start": 0.1
+            },
+            "children": [],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "repeat-4",
+    "layer": 0,
+    "stack": {
+      "name": "Rose composite with layer driver",
+      "root": {
+        "id": 1,
+        "behavior": "Tool.Merge",
+        "properties": {},
+        "children": [
+          {
+            "id": 2,
+            "behavior": "Create.Layer.Above",
+            "properties": {
+              "Layer": 0
+            },
+            "children": [],
+            "drivers": {}
+          },
+          {
+            "id": 3,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 1
+            },
+            "children": [
+              {
+                "id": 5,
+                "behavior": "Create.Color.Color",
+                "properties": {
+                  "Color": "#ee88aa"
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {
+              "Amount": {
+                "id": 4,
+                "behavior": "Create.Layer.Above",
+                "properties": {
+                  "Layer": 1
+                },
+                "children": [],
+                "drivers": {}
+              }
+            }
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "repeat-4",
+    "layer": 1,
+    "stack": {
+      "name": "Independent XYZ Bezier",
+      "root": {
+        "id": 10,
+        "behavior": "Create.Position.Bezier",
+        "properties": {
+          "Duration": 8,
+          "P0": [
+            3,
+            0,
+            -2
+          ],
+          "P1": [
+            3,
+            2,
+            -2
+          ],
+          "P2": [
+            3,
+            2,
+            2
+          ],
+          "P3": [
+            3,
+            0,
+            2
+          ],
+          "Ping Pong": true
+        },
+        "children": [],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "repeat-4",
+    "layer": 2,
+    "stack": {
+      "name": "Recorded scalar PingPong",
+      "root": {
+        "id": 20,
+        "behavior": "Modify.Repeat",
+        "properties": {
+          "Mode": 1,
+          "Play": true,
+          "Record": true
+        },
+        "children": [
+          {
+            "id": 21,
+            "behavior": "Create.Value.Bezier",
+            "properties": {
+              "Control1": 0.1,
+              "Control2": 1,
+              "Duration": 4,
+              "End": 1,
+              "Ping Pong": true,
+              "Start": 0.1
+            },
+            "children": [],
+            "drivers": {}
+          }
+        ],
+        "drivers": {}
+      }
+    }
+  },
+  {
+    "fixture": "__director",
+    "layer": 0,
+    "stack": null
+  },
+  {
+    "fixture": "__director",
+    "layer": 1,
+    "stack": null
+  },
+  {
+    "fixture": "__director",
+    "layer": 2,
+    "stack": null
+  }
+]

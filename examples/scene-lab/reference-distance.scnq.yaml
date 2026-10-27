@@ -1,0 +1,21 @@
+name: Clamped fixture distance
+stack:
+  Modify.Color.Dim:
+    Amount: 0.8
+    in:
+    - Convert.Value.ToColor:
+        in:
+        - Modify.Value.Clamp:
+            Maximum: 1
+            Minimum: 0
+            in:
+            - Modify.Value.MapFromTo:
+                Maximum: 0
+                Minimum: 1
+                Source Max: 4
+                Source Min: 0
+                in:
+                - Create.Value.Distance:
+                    Auto/Setup: false
+                    Fixture: source
+

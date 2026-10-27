@@ -1,0 +1,15 @@
+name: Recorded scalar PingPong
+stack:
+  Modify.Repeat:
+    Mode: 1
+    Play: true
+    Record: true
+    in:
+    - Create.Value.Bezier:
+        Control1: 0.1
+        Control2: 1
+        Duration: 4
+        End: 1
+        Ping Pong: true
+        Start: 0.1
+

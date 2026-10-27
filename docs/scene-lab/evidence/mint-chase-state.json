@@ -1,0 +1,2630 @@
+{
+  "project": {
+    "dmx_models": {
+      "lab-uv-cob": {
+        "name": "Lab UV COB two slot",
+        "slots": [
+          {
+            "name": "Dimmer",
+            "source": "value",
+            "constant": 0,
+            "channel": "",
+            "minimum": 0,
+            "maximum": 255,
+            "fine": false
+          },
+          {
+            "name": "Program off",
+            "source": "constant",
+            "constant": 0,
+            "channel": "",
+            "minimum": 0,
+            "maximum": 255,
+            "fine": false
+          }
+        ]
+      },
+      "uv-cob": {
+        "name": "UV COB · 2 channel",
+        "slots": [
+          {
+            "name": "Dimmer",
+            "source": "value",
+            "constant": 0,
+            "channel": "",
+            "minimum": 0,
+            "maximum": 255,
+            "fine": false
+          },
+          {
+            "name": "Program",
+            "source": "constant",
+            "constant": 0,
+            "channel": "",
+            "minimum": 0,
+            "maximum": 255,
+            "fine": false
+          }
+        ]
+      }
+    },
+    "dimming": {
+      "enabled": false,
+      "master": 1.0,
+      "utc_offset_minutes": 120,
+      "points": [
+        {
+          "minute": 360,
+          "level": 0.2
+        },
+        {
+          "minute": 1080,
+          "level": 1.0
+        }
+      ]
+    },
+    "director": [
+      null,
+      null,
+      null
+    ],
+    "version": 1,
+    "name": "Mint chase and reference distance",
+    "fixtures": [
+      {
+        "setup_channel": 0,
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "pixel_positions": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "pixel_reverse": false,
+        "id": "source",
+        "name": "Mint moving emitter",
+        "position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "groups": [
+          "source"
+        ],
+        "model": "rgb",
+        "universe": 0,
+        "address": 1,
+        "dimmer": 1.0
+      },
+      {
+        "setup_channel": 0,
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "pixel_positions": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "pixel_reverse": false,
+        "id": "sample-1",
+        "name": "Field 1",
+        "position": [
+          -3.75,
+          0.0,
+          -1.0
+        ],
+        "groups": [
+          "field"
+        ],
+        "model": "rgb",
+        "universe": 0,
+        "address": 4,
+        "dimmer": 1.0
+      },
+      {
+        "setup_channel": 0,
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "pixel_positions": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "pixel_reverse": false,
+        "id": "sample-2",
+        "name": "Field 2",
+        "position": [
+          -1.25,
+          0.0,
+          -1.0
+        ],
+        "groups": [
+          "field"
+        ],
+        "model": "rgb",
+        "universe": 0,
+        "address": 7,
+        "dimmer": 1.0
+      },
+      {
+        "setup_channel": 0,
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "pixel_positions": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "pixel_reverse": false,
+        "id": "sample-3",
+        "name": "Field 3",
+        "position": [
+          1.25,
+          0.0,
+          -1.0
+        ],
+        "groups": [
+          "field"
+        ],
+        "model": "rgb",
+        "universe": 0,
+        "address": 10,
+        "dimmer": 1.0
+      },
+      {
+        "setup_channel": 0,
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "pixel_positions": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "pixel_reverse": false,
+        "id": "sample-4",
+        "name": "Field 4",
+        "position": [
+          3.75,
+          0.0,
+          -1.0
+        ],
+        "groups": [
+          "field"
+        ],
+        "model": "rgb",
+        "universe": 0,
+        "address": 13,
+        "dimmer": 1.0
+      },
+      {
+        "setup_channel": 0,
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "pixel_positions": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "pixel_reverse": false,
+        "id": "sample-5",
+        "name": "Distance 1",
+        "position": [
+          -3.75,
+          0.0,
+          1.0
+        ],
+        "groups": [
+          "reference"
+        ],
+        "model": "rgb",
+        "universe": 0,
+        "address": 16,
+        "dimmer": 1.0
+      },
+      {
+        "setup_channel": 0,
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "pixel_positions": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "pixel_reverse": false,
+        "id": "sample-6",
+        "name": "Distance 2",
+        "position": [
+          -1.25,
+          0.0,
+          1.0
+        ],
+        "groups": [
+          "reference"
+        ],
+        "model": "rgb",
+        "universe": 0,
+        "address": 19,
+        "dimmer": 1.0
+      },
+      {
+        "setup_channel": 0,
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "pixel_positions": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "pixel_reverse": false,
+        "id": "sample-7",
+        "name": "Distance 3",
+        "position": [
+          1.25,
+          0.0,
+          1.0
+        ],
+        "groups": [
+          "reference"
+        ],
+        "model": "rgb",
+        "universe": 0,
+        "address": 22,
+        "dimmer": 1.0
+      },
+      {
+        "setup_channel": 0,
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "pixel_positions": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "pixel_reverse": false,
+        "id": "sample-8",
+        "name": "Distance 4",
+        "position": [
+          3.75,
+          0.0,
+          1.0
+        ],
+        "groups": [
+          "reference"
+        ],
+        "model": "rgb",
+        "universe": 0,
+        "address": 25,
+        "dimmer": 1.0
+      }
+    ],
+    "content": {
+      "sample-1": [
+        {
+          "name": "Mint receiver",
+          "root": {
+            "id": 1,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 0.8
+            },
+            "children": [
+              {
+                "id": 2,
+                "behavior": "Light.Receiver",
+                "properties": {
+                  "Channel": "mint",
+                  "Fixture": "source",
+                  "Gain": 1
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        },
+        null,
+        null
+      ],
+      "sample-2": [
+        {
+          "name": "Mint receiver",
+          "root": {
+            "id": 1,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 0.8
+            },
+            "children": [
+              {
+                "id": 2,
+                "behavior": "Light.Receiver",
+                "properties": {
+                  "Channel": "mint",
+                  "Fixture": "source",
+                  "Gain": 1
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        },
+        null,
+        null
+      ],
+      "sample-3": [
+        {
+          "name": "Mint receiver",
+          "root": {
+            "id": 1,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 0.8
+            },
+            "children": [
+              {
+                "id": 2,
+                "behavior": "Light.Receiver",
+                "properties": {
+                  "Channel": "mint",
+                  "Fixture": "source",
+                  "Gain": 1
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        },
+        null,
+        null
+      ],
+      "sample-4": [
+        {
+          "name": "Mint receiver",
+          "root": {
+            "id": 1,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 0.8
+            },
+            "children": [
+              {
+                "id": 2,
+                "behavior": "Light.Receiver",
+                "properties": {
+                  "Channel": "mint",
+                  "Fixture": "source",
+                  "Gain": 1
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        },
+        null,
+        null
+      ],
+      "sample-5": [
+        {
+          "name": "Clamped fixture distance",
+          "root": {
+            "id": 1,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 0.8
+            },
+            "children": [
+              {
+                "id": 2,
+                "behavior": "Convert.Value.ToColor",
+                "properties": {},
+                "children": [
+                  {
+                    "id": 3,
+                    "behavior": "Modify.Value.Clamp",
+                    "properties": {
+                      "Maximum": 1,
+                      "Minimum": 0
+                    },
+                    "children": [
+                      {
+                        "id": 4,
+                        "behavior": "Modify.Value.MapFromTo",
+                        "properties": {
+                          "Maximum": 0,
+                          "Minimum": 1,
+                          "Source Max": 4,
+                          "Source Min": 0
+                        },
+                        "children": [
+                          {
+                            "id": 5,
+                            "behavior": "Create.Value.Distance",
+                            "properties": {
+                              "Auto/Setup": false,
+                              "Fixture": "source"
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        },
+        null,
+        null
+      ],
+      "sample-6": [
+        {
+          "name": "Clamped fixture distance",
+          "root": {
+            "id": 1,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 0.8
+            },
+            "children": [
+              {
+                "id": 2,
+                "behavior": "Convert.Value.ToColor",
+                "properties": {},
+                "children": [
+                  {
+                    "id": 3,
+                    "behavior": "Modify.Value.Clamp",
+                    "properties": {
+                      "Maximum": 1,
+                      "Minimum": 0
+                    },
+                    "children": [
+                      {
+                        "id": 4,
+                        "behavior": "Modify.Value.MapFromTo",
+                        "properties": {
+                          "Maximum": 0,
+                          "Minimum": 1,
+                          "Source Max": 4,
+                          "Source Min": 0
+                        },
+                        "children": [
+                          {
+                            "id": 5,
+                            "behavior": "Create.Value.Distance",
+                            "properties": {
+                              "Auto/Setup": false,
+                              "Fixture": "source"
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        },
+        null,
+        null
+      ],
+      "sample-7": [
+        {
+          "name": "Clamped fixture distance",
+          "root": {
+            "id": 1,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 0.8
+            },
+            "children": [
+              {
+                "id": 2,
+                "behavior": "Convert.Value.ToColor",
+                "properties": {},
+                "children": [
+                  {
+                    "id": 3,
+                    "behavior": "Modify.Value.Clamp",
+                    "properties": {
+                      "Maximum": 1,
+                      "Minimum": 0
+                    },
+                    "children": [
+                      {
+                        "id": 4,
+                        "behavior": "Modify.Value.MapFromTo",
+                        "properties": {
+                          "Maximum": 0,
+                          "Minimum": 1,
+                          "Source Max": 4,
+                          "Source Min": 0
+                        },
+                        "children": [
+                          {
+                            "id": 5,
+                            "behavior": "Create.Value.Distance",
+                            "properties": {
+                              "Auto/Setup": false,
+                              "Fixture": "source"
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        },
+        null,
+        null
+      ],
+      "sample-8": [
+        {
+          "name": "Clamped fixture distance",
+          "root": {
+            "id": 1,
+            "behavior": "Modify.Color.Dim",
+            "properties": {
+              "Amount": 0.8
+            },
+            "children": [
+              {
+                "id": 2,
+                "behavior": "Convert.Value.ToColor",
+                "properties": {},
+                "children": [
+                  {
+                    "id": 3,
+                    "behavior": "Modify.Value.Clamp",
+                    "properties": {
+                      "Maximum": 1,
+                      "Minimum": 0
+                    },
+                    "children": [
+                      {
+                        "id": 4,
+                        "behavior": "Modify.Value.MapFromTo",
+                        "properties": {
+                          "Maximum": 0,
+                          "Minimum": 1,
+                          "Source Max": 4,
+                          "Source Min": 0
+                        },
+                        "children": [
+                          {
+                            "id": 5,
+                            "behavior": "Create.Value.Distance",
+                            "properties": {
+                              "Auto/Setup": false,
+                              "Fixture": "source"
+                            },
+                            "children": [],
+                            "drivers": {}
+                          }
+                        ],
+                        "drivers": {}
+                      }
+                    ],
+                    "drivers": {}
+                  }
+                ],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        },
+        null,
+        null
+      ],
+      "source": [
+        {
+          "name": "Mint source path",
+          "root": {
+            "id": 1,
+            "behavior": "Light.Emitter",
+            "properties": {
+              "Channel": "mint",
+              "Color": "#72dec2",
+              "Falloff": 2,
+              "Intensity": 1,
+              "Range": 4,
+              "Type": 0
+            },
+            "children": [
+              {
+                "id": 2,
+                "behavior": "Create.Position.Bezier",
+                "properties": {
+                  "Duration": 8,
+                  "P0": [
+                    -4,
+                    1,
+                    0
+                  ],
+                  "P1": [
+                    -4,
+                    1,
+                    0
+                  ],
+                  "P2": [
+                    4,
+                    1,
+                    0
+                  ],
+                  "P3": [
+                    4,
+                    1,
+                    0
+                  ],
+                  "Ping Pong": true
+                },
+                "children": [],
+                "drivers": {}
+              }
+            ],
+            "drivers": {}
+          }
+        },
+        null,
+        null
+      ]
+    },
+    "output": {
+      "enabled": false,
+      "target": "127.0.0.1:6454",
+      "fps": 40
+    }
+  },
+  "snapshot": {
+    "plugin_generation": 0,
+    "actions": {},
+    "director": [
+      {
+        "rotation": null,
+        "speed": null,
+        "duration": null,
+        "position": null,
+        "fixture_reference": null,
+        "value": null,
+        "colors": null
+      },
+      {
+        "rotation": null,
+        "speed": null,
+        "duration": null,
+        "position": null,
+        "fixture_reference": null,
+        "value": null,
+        "colors": null
+      },
+      {
+        "rotation": null,
+        "speed": null,
+        "duration": null,
+        "position": null,
+        "fixture_reference": null,
+        "value": null,
+        "colors": null
+      }
+    ],
+    "director_nodes": {},
+    "emitters": [
+      {
+        "fixture": "source",
+        "node": 1,
+        "layer": 0,
+        "position": [
+          -3.26125919155721,
+          1.0,
+          0.0
+        ],
+        "direction": [
+          0.0,
+          -1.0,
+          0.0
+        ],
+        "kind": 0,
+        "color": [
+          0.4470588235294118,
+          0.8705882352941177,
+          0.7607843137254902,
+          1.0
+        ],
+        "intensity": 1.0,
+        "range": 4.0,
+        "falloff": 2.0,
+        "angle": 60.0,
+        "softness": 0.2,
+        "width": 2.0,
+        "height": 2.0,
+        "two_sided": false,
+        "channel": "mint",
+        "follows_fixture": false
+      }
+    ],
+    "frame": 7740,
+    "revision": 4,
+    "time": 129.5005026999997,
+    "paused": false,
+    "blackout": false,
+    "fixtures": [
+      {
+        "fixture": {
+          "setup_channel": 0,
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "pixel_positions": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "pixel_reverse": false,
+          "id": "source",
+          "name": "Mint moving emitter",
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "groups": [
+            "source"
+          ],
+          "model": "rgb",
+          "universe": 0,
+          "address": 1,
+          "dimmer": 1.0
+        },
+        "result": {
+          "rotation": null,
+          "speed": null,
+          "duration": null,
+          "emitters": [
+            {
+              "fixture": "source",
+              "node": 1,
+              "layer": 0,
+              "position": [
+                -3.26125919155721,
+                1.0,
+                0.0
+              ],
+              "direction": [
+                0.0,
+                -1.0,
+                0.0
+              ],
+              "kind": 0,
+              "color": [
+                0.4470588235294118,
+                0.8705882352941177,
+                0.7607843137254902,
+                1.0
+              ],
+              "intensity": 1.0,
+              "range": 4.0,
+              "falloff": 2.0,
+              "angle": 60.0,
+              "softness": 0.2,
+              "width": 2.0,
+              "height": 2.0,
+              "two_sided": false,
+              "channel": "mint",
+              "follows_fixture": false
+            }
+          ],
+          "position": [
+            -3.26125919155721,
+            1.0,
+            0.0
+          ],
+          "fixture_reference": null,
+          "value": null,
+          "colors": [
+            [
+              0.4470588235294118,
+              0.8705882352941177,
+              0.7607843137254902,
+              1.0
+            ]
+          ]
+        },
+        "layers": [
+          {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "emitters": [
+              {
+                "fixture": "source",
+                "node": 1,
+                "layer": 0,
+                "position": [
+                  -3.26125919155721,
+                  1.0,
+                  0.0
+                ],
+                "direction": [
+                  0.0,
+                  -1.0,
+                  0.0
+                ],
+                "kind": 0,
+                "color": [
+                  0.4470588235294118,
+                  0.8705882352941177,
+                  0.7607843137254902,
+                  1.0
+                ],
+                "intensity": 1.0,
+                "range": 4.0,
+                "falloff": 2.0,
+                "angle": 60.0,
+                "softness": 0.2,
+                "width": 2.0,
+                "height": 2.0,
+                "two_sided": false,
+                "channel": "mint",
+                "follows_fixture": false
+              }
+            ],
+            "position": [
+              -3.26125919155721,
+              1.0,
+              0.0
+            ],
+            "fixture_reference": null,
+            "value": null,
+            "colors": [
+              [
+                0.4470588235294118,
+                0.8705882352941177,
+                0.7607843137254902,
+                1.0
+              ]
+            ]
+          },
+          {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": null,
+            "colors": null
+          },
+          {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": null,
+            "colors": null
+          }
+        ],
+        "nodes": {
+          "0/1": {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "emitters": [
+              {
+                "fixture": "source",
+                "node": 1,
+                "layer": 0,
+                "position": [
+                  -3.26125919155721,
+                  1.0,
+                  0.0
+                ],
+                "direction": [
+                  0.0,
+                  -1.0,
+                  0.0
+                ],
+                "kind": 0,
+                "color": [
+                  0.4470588235294118,
+                  0.8705882352941177,
+                  0.7607843137254902,
+                  1.0
+                ],
+                "intensity": 1.0,
+                "range": 4.0,
+                "falloff": 2.0,
+                "angle": 60.0,
+                "softness": 0.2,
+                "width": 2.0,
+                "height": 2.0,
+                "two_sided": false,
+                "channel": "mint",
+                "follows_fixture": false
+              }
+            ],
+            "position": [
+              -3.26125919155721,
+              1.0,
+              0.0
+            ],
+            "fixture_reference": null,
+            "value": null,
+            "colors": [
+              [
+                0.4470588235294118,
+                0.8705882352941177,
+                0.7607843137254902,
+                1.0
+              ]
+            ]
+          },
+          "0/2": {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": [
+              -3.26125919155721,
+              1.0,
+              0.0
+            ],
+            "fixture_reference": null,
+            "value": null,
+            "colors": null
+          }
+        }
+      },
+      {
+        "fixture": {
+          "setup_channel": 0,
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "pixel_positions": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "pixel_reverse": false,
+          "id": "sample-1",
+          "name": "Field 1",
+          "position": [
+            -3.75,
+            0.0,
+            -1.0
+          ],
+          "groups": [
+            "field"
+          ],
+          "model": "rgb",
+          "universe": 0,
+          "address": 4,
+          "dimmer": 1.0
+        },
+        "result": {
+          "rotation": null,
+          "speed": null,
+          "duration": null,
+          "position": null,
+          "fixture_reference": null,
+          "value": 0.39178692801904896,
+          "colors": [
+            [
+              0.1401214424915187,
+              0.2728680722203259,
+              0.23845227932767213,
+              1.0
+            ]
+          ]
+        },
+        "layers": [
+          {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": 0.39178692801904896,
+            "colors": [
+              [
+                0.1401214424915187,
+                0.2728680722203259,
+                0.23845227932767213,
+                1.0
+              ]
+            ]
+          },
+          {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": null,
+            "colors": null
+          },
+          {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": null,
+            "colors": null
+          }
+        ],
+        "nodes": {
+          "0/1": {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": 0.39178692801904896,
+            "colors": [
+              [
+                0.1401214424915187,
+                0.2728680722203259,
+                0.23845227932767213,
+                1.0
+              ]
+            ]
+          },
+          "0/2": {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": 0.39178692801904896,
+            "colors": [
+              [
+                0.17515180311439837,
+                0.34108509027540734,
+                0.29806534915959015,
+                1.0
+              ]
+            ]
+          }
+        }
+      },
+      {
+        "fixture": {
+          "setup_channel": 0,
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "pixel_positions": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "pixel_reverse": false,
+          "id": "sample-2",
+          "name": "Field 2",
+          "position": [
+            -1.25,
+            0.0,
+            -1.0
+          ],
+          "groups": [
+            "field"
+          ],
+          "model": "rgb",
+          "universe": 0,
+          "address": 7,
+          "dimmer": 1.0
+        },
+        "result": {
+          "rotation": null,
+          "speed": null,
+          "duration": null,
+          "position": null,
+          "fixture_reference": null,
+          "value": 0.14847700723038756,
+          "colors": [
+            [
+              0.05310236493886803,
+              0.10340986856516406,
+              0.09036718243982804,
+              1.0
+            ]
+          ]
+        },
+        "layers": [
+          {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": 0.14847700723038756,
+            "colors": [
+              [
+                0.05310236493886803,
+                0.10340986856516406,
+                0.09036718243982804,
+                1.0
+              ]
+            ]
+          },
+          {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": null,
+            "colors": null
+          },
+          {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": null,
+            "colors": null
+          }
+        ],
+        "nodes": {
+          "0/1": {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": 0.14847700723038756,
+            "colors": [
+              [
+                0.05310236493886803,
+                0.10340986856516406,
+                0.09036718243982804,
+                1.0
+              ]
+            ]
+          },
+          "0/2": {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": 0.14847700723038756,
+            "colors": [
+              [
+                0.06637795617358504,
+                0.12926233570645507,
+                0.11295897804978504,
+                1.0
+              ]
+            ]
+          }
+        }
+      },
+      {
+        "fixture": {
+          "setup_channel": 0,
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "pixel_positions": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "pixel_reverse": false,
+          "id": "sample-3",
+          "name": "Field 3",
+          "position": [
+            1.25,
+            0.0,
+            -1.0
+          ],
+          "groups": [
+            "field"
+          ],
+          "model": "rgb",
+          "universe": 0,
+          "address": 10,
+          "dimmer": 1.0
+        },
+        "result": {
+          "rotation": null,
+          "speed": null,
+          "duration": null,
+          "position": null,
+          "fixture_reference": null,
+          "value": 0.0,
+          "colors": [
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        "layers": [
+          {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": 0.0,
+            "colors": [
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ]
+          },
+          {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": null,
+            "colors": null
+          },
+          {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": null,
+            "colors": null
+          }
+        ],
+        "nodes": {
+          "0/1": {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": 0.0,
+            "colors": [
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ]
+          },
+          "0/2": {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": 0.0,
+            "colors": [
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ]
+          }
+        }
+      },
+      {
+        "fixture": {
+          "setup_channel": 0,
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "pixel_positions": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "pixel_reverse": false,
+          "id": "sample-4",
+          "name": "Field 4",
+          "position": [
+            3.75,
+            0.0,
+            -1.0
+          ],
+          "groups": [
+            "field"
+          ],
+          "model": "rgb",
+          "universe": 0,
+          "address": 13,
+          "dimmer": 1.0
+        },
+        "result": {
+          "rotation": null,
+          "speed": null,
+          "duration": null,
+          "position": null,
+          "fixture_reference": null,
+          "value": 0.0,
+          "colors": [
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        "layers": [
+          {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": 0.0,
+            "colors": [
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ]
+          },
+          {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": null,
+            "colors": null
+          },
+          {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": null,
+            "colors": null
+          }
+        ],
+        "nodes": {
+          "0/1": {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": 0.0,
+            "colors": [
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ]
+          },
+          "0/2": {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": 0.0,
+            "colors": [
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ]
+          }
+        }
+      },
+      {
+        "fixture": {
+          "setup_channel": 0,
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "pixel_positions": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "pixel_reverse": false,
+          "id": "sample-5",
+          "name": "Distance 1",
+          "position": [
+            -3.75,
+            0.0,
+            1.0
+          ],
+          "groups": [
+            "reference"
+          ],
+          "model": "rgb",
+          "universe": 0,
+          "address": 16,
+          "dimmer": 1.0
+        },
+        "result": {
+          "rotation": null,
+          "speed": null,
+          "duration": null,
+          "position": null,
+          "fixture_reference": null,
+          "value": 0.6259288522021085,
+          "colors": [
+            [
+              0.5007430817616868,
+              0.5007430817616868,
+              0.5007430817616868,
+              1.0
+            ]
+          ]
+        },
+        "layers": [
+          {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": 0.6259288522021085,
+            "colors": [
+              [
+                0.5007430817616868,
+                0.5007430817616868,
+                0.5007430817616868,
+                1.0
+              ]
+            ]
+          },
+          {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": null,
+            "colors": null
+          },
+          {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": null,
+            "colors": null
+          }
+        ],
+        "nodes": {
+          "0/1": {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": 0.6259288522021085,
+            "colors": [
+              [
+                0.5007430817616868,
+                0.5007430817616868,
+                0.5007430817616868,
+                1.0
+              ]
+            ]
+          },
+          "0/2": {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": 0.6259288522021085,
+            "colors": [
+              [
+                0.6259288522021085,
+                0.6259288522021085,
+                0.6259288522021085,
+                1.0
+              ]
+            ]
+          },
+          "0/3": {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": 0.6259288522021085,
+            "colors": null
+          },
+          "0/4": {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": 0.6259288522021085,
+            "colors": null
+          },
+          "0/5": {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": 1.496284591191566,
+            "colors": null
+          }
+        }
+      },
+      {
+        "fixture": {
+          "setup_channel": 0,
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "pixel_positions": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "pixel_reverse": false,
+          "id": "sample-6",
+          "name": "Distance 2",
+          "position": [
+            -1.25,
+            0.0,
+            1.0
+          ],
+          "groups": [
+            "reference"
+          ],
+          "model": "rgb",
+          "universe": 0,
+          "address": 19,
+          "dimmer": 1.0
+        },
+        "result": {
+          "rotation": null,
+          "speed": null,
+          "duration": null,
+          "position": null,
+          "fixture_reference": null,
+          "value": 0.3853271431269637,
+          "colors": [
+            [
+              0.30826171450157097,
+              0.30826171450157097,
+              0.30826171450157097,
+              1.0
+            ]
+          ]
+        },
+        "layers": [
+          {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": 0.3853271431269637,
+            "colors": [
+              [
+                0.30826171450157097,
+                0.30826171450157097,
+                0.30826171450157097,
+                1.0
+              ]
+            ]
+          },
+          {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": null,
+            "colors": null
+          },
+          {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": null,
+            "colors": null
+          }
+        ],
+        "nodes": {
+          "0/1": {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": 0.3853271431269637,
+            "colors": [
+              [
+                0.30826171450157097,
+                0.30826171450157097,
+                0.30826171450157097,
+                1.0
+              ]
+            ]
+          },
+          "0/2": {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": 0.3853271431269637,
+            "colors": [
+              [
+                0.3853271431269637,
+                0.3853271431269637,
+                0.3853271431269637,
+                1.0
+              ]
+            ]
+          },
+          "0/3": {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": 0.3853271431269637,
+            "colors": null
+          },
+          "0/4": {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": 0.3853271431269637,
+            "colors": null
+          },
+          "0/5": {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": 2.458691427492145,
+            "colors": null
+          }
+        }
+      },
+      {
+        "fixture": {
+          "setup_channel": 0,
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "pixel_positions": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "pixel_reverse": false,
+          "id": "sample-7",
+          "name": "Distance 3",
+          "position": [
+            1.25,
+            0.0,
+            1.0
+          ],
+          "groups": [
+            "reference"
+          ],
+          "model": "rgb",
+          "universe": 0,
+          "address": 22,
+          "dimmer": 1.0
+        },
+        "result": {
+          "rotation": null,
+          "speed": null,
+          "duration": null,
+          "position": null,
+          "fixture_reference": null,
+          "value": 0.0,
+          "colors": [
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        "layers": [
+          {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": 0.0,
+            "colors": [
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ]
+          },
+          {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": null,
+            "colors": null
+          },
+          {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": null,
+            "colors": null
+          }
+        ],
+        "nodes": {
+          "0/1": {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": 0.0,
+            "colors": [
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ]
+          },
+          "0/2": {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": 0.0,
+            "colors": [
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ]
+          },
+          "0/3": {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": 0.0,
+            "colors": null
+          },
+          "0/4": {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": -0.18193325460369714,
+            "colors": null
+          },
+          "0/5": {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": 4.7277330184147885,
+            "colors": null
+          }
+        }
+      },
+      {
+        "fixture": {
+          "setup_channel": 0,
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "pixel_positions": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "pixel_reverse": false,
+          "id": "sample-8",
+          "name": "Distance 4",
+          "position": [
+            3.75,
+            0.0,
+            1.0
+          ],
+          "groups": [
+            "reference"
+          ],
+          "model": "rgb",
+          "universe": 0,
+          "address": 25,
+          "dimmer": 1.0
+        },
+        "result": {
+          "rotation": null,
+          "speed": null,
+          "duration": null,
+          "position": null,
+          "fixture_reference": null,
+          "value": 0.0,
+          "colors": [
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        "layers": [
+          {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": 0.0,
+            "colors": [
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ]
+          },
+          {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": null,
+            "colors": null
+          },
+          {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": null,
+            "colors": null
+          }
+        ],
+        "nodes": {
+          "0/1": {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": 0.0,
+            "colors": [
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ]
+          },
+          "0/2": {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": 0.0,
+            "colors": [
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ]
+          },
+          "0/3": {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": 0.0,
+            "colors": null
+          },
+          "0/4": {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": -0.7881162478149222,
+            "colors": null
+          },
+          "0/5": {
+            "rotation": null,
+            "speed": null,
+            "duration": null,
+            "position": null,
+            "fixture_reference": null,
+            "value": 7.152464991259689,
+            "colors": null
+          }
+        }
+      }
+    ],
+    "universes": {
+      "0": [
+        114,
+        222,
+        194,
+        36,
+        70,
+        61,
+        14,
+        26,
+        23,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        128,
+        128,
+        128,
+        79,
+        79,
+        79,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "diagnostics": [],
+    "can_undo": true,
+    "can_redo": false,
+    "evaluation_us": 1087,
+    "output_status": "Disabled — capture only"
+  }
+}

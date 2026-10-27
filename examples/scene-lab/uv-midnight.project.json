@@ -1,0 +1,369 @@
+{
+  "dmx_models": {
+    "lab-uv-cob": {
+      "name": "Lab UV COB two slot",
+      "slots": [
+        {
+          "name": "Dimmer",
+          "source": "value",
+          "constant": 0,
+          "channel": "",
+          "minimum": 0,
+          "maximum": 255,
+          "fine": false
+        },
+        {
+          "name": "Program off",
+          "source": "constant",
+          "constant": 0,
+          "channel": "",
+          "minimum": 0,
+          "maximum": 255,
+          "fine": false
+        }
+      ]
+    },
+    "uv-cob": {
+      "name": "UV COB · 2 channel",
+      "slots": [
+        {
+          "name": "Dimmer",
+          "source": "value",
+          "constant": 0,
+          "channel": "",
+          "minimum": 0,
+          "maximum": 255,
+          "fine": false
+        },
+        {
+          "name": "Program",
+          "source": "constant",
+          "constant": 0,
+          "channel": "",
+          "minimum": 0,
+          "maximum": 255,
+          "fine": false
+        }
+      ]
+    }
+  },
+  "dimming": {
+    "enabled": true,
+    "master": 1.0,
+    "utc_offset_minutes": 120,
+    "points": [
+      {
+        "minute": 360,
+        "level": 0.2
+      },
+      {
+        "minute": 1080,
+        "level": 1.0
+      }
+    ]
+  },
+  "director": [
+    null,
+    null,
+    null
+  ],
+  "version": 1,
+  "name": "UV COB midnight wash",
+  "fixtures": [
+    {
+      "dmx_model": "lab-uv-cob",
+      "setup_channel": 0,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pixel_positions": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "pixel_reverse": false,
+      "id": "uv-1",
+      "name": "UV COB 1",
+      "position": [
+        -3.0,
+        2.0,
+        -2.0
+      ],
+      "groups": [
+        "uv",
+        "front"
+      ],
+      "model": "dimmer",
+      "universe": 0,
+      "address": 1,
+      "dimmer": 1.0
+    },
+    {
+      "dmx_model": "lab-uv-cob",
+      "setup_channel": 0,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pixel_positions": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "pixel_reverse": false,
+      "id": "uv-2",
+      "name": "UV COB 2",
+      "position": [
+        0.0,
+        2.0,
+        -2.0
+      ],
+      "groups": [
+        "uv",
+        "front"
+      ],
+      "model": "dimmer",
+      "universe": 0,
+      "address": 3,
+      "dimmer": 1.0
+    },
+    {
+      "dmx_model": "lab-uv-cob",
+      "setup_channel": 0,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pixel_positions": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "pixel_reverse": false,
+      "id": "uv-3",
+      "name": "UV COB 3",
+      "position": [
+        3.0,
+        2.0,
+        -2.0
+      ],
+      "groups": [
+        "uv",
+        "front"
+      ],
+      "model": "dimmer",
+      "universe": 0,
+      "address": 5,
+      "dimmer": 1.0
+    },
+    {
+      "dmx_model": "lab-uv-cob",
+      "setup_channel": 0,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pixel_positions": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "pixel_reverse": false,
+      "id": "uv-4",
+      "name": "UV COB 4",
+      "position": [
+        -3.0,
+        2.0,
+        2.0
+      ],
+      "groups": [
+        "uv",
+        "back"
+      ],
+      "model": "dimmer",
+      "universe": 0,
+      "address": 7,
+      "dimmer": 1.0
+    },
+    {
+      "dmx_model": "lab-uv-cob",
+      "setup_channel": 0,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pixel_positions": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "pixel_reverse": false,
+      "id": "uv-5",
+      "name": "UV COB 5",
+      "position": [
+        0.0,
+        2.0,
+        2.0
+      ],
+      "groups": [
+        "uv",
+        "back"
+      ],
+      "model": "dimmer",
+      "universe": 0,
+      "address": 9,
+      "dimmer": 1.0
+    },
+    {
+      "dmx_model": "lab-uv-cob",
+      "setup_channel": 0,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pixel_positions": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "pixel_reverse": false,
+      "id": "uv-6",
+      "name": "UV COB 6",
+      "position": [
+        3.0,
+        2.0,
+        2.0
+      ],
+      "groups": [
+        "uv",
+        "back"
+      ],
+      "model": "dimmer",
+      "universe": 0,
+      "address": 11,
+      "dimmer": 1.0
+    }
+  ],
+  "content": {
+    "uv-1": [
+      {
+        "name": "UV native constant wash",
+        "root": {
+          "id": 1,
+          "behavior": "Create.Value.Constant",
+          "properties": {
+            "Value": 0.8
+          },
+          "children": [],
+          "drivers": {}
+        }
+      },
+      null,
+      null
+    ],
+    "uv-2": [
+      {
+        "name": "UV native constant wash",
+        "root": {
+          "id": 1,
+          "behavior": "Create.Value.Constant",
+          "properties": {
+            "Value": 0.8
+          },
+          "children": [],
+          "drivers": {}
+        }
+      },
+      null,
+      null
+    ],
+    "uv-3": [
+      {
+        "name": "UV native constant wash",
+        "root": {
+          "id": 1,
+          "behavior": "Create.Value.Constant",
+          "properties": {
+            "Value": 0.8
+          },
+          "children": [],
+          "drivers": {}
+        }
+      },
+      null,
+      null
+    ],
+    "uv-4": [
+      {
+        "name": "UV native constant wash",
+        "root": {
+          "id": 1,
+          "behavior": "Create.Value.Constant",
+          "properties": {
+            "Value": 0.8
+          },
+          "children": [],
+          "drivers": {}
+        }
+      },
+      null,
+      null
+    ],
+    "uv-5": [
+      {
+        "name": "UV native constant wash",
+        "root": {
+          "id": 1,
+          "behavior": "Create.Value.Constant",
+          "properties": {
+            "Value": 0.8
+          },
+          "children": [],
+          "drivers": {}
+        }
+      },
+      null,
+      null
+    ],
+    "uv-6": [
+      {
+        "name": "UV native constant wash",
+        "root": {
+          "id": 1,
+          "behavior": "Create.Value.Constant",
+          "properties": {
+            "Value": 0.8
+          },
+          "children": [],
+          "drivers": {}
+        }
+      },
+      null,
+      null
+    ]
+  },
+  "output": {
+    "enabled": false,
+    "target": "127.0.0.1:6454",
+    "fps": 40
+  }
+}

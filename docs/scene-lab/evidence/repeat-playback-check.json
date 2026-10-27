@@ -1,0 +1,10 @@
+{
+  "sample_index": 20,
+  "expected": 0.9065674255109621,
+  "actual": 0.9065674255109621,
+  "count": 402,
+  "index": 2834,
+  "authored_record": true,
+  "frame": 25994,
+  "latch": true
+}

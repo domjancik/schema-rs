@@ -1,0 +1,10 @@
+name: Mint receiver
+stack:
+  Modify.Color.Dim:
+    Amount: 0.8
+    in:
+    - Light.Receiver:
+        Channel: mint
+        Fixture: source
+        Gain: 1
+

@@ -1,0 +1,339 @@
+{
+  "dmx_models": {
+    "lab-uv-cob": {
+      "name": "Lab UV COB two slot",
+      "slots": [
+        {
+          "name": "Dimmer",
+          "source": "value",
+          "constant": 0,
+          "channel": "",
+          "minimum": 0,
+          "maximum": 255,
+          "fine": false
+        },
+        {
+          "name": "Program off",
+          "source": "constant",
+          "constant": 0,
+          "channel": "",
+          "minimum": 0,
+          "maximum": 255,
+          "fine": false
+        }
+      ]
+    },
+    "uv-cob": {
+      "name": "UV COB · 2 channel",
+      "slots": [
+        {
+          "name": "Dimmer",
+          "source": "value",
+          "constant": 0,
+          "channel": "",
+          "minimum": 0,
+          "maximum": 255,
+          "fine": false
+        },
+        {
+          "name": "Program",
+          "source": "constant",
+          "constant": 0,
+          "channel": "",
+          "minimum": 0,
+          "maximum": 255,
+          "fine": false
+        }
+      ]
+    }
+  },
+  "dimming": {
+    "enabled": false,
+    "master": 1.0,
+    "utc_offset_minutes": 120,
+    "points": [
+      {
+        "minute": 360,
+        "level": 0.2
+      },
+      {
+        "minute": 1080,
+        "level": 1.0
+      }
+    ]
+  },
+  "version": 1,
+  "name": "Mint chase and reference distance",
+  "fixtures": [
+    {
+      "setup_channel": 0,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pixel_positions": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "pixel_reverse": false,
+      "id": "source",
+      "name": "Mint moving emitter",
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "groups": [
+        "source"
+      ],
+      "model": "rgb",
+      "universe": 0,
+      "address": 1,
+      "dimmer": 1.0
+    },
+    {
+      "setup_channel": 0,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pixel_positions": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "pixel_reverse": false,
+      "id": "sample-1",
+      "name": "Field 1",
+      "position": [
+        -3.75,
+        0.0,
+        -1.0
+      ],
+      "groups": [
+        "field"
+      ],
+      "model": "rgb",
+      "universe": 0,
+      "address": 4,
+      "dimmer": 1.0
+    },
+    {
+      "setup_channel": 0,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pixel_positions": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "pixel_reverse": false,
+      "id": "sample-2",
+      "name": "Field 2",
+      "position": [
+        -1.25,
+        0.0,
+        -1.0
+      ],
+      "groups": [
+        "field"
+      ],
+      "model": "rgb",
+      "universe": 0,
+      "address": 7,
+      "dimmer": 1.0
+    },
+    {
+      "setup_channel": 0,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pixel_positions": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "pixel_reverse": false,
+      "id": "sample-3",
+      "name": "Field 3",
+      "position": [
+        1.25,
+        0.0,
+        -1.0
+      ],
+      "groups": [
+        "field"
+      ],
+      "model": "rgb",
+      "universe": 0,
+      "address": 10,
+      "dimmer": 1.0
+    },
+    {
+      "setup_channel": 0,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pixel_positions": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "pixel_reverse": false,
+      "id": "sample-4",
+      "name": "Field 4",
+      "position": [
+        3.75,
+        0.0,
+        -1.0
+      ],
+      "groups": [
+        "field"
+      ],
+      "model": "rgb",
+      "universe": 0,
+      "address": 13,
+      "dimmer": 1.0
+    },
+    {
+      "setup_channel": 0,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pixel_positions": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "pixel_reverse": false,
+      "id": "sample-5",
+      "name": "Distance 1",
+      "position": [
+        -3.75,
+        0.0,
+        1.0
+      ],
+      "groups": [
+        "reference"
+      ],
+      "model": "rgb",
+      "universe": 0,
+      "address": 16,
+      "dimmer": 1.0
+    },
+    {
+      "setup_channel": 0,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pixel_positions": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "pixel_reverse": false,
+      "id": "sample-6",
+      "name": "Distance 2",
+      "position": [
+        -1.25,
+        0.0,
+        1.0
+      ],
+      "groups": [
+        "reference"
+      ],
+      "model": "rgb",
+      "universe": 0,
+      "address": 19,
+      "dimmer": 1.0
+    },
+    {
+      "setup_channel": 0,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pixel_positions": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "pixel_reverse": false,
+      "id": "sample-7",
+      "name": "Distance 3",
+      "position": [
+        1.25,
+        0.0,
+        1.0
+      ],
+      "groups": [
+        "reference"
+      ],
+      "model": "rgb",
+      "universe": 0,
+      "address": 22,
+      "dimmer": 1.0
+    },
+    {
+      "setup_channel": 0,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pixel_positions": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "pixel_reverse": false,
+      "id": "sample-8",
+      "name": "Distance 4",
+      "position": [
+        3.75,
+        0.0,
+        1.0
+      ],
+      "groups": [
+        "reference"
+      ],
+      "model": "rgb",
+      "universe": 0,
+      "address": 25,
+      "dimmer": 1.0
+    }
+  ]
+}

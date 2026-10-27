@@ -1,0 +1,9 @@
+{
+  "binary": "target/scene-lab/schema-scene-lab.exe",
+  "sha256": "B703500D87E66A5FEC6EE0FC78BE3332962C59C41248E62BE5CCE183A103A9AE",
+  "source_head_at_start": "9427a13ba623ec661a3c08a1067aa5f0684fcf16",
+  "engine": "127.0.0.1:18797",
+  "date": "2026-10-27",
+  "verification": "existing binary, no compilation by scene lab",
+  "output": "disabled"
+}
