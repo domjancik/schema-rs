@@ -1,6 +1,6 @@
 'use strict';
 // Only a disconnected navigation page is cached. Engine data and commands stay online.
-const CACHE='schema-mobile-offline-v1';
+const CACHE='schema-mobile-offline-v2';
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.add('/offline.html'))));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith('schema-mobile-offline-')&&key!==CACHE).map(key=>caches.delete(key))))));
 self.addEventListener('fetch',event=>{
