@@ -585,6 +585,7 @@ async fn guard(State(state): State<AppState>, request: Request, next: Next) -> R
 }
 pub fn router(state: AppState) -> Router {
     Router::new()
+        .merge(crate::web_product::routes())
 .route("/output-core.js",get(||async{ ([(header::CONTENT_TYPE,"text/javascript")],include_str!("../web/output-core.js")) }))
 .route("/output-ui.js",get(||async{ ([(header::CONTENT_TYPE,"text/javascript")],include_str!("../web/output-ui.js")) }))
 .route("/output-design.css",get(||async{ ([(header::CONTENT_TYPE,"text/css")],include_str!("../web/output-design.css")) }))

@@ -24,3 +24,5 @@ pub mod plugin_host;
 pub mod output_design;
 
 pub mod project_library;
+
+mod web_product;

@@ -1,0 +1,25 @@
+{
+  "id": "/mobile",
+  "name": "Schema-s \u00b7 sch\u00e9maboy",
+  "short_name": "sch\u00e9maboy",
+  "description": "A phone controller for your Sch\u00e9ma lighting engine.",
+  "start_url": "/mobile",
+  "scope": "/mobile",
+  "display": "standalone",
+  "background_color": "#111416",
+  "theme_color": "#111416",
+  "icons": [
+    {
+      "src": "/app-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/app-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
