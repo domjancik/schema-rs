@@ -16,3 +16,9 @@ The compact variant uses explicit lift-and-place movement. Direct touch dragging
 Files: `web/mobile.html`, `mobile.css`, `mobile.js`, `mobile-core.js`, `view-variant.js`, and shared `engine-client.js`. Rust embeds the same assets; `scripts/dev-web.cjs` serves them live without restarting the engine.
 
 Validation: `node --test tests/mobile-core.test.cjs`; `SCHEMA_URL=<isolated capture-only frontend> node tests/mobile-ui.cjs`. The browser test covers a non-mutating gesture preview, one-edit commit/undo, real touch cancellation, library creation and undo, selection-preserving switches, and square/no-overflow layouts at 320, 390, 430 and 700px plus desktop. Existing catalog/editor/native-input browser tests cover Studio through the shared transport. Screenshots are in `docs/schemaboy-*.png`.
+
+## Direct navigation and toolbar
+
+Keep **Studio ↗** visible in the schémaboy header. Output/DMX, Components, theme, connection, help and fullscreen remain direct top-panel buttons. Small portrait phones use two compact rows; landscape and desktop keep one row. About and installation remain in the secondary menu. Preserve these controls when refining viewport fit.
+
+`tests/mobile-toolbar.cjs` checks direct hit targets and real return navigation at 320×568, 390×844, 568×320, 844×390 and 1360×1000. The viewport, long-label, Output-tab and installation regressions remain applicable.
