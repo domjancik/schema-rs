@@ -1,0 +1,11 @@
+"use strict";
+const assert=require('node:assert/strict'),path=require('node:path'),{chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
+const base=process.env.SCHEMA_URL||'http://127.0.0.1:8788';
+(async()=>{const browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_EXECUTABLE});try{const page=await browser.newPage({viewport:{width:1600,height:1050}});const errors=[];page.on('pageerror',e=>errors.push(e.message));const frame=await page.request.get(base+'/api/state').then(r=>r.json()),id=frame.project.fixtures[0].id;
+frame.project.content[id][0]={name:'Add button overlap',root:{id:1,behavior:'Tool.Merge',properties:{},drivers:{},children:[{id:2,behavior:'Create.Value.Constant',properties:{Value:0},drivers:{},children:[]}]}};frame.snapshot.fixtures[0].nodes={};
+await page.route('**/api/state',r=>r.fulfill({json:frame}));await page.route('**/api/command',r=>r.abort());for(const file of ['app.js','stack-editor.css'])await page.route('**/'+file,r=>r.fulfill({path:path.resolve('web',file),contentType:file.endsWith('.css')?'text/css':'text/javascript'}));await page.goto(base+'/?view=studio');await page.locator('#fit').click();await page.waitForTimeout(350);
+const port=page.locator('.block[data-node="1"] .input-slot[data-index="0"]');const box=await port.boundingBox();const top={x:box.x+box.width/2,y:box.y+3};
+assert(await page.evaluate(({x,y})=>document.elementFromPoint(x,y)?.closest('button')?.matches('.input-slot[data-owner="1"][data-index="0"]'),top),'Upper half of the add button must be above the neighboring child block');
+await page.mouse.click(top.x,top.y);await page.locator('#block-picker-dialog').waitFor();await page.getByRole('button',{name:'Close block picker',exact:true}).click();
+const last=page.locator('.block[data-node="1"] .input-slot[data-index="1"]'),end=await last.boundingBox();assert(await page.evaluate(({x,y})=>document.elementFromPoint(x,y)?.closest('button')?.matches('.input-slot[data-owner="1"][data-index="1"]'),{x:end.x+end.width/2,y:end.y+end.height-3}),'Add button must be above the fold button where they overlap');
+assert.deepEqual(errors,[]);console.log('Add buttons retain top-plane pointer access above adjacent blocks and fold controls.');}finally{await browser.close();}})().catch(e=>{console.error(e);process.exitCode=1});
