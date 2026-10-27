@@ -23,7 +23,7 @@ The initial scene contains one UV COB at DMX address 1, with channel 1 intensity
 
 - `schema.service`: nonroot `schema` user; native engine and embedded web server on port 8787. SIGINT shutdown flushes the final session.
 - `schema-clock.service`: invokes the existing DS3231 restore helper after legacy fake-hwclock loaders, before Schéma.
-- `olad.service`: dedicated `olad` user, native FTDI driver at 30 Hz; HTTP/RPC administration bound to loopback.
+- `olad.service`: dedicated `olad` user, native FTDI driver at 30 Hz; HTTP administration disabled and RPC bound to loopback. Art-Net UDP 6454 accepts protocol ingress; the local engine sends to 127.0.0.1.
 - `schema-ola-bridge.timer`: checks every 5 seconds and reconciles Art-Net input to universe 0 and the single FTDI output to universe 0. It discovers aliases/ports and does not restart OLA.
 - `schema-ola-usb-refresh.service`: USB 0403:6001 insertion reloads OLA plugins once, since the FTDI plugin discovers devices on startup; the timer re-patches new aliases. Multiple FTDI adapters require an explicit `SCHEMA_FTDI_UID` in `/etc/schema/bridge.env`. Other USB DMX protocols need their own configuration.
 - `schema-ap.service` and `schema-ap-dhcp.service`: 2.4 GHz channel 6, existing IL regulatory domain, DHCP/local DNS on wlan0 only. Netplan's generated station-mode WPA unit and the competing packaged hostapd unit are masked. Ethernet DHCP/IPv6 remain available alongside the management IPv4 address.
@@ -38,7 +38,7 @@ The inspected board initially rejected DS3231 time reads (`RTC_RD_TIME` returned
 
 ## Secrets and administrator access
 
-Generated AP credentials and the web API token are stored root-only in `/etc/schema/access.json`; the engine token is passed through root-only `/etc/schema/schema.env`. Do not commit either file. The provisioning staging directory is mode 0700 and credentials are uploaded mode 0600.
+Generated AP credentials and the web API token are stored root-only in `/etc/schema/access.json`; the engine token is passed through root-only `/etc/schema/schema.env`. Do not commit either file. AP and API credentials are generated directly on the device in mode 0600 staging inside a mode 0700 directory; no Windows credential payload or existing project is transferred.
 
 The Windows administrator helper uses the existing SSH key and strictly verifies the saved host key. With the user's explicit authorization, the entered sudo credential is retained in native Windows Credential Manager under `schema-rs/orangepi/sudo` (Generic, local-machine persistence for the current Windows account). The password is never written to project files, JSON, environment variables, command lines or logs. Password collection is local-only and stores the value before any network operation. The SSH helper then verifies the stored value with sudo before privileged deployment work. A rejected value returns an error; it does not open another prompt. Remove the Generic credential in Windows Credential Manager to forget it.
 
@@ -51,3 +51,13 @@ The Windows administrator helper uses the existing SSH key and strictly verifies
 For manual recovery, run `/usr/local/sbin/schema-ap-rollback` as root over wired SSH. For a binary rollback, switch `/opt/schema/current` to a verified previous release and restart `schema.service`.
 
 Verify enabled/active service states, actual hostapd AP-ENABLED status, DHCP binding, API authentication, RTC/system UTC epoch skew, unchanged original RTC hashes, and a changed boot ID after a warm reboot. A successful service start alone is not proof that a phone associated or a physical DMX fixture received data.
+
+## Verified deployment
+
+The ARM64 musl release from source commit `154ed41` ran on the board and served all 186 catalog nodes and embedded web assets. Its SHA256 is `04a41f9fba753bc39a2ef723a179b38281ad4c6d13bd8b9c67c55882c7768f7f`. Desktop and mobile browser checks passed against the wired URL with API token authentication.
+
+A scratch engine, gated on no FTDI hardware being present, sent a UV value of 0.5 through Art-Net to OLA universe 0. OLA reported 512 slots with dimmer 128, program 0 and all other slots zero. The scratch scene was returned to Value 0; all 512 slots were verified zero before and after the scratch sender stopped. Production scene/history were unchanged.
+
+An actual warm reboot changed boot ID from `e1634812-7852-45f9-9fbd-90cd3efca357` to `35a00b11-f24e-4a1b-8fea-af41622dc7cd`. Schéma, late RTC restoration, OLA, AP, DHCP and patch timer started automatically. The initial named project `uv-cob`, scene, output disabled state and undo/redo history were retained. All 14 original RTC/boot configuration hashes matched after reboot. System time and RTC agree within a second; they are approximately 13 seconds behind the Windows reference. Optional recalibration was not performed.
+
+The USB DMX adapter was not connected during deployment, so physical DMX and fixture output remain unverified. The bridge is in its normal waiting-for-adapter state and will discover/re-patch the common FTDI adapter when attached. Actual phone association was not exercised by automation; AP-ENABLED, channel 6, address persistence and DHCP/DNS bindings were verified.

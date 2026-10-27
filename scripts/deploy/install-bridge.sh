@@ -24,14 +24,14 @@ PY
 chown olad:olad /etc/ola/*.conf
 cat > /etc/systemd/system/olad.service <<'EOF'
 [Unit]
-Description=OLA loopback Art-Net to FTDI Open DMX bridge
+Description=OLA Art-Net to FTDI Open DMX bridge
 After=network.target
 [Service]
 Type=simple
 User=olad
 Group=olad
 SupplementaryGroups=plugdev dialout
-ExecStart=/usr/bin/olad --config-dir /etc/ola --interface 127.0.0.1 --no-register-with-dns-sd --no-http-quit --log-level 3 --pid-location /run/olad
+ExecStart=/usr/bin/olad --config-dir /etc/ola --no-http --no-register-with-dns-sd --log-level 3 --pid-location /run/olad
 ExecReload=/bin/kill -HUP $MAINPID
 Restart=on-failure
 RestartSec=3
