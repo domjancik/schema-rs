@@ -1,0 +1,104 @@
+{
+  "release": {
+    "release_id": "a87a8e1e677c-9a31fa092371-1",
+    "sequence": 1,
+    "sha256": "9a31fa092371ed3dc3f1780d7ce49dc8d035979912346e423dd737ee990be85a",
+    "source_commit": "a87a8e1e677c12152a0d86ccd559bf0bc6bd5723",
+    "target": "aarch64-unknown-linux-musl"
+  },
+  "receipt": {
+    "error": null,
+    "highest_sequence": 1,
+    "installed_release": "a87a8e1e677c-9a31fa092371-1",
+    "operation_id": "33246a9325d946508464c8f9a7b3b84f",
+    "phase": "succeeded",
+    "previous_release": "337234a2dd36",
+    "release_id": "a87a8e1e677c-9a31fa092371-1",
+    "unchanged": true,
+    "updated_ns": 13216154799964
+  },
+  "journal": {
+    "phase": "complete",
+    "result": "succeeded",
+    "operation_id": "b5f5a4fab91b478097efaaf9e89c25ae"
+  },
+  "authored_sha256": "5278713f663f7875efa05ba053986dcadccf5a12e356099972f19850ef91b4a8",
+  "checkpoint_authored_sha256": "5278713f663f7875efa05ba053986dcadccf5a12e356099972f19850ef91b4a8",
+  "project_history_exact": true,
+  "revision": 3,
+  "undo": 3,
+  "redo": 0,
+  "output_enabled": false,
+  "clock_resumed": true,
+  "barrier_cleared": true,
+  "ola_pid": "1038",
+  "engine_pid": "32087",
+  "downloads": {
+    "available": true,
+    "version": "0.1.0-preview",
+    "commit": "a87a8e1e677c",
+    "sha256": "56baee0487320a12a56e296cd832a0404d6354805050250237933716eb4e7bb4",
+    "bytes": 6510554,
+    "filename": "Schema-s-Windows-x64.zip"
+  },
+  "download_hash_matches": true,
+  "host_jobs": [
+    {
+      "id": "33246a9325d946508464c8f9a7b3b84f",
+      "kind": "push",
+      "status": "succeeded",
+      "phase": "succeeded",
+      "created": "2026-10-27T23:04:22.373089+00:00",
+      "updated": "2026-10-27T23:04:38.404221+00:00",
+      "release_id": "a87a8e1e677c-9a31fa092371-1",
+      "detail": "Scene/history preserved; OLA unchanged"
+    },
+    {
+      "id": "b5f5a4fab91b478097efaaf9e89c25ae",
+      "kind": "push",
+      "status": "succeeded",
+      "phase": "succeeded",
+      "created": "2026-10-27T23:02:44.887145+00:00",
+      "updated": "2026-10-27T23:02:52.179813+00:00",
+      "release_id": "a87a8e1e677c-9a31fa092371-1",
+      "detail": "Scene/history preserved; OLA unchanged"
+    },
+    {
+      "id": "bfc8266be4d04608bd62d4a39d6bac2f",
+      "kind": "build",
+      "status": "succeeded",
+      "phase": "ready",
+      "created": "2026-10-27T22:55:29.684786+00:00",
+      "updated": "2026-10-27T23:02:40.832669+00:00",
+      "release_id": "a87a8e1e677c-9a31fa092371-1",
+      "detail": ""
+    },
+    {
+      "id": "37af6d72dcc341069cd837d1003d889b",
+      "kind": "build",
+      "status": "failed",
+      "phase": "failed",
+      "created": "2026-10-27T22:52:27.241084+00:00",
+      "updated": "2026-10-27T22:53:31.102361+00:00",
+      "release_id": "",
+      "detail": "Validation/build command failed: cargo"
+    }
+  ],
+  "ready_checks": {
+    "clippy": true,
+    "fmt": true,
+    "gpu_smoke": true,
+    "smoke": true,
+    "syntax": true,
+    "tests": true
+  },
+  "verified_at": "2026-10-27T23:04:59.345379+00:00",
+  "tests": {
+    "host": 6,
+    "linux_transaction": 4,
+    "linux_signature": 5,
+    "dashboard_desktop_mobile": true,
+    "repository_checks": true,
+    "chrome_webgpu_smoke": true
+  }
+}

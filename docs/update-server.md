@@ -31,3 +31,5 @@ A ready release is trusted code from a local commit, not a sandboxed untrusted b
 - On Linux, `python tests/update_device_transaction_test.py` runs isolated fake-service transaction tests, including failed health checks and boot recovery. It never accesses the live controller paths/services.
 - `cargo test --test update_barrier` verifies held evaluation, HTTP/direct edit rejection, clock resumption and undo.
 - Full repository checks remain mandatory. Ready-build workflows execute them again against their committed source snapshot.
+
+The first live deployment and subsequent idempotent push are recorded in [verification evidence](update-server-verification.json). The final host/helper hardening is active independently of the native engine release.
