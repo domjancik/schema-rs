@@ -1,0 +1,21 @@
+[Unit]
+Description=Schéma captive login and admin portal
+After=network.target schema.service
+Wants=schema.service
+[Service]
+Type=simple
+User=schema-portal
+Group=schema-portal
+LoadCredential=portal.json:/etc/schema/portal.json
+ExecStart=/usr/bin/python3 /usr/local/lib/schema/captive_portal.py --bind 0.0.0.0 --port 80
+Restart=on-failure
+RestartSec=3
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+CapabilityBoundingSet=CAP_NET_BIND_SERVICE
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+UMask=0077
+[Install]
+WantedBy=multi-user.target
