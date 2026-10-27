@@ -47,6 +47,12 @@ class Recovery(unittest.TestCase):
   with tempfile.TemporaryDirectory()as root,ReleaseStore(root)as store:
    queued=store.db.create('push','ready');running=store.db.create('build');store.db.update(running,status='running');store.db.recover();jobs={j['id']:j for j in store.db.jobs()};self.assertEqual(jobs[queued]['status'],'queued');self.assertEqual(jobs[running]['status'],'interrupted')
    store.db.ensure_sequence(22);self.assertEqual(store.db.sequence(),23);store.db.ensure_sequence(2);self.assertEqual(store.db.sequence(),24)
+class Reconcile(unittest.TestCase):
+ def test_device_success_corrects_a_disconnected_host_failure(self):
+  from manager import Manager
+  with tempfile.TemporaryDirectory()as root,ReleaseStore(root)as store:
+   manager=Manager({'repo':root,'device':{}},store,Signer.generate());job=store.db.create('push','release');store.db.update(job,status='failed',detail='SSH disconnected');store.db.set('blocked',['release']);manager.reconcile({'update':{'operation_id':job,'phase':'succeeded'}});self.assertEqual(store.db.jobs()[0]['status'],'succeeded');self.assertEqual(store.db.get('blocked'),[])
+
 class ConnectedPush(unittest.TestCase):
  artifacts=Releases.artifacts
  def test_offline_queue_deploys_once_on_reconnect_and_stays_current(self):

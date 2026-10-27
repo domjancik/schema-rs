@@ -76,8 +76,9 @@ class Manager:
   update=info.get('update')or{};operation=update.get('operation_id');phase=update.get('phase')
   if operation and phase in TERMINAL:
    for job in self.store.db.jobs():
-    if job['id']==operation and job['status']not in('succeeded','failed'):
+    if job['id']==operation and job['status']!=('succeeded'if phase=='succeeded'else'failed'):
      ok=phase=='succeeded'
+     if ok:self.store.db.set('blocked',[r for r in self.store.db.get('blocked',[])if r!=job['release_id']])
      if not ok and job['release_id']not in self.store.db.get('blocked',[]):self.store.db.set('blocked',self.store.db.get('blocked',[])+[job['release_id']])
      self.store.db.update(operation,status='succeeded'if ok else'failed',phase=phase,detail=update.get('error')or'');self.store.db.event(operation,'Device transaction reconciled: '+phase)
  def device_loop(self):
