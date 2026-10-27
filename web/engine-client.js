@@ -16,7 +16,7 @@ window.SchemaEditorContext={load(){try{return JSON.parse(sessionStorage.getItem(
   button.setAttribute('aria-pressed',String(active));
   button.setAttribute('aria-label',label);
   button.title=label;
-  button.textContent=active?'⛶ Exit':'⛶';
+  button.textContent=active?'⤡':'⛶';
  }
  document.addEventListener('fullscreenchange',sync);
  button.onclick=async()=>{
