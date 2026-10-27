@@ -1,0 +1,10 @@
+[Unit]
+Description=Recover an interrupted Schéma update before engine startup
+After=local-fs.target
+Before=schema.service
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /usr/local/libexec/schema-update/apply.py recover
+RemainAfterExit=yes
+[Install]
+WantedBy=multi-user.target

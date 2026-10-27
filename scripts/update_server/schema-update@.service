@@ -1,0 +1,9 @@
+[Unit]
+Description=Install signed Schéma release %i
+After=network.target
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /usr/local/libexec/schema-update/apply.py apply %i
+ExecStopPost=/usr/bin/python3 /usr/local/libexec/schema-update/apply.py recover --live
+TimeoutStartSec=180
+TimeoutStopSec=45

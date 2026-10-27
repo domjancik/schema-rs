@@ -5,3 +5,7 @@ tests/deploy_*.py text eol=lf
 # Generated dependency contains shader template literals; preserve exact vendor bytes.
 /web/vendor/scene-three.mjs -text -diff -whitespace
 /web/scene-assets/*.glb binary
+
+scripts/update_server/** text eol=lf
+tests/update_*.py text eol=lf
+scripts/start-update-server.ps1 text eol=crlf

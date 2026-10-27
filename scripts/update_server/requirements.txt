@@ -1,0 +1,2 @@
+paramiko>=4,<6
+cryptography>=45,<51
