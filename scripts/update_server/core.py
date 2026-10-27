@@ -26,6 +26,7 @@ class Database:
   self.lock=threading.RLock();self.connection=sqlite3.connect(path,check_same_thread=False);self.connection.row_factory=sqlite3.Row
   with self.connection:
    self.connection.executescript('PRAGMA journal_mode=WAL; CREATE TABLE IF NOT EXISTS kv(key TEXT PRIMARY KEY,value TEXT); CREATE TABLE IF NOT EXISTS jobs(id TEXT PRIMARY KEY,kind TEXT,status TEXT,phase TEXT,created TEXT,updated TEXT,release_id TEXT,detail TEXT); CREATE TABLE IF NOT EXISTS events(id INTEGER PRIMARY KEY AUTOINCREMENT,job TEXT,at TEXT,message TEXT);')
+   self.connection.execute("UPDATE jobs SET kind='push' WHERE kind='spush'")
  def close(self):
   with self.lock:self.connection.close()
  def get(self,key,default=None):

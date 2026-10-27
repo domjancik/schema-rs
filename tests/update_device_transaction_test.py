@@ -25,16 +25,20 @@ class Transactions(unittest.TestCase):
   for p in reversed(self.patches):p.stop()
   self.temp.cleanup()
  def test_success_retains_checkpoint_and_records_trusted_previous(self):
-  with patch.object(installer,'ready',return_value=self.session):installer.activate(self.new,{'sequence':1},'d'*32)
+  with patch.object(installer,'ready',return_value=self.session):installer.activate(self.new,{'schema':1,'sequence':1},'d'*32)
   self.assertEqual((installer.BASE/'current').resolve(),self.new);self.assertFalse(installer.BARRIER.exists());self.assertEqual(json.loads(installer.SESSION.read_bytes()),self.session)
   status=installer.read(installer.STATUS);self.assertEqual(status['phase'],'succeeded');self.assertTrue(status['history_preserved']);self.assertTrue(status['ola_unchanged']);self.assertEqual(status['previous_release'],self.old.name)
   self.assertEqual(installer.read(installer.TRUST)['highest_sequence'],1)
-  with patch.object(installer,'ready',return_value=self.session):installer.activate(self.new,{'sequence':1},'f'*32)
+  with patch.object(installer,'ready',return_value=self.session):installer.activate(self.new,{'schema':1,'sequence':1},'f'*32)
   self.assertEqual(installer.read(installer.STATUS)['previous_release'],self.old.name)
  def test_failed_health_check_restores_links_and_exact_scene(self):
   broken={**self.session,'undo':[]}
-  with patch.object(installer,'ready',return_value=broken),self.assertRaisesRegex(ValueError,'undo differs'):installer.activate(self.new,{'sequence':1},'e'*32)
+  with patch.object(installer,'ready',return_value=broken),self.assertRaisesRegex(ValueError,'undo differs'):installer.activate(self.new,{'schema':1,'sequence':1},'e'*32)
   self.assertEqual((installer.BASE/'current').resolve(),self.old);self.assertEqual((installer.DATA/'downloads').resolve(),self.old/'downloads');self.assertFalse(installer.BARRIER.exists());self.assertEqual(json.loads(installer.SESSION.read_bytes()),self.session);self.assertEqual(installer.read(installer.STATUS)['phase'],'rolled_back')
+ def test_running_clock_during_validation_triggers_recovery(self):
+  changed={**self.session,'snapshot':{**self.session['snapshot'],'time':43}}
+  with patch.object(installer,'ready',return_value=changed),self.assertRaisesRegex(ValueError,'clock/control time'):installer.activate(self.new,{'schema':1,'sequence':1},'e'*32)
+  self.assertEqual((installer.BASE/'current').resolve(),self.old);self.assertFalse(installer.BARRIER.exists())
  def test_boot_recovers_interrupted_switch_without_starting_services(self):
   owner=installer.SESSION.stat();backup=installer.STATE/'backup.json';backup.write_bytes(canonical(self.session));installer.atomic(installer.JOURNAL,canonical({'phase':'switched','checkpoint':str(backup),'session_owner':[owner.st_uid,owner.st_gid],'previous':'releases/'+self.old.name,'previous_download':str(self.old/'downloads'),'operation_id':'f'*32,'release_id':self.new.name}));installer.point(installer.BASE/'current','releases/'+self.new.name);installer.BARRIER.write_bytes(b'held');installer.recover()
   self.assertEqual((installer.BASE/'current').resolve(),self.old);self.assertFalse(self.calls);self.assertFalse(installer.BARRIER.exists())

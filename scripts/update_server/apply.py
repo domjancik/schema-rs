@@ -115,6 +115,11 @@ def activate(folder,manifest,operation,rollback=False):
   for key in ('project','undo','redo'):
    if restored[key]!=expected[key]:raise ValueError('Restored '+key+' differs')
   if restored['snapshot']['revision']!=expected['snapshot']['revision']:raise ValueError('Restored revision differs')
+  if manifest.get('schema')==1 and not rollback:
+   for key in ('inputs','states','plugins'):
+    if restored.get(key)!=expected.get(key):raise ValueError('Restored '+key+' differs')
+   for key in ('frame','time','paused','blackout'):
+    if restored['snapshot'].get(key)!=expected['snapshot'].get(key):raise ValueError('Restored clock/control '+key+' differs')
   if system('show','olad.service','-p','MainPID','--value').stdout.strip()!=ola:raise ValueError('OLA changed during update')
   if system('is-active','schema.service').stdout.strip()!='active':raise ValueError('Engine service unhealthy')
   trust['releases'][release]=record(folder);trust['highest_sequence']=max(trust['highest_sequence'],manifest.get('sequence',0));trust['previous_release']=current.name;atomic(TRUST,canonical(trust))

@@ -67,6 +67,8 @@ class ConnectedPush(unittest.TestCase):
     def probe(self):return {'online':True,'helper':True,'service':'active','build':{'release_id':release if self.operation else 'old'},'update':{'operation_id':self.operation,'phase':'succeeded','highest_sequence':1}if self.operation else None}
     def push(self,folder,release_id,rollback=False,operation=None):self.operation=operation;calls.append(release_id);pushed.set();return operation
    manager=Manager({'repo':root,'device':{},'poll_seconds':.02},store,signer);job=manager.enqueue_push(release)
+   self.assertEqual(store.db.jobs()[0]['kind'],'push')
+   restored=Manager({'repo':root,'device':{},'poll_seconds':.02},store,signer);self.assertTrue(restored.pushing);self.assertEqual(restored.push_queue.qsize(),1)
    with patch('manager.Device',FakeDevice):
     thread=threading.Thread(target=manager.device_loop,daemon=True);thread.start();time.sleep(.08);self.assertEqual(calls,[]);self.assertEqual(store.db.jobs()[0]['status'],'queued');online.set();self.assertTrue(pushed.wait(2))
     deadline=time.monotonic()+2

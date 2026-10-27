@@ -27,7 +27,7 @@ class Manager:
    if rollback:
     if release_id!=self.device.get('previous_release'):raise ValueError('Only the previous trusted release can be rolled back')
    else:self.store.verify(release_id,self.signer)
-   self.store.db.set('pinned',release_id if rollback else None);job_id=self.store.db.create('rollback'if rollback else'spush',release_id);self.pushing=True;self.push_queue.put({'id':job_id,'kind':'rollback'if rollback else'spush','release_id':release_id});return job_id
+   self.store.db.set('pinned',release_id if rollback else None);job_id=self.store.db.create('rollback'if rollback else'push',release_id);self.pushing=True;self.push_queue.put({'id':job_id,'kind':'rollback'if rollback else'push','release_id':release_id});return job_id
  def action(self,value):
   action=value.get('action');unknown=set(value)-{'action','release_id'}
   if unknown:raise ValueError('Unknown action fields')
