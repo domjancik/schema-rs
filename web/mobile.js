@@ -128,3 +128,5 @@
  SchemaPlugins.configure({api,onChanged:async()=>{await loadCatalog();await refresh();}});$('components').onclick=()=>SchemaPlugins.open();
  async function connect(){try{await loadCatalog();await refresh();}catch(error){toast(error.message);}}connect();setInterval(refresh,100);
 })();
+
+document.querySelector('.app-menu-panel').addEventListener('click',event=>{if(event.target.closest('button,a'))document.querySelector('.app-menu').open=false;});
