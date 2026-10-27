@@ -24,7 +24,7 @@ def read(path,default=None):
  except FileNotFoundError:return default
 
 def status(operation,release,phase,error=None,**extra):
- value={'operation_id':operation,'release_id':release,'phase':phase,'error':error,'updated_ns':time.monotonic_ns(),**extra};atomic(STATUS,canonical(value),0o644);return value
+ value={'operation_id':operation,'release_id':release,'phase':phase,'error':error,'updated_ns':time.monotonic_ns(),'highest_sequence':read(TRUST,{}).get('highest_sequence',0),**extra};atomic(STATUS,canonical(value),0o644);return value
 
 def system(*args,check=True):return subprocess.run(['systemctl',*args],check=check,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
 def point(path,target):

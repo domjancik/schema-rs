@@ -48,7 +48,7 @@ class Manager:
   with self.lock:device=dict(self.device);building=self.building;pushing=self.pushing
   try:commit,tree=source_identity(self.config['repo'])
   except Exception:commit,tree=None,None
-  return{'service':'schema-update-server','device':device,'releases':self.store.list(),'jobs':self.store.db.jobs(),'events':self.store.db.events(),'auto_deploy':self.store.db.get('auto_deploy',True),'auto_build':self.store.db.get('auto_build',True),'pinned':self.store.db.get('pinned'),'blocked':self.store.db.get('blocked',[]),'building':building,'pushing':pushing,'source_commit':commit,'source_tree':tree,'public_key_sha256':hashlib.sha256(self.signer.public_pem()).hexdigest(),'at':utc()}
+  return{'service':'schema-update-server','device':device,'releases':self.store.list(),'jobs':self.store.db.jobs(),'events':self.store.db.events(),'auto_deploy':self.store.db.get('auto_deploy',True),'auto_build':self.store.db.get('auto_build',True),'pinned':self.store.db.get('pinned'),'blocked':self.store.db.get('blocked',[]),'building':building,'pushing':pushing or device.get('updating',False),'source_commit':commit,'source_tree':tree,'public_key_sha256':hashlib.sha256(self.signer.public_pem()).hexdigest(),'at':utc()}
  def build_loop(self):
   while not self.stop.is_set():
    try:job=self.build_queue.get(timeout=1)
@@ -77,16 +77,18 @@ class Manager:
   if operation and phase in TERMINAL:
    for job in self.store.db.jobs():
     if job['id']==operation and job['status']not in('succeeded','failed'):
-     ok=phase=='succeeded';self.store.db.update(operation,status='succeeded'if ok else'failed',phase=phase,detail=update.get('error')or'');self.store.db.event(operation,'Device transaction reconciled: '+phase)
+     ok=phase=='succeeded'
+     if not ok and job['release_id']not in self.store.db.get('blocked',[]):self.store.db.set('blocked',self.store.db.get('blocked',[])+[job['release_id']])
+     self.store.db.update(operation,status='succeeded'if ok else'failed',phase=phase,detail=update.get('error')or'');self.store.db.event(operation,'Device transaction reconciled: '+phase)
  def device_loop(self):
   device=Device(self.config['device'])
   while not self.stop.is_set():
    try:
     info=self.refresh_device(device);self.reconcile(info)
-    if not self.pushing:
+    if not self.pushing and not info.get('updating'):
      release=choose_release(self.store.list(),info.get('installed_release'),paused=not self.store.db.get('auto_deploy',True),pinned=self.store.db.get('pinned'),blocked=self.store.db.get('blocked',[]))
      if release:self.enqueue_push(release['release_id'])
-    if not self.push_queue.empty():
+    if not self.push_queue.empty()and not info.get('updating'):
      job=self.push_queue.get_nowait();self.deploy(device,job)
    except Exception as error:
     with self.lock:self.device={**self.device,'online':False,'error':str(error),'checked_at':utc()}

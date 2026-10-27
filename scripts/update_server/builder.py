@@ -49,8 +49,9 @@ def smoke(binary,source,work,config,log,stop):
 def build(repo,store,signer,config,job,stop):
  repo=pathlib.Path(repo);commit,tree=source_identity(repo);db=store.db;log=lambda text:db.event(job,text)
  def phase(value):db.update(job,status='running',phase=value);log(value)
- work=store.root/'builds'/job;work.mkdir(parents=True);archive=work/'source.zip';source=work/'source';source.mkdir();env=os.environ.copy();cache=store.root/'build-cache';env['CARGO_TARGET_DIR']=str(cache);env['CARGO_BUILD_JOBS']=str(config.get('build_jobs',2));env.pop('SCHEMA_TOKEN',None)
+ work=store.root/'builds'/job;work.mkdir(parents=True);archive=work/'source.zip';source=work/'source';source.mkdir();env=os.environ.copy();cache=store.root/'build-cache';env['CARGO_TARGET_DIR']=str(cache);env['CARGO_BUILD_JOBS']=str(config.get('build_jobs',2));env['CARGO_PROFILE_DEV_DEBUG']='0';env['CARGO_PROFILE_TEST_DEBUG']='0';env['CARGO_INCREMENTAL']='0';env.pop('SCHEMA_TOKEN',None)
  try:
+  if shutil.disk_usage(store.root).free<768*1024*1024:raise RuntimeError('At least 768 MiB free disk space is required for an update build; clean regenerable compiler artifacts and retry')
   phase('snapshot');subprocess.run(['git','archive','--format=zip','-o',str(archive),commit],cwd=repo,check=True)
   with zipfile.ZipFile(archive)as zipped:zipped.extractall(source)
   sysroot=subprocess.check_output(['rustc','--print','sysroot'],text=True).strip();linker=pathlib.Path(sysroot)/'lib/rustlib/x86_64-pc-windows-msvc/bin/rust-lld.exe'
