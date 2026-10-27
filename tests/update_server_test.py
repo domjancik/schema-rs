@@ -1,4 +1,5 @@
-import sys,pathlib,tempfile,json,unittest,hashlib,threading,urllib.request,urllib.error
+import sys,pathlib,tempfile,json,unittest,hashlib,threading,urllib.request,urllib.error,time
+from unittest.mock import patch
 sys.path.insert(0,str(pathlib.Path(__file__).resolve().parents[1]/'scripts/update_server'))
 from core import ReleaseStore,Signer,choose_release
 class Releases(unittest.TestCase):
@@ -46,4 +47,24 @@ class Recovery(unittest.TestCase):
   with tempfile.TemporaryDirectory()as root,ReleaseStore(root)as store:
    queued=store.db.create('push','ready');running=store.db.create('build');store.db.update(running,status='running');store.db.recover();jobs={j['id']:j for j in store.db.jobs()};self.assertEqual(jobs[queued]['status'],'queued');self.assertEqual(jobs[running]['status'],'interrupted')
    store.db.ensure_sequence(22);self.assertEqual(store.db.sequence(),23);store.db.ensure_sequence(2);self.assertEqual(store.db.sequence(),24)
+class ConnectedPush(unittest.TestCase):
+ artifacts=Releases.artifacts
+ def test_offline_queue_deploys_once_on_reconnect_and_stays_current(self):
+  from manager import Manager
+  with tempfile.TemporaryDirectory()as root,ReleaseStore(pathlib.Path(root)/'state')as store:
+   signer=Signer.generate();release=store.publish(self.artifacts(pathlib.Path(root)),'a'*40,'b'*64,dict.fromkeys(['fmt','tests','clippy','syntax','smoke'],True),signer)['release_id'];online=threading.Event();pushed=threading.Event();calls=[]
+   class FakeDevice:
+    def __init__(self,config):self.operation=None
+    def connect(self):
+     if not online.is_set():raise ConnectionError('offline')
+    def close(self):pass
+    def probe(self):return {'online':True,'helper':True,'service':'active','build':{'release_id':release if self.operation else 'old'},'update':{'operation_id':self.operation,'phase':'succeeded','highest_sequence':1}if self.operation else None}
+    def push(self,folder,release_id,rollback=False,operation=None):self.operation=operation;calls.append(release_id);pushed.set();return operation
+   manager=Manager({'repo':root,'device':{},'poll_seconds':.02},store,signer);job=manager.enqueue_push(release)
+   with patch('manager.Device',FakeDevice):
+    thread=threading.Thread(target=manager.device_loop,daemon=True);thread.start();time.sleep(.08);self.assertEqual(calls,[]);self.assertEqual(store.db.jobs()[0]['status'],'queued');online.set();self.assertTrue(pushed.wait(2))
+    deadline=time.monotonic()+2
+    while store.db.jobs()[0]['status']!='succeeded'and time.monotonic()<deadline:time.sleep(.01)
+    time.sleep(.1);manager.stop.set();thread.join(timeout=2)
+   self.assertEqual(calls,[release]);self.assertEqual(store.db.jobs()[0]['status'],'succeeded');self.assertEqual(store.db.jobs()[0]['id'],job)
 if __name__=='__main__':unittest.main()

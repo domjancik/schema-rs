@@ -100,7 +100,7 @@ def recover(live=False):
 
 def activate(folder,manifest,operation,rollback=False):
  release=folder.name;previous=os.readlink(BASE/'current');current=(BASE/'current').resolve();trust=read(TRUST,{'highest_sequence':0,'releases':{}});trust['releases'][current.name]=record(current)
- if current==folder.resolve():status(operation,release,'succeeded',installed_release=release,unchanged=True);return
+ if current==folder.resolve():status(operation,release,'succeeded',installed_release=release,previous_release=trust.get('previous_release'),unchanged=True);return
  old_download=os.readlink(DATA/'downloads')if(DATA/'downloads').is_symlink()else None
  if(DATA/'downloads').exists()and old_download is None:raise ValueError('Unexpected downloads directory; refusing overwrite')
  ola=system('show','olad.service','-p','MainPID','--value').stdout.strip()

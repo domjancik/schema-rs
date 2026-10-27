@@ -29,6 +29,8 @@ class Transactions(unittest.TestCase):
   self.assertEqual((installer.BASE/'current').resolve(),self.new);self.assertFalse(installer.BARRIER.exists());self.assertEqual(json.loads(installer.SESSION.read_bytes()),self.session)
   status=installer.read(installer.STATUS);self.assertEqual(status['phase'],'succeeded');self.assertTrue(status['history_preserved']);self.assertTrue(status['ola_unchanged']);self.assertEqual(status['previous_release'],self.old.name)
   self.assertEqual(installer.read(installer.TRUST)['highest_sequence'],1)
+  with patch.object(installer,'ready',return_value=self.session):installer.activate(self.new,{'sequence':1},'f'*32)
+  self.assertEqual(installer.read(installer.STATUS)['previous_release'],self.old.name)
  def test_failed_health_check_restores_links_and_exact_scene(self):
   broken={**self.session,'undo':[]}
   with patch.object(installer,'ready',return_value=broken),self.assertRaisesRegex(ValueError,'undo differs'):installer.activate(self.new,{'sequence':1},'e'*32)
