@@ -534,13 +534,14 @@ impl From<String> for ApiError {
 }
 impl IntoResponse for ApiError {
     fn into_response(self) -> Response {
-        let status = if self.0.contains("Revision conflict") {
-            StatusCode::CONFLICT
-        } else if self.0.contains("queue") {
-            StatusCode::SERVICE_UNAVAILABLE
-        } else {
-            StatusCode::BAD_REQUEST
-        };
+        let status =
+            if self.0.contains("Revision conflict") || self.0.contains("Project already exists") {
+                StatusCode::CONFLICT
+            } else if self.0.contains("queue") {
+                StatusCode::SERVICE_UNAVAILABLE
+            } else {
+                StatusCode::BAD_REQUEST
+            };
         (status, Json(serde_json::json!({"error":self.0}))).into_response()
     }
 }
@@ -587,6 +588,7 @@ pub fn router(state: AppState) -> Router {
 .route("/output-core.js",get(||async{ ([(header::CONTENT_TYPE,"text/javascript")],include_str!("../web/output-core.js")) }))
 .route("/output-ui.js",get(||async{ ([(header::CONTENT_TYPE,"text/javascript")],include_str!("../web/output-ui.js")) }))
 .route("/output-design.css",get(||async{ ([(header::CONTENT_TYPE,"text/css")],include_str!("../web/output-design.css")) }))
+        .route("/projects-ui.js",get(||async{ ([(header::CONTENT_TYPE,"text/javascript")],include_str!("../web/projects-ui.js")) }))
         .route("/bezier-editor.js",get(||async{ ([(header::CONTENT_TYPE,"text/javascript")],include_str!("../web/bezier-editor.js")) }))
         .route("/bezier-editor.css",get(||async{ ([(header::CONTENT_TYPE,"text/css")],include_str!("../web/bezier-editor.css")) }))
         .route("/stack-layout.js",get(||async{ ([(header::CONTENT_TYPE,"text/javascript")],include_str!("../web/stack-layout.js")) }))
@@ -759,6 +761,9 @@ pub fn router(state: AppState) -> Router {
         .route("/api/import", post(import))
         .route("/api/export/{fixture}/{layer}", get(export))
         .route("/api/project/save", post(save))
+        .route("/api/projects", get(project_list))
+        .route("/api/projects/save", post(project_store))
+        .route("/api/projects/load", post(project_open))
         .route("/api/content/load", post(load_content))
         .layer(DefaultBodyLimit::max(512 * 1024))
         .layer(middleware::from_fn_with_state(state.clone(), guard))
@@ -966,4 +971,84 @@ async fn plugin_watch(
 ) -> ApiResult<Json<serde_json::Value>> {
     state.plugins.set_watch(body.enabled).await?;
     Ok(Json(serde_json::json!({"watch":body.enabled})))
+}
+
+#[derive(serde::Deserialize)]
+#[serde(deny_unknown_fields)]
+struct ProjectStore {
+    id: String,
+    title: String,
+    #[serde(default)]
+    overwrite: bool,
+    expected_revision: u64,
+}
+#[derive(serde::Deserialize)]
+#[serde(deny_unknown_fields)]
+struct ProjectOpen {
+    id: String,
+    expected_revision: u64,
+}
+async fn project_list(State(state): State<AppState>) -> ApiResult<Json<serde_json::Value>> {
+    let _guard = state.io_lock.lock().await;
+    let root = state.root;
+    let entries = tokio::task::spawn_blocking(move || crate::project_library::list(&root))
+        .await
+        .map_err(|e| e.to_string())??;
+    Ok(Json(serde_json::json!({"projects":entries})))
+}
+async fn project_store(
+    State(state): State<AppState>,
+    Json(body): Json<ProjectStore>,
+) -> ApiResult<Json<serde_json::Value>> {
+    let _guard = state.io_lock.lock().await;
+    let frame = state.controller.current();
+    if frame.snapshot.revision != body.expected_revision {
+        return Err("Revision conflict: refresh state before saving"
+            .to_owned()
+            .into());
+    }
+    let root = state.root;
+    let revision = frame.snapshot.revision;
+    let entry = tokio::task::spawn_blocking(move || {
+        scenic::with_plugins(frame.plugins.clone(), || {
+            crate::project_library::store(
+                &root,
+                &frame.project,
+                &body.id,
+                &body.title,
+                body.overwrite,
+                revision,
+            )
+        })
+    })
+    .await
+    .map_err(|e| e.to_string())??;
+    Ok(Json(
+        serde_json::json!({"saved_revision":revision,"project":entry}),
+    ))
+}
+async fn project_open(
+    State(state): State<AppState>,
+    Json(body): Json<ProjectOpen>,
+) -> ApiResult<Json<serde_json::Value>> {
+    let _guard = state.io_lock.lock().await;
+    let frame = state.controller.current();
+    let root = state.root;
+    let project = tokio::task::spawn_blocking(move || {
+        scenic::with_plugins(frame.plugins.clone(), || {
+            crate::project_library::load(&root, &body.id)
+        })
+    })
+    .await
+    .map_err(|e| e.to_string())??;
+    let revision = state
+        .controller
+        .command(
+            Command::ReplaceProject {
+                project: Box::new(project),
+            },
+            Some(body.expected_revision),
+        )
+        .await?;
+    Ok(Json(serde_json::json!({"revision":revision})))
 }

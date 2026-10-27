@@ -177,3 +177,5 @@ Touch slider/encoder gestures have one pointer owner. Other fingers cannot repla
 ## Daily output and patching
 
 The [output designer](docs/output-design.md) adds a cyclic daily dimming timeline, extensible ordered DMX slot models (including the two-channel UV COB), and a 512-slot universe view with atomic drag reindexing. [Stack interactions](docs/stack-interactions.md) cover desktop projected drag ghosts, exact insertion points and schémaboy’s width-aware grid Cursor.
+
+Open **Projects** in Studio or **SAVE** in schémaboy to save named scenes, select saved projects and load them with undo. See [project storage and loading](docs/projects.md).

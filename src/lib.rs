@@ -22,3 +22,5 @@ pub mod plugins;
 pub mod plugin_host;
 
 pub mod output_design;
+
+pub mod project_library;

@@ -8,6 +8,9 @@ use std::{
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(tag = "type", rename_all = "snake_case", deny_unknown_fields)]
 pub enum Command {
+    ReplaceProject {
+        project: Box<Project>,
+    },
     SetDimming {
         timeline: crate::output_design::DimmingTimeline,
     },
@@ -179,6 +182,7 @@ impl NodeState {
     }
 }
 pub struct PreparedEdit {
+    reset_runtime: bool,
     plugin_generation: u64,
     record_history: bool,
     project: Project,
@@ -500,10 +504,12 @@ impl Engine {
     }
     /// Build/validate/compile on a control worker; commit only on the owning engine thread.
     pub fn prepare(mut draft: Project, command: Command) -> Result<PreparedEdit> {
+        let reset_runtime = matches!(command, Command::ReplaceProject { .. });
         edit(&mut draft, command, 0)?;
         draft.validate()?;
         let scripts = compile_scripts(&draft, &script_engine())?;
         Ok(PreparedEdit {
+            reset_runtime,
             plugin_generation: scenic::active_plugins().state.generation,
             record_history: true,
             project: draft,
@@ -520,6 +526,7 @@ impl Engine {
     }
     pub fn install(&mut self, prepared: PreparedEdit) -> Result<()> {
         let PreparedEdit {
+            reset_runtime,
             plugin_generation,
             record_history,
             project: draft,
@@ -528,7 +535,7 @@ impl Engine {
         if plugin_generation != self.plugins.state.generation {
             return Err("Plugin registry changed while preparing edit; retry".into());
         }
-        if draft == self.project {
+        if draft == self.project && !reset_runtime {
             return Ok(());
         }
         // Retain native state only for nodes whose authored definition did not change.
@@ -625,7 +632,11 @@ impl Engine {
                 }
             }
         }
-        self.nodes = preserve;
+        self.nodes = if reset_runtime {
+            HashMap::new()
+        } else {
+            preserve
+        };
         if record_history {
             self.undo.push((Arc::new(previous), self.scripts.clone()));
         }
@@ -930,6 +941,12 @@ fn edit(p: &mut Project, c: Command, depth: usize) -> Result<()> {
         return Err("Command nesting exceeds limit".into());
     }
     match c {
+        Command::ReplaceProject { project } => {
+            if depth != 0 {
+                return Err("Project replacement must be a standalone command".into());
+            }
+            *p = *project;
+        }
         Command::AdoptNode {
             fixture,
             layer,

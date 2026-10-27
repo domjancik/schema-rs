@@ -14,7 +14,7 @@ struct Layout {
     name: String,
     fixtures: Vec<Fixture>,
 }
-fn filename(name: &str) -> Result<()> {
+pub(crate) fn filename(name: &str) -> Result<()> {
     if name.is_empty()
         || name.len() > 80
         || !name
@@ -25,11 +25,39 @@ fn filename(name: &str) -> Result<()> {
     }
     Ok(())
 }
-fn write(path: PathBuf, bytes: &[u8]) -> Result<()> {
-    let temp = path.with_extension("tmp");
-    fs::write(&temp, bytes).map_err(|e| e.to_string())?;
-    fs::rename(&temp, &path).map_err(|e| e.to_string())
+pub(crate) fn write(path: PathBuf, bytes: &[u8]) -> Result<()> {
+    use std::{
+        io::Write,
+        sync::atomic::{AtomicU64, Ordering},
+    };
+    static SERIAL: AtomicU64 = AtomicU64::new(0);
+    let parent = path.parent().ok_or("Project file has no parent")?;
+    let temp = parent.join(format!(
+        ".project-{}-{}-{}.tmp",
+        std::process::id(),
+        std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .map_err(|e| e.to_string())?
+            .as_nanos(),
+        SERIAL.fetch_add(1, Ordering::Relaxed)
+    ));
+    let mut file = fs::OpenOptions::new()
+        .write(true)
+        .create_new(true)
+        .open(&temp)
+        .map_err(|e| e.to_string())?;
+    let result = (|| {
+        file.write_all(bytes).map_err(|e| e.to_string())?;
+        file.sync_all().map_err(|e| e.to_string())?;
+        drop(file);
+        fs::rename(&temp, &path).map_err(|e| e.to_string())
+    })();
+    if result.is_err() {
+        let _ = fs::remove_file(&temp);
+    }
+    result
 }
+
 pub fn initialize(root: &Path) -> Result<()> {
     for dir in [
         "registry/config/window",
