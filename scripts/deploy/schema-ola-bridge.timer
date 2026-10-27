@@ -1,0 +1,8 @@
+[Unit]
+Description=Maintain Schéma Art-Net and USB bridge patch
+[Timer]
+OnBootSec=8s
+OnUnitActiveSec=5s
+AccuracySec=1s
+[Install]
+WantedBy=timers.target

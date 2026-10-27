@@ -1,0 +1,11 @@
+[Unit]
+Description=Restore DS3231 UTC after legacy software clock loaders
+After=rtc-ds3231-restore.service fake-hwclock-load.service fake-hwclock.service systemd-timesyncd.service
+Before=schema.service
+Wants=rtc-ds3231-restore.service
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/ds3231-clock restore
+RemainAfterExit=yes
+[Install]
+WantedBy=multi-user.target

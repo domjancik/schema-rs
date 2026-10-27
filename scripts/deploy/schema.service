@@ -1,0 +1,23 @@
+[Unit]
+Description=Schéma native lighting engine and control web server
+After=network.target schema-clock.service olad.service
+Wants=schema-clock.service olad.service
+[Service]
+Type=simple
+User=schema
+Group=schema
+WorkingDirectory=/var/lib/schema
+EnvironmentFile=/etc/schema/schema.env
+ExecStart=/usr/local/sbin/schema-start
+Restart=on-failure
+RestartSec=3
+KillSignal=SIGINT
+TimeoutStopSec=30
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+ReadWritePaths=/var/lib/schema
+UMask=0077
+[Install]
+WantedBy=multi-user.target

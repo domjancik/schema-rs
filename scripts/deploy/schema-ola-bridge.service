@@ -1,0 +1,18 @@
+[Unit]
+Description=Reconcile Schéma Art-Net to Open DMX USB patch
+After=olad.service
+Wants=olad.service
+[Service]
+Type=oneshot
+User=schema
+Group=schema
+EnvironmentFile=-/etc/schema/bridge.env
+ExecStart=/usr/local/sbin/schema-ola-reconcile
+RuntimeDirectory=schema-ola
+RuntimeDirectoryMode=0750
+RuntimeDirectoryPreserve=yes
+NoNewPrivileges=yes
+ProtectHome=yes
+ProtectSystem=strict
+ReadWritePaths=/run/schema-ola
+UMask=0077

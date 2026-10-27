@@ -1,0 +1,2 @@
+# Common Enttec Open DMX / FT232 USB adapter. Reload plugins on insertion.
+SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", ATTR{idVendor}=="0403", ATTR{idProduct}=="6001", GROUP="plugdev", MODE="0660", TAG+="systemd", ENV{SYSTEMD_WANTS}+="schema-ola-usb-refresh.service"

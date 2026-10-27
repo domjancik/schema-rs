@@ -1,0 +1,6 @@
+[Unit]
+Description=Refresh OLA FTDI discovery when Open DMX USB is attached
+After=olad.service
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/systemctl reload-or-restart olad.service

@@ -1,0 +1,3 @@
+
+scripts/deploy/* text eol=lf
+tests/deploy_*.py text eol=lf
