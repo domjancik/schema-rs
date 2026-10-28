@@ -1,3 +1,5 @@
+> PAUSED by the human. Explicit exception: current item56 faceted schémaboy skin request is authorized. All other queued work remains paused until an explicit resume instruction.
+
 # Active Schéma work queue
 
 Human priority order verified in chat `01a18134-f05d-7b22-9c5e-44adab032412`, user turn `01a1813b-8f81-7253-8a26-65790d478332`. This newer order supersedes the original queued order. Keep completed entries with commit, verification and activation evidence; later deliveries of those prompts are duplicates.
