@@ -136,6 +136,25 @@
     for (const r of all) r.y -= top;
     return all;
   }
+  function fit(all, { width, height }) {
+    if (!all.length) return { scale: 1, pan: { x: 20, y: 40 } };
+    const left = Math.min(...all.map((r) => r.x * 190)),
+      right = Math.max(...all.map((r) => r.x * 190 + r.width)),
+      top = Math.min(...all.map((r) => r.y - 10 * r.scale)),
+      bottom = Math.max(...all.map((r) => r.y + r.height + 12 * r.scale));
+    const w = Math.max(1, right - left),
+      h = Math.max(1, bottom - top),
+      availableWidth = Math.max(1, width - 40),
+      availableHeight = Math.max(1, height - 105);
+    const scale = Math.max(1e-6, Math.min(1.2, availableWidth / w, availableHeight / h));
+    return {
+      scale,
+      pan: {
+        x: 20 + (availableWidth - w * scale) / 2 - left * scale,
+        y: 40 + (availableHeight - h * scale) / 2 - top * scale
+      }
+    };
+  }
   function connections(row, all) {
     const children = row.node.children
       .map((n) => all.find((r) => r.node.id === n.id))
@@ -185,6 +204,7 @@
   }
   const api = {
     geometry,
+    fit,
     connections,
     ports,
     rows,

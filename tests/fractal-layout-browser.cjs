@@ -130,6 +130,31 @@ if (!base.endsWith(':8823')) throw Error('Use isolated frontend');
     r = await rects();
     for (const a of Object.values(r)) near(a.w, a.h);
     assert(r[1].w > r[3].w);
+    // A short viewport must fit the entire expanded square tree, even below25% zoom.
+    await page.setViewportSize({ width: 1600, height: 660 });
+    await page.locator('#fit').click();
+    const fitBounds = await page.evaluate(() => {
+      const canvas = document.querySelector('#canvas'),
+        c = canvas.getBoundingClientRect();
+      return {
+        canvas: { x: c.x, y: c.y, right: c.right, bottom: c.bottom },
+        cards: [...document.querySelectorAll('#world .block[data-node]')].map((n) => {
+          const r = n.getBoundingClientRect();
+          return { x: r.x, y: r.y, right: r.right, bottom: r.bottom };
+        }),
+        scale: ui.scale,
+        scroll: canvas.scrollTop
+      };
+    });
+    assert(fitBounds.scale < 0.25);
+    assert.equal(fitBounds.scroll, 0);
+    for (const r of fitBounds.cards) {
+      assert(r.x >= fitBounds.canvas.x && r.right <= fitBounds.canvas.right);
+      assert(r.y >= fitBounds.canvas.y && r.bottom <= fitBounds.canvas.bottom);
+    }
+    await page.reload();
+    await page.locator('#world .block[data-node]').first().waitFor();
+    assert.equal(await page.locator('#world').getAttribute('data-square'), 'true');
     await choose('Block shape', false);
     r = await rects();
     assert(r[1].w > r[1].h);

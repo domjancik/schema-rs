@@ -42,11 +42,26 @@ const farSeam = [{ id: 1, left: 0, right: 20, bottom: 10, scale: 0.1 }];
 assert.equal(L.underside(farSeam, { x: 5, y: 15 }), null);
 assert.equal(L.underside(farSeam, { x: 5, y: 11 }), 1);
 
-
-const W = require('../web/workspace-core.js'), workspace = W.create(), panel = W.panels(W.active(workspace).root)[0];
-assert.doesNotThrow(() => W.context(workspace, panel.id, {fractal:true,square:false}));
-assert.throws(() => W.context(workspace, panel.id, {fractal:'true'}));
-assert.throws(() => W.context(workspace, panel.id, {square:1}));
+const W = require('../web/workspace-core.js'),
+  workspace = W.create(),
+  panel = W.panels(W.active(workspace).root)[0];
+assert.doesNotThrow(() => W.context(workspace, panel.id, { fractal: true, square: false }));
+assert.throws(() => W.context(workspace, panel.id, { fractal: 'true' }));
+assert.throws(() => W.context(workspace, panel.id, { square: 1 }));
 console.log(
   'Fractal shared widths, recursive scaling, square aspect, aligned connectors/ports and folded geometry passed'
 );
+
+const tall = L.geometry(
+  { id: 10, children: [{ id: 11, children: [{ id: 12, children: [leaf(13), leaf(14)] }] }] },
+  new Set(),
+  { square: true }
+);
+const fitted = L.fit(tall, { width: 713, height: 340 });
+assert(fitted.scale < 0.25);
+for (const r of tall) {
+  assert(r.x * 190 * fitted.scale + fitted.pan.x >= 0);
+  assert((r.x * 190 + r.width) * fitted.scale + fitted.pan.x <= 713);
+  assert(r.y * fitted.scale + fitted.pan.y >= 0);
+  assert((r.y + r.height) * fitted.scale + fitted.pan.y <= 340);
+}

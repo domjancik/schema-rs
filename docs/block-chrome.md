@@ -30,3 +30,6 @@ Open **Layout** in a Stack editor panel header. **Sibling layout → Fractal** m
 These are local workspace preferences saved independently per panel, including duplicate Stack views and driver trees. They do not change project data, evaluation or scene undo history. Expanded + Square keeps combiners wide enough for all inputs, so those combiner squares are taller. Fractal + Square keeps the complete tree within the root's width. Zoom supports up to1600% for inspecting small branches; clicking a card still opens its full inspector.
 
 Geometry drives card faces, scaled connection tabs, insertion buttons, drag seams, ghost previews, fold anchoring and Fit together. The logical child order and Cursor column mapping stay unchanged. A dense fractal view intentionally makes distant branches small; zoom in for precise pointer edits.
+
+
+Fit includes card/tab extents and reserves space for the canvas controls. It can zoom below25% for tall expanded square trees, resets canvas scroll offsets, and saves the resulting scale in the panel. Manual zoom keeps that fitted scale continuous. This addresses lab finding SL-007; the original Carpushit retest remains with the lab.

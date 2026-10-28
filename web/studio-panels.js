@@ -66,7 +66,7 @@
         surface.onwheel = (e) => {
           e.preventDefault();
           const scale = Math.max(
-            0.15,
+            1e-6,
             Math.min(16, (c.scale || 0.65) * (e.deltaY < 0 ? 1.08 : 1 / 1.08))
           );
           api.context({ scale });

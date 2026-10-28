@@ -24,7 +24,7 @@
     if (c.fixture !== undefined && (typeof c.fixture !== 'string' || c.fixture.length > 100))
       throw Error('Invalid panel fixture');
     for (const key of ['scale', 'sceneZoom'])
-      if (c[key] !== undefined && (!Number.isFinite(c[key]) || c[key] < 0.05 || c[key] > 16))
+      if (c[key] !== undefined && (!Number.isFinite(c[key]) || c[key] < (key === 'scale' ? 1e-6 : 0.05) || c[key] > 16))
         throw Error('Invalid view scale');
     for (const key of ['pan', 'scenePan'])
       if (
