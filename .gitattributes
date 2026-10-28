@@ -11,3 +11,6 @@ tests/update_*.py text eol=lf
 scripts/start-update-server.ps1 text eol=crlf
 
 docs/scene-lab/developments.md text eol=lf
+
+scripts/publication/*.sh text eol=lf
+scripts/publication/*.py text eol=lf
