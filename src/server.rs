@@ -624,6 +624,10 @@ pub fn router(state: AppState) -> Router {
         .route("/projects-ui.js",get(||async{ ([(header::CONTENT_TYPE,"text/javascript")],include_str!("../web/projects-ui.js")) }))
         .route("/bezier-editor.js",get(||async{ ([(header::CONTENT_TYPE,"text/javascript")],include_str!("../web/bezier-editor.js")) }))
         .route("/bezier-editor.css",get(||async{ ([(header::CONTENT_TYPE,"text/css")],include_str!("../web/bezier-editor.css")) }))
+        .route("/workspace-core.js",get(||async{ ([(header::CONTENT_TYPE,"text/javascript")],include_str!("../web/workspace-core.js")) }))
+        .route("/workspace-ui.js",get(||async{ ([(header::CONTENT_TYPE,"text/javascript")],include_str!("../web/workspace-ui.js")) }))
+        .route("/studio-panels.js",get(||async{ ([(header::CONTENT_TYPE,"text/javascript")],include_str!("../web/studio-panels.js")) }))
+        .route("/workspace.css",get(||async{ ([(header::CONTENT_TYPE,"text/css")],include_str!("../web/workspace.css")) }))
         .route("/stack-layout.js",get(||async{ ([(header::CONTENT_TYPE,"text/javascript")],include_str!("../web/stack-layout.js")) }))
         .route("/stack-editor.css",get(||async{ ([(header::CONTENT_TYPE,"text/css")],include_str!("../web/stack-editor.css")) }))
         .route(

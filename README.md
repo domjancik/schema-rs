@@ -52,7 +52,7 @@ Enter the same token in the web **Connection** dialog, or set SCHEMA_TOKEN for t
 ## What works
 
 - Scene editing: drag fixtures in X/Z, edit XYZ numerically, rename, group, add/remove, choose model/universe/address and adjust fixture dimmers. Studio and mobile keep selection handles at layout positions while separate dots preview animated positions.
-- Native scalar/color sources and transformations, value maps, fixture-referenced and fixed-point spatial distance/axis effects, three independent layers and Layer Above.
+- Native scalar/color sources and transformations, value maps, fixture-referenced and fixed-point spatial distance/axis effects, up to32 independent fixture/director layers, undoable layer enable switches and Layer Above.
 - ScenicScript YAML import/export with ordered repeated children and separate driver trees; supported properties are validated.
 - Stack add/wrap/delete, single-block/full-branch moves, local folding, web pan/zoom, four ASCII zoom levels and property editing and LFO-driver attachment.
 - One shared undo/redo history for accepted authored edits, transactional batches and partial content application. Invalid edits preserve the running model.
@@ -189,3 +189,5 @@ The [output designer](docs/output-design.md) adds a cyclic daily dimming timelin
 Open **Projects** in Studio or **SAVE** in schémaboy to save named scenes, select saved projects and load them with undo. See [project storage and loading](docs/projects.md).
 
 Automatic controller deployment: [update server and operator workflow](docs/update-server.md).
+
+Studio supports resizable, dockable view instances and saved workspace tabs: [panel and layer guide](docs/workspaces.md).
