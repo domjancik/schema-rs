@@ -33,6 +33,24 @@
           ))
       )
         throw Error('Invalid view navigation');
+    if (c.sceneCamera !== undefined) {
+      const n = c.sceneCamera;
+      if (
+        !n ||
+        !Array.isArray(n.target) ||
+        n.target.length !== 3 ||
+        !n.target.every((v) => Number.isFinite(v) && Math.abs(v) <= 1e7) ||
+        !Number.isFinite(n.zoom) ||
+        n.zoom < 1e-5 ||
+        n.zoom > 1e5 ||
+        !Number.isFinite(n.yaw) ||
+        Math.abs(n.yaw) > Math.PI * 2 ||
+        !Number.isFinite(n.pitch) ||
+        Math.abs(n.pitch) > Math.PI / 2 ||
+        !['orbit', 'pan'].includes(n.mode)
+      )
+        throw Error('Invalid scene camera');
+    }
     if (c.node !== undefined && (!Number.isSafeInteger(c.node) || c.node < 0))
       throw Error('Invalid node selection');
     if (
@@ -42,7 +60,7 @@
         c.folded.some((id) => !Number.isSafeInteger(id) || id < 0))
     )
       throw Error('Invalid folded blocks');
-    if (c.axes !== undefined && !['xz', 'xy', 'yz'].includes(c.axes))
+    if (c.axes !== undefined && !['xz', 'xy', 'yz', '3d'].includes(c.axes))
       throw Error('Invalid scene axes');
     if (
       c.driverTrail !== undefined &&

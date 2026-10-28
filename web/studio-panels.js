@@ -9,6 +9,8 @@
   function adapters(a) {
     const getLayers = (p, id) => (id === '__director' ? p.director : p.content[id] || []);
     function render(panel, body, api) {
+      body._sceneCamera?.destroy();
+      body._sceneCamera = null;
       const data = a.data();
       if (!data) return;
       if (panel.view === 'gpu') {
@@ -253,6 +255,52 @@
       }
     }
     function scene(panel, body, api, data) {
+      if (panel.context.axes === '3d') {
+        body.replaceChildren();
+        const view = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        view.classList.add('panel-scene');
+        view.style.marginTop = '42px';
+        view.style.height = 'calc(100% - 42px)';
+        const controls = make('div', undefined, 'panel-scene-controls');
+        for (const axes of ['3d', 'xz', 'xy', 'yz']) {
+          const button = make('button', axes.toUpperCase());
+          button.setAttribute('aria-pressed', String(axes === '3d'));
+          button.onclick = () => api.context({ axes });
+          controls.append(button);
+        }
+        body.append(view, controls);
+        const navigation = SchemaSchematicCamera.mount(view, {
+          camera: panel.context.sceneCamera,
+          data: () => a.data(),
+          selected: () => a.context().fixture,
+          select: (id) => {
+            const focused = view.contains(document.activeElement);
+            a.select(id);
+            if (focused)
+              document
+                .querySelector('[data-panel="' + CSS.escape(panel.id) + '"] .schematic-scene')
+                ?.focus({ preventScroll: true });
+          },
+          changed: (sceneCamera) => {
+            const focused = view.contains(document.activeElement);
+            if(api.persistCamera)api.persistCamera(sceneCamera);else api.context({ sceneCamera });
+            if (focused)
+              document
+                .querySelector('[data-panel="' + CSS.escape(panel.id) + '"] .schematic-scene')
+                ?.focus({ preventScroll: true });
+          }
+        });
+        navigation.toolbar(controls);
+        body._sceneCamera = navigation;
+        body._panelTick = () => {
+          const top = controls.getBoundingClientRect().height + 16;
+          view.style.marginTop = top + 'px';
+          view.style.height = `calc(100% - ${top}px)`;
+          navigation.update();
+        };
+        body._panelTick();
+        return;
+      }
       const c = panel.context,
         axes = c.axes || 'xz',
         indices = axes === 'xy' ? [0, 1] : axes === 'yz' ? [2, 1] : [0, 2],
@@ -287,7 +335,7 @@
           'aria-label': axes.toUpperCase() + ' scene view'
         }),
         controls = make('div', undefined, 'panel-scene-controls');
-      for (const axis of ['xz', 'xy', 'yz']) {
+      for (const axis of ['3d', 'xz', 'xy', 'yz']) {
         const b = make('button', axis.toUpperCase());
         b.onclick = () => api.context({ axes: axis });
         controls.append(b);

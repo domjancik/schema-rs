@@ -762,6 +762,24 @@ pub fn router(state: AppState) -> Router {
             }),
         )
         .route(
+            "/schematic-camera.js",
+            get(|| async {
+                (
+                    [(header::CONTENT_TYPE, "text/javascript; charset=utf-8")],
+                    include_str!("../web/schematic-camera.js"),
+                )
+            }),
+        )
+        .route(
+            "/schematic-camera.css",
+            get(|| async {
+                (
+                    [(header::CONTENT_TYPE, "text/css; charset=utf-8")],
+                    include_str!("../web/schematic-camera.css"),
+                )
+            }),
+        )
+        .route(
             "/mobile-core.js",
             get(|| async {
                 (

@@ -237,6 +237,15 @@
       };
       return h;
     }
+    // Camera preferences update the model without remounting independent views.
+    function setCamera(id, sceneCamera) {
+      try {
+        state = W.context(state, id, { sceneCamera });
+        save();
+      } catch (error) {
+        options.status(error.message, true);
+      }
+    }
     function setContext(id, patch) {
       try {
         if (id === focused) remember();
@@ -426,7 +435,8 @@
               .forEach((n) => stash.append(n));
           options.render(panel, body, {
             focus: () => focus(panel.id),
-            context: (patch) => setContext(panel.id, patch)
+            context: (patch) => setContext(panel.id, patch),
+            persistCamera: (sceneCamera) => setCamera(panel.id, sceneCamera)
           });
         }
       }

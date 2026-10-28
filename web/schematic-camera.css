@@ -1,0 +1,157 @@
+.schematic-scene {
+  touch-action: none;
+  overflow: hidden;
+  outline-offset: -3px;
+}
+.schematic-grid {
+  fill: none;
+  stroke: var(--line, #3b5149);
+  stroke-width: 0.6;
+  opacity: 0.7;
+}
+.schematic-stem {
+  fill: none;
+  stroke: var(--accent, #72dec2);
+  stroke-width: 1;
+  opacity: 0.4;
+}
+.schematic-label {
+  font: 10px system-ui !important;
+  fill: var(--ink, #c7ddd5);
+}
+.schematic-hit {
+  pointer-events: all;
+}
+.schematic-camera {
+  position: relative;
+  color: var(--ink, #c7ddd5);
+  font: 12px system-ui;
+  z-index: 10;
+}
+.schematic-camera summary {
+  list-style: none;
+  cursor: pointer;
+  min-height: 32px;
+  min-width: 54px;
+  padding: 8px;
+  border: 1px solid var(--line, #3b5149);
+  border-radius: 5px;
+  background: var(--control, #17221d);
+}
+.schematic-camera-popup {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 5px);
+  width: min(300px, calc(100vw - 24px));
+  max-height: 60dvh;
+  overflow: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  padding: 9px;
+  background: var(--shell, var(--paper, #17221d));
+  border: 1px solid var(--line, #3b5149);
+  box-shadow: 0 8px 24px #0006;
+  border-radius: 8px;
+}
+.schematic-camera-popup button {
+  min-width: 44px !important;
+  min-height: 40px !important;
+  width: auto !important;
+  height: auto !important;
+  padding: 8px !important;
+  background: var(--control, #22382f);
+  color: inherit;
+  border: 1px solid var(--line, #3b5149);
+  border-radius: 4px;
+}
+.schematic-camera-popup button[aria-pressed='true'] {
+  border-color: var(--accent, #72dec2);
+  color: var(--accent, #72dec2);
+}
+.schematic-camera-popup p {
+  margin: 4px;
+  font: 11px/1.5 system-ui;
+  color: var(--muted, #a0ada7);
+}
+.panel-scene-controls .schematic-camera-popup {
+  top: calc(100% + 5px);
+  bottom: auto;
+}
+.panel-scene-controls {
+  flex-wrap: wrap;
+  max-width: calc(100% - 16px);
+}
+#scene[data-view='3d'] {
+  top: 42px;
+  height: calc(100% - 142px);
+  min-height: 20px;
+  overflow: hidden;
+}
+.screen:has(#scene[data-view='3d']) {
+  container-type: size;
+}
+@container (max-height:230px) {
+  .screen:has(#scene[data-view='3d']) .fixture-caption {
+    display: none;
+  }
+  .screen:has(#scene[data-view='3d']) .fixtures {
+    bottom: 4px;
+    padding-top: 0;
+    border-top: 0;
+  }
+  .screen:has(#scene[data-view='3d']) .screen-tools {
+    bottom: 39px;
+  }
+  .screen:has(#scene[data-view='3d']) #scene {
+    top: 38px;
+    height: calc(100% - 111px);
+  }
+  .screen:has(#scene[data-view='3d']) .screen-top {
+    top: 4px;
+  }
+}
+.screen-tools:has(.schematic-camera) {
+  gap: 4px;
+}
+.screen-tools:has(.schematic-camera) #view-caption {
+  display: none;
+}
+.screen-tools .schematic-camera {
+  margin-left: auto;
+}
+.screen-tools .schematic-camera summary {
+  min-height: 26px;
+  padding: 6px;
+}
+.panel-scene-controls > button[aria-pressed='true'] {
+  color: var(--accent);
+}
+
+.schematic-scene [role='button']:focus-visible .fixture-layout-dot {
+  stroke: var(--ink, #fff);
+  stroke-width: 3;
+}
+.panel-scene.schematic-scene {
+  min-height: 0;
+  display: block;
+}
+
+/* The native top layer keeps camera controls reachable outside tiny/stacked scene panels. */
+.schematic-camera-popup[popover],
+dialog.schematic-camera-popup {
+  position: fixed;
+  inset: auto;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  max-height: calc(100dvh - 32px);
+  color: var(--ink, #c7ddd5);
+}
+.schematic-camera-popup[popover]:not(:popover-open) {
+  display: none;
+}
+dialog.schematic-camera-popup:not([open]) {
+  display: none;
+}
