@@ -10,7 +10,7 @@ Human priority order verified in chat `01a18134-f05d-7b22-9c5e-44adab032412`, us
 - [x] 60: Vercel publication at https://schema-s.vercel.app, Windows/Linux x64/ARM64 downloads, checksums and a preserving Linux boot installer —90d5b61. Public browser/download/bootstrap tests pass; extracted Linux x64 restart/undo verified. Real ARM64 board was unreachable. See docs/publishing.md.
 - [ ] 54: review/refine application and file structure, retaining what is good. Original prompt delivered while panels were active; deferred per the newer human order. No broad refactor started.
 - [ ] 55: view drivers, including inline like original Schéma.
-- [ ] 58: refine fold toggle animation.
+- [x] 58: refine fold toggle animation —94d46cb. Reversible tuck/fan-out, soft settle, pinned fold controls and reduced motion. Browser/Rust checks pass; local8788 active with exact scene/undo/redo preservation. See docs/block-chrome.md.
 - [ ] 59: fractal sibling scaling to shared width and square block layout.
 - [ ] 56: optional efficient faceted schémaboy skin with phone orientation/averaged scene lighting and explicitly enabled camera environmental shading.
 
