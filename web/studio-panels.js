@@ -50,7 +50,7 @@
           empty,
           surface,
           layer,
-          view: { pan: c.pan, scale: c.scale, folded: new Set(c.folded || []) },
+          view: { pan: c.pan, scale: c.scale, folded: new Set(c.folded || []), fractal: !!c.fractal, square: !!c.square },
           fixture,
           activate: api.focus
         });
@@ -67,7 +67,7 @@
           e.preventDefault();
           const scale = Math.max(
             0.15,
-            Math.min(2, (c.scale || 0.65) * (e.deltaY < 0 ? 1.08 : 1 / 1.08))
+            Math.min(16, (c.scale || 0.65) * (e.deltaY < 0 ? 1.08 : 1 / 1.08))
           );
           api.context({ scale });
         };
@@ -248,7 +248,22 @@
             layer: Number(layer.value),
             enabled: toggle.checked
           });
-        header.append(fixture, layer, toggle);
+        const layout = make('details', undefined, 'stack-layout-menu');
+        layout.append(make('summary', 'Layout'));
+        const choices = make('div', undefined, 'stack-layout-choices');
+        for (const [key, title, options] of [
+          ['fractal', 'Sibling layout', ['Expanded', 'Fractal']],
+          ['square', 'Block shape', ['Rectangle', 'Square']]
+        ]) {
+          const label = make('label', title), select = make('select');
+          select.setAttribute('aria-label', title);
+          options.forEach((title, i) => { const o = make('option', title); o.value = String(!!i); select.append(o); });
+          select.value = String(!!context[key]);
+          select.onchange = () => update({ [key]: select.value === 'true' });
+          label.append(select); choices.append(label);
+        }
+        layout.append(choices);
+        header.append(fixture, layer, toggle, layout);
       } else if (panel.view === 'inspector') {
         const pin = make('input');
         pin.type = 'checkbox';

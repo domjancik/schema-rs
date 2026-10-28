@@ -21,3 +21,12 @@ Studio folding tucks visible inputs into the parent rather than removing them in
 Disappearing cards are temporary inert, aria-hidden visual copies without model IDs or controls. Entering cards become interactive after settling; the parent stays responsive throughout. Keyboard Space/Enter toggles the focused fold without triggering transport shortcuts. Context/structural changes and drag previews cancel outstanding motion; hidden-page and reduced-motion changes clean it up immediately. Reduced motion uses an immediate toggle with no ghost cloning.
 
 Work is bounded to 96 cards, prioritizing the folding subtree. Larger trees keep their correct final layout without pretending uncaptured cards are new entries. Web Animations runs only during transitions (approximately 220–360ms); no permanent frame loop, engine command, authored mutation or undo entry is added. Motion has tests for exits/entries, anchoring, rapid reversals, cleanup, layer switching, keyboard operation and reduced-motion interruption. schémaboy's separate SVG stack presentation is unchanged.
+
+
+## Fractal and square layouts
+
+Open **Layout** in a Stack editor panel header. **Sibling layout → Fractal** makes each group of input siblings share its parent's width, including a proportionally scaled gap. A single input keeps its parent's size; every additional fork scales recursively. **Expanded** keeps the original leaf-column layout. **Block shape → Square** makes every visible card's width equal its height; **Rectangle** keeps the original card proportions. The two choices can be combined.
+
+These are local workspace preferences saved independently per panel, including duplicate Stack views and driver trees. They do not change project data, evaluation or scene undo history. Expanded + Square keeps combiners wide enough for all inputs, so those combiner squares are taller. Fractal + Square keeps the complete tree within the root's width. Zoom supports up to1600% for inspecting small branches; clicking a card still opens its full inspector.
+
+Geometry drives card faces, scaled connection tabs, insertion buttons, drag seams, ghost previews, fold anchoring and Fit together. The logical child order and Cursor column mapping stay unchanged. A dense fractal view intentionally makes distant branches small; zoom in for precise pointer edits.

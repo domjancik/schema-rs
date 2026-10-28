@@ -14,3 +14,18 @@
 .fold-motion-layer .fold-exit-ghost{pointer-events:none!important;user-select:none}
 :is(#world,.layer-world) .fold-shell-before{pointer-events:none}
 @media(prefers-reduced-motion:reduce){.fold-motion-layer{display:none}}
+
+/* Layout variants keep physical geometry, tabs and input targets in the same coordinate system. */
+:is(#world,.layer-world) .scaled-block{padding:0}
+.block-face{position:absolute;left:0;top:0;transform-origin:0 0;padding:14px 18px;pointer-events:none}
+.block-face>*{pointer-events:auto}
+:is(#world,.layer-world) .scaled-block>.port{width:calc(21px * var(--block-scale));height:calc(21px * var(--block-scale));font-size:calc(15px * var(--block-scale));line-height:calc(18px * var(--block-scale));top:calc(-10px * var(--block-scale));border-width:calc(1px * var(--block-scale))}
+:is(#world,.layer-world) .scaled-block>.below-slot{top:auto;bottom:calc(-10px * var(--block-scale))}
+.stack-layout-menu{position:relative;font-size:11px;flex:none}
+.stack-layout-menu>summary{cursor:pointer;padding:6px 8px;border:1px solid var(--line);border-radius:5px;list-style:none}
+.stack-layout-choices{position:absolute;right:0;top:100%;z-index:80;min-width:190px;padding:8px 12px;background:var(--paper);border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 25px #0003}
+.stack-layout-choices label{display:block;text-transform:none;letter-spacing:normal;margin:6px 0;color:var(--ink)}
+.stack-layout-choices select{display:block!important;width:100%!important;max-width:none!important;min-height:32px}
+
+:is(#world,.layer-world) .scaled-block>.block-shell path{stroke-width:calc(1px * var(--block-scale))}
+:is(#world,.layer-world) .scaled-block.selected>.block-shell path{stroke-width:calc(2.4px * var(--block-scale))}

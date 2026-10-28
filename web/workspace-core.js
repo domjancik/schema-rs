@@ -17,6 +17,8 @@
     return state.workspaces.find((w) => w.id === state.active);
   }
   function validContext(c) {
+    for (const key of ['fractal', 'square'])
+      if (c[key] !== undefined && typeof c[key] !== 'boolean') throw Error('Invalid stack layout');
     if (c.layer !== undefined && (!Number.isInteger(c.layer) || c.layer < 0 || c.layer >= 32))
       throw Error('Invalid panel layer');
     if (c.fixture !== undefined && (typeof c.fixture !== 'string' || c.fixture.length > 100))
