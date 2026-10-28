@@ -735,6 +735,33 @@ pub fn router(state: AppState) -> Router {
             }),
         )
         .route(
+            "/mobile-skin-core.js",
+            get(|| async {
+                (
+                    [(header::CONTENT_TYPE, "text/javascript; charset=utf-8")],
+                    include_str!("../web/mobile-skin-core.js"),
+                )
+            }),
+        )
+        .route(
+            "/mobile-skin.js",
+            get(|| async {
+                (
+                    [(header::CONTENT_TYPE, "text/javascript; charset=utf-8")],
+                    include_str!("../web/mobile-skin.js"),
+                )
+            }),
+        )
+        .route(
+            "/mobile-skin.css",
+            get(|| async {
+                (
+                    [(header::CONTENT_TYPE, "text/css; charset=utf-8")],
+                    include_str!("../web/mobile-skin.css"),
+                )
+            }),
+        )
+        .route(
             "/mobile-core.js",
             get(|| async {
                 (

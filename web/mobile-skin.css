@@ -1,0 +1,147 @@
+/* Painted facets only. No canvas renderer, extra layout rows or moving hit targets. */
+.pocket.faceted-skin {
+  background: transparent;
+  isolation: isolate;
+  border-radius: 0;
+  border-color: transparent;
+  box-shadow: none;
+  --skin-rgb: 114 222 194;
+  --skin-energy: 0.08;
+  --skin-top: 0.4;
+  --skin-left: 0.3;
+  --skin-right: 0.15;
+  --skin-bottom: 0.1;
+}
+.skin-facets {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(145deg, rgb(var(--skin-rgb) / var(--skin-energy)), transparent 75%),
+    linear-gradient(140deg, var(--shell-top), var(--shell));
+  clip-path: polygon(
+    18px 0,
+    calc(100% - 23px) 0,
+    100% 23px,
+    100% calc(100% - 34px),
+    calc(100% - 34px) 100%,
+    15px 100%,
+    0 calc(100% - 15px),
+    0 18px
+  );
+}
+.skin-facets i {
+  position: absolute;
+  inset: 0;
+  display: block;
+  pointer-events: none;
+  background: rgb(220 245 236 / var(--facet));
+}
+.skin-facet-top {
+  --facet: var(--skin-top);
+  clip-path: polygon(0 0, 100% 0, calc(100% - 17px) 13px, 17px 13px);
+}
+.skin-facet-left {
+  --facet: var(--skin-left);
+  clip-path: polygon(0 0, 17px 13px, 12px calc(100% - 20px), 0 100%);
+}
+.skin-facet-right {
+  --facet: var(--skin-right);
+  clip-path: polygon(
+    100% 0,
+    100% 100%,
+    calc(100% - 15px) calc(100% - 25px),
+    calc(100% - 17px) 13px
+  );
+}
+.skin-facet-bottom {
+  --facet: var(--skin-bottom);
+  clip-path: polygon(
+    0 100%,
+    12px calc(100% - 20px),
+    calc(100% - 15px) calc(100% - 25px),
+    100% 100%
+  );
+}
+#skin-dialog {
+  max-width: 440px;
+  width: calc(100% - 24px);
+  max-height: calc(100dvh - 24px);
+  overflow: auto;
+  background: var(--shell);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 20px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+#skin-dialog::backdrop {
+  background: #0009;
+}
+#skin-dialog .dialog-head h2 {
+  margin: 0;
+  font-size: 20px;
+}
+#skin-dialog .dialog-head button {
+  min-width: 44px;
+  min-height: 44px;
+  background: var(--control);
+  color: var(--ink);
+  border-radius: 8px;
+}
+.skin-settings {
+  display: grid;
+  gap: 8px;
+}
+.skin-settings button {
+  min-height: 44px;
+  background: var(--control);
+  color: var(--ink);
+  text-align: left;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: 10px;
+}
+.skin-settings button[aria-pressed='true'] {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.skin-settings output,
+.skin-privacy {
+  font-size: 12px;
+  color: var(--muted);
+}
+/* Small bevel cuts expose the housing without shrinking the screen or touch controls. */
+.faceted-skin .screen-bezel {
+  border-radius: 0;
+  clip-path: polygon(
+    8px 0,
+    calc(100% - 8px) 0,
+    100% 8px,
+    100% calc(100% - 8px),
+    calc(100% - 8px) 100%,
+    8px 100%,
+    0 calc(100% - 8px),
+    0 8px
+  );
+}
+.faceted-skin .encoder {
+  border-radius: 18%;
+  background:
+    linear-gradient(
+      135deg,
+      rgb(225 248 240 / var(--skin-left)),
+      transparent 38%,
+      rgb(0 0 0 / var(--skin-right))
+    ),
+    var(--control);
+}
+.faceted-skin .encoder-inner {
+  border-radius: 22%;
+}
+.faceted-skin .rolling-strip {
+  border-radius: 0;
+  background: linear-gradient(160deg, rgb(var(--skin-rgb) / 0.04), transparent), var(--control);
+}
