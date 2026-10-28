@@ -637,6 +637,7 @@ pub fn router(state: AppState) -> Router {
         .route("/workspace-ui.js",get(||async{ ([(header::CONTENT_TYPE,"text/javascript")],include_str!("../web/workspace-ui.js")) }))
         .route("/studio-panels.js",get(||async{ ([(header::CONTENT_TYPE,"text/javascript")],include_str!("../web/studio-panels.js")) }))
         .route("/workspace.css",get(||async{ ([(header::CONTENT_TYPE,"text/css")],include_str!("../web/workspace.css")) }))
+        .route("/fold-motion.js",get(||async{ ([(header::CONTENT_TYPE,"text/javascript")],include_str!("../web/fold-motion.js")) }))
         .route("/stack-layout.js",get(||async{ ([(header::CONTENT_TYPE,"text/javascript")],include_str!("../web/stack-layout.js")) }))
         .route("/stack-editor.css",get(||async{ ([(header::CONTENT_TYPE,"text/css")],include_str!("../web/stack-editor.css")) }))
         .route(

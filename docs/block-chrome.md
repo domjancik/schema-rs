@@ -12,3 +12,12 @@ Each block has persistent top-right controls in this order: **fold → grab ⠿ 
 A chooser captures fixture/layer/revision when opened. Concurrent edits cause native revision rejection and keep the chooser open with an error; it does not silently delete a newer tree. Each successful delete is one engine transaction and supports shared undo/redo and the existing serialized history. No new project format or native deletion API is introduced.
 
 Verification: `tests/block-chrome-browser.cjs` uses an isolated output-disabled engine and checks geometry, icon/label separation, leaf/fold behavior, cancellation, root ambiguity, nested-parent selection, block/branch deletion and undo, real grip moves/Shift override/threshold/Escape, preference persistence, touch activation, stale 409 rejection, inactive driver controls and ID-preserving driver promotion/full undo. Authored-state assertions poll the actual wire publication with a bounded timeout. Existing indexed creation/ghost-drop, layout/editing, layer and workspace/camera regressions are also run. The live Studio is checked read-only; test deletion never runs against its project.
+
+
+## Fold motion
+
+Studio folding tucks visible inputs into the parent rather than removing them in one frame. Unfolding fans them back out with a short stagger and restrained spring settle. The block shell and fold glyph give a small squash/twist response. The parent's upper-right corner stays pinned in the active canvas, keeping the fold control under the pointer. Reversing mid-animation starts from the current visual positions.
+
+Disappearing cards are temporary inert, aria-hidden visual copies without model IDs or controls. Entering cards become interactive after settling; the parent stays responsive throughout. Keyboard Space/Enter toggles the focused fold without triggering transport shortcuts. Context/structural changes and drag previews cancel outstanding motion; hidden-page and reduced-motion changes clean it up immediately. Reduced motion uses an immediate toggle with no ghost cloning.
+
+Work is bounded to 96 cards, prioritizing the folding subtree. Larger trees keep their correct final layout without pretending uncaptured cards are new entries. Web Animations runs only during transitions (approximately 220–360ms); no permanent frame loop, engine command, authored mutation or undo entry is added. Motion has tests for exits/entries, anchoring, rapid reversals, cleanup, layer switching, keyboard operation and reduced-motion interruption. schémaboy's separate SVG stack presentation is unchanged.
