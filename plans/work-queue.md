@@ -11,7 +11,7 @@ Human priority order verified in chat `01a18134-f05d-7b22-9c5e-44adab032412`, us
 - [ ] 54: review/refine application and file structure, retaining what is good. Original prompt delivered while panels were active; deferred per the newer human order. No broad refactor started.
 - [ ] 55: view drivers, including inline like original Schéma.
 - [x] 58: refine fold toggle animation —94d46cb. Reversible tuck/fan-out, soft settle, pinned fold controls and reduced motion. Browser/Rust checks pass; local8788 active with exact scene/undo/redo preservation. See docs/block-chrome.md.
-- [ ] 59: fractal sibling scaling to shared width and square block layout.
+- [x] 59: fractal sibling scaling to shared width and square block layout —d9079d2. Independent per-panel Layout choices, recursive card/tab scaling, square aspect, accurate insertion/ghost drag/fold geometry and saved view state. Browser/Rust checks pass; local8788 active with project/history exact. See docs/block-chrome.md.
 - [ ] 56: optional efficient faceted schémaboy skin with phone orientation/averaged scene lighting and explicitly enabled camera environmental shading.
 
 Separate coordinated handoff: scene lab has validated Carpushit revision2 (33 fixtures, one `uv-roof` with six `line_paths_m`). Bundled web reference refresh pending; authored lab data belongs to that chat. Do not replace the live project automatically.
