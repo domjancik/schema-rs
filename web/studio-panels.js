@@ -40,7 +40,12 @@
         empty.append(make('p', 'An open layer.'), start);
         surface.append(world, empty);
         body.append(surface);
-        a.drawStack(stack?.root || null, {
+        let displayed = stack?.root;
+        for (const step of c.driverTrail || [])
+          displayed = global.SchemaBlocks.find(displayed, step.owner)?.drivers[
+            step.key
+          ];
+        a.drawStack(displayed || null, {
           world,
           empty,
           surface,

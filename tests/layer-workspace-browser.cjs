@@ -13,6 +13,7 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE);
     const initial = await fetch(base + '/api/state').then((r) => r.json());
     assert.equal(initial.project.output.enabled, false);
     const project = structuredClone(initial.project);
+    const originalRoot = structuredClone(project.content['fixture-1'][0].root);
     for (const layers of Object.values(project.content)) layers.splice(3);
     project.director.splice(3);
     if (project.content['fixture-1'][0]) delete project.content['fixture-1'][0].enabled;
@@ -44,7 +45,7 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE);
     await page.waitForFunction(()=>fetch('/api/state').then(r=>r.json()).then(s=>s.project.content['fixture-1'][0].enabled===false));
     let state = await page.evaluate(() => fetch('/api/state').then((r) => r.json()));
     assert.equal(state.project.content['fixture-1'][0].enabled, false);
-    assert.equal(state.project.content['fixture-1'][0].root.behavior, 'Modify.Color.Dim');
+    assert.deepEqual(state.project.content['fixture-1'][0].root, originalRoot);
     await page.locator('#undo').click();
     await page.waitForFunction(() =>
       fetch('/api/state')
