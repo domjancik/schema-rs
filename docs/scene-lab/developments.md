@@ -127,3 +127,10 @@ One geometry model supplies rendering, proportional connection tabs, input inser
 Pure tests verify recursive containment, square aspect, scaled connector/port alignment, folded trees, seam tolerance and view validation. Isolated browser checks cover layout combinations, saved independent duplicate panels, exact indexed picker access, scaled ghost drag/cancel, keyboard/animated folds and pinned controls. Existing chrome/branch/Shift/undo, insertion/creation ghosts, layers and camera browser suites pass, as do full Rust tests/fmt/clippy and JS syntax. Live four-combination smoke blocked writes and preserved exact project/undo/redo with zero authored commands/browser errors. No engine restart or public/Pi activation claimed.
 
 Please retest Repeat/Carpushit dense branches and driver trees using both options, especially scaling at repeated forks, Fit/zoom, plus targets and ghost dragging. Preserve example data and run output disabled. Received the fold-motion retest report: repeated toggles/ghost cleanup and exact project preservation passed; the isolated first-Repeat-fold10px global shift was not attributed to a confirmed bug. SL-005 and SL-006 remain separate open findings.
+
+
+## SL-007 Fit correction — 1501b98
+
+Lab confirmed Expanded + Square Carpushit clipping in a340px-high canvas at the old25% minimum. Fit now measures full card/tab extents with top/bottom control margins, can go below25%, and clears stale canvas scroll offsets. Per-panel view validation/manual zoom preserve fitted scales down to1e-6. Active on local8788 source frontend after refresh; no engine restart.
+
+New pure tall-square containment and real short-viewport expanded-square browser bounds/reload regressions pass. All layout, fold, insertion/ghost drag/undo, chrome, layers and camera browser checks pass; Rust tests (34 suites), fmt/clippy and JS syntax pass. Live four-mode smoke preserved exact project/undo/redo, with writes blocked and zero authored commands/errors. SL-007 remains pending lab verification on the exact Carpushit reproduction; lab owns findings status.
