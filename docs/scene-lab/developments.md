@@ -134,3 +134,16 @@ Please retest Repeat/Carpushit dense branches and driver trees using both option
 Lab confirmed Expanded + Square Carpushit clipping in a340px-high canvas at the old25% minimum. Fit now measures full card/tab extents with top/bottom control margins, can go below25%, and clears stale canvas scroll offsets. Per-panel view validation/manual zoom preserve fitted scales down to1e-6. Active on local8788 source frontend after refresh; no engine restart.
 
 New pure tall-square containment and real short-viewport expanded-square browser bounds/reload regressions pass. All layout, fold, insertion/ghost drag/undo, chrome, layers and camera browser checks pass; Rust tests (34 suites), fmt/clippy and JS syntax pass. Live four-mode smoke preserved exact project/undo/redo, with writes blocked and zero authored commands/errors. SL-007 remains pending lab verification on the exact Carpushit reproduction; lab owns findings status.
+
+
+## Windows Open DMX USB — d3b89b3
+
+Active on local8787/8788 after refresh. Output → Connection adds Art-Net/Open DMX USB transport selection, authenticated read-only FTDI discovery, serial-number adapter selection, one zero-based universe,1–40 FPS (UI starts at30) and an undoable expected-revision save. Old projects retain their Art-Net wire representation. Native secondary Output panels show the selected transport and link to connection setup.
+
+Windows dynamically loads the optional official FTDI D2XX DLL from System32 only. Device handling is isolated on the output worker, with bounded TX drain/write timeouts, full start-code/512-slot frames, missing-universe zero filling, short-write errors, release/retry and no UI/evaluation coupling. The Windows-only module is excluded from Linux; unsupported saved USB selection reports unavailable instead of silently changing to Art-Net. Linux OLA/Art-Net configuration is untouched.
+
+Windows full36-suite Rust tests/fmt/clippy and USB/layout/fold/layer browser checks pass. Linux x64 full36-suite tests ran offline in WSL after crates.io network timeout; ARM64 GNU and the existing Pi-class ARM64 musl build both pass. No dependency/Cargo.lock changes. Tests include mocked protocol ordering/write failures, backwards-compatible configuration, API auth, undo/redo and continued evaluation during a nonexistent-device error. No physical output/timing parity is claimed.
+
+Activation used a fresh guarded checkpoint and preserved exact project, revision199,6undo/0redo, plugins and resumed clock; output stayed disabled. Live read-only discovery/form smoke preserved exact project/history with zero authored commands/errors. The optional FTDI DLL loads, but currently lists zero available devices while QLC+5 is running; it may own the attached FTDI port. No application was closed, driver changed or USB DMX sent. Public/Pi deployment is not claimed. Guide: [Open DMX on Windows](../open-dmx-windows.md).
+
+Suggested lab retest: unchanged UV two-slot model and nonzero-universe project save/reload/undo in output-disabled isolated engines; Linux capabilities should disable choosing USB and retain Art-Net/OLA workflows. Leave actual Windows USB transmission to explicit hardware testing.
