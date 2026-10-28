@@ -1,4 +1,9 @@
 import {
+  navigateCamera,
+  cameraPreset,
+  validateCamera,
+} from "./scene-camera.mjs";
+import {
   THREE as T,
   OrbitControls,
   GLTFLoader,
@@ -78,12 +83,15 @@ export class SceneView {
       quality = "balanced",
       onSelect = () => {},
       onError = () => {},
+      onCameraChange = () => {},
     } = {},
   ) {
     this.canvas = canvas;
     this.options = { backend, quality };
     this.onSelect = onSelect;
     this.onError = onError;
+    this.onCameraChange = onCameraChange;
+    this.navigationMode = "orbit";
     this.settings = {
       gi: true,
       volumes: true,
@@ -149,6 +157,58 @@ export class SceneView {
     this.controls.target.set(0, 1, 0);
     this.controls.maxDistance = 150;
     this.controls.minDistance = 0.2;
+    this.canvas.tabIndex = 0;
+    this.canvas.setAttribute(
+      "aria-keyshortcuts",
+      "ArrowLeft ArrowRight ArrowUp ArrowDown W A S D + - F Home",
+    );
+    this.cameraChanged = () =>
+      this.onCameraChange({ ...this.cameraState(), mode: this.navigationMode });
+    this.controls.addEventListener("change", this.cameraChanged);
+    this.listeners.push(() =>
+      this.controls.removeEventListener("change", this.cameraChanged),
+    );
+    this.listen(this.canvas, "keydown", (event) => {
+      if (event.ctrlKey || event.metaKey || event.altKey) return;
+      const key = event.key.toLowerCase(),
+        pan = event.shiftKey || this.navigationMode === "pan";
+      let action;
+      if (["arrowleft", "arrowright", "arrowup", "arrowdown"].includes(key)) {
+        const x = key === "arrowleft" ? -1 : key === "arrowright" ? 1 : 0,
+          y = key === "arrowup" ? 1 : key === "arrowdown" ? -1 : 0;
+        action = pan ? { pan: [x, y] } : { orbit: [x * 0.12, y * 0.12] };
+      } else if (["w", "a", "s", "d"].includes(key))
+        action = {
+          pan: [
+            key === "a" ? -1 : key === "d" ? 1 : 0,
+            key === "w" ? 1 : key === "s" ? -1 : 0,
+          ],
+        };
+      else if (key === "+" || key === "=") action = { zoom: 0.85 };
+      else if (key === "-") action = { zoom: 1 / 0.85 };
+      else if (key === "f") {
+        event.preventDefault();
+        event.stopPropagation();
+        this.fit();
+        return;
+      } else if (key === "home" || key === "1" || key === "3" || key === "7") {
+        event.preventDefault();
+        event.stopPropagation();
+        this.viewPreset(
+          key === "1"
+            ? "front"
+            : key === "3"
+              ? "right"
+              : key === "7"
+                ? "top"
+                : "iso",
+        );
+        return;
+      } else return;
+      event.preventDefault();
+      event.stopPropagation();
+      this.navigate(action);
+    });
     this.ambient = new T.HemisphereLight(
       "#becfe1",
       "#1b2427",
@@ -234,22 +294,35 @@ export class SceneView {
     this.resize = new ResizeObserver(() => this.setSize());
     this.resize.observe(this.canvas.parentElement);
     this.setSize();
-    const down = (event) => {
-      this.pointerDown = [event.clientX, event.clientY];
-    };
-    const up = (event) => {
+    const pointers = new Map();
+    let selection = null,
+      multi = false;
+    this.listen(this.canvas, "pointerdown", (event) => {
+      this.canvas.focus({ preventScroll: true });
+      pointers.set(event.pointerId, [event.clientX, event.clientY]);
+      if (pointers.size > 1) {
+        multi = true;
+        selection = null;
+      } else if (event.button === 0 && this.navigationMode === "orbit")
+        selection = { id: event.pointerId, x: event.clientX, y: event.clientY };
+    });
+    this.listen(this.canvas, "pointermove", (event) => {
       if (
-        !this.pointerDown ||
-        Math.hypot(
-          event.clientX - this.pointerDown[0],
-          event.clientY - this.pointerDown[1],
-        ) > 5
+        selection?.id === event.pointerId &&
+        Math.hypot(event.clientX - selection.x, event.clientY - selection.y) > 5
       )
-        return;
+        selection = null;
+    });
+    this.listen(this.canvas, "pointerup", (event) => {
+      const click = selection?.id === event.pointerId && !multi;
+      pointers.delete(event.pointerId);
+      selection = null;
+      if (!pointers.size) multi = false;
+      if (!click) return;
       const rect = this.canvas.getBoundingClientRect();
       this.pointer.set(
         ((event.clientX - rect.left) / rect.width) * 2 - 1,
-        (-(event.clientY - rect.top) / rect.height) * 2 + 1,
+        -((event.clientY - rect.top) / rect.height) * 2 + 1,
       );
       this.raycaster.setFromCamera(this.pointer, this.camera);
       const hit = this.raycaster.intersectObjects([
@@ -266,9 +339,12 @@ export class SceneView {
           if (this.data) this.update(this.data);
         }
       }
-    };
-    this.listen(this.canvas, "pointerdown", down);
-    this.listen(this.canvas, "pointerup", up);
+    });
+    this.listen(this.canvas, "pointercancel", (event) => {
+      pointers.delete(event.pointerId);
+      selection = null;
+      if (!pointers.size) multi = false;
+    });
     this.listen(this.canvas, "webglcontextlost", (event) => {
       event.preventDefault();
       this.stop();
@@ -454,6 +530,55 @@ export class SceneView {
       }
     }
   }
+  cameraState() {
+    return {
+      position: this.camera.position.toArray(),
+      target: this.controls.target.toArray(),
+      up: this.camera.up.toArray(),
+    };
+  }
+  restoreCamera(pose) {
+    validateCamera(pose);
+    const damping = this.controls.enableDamping;
+    this.controls.enableDamping = false;
+    this.controls.update();
+    this.camera.position.fromArray(pose.position);
+    this.camera.up.fromArray(pose.up);
+    this.controls.target.fromArray(pose.target);
+    this.controls.update();
+    this.controls.enableDamping = damping;
+    this.cameraChanged();
+  }
+  navigate(action) {
+    this.restoreCamera(navigateCamera(this.cameraState(), action));
+  }
+  viewPreset(name) {
+    this.restoreCamera(cameraPreset(this.cameraState(), name));
+  }
+  navigationModeSet(mode) {
+    this.navigationMode = mode === "pan" ? "pan" : "orbit";
+    this.controls.mouseButtons.LEFT =
+      this.navigationMode === "pan" ? T.MOUSE.PAN : T.MOUSE.ROTATE;
+    this.controls.touches.ONE =
+      this.navigationMode === "pan" ? T.TOUCH.PAN : T.TOUCH.ROTATE;
+    this.cameraChanged();
+  }
+  focusSelected() {
+    const fixture = this.data?.fixtures.find((f) => f.id === this.selected);
+    if (!fixture) {
+      this.fit();
+      return;
+    }
+    const pose = this.cameraState(),
+      target = fixture.position || fixture.layoutPosition,
+      offset = pose.position.map((v, i) => v - pose.target[i]),
+      distance = Math.hypot(...offset);
+    this.restoreCamera({
+      ...pose,
+      target: [...target],
+      position: target.map((v, i) => v + (offset[i] / distance) * 2.5),
+    });
+  }
   fit() {
     const bounds = new T.Box3();
     if (this.data)
@@ -469,13 +594,14 @@ export class SceneView {
     const size = bounds.getSize(new T.Vector3()),
       center = bounds.getCenter(new T.Vector3()),
       radius = Math.max(2, size.length());
+    this.camera.up.set(0, 1, 0);
     this.controls.target.copy(center);
     this.camera.position
       .copy(center)
       .add(
         new T.Vector3(0.85, 0.55, -1).normalize().multiplyScalar(radius * 1.2),
       );
-    this.camera.far = Math.max(100, radius * 20);
+    this.camera.far = Math.max(300, radius * 20);
     this.camera.updateProjectionMatrix();
     this.controls.update();
     this.floor.position.y = Math.min(-0.04, bounds.min.y - 0.04);

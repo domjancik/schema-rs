@@ -379,3 +379,4 @@
 .panel-header input[type='checkbox'] {
   width: 14px;
 }
+.schema-workspace{position:relative}.schema-workspace.panel-maximized .split-child{overflow:visible}.schema-workspace.panel-maximized .workspace-panel:not(.maximized),.schema-workspace.panel-maximized .panel-divider{visibility:hidden}.schema-workspace.panel-maximized .workspace-panel.maximized{position:absolute;inset:0;width:100%;height:100%;z-index:90;background:var(--paper)}

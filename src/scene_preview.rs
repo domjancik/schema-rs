@@ -3,6 +3,15 @@ use axum::{http::header, routing::get, Router};
 pub(crate) fn routes() -> Router<AppState> {
     let mut router = Router::new();
     router = router.route(
+        "/scene-camera.mjs",
+        get(|| async {
+            (
+                [(header::CONTENT_TYPE, "text/javascript")],
+                include_bytes!("../web/scene-camera.mjs").as_slice(),
+            )
+        }),
+    );
+    router = router.route(
         "/preview",
         get(|| async {
             (

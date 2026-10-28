@@ -602,12 +602,21 @@ async fn guard(State(state): State<AppState>, request: Request, next: Next) -> R
         )
             .into_response();
     }
+    let preview_frame = request.uri().path() == "/preview";
     let mut response = next.run(request).await;
     response.headers_mut().insert(
         "x-content-type-options",
         header::HeaderValue::from_static("nosniff"),
     );
-    response.headers_mut().insert("content-security-policy",header::HeaderValue::from_static("default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' data: blob:; img-src 'self' blob: data:; frame-ancestors 'none'; base-uri 'none'"));
+    let policy = if preview_frame {
+        "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' data: blob:; img-src 'self' blob: data:; frame-ancestors 'self'; base-uri 'none'"
+    } else {
+        "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' data: blob:; img-src 'self' blob: data:; frame-ancestors 'none'; base-uri 'none'"
+    };
+    response.headers_mut().insert(
+        "content-security-policy",
+        header::HeaderValue::from_static(policy),
+    );
     response.headers_mut().insert(
         header::CACHE_CONTROL,
         header::HeaderValue::from_static("no-store"),

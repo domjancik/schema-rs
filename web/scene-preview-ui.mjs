@@ -1,3 +1,4 @@
+import { validateCamera } from "./scene-camera.mjs";
 import { SceneView } from "./scene-preview-renderer.mjs";
 
 import { frameToScene } from "./scene-preview-core.mjs";
@@ -120,6 +121,118 @@ export async function open(adapter = {}) {
     serial = 0,
     sourceSerial = 0;
 
+  const navigation = document.createElement("details");
+  navigation.className = "preview-navigation";
+  navigation.open = !matchMedia("(max-width:700px), (pointer:coarse)").matches;
+  navigation.innerHTML = `<summary>Camera</summary><div class="camera-modes"><button data-camera-mode="orbit" aria-pressed="true">Orbit</button><button data-camera-mode="pan" aria-pressed="false">Pan</button></div><div class="camera-pad"><button data-camera="up" aria-label="Camera up">▲</button><button data-camera="left" aria-label="Camera left">◀</button><button data-camera="fit" aria-label="Fit scene">Fit</button><button data-camera="right" aria-label="Camera right">▶</button><button data-camera="down" aria-label="Camera down">▼</button></div><div class="camera-zoom"><button data-camera="out" aria-label="Zoom camera out">−</button><button data-camera="in" aria-label="Zoom camera in">+</button><button data-camera="focus" aria-label="Frame selected fixture">Frame</button></div><div class="camera-presets"><button data-camera-preset="top">Top</button><button data-camera-preset="front">Front</button><button data-camera-preset="right">Right</button><button data-camera-preset="iso">Iso</button></div><output id="preview-camera-status" aria-label="Camera pose">Orbit</output><p>Drag: orbit · Pan mode: drag to move<br>Pinch / wheel: zoom · Two fingers: pan<br>Canvas keys: arrows, WASD, +/−, F</p>`;
+  dialog.querySelector(".preview-viewport").append(navigation);
+  const cameraKey =
+    "schema-camera-v1:" + (params.get("panel") || location.pathname);
+  let storedCamera = null,
+    cameraTimer,
+    holdTimer;
+  try {
+    const saved = JSON.parse(localStorage.getItem(cameraKey));
+    validateCamera(saved.pose);
+    if (["live", "carpushit"].includes(saved.source)) {
+      storedCamera = saved;
+      if (!params.get("scene")) $("preview-source").value = saved.source;
+    }
+  } catch {}
+  function saveCamera() {
+    if (!state.view || loading) return;
+    const record = {
+      source: state.source,
+      mode: state.view.navigationMode,
+      pose: state.view.cameraState(),
+    };
+    try {
+      localStorage.setItem(cameraKey, JSON.stringify(record));
+    } catch {}
+  }
+  function cameraChanged(pose) {
+    const distance = Math.hypot(
+      ...pose.position.map((v, i) => v - pose.target[i]),
+    );
+    $("preview-camera-status").textContent =
+      `${pose.mode === "pan" ? "Pan" : "Orbit"} · ${distance.toFixed(1)} m`;
+    $("preview-camera-status").dataset.pose = JSON.stringify(pose);
+    for (const b of navigation.querySelectorAll("[data-camera-mode]"))
+      b.setAttribute(
+        "aria-pressed",
+        String(b.dataset.cameraMode === pose.mode),
+      );
+    if (!loading) {
+      clearTimeout(cameraTimer);
+      cameraTimer = setTimeout(saveCamera, 150);
+    }
+  }
+  function cameraAction(key) {
+    const view = state.view;
+    if (!view) return;
+    if (key === "fit") {
+      view.fit();
+      return;
+    }
+    if (key === "focus") {
+      view.focusSelected();
+      return;
+    }
+    if (key === "in" || key === "out") {
+      view.navigate({ zoom: key === "in" ? 0.88 : 1 / 0.88 });
+      return;
+    }
+    const x = key === "left" ? -1 : key === "right" ? 1 : 0,
+      y = key === "up" ? 1 : key === "down" ? -1 : 0;
+    view.navigate(
+      view.navigationMode === "pan"
+        ? { pan: [x, y] }
+        : { orbit: [x * 0.12, y * 0.12] },
+    );
+  }
+  const clearHold = () => {
+    clearInterval(holdTimer);
+    holdTimer = null;
+  };
+  for (const button of navigation.querySelectorAll("[data-camera]")) {
+    const key = button.dataset.camera;
+    button.onclick = (event) => {
+      if (event.detail === 0) cameraAction(key);
+    };
+    button.onpointerdown = (event) => {
+      if (event.button !== 0) return;
+      event.preventDefault();
+      button.setPointerCapture(event.pointerId);
+      cameraAction(key);
+      if (!["fit", "focus"].includes(key)) {
+        clearHold();
+        holdTimer = setInterval(() => cameraAction(key), 110);
+      }
+    };
+    button.onpointerup =
+      button.onpointercancel =
+      button.onlostpointercapture =
+        clearHold;
+  }
+  for (const button of navigation.querySelectorAll("[data-camera-preset]"))
+    button.onclick = () => state.view?.viewPreset(button.dataset.cameraPreset);
+  for (const button of navigation.querySelectorAll("[data-camera-mode]"))
+    button.onclick = () =>
+      state.view?.navigationModeSet(button.dataset.cameraMode);
+  dialog.addEventListener("close", () => {
+    clearHold();
+    saveCamera();
+  });
+  addEventListener(
+    "pagehide",
+    () => {
+      clearHold();
+      clearTimeout(cameraTimer);
+      saveCamera();
+    },
+    { once: true },
+  );
+
   const error = (message) => {
     $("preview-loading").textContent = message;
     $("preview-loading").hidden = false;
@@ -128,6 +241,7 @@ export async function open(adapter = {}) {
   const options = () => ({
     backend: $("preview-backend").value,
     quality: $("preview-quality").value,
+    onCameraChange: cameraChanged,
     onSelect: (id) => {
       $("preview-selection").textContent = id;
       if (state.source === "live") adapter.onSelect?.(id);
@@ -177,6 +291,13 @@ export async function open(adapter = {}) {
 
   async function initialize() {
     const request = ++serial;
+    const cameraBefore = state.view
+      ? {
+          source: state.source,
+          mode: state.view.navigationMode,
+          pose: state.view.cameraState(),
+        }
+      : storedCamera;
     loading = true;
     state.view?.dispose();
     state.view = null;
@@ -200,7 +321,12 @@ export async function open(adapter = {}) {
       view.configure(settings());
       if (state.geometry) await view.loadGeometry(state.geometry.slice(0));
       update(state.frame);
-      if (dialog.open) view.start();
+      if (cameraBefore && cameraBefore.source === state.source) {
+        view.restoreCamera(cameraBefore.pose);
+        view.navigationModeSet(cameraBefore.mode);
+      }
+      storedCamera = null;
+      if (dialog.open && state.panelActive !== false) view.start();
       $("preview-loading").hidden = true;
     } catch (err) {
       if (request === serial) {
@@ -208,7 +334,10 @@ export async function open(adapter = {}) {
         error("Graphics unavailable: " + err.message);
       }
     } finally {
-      if (request === serial) loading = false;
+      if (request === serial) {
+        loading = false;
+        saveCamera();
+      }
     }
   }
 
@@ -341,7 +470,13 @@ export async function open(adapter = {}) {
   if (dialog.open) await initialize();
 
   state.timer = setInterval(async () => {
-    if (!dialog.open || document.hidden || loading) return;
+    if (
+      !dialog.open ||
+      document.hidden ||
+      loading ||
+      state.panelActive === false
+    )
+      return;
     if (state.source === "live") {
       try {
         const frame =
@@ -375,4 +510,11 @@ export async function open(adapter = {}) {
     },
     { once: true },
   );
+}
+
+export function setActive(active) {
+  if (!current) return;
+  current.panelActive = active;
+  if (!active) current.view?.stop();
+  else if (current.dialog.open) current.view?.start();
 }

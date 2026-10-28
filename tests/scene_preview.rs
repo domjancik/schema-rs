@@ -51,3 +51,26 @@ async fn preview_assets_and_preset_do_not_mutate_the_live_project() {
     }
     assert_eq!(runtime.controller.current().project, original);
 }
+#[tokio::test]
+async fn preview_panels_allow_only_same_origin_embedding() {
+    let runtime = Runtime::start(Project::demo()).unwrap();
+    let app = router(AppState::new(
+        runtime.controller.clone(),
+        std::env::temp_dir(),
+        None,
+    ));
+    for (path, expected) in [
+        ("/preview?panel=example", "frame-ancestors 'self'"),
+        ("/", "frame-ancestors 'none'"),
+    ] {
+        let response = app
+            .clone()
+            .oneshot(Request::builder().uri(path).body(Body::empty()).unwrap())
+            .await
+            .unwrap();
+        assert!(response.headers()["content-security-policy"]
+            .to_str()
+            .unwrap()
+            .contains(expected));
+    }
+}

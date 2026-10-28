@@ -84,7 +84,8 @@
       return W.panels(W.active(state).root);
     }
     function remember() {
-      if (focused && W.find(state, focused)) state = W.context(state, focused, options.capture());
+      if (focused && W.find(state, focused))
+        state = W.context(state, focused, options.capture());
     }
     function load(panel) {
       if (panel?.view === 'stack') options.activate(panel.context, panel.id);
@@ -121,7 +122,11 @@
     function tabs() {
       bar.replaceChildren();
       for (const workspace of state.workspaces) {
-        const b = element('button', workspace.name, workspace.id === state.active ? 'active' : '');
+        const b = element(
+          'button',
+          workspace.name,
+          workspace.id === state.active ? 'active' : ''
+        );
         b.setAttribute('aria-pressed', String(workspace.id === state.active));
         b.onclick = () => change((s) => W.workspace(s, workspace.id));
         b.ondblclick = () => rename();
@@ -170,7 +175,11 @@
         menu.append(b);
       }
       bar.append(add, menu);
-      const hint = element('span', 'Drag a header to dock · Ctrl Space maximize', 'workspace-hint');
+      const hint = element(
+        'span',
+        'Drag a header to dock · Ctrl Space maximize',
+        'workspace-hint'
+      );
       bar.append(hint);
     }
     function rename() {
@@ -191,7 +200,8 @@
         select.append(o);
       }
       select.value = panel.view;
-      select.onchange = () => change((s) => W.setView(s, panel.id, select.value));
+      select.onchange = () =>
+        change((s) => W.setView(s, panel.id, select.value));
       h.append(grip, select);
       options.decorate?.(panel, h, (patch) => setContext(panel.id, patch));
       const controls = element('details', undefined, 'panel-menu'),
@@ -206,7 +216,7 @@
           () => {
             remember();
             maximized = maximized === panel.id ? null : panel.id;
-            draw();
+            applyMaximize();
           }
         ],
         ['Close panel', () => change((s) => W.close(s, panel.id))]
@@ -222,7 +232,7 @@
       h.ondblclick = (e) => {
         if (e.target === h) {
           maximized = maximized === panel.id ? null : panel.id;
-          draw();
+          applyMaximize();
         }
       };
       return h;
@@ -267,17 +277,24 @@
       b.append(node(tree.b));
       divider.tabIndex = 0;
       divider.role = 'separator';
-      divider.setAttribute('aria-orientation', tree.axis === 'x' ? 'vertical' : 'horizontal');
+      divider.setAttribute(
+        'aria-orientation',
+        tree.axis === 'x' ? 'vertical' : 'horizontal'
+      );
       divider.setAttribute('aria-label', 'Resize panels');
       divider.setAttribute('aria-valuenow', Math.round(tree.ratio * 100));
       divider.onkeydown = (e) => {
-        if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.key)) return;
+        if (
+          !['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.key)
+        )
+          return;
         e.preventDefault();
         change((s) =>
           W.resize(
             s,
             tree.id,
-            currentRatio + (['ArrowLeft', 'ArrowUp'].includes(e.key) ? -0.03 : 0.03)
+            currentRatio +
+              (['ArrowLeft', 'ArrowUp'].includes(e.key) ? -0.03 : 0.03)
           )
         );
       };
@@ -316,18 +333,62 @@
       box.append(a, divider, b);
       return box;
     }
+    function framePolicy() {
+      for (const [id, entry] of bodies) {
+        const frame = entry.body.querySelector('iframe');
+        if (!frame) continue;
+        const send = () =>
+          frame.contentWindow?.postMessage(
+            {
+              type: 'schema-panel-visibility',
+              active: !maximized || maximized === id,
+              maximized: maximized === id
+            },
+            location.origin
+          );
+        if (!frame.dataset.policy) {
+          frame.dataset.policy = 'bound';
+          frame.addEventListener('load', send);
+        }
+        send();
+      }
+    }
+    function applyMaximize() {
+      main.classList.toggle('panel-maximized', !!maximized);
+      for (const [id, entry] of bodies)
+        entry.pane.classList.toggle('maximized', id === maximized);
+      framePolicy();
+    }
+    window.addEventListener('message', (event) => {
+      if (
+        event.origin !== location.origin ||
+        !['schema-panel-maximize', 'schema-panel-restore'].includes(
+          event.data?.type
+        )
+      )
+        return;
+      const id = event.data.panel,
+        entry = bodies.get(id),
+        frame = entry?.body.querySelector('iframe');
+      if (!frame || frame.contentWindow !== event.source) return;
+      if (event.data.type === 'schema-panel-restore') {
+        if (maximized === id) maximized = null;
+      } else maximized = maximized === id ? null : id;
+      applyMaximize();
+    });
     function draw() {
       Object.values(legacy).forEach((n) => stash.append(n));
       bodies.clear();
-      main.replaceChildren(
-        node(maximized ? W.find(state, maximized) || W.active(state).root : W.active(state).root)
-      );
+      main.replaceChildren(node(W.active(state).root));
       tabs();
       attach();
+      applyMaximize();
     }
     function attach() {
       const firstScene = leaves().find((p) => p.view === 'setup')?.id,
-        firstInspector = leaves().find((p) => p.view === 'inspector' && !p.context.pinned)?.id;
+        firstInspector = leaves().find(
+          (p) => p.view === 'inspector' && !p.context.pinned
+        )?.id;
       for (const panel of leaves()) {
         const entry = bodies.get(panel.id);
         if (!entry) continue;
@@ -335,9 +396,14 @@
         pane.classList.toggle('active', panel.id === focused);
         pane.dataset.layer = panel.context.layer ?? 0;
         pane.dataset.fixture = panel.context.fixture || '';
-        const selectedLayer = pane.querySelector('select[aria-label="Panel layer"]'),
-          selectedFixture = pane.querySelector('select[aria-label="Panel fixture"]');
-        if (selectedFixture && panel.context.fixture) selectedFixture.value = panel.context.fixture;
+        const selectedLayer = pane.querySelector(
+            'select[aria-label="Panel layer"]'
+          ),
+          selectedFixture = pane.querySelector(
+            'select[aria-label="Panel fixture"]'
+          );
+        if (selectedFixture && panel.context.fixture)
+          selectedFixture.value = panel.context.fixture;
         if (selectedLayer && panel.context.layer !== undefined)
           selectedLayer.value = panel.context.layer;
         const primary =
@@ -369,16 +435,29 @@
       if (e.button !== 0) return;
       e.preventDefault();
       e.currentTarget.setPointerCapture(e.pointerId);
-      drag = { id, x: e.clientX, y: e.clientY, pointer: e.pointerId, active: false, target: null };
+      drag = {
+        id,
+        x: e.clientX,
+        y: e.clientY,
+        pointer: e.pointerId,
+        active: false,
+        target: null
+      };
     }
     window.addEventListener('pointermove', (e) => {
       if (!drag || e.pointerId !== drag.pointer) return;
-      if (!drag.active && Math.hypot(e.clientX - drag.x, e.clientY - drag.y) < 7) return;
+      if (
+        !drag.active &&
+        Math.hypot(e.clientX - drag.x, e.clientY - drag.y) < 7
+      )
+        return;
       drag.active = true;
       document
         .querySelectorAll('.workspace-panel[data-dock]')
         .forEach((n) => delete n.dataset.dock);
-      const pane = document.elementFromPoint(e.clientX, e.clientY)?.closest('.workspace-panel');
+      const pane = document
+        .elementFromPoint(e.clientX, e.clientY)
+        ?.closest('.workspace-panel');
       if (!pane || pane.dataset.panel === drag.id) {
         drag.target = null;
         return;
@@ -407,7 +486,9 @@
         .querySelectorAll('.workspace-panel[data-dock]')
         .forEach((n) => delete n.dataset.dock);
       if (moving.active && moving.target)
-        change((s) => W.move(s, moving.id, moving.target.id, moving.target.edge));
+        change((s) =>
+          W.move(s, moving.id, moving.target.id, moving.target.edge)
+        );
     });
     window.addEventListener('pointercancel', () => {
       drag = null;
@@ -418,18 +499,22 @@
     document.addEventListener(
       'keydown',
       (e) => {
-        if (e.code === 'Space' && e.ctrlKey && !e.target.closest('input,textarea,select')) {
+        if (
+          e.code === 'Space' &&
+          e.ctrlKey &&
+          !e.target.closest('input,textarea,select')
+        ) {
           e.preventDefault();
           e.stopImmediatePropagation();
           remember();
           maximized = maximized
             ? null
             : e.target.closest('.workspace-panel')?.dataset.panel || focused;
-          draw();
+          applyMaximize();
         } else if (e.key === 'Escape' && maximized) {
           e.preventDefault();
           maximized = null;
-          draw();
+          applyMaximize();
         }
       },
       true

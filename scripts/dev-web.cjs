@@ -42,6 +42,7 @@ assets['/welcome']=['welcome.html','text/html; charset=utf-8'];
 for(const file of ['landing.css','landing.js'])assets['/'+file]=[file,file.endsWith('.css')?'text/css; charset=utf-8':'text/javascript; charset=utf-8'];
 assets['/preview']=['preview.html','text/html'];
 assets['/scene-preview.css']=['scene-preview.css','text/css'];
+assets['/scene-camera.mjs']=['scene-camera.mjs','text/javascript'];
 assets['/scene-preview-core.mjs']=['scene-preview-core.mjs','text/javascript'];
 assets['/scene-preview-renderer.mjs']=['scene-preview-renderer.mjs','text/javascript'];
 assets['/scene-preview-ui.mjs']=['scene-preview-ui.mjs','text/javascript'];
@@ -104,6 +105,7 @@ http.createServer((req,res)=>{
   forward();return;
  }
  const asset=assets[req.url.split('?')[0]];if(req.method!=='GET'||!asset){res.writeHead(404);res.end();return;}
- res.setHeader('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' data: blob:; img-src 'self' blob: data:; frame-ancestors 'none'; base-uri 'none'");
+ const framePolicy=downloadPath==='/preview'?"'self'":"'none'";
+ res.setHeader('Content-Security-Policy',`default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' data: blob:; img-src 'self' blob: data:; frame-ancestors ${framePolicy}; base-uri 'none'`);
  fs.readFile(path.join(__dirname,'../web',asset[0]),(error,data)=>{if(error){res.writeHead(500);res.end('Asset unavailable');return;}res.setHeader('Content-Type',asset[1]);res.end(data);});
 }).listen(port,bind,()=>console.log(`Live web UI: http://${hostAddress(bind)}:${port} → engine ${backend.origin}${accessKey?' (access key required)':''}`));
