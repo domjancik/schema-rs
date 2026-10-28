@@ -252,7 +252,9 @@ impl Event {
                 }
                 let mut targets = std::collections::BTreeSet::new();
                 for entry in entries {
-                    if entry.layer >= 3 || !targets.insert((entry.fixture.clone(), entry.layer)) {
+                    if entry.layer >= crate::model::MAX_LAYERS
+                        || !targets.insert((entry.fixture.clone(), entry.layer))
+                    {
                         return Err("Invalid content target".into());
                     }
                     if let Some(stack) = &entry.stack {

@@ -8,7 +8,7 @@ description = "Headless ScenicScript engine with scene editing, web and terminal
 
 [dependencies]
 serde = { version = "1", features = ["derive", "rc"] }
-serde_json = { version = "1", features = ["unbounded_depth"] }
+serde_json = { version = "1", features = ["unbounded_depth", "float_roundtrip"] }
 serde_yaml = "0.9"
 axum = "0.8"
 tokio = { version = "1", features = ["rt-multi-thread", "net", "macros", "signal"] }

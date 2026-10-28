@@ -59,7 +59,7 @@ impl Session {
         for p in self.undo.iter().chain(&self.redo) {
             p.validate()?;
         }
-        if self.states.len() > (self.project.fixtures.len() + 1) * 3 * 4096 {
+        if self.states.len() > (self.project.fixtures.len() + 1) * crate::model::MAX_LAYERS * 4096 {
             return Err("Session runtime state exceeds node limit".into());
         }
         let mut keys = std::collections::HashMap::new();

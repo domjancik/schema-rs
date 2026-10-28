@@ -277,6 +277,7 @@ fn valid_deep_program_can_be_restored_from_a_checkpoint() {
     }
     let mut p = Project::demo();
     p.content.get_mut("fixture-1").unwrap()[0] = Some(Stack {
+        enabled: true,
         name: "Deep".into(),
         root,
     });

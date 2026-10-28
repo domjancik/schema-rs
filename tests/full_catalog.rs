@@ -33,6 +33,7 @@ fn every_catalog_default_constructs_evaluates_and_serializes() {
             *layers = vec![None, None, None];
         }
         p.content.get_mut("fixture-1").unwrap()[0] = Some(Stack {
+            enabled: true,
             name: behavior.key.into(),
             root: Node {
                 id: 1,

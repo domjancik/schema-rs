@@ -201,7 +201,16 @@ pub fn parse(text: &str) -> Result<Stack> {
         0,
         None,
     )?;
-    let stack = Stack { name, root };
+    let enabled = object
+        .get("enabled")
+        .map(|v| v.as_bool().ok_or("enabled must be boolean"))
+        .transpose()?
+        .unwrap_or(true);
+    let stack = Stack {
+        name,
+        root,
+        enabled,
+    };
     validate(&stack)?;
     Ok(stack)
 }
@@ -461,6 +470,9 @@ pub fn encode(stack: &Stack) -> Result<String> {
         }
         json!({n.behavior.clone():fields})
     }
-    serde_yaml::to_string(&json!({"name":stack.name,"stack":node(&stack.root)}))
-        .map_err(|e| e.to_string())
+    let mut envelope = json!({"name":stack.name,"stack":node(&stack.root)});
+    if !stack.enabled {
+        envelope["enabled"] = json!(false);
+    }
+    serde_yaml::to_string(&envelope).map_err(|e| e.to_string())
 }

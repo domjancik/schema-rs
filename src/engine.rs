@@ -65,6 +65,14 @@ pub enum Command {
     RemoveFixture {
         fixture: String,
     },
+    AddLayer {
+        fixture: String,
+    },
+    SetLayerEnabled {
+        fixture: String,
+        layer: usize,
+        enabled: bool,
+    },
     ReplaceLayer {
         fixture: String,
         layer: usize,
@@ -750,7 +758,7 @@ impl Engine {
             let mut results = vec![Bank::default(); layers.len()];
             let mut trace = BTreeMap::new();
             for layer in (0..layers.len()).rev() {
-                let result = if let Some(stack) = &layers[layer] {
+                let result = if let Some(stack) = layers[layer].as_ref().filter(|s| s.enabled) {
                     let mut ctx = Context {
                         fixture,
                         host: &self.inputs,
@@ -855,10 +863,12 @@ impl Engine {
             let fixture = &mut director_fixture;
             fixture.id = "__director".into();
             let mut higher = Vec::new();
-            snap.director = vec![Bank::default(); 3];
+            snap.director = vec![Bank::default(); self.project.director.len()];
             let mut trace = BTreeMap::new();
-            for layer in (0..3).rev() {
-                let result = if let Some(stack) = &self.project.director[layer] {
+            for layer in (0..self.project.director.len()).rev() {
+                let result = if let Some(stack) =
+                    self.project.director[layer].as_ref().filter(|s| s.enabled)
+                {
                     let mut ctx = Context {
                         fixture,
                         host: &self.inputs,
@@ -907,6 +917,15 @@ impl Engine {
             }
         }
         snap
+    }
+}
+fn layers_mut<'a>(p: &'a mut Project, fixture: &str) -> Result<&'a mut Vec<Option<Stack>>> {
+    if fixture == "__director" {
+        Ok(&mut p.director)
+    } else {
+        p.content
+            .get_mut(fixture)
+            .ok_or_else(|| "Unknown fixture".into())
     }
 }
 fn root_mut<'a>(p: &'a mut Project, fixture: &str, layer: usize) -> Result<&'a mut Node> {
@@ -1002,34 +1021,48 @@ fn edit(p: &mut Project, c: Command, depth: usize) -> Result<()> {
             p.fixtures.retain(|f| f.id != fixture);
             p.content.remove(&fixture);
         }
+        Command::AddLayer { fixture } => {
+            let layers = layers_mut(p, &fixture)?;
+            if layers.len() >= MAX_LAYERS {
+                return Err("Layer limit reached (32)".into());
+            }
+            layers.push(None);
+        }
+        Command::SetLayerEnabled {
+            fixture,
+            layer,
+            enabled,
+        } => {
+            layers_mut(p, &fixture)?
+                .get_mut(layer)
+                .and_then(Option::as_mut)
+                .ok_or("Layer has no program")?
+                .enabled = enabled;
+        }
         Command::ReplaceLayer {
             fixture,
             layer,
             stack,
         } => {
             if fixture == "__director" {
-                *p.director.get_mut(layer).ok_or("Layer must be 0..2")? = stack;
+                *p.director.get_mut(layer).ok_or("Layer does not exist")? = stack;
             } else {
                 fixture_mut(p, &fixture)?;
                 *p.content
                     .get_mut(&fixture)
                     .and_then(|v| v.get_mut(layer))
-                    .ok_or("Layer must be 0..2")? = stack;
+                    .ok_or("Layer does not exist")? = stack;
             }
         }
         Command::ApplyContent { entries } => {
             let mut seen = std::collections::HashSet::new();
             for entry in entries {
-                if entry.layer >= 3 || !seen.insert((entry.fixture.clone(), entry.layer)) {
+                if entry.layer >= MAX_LAYERS || !seen.insert((entry.fixture.clone(), entry.layer)) {
                     return Err("Invalid or duplicate content target".into());
                 }
-                if entry.fixture == "__director" {
-                    p.director[entry.layer] = entry.stack;
-                } else {
-                    p.content
-                        .get_mut(&entry.fixture)
-                        .ok_or("Unknown content fixture")?[entry.layer] = entry.stack;
-                }
+                let layers = layers_mut(p, &entry.fixture)?;
+                layers.resize_with(layers.len().max(entry.layer + 1), || None);
+                layers[entry.layer] = entry.stack;
             }
         }
         Command::SetProperty {

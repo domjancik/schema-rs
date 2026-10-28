@@ -141,14 +141,26 @@ pub fn load(root: &Path, name: &str) -> Result<Project> {
     let mut content = layout
         .fixtures
         .iter()
-        .map(|f| (f.id.clone(), vec![None, None, None]))
+        .map(|f| (f.id.clone(), Vec::new()))
         .collect::<std::collections::BTreeMap<_, _>>();
-    let mut director = vec![None, None, None];
+    let mut director = Vec::new();
     for e in entries {
-        if e.fixture == "__director" {
-            *director.get_mut(e.layer).ok_or("Invalid director layer")? = e.stack;
+        if e.layer >= MAX_LAYERS {
+            return Err("Invalid saved layer".into());
+        }
+        let layers = if e.fixture == "__director" {
+            &mut director
         } else if let Some(layers) = content.get_mut(&e.fixture) {
-            *layers.get_mut(e.layer).ok_or("Invalid saved layer")? = e.stack;
+            layers
+        } else {
+            continue;
+        };
+        layers.resize_with(layers.len().max(e.layer + 1), || None);
+        layers[e.layer] = e.stack;
+    }
+    for layers in content.values_mut().chain(std::iter::once(&mut director)) {
+        if layers.is_empty() {
+            layers.resize(3, None);
         }
     }
     let mut output: OutputConfig = serde_json::from_slice(
@@ -181,7 +193,7 @@ pub fn save_content(root: &Path, entries: &[ContentEntry], name: &str) -> Result
     initialize(root)?;
     let mut targets = std::collections::HashSet::new();
     for e in entries {
-        if e.layer >= 3 || !targets.insert((&e.fixture, e.layer)) {
+        if e.layer >= MAX_LAYERS || !targets.insert((&e.fixture, e.layer)) {
             return Err("Invalid or duplicate content target".into());
         }
         if let Some(s) = &e.stack {

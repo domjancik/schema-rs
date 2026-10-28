@@ -52,9 +52,18 @@ impl Node {
         }
     }
 }
+pub const MAX_LAYERS: usize = 32;
+fn enabled_by_default() -> bool {
+    true
+}
+fn is_enabled(value: &bool) -> bool {
+    *value
+}
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
 #[serde(deny_unknown_fields)]
 pub struct Stack {
+    #[serde(default = "enabled_by_default", skip_serializing_if = "is_enabled")]
+    pub enabled: bool,
     pub name: String,
     pub root: Node,
 }
@@ -337,8 +346,8 @@ impl Project {
         {
             return Err("Art-Net requires an explicit unicast IPv4 target".into());
         }
-        if self.director.len() != 3 {
-            return Err("Exactly three director layers are required".into());
+        if self.director.is_empty() || self.director.len() > MAX_LAYERS {
+            return Err("Director requires 1..32 layers".into());
         }
         for stack in self.director.iter().flatten() {
             crate::scenic::validate(stack)?;
@@ -397,8 +406,8 @@ impl Project {
                 .content
                 .get(&f.id)
                 .ok_or_else(|| format!("Missing content for {}", f.id))?;
-            if layers.len() != 3 {
-                return Err("Exactly three independent layers are supported in v0.1".into());
+            if layers.is_empty() || layers.len() > MAX_LAYERS {
+                return Err("Fixture requires 1..32 independent layers".into());
             }
             for s in layers.iter().flatten() {
                 crate::scenic::validate(s)?;

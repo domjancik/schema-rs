@@ -324,7 +324,7 @@ pub fn run(address: &str, token: Option<&str>) -> Result<()> {
             screen
                 .push("Empty layer. Press i to import ScenicScript or a to create a root.".into());
         }
-        screen.push("Tab scene/stack | , . fixture | 1 2 3 layer | +/- zoom | u undo r redo | space pause b blackout".into());
+        screen.push("Tab scene/stack | , . fixture | 1–9 / [ ] layer | +/- zoom | u undo r redo | space pause b blackout".into());
         screen.push(if scene{"Arrows move X/Z | y/Y height | [ ] dim | e fixture JSON | n add | Delete remove | s save"}else{"Arrows navigate | a input | w wrap | Delete block | D branch | x/X mark | v/V move | p property | d driver | i import | o export"}.into());
         screen.push(message.clone());
         let mut stdout = std::io::stdout();
@@ -366,7 +366,7 @@ pub fn run(address: &str, token: Option<&str>) -> Result<()> {
         let fixture = fixture.cloned();
         let mut result: Result<()> = Ok(());
         match key.code{
-   KeyCode::Tab=>scene= !scene,KeyCode::Char(',')=>fixture_index=fixture_index.saturating_sub(1),KeyCode::Char('.')=>fixture_index=(fixture_index+1).min(published.project.fixtures.len().saturating_sub(1)),KeyCode::Char(c @ '1'..='3')=>layer=c as usize-'1' as usize,
+   KeyCode::Tab=>scene= !scene,KeyCode::Char(',')=>fixture_index=fixture_index.saturating_sub(1),KeyCode::Char('.')=>fixture_index=(fixture_index+1).min(published.project.fixtures.len().saturating_sub(1)),KeyCode::Char(c @ '1'..='9')=>layer=(c as usize-'1' as usize).min(published.project.fixtures.get(fixture_index).and_then(|f|published.project.content.get(&f.id)).map_or(3,Vec::len).saturating_sub(1)),KeyCode::Char('[')=>layer=layer.saturating_sub(1),KeyCode::Char(']')=>layer=(layer+1).min(published.project.fixtures.get(fixture_index).and_then(|f|published.project.content.get(&f.id)).map_or(3,Vec::len).saturating_sub(1)),
    KeyCode::Char('+')|KeyCode::Char('=')=>zoom=(zoom+1).min(3),KeyCode::Char('-')=>zoom=zoom.saturating_sub(1),
    KeyCode::Char('u')=>command=Some(Command::Undo),KeyCode::Char('r')=>command=Some(Command::Redo),KeyCode::Char(' ')=>command=Some(Command::Pause{paused:!published.snapshot.paused}),KeyCode::Char('b')=>command=Some(Command::Blackout{enabled:!published.snapshot.blackout}),
    KeyCode::Char('s')=>{result=request(address,"POST","/api/project/save",Some(&serde_json::json!({"name":"init"})),token).map(|_|());message="Saved layout, content, stack files and output configuration".into();},
@@ -379,7 +379,7 @@ pub fn run(address: &str, token: Option<&str>) -> Result<()> {
     KeyCode::Delete=>{if prompt("Type DELETE to remove fixture")?=="DELETE"{command=Some(Command::RemoveFixture{fixture:id})}},
     KeyCode::Char('e')=>{let current=serde_json::to_string(&f).unwrap();match prompt(&format!("Fixture JSON (current {current})")).and_then(|s|serde_json::from_str(&s).map_err(|e|e.to_string())){Ok(fixture)=>command=Some(Command::SetFixture{fixture}),Err(e)=>result=Err(e)}},_=>{}
    }}else{match code{
-    KeyCode::Char('a')=>{let behavior=prompt("Behavior key")?;if let Some(root)=root{command=Some(Command::AddInput{index:None,fixture:id,layer,node:if root.find(node).is_some(){node}else{root.id},behavior})}else{result=crate::scenic::new_node(&behavior,1).map(|root|command=Some(Command::ReplaceLayer{fixture:id,layer,stack:Some(Stack{name:"New stack".into(),root})}));}},
+    KeyCode::Char('a')=>{let behavior=prompt("Behavior key")?;if let Some(root)=root{command=Some(Command::AddInput{index:None,fixture:id,layer,node:if root.find(node).is_some(){node}else{root.id},behavior})}else{result=crate::scenic::new_node(&behavior,1).map(|root|command=Some(Command::ReplaceLayer{fixture:id,layer,stack:Some(Stack{enabled:true,name:"New stack".into(),root})}));}},
     KeyCode::Char('x') | KeyCode::Char('X') => {marked=Some((node,code==KeyCode::Char('X')));message="Move marked: navigate to target, v append / V insert below".into();},
     KeyCode::Char('v') | KeyCode::Char('V') => {if let Some((source,branch))=marked.take(){command=Some(Command::MoveNode{fixture:id,layer,node:source,target:node,branch,below:code==KeyCode::Char('V')});}},
     KeyCode::Char('w')=>command=Some(Command::WrapNode{fixture:id,layer,node,behavior:prompt("Wrapper behavior key")?}),KeyCode::Delete=>command=Some(Command::DeleteNode{fixture:id,layer,node,branch:false}),KeyCode::Char('D')=>{if prompt("Type DELETE to remove branch")?=="DELETE"{command=Some(Command::DeleteNode{fixture:id,layer,node,branch:true})}},

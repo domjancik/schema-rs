@@ -217,6 +217,7 @@ pub(crate) fn evaluate(
                         Action::Memorize {
                             name: name.clone(),
                             stack: Stack {
+                                enabled: true,
                                 name: name.clone(),
                                 root: child.clone(),
                             },
@@ -312,8 +313,8 @@ pub(crate) fn resolve(frame: &crate::server::Published) -> Resolution {
                 transition,
                 duration,
             } => {
-                if *layer >= 3 {
-                    result.errors.push("Assignment layer must be 0..2".into());
+                if *layer >= crate::model::MAX_LAYERS {
+                    result.errors.push("Assignment layer must be 0..31".into());
                     continue;
                 }
                 if let Some(stack) = frame.host.stacks.get(stack) {
