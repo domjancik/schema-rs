@@ -30,3 +30,5 @@ mod web_product;
 pub mod desktop;
 
 mod scene_preview;
+
+pub mod open_dmx;

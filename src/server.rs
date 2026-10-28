@@ -394,37 +394,87 @@ impl Runtime {
         let state = published;
         let output_status = status;
         let output = std::thread::Builder::new()
-            .name("schema-artnet".into())
+            .name("schema-output".into())
             .spawn(move || {
-                let mut sender = None;
+                let mut artnet = None;
+                let mut usb: Option<crate::open_dmx::Sender> = None;
+                let mut device = String::new();
+                let mut retry = Instant::now();
+                let mut last_error = String::new();
                 while !stopping.load(Ordering::Relaxed) {
+                    let started = Instant::now();
                     let frame = state.read().unwrap_or_else(|e| e.into_inner()).clone();
                     let config = &frame.project.output;
                     let message = if !config.enabled {
+                        usb = None;
+                        device.clear();
                         "Disabled — capture only".into()
+                    } else if config.transport == OutputTransport::OpenDmx {
+                        if device != config.device {
+                            usb = None;
+                            device = config.device.clone();
+                            retry = Instant::now();
+                        }
+                        let attempted = usb.is_some() || Instant::now() >= retry;
+                        let result = if !attempted {
+                            Err(last_error.clone())
+                        } else {
+                            (if usb.is_none() {
+                                crate::open_dmx::Sender::open(&device).map(|s| usb = Some(s))
+                            } else {
+                                Ok(())
+                            })
+                            .and_then(|_| {
+                                usb.as_mut().unwrap().send(
+                                    frame
+                                        .snapshot
+                                        .universes
+                                        .get(&config.universe)
+                                        .map(Vec::as_slice)
+                                        .unwrap_or(&[]),
+                                )
+                            })
+                        };
+                        match result {
+                            Ok(()) => format!(
+                                "Open DMX USB {} · U{} · {} FPS",
+                                device, config.universe, config.fps
+                            ),
+                            Err(e) => {
+                                usb = None;
+                                last_error = e;
+                                if attempted {
+                                    retry = Instant::now() + Duration::from_secs(1);
+                                }
+                                format!("Output error: {last_error}")
+                            }
+                        }
                     } else {
-                        let result = if sender.is_none() {
-                            crate::artnet::Sender::new().map(|s| sender = Some(s))
+                        usb = None;
+                        device.clear();
+                        (if artnet.is_none() {
+                            crate::artnet::Sender::new().map(|s| artnet = Some(s))
                         } else {
                             Ok(())
-                        };
-                        result
-                            .and_then(|_| {
-                                let target = config
+                        })
+                        .and_then(|_| {
+                            artnet.as_mut().unwrap().send(
+                                config
                                     .target
                                     .parse()
-                                    .map_err(|_| "Invalid output target".to_string())?;
-                                sender
-                                    .as_mut()
-                                    .unwrap()
-                                    .send(target, &frame.snapshot.universes)
-                            })
-                            .map(|_| format!("ArtDmx → {}", config.target))
-                            .unwrap_or_else(|e| format!("Output error: {e}"))
+                                    .map_err(|_| "Invalid output target".to_string())?,
+                                &frame.snapshot.universes,
+                            )
+                        })
+                        .map(|_| format!("ArtDmx → {}", config.target))
+                        .unwrap_or_else(|e| format!("Output error: {e}"))
                     };
                     *output_status.write().unwrap_or_else(|e| e.into_inner()) = message;
-                    // Transport scheduling never blocks evaluation. Poll disabled output at 40 Hz too.
-                    std::thread::sleep(Duration::from_secs_f64(1. / config.fps as f64));
+                    // Device I/O never blocks evaluation. Deadline includes USB frame transmission time.
+                    std::thread::sleep(
+                        Duration::from_secs_f64(1. / config.fps as f64)
+                            .saturating_sub(started.elapsed()),
+                    );
                 }
             })
             .map_err(|e| e.to_string())?;
@@ -847,6 +897,7 @@ pub fn router(state: AppState) -> Router {
         .route("/api/session/save", post(session_save))
         .route("/api/session/status", get(session_status))
         .route("/api/inputs", post(input_event))
+        .route("/api/output/devices", get(output_devices))
         .route("/api/state", get(state_get))
         .route("/api/catalog", get(|State(state):State<AppState>|async move{Json(state.controller.plugin_catalog())}))
         .route("/api/command", post(command))
@@ -860,6 +911,17 @@ pub fn router(state: AppState) -> Router {
         .layer(DefaultBodyLimit::max(512 * 1024))
         .layer(middleware::from_fn_with_state(state.clone(), guard))
         .with_state(state)
+}
+async fn output_devices() -> Json<serde_json::Value> {
+    let found = tokio::task::spawn_blocking(crate::open_dmx::devices).await;
+    match found {
+        Ok(Ok(devices)) => {
+            Json(serde_json::json!({"open_dmx":cfg!(windows),"devices":devices,"error":null}))
+        }
+        result => Json(
+            serde_json::json!({"open_dmx":cfg!(windows),"devices":[],"error":match result {Ok(Err(e))=>e,Err(e)=>e.to_string(),_=>unreachable!()}}),
+        ),
+    }
 }
 async fn state_get(State(state): State<AppState>) -> Json<Published> {
     Json((*state.controller.current()).clone())

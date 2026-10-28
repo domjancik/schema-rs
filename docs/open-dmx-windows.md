@@ -1,0 +1,15 @@
+# Open DMX USB on Windows
+
+Open **Output → Connection**, choose **Open DMX USB (Windows)**, refresh USB adapters, select the adapter by its FTDI serial number, select the zero-based Schéma universe and save. Start at30 FPS (supported1–40). Enable **Live output enabled** when ready to transmit. The existing fixture/model/universe patching and daily dimming supply the same512 channel bytes used by Art-Net. Missing universes send a zero-filled frame. This backend selects one universe and one device; simultaneous USB/Art-Net, RDM and DMX input are not included.
+
+Install the official [FTDI D2XX Windows driver](https://ftdichip.com/drivers/d2xx-drivers/) on the engine host. The engine loads the installed `ftd2xx.dll` from Windows System32 only. There is no bundled vendor DLL or driver installer. The picker lists FTDI serial devices, which may include unrelated UART adapters: choose your actual Open DMX interface. A COM port number is not the selector. Close QLC+, other lighting software or serial applications that own the adapter before refreshing. The device serial must be unique and nonempty.
+
+The output worker owns the USB handle, configures250000baud/8N2/no flow control, sends a120µs minimum host BREAK and16µs mark-after-break, then a513-byte frame (zero start code plus512 slots). Driver TX drain is bounded, with a24ms wire-time guard before the next BREAK. The host OS/USB driver controls actual timing; requested FPS is a ceiling. Slower driver calls lower actual output frequency. Evaluation and browser rendering continue independently. USB failures release the handle and retry at most once per second; disabling output or switching to Art-Net releases it. Disabling stops transmission; use Blackout first if fixtures should receive zero light levels.
+
+Art-Net remains the default. Old output JSON retains its original representation; new optional fields are `transport` (`art_net`/`open_dmx`), `device` (serial) and `universe` (0–32767). Selection is an undoable `set_output` command with expected revision. Existing session recovery disarms output. On Linux, Windows FFI/DLL code is excluded at compile time and discovery reports unavailable; use Art-Net or the existing OLA USB bridge. Loading a saved USB project does not silently change transport.
+
+`GET /api/output/devices` uses the same authentication/origin rules as other APIs. Discovery runs on a blocking task and does not open a device or send data. It returns host capability, devices and driver errors.
+
+Verification includes mocked BREAK/write ordering and partial/error handling, frame padding, backwards-compatible config, protected discovery, undo/redo and evaluator progress with a nonexistent adapter. No fixture/physical wire timing parity is implied by these tests. Current Windows discovery loads D2XX but reports no free adapters while QLC+ is running; no driver changes or physical output have been made.
+
+Protocol references: [FTDI D2XX programmer guide](https://ftdichip.com/document/programming-guides/) and [QLC+ Open DMX support](https://docs.qlcplus.org/v4/plugins/dmx-usb).

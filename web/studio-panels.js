@@ -111,14 +111,19 @@
       }
       if (panel.view === 'output') {
         const config = data.project.output;
-        box.append(make('h3', 'Output / Art-Net'));
+        box.append(make('h3', config.transport === 'open_dmx' ? 'Output / Open DMX USB' : 'Output / Art-Net'));
+        const connection = make('button', 'Configure connection…');
+        connection.onclick = () => global.SchemaOutput.open('connection');
+        box.append(connection);
+        if (config.transport === 'open_dmx') box.append(make('p', `${config.device} · Universe ${config.universe || 0}`));
         const target = make('input');
         target.value = config.target;
+        target.hidden = config.transport === 'open_dmx';
         target.setAttribute('aria-label', 'Output destination');
         const enabled = make('input');
         enabled.type = 'checkbox';
         enabled.checked = config.enabled;
-        const label = make('label', 'Live ArtDmx output');
+        const label = make('label', 'Live DMX output');
         label.prepend(enabled);
         const apply = make('button', 'Apply output settings');
         apply.onclick = () =>

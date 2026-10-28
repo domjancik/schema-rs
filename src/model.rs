@@ -111,9 +111,30 @@ pub struct Fixture {
     pub address: u16,
     pub dimmer: f64,
 }
+#[derive(Clone, Copy, Debug, Default, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(rename_all = "snake_case")]
+pub enum OutputTransport {
+    #[default]
+    ArtNet,
+    OpenDmx,
+}
+impl OutputTransport {
+    pub fn is_art_net(&self) -> bool {
+        *self == Self::ArtNet
+    }
+}
+fn zero_universe(n: &u16) -> bool {
+    *n == 0
+}
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
 #[serde(deny_unknown_fields)]
 pub struct OutputConfig {
+    #[serde(default, skip_serializing_if = "OutputTransport::is_art_net")]
+    pub transport: OutputTransport,
+    #[serde(default, skip_serializing_if = "String::is_empty")]
+    pub device: String,
+    #[serde(default, skip_serializing_if = "zero_universe")]
+    pub universe: u16,
     pub enabled: bool,
     pub target: String,
     pub fps: u32,
@@ -294,6 +315,9 @@ impl Project {
             fixtures,
             content,
             output: OutputConfig {
+                transport: OutputTransport::ArtNet,
+                device: String::new(),
+                universe: 0,
                 enabled: false,
                 target: "127.0.0.1:6454".into(),
                 fps: 40,
@@ -333,6 +357,21 @@ impl Project {
         }
         if !(1..=44).contains(&self.output.fps) {
             return Err("Output FPS must be 1..44".into());
+        }
+        if self.output.universe > 32767
+            || self.output.device.len() > 64
+            || !self
+                .output
+                .device
+                .bytes()
+                .all(|b| b.is_ascii_alphanumeric() || b"_-".contains(&b))
+        {
+            return Err("Invalid USB device serial or universe".into());
+        }
+        if self.output.transport == OutputTransport::OpenDmx
+            && (self.output.device.is_empty() || self.output.fps > 40)
+        {
+            return Err("Open DMX requires a device serial and1..40 FPS".into());
         }
         let target: std::net::SocketAddr = self
             .output

@@ -84,6 +84,7 @@ async fn run() -> Result<(), String> {
                 Project::demo()
             };
             if let Some(i) = args.iter().position(|v| v == "--artnet") {
+                project.output.transport = schema_rs::model::OutputTransport::ArtNet;
                 project.output.target = args.get(i + 1).ok_or("--artnet requires IP:port")?.clone();
                 project.output.enabled = true;
             }

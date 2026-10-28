@@ -34,3 +34,6 @@ See [lighting/motion contracts and examples](lighting-motion.md). Position/curre
 [Component plugins](plugins.md) add engine-scoped `Plugin.<id>.<name>` nodes implemented by native graphs and bounded static Rhai scripts. They require schema-rs and its loaded package registry. This is not a native gamma plugin ABI or binary dynamic loader. Unloaded definitions remain available for scenes, serialization and history, while execution returns no output with a diagnostic. Structural transitions/memorize inside templates, partial vector bindings, and dynamic script source parameters are rejected.
 
 Modify.Repeat preserves source-derived frame playback modes, duplicated bank capture and the 402-sample recording guard. The guard is a serialized runtime latch instead of an evaluation-time authored Record mutation; toggle Record off then on to re-arm it. See [the Repeat contract](lighting-motion.md#recorded-repeat).
+
+
+Windows Open DMX USB output uses the optional installed FTDI D2XX driver; Art-Net remains platform-independent. One selected universe/device, no USB input/RDM or simultaneous transports. Linux excludes Windows FFI and continues using Art-Net/OLA. See [Open DMX on Windows](open-dmx-windows.md).
