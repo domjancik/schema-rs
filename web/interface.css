@@ -1,0 +1,807 @@
+/* Shared application materials. Geometry belongs to each editor/view stylesheet. */
+:root {
+  --ui-font: "Segoe UI Variable", "Segoe UI", system-ui, sans-serif;
+  --ui-mono: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+  --ui-page: #edf1ee;
+  --ui-surface: #f8faf8;
+  --ui-panel: #ffffff;
+  --ui-field: #f0f4f1;
+  --ui-text: #24372e;
+  --ui-muted: #5f7267;
+  --ui-node-muted: #425d50;
+  --ui-border: #d4dfd7;
+  --ui-border-strong: #a6b9ad;
+  --ui-hover: #e5eee8;
+  --ui-accent: #18745b;
+  --ui-accent-fill: #72dec2;
+  --ui-accent-ink: #113c30;
+  --ui-selected: #d9f0e6;
+  --ui-danger: #a04437;
+  --ui-danger-bg: #f9ebe6;
+  --ui-shadow: 0 20px 70px #132d2429, 0 2px 8px #132d2412;
+  --ui-radius: 7px;
+  --paper: var(--ui-surface);
+  --ink: var(--ui-text);
+  --muted: var(--ui-muted);
+  --line: var(--ui-border);
+  --focus: var(--ui-accent);
+  --accent: var(--ui-accent-fill);
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  --ui-page: #111716;
+  --ui-surface: #19211e;
+  --ui-panel: #202a25;
+  --ui-field: #121b17;
+  --ui-text: #e1eae3;
+  --ui-muted: #a0b2a6;
+  --ui-node-muted: #b9cabe;
+  --ui-border: #35463d;
+  --ui-border-strong: #526e5d;
+  --ui-hover: #2a3930;
+  --ui-accent: #72dec2;
+  --ui-accent-ink: #10382c;
+  --ui-selected: #23463a;
+  --ui-danger: #f0b2a2;
+  --ui-danger-bg: #3a2622;
+  --ui-shadow: 0 24px 80px #0006, 0 2px 8px #0003;
+  color-scheme: dark;
+}
+body.studio-app,
+body.mobile-app,
+body.preview-app {
+  font-family: var(--ui-font);
+  background-color: var(--ui-page);
+}
+button,
+input,
+select,
+textarea,
+summary {
+  -webkit-tap-highlight-color: transparent;
+}
+:is(.studio-app, .mobile-app, .preview-app)
+  :is(button, input, select, textarea, summary, a):focus-visible {
+  outline: 2px solid var(--ui-accent);
+  outline-offset: 2px;
+}
+/* App chrome stays compact; block grips, ports and handheld hardware retain their geometry. */
+.studio-app > header {
+  background: var(--ui-surface);
+  border-color: var(--ui-border);
+  padding-inline: 20px;
+  gap: 18px;
+}
+.studio-app .brand {
+  min-width: 172px;
+  font-size: 28px;
+  letter-spacing: -1.4px;
+}
+.studio-app .brand img {
+  width: 29px;
+  height: 29px;
+}
+.studio-app #project-name {
+  display: block;
+  max-width: 24ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 600;
+}
+.studio-app header .muted {
+  font-size: 11px;
+  color: var(--ui-muted);
+}
+.studio-app .header-actions {
+  gap: 5px;
+  align-items: center;
+}
+.studio-app
+  :is(
+    .header-actions button,
+    .header-actions a,
+    .workspace-top button,
+    .layer-bar button,
+    .inspector button,
+    .scene-panel button,
+    .canvas-tools button
+  ) {
+  font-family: var(--ui-font);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.3;
+  min-height: 32px;
+  border: 1px solid var(--ui-border);
+  border-radius: var(--ui-radius);
+  background: var(--ui-panel);
+  color: var(--ui-text);
+  padding: 7px 10px;
+  box-shadow: 0 1px 1px #00000006;
+}
+.studio-app .header-actions button {
+  white-space: nowrap;
+}
+.studio-app
+  :is(
+    .header-actions button,
+    .workspace-top button,
+    .inspector button,
+    .scene-panel button
+  ):hover:not(:disabled) {
+  background: var(--ui-hover);
+  border-color: var(--ui-border-strong);
+  filter: none;
+}
+.studio-app :is(.header-actions .primary, .workspace-top .dark) {
+  background: var(--ui-accent-fill);
+  border-color: var(--ui-accent-fill);
+  color: var(--ui-accent-ink);
+}
+.studio-app .header-actions :is(#undo, #redo, #fullscreen-toggle) {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+.studio-app #mobile-view {
+  background: transparent;
+  color: var(--ui-accent);
+}
+.studio-app .workspace-tabs {
+  background: var(--ui-surface);
+  padding-inline: 14px;
+  gap: 4px;
+}
+.studio-app .workspace-tabs > button {
+  font: 500 11px var(--ui-font);
+  border-radius: 6px 6px 0 0;
+  color: var(--ui-muted);
+}
+.studio-app .workspace-tabs > button.active {
+  background: var(--ui-selected);
+  color: var(--ui-accent);
+  box-shadow: inset 0 -2px var(--ui-accent);
+}
+.studio-app .workspace-hint {
+  font: 10px var(--ui-font);
+  opacity: 1;
+  color: var(--ui-muted);
+}
+.studio-app .panel-header {
+  background: var(--ui-surface);
+  border-color: var(--ui-border);
+  padding-inline: 6px;
+}
+.studio-app .workspace-panel.active > .panel-header {
+  box-shadow: inset 0 2px var(--ui-accent);
+}
+.studio-app .panel-divider {
+  background: var(--ui-border);
+  flex-basis: 4px;
+}
+.studio-app .panel-divider:hover {
+  background: var(--ui-accent);
+}
+.studio-app .panel-header :is(select, button) {
+  font: 11px var(--ui-font);
+  border-radius: 5px;
+}
+.studio-app .panel-header select {
+  min-height: 25px;
+  padding: 3px 22px 3px 7px;
+  border-color: transparent;
+  background-color: var(--ui-field);
+}
+.studio-app .panel-header .panel-grip {
+  background: transparent;
+  color: var(--ui-muted);
+}
+.studio-app :is(.panel-menu, .workspace-menu, .stack-layout-menu) > summary {
+  border-radius: 5px;
+  color: var(--ui-muted);
+}
+.studio-app :is(.panel-menu, .workspace-menu)[open] {
+  background: var(--ui-panel);
+  border: 1px solid var(--ui-border);
+  border-radius: 8px;
+  padding: 3px;
+  box-shadow: var(--ui-shadow);
+}
+.studio-app :is(.panel-menu, .workspace-menu) button {
+  min-height: 34px;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  font-size: 12px;
+}
+.studio-app :is(.panel-menu, .workspace-menu) button:hover {
+  background: var(--ui-hover);
+}
+.studio-app .stack-layout-choices {
+  background: var(--ui-panel);
+  border-color: var(--ui-border);
+  box-shadow: var(--ui-shadow);
+}
+.studio-app :is(.workspace-top, .layer-bar, .inspector, .scene-panel) {
+  background: var(--ui-surface);
+  color: var(--ui-text);
+  border-color: var(--ui-border);
+}
+.studio-app .workspace-top {
+  padding: 14px 16px;
+}
+.studio-app .workspace-top h2 {
+  font-size: 16px;
+  letter-spacing: -0.3px;
+  font-weight: 600;
+}
+.studio-app :is(.eyebrow, .canvas-label) {
+  font-family: var(--ui-mono);
+  letter-spacing: 1.1px;
+  color: var(--ui-muted);
+}
+.studio-app .canvas-label {
+  font-size: 9px;
+}
+.studio-app #canvas,
+.studio-app .layer-canvas {
+  background-color: var(--ui-page);
+}
+.studio-app .layer-bar {
+  padding-inline: 12px;
+}
+.studio-app .layer-bar button {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+.studio-app .layer-bar button.active {
+  background: var(--ui-selected);
+  color: var(--ui-accent);
+}
+.studio-app .inspector {
+  padding: 20px 16px;
+}
+.studio-app .inspector h2 {
+  font-size: 23px;
+  font-weight: 600;
+  letter-spacing: -0.6px;
+}
+.studio-app .inspector :is(.key, .block-description) {
+  color: var(--ui-muted);
+  font-size: 11px;
+  line-height: 1.6;
+}
+.studio-app .inspector .key {
+  font-family: var(--ui-mono);
+}
+.studio-app .inspector label {
+  margin-block: 16px;
+  font-weight: 500;
+  color: var(--ui-muted);
+}
+.studio-app .inspector .row {
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+.studio-app .inspector .row > :is(input, select, textarea) {
+  flex: 1 0 100%;
+  width: 100%;
+  margin: 0;
+}
+.studio-app .inspector .row > button {
+  margin: 0;
+  min-height: 28px;
+  padding: 5px 8px;
+}
+.studio-app .inspector .driver-btn.active {
+  background: var(--ui-selected);
+  color: var(--ui-accent);
+  border-color: var(--ui-border-strong);
+}
+.studio-app .block-copy-actions {
+  padding-top: 14px;
+  border-top: 1px solid var(--ui-border);
+  gap: 6px;
+}
+.studio-app .inspector .block-copy-actions button {
+  background: transparent;
+  box-shadow: none;
+}
+.studio-app .inspector :is(.danger, .actions .danger) {
+  background: var(--ui-danger-bg);
+  color: var(--ui-danger);
+  border-color: transparent;
+}
+.studio-app .scene-panel {
+  padding: 18px 14px;
+}
+.studio-app .scene-panel .caption {
+  font: 12px/1.5 var(--ui-font);
+  color: var(--ui-muted);
+}
+.studio-app #stage {
+  background: #101a16;
+  border-radius: 8px;
+}
+.studio-app #stage text {
+  fill: #adbdaf;
+}
+.studio-app .scene-panel :is(label, .section-line, .stage-axis) {
+  color: var(--ui-muted);
+}
+.studio-app .scene-panel :is(.section-line, label) {
+  font-size: 11px;
+}
+.studio-app .scene-form {
+  border-color: var(--ui-border);
+}
+.studio-app #fixtures button {
+  font-size: 11px;
+  min-height: 32px;
+}
+.studio-app #fixtures button.active {
+  background: var(--ui-selected);
+  border-color: var(--ui-border-strong);
+  color: var(--ui-accent);
+}
+.studio-app :is(.telemetry, footer) {
+  background: var(--ui-surface);
+  border-color: var(--ui-border);
+  color: var(--ui-muted);
+}
+.studio-app footer {
+  font: 10px var(--ui-mono);
+}
+.studio-app .header-actions :is(button, a) {
+  font-size: 12px;
+}
+:root .studio-app #layers button {
+  background: transparent;
+  border-color: transparent;
+  color: var(--ui-muted);
+}
+:root .studio-app #layers button.active {
+  background: var(--ui-selected);
+  color: var(--ui-accent);
+}
+.studio-app .header-actions .primary:hover:not(:disabled) {
+  background: var(--ui-accent-fill);
+  border-color: var(--ui-accent-fill);
+  color: var(--ui-accent-ink);
+  filter: brightness(1.04);
+}
+/* Consistent field materials, including native option lists and keyboard focus. */
+.studio-app
+  :is(.inspector, .scene-panel, .panel-simple, .dmx-test-panel)
+  :is(input, select, textarea):where(
+    :not([type="checkbox"]):not([type="range"]):not([type="radio"]):not(
+        [type="file"]
+      )
+  ) {
+  box-sizing: border-box;
+  border: 1px solid var(--ui-border);
+  border-radius: var(--ui-radius);
+  background-color: var(--ui-field);
+  color: var(--ui-text);
+  font-family: var(--ui-font);
+  font-size: 12px;
+  line-height: 1.4;
+  min-height: 34px;
+  padding: 8px 10px;
+}
+:is(.studio-app, dialog) select {
+  appearance: none;
+  padding-right: 26px;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--ui-muted) 50%),
+    linear-gradient(135deg, var(--ui-muted) 50%, transparent 50%);
+  background-position:
+    calc(100% - 12px) 52%,
+    calc(100% - 8px) 52%;
+  background-size: 4px 4px;
+  background-repeat: no-repeat;
+}
+:is(.studio-app, dialog) select option {
+  color: var(--ui-text);
+  background: var(--ui-panel);
+}
+:is(.studio-app .schema-workspace, dialog)
+  :is(input, select, textarea):hover:not(:disabled) {
+  border-color: var(--ui-border-strong);
+}
+:is(.studio-app, dialog) textarea {
+  font-family: var(--ui-mono);
+  font-size: 12px;
+}
+:is(.studio-app .schema-workspace, dialog) input[type="checkbox"] {
+  appearance: none;
+  display: inline-grid;
+  place-content: center;
+  flex: none;
+  width: 16px;
+  height: 16px;
+  min-height: 16px;
+  padding: 0;
+  margin: 0;
+  border: 1px solid var(--ui-border-strong);
+  border-radius: 4px;
+  background: var(--ui-field);
+  vertical-align: middle;
+  cursor: pointer;
+}
+:is(.studio-app .schema-workspace, dialog) input[type="checkbox"]::before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  background: var(--ui-accent-ink);
+  clip-path: polygon(0 42%, 20% 25%, 41% 48%, 80% 0, 100% 17%, 42% 95%);
+  transform: scale(0);
+}
+:is(.studio-app .schema-workspace, dialog) input[type="checkbox"]:checked {
+  background: var(--ui-accent-fill);
+  border-color: var(--ui-accent-fill);
+}
+:is(.studio-app .schema-workspace, dialog)
+  input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+:is(.studio-app, dialog) input[type="range"] {
+  accent-color: var(--ui-accent);
+  cursor: ew-resize;
+}
+/* Dialogs share surfaces and a title rhythm without sharing page-header layout. */
+:root
+  :is(
+    #projects-dialog,
+    #plugins-dialog,
+    #output-design-dialog,
+    #block-transfer-dialog,
+    #skin-dialog,
+    #menu,
+    #yaml-dialog,
+    #apply-dialog,
+    .node-delete-dialog
+  ) {
+  background: var(--ui-surface);
+  color: var(--ui-text);
+  border: 1px solid var(--ui-border);
+  border-radius: 12px;
+  box-shadow: var(--ui-shadow);
+  font: 13px/1.55 var(--ui-font);
+}
+:root dialog::backdrop {
+  background: #08140e99;
+  backdrop-filter: blur(3px);
+}
+:root
+  dialog
+  :is(
+    .dialog-head,
+    .plugin-head,
+    .output-head,
+    .block-transfer-head,
+    .preview-heading
+  ),
+:root #projects-dialog > header {
+  height: auto;
+  min-height: 0;
+  padding: 0 0 16px;
+  margin: 0 0 16px;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--ui-border);
+}
+:root dialog :is(h2, #projects-title) {
+  font: 600 23px/1.2 var(--ui-font);
+  letter-spacing: -0.65px;
+}
+:root
+  dialog
+  :is(label, .project-details, .project-hint, .plugin-note, .skin-privacy) {
+  color: var(--ui-muted);
+}
+:root
+  :is(
+    #projects-dialog,
+    #plugins-dialog,
+    #output-design-dialog,
+    #block-transfer-dialog,
+    #skin-dialog
+  )
+  button {
+  font: 500 12px/1.4 var(--ui-font);
+  min-height: 36px;
+  padding: 8px 12px;
+  border: 1px solid var(--ui-border);
+  border-radius: var(--ui-radius);
+  color: var(--ui-text);
+  background: var(--ui-panel);
+}
+:root
+  :is(
+    #projects-dialog,
+    #plugins-dialog,
+    #output-design-dialog,
+    #block-transfer-dialog,
+    #skin-dialog
+  )
+  button:hover:not(:disabled) {
+  background: var(--ui-hover);
+  border-color: var(--ui-border-strong);
+}
+:root
+  :is(
+    #projects-dialog,
+    #plugins-dialog,
+    #output-design-dialog,
+    #block-transfer-dialog,
+    #skin-dialog,
+    #menu,
+    #yaml-dialog,
+    #apply-dialog
+  )
+  :where(
+    input:not([type="checkbox"]):not([type="range"]):not([type="radio"]):not(
+        [type="file"]
+      ),
+    select,
+    textarea
+  ) {
+  background-color: var(--ui-field);
+  color: var(--ui-text);
+  border: 1px solid var(--ui-border);
+  border-radius: var(--ui-radius);
+  font-family: var(--ui-font);
+  font-size: 14px;
+  min-height: 38px;
+}
+:root #projects-dialog .project-actions button:first-child,
+:root #block-transfer-dialog > button.primary {
+  background: var(--ui-accent-fill);
+  color: var(--ui-accent-ink);
+  border-color: var(--ui-accent-fill);
+}
+:root
+  dialog
+  :is(.plugin-head, .output-head, .dialog-head, .block-transfer-head)
+  > button,
+:root #projects-dialog > header > button {
+  flex: none;
+  width: 36px;
+  height: 36px;
+  min-height: 36px;
+  padding: 0;
+  font-size: 21px;
+  line-height: 1;
+  background: transparent;
+  border-color: transparent;
+}
+:root #block-picker-dialog {
+  --pk-bg: var(--ui-surface);
+  --pk-panel: var(--ui-panel);
+  --pk-text: var(--ui-text);
+  --pk-muted: var(--ui-muted);
+  --pk-line: var(--ui-border);
+  --pk-accent: var(--ui-accent);
+  --pk-tint: var(--ui-selected);
+  border-radius: 12px;
+  box-shadow: var(--ui-shadow);
+  font-family: var(--ui-font);
+}
+:root #block-picker-dialog .picker-header {
+  min-height: 78px;
+}
+:root #block-picker-dialog .picker-search {
+  border-radius: 8px;
+}
+:root #block-picker-dialog .picker-row {
+  border-radius: 8px;
+}
+:root #plugins-dialog .plugin-package {
+  background: var(--ui-field);
+  border-color: var(--ui-border);
+  border-radius: 8px;
+}
+:root #plugins-dialog .plugin-badge {
+  background: var(--ui-selected);
+  color: var(--ui-accent);
+}
+:root #output-design-dialog nav button {
+  background: transparent;
+}
+:root #output-design-dialog nav button[aria-pressed="true"],
+:root #output-design-dialog nav button[aria-selected="true"],
+:root #output-design-dialog nav button.active {
+  background: var(--ui-selected);
+  color: var(--ui-accent);
+  border-color: var(--ui-border-strong);
+}
+:root #output-design-dialog :is(.dmx-slot-card, .patch-fixture) {
+  background: var(--ui-field);
+  border-color: var(--ui-border);
+  border-radius: 8px;
+}
+:root #output-design-dialog .output-sticky-actions {
+  background: var(--ui-surface);
+  border-color: var(--ui-border);
+}
+:root #output-design-dialog .dimming-graph {
+  background: var(--ui-field);
+  border-color: var(--ui-border);
+}
+:root #menu .mobile-choice {
+  border-color: var(--ui-border);
+  background: var(--ui-panel);
+  color: var(--ui-text);
+  border-radius: 8px;
+}
+:root #menu .mobile-choice small {
+  color: var(--ui-muted);
+}
+.mobile-app :is(.site-header, .app-menu-panel) {
+  background-color: var(--ui-page);
+}
+.mobile-app
+  .site-header
+  :is(.quick-tools button, .studio-return, .app-menu summary) {
+  border-color: var(--ui-border);
+  border-radius: 7px;
+  color: var(--ui-text);
+}
+.mobile-app .app-menu-panel {
+  background: var(--ui-surface);
+  border-color: var(--ui-border);
+  box-shadow: var(--ui-shadow);
+}
+.mobile-app .app-menu-panel > :is(button, a) {
+  color: var(--ui-text);
+}
+.mobile-app .app-menu-panel > :is(button, a):hover {
+  background: var(--ui-hover);
+}
+:root #scene-preview-dialog[open] {
+  background: var(--ui-page);
+  border-color: var(--ui-border);
+  color: var(--ui-text);
+  box-shadow: var(--ui-shadow);
+}
+:root #scene-preview-dialog :is(button, select, .preview-file) {
+  background-color: var(--ui-panel);
+  border-color: var(--ui-border);
+  color: var(--ui-text);
+  font-family: var(--ui-font);
+  border-radius: var(--ui-radius);
+}
+:root #scene-preview-dialog label {
+  color: var(--ui-muted);
+}
+.preview-app {
+  padding: 20px;
+  color: var(--ui-text);
+}
+.preview-app > a {
+  color: var(--ui-accent);
+}
+@media (pointer: coarse) {
+  :root
+    :is(
+      #projects-dialog,
+      #plugins-dialog,
+      #output-design-dialog,
+      #block-transfer-dialog,
+      #skin-dialog
+    )
+    button {
+    min-height: 44px;
+  }
+  :root
+    :is(
+      #projects-dialog,
+      #plugins-dialog,
+      #output-design-dialog,
+      #block-transfer-dialog,
+      #skin-dialog,
+      #menu,
+      #yaml-dialog,
+      #apply-dialog
+    )
+    :where(
+      input:not([type="checkbox"]):not([type="range"]):not([type="radio"]):not(
+          [type="file"]
+        ),
+      select,
+      textarea
+    ) {
+    min-height: 44px;
+    font-size: 16px;
+  }
+  :root
+    dialog
+    :is(.dialog-head, .plugin-head, .output-head, .block-transfer-head)
+    > button,
+  :root #projects-dialog > header > button {
+    width: 44px;
+    height: 44px;
+    min-height: 44px;
+  }
+}
+@media (max-width: 850px) {
+  .studio-app > header {
+    padding-inline: 12px;
+    gap: 10px;
+  }
+  .studio-app .brand {
+    min-width: 125px;
+    font-size: 24px;
+  }
+  .studio-app .header-actions {
+    flex-wrap: wrap;
+  }
+}
+@media (max-width: 700px), (max-height: 500px) {
+  :root #block-picker-dialog {
+    border-radius: 0;
+  }
+}
+
+:is(.studio-app, .mobile-app) {
+  scrollbar-color: var(--ui-border-strong) transparent;
+  scrollbar-width: thin;
+}
+dialog input[type="file"]::file-selector-button {
+  font: 500 12px var(--ui-font);
+  min-height: 34px;
+  padding: 7px 12px;
+  margin-right: 10px;
+  border: 1px solid var(--ui-border);
+  border-radius: var(--ui-radius);
+  background: var(--ui-panel);
+  color: var(--ui-text);
+  cursor: pointer;
+}
+/* Let compact toolbars wrap without pushing the workspace/footer off screen. */
+body.studio-app {
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
+  height: 100dvh;
+  overflow: hidden;
+}
+.studio-app .schema-workspace {
+  height: auto;
+  min-height: 0;
+}
+.studio-app .header-actions {
+  flex-wrap: wrap;
+  min-width: 0;
+  justify-content: flex-end;
+}
+.studio-app > header > div:not(.header-actions) {
+  min-width: 0;
+  max-width: 210px;
+}
+.studio-app .panel-header .panel-grip {
+  font-size: 17px;
+  min-width: 20px;
+}
+@media (max-width: 1100px) {
+  .studio-app > header {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    height: auto;
+    padding: 10px 14px;
+    gap: 8px 16px;
+  }
+  .studio-app .header-actions {
+    grid-column: 1/-1;
+    width: 100%;
+    margin: 0;
+    justify-content: flex-start;
+  }
+}
+
+.studio-app :is(#world, .layer-world) .block .node-properties {
+  color: var(--ui-node-muted);
+}

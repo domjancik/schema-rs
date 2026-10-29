@@ -41,6 +41,7 @@ for(const [file,mime] of [['app.webmanifest','application/manifest+json'],['app-
 assets['/welcome']=['welcome.html','text/html; charset=utf-8'];
 for(const file of ['landing.css','landing.js'])assets['/'+file]=[file,file.endsWith('.css')?'text/css; charset=utf-8':'text/javascript; charset=utf-8'];
 assets['/preview']=['preview.html','text/html'];
+assets['/interface.css']=['interface.css','text/css'];
 assets['/scene-preview.css']=['scene-preview.css','text/css'];
 assets['/scene-camera.mjs']=['scene-camera.mjs','text/javascript'];
 assets['/scene-preview-core.mjs']=['scene-preview-core.mjs','text/javascript'];

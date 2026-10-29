@@ -108,3 +108,30 @@ async fn revision_conflicts_reject_stale_edits() {
         .await
         .is_err());
 }
+
+#[tokio::test]
+async fn native_studio_serves_shared_interface_materials() {
+    let runtime = Runtime::start(Project::demo()).unwrap();
+    let app = router(AppState::new(
+        runtime.controller.clone(),
+        std::env::temp_dir(),
+        None,
+    ));
+    for path in ["/", "/mobile", "/preview", "/interface.css"] {
+        let response = app
+            .clone()
+            .oneshot(Request::builder().uri(path).body(Body::empty()).unwrap())
+            .await
+            .unwrap();
+        assert_eq!(response.status(), StatusCode::OK, "{path}");
+        let body = to_bytes(response.into_body(), 2 * 1024 * 1024)
+            .await
+            .unwrap();
+        let body = std::str::from_utf8(&body).unwrap();
+        if path.ends_with(".css") {
+            assert!(body.contains("--ui-accent-fill"));
+        } else {
+            assert!(body.contains("href=\"/interface.css\""), "{path}");
+        }
+    }
+}
