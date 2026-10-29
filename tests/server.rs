@@ -110,14 +110,21 @@ async fn revision_conflicts_reject_stale_edits() {
 }
 
 #[tokio::test]
-async fn native_studio_serves_shared_interface_materials() {
+async fn native_studio_serves_shared_interface_assets() {
     let runtime = Runtime::start(Project::demo()).unwrap();
     let app = router(AppState::new(
         runtime.controller.clone(),
         std::env::temp_dir(),
         None,
     ));
-    for path in ["/", "/mobile", "/preview", "/interface.css"] {
+    for path in [
+        "/",
+        "/mobile",
+        "/preview",
+        "/interface.css",
+        "/fixture-placement.js",
+        "/fixture-placement.css",
+    ] {
         let response = app
             .clone()
             .oneshot(Request::builder().uri(path).body(Body::empty()).unwrap())
@@ -128,7 +135,11 @@ async fn native_studio_serves_shared_interface_materials() {
             .await
             .unwrap();
         let body = std::str::from_utf8(&body).unwrap();
-        if path.ends_with(".css") {
+        if path == "/fixture-placement.js" {
+            assert!(body.contains("SchemaPlacement"));
+        } else if path == "/fixture-placement.css" {
+            assert!(body.contains("fixture-placement-overlay"));
+        } else if path.ends_with(".css") {
             assert!(body.contains("--ui-accent-fill"));
         } else {
             assert!(body.contains("href=\"/interface.css\""), "{path}");

@@ -72,6 +72,7 @@ export async function open(adapter = {}) {
   if (current?.failed) {
     clearInterval(current.timer);
     current.view?.dispose();
+    current.placement?.destroy();
     current.dialog.remove();
     current = null;
   }
@@ -115,6 +116,7 @@ export async function open(adapter = {}) {
       adapter,
       closed: false,
     });
+  let placement;
   let loading = false,
     frameKey = null,
     fitPending = true,
@@ -151,6 +153,7 @@ export async function open(adapter = {}) {
     } catch {}
   }
   function cameraChanged(pose) {
+    placement?.update();
     const distance = Math.hypot(
       ...pose.position.map((v, i) => v - pose.target[i]),
     );
@@ -246,6 +249,42 @@ export async function open(adapter = {}) {
     $("preview-loading").hidden = false;
   };
 
+  placement = window.SchemaPlacement?.mount({
+    view: () => $("preview-canvas"),
+    host: dialog.querySelector(".preview-viewport"),
+    key: "preview:" + (params.get("panel") || location.pathname),
+    data: () => state.frame,
+    selected: () =>
+      state.view?.selected ||
+      adapter.selected?.() ||
+      state.frame?.project.fixtures[0]?.id,
+    enabled: () =>
+      state.source === "live" &&
+      !!state.view &&
+      !loading &&
+      dialog.open &&
+      state.panelActive !== false,
+    frame: () => state.view?.focusSelected(true),
+    project: (p) => state.view?.projectPoint(p),
+    active: (on) => state.view?.placementActive(on),
+    status: adapter.status,
+    commit: async (command, revision) => {
+      const ok = adapter.command
+        ? await adapter.command(command, revision)
+        : await window.SchemaEngine.request("/api/command", {
+            command,
+            expected_revision: revision,
+          });
+      if (ok === false) return false;
+      state.frame =
+        adapter.getFrame?.() ||
+        (await window.SchemaEngine.request("/api/state"));
+      update(state.frame);
+      return true;
+    },
+  });
+  state.placement = placement;
+  placement?.toolbar(dialog.querySelector(".preview-controls"));
   const options = () => ({
     backend: $("preview-backend").value,
     quality: $("preview-quality").value,
@@ -288,9 +327,15 @@ export async function open(adapter = {}) {
         frame.project.fixtures.filter((f) =>
           state.preset.project.fixtures.some((p) => p.id === f.id),
         ).length >= 30);
+    const chosen = state.source === "live" ? adapter.selected?.() : null;
+    if (chosen && frame.project.fixtures.some((f) => f.id === chosen))
+      state.view.selected = chosen;
+    else if (!frame.project.fixtures.some((f) => f.id === state.view.selected))
+      state.view.selected = frame.project.fixtures[0]?.id || null;
     state.view.update(
       frameToScene(frame, useOverrides ? state.preset.overrides : {}),
     );
+    placement?.update();
     if (fitPending) {
       state.view.fit();
       fitPending = false;
@@ -353,6 +398,7 @@ export async function open(adapter = {}) {
     const epoch = ++sourceSerial,
       source = $("preview-source").value;
     state.source = source;
+    placement?.update();
     $("preview-review").hidden = true;
     $("preview-load-preset").hidden = source !== "carpushit";
     $("preview-mode").textContent =
@@ -403,6 +449,7 @@ export async function open(adapter = {}) {
     serial++;
     loading = false;
     state.view?.stop();
+    placement?.update();
   });
   dialog.addEventListener("cancel", () => state.view?.stop());
   $("preview-fit").onclick = () => state.view?.fit();
@@ -515,6 +562,7 @@ export async function open(adapter = {}) {
     () => {
       clearInterval(state.timer);
       state.view?.dispose();
+      placement?.destroy();
     },
     { once: true },
   );
@@ -523,6 +571,7 @@ export async function open(adapter = {}) {
 export function setActive(active) {
   if (!current) return;
   current.panelActive = active;
+  current.placement?.update();
   if (!active) current.view?.stop();
   else if (current.dialog.open) current.view?.start();
 }

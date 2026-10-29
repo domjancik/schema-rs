@@ -56,6 +56,19 @@ const server = http.createServer((req,res) => {
     await page.evaluate(async()=>{await SchemaEngine.request('/api/project/save',{name:'partial',scope:'layout'});await SchemaEngine.request('/api/project/save',{name:'partial',scope:'content',fixtures:['fixture-1'],layer:0});const d=await SchemaEngine.request('/api/state');await SchemaEngine.request('/api/projects/load',{id:'partial',expected_revision:d.snapshot.revision});});
     const unavailable=await page.evaluate(async()=>{const d=await SchemaEngine.request('/api/state');try{await SchemaEngine.request('/api/command',{expected_revision:d.snapshot.revision,command:{type:'set_output',config:{...d.project.output,enabled:true}}});return false;}catch(e){return e.message.includes('unavailable');}});assert(unavailable);
     await page.evaluate(async()=>{const d=await SchemaEngine.request('/api/state');await SchemaEngine.request('/api/projects/load',{id:'browser-test',expected_revision:d.snapshot.revision});});
+    await page.evaluate(()=>refresh(true));
+    await page.locator('.workspace-panel[data-view="setup"] [aria-label="View type"]').selectOption('scene');
+    await page.locator('.workspace-panel[data-view="scene"]').getByRole('button',{name:'3D',exact:true}).click();
+    const beforePlacement=await state();
+    await page.getByRole('button',{name:'Place selected fixture',exact:true}).click();
+    const placement=page.getByRole('dialog',{name:'Fixture position',exact:true});
+    await placement.getByLabel('Y position (m)',{exact:true}).fill('2.5');
+    await placement.getByRole('button',{name:'Apply position',exact:true}).click();
+    await page.waitForFunction(()=>ui.data.project.fixtures[0].position[1]===2.5);
+    assert.equal((await state()).snapshot.revision,beforePlacement.snapshot.revision+1);
+    await page.locator('#undo').click();
+    await page.waitForFunction(position=>JSON.stringify(ui.data.project.fixtures[0].position)===JSON.stringify(position),beforePlacement.project.fixtures[0].position);
+    assert.deepEqual((await state()).project,beforePlacement.project);
     await page.goto(base+'/animation-demo.html');
     await page.waitForFunction(()=>document.querySelector('.shape').style.getPropertyValue('--schema-value')!=='');
     const css=await page.locator('.shape').first().getAttribute('style');await page.waitForTimeout(100);assert.notEqual(await page.locator('.shape').first().getAttribute('style'),css);
@@ -67,6 +80,6 @@ const server = http.createServer((req,res) => {
     const deterministic=await page.evaluate(async()=>{const {SchemaPlayer}=await import('/schema-player.mjs');const a=await SchemaPlayer.create({autoTick:false}),b=await SchemaPlayer.create({autoTick:false});try{const x=await a.advance(.1),y=await b.advance(.1);const same=JSON.stringify(x.snapshot.fixtures)===JSON.stringify(y.snapshot.fixtures);await a.request('/api/import',{fixture:'fixture-1',layer:0,yaml:'name: Script test\nstack:\n  Script.Value: {Code: \"0.25 + 0.5\"}\n',expected_revision:0});const scripted=await a.advance(.1);const scriptWorks=scripted.snapshot.fixtures[0].result.value===.75;a.dispose();let rejected=false;try{await a.advance(.1);}catch{rejected=true;}return same&&rejected&&scriptWorks;}finally{a.dispose();b.dispose();}});assert(deterministic);
     assert.deepEqual(apiRequests,[],'No engine API requests leave the browser');
     assert.deepEqual(errors,[]);
-    console.log('WASM editor, animation, revision conflict, durable undo, project save and Worker isolation passed');
+    console.log('WASM editor, fixture placement, animation, revision conflict, durable undo, project save and Worker isolation passed');
   } finally {await browser.close();server.close();}
 })().catch(e=>{console.error(e);server.close();process.exitCode=1;});

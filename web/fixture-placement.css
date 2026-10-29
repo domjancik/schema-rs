@@ -1,0 +1,288 @@
+.fixture-placement-overlay {
+  position: absolute;
+  z-index: 8;
+  pointer-events: none;
+  overflow: hidden;
+  touch-action: none;
+}
+.fixture-placement-overlay .fixture-axis-handle,
+.fixture-placement-overlay .fixture-plane-handle {
+  pointer-events: all;
+  cursor: grab;
+  touch-action: none;
+  outline: none;
+}
+.fixture-placement-overlay [data-axis="X"] {
+  --axis-color: #f4988a;
+}
+.fixture-placement-overlay [data-axis="Y"] {
+  --axis-color: #8ddca4;
+}
+.fixture-placement-overlay [data-axis="Z"] {
+  --axis-color: #8ebdff;
+}
+.fixture-axis-handle line {
+  stroke: var(--axis-color);
+  stroke-width: 2.5;
+}
+.fixture-axis-handle circle {
+  fill: #13231f;
+  stroke: var(--axis-color);
+  stroke-width: 2;
+}
+.fixture-axis-handle .fixture-axis-hit {
+  fill: transparent;
+  stroke: transparent;
+  stroke-width: 16;
+}
+.fixture-axis-handle text {
+  fill: var(--axis-color);
+  font: 600 12px system-ui;
+  text-anchor: middle;
+  pointer-events: none;
+}
+.fixture-axis-handle:focus-visible circle:not(.fixture-axis-hit),
+.fixture-axis-handle:hover circle:not(.fixture-axis-hit) {
+  fill: #314c40;
+  stroke-width: 3;
+}
+.fixture-plane-handle polygon {
+  fill: #dcbd5338;
+  stroke: #e8cf7c;
+  stroke-width: 1.5;
+}
+.fixture-plane-handle:focus-visible polygon,
+.fixture-plane-handle:hover polygon {
+  fill: #dcbd5370;
+  stroke-width: 3;
+}
+.fixture-move-origin {
+  fill: #fff;
+  stroke: #123227;
+  stroke-width: 2;
+  pointer-events: none;
+}
+.fixture-move-readout {
+  fill: #fff;
+  stroke: #10221b;
+  paint-order: stroke;
+  stroke-width: 3;
+  font:
+    12px ui-monospace,
+    monospace;
+  pointer-events: none;
+}
+button.fixture-placement-launch {
+  flex: none;
+  width: auto;
+  min-width: 48px;
+  min-height: 32px;
+  padding: 6px 10px;
+  border: 1px solid var(--ui-border, #486657);
+  border-radius: 7px;
+  color: var(--ui-text, #e1eae3);
+  background: var(--ui-panel, #202a25);
+  font: 12px var(--ui-font, system-ui);
+}
+button.fixture-placement-launch[aria-pressed="true"] {
+  color: var(--ui-accent, #72dec2);
+  background: var(--ui-selected, #23463a);
+  border-color: var(--ui-accent, #72dec2);
+}
+.screen-tools button.fixture-placement-launch {
+  width: auto;
+  height: auto;
+  min-width: 40px;
+  min-height: 32px;
+  padding: 6px;
+  font-size: 11px;
+}
+.screen-tools:has(.fixture-placement-launch) {
+  z-index: 9;
+  gap: 3px;
+}
+.fixture-placement-dialog {
+  width: min(420px, calc(100vw - 24px));
+  max-width: none;
+  max-height: calc(100dvh - 24px);
+  padding: 22px;
+  overflow: auto;
+  border: 1px solid var(--ui-border, #486657);
+  border-radius: 12px;
+  background: var(--ui-surface, #19211e);
+  color: var(--ui-text, #e1eae3);
+  font: 13px/1.5 var(--ui-font, system-ui);
+  box-shadow: var(--ui-shadow, 0 24px 80px #0006);
+}
+.fixture-placement-dialog::backdrop {
+  background: #08140e99;
+  backdrop-filter: blur(3px);
+}
+.fixture-placement-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--ui-border);
+  padding-bottom: 12px;
+}
+.fixture-placement-dialog .fixture-placement-heading h2 {
+  margin: 0;
+  font-size: 22px;
+}
+.fixture-placement-dialog button {
+  min-height: 36px;
+  padding: 7px 10px;
+  border: 1px solid var(--ui-border);
+  border-radius: 7px;
+  font: 500 12px var(--ui-font, system-ui);
+  background: var(--ui-panel);
+  color: var(--ui-text);
+  cursor: pointer;
+}
+.fixture-placement-dialog .fixture-placement-heading button {
+  width: 40px;
+  font-size: 22px;
+  padding: 0;
+}
+.fixture-placement-dialog p {
+  color: var(--ui-muted);
+  font-size: 12px;
+}
+.fixture-position-fields {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+.fixture-placement-dialog label {
+  display: block;
+  min-width: 0;
+  margin: 8px 0;
+  color: var(--ui-muted);
+  font: 12px var(--ui-font, system-ui);
+}
+.fixture-placement-dialog input,
+.fixture-placement-dialog select {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  min-width: 0;
+  min-height: 38px;
+  margin-top: 7px;
+  padding: 8px;
+  border: 1px solid var(--ui-border);
+  border-radius: 7px;
+  color: var(--ui-text);
+  background-color: var(--ui-field);
+  font: 14px var(--ui-font, system-ui);
+}
+.fixture-position-nudge {
+  display: flex;
+  gap: 5px;
+  margin-top: 5px;
+}
+.fixture-position-nudge button {
+  flex: 1;
+  font-size: 18px;
+}
+.fixture-position-settings {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.fixture-position-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  padding-top: 15px;
+  border-top: 1px solid var(--ui-border);
+  margin-top: 10px;
+}
+.fixture-placement-dialog .fixture-position-actions .primary {
+  background: var(--ui-accent-fill, #72dec2);
+  color: var(--ui-accent-ink, #10382c);
+  border-color: var(--ui-accent-fill, #72dec2);
+}
+.fixture-placement-dialog button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+@media (pointer: coarse) {
+  .fixture-placement-dialog button,
+  .fixture-placement-dialog input,
+  .fixture-placement-dialog select {
+    min-height: 44px;
+  }
+  .fixture-placement-dialog input,
+  .fixture-placement-dialog select {
+    font-size: 16px;
+  }
+  .screen-tools button.fixture-placement-launch {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+@media (max-width: 350px) {
+  .fixture-position-nudge {
+    flex-direction: column;
+  }
+}
+
+.fixture-plane-handle .fixture-plane-hit {
+  fill: transparent;
+  stroke: none;
+}
+
+/* Reserve the real touch toolbar height; compact phones can opt into a large scene. */
+.mobile-app .screen:has(#scene[data-view="3d"]) #scene {
+  height: calc(100% - 158px);
+}
+@container (max-height:230px) {
+  .mobile-app .screen:has(#scene[data-view="3d"]) #scene {
+    height: calc(100% - 123px);
+  }
+}
+.mobile-app .screen.fixture-placement-expanded {
+  position: fixed;
+  inset: var(--placement-header-bottom, 104px) 8px 8px;
+  width: auto;
+  height: auto;
+  z-index: 70;
+  box-shadow: 0 16px 60px #0009;
+}
+
+.mobile-app .screen-bezel:has(.fixture-placement-expanded) {
+  z-index: 80;
+}
+
+.preview-viewport .fixture-placement-overlay {
+  z-index: 4;
+}
+.studio-app .schematic-camera summary,
+.studio-app .schematic-camera-popup,
+.studio-app .schematic-camera-popup button {
+  background: var(--ui-panel);
+  color: var(--ui-text);
+  border-color: var(--ui-border);
+}
+.studio-app .schematic-camera-popup button[aria-pressed="true"] {
+  color: var(--ui-accent);
+  border-color: var(--ui-accent);
+}
+:root:not([data-theme="dark"]) .fixture-axis-handle[data-axis="X"] {
+  --axis-color: #b9473c;
+}
+:root:not([data-theme="dark"]) .fixture-axis-handle[data-axis="Y"] {
+  --axis-color: #267441;
+}
+:root:not([data-theme="dark"]) .fixture-axis-handle[data-axis="Z"] {
+  --axis-color: #2d65a5;
+}
+:root:not([data-theme="dark"])
+  .fixture-axis-handle
+  circle:not(.fixture-axis-hit) {
+  fill: var(--ui-panel, #fff);
+}
+:root:not([data-theme="dark"]) .fixture-plane-handle polygon {
+  stroke: #957018;
+}

@@ -567,6 +567,23 @@ export class SceneView {
       }
     }
   }
+  projectPoint(position) {
+    this.camera.updateMatrixWorld();
+    const rect = this.canvas.getBoundingClientRect(),
+      point = new T.Vector4(...position, 1)
+        .applyMatrix4(this.camera.matrixWorldInverse)
+        .applyMatrix4(this.camera.projectionMatrix);
+    return {
+      x: ((point.x / point.w + 1) * rect.width) / 2,
+      y: ((1 - point.y / point.w) * rect.height) / 2,
+      w: point.w,
+      visible: point.w > 0 && point.z / point.w >= -1 && point.z / point.w <= 1,
+    };
+  }
+  placementActive(active) {
+    this.placing = active;
+    this.controls.enabled = !active;
+  }
   cameraState() {
     return {
       position: this.camera.position.toArray(),
@@ -624,14 +641,16 @@ export class SceneView {
       this.navigationMode === "pan" ? T.TOUCH.PAN : T.TOUCH.ROTATE;
     this.cameraChanged();
   }
-  focusSelected() {
+  focusSelected(layout = false) {
     const fixture = this.data?.fixtures.find((f) => f.id === this.selected);
     if (!fixture) {
       this.fit();
       return;
     }
     const pose = this.cameraState(),
-      target = fixture.position || fixture.layoutPosition,
+      target = layout
+        ? fixture.layoutPosition
+        : fixture.position || fixture.layoutPosition,
       offset = pose.position.map((v, i) => v - pose.target[i]),
       distance = Math.hypot(...offset);
     this.restoreCamera({
@@ -742,7 +761,7 @@ export class SceneView {
         return;
       this.lastTime = time;
       try {
-        this.controls.update();
+        if (!this.placing) this.controls.update();
         if (this.advanced) this.pipeline.render();
         else this.renderer.render(this.scene, this.camera);
         this.stats.frames++;

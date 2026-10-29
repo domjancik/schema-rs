@@ -45,3 +45,14 @@ Scene/Fixture setup viewport controls include **Stacks off / Selected stacks / A
 Each fixture has a local layer picker. Click a block to select its fixture/node in the shared inspector and edit its properties there. Plus buttons use the existing indexed creation picker; delete uses the existing block/branch chooser; fold affects that embedded tree locally. The grip opens the Move block/branch chooser; direct pointer drag between embedded stacks is not implemented. The regular Stack editor remains available for ghost drag-and-drop, drivers and detailed layout controls. Empty layers offer Create stack.
 
 Visibility and size are saved per viewport. Selected mode follows the current fixture selection, including a multiple selection made in Studio. Embedded selection then focuses one fixture. The overlay renders at most600 authored tree nodes per viewport; an explicit notice reports omitted stacks so dense projects can use Selected mode. Overlapping stacks retain their scene anchors; selecting a fixture raises its stack. Scene controls stay above overlays. These preferences and local folds do not alter project/undo history; authored edits use the same expected-revision engine commands as the regular editor.
+
+
+## Fixture placement
+
+Select a fixture in Studio's **Scene view → 3D**, Schémaboy's **3D** view, or the live GPU preview, then open **Place**. XYZ fields use metres. The ± buttons adjust the draft; **Apply position** commits all three coordinates together. **Set Y to 0** prepares a ground-height value for Apply.
+
+**Show move gizmo** displays red X, green Y and blue Z handles at the fixture's layout position. Drag an axis to constrain one coordinate, or the amber plane handle to move two coordinates. Choose XZ, XY or YZ in Place. Snap offers free movement, 1 cm, 10 cm, 50 cm and 1 m. With canvas focus, G toggles the gizmo. Arrow keys on a handle nudge by the snap step, or 10 cm when free; Shift divides the step by ten. Nearly end-on axes hide until the camera rotates to a useful angle.
+
+**Frame layout** centers the saved position even when the evaluated light is somewhere else. On small phones, **Expand 3D view** temporarily enlarges the scene while retaining the app header; **Done** returns to the compact controller. Precise XYZ controls remain available at compact sizes.
+
+A drag is a local preview until release, then becomes one revision-checked, undoable MoveFixture command. Escape, touch cancellation, focus loss, hiding the page or a concurrent authored edit cancels the preview. Camera orbit/pan stays separate from placement. The reference-preset view keeps placement disabled; load that preset into the live project before editing it. Placement changes layout coordinates; evaluated animation remains separate. Imported scenery keeps its GLB transform.

@@ -127,9 +127,10 @@
  window.addEventListener('keyup',e=>{if(e.key==='Shift'){if(e.code){S.shiftKeys.delete(e.code);S.shiftKeys.delete('Shift');}else S.shiftKeys.clear();syncHeld();}});
  document.addEventListener('visibilitychange',()=>{if(document.hidden){if(S.gesture)cancelGesture();S.wheel=null;clearHeld();}});
 
+ SchemaPlacement.configure({command,status:toast,pending:()=>S.pending});
  SchemaBlockUI.configure({pending:()=>S.pending,onFixture:id=>switchFixture(S.data.project.fixtures.findIndex(f=>f.id===id)),getProject:()=>S.data.project,getCatalog:()=>S.catalog,getRevision:()=>S.data.snapshot.revision,getSelection:()=>({...stateTarget(),node:selected()?.id||0,context:S.context}),commit:command,onStatus:toast,onSelection:selection=>{S.fixture=selection.fixture;S.layer=selection.layer;S.node=selection.node;S.context=selection.context;S.property=0;S.view='stack';render();}});
  SchemaOutput.configure({data:()=>S.data,project:()=>S.data.project,revision:()=>S.data.snapshot.revision,command});$('output-design').onclick=()=>SchemaOutput.open();
- SchemaScenePreview.configure({getFrame:()=>S.data,onSelect:id=>{const index=S.data?.project.fixtures.findIndex(f=>f.id===id)??-1;if(index>=0)switchFixture(index);},onLoadProject:project=>command({type:'replace_project',project}),status:toast});$('scene-preview').onclick=()=>SchemaScenePreview.open();
+ SchemaScenePreview.configure({command,selected:()=>S.fixture,getFrame:()=>S.data,onSelect:id=>{const index=S.data?.project.fixtures.findIndex(f=>f.id===id)??-1;if(index>=0)switchFixture(index);},onLoadProject:project=>command({type:'replace_project',project}),status:toast});$('scene-preview').onclick=()=>SchemaScenePreview.open();
  SchemaProjects.configure({api,project:()=>S.data?.project,revision:()=>S.data.snapshot.revision,refresh:()=>refresh(true),status:toast,loaded:async()=>{S.context=[];S.cursor=null;S.layer=0;S.node=0;S.property=0;await refresh(true);S.fixture=S.data.project.fixtures[0]?.id||'';render();}});
  SchemaPlugins.configure({api,onChanged:async()=>{await loadCatalog();await refresh();}});$('components').onclick=()=>SchemaPlugins.open();
  async function connect(){try{await loadCatalog();await refresh();}catch(error){toast(error.message);}}connect();setInterval(refresh,100);

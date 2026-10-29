@@ -1,6 +1,6 @@
 # GPU scene preview
 
-Open **Scene preview** above the Studio stack editor, **GPU** in schémaboy’s screen-view controls, or `/preview`. The preview is a separate GPU canvas: orbit with drag, pan with right-drag/two fingers, zoom/pinch and use Fit scene. Clicking a layout handle selects the fixture in the originating editor. Fixture editing remains in the normal validated engine UI.
+Open **Scene preview** above the Studio stack editor, **GPU** in schémaboy’s screen-view controls, or `/preview`. The preview is a separate GPU canvas: orbit with drag, pan with right-drag/two fingers, zoom/pinch and use Fit scene. Clicking a layout handle selects the fixture in the originating editor. Use **Place** for precise XYZ values, axis/plane gizmos, snapping and layout framing through the same validated engine commands. See [fixture placement](scene-camera.md#fixture-placement).
 
 ## Live output and reference presets
 
@@ -8,7 +8,7 @@ Live fixture brightness is decoded from published capture universes, including g
 
 Studio/schémaboy share their existing publication with the canvas. The standalone page reads `/api/state` at eight Hz. Neither path evaluates node programs or advances the engine clock. Graphics render independently with bounded quality settings and stop when the dialog closes or the document is hidden. The engine continues to run if the graphics context fails.
 
-Choose **Carpushit · reference preset** for a static full-look reference with the actual assembly and 38 circuits. That selection, camera/settings and scenery import issue no engine commands. **Use Carpushit in project…** opens a review; **Replace current scene** performs one revision-checked, undoable ReplaceProject with output disabled. The bundled template is the lighting layout/full look; the example workspace’s stored-content library and disarmed recall director are not implicitly imported into a different host’s registry. The complete authored example remains under `examples/scene-lab/carpushit/`.
+Choose **Carpushit** for a static full-look reference with the actual assembly and 38 circuits. That selection, camera/settings and scenery import issue no engine commands. **Use Carpushit in project…** opens a review; **Replace current scene** performs one revision-checked, undoable ReplaceProject with output disabled. The bundled template is the lighting layout/full look; the example workspace’s stored-content library and disarmed recall director are not implicitly imported into a different host’s registry. The complete authored example remains under `examples/scene-lab/carpushit/`.
 
 The Carpushit GLB is 58,533 triangles, six material roles, 4,560,244 bytes, already in Schema Y-up metres/front negative Z. Do not transform it again. The six UV strips use rectangular area approximations of the source paths; the visible violet is an illustrative proxy, not fluorescence. Bulbs retain the captured 127-byte ceiling. Geometry/source mapping and provenance live under `web/scene-assets/`. The assembly is a user-provided local/private asset and is not relicensed by the code’s MIT license.
 

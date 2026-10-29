@@ -876,6 +876,8 @@ pub fn router(state: AppState) -> Router {
             }),
         )
         .route("/block-picker.js", get(|| async { ([(header::CONTENT_TYPE, "text/javascript; charset=utf-8")], include_str!("../web/block-picker.js")) }))
+        .route("/fixture-placement.js", get(|| async { ([(header::CONTENT_TYPE,"text/javascript; charset=utf-8")], include_str!("../web/fixture-placement.js")) }))
+        .route("/fixture-placement.css", get(|| async { ([(header::CONTENT_TYPE,"text/css; charset=utf-8")], include_str!("../web/fixture-placement.css")) }))
         .route("/interface.css", get(|| async { ([(header::CONTENT_TYPE,"text/css; charset=utf-8")], include_str!("../web/interface.css")) }))
         .route("/block-picker.css", get(|| async { ([(header::CONTENT_TYPE, "text/css; charset=utf-8")], include_str!("../web/block-picker.css")) }))
         .route("/plugins-ui.js", get(|| async { ([(header::CONTENT_TYPE, "text/javascript; charset=utf-8")], include_str!("../web/plugins-ui.js")) }))

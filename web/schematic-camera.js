@@ -122,6 +122,7 @@
     } catch {
       camera = null;
     }
+    let placement;
     let automaticFit = !camera;
     let width = 360,
       height = 200,
@@ -298,11 +299,12 @@
       }
       for (const b of buttons)
         b.setAttribute('aria-pressed', String(b.dataset.mode === camera.mode));
+      placement?.update();
       options.painted?.(camera);
     }
     view.oncontextmenu = (e) => e.preventDefault();
     view.onpointerdown = (e) => {
-      if (e.button > 2) return;
+      if (placement?.active || e.button > 2) return;
       view.focus({ preventScroll: true });
       if (!pointers.size) {
         initial = valid(camera);
@@ -376,6 +378,7 @@
     view.onlostpointercapture = (e) => end(e, true);
     view.onwheel = (e) => {
       e.preventDefault();
+      if(placement?.active)return;
       const pixels = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? height : 1);
       change({ zoom: Math.exp(clamp(-pixels, -300, 300) * 0.002) });
     };
@@ -386,6 +389,7 @@
         return;
       }
       if (e.target !== view) return;
+      if(placement?.active)return;
       const key = e.key.toLowerCase(),
         dx = { arrowleft: -18, arrowright: 18 }[key] || 0,
         dy = { arrowup: -18, arrowdown: 18 }[key] || 0;
@@ -503,9 +507,11 @@
         add('Rotate view right 45°', '↷', () => rotateView(1)),
         details
       );
+      placement?.toolbar(host);
       draw();
       return details;
     }
+    if(global.SchemaPlacement)placement=global.SchemaPlacement.mount({view:()=>view,host:view.parentElement,key:'schematic:'+(view.closest('[data-panel]')?.dataset.panel||view.id),data:options.data,selected:options.selected,resize:draw,fit:fitAll,frame:()=>{const f=state().project.fixtures.find(f=>f.id===options.selected());if(f){automaticFit=false;camera={...camera,target:[...f.position],zoom:Math.max(40,camera.zoom)};draw();commit();}},project:p=>({...project(p,camera,width,height),w:1}),active:on=>{if(on){pointers.clear();automaticFit=false;commit();}}});
     draw();
     return {
       update: draw,
@@ -518,6 +524,7 @@
       get: () => valid(camera),
       destroy() {
         disposed = true;
+        placement?.destroy();
         for (const key of [
           'onpointerdown',
           'onpointermove',
