@@ -56,6 +56,26 @@ def bundle(binary,launcher,output,commit,notices,platform,ftdi=None,ftdi_license
   framework=app/'Contents/Frameworks';framework.mkdir(exist_ok=True);shutil.copyfile(ftdi,framework/'libftd2xx.dylib');shutil.copyfile(ftdi_license,resources/'THIRD_PARTY_NOTICES/FTDI-LICENSE.txt')
  return app
 
+def signing_order(app):
+ """Seal nested executables before bundles; signing a bundle's main binary seals its bundle."""
+ app=pathlib.Path(app)
+ nested=[folder for folder in app.rglob('*') if folder.is_dir() and not folder.is_symlink() and folder.suffix in ['.xpc','.app','.framework','.bundle']]
+ mains=set()
+ for folder in nested+[app]:
+  for info in [folder/'Contents/Info.plist',folder/'Resources/Info.plist',folder/'Info.plist']:
+   if info.is_file():
+    executable=plistlib.loads(info.read_bytes()).get('CFBundleExecutable')
+    if executable:
+     main=folder/executable if folder.suffix=='.framework' else folder/'Contents/MacOS'/executable
+     mains.add(main.resolve())
+    break
+ candidates=[]
+ for file in app.rglob('*'):
+  if file.is_file() and not file.is_symlink() and file.resolve() not in mains:
+   with file.open('rb') as content:magic=content.read(4)
+   if magic in [b'\xcf\xfa\xed\xfe',b'\xca\xfe\xba\xbe',b'\xbe\xba\xfe\xca']:candidates.append(file)
+ return sorted(candidates,key=lambda path:len(path.parts),reverse=True)+sorted(nested,key=lambda path:len(path.parts),reverse=True)+[app]
+
 def unsigned_preview(app,output,platform):
  if sys.platform!='darwin':raise ValueError('Mac preview packaging requires macOS')
  app=pathlib.Path(app);output=pathlib.Path(output);output.mkdir(parents=True,exist_ok=True)
@@ -63,13 +83,7 @@ def unsigned_preview(app,output,platform):
  metadata.update({'distribution':'unsigned-preview','signing':'ad-hoc','notarized':False})
  metadata_path.write_text(json.dumps(metadata,indent=2)+'\n',encoding='utf8')
  (app/'Contents/Resources/UNSIGNED-PREVIEW.txt').write_text('Unsigned preview: no Developer ID signature or Apple notarization. The app uses an ad-hoc integrity signature. On first launch macOS may require System Settings > Privacy & Security > Open Anyway. Projects and history stay in Application Support.\n',encoding='utf8')
- candidates=[]
- for file in app.rglob('*'):
-  if file.is_file() and not file.is_symlink():
-   with file.open('rb') as content:magic=content.read(4)
-   if magic in [b'\xcf\xfa\xed\xfe',b'\xca\xfe\xba\xbe',b'\xbe\xba\xfe\xca']:candidates.append(file)
- nested=[folder for folder in app.rglob('*') if folder.is_dir() and not folder.is_symlink() and folder.suffix in ['.xpc','.app','.framework','.bundle']]
- for file in candidates+sorted(nested,key=lambda path:len(path.parts),reverse=True)+[app]:subprocess.run(['codesign','--force','--sign','-',str(file)],check=True)
+ for file in signing_order(app):subprocess.run(['codesign','--force','--sign','-',str(file)],check=True)
  subprocess.run(['codesign','--verify','--deep','--strict',str(app)],check=True)
  archive=output/('Schema-s-'+platform+'-unsigned.zip')
  if archive.exists():raise ValueError('Refusing to overwrite an existing preview archive')
@@ -84,12 +98,7 @@ def sign_and_archive(app,output,platform,identity=None,profile=None):
  if not profile:raise ValueError('Notary Keychain profile required for distribution')
  if not identity:raise ValueError('Developer ID identity required for distribution; do not ship unsigned bundles')
  app=pathlib.Path(app);output=pathlib.Path(output);output.mkdir(parents=True,exist_ok=True)
- def is_macho(file):
-  if not file.is_file() or file.is_symlink():return False
-  with file.open('rb') as content:return content.read(4) in [b'\xcf\xfa\xed\xfe',b'\xca\xfe\xba\xbe',b'\xbe\xba\xfe\xca']
- candidates=[file for file in app.rglob('*') if is_macho(file)]
- nested=[folder for folder in app.rglob('*') if folder.is_dir() and not folder.is_symlink() and folder.suffix in ['.xpc','.app','.framework','.bundle']]
- for file in candidates+sorted(nested,key=lambda p:len(p.parts),reverse=True)+[app]:subprocess.run(['codesign','--force','--options','runtime','--timestamp','--sign',identity,str(file)],check=True)
+ for file in signing_order(app):subprocess.run(['codesign','--force','--options','runtime','--timestamp','--sign',identity,str(file)],check=True)
  subprocess.run(['codesign','--verify','--deep','--strict',str(app)],check=True)
  archive=output/('Schema-s-'+platform+'.zip')
  def compress():

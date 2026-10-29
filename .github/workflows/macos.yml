@@ -36,7 +36,6 @@ jobs:
   unsigned-preview:
     # No secrets or signing run on untrusted pull requests.
     if: github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/main'
-    needs: native-check
     runs-on: macos-15
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
@@ -44,6 +43,13 @@ jobs:
         with:
           python-version: '3.12'
       - run: rustup update stable && rustup default stable
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target/macos-build/cargo
+          key: macos-universal-${{ hashFiles('Cargo.lock') }}
       - run: python3 scripts/macos/build_native.py --unsigned-preview --build-number "${{ github.run_number }}"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:

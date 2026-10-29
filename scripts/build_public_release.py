@@ -64,6 +64,23 @@ def verify_macos_release(archive, commit):
         raise ValueError('Native notarized Mac release and attestation required') from error
     return {key:proof[key] for key in ['filename','sha256','bytes','notarized','distribution','signing','commit'] if key in proof}
 
+def add_macos_release(downloads, archive, commit):
+    """Update one platform without relabeling older native artifacts as a new build."""
+    downloads=pathlib.Path(downloads);archive=pathlib.Path(archive)
+    metadata=verify_macos_release(archive,commit)
+    manifest=json.loads((downloads/'latest.json').read_text(encoding='utf8'))
+    for entry in manifest.get('platforms',{}).values():
+        file=downloads/entry['filename']
+        if file.stat().st_size!=entry['bytes'] or digest(file)!=entry['sha256']: raise ValueError('Existing release checksum mismatch')
+    destination=downloads/archive.name
+    if archive.resolve()!=destination.resolve():shutil.copyfile(archive,destination)
+    manifest.setdefault('platforms',{})['macos-universal']=metadata
+    checksum=''.join(f"{entry['sha256']}  {entry['filename']}\n" for entry in manifest['platforms'].values())
+    if (downloads/'install.sh').is_file():checksum+=digest(downloads/'install.sh')+'  install.sh\n'
+    (downloads/'SHA256SUMS.txt').write_text(checksum,encoding='utf8')
+    pending=downloads/'latest.json.tmp';pending.write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf8');pending.replace(downloads/'latest.json')
+    return manifest
+
 def install_browser(destination, browser):
     browser=pathlib.Path(browser).resolve();destination=pathlib.Path(destination)
     manifest=json.loads((browser/'browser-build.json').read_text(encoding='utf8'))

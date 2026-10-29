@@ -51,6 +51,10 @@ class PublicRelease(unittest.TestCase):
    proof={**metadata,'sha256':hashlib.sha256(archive.read_bytes()).hexdigest(),'bytes':archive.stat().st_size,'filename':archive.name}
    sidecar=root/(archive.name+'.release.json');sidecar.write_text(json.dumps(proof))
    result=release.verify_macos_release(archive,'abc1234');self.assertEqual(result['signing'],'ad-hoc');self.assertFalse(result['notarized'])
+   downloads=root/'downloads';downloads.mkdir();windows=downloads/'Schema-s-Windows-x64.zip';windows.write_bytes(b'existing native release');old={'filename':windows.name,'sha256':hashlib.sha256(windows.read_bytes()).hexdigest(),'bytes':windows.stat().st_size}
+   (downloads/'latest.json').write_text(json.dumps({'available':True,'commit':'old1234','platforms':{'windows-x64':old},**old}));(downloads/'install.sh').write_text('# installer')
+   release.add_macos_release(downloads,archive,'abc1234')
+   updated=json.loads((downloads/'latest.json').read_text());self.assertEqual(updated['commit'],'old1234');self.assertEqual(updated['platforms']['windows-x64'],old);self.assertEqual(updated['platforms']['macos-universal']['commit'],'abc1234')
    proof['distribution']='release';sidecar.write_text(json.dumps(proof))
    with self.assertRaises(ValueError):release.verify_macos_release(archive,'abc1234')
  def test_browser_publication_verifies_artifacts_before_copying_and_preserves_landing(self):

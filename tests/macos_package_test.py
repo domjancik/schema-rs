@@ -41,5 +41,6 @@ class MacBundle(unittest.TestCase):
        if path.is_file():z.write(path,'Schema-s.app/'+path.relative_to(app).as_posix())
    with patch.object(mac.sys,'platform','darwin'),patch.object(mac.subprocess,'run',side_effect=run):archive=mac.unsigned_preview(app,p/'out','macos-arm64')
    proof=json.loads(archive.with_name(archive.name+'.release.json').read_text());self.assertFalse(proof['notarized']);self.assertEqual(proof['signing'],'ad-hoc');self.assertIn('unsigned',archive.name)
+   signed=[args[-1] for args in calls if args[0]=='codesign' and '--sign' in args];self.assertNotIn(str(app/'Contents/MacOS/Schema-s'),signed);self.assertLess(signed.index(str(app/'Contents/MacOS/schema-rs')),signed.index(str(app)))
    self.assertTrue(any('--sign' in args and '-' in args for args in calls));self.assertFalse(any('notarytool' in args or 'spctl' in args for args in calls));self.assertTrue((app/'Contents/Resources/UNSIGNED-PREVIEW.txt').is_file())
 if __name__=='__main__':unittest.main()
