@@ -9,10 +9,12 @@
   function adapters(a) {
     const getLayers = (p, id) => (id === '__director' ? p.director : p.content[id] || []);
     function render(panel, body, api) {
+      body._dmxTest?.destroy();body._dmxTest=null;
       body._sceneCamera?.destroy();
       body._sceneCamera = null;
       const data = a.data();
       if (!data) return;
+      if(panel.view==='dmxtest'){body.replaceChildren();body._dmxTest=SchemaDmxTest.mount(body,{data:a.data});body._panelTick=()=>body._dmxTest?.update();return;}
       if (panel.view === 'gpu') {
         if (!body.querySelector('iframe')) {
           const frame = make('iframe', undefined, 'panel-preview');

@@ -32,3 +32,5 @@ pub mod desktop;
 mod scene_preview;
 
 pub mod open_dmx;
+
+pub mod dmx_test;

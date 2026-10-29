@@ -405,7 +405,7 @@ impl Runtime {
                     let started = Instant::now();
                     let frame = state.read().unwrap_or_else(|e| e.into_inner()).clone();
                     let config = &frame.project.output;
-                    let message = if !config.enabled {
+                    let mut message = if !config.enabled {
                         usb = None;
                         device.clear();
                         "Disabled — capture only".into()
@@ -469,6 +469,13 @@ impl Runtime {
                         .map(|_| format!("ArtDmx → {}", config.target))
                         .unwrap_or_else(|e| format!("Output error: {e}"))
                     };
+                    if let Some(test) = &frame.snapshot.channel_test {
+                        message.push_str(&format!(
+                            " · TEST U{} · {} channels",
+                            test.universe,
+                            test.channels.len()
+                        ));
+                    }
                     *output_status.write().unwrap_or_else(|e| e.into_inner()) = message;
                     // Device I/O never blocks evaluation. Deadline includes USB frame transmission time.
                     std::thread::sleep(
@@ -897,6 +904,7 @@ pub fn router(state: AppState) -> Router {
         .route("/api/session/save", post(session_save))
         .route("/api/session/status", get(session_status))
         .route("/api/inputs", post(input_event))
+        .route("/dmx-test.js",get(||async{([(header::CONTENT_TYPE,"text/javascript; charset=utf-8")],include_str!("../web/dmx-test.js"))}))
         .route("/scene-stacks.js",get(||async{([(header::CONTENT_TYPE,"text/javascript; charset=utf-8")],include_str!("../web/scene-stacks.js"))}))
         .route("/api/output/devices", get(output_devices))
         .route("/api/state", get(state_get))

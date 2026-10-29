@@ -9,6 +9,7 @@
     fixtures: 'Fixtures',
     output: 'Output',
     telemetry: 'Telemetry',
+    dmxtest: 'DMX test',
     gpu: '3D preview'
   };
   const element = (tag, text, cls) => {
@@ -386,6 +387,7 @@
       applyMaximize();
     });
     function draw() {
+      for(const entry of bodies.values())entry.body._dmxTest?.destroy();
       Object.values(legacy).forEach((n) => stash.append(n));
       bodies.clear();
       main.replaceChildren(node(W.active(state).root));

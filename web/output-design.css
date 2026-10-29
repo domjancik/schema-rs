@@ -8,3 +8,5 @@
 
 /* SL-003: tab text must override the handheld navigation icon dimensions. */
 #output-design-dialog nav{align-items:stretch}#output-design-dialog nav button{width:auto;height:auto;flex:1 0 auto;min-width:44px;min-height:44px;margin:0;white-space:nowrap}
+
+.dmx-test-panel{padding:12px;color:var(--ink);overflow:auto}.dmx-test-controls,.dmx-test-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.dmx-test-controls label{min-width:100px;flex:1}.dmx-test-controls input{width:100%;min-height:32px}.dmx-test-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:8px;margin-top:12px}.dmx-test-channel{padding:10px;background:var(--paper);border:1px solid var(--line);border-radius:7px;display:grid;gap:6px}.dmx-test-channel.overridden{border-color:var(--focus)}.dmx-test-channel small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--muted)}.dmx-test-channel input[type=range]{width:100%;min-width:0;min-height:40px;touch-action:pan-y;margin:0;padding:0;accent-color:var(--focus)}.dmx-test-channel output{font:12px Consolas,monospace}.dmx-test-channel button{min-height:32px}.dmx-test-actions button{min-height:36px}

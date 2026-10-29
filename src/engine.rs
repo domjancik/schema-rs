@@ -916,6 +916,12 @@ impl Engine {
                 }
             }
         }
+        snap.channel_test = crate::dmx_test::apply_at(
+            &self.inputs.channel_test,
+            &mut snap.universes,
+            self.blackout,
+            std::time::Instant::now(),
+        );
         snap
     }
 }

@@ -106,6 +106,8 @@ pub struct Pong {
 #[derive(Clone, Default, Serialize, Deserialize)]
 #[serde(default)]
 pub struct Inputs {
+    #[serde(skip)]
+    pub channel_test: Option<crate::dmx_test::Lease>,
     pub pixels: BTreeMap<String, Vec<[f64; 3]>>,
     pub serial: u64,
     pub audio: BTreeMap<usize, Audio>,
@@ -136,6 +138,12 @@ pub struct Inputs {
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(tag = "type", rename_all = "snake_case", deny_unknown_fields)]
 pub enum Event {
+    ChannelTest {
+        owner: String,
+        universe: u16,
+        #[serde(deserialize_with = "crate::dmx_test::deserialize_channels")]
+        channels: BTreeMap<u16, u8>,
+    },
     Pixels {
         fixture: String,
         positions: Vec<[f64; 3]>,
@@ -217,6 +225,11 @@ pub enum Event {
 impl Event {
     pub fn prepare(&mut self) -> Result<()> {
         match self {
+            Self::ChannelTest {
+                owner,
+                universe,
+                channels,
+            } => crate::dmx_test::validate(owner, *universe, channels)?,
             Self::Audio { slot, audio } => {
                 if *slot > 31 {
                     return Err("Audio slot must be 0..31".into());
@@ -519,6 +532,17 @@ impl Inputs {
 
         self.serial = self.serial.wrapping_add(1);
         match event {
+            Event::ChannelTest {
+                owner,
+                universe,
+                channels,
+            } => crate::dmx_test::update_at(
+                &mut self.channel_test,
+                owner,
+                universe,
+                channels,
+                std::time::Instant::now(),
+            )?,
             Event::Pixels { fixture, positions } => {
                 self.pixels.insert(fixture, positions);
             }

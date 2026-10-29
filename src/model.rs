@@ -259,6 +259,8 @@ pub struct FixtureSnapshot {
 }
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 pub struct Snapshot {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub channel_test: Option<crate::dmx_test::Status>,
     #[serde(default)]
     pub plugin_generation: u64,
     #[serde(default)]
