@@ -56,6 +56,29 @@ def bundle(binary,launcher,output,commit,notices,platform,ftdi=None,ftdi_license
   framework=app/'Contents/Frameworks';framework.mkdir(exist_ok=True);shutil.copyfile(ftdi,framework/'libftd2xx.dylib');shutil.copyfile(ftdi_license,resources/'THIRD_PARTY_NOTICES/FTDI-LICENSE.txt')
  return app
 
+def unsigned_preview(app,output,platform):
+ if sys.platform!='darwin':raise ValueError('Mac preview packaging requires macOS')
+ app=pathlib.Path(app);output=pathlib.Path(output);output.mkdir(parents=True,exist_ok=True)
+ metadata_path=app/'Contents/Resources/BUILD.json';metadata=json.loads(metadata_path.read_text(encoding='utf8'))
+ metadata.update({'distribution':'unsigned-preview','signing':'ad-hoc','notarized':False})
+ metadata_path.write_text(json.dumps(metadata,indent=2)+'\n',encoding='utf8')
+ (app/'Contents/Resources/UNSIGNED-PREVIEW.txt').write_text('Unsigned preview: no Developer ID signature or Apple notarization. The app uses an ad-hoc integrity signature. On first launch macOS may require System Settings > Privacy & Security > Open Anyway. Projects and history stay in Application Support.\n',encoding='utf8')
+ candidates=[]
+ for file in app.rglob('*'):
+  if file.is_file() and not file.is_symlink():
+   with file.open('rb') as content:magic=content.read(4)
+   if magic in [b'\xcf\xfa\xed\xfe',b'\xca\xfe\xba\xbe',b'\xbe\xba\xfe\xca']:candidates.append(file)
+ nested=[folder for folder in app.rglob('*') if folder.is_dir() and not folder.is_symlink() and folder.suffix in ['.xpc','.app','.framework','.bundle']]
+ for file in candidates+sorted(nested,key=lambda path:len(path.parts),reverse=True)+[app]:subprocess.run(['codesign','--force','--sign','-',str(file)],check=True)
+ subprocess.run(['codesign','--verify','--deep','--strict',str(app)],check=True)
+ archive=output/('Schema-s-'+platform+'-unsigned.zip')
+ if archive.exists():raise ValueError('Refusing to overwrite an existing preview archive')
+ subprocess.run(['ditto','-c','-k','--keepParent',str(app),str(archive)],check=True)
+ digest=hashlib.sha256(archive.read_bytes()).hexdigest();metadata.update({'sha256':digest,'filename':archive.name,'bytes':archive.stat().st_size})
+ (output/(archive.name+'.release.json')).write_text(json.dumps(metadata,indent=2)+'\n',encoding='utf8')
+ (output/(archive.name+'.sha256')).write_text(digest+'  '+archive.name+'\n',encoding='utf8')
+ return archive
+
 def sign_and_archive(app,output,platform,identity=None,profile=None):
  if sys.platform!='darwin':raise ValueError('Signing and distributable archives require macOS')
  if not profile:raise ValueError('Notary Keychain profile required for distribution')

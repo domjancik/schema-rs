@@ -40,6 +40,19 @@ class PublicRelease(unittest.TestCase):
    with self.assertRaises(ValueError):release.verify_macos_release(archive,'abc1234')
    proof['notarized']=True;proof['sha256']='0'*64;sidecar.write_text(json.dumps(proof))
    with self.assertRaises(ValueError):release.verify_macos_release(archive,'abc1234')
+ def test_unsigned_mac_preview_requires_explicit_label_and_matching_metadata(self):
+  import zipfile,hashlib,plistlib
+  with tempfile.TemporaryDirectory() as t:
+   root=pathlib.Path(t);archive=root/'Schema-s-macos-universal-unsigned.zip'
+   metadata={'commit':'abc1234','platform':'macos-universal','distribution':'unsigned-preview','signing':'ad-hoc','notarized':False}
+   with zipfile.ZipFile(archive,'w') as z:
+    z.writestr('Schema-s.app/Contents/Resources/BUILD.json',json.dumps(metadata))
+    z.writestr('Schema-s.app/Contents/Info.plist',plistlib.dumps({'CFBundleIdentifier':'tools.scenic.schema-s'}))
+   proof={**metadata,'sha256':hashlib.sha256(archive.read_bytes()).hexdigest(),'bytes':archive.stat().st_size,'filename':archive.name}
+   sidecar=root/(archive.name+'.release.json');sidecar.write_text(json.dumps(proof))
+   result=release.verify_macos_release(archive,'abc1234');self.assertEqual(result['signing'],'ad-hoc');self.assertFalse(result['notarized'])
+   proof['distribution']='release';sidecar.write_text(json.dumps(proof))
+   with self.assertRaises(ValueError):release.verify_macos_release(archive,'abc1234')
  def test_browser_publication_verifies_artifacts_before_copying_and_preserves_landing(self):
   import hashlib
   with tempfile.TemporaryDirectory() as t:

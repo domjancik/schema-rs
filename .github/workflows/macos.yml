@@ -30,9 +30,9 @@ jobs:
       - run: node --check web/app.js && node --check web/output-ui.js && node --check web/landing.js
       - run: cargo build --locked
       - run: python3 tests/macos_engine_smoke.py target/debug/schema-rs
-  development-bundle:
+  unsigned-preview:
     # No secrets or signing run on untrusted pull requests.
-    if: github.event_name == 'workflow_dispatch'
+    if: github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/main'
     needs: native-check
     runs-on: macos-15
     steps:
@@ -41,9 +41,9 @@ jobs:
         with:
           python-version: '3.12'
       - run: rustup update stable && rustup default stable
-      - run: python3 scripts/macos/build_native.py --build-number "${{ github.run_number }}"
+      - run: python3 scripts/macos/build_native.py --unsigned-preview --build-number "${{ github.run_number }}"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
-          name: macos-universal-development
+          name: macos-universal-unsigned
           path: target/macos-build/artifacts/*
           if-no-files-found: error

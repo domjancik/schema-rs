@@ -45,21 +45,24 @@ def verify_macos_release(archive, commit):
     """
     import zipfile, plistlib
     archive=pathlib.Path(archive)
-    if archive.name != 'Schema-s-macos-universal.zip': raise ValueError('Expected universal Mac release')
+    if archive.name not in ['Schema-s-macos-universal.zip','Schema-s-macos-universal-unsigned.zip']: raise ValueError('Expected universal Mac release')
     try:
         proof=json.loads(archive.with_name(archive.name+'.release.json').read_text(encoding='utf8'))
-        if (proof.get('notarized') is not True or proof.get('commit') != commit or
+        preview=archive.name.endswith('-unsigned.zip')
+        valid_distribution=(proof.get('distribution')=='unsigned-preview' and proof.get('signing')=='ad-hoc' and proof.get('notarized') is False) if preview else proof.get('notarized') is True
+        if (not valid_distribution or proof.get('commit') != commit or
             proof.get('platform') != 'macos-universal' or proof.get('filename') != archive.name or
             proof.get('sha256') != digest(archive) or proof.get('bytes') != archive.stat().st_size):
             raise ValueError('Mac release attestation mismatch')
         with zipfile.ZipFile(archive) as z:
             metadata=json.loads(z.read('Schema-s.app/Contents/Resources/BUILD.json'))
             info=plistlib.loads(z.read('Schema-s.app/Contents/Info.plist'))
+            if preview and any(metadata.get(key)!=proof.get(key) for key in ['distribution','signing','notarized']): raise ValueError('Unsigned Mac preview metadata mismatch')
             if metadata.get('commit') != commit or metadata.get('platform') != 'macos-universal' or info.get('CFBundleIdentifier') != 'tools.scenic.schema-s':
                 raise ValueError('Mac bundle metadata mismatch')
     except (OSError, KeyError, json.JSONDecodeError, zipfile.BadZipFile, plistlib.InvalidFileException) as error:
         raise ValueError('Native notarized Mac release and attestation required') from error
-    return {key:proof[key] for key in ['filename','sha256','bytes','notarized']}
+    return {key:proof[key] for key in ['filename','sha256','bytes','notarized','distribution','signing','commit'] if key in proof}
 
 def install_browser(destination, browser):
     browser=pathlib.Path(browser).resolve();destination=pathlib.Path(destination)
@@ -96,8 +99,8 @@ def export_site(destination, downloads, browser=None):
     manifest=json.loads((downloads/'latest.json').read_text(encoding='utf8')) if (downloads/'latest.json').is_file() else {}
     mac=manifest.get('platforms',{}).get('macos-universal',{})
     for path in downloads.iterdir():
-        if path.name == 'Schema-s-macos-universal.zip' and (mac.get('notarized') is not True or mac.get('sha256') != digest(path)): continue
-        if path.is_file() and (path.name in {'latest.json','SHA256SUMS.txt','install.sh','Schema-s-Windows-x64.zip','Schema-s-linux-x64.tar.gz','Schema-s-linux-arm64.tar.gz','Schema-s-macos-universal.zip'}): shutil.copyfile(path,target/path.name)
+        if path.name in ['Schema-s-macos-universal.zip','Schema-s-macos-universal-unsigned.zip'] and (mac.get('filename') != path.name or not (mac.get('notarized') is True or mac.get('distribution')=='unsigned-preview' and mac.get('signing')=='ad-hoc' and mac.get('notarized') is False) or mac.get('sha256') != digest(path)): continue
+        if path.is_file() and (path.name in {'latest.json','SHA256SUMS.txt','install.sh','Schema-s-Windows-x64.zip','Schema-s-linux-x64.tar.gz','Schema-s-linux-arm64.tar.gz','Schema-s-macos-universal.zip','Schema-s-macos-universal-unsigned.zip'}): shutil.copyfile(path,target/path.name)
     shutil.copyfile(ROOT/'scripts/publication/vercel.json',destination/'vercel.json')
     shutil.copyfile(ROOT/'docs/linux.md',destination/'linux.txt')
     shutil.copyfile(ROOT/'docs/macos.md',destination/'macos.txt')

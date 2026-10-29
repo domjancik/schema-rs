@@ -195,3 +195,5 @@ Studio supports resizable, dockable view instances and saved workspace tabs: [pa
 macOS support: [native menu-bar app, universal builds, signing and optional USB output](docs/macos.md). Native Mac and hardware release validation is still required.
 
 Browser/WASM host and website animation API: [build, storage, embedding and host boundaries](docs/browser.md). Native services remain the default build; browser consumers use the shared evaluator through a dedicated Worker.
+
+Public source: https://github.com/domjancik/schema-rs. macOS CI produces an explicitly unsigned/not-notarized preview without Apple credentials.

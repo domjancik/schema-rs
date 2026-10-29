@@ -11,7 +11,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "scripts"))
 from build_desktop import collect_notices
-from build_macos import bundle, sign_and_archive
+from build_macos import bundle, sign_and_archive, unsigned_preview
 
 
 def run(*args):
@@ -22,6 +22,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=Path, default=ROOT / "target/macos-build")
     parser.add_argument("--build-number", required=True, type=int)
+    parser.add_argument("--unsigned-preview",action="store_true")
     parser.add_argument("--identity")
     parser.add_argument("--notary-profile")
     parser.add_argument("--sparkle-sdk", type=Path)
@@ -32,6 +33,8 @@ def main():
     args = parser.parse_args()
     if sys.platform != "darwin":
         parser.error("Xcode/macOS required; cross-checking Rust is not a native release build")
+    if args.unsigned_preview and (args.identity or args.notary_profile or args.sparkle_sdk):
+        parser.error("Unsigned preview cannot use Developer ID/notary/Sparkle options")
     if bool(args.identity) != bool(args.notary_profile):
         parser.error("Signing identity and notary Keychain profile must be supplied together")
     if any([args.sparkle_sdk, args.update_key, args.update_feed]) and not all([args.sparkle_sdk, args.update_key, args.update_feed, args.identity]):
@@ -84,7 +87,9 @@ def main():
     info_path.write_bytes(plistlib.dumps(info))
     artifacts = output / "artifacts"
     artifacts.mkdir(exist_ok=True)
-    if args.identity:
+    if args.unsigned_preview:
+        print(unsigned_preview(app, artifacts, "macos-universal"))
+    elif args.identity:
         print(sign_and_archive(app, artifacts, "macos-universal", args.identity, args.notary_profile))
     else:
         # tar preserves modes and symlinks across CI artifact upload/download.
