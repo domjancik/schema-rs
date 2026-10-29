@@ -102,6 +102,10 @@
     {
       "source": "/animation",
       "destination": "/animation-demo"
+    },
+    {
+      "source": "/app",
+      "destination": "/studio"
     }
   ]
 }

@@ -3,6 +3,10 @@ use axum::{http::header, routing::get, Router};
 pub(crate) fn routes() -> Router<AppState> {
     Router::new()
         .route(
+            "/app",
+            get(|| async { axum::response::Html(include_str!("../web/index.html")) }),
+        )
+        .route(
             "/welcome",
             get(|| async { axum::response::Html(include_str!("../web/welcome.html")) }),
         )

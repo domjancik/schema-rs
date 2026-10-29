@@ -33,7 +33,7 @@ function authenticate(req,res){
 
 const backend=new URL(process.env.SCHEMA_ENGINE_URL||'http://127.0.0.1:8787');
 if(backend.protocol!=='http:'||!['127.0.0.1','localhost','[::1]'].includes(backend.hostname))throw Error('Development engine must be loopback HTTP');
-const assets={'/':['index.html','text/html; charset=utf-8'],'/app.js':['app.js','text/javascript; charset=utf-8'],'/style.css':['style.css','text/css; charset=utf-8']};
+const assets={'/app':['index.html','text/html; charset=utf-8'],'/':['index.html','text/html; charset=utf-8'],'/app.js':['app.js','text/javascript; charset=utf-8'],'/style.css':['style.css','text/css; charset=utf-8']};
 for(const [route,file,mime] of [['/mobile','mobile.html','text/html; charset=utf-8'],['/mobile.html','mobile.html','text/html; charset=utf-8'],['/mobile.css','mobile.css','text/css; charset=utf-8'],['/mobile-skin.css','mobile-skin.css','text/css; charset=utf-8'],...['mobile.js','mobile-skin-core.js','mobile-skin.js','mobile-core.js','view-variant.js','engine-client.js'].map(file=>['/'+file,file,'text/javascript; charset=utf-8'])])assets[route]=[file,mime];
 for(const file of ['dmx-test.js','scene-stacks.js','fold-motion.js','schematic-camera.js','schematic-camera.css','workspace-core.js','workspace-ui.js','studio-panels.js','workspace.css','projects-ui.js','bezier-editor.js','bezier-editor.css','block-edit.js','block-ui.js','block-edit.css','plugins-ui.js','plugins.css','block-picker.js','block-picker.css','stack-layout.js','stack-editor.css','output-core.js','output-ui.js','output-design.css'])assets['/'+file]=[file,file.endsWith('.css')?'text/css; charset=utf-8':'text/javascript; charset=utf-8'];
 assets['/icons/plugin-component.svg']=['icons/plugin-component.svg','image/svg+xml'];
