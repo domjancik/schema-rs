@@ -28,3 +28,8 @@ Browser scheduling is not an unattended real-time lighting clock: background tab
 
 
 The shared contract is commands in, frame deltas/host inputs in, and snapshots/session bytes out. Storage and presentation are adapters: IndexedDB is replaceable, and a CSS binding is one snapshot consumer alongside Canvas/WebGL or an application-specific renderer. Fixture IDs/banks remain the current scene data model for compatibility; this change removes host/transport coupling without renaming that model or implying that every native integration is available in a browser.
+
+
+For website embedding, serve `schema-player.mjs`, `browser-worker.mjs`, `browser-storage.mjs` and the generated `wasm/` files from the same origin as the consuming page. A cross-origin CDN import alone cannot create a same-origin Worker. Named project storage is origin-local. Browsers without Web Locks do not enforce the duplicate-session lock; named saves remain IndexedDB transactions.
+
+Production editor: https://schema-s.vercel.app/play?view=studio. Animation example: https://schema-s.vercel.app/animation. Deployment `dpl_7dcBST27zJLQYkm5P2Pa22jrY7Hh` passed the real Chrome browser-runtime suite, including bounded Rhai evaluation, deterministic independent instances, rejection after disposal, partial saves/load, revision conflicts, history recovery, duplicate-session rejection, website CSS updates, and mobile transport. Native macOS packaging remains a separate release process. Browser CI is configured but has not run remotely because this repository has no Git remote.
