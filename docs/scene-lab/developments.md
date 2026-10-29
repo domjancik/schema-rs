@@ -152,3 +152,14 @@ Suggested lab retest: unchanged UV two-slot model and nonzero-universe project s
 ## Panel dropdown readability — 9f973fa
 
 Local8788 serves the updated stylesheet after refresh. Panel header selects and native option lists now have explicit theme-matched paper/text colors and color-scheme,12px text (previously10px), and a24px minimum closed height. Applies to view type, fixture, layer and layout selects. Chrome open menus were visually checked in both themes; computed text/background contrast is12.7:1 light and14.7:1 dark. Live browser smoke blocked non-GET requests and observed zero authored commands/errors. Full Rust tests/fmt/clippy and app JS syntax pass. No engine restart, scene/history edit, public/Pi activation or unrelated lab changes. Optional retest: native menu contrast on other Windows browsers/themes.
+
+
+## Isometric/rotatable viewports — b7fec61
+
+Active on local8788 source frontend after refresh. Scene panels expose Iso alongside3D/XZ/XY/YZ, with direct45° left/right rotation and existing free drag/touch orbit. Iso is now mathematically isometric (45° yaw,35.264° pitch), preserving equal world-axis scale. Direct controls are available in schémaboy as well. Each panel's target/zoom/orientation remains independent and saves locally; entering Iso restores Orbit mode.
+
+Rendered3D previews add a direct Iso preset and rotation buttons plus Camera → Projection (Perspective/Orthographic). Iso selects a true orthographic camera; projection changes rebuild camera-dependent SSGI/volumetric/temporal passes and preserve framing at the target. Zoom span saves/restores, touch pan/pinch works orthographically, Frame adjusts orthographic scale, and Fit retains the current viewing angle. Existing perspective poses remain valid. Stack/block canvases stay planar.
+
+Pure tests verify equal projected axis lengths,45° rotation invariants, projection validation and span-preserving navigation. Isolated Chrome tests pass for split Scene independence/reload, keyboard activation without transport commands, mobile controls, WebGL2 and actual WebGPU rendering/projection switches/reload, and real two-finger orthographic pan/pinch. Existing camera/mobile/workspace/layer/fractal suites pass; Rust full tests/fmt/clippy and JS/module syntax pass. Screenshots were visually inspected. Live Iso/rotation smoke blocked writes and preserved exact project/undo/redo with zero authored commands/errors; no engine restart or public/Pi activation claim.
+
+Suggested retest: dense Repeat/Carpushit layout points from Iso, split viewpoints, camera rotations and retained selection, GPU perspective/orthographic switching and phone gestures. Keep SL-005 dense selection and SL-006 stale fixture options separate; no closure claimed. Use isolated output-disabled engines and preserve live scene/example data.
