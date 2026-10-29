@@ -35,22 +35,31 @@ pub fn transmit(
     }
     Ok(())
 }
-#[cfg(windows)]
-mod windows;
-#[cfg(windows)]
-pub use windows::{devices, Sender};
-#[cfg(not(windows))]
-pub fn devices() -> Result<Vec<Device>> {
-    Err("Open DMX USB is available on Windows; use Art-Net/OLA on Linux".into())
+pub const fn supported() -> bool {
+    cfg!(any(windows, target_os = "macos"))
 }
-#[cfg(not(windows))]
+#[cfg(any(windows, target_os = "macos"))]
+mod d2xx;
+#[cfg(windows)]
+#[path = "open_dmx/windows.rs"]
+mod platform;
+#[cfg(target_os = "macos")]
+#[path = "open_dmx/macos.rs"]
+mod platform;
+#[cfg(any(windows, target_os = "macos"))]
+pub use d2xx::{devices, Sender};
+#[cfg(not(any(windows, target_os = "macos")))]
+pub fn devices() -> Result<Vec<Device>> {
+    Err("Open DMX USB is available on Windows/macOS; use Art-Net/OLA on Linux".into())
+}
+#[cfg(not(any(windows, target_os = "macos")))]
 pub struct Sender;
-#[cfg(not(windows))]
+#[cfg(not(any(windows, target_os = "macos")))]
 impl Sender {
     pub fn open(_: &str) -> Result<Self> {
-        Err("Open DMX USB requires Windows FTDI D2XX".into())
+        Err("Open DMX USB requires Windows or macOS FTDI D2XX".into())
     }
     pub fn send(&mut self, _: &[u8]) -> Result<()> {
-        Err("Open DMX USB requires Windows FTDI D2XX".into())
+        Err("Open DMX USB requires Windows or macOS FTDI D2XX".into())
     }
 }

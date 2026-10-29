@@ -40,7 +40,7 @@ async fn discovery_requires_existing_api_auth_and_reports_platform() {
     assert_eq!(good.status(), StatusCode::OK);
     let json: serde_json::Value =
         serde_json::from_slice(&to_bytes(good.into_body(), 100_000).await.unwrap()).unwrap();
-    assert_eq!(json["open_dmx"], cfg!(windows));
+    assert_eq!(json["open_dmx"], schema_rs::open_dmx::supported());
     assert!(json["devices"].is_array());
 }
 #[tokio::test]

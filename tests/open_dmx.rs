@@ -80,7 +80,7 @@ fn short_write_and_failed_break_are_errors() {
     assert!(transmit(&mut m, &frame(&[]).unwrap(), |_| {}).is_err());
     assert_eq!(m.events, ["on", "off"]);
 }
-#[cfg(not(windows))]
+#[cfg(not(any(windows, target_os = "macos")))]
 #[test]
 fn linux_reports_usb_unavailable_without_opening_anything() {
     assert!(schema_rs::open_dmx::devices().is_err());

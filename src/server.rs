@@ -924,11 +924,11 @@ pub fn router(state: AppState) -> Router {
 async fn output_devices() -> Json<serde_json::Value> {
     let found = tokio::task::spawn_blocking(crate::open_dmx::devices).await;
     match found {
-        Ok(Ok(devices)) => {
-            Json(serde_json::json!({"open_dmx":cfg!(windows),"devices":devices,"error":null}))
-        }
+        Ok(Ok(devices)) => Json(
+            serde_json::json!({"open_dmx":crate::open_dmx::supported(),"devices":devices,"error":null}),
+        ),
         result => Json(
-            serde_json::json!({"open_dmx":cfg!(windows),"devices":[],"error":match result {Ok(Err(e))=>e,Err(e)=>e.to_string(),_=>unreachable!()}}),
+            serde_json::json!({"open_dmx":crate::open_dmx::supported(),"devices":[],"error":match result {Ok(Err(e))=>e,Err(e)=>e.to_string(),_=>unreachable!()}}),
         ),
     }
 }
