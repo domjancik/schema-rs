@@ -147,3 +147,8 @@ Windows full36-suite Rust tests/fmt/clippy and USB/layout/fold/layer browser che
 Activation used a fresh guarded checkpoint and preserved exact project, revision199,6undo/0redo, plugins and resumed clock; output stayed disabled. Live read-only discovery/form smoke preserved exact project/history with zero authored commands/errors. The optional FTDI DLL loads, but currently lists zero available devices while QLC+5 is running; it may own the attached FTDI port. No application was closed, driver changed or USB DMX sent. Public/Pi deployment is not claimed. Guide: [Open DMX on Windows](../open-dmx-windows.md).
 
 Suggested lab retest: unchanged UV two-slot model and nonzero-universe project save/reload/undo in output-disabled isolated engines; Linux capabilities should disable choosing USB and retain Art-Net/OLA workflows. Leave actual Windows USB transmission to explicit hardware testing.
+
+
+## Panel dropdown readability — 9f973fa
+
+Local8788 serves the updated stylesheet after refresh. Panel header selects and native option lists now have explicit theme-matched paper/text colors and color-scheme,12px text (previously10px), and a24px minimum closed height. Applies to view type, fixture, layer and layout selects. Chrome open menus were visually checked in both themes; computed text/background contrast is12.7:1 light and14.7:1 dark. Live browser smoke blocked non-GET requests and observed zero authored commands/errors. Full Rust tests/fmt/clippy and app JS syntax pass. No engine restart, scene/history edit, public/Pi activation or unrelated lab changes. Optional retest: native menu contrast on other Windows browsers/themes.
