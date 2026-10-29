@@ -198,3 +198,16 @@ Tests cover limits/ownership/expiry/blackout, unchanged project/history/revision
 A guarded activation preserved exact live project at revision203,10undo/0redo and resumed clock; physical output remained disabled. Live disarmed dialog/docked panel smoke preserved exact project/history with zero authored commands/errors; no actual live test levels or hardware output were sent. Public/Pi activation not claimed. Guide: [Channel test](../channel-test.md).
 
 Suggested lab retest when browser access returns: UV model's dimmer/program slots, nonzero universe, raw captured values, Release and session restart, isolated output-disabled only. No physical fixture parity claimed; preserve live and lab-authored examples. Existing Iso/embedded independent lab verification remains pending browser access.
+
+
+## macOS support and release tooling — b3fb6b3 / 6f7ab14
+
+Engine support uses macOS Application Support for the desktop project, with optional D2XX loading from the app's Frameworks or explicit installed paths. Windows and Mac share the existing serial-selected DMX sender; Windows retains System32-only DLL lookup. Linux retains Art-Net/OLA and excludes the D2XX loaders. Output UI now describes Windows and Mac capability. Art-Net and authored scene semantics are unchanged.
+
+The native Swift menu-bar launcher owns a loopback engine, opens the existing browser UI only after its own engine announces readiness, and requests graceful session-flushing shutdown. Universal build tooling combines Apple Silicon and Intel engines/launchers, adds branding/licenses, and supports Developer ID signing/notarization/stapling. Optional complete Sparkle configuration uses the standard updater; no update feed is currently configured. Public packaging requires matching native notarization-job metadata; Mac download links remain unavailable without a notarized release. Guide: [macOS](../macos.md).
+
+Verification here: full Windows Rust tests, formatting and strict clippy pass; both Apple Silicon/Intel Rust target checks and strict target clippy pass; ARM64 Linux target check passes. Mac package tests (architecture, public inputs, licensing, key/feed completeness, overwrite guard), public and Windows package tests, Python/JS syntax and native CI YAML checks pass. Isolated output-disabled browser tests pass for the shared USB panel and pending/notarized/invalid-filename Mac download states.
+
+Native Mac execution, Swift compilation, Safari, physical USB timing and signed update behavior remain pending access to a Mac and signing identity. CI is configured to compile/test natively on both Mac runner types and exercise graceful session/undo recovery; it has not run remotely (no Git remote configured). No Mac distributable or public/Pi deployment is claimed. Live local engine was not restarted; authored scene/history and physical output were untouched.
+
+Suggested lab follow-up: keep current examples output-disabled. When Mac hardware is available, retest UV model/channel-test, session undo recovery, Studio/schémaboy browser controls and scene preview on Safari; hardware DMX is a separate acceptance check. Existing SL-005/SL-006 and pending independent Iso/embedded verification are unchanged.
