@@ -413,10 +413,23 @@
           selectedFixture = pane.querySelector(
             'select[aria-label="Panel fixture"]'
           );
-        if (selectedFixture && panel.context.fixture)
+        if (selectedFixture && options.project) {
+          const project = options.project(), fixtures = [...project.fixtures, ...(project.director ? [{id:'__director',name:'Director'}] : [])],
+            signature = JSON.stringify(fixtures.map(f => [f.id,f.name]));
+          if (selectedFixture.dataset.options !== signature) {
+            selectedFixture.replaceChildren(...fixtures.map(f => new Option(f.name,f.id)));
+            selectedFixture.dataset.options = signature;
+          }
+          const preferred = panel.context.fixture || options.capture().fixture;
+          selectedFixture.value = fixtures.some(f => f.id===preferred) ? preferred : fixtures[0]?.id || '';
+          if (selectedLayer) {
+            const layers = selectedFixture.value==='__director' ? project.director : project.content[selectedFixture.value] || [];
+            if (selectedLayer.options.length !== layers.length) selectedLayer.replaceChildren(...layers.map((_,i)=>new Option(`Layer ${i+1}`,i)));
+          }
+        } else if (selectedFixture && panel.context.fixture)
           selectedFixture.value = panel.context.fixture;
         if (selectedLayer && panel.context.layer !== undefined)
-          selectedLayer.value = panel.context.layer;
+          selectedLayer.value = Math.max(0,Math.min(panel.context.layer,selectedLayer.options.length-1));
         const primary =
           panel.view === 'stack' && panel.id === focused
             ? legacy.stack

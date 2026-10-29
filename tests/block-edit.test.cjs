@@ -15,3 +15,19 @@ test('an unchanged placement produces no authored transaction',()=>{const p=proj
 
 test('indexed creation is immutable and inserts at the exact ordered boundary',()=>{const p={content:{f:[{name:'Test',root:node(1,1,[node(2,2),node(3,3),node(4,4)])},null,null]},director:[null,null,null]},before=structuredClone(p);const plan=B.create(p,{key:'Create.Value.Constant',name:'Constant',defaults:{Value:0.8}},{fixture:'f',layer:0,target:1,placement:'input',index:1});assert.deepEqual(plan.command.commands[0].stack.root.children.map(n=>n.id),[2,5,3,4]);assert.deepEqual(p,before);assert.equal(plan.selection.node,5);});
 test('same-parent indexed moves adjust for detached and promoted children',()=>{const p={content:{f:[{name:'Test',root:node(1,1,[node(2,2),node(3,3),node(4,4)])},null,null]},director:[null,null,null]};let plan=B.move(p,{fixture:'f',layer:0,node:2},{fixture:'f',layer:0,target:1,placement:'input',index:3});assert.deepEqual(plan.command.commands[0].stack.root.children.map(n=>n.id),[3,4,2]);assert.equal(B.move(p,{fixture:'f',layer:0,node:2},{fixture:'f',layer:0,target:1,placement:'input',index:1}).command.commands.length,0);p.content.f[0].root.children[0].children=[node(5,5),node(6,6)];plan=B.move(p,{fixture:'f',layer:0,node:2},{fixture:'f',layer:0,target:1,placement:'input',index:3},'block');assert.deepEqual(plan.command.commands[0].stack.root.children.map(n=>n.id),[5,6,3,4,2]);assert.throws(()=>B.create(p,{key:'Create.Value.Constant',defaults:{Value:1}},{fixture:'f',layer:0,target:1,placement:'input',index:99}),/index/i);});
+
+test('duplicate inserts a fresh sibling with drivers and leaves clipboard/source untouched',()=>{
+ const p=project(),before=structuredClone(p),out=B.duplicate(p,source),r=out.command.commands[0].stack.root;
+ assert.deepEqual(p,before);assert.equal(r.children.length,2);assert.equal(r.children[0].id,2);
+ assert(r.children[1].id>4);assert.equal(r.children[1].drivers.Value.properties.Value,.4);
+ assert.deepEqual(out.selection.context,[]);assert.equal(out.selection.node,r.children[1].id);
+});
+test('duplicating a layer or driver root creates an independent layer in one batch',()=>{
+ const p=project(),before=structuredClone(p),out=B.duplicate(p,{...source,node:1});
+ assert.deepEqual(p,before);assert.equal(out.command.commands[0].type,'add_layer');
+ assert.equal(out.command.commands[1].layer,3);assert.equal(out.selection.layer,3);
+ const driver=B.duplicate(p,{...source,node:4,context:[{owner:2,key:'Value'}]});
+ assert.equal(driver.selection.layer,3);assert.equal(driver.command.commands[1].stack.root.properties.Value,.4);
+ const full=project();full.content.one=Array.from({length:32},()=>full.content.one[0]);
+ assert.throws(()=>B.duplicate(full,{...source,node:1}),/32|limit/i);
+});

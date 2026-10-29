@@ -271,3 +271,14 @@ Core tests check full-area coverage, shallow unit normals, opposing illumination
 ## Studio product branding — 2026-10-29
 
 Removed the legacy RUST badge from Studio. The header reads schema-s, the document title is Schema-s / Studio, and the project subtitle is Studio. About remains linked from the brand. Read-only local Chrome check verified the exact name/title and link; JavaScript syntax and scoped diff checks pass. This is static copy only; no engine/session or native archive changes. Public /app still routes to the browser Studio.
+
+
+## Everyday authoring QoL — 2026-10-30
+
+Implemented the three selected improvements plus two high-value additions: Duplicate branch (Ctrl/Cmd+D), fuzzy Find fixture (Ctrl/Cmd+K), per-property Reset to default, Ctrl/Cmd+S project saving, and panel fixture/layer menu refresh after scene replacement/addition/undo (SL-006 implementation; independent lab verification pending). Actions are exposed in Studio and Schémaboy menus. Finder searches names, stable IDs, groups and universe/address and has keyboard navigation plus44px touch targets. It changes selection only.
+
+Duplicate inserts a fresh sibling with all driver trees, leaving the clipboard intact. Layer/driver roots copy to a new independent layer in one atomic batch, respect the32-layer limit and preserve disabled source layers; undo returns to the source layer. Reset restores only the selected catalog property and is disabled while driven. Save opens the existing Projects dialog; it blurs and waits for pending field edits before opening, and Ctrl/Cmd+Y also supports redo. Shortcuts do not duplicate or search from editable fields/modal dialogs. Fixed selection-only polling replacing a newly focused desktop property field.
+
+Pure planner tests and real isolated-engine browser tests pass: full branch/driver copies, root layers, reset/default equality, one-step exact undo, desktop/mobile search and reset, dirty-field save, typing guards, and fixture option additions/names after full project replacement and undo. Existing driver-removal, split-pane/chrome deletion and mobile skin/permissions regressions pass. Required Rust tests/fmt/strict clippy and JS/diff checks pass. No live user project/history or physical output edited; native archives remain unchanged. Public web publication follows the commit. Retest nested Repeat/Bezier duplication and property reset, and independently confirm SL-006 on Carpushit switching; retain SL-005.
+
+Remaining priorities: dense-scene marker/footer occlusion (SL-005); searchable command/shortcut palette; fixture snapping/alignment/distribution; per-block bypass with defined signal semantics; portable project bundles including resources and component dependencies; inspectable undo history and named scene checkpoints. These are follow-up candidates, not new implementation claims.

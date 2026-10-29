@@ -27,5 +27,15 @@
   else{decode(JSON.stringify(clip));node=clone(clip.node);}
   const destination=draft(d);if(!source||!same)reidentify(node,maxId(destination.root)+1);const id=node.id;place(destination,node,d,catalog);const commands=[...drafts.values()].map(({where,stack})=>({type:'replace_layer',fixture:where.fixture,layer:where.layer,stack:stack.root?stack:null})).filter(command=>JSON.stringify(canonical(command.stack))!==JSON.stringify(canonical(stack(p,command))));return{command:{type:'batch',commands},selection:{fixture:d.fixture,layer:d.layer,node:id,context:context(destination.root,id)||[]}};
  }
- const api={find,decode,copy,create:(p,behavior,d)=>plan(p,null,{format:'schema-block',version:1,mode:'branch',node:{id:1,behavior:behavior.key,properties:clone(behavior.defaults||{}),children:[],drivers:{}}},d,'branch'),paste:(p,clip,d,catalog)=>plan(p,null,clip,d,'branch',catalog),move:(p,source,d,mode='branch',catalog)=>plan(p,source,null,d,mode,catalog),context};global.SchemaBlocks=api;if(typeof module!=='undefined')module.exports=api;
+ function duplicate(p,source,catalog){
+  const original=stack(p,source),node=find(original?.root,source.node);if(!node)throw Error('Select a block first');
+  let destination;function visit(n){for(let i=0;i<n.children.length;i++){if(n.children[i].id===source.node){destination={fixture:source.fixture,layer:source.layer,target:n.id,placement:'input',index:i+1};return;}visit(n.children[i]);if(destination)return;}for(const driver of Object.values(n.drivers)){visit(driver);if(destination)return;}}
+  visit(original.root);const clip=copy(p,source,'branch');if(destination)return plan(p,null,clip,destination,'branch',catalog);
+  const list=layers(p,source.fixture);if(list.length>=32)throw Error('The 32-layer limit has been reached');
+  const draft=source.fixture==='__director'?{...p,director:[...list,null]}:{...p,content:{...p.content,[source.fixture]:[...list,null]}};
+  const result=plan(draft,null,clip,{fixture:source.fixture,layer:list.length,placement:'root'},'branch',catalog);
+  const replacement=result.command.commands[0].stack;replacement.name=(node===original.root?original.name:node.behavior.split('.').at(-1))+' copy';if(original.enabled===false)replacement.enabled=false;
+  result.command.commands.unshift({type:'add_layer',fixture:source.fixture});return result;
+ }
+ const api={duplicate,find,decode,copy,create:(p,behavior,d)=>plan(p,null,{format:'schema-block',version:1,mode:'branch',node:{id:1,behavior:behavior.key,properties:clone(behavior.defaults||{}),children:[],drivers:{}}},d,'branch'),paste:(p,clip,d,catalog)=>plan(p,null,clip,d,'branch',catalog),move:(p,source,d,mode='branch',catalog)=>plan(p,source,null,d,mode,catalog),context};global.SchemaBlocks=api;if(typeof module!=='undefined')module.exports=api;
 })(globalThis);
