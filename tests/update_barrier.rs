@@ -70,7 +70,15 @@ async fn update_barrier_holds_clock_actions_and_edits_until_validation_completes
         .unwrap();
     assert_eq!(response.status(), StatusCode::SERVICE_UNAVAILABLE);
     std::fs::remove_file(&barrier).unwrap();
-    tokio::time::sleep(std::time::Duration::from_millis(70)).await;
+    // Scheduler latency differs across hosts; wait for the observable release,
+    // rather than assuming an evaluator frame is published within 70 ms.
+    tokio::time::timeout(std::time::Duration::from_secs(2), async {
+        while runtime.controller.current().snapshot.frame <= expected.snapshot.frame {
+            tokio::time::sleep(std::time::Duration::from_millis(10)).await;
+        }
+    })
+    .await
+    .expect("evaluation resumes after the update barrier is removed");
     assert!(runtime.controller.current().snapshot.frame > expected.snapshot.frame);
     assert_eq!(runtime.controller.current().project, *expected.project);
     runtime

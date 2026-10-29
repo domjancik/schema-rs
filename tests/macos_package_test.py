@@ -28,4 +28,18 @@ class MacBundle(unittest.TestCase):
   with tempfile.TemporaryDirectory() as t:
    p=pathlib.Path(t)/'binary';p.write_bytes(b'MZ'+bytes(100));
    with self.assertRaises(ValueError):mac.validate_macho(p,'macos-arm64')
+ def test_unsigned_preview_never_requests_apple_credentials(self):
+  from unittest.mock import patch
+  import json,zipfile
+  with tempfile.TemporaryDirectory() as t:
+   p=pathlib.Path(t);binary=p/'engine';binary.write_bytes(struct.pack('<IIIIIIII',0xfeedfacf,0x100000c,0,2,0,0,0,0));notices=p/'notices';notices.mkdir();(notices/'LICENSE').write_text('notice');app=mac.bundle(binary,binary,p/'app','abc1234',notices,'macos-arm64');calls=[]
+   def run(args,**kwargs):
+    calls.append(args)
+    if args[0]=='ditto':
+     with zipfile.ZipFile(args[-1],'w') as z:
+      for path in app.rglob('*'):
+       if path.is_file():z.write(path,'Schema-s.app/'+path.relative_to(app).as_posix())
+   with patch.object(mac.sys,'platform','darwin'),patch.object(mac.subprocess,'run',side_effect=run):archive=mac.unsigned_preview(app,p/'out','macos-arm64')
+   proof=json.loads(archive.with_name(archive.name+'.release.json').read_text());self.assertFalse(proof['notarized']);self.assertEqual(proof['signing'],'ad-hoc');self.assertIn('unsigned',archive.name)
+   self.assertTrue(any('--sign' in args and '-' in args for args in calls));self.assertFalse(any('notarytool' in args or 'spctl' in args for args in calls));self.assertTrue((app/'Contents/Resources/UNSIGNED-PREVIEW.txt').is_file())
 if __name__=='__main__':unittest.main()

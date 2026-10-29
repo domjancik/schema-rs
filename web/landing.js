@@ -18,12 +18,13 @@
     ]) {
       const file = release.platforms?.[platform],
         link = document.getElementById(platform + '-download');
-      const expected = `Schema-s-${platform}.${platform === 'macos-universal' ? 'zip' : 'tar.gz'}`;
-      if (file?.filename === expected && (platform !== 'macos-universal' || file.notarized === true)) {
+      const preview = platform === 'macos-universal' && file?.distribution === 'unsigned-preview' && file?.signing === 'ad-hoc' && file?.notarized === false;
+      const expected = `Schema-s-${platform}${preview ? '-unsigned' : ''}.${platform === 'macos-universal' ? 'zip' : 'tar.gz'}`;
+      if (file?.filename === expected && (platform !== 'macos-universal' || file.notarized === true || preview)) {
         link.href = '/downloads/' + file.filename;
-        link.textContent = label;
+        link.textContent = preview ? 'macOS · unsigned preview ↓' : label;
         link.removeAttribute('aria-disabled');
-        if (platform === 'macos-universal') document.getElementById('macos-release-status').textContent = 'Universal macOS download · Apple Silicon + Intel · signed and notarized.';
+        if (platform === 'macos-universal') document.getElementById('macos-release-status').textContent = preview ? 'Unsigned preview · Apple Silicon + Intel · not notarized. First launch may require Privacy & Security → Open Anyway.' : 'Universal macOS download · Apple Silicon + Intel · signed and notarized.';
       }
     }
     if (release.platforms) {

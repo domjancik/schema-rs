@@ -1,6 +1,6 @@
 # Schema-s on macOS
 
-macOS 13 or newer, Apple Silicon and Intel. The Rust engine serves Studio and schémaboy in the system browser and supports the TUI and Art-Net. Native macOS execution, Safari and physical USB validation must be completed on a Mac before a public release is advertised. Windows and Linux keep their existing launch and output paths.
+macOS 13 or newer, Apple Silicon and Intel. The Rust engine serves Studio and schémaboy in the system browser and supports the TUI and Art-Net. Unsigned previews can be distributed without Apple credentials. Native CI validates the engine and launcher on Mac runners; Safari and physical USB testing remain separate checks. Windows and Linux keep their existing launch and output paths.
 
 ## Running the app
 
@@ -20,6 +20,18 @@ The loader tries the app's `Contents/Frameworks/libftd2xx.dylib`, then explicit 
 
 Hardened runtime may reject an external library signed by another team. Bundle and sign the licensed dylib with the app instead of disabling library validation. Supply `--ftdi PATH --ftdi-license PATH` to the native builder; redistribution requires the unchanged vendor license. Nothing downloads or installs a driver automatically. Follow [current FTDI guidance](https://ftdichip.com/drivers/d2xx-drivers/); do not disable Apple security protections or unload system drivers based on older instructions. Real-device timing, disconnect/reconnect and sleep tests remain required.
 
+## Unsigned preview
+
+No Developer ID certificate or notarization is required for a preview:
+
+```sh
+python3 scripts/macos/build_native.py --output target/mac-preview --build-number 1 --unsigned-preview
+```
+
+This produces `Schema-s-macos-universal-unsigned.zip`, marked **unsigned / not notarized** on the download page and inside the bundle. An ad-hoc signature provides binary integrity on Apple Silicon without identifying a developer. After first trying to open the app, macOS may require System Settings → Privacy & Security → Open Anyway. No system-wide security setting needs to be disabled. Signing/notarization remains optional for a later polished release. Automatic Sparkle updates are not configured for this preview.
+
+The public source and Mac build results are at https://github.com/domjancik/schema-rs.
+
 ## Build and sign
 
 On a Mac with Xcode command-line tools, Rust and Python 3.11+, run:
@@ -38,9 +50,9 @@ python3 scripts/macos/build_native.py --output target/mac-release --build-number
   --notary-profile schema-s-notary
 ```
 
-Use a fresh output directory for each build. Signed releases require a clean Git checkout so the commit identifies the exact source. Increment the build number for every published update. The marketing version comes from Cargo.toml. Signing uses hardened runtime, signs nested code before enclosing bundles, verifies signatures, submits to notarization, staples and verifies the ticket, checks Gatekeeper, then creates the final ZIP, checksum and release attestation. No unsigned fallback is published. Credentials belong in Keychains or CI secrets; do not commit them. See [Apple's notarization workflow](https://developer.apple.com/documentation/security/notarizing-macos-software-before-distribution).
+Use a fresh output directory for each build. Signed releases require a clean Git checkout so the commit identifies the exact source. Increment the build number for every published update. The marketing version comes from Cargo.toml. Signing uses hardened runtime, signs nested code before enclosing bundles, verifies signatures, submits to notarization, staples and verifies the ticket, checks Gatekeeper, then creates the final ZIP, checksum and release attestation. The signed path has no automatic unsigned fallback; unsigned previews are an explicit separate build mode. Credentials belong in Keychains or CI secrets; do not commit them. See [Apple's notarization workflow](https://developer.apple.com/documentation/security/notarizing-macos-software-before-distribution).
 
-`.github/workflows/macos.yml` configures native Rust tests/lints, Swift compilation and a loopback engine startup/shutdown smoke on Apple Silicon and Intel. Manual dispatch also produces a universal development bundle. It does not use signing credentials or upload a public release. There is currently no Git remote configured here, so this workflow has not run remotely.
+`.github/workflows/macos.yml` configures native Rust tests/lints, Swift compilation and a loopback engine startup/shutdown smoke on Apple Silicon and Intel. Manual dispatch also produces a universal development bundle. It uses no Apple credentials for the unsigned-preview job, which runs after native checks on main or manual dispatch. Artifacts can be published as explicitly labeled unsigned previews.
 
 ## Updates and public downloads
 
@@ -55,7 +67,7 @@ python3 scripts/macos/build_native.py --output target/mac-updatable --build-numb
 
 The SDK directory must contain `Sparkle.framework` and `LICENSE`. The launcher then offers Check for Updates and uses Sparkle's standard consent/preferences. Without this complete configuration it opens the downloads page. Projects and history remain outside the application bundle. Private update signing keys stay in the release Mac's Keychain. After notarization, use the SDK's `generate_appcast` against the final release archive directory and publish its signed enclosure/feed at the configured HTTPS URLs. Follow [Sparkle's distribution instructions](https://sparkle-project.org/documentation/); no feed or automatic installation is active until a real signed channel is configured and tested, including graceful engine shutdown and update failure recovery.
 
-Public site packaging accepts `--macos PATH/Schema-s-macos-universal.zip` alongside its existing Windows/Linux inputs. The adjacent `.release.json` from the native notarization job must match the source commit, filename, size and SHA-256. Only import artifacts from that trusted job; the sidecar itself is not a cryptographic notarization verifier. The landing page enables its Mac link only for an available notarized manifest entry. Development bundles are never promoted through this path.
+Public site packaging accepts `--macos PATH/Schema-s-macos-universal.zip` alongside its existing Windows/Linux inputs. The adjacent `.release.json` from the native packaging job must match the source commit, filename, size and SHA-256. Only import artifacts from that trusted job; the sidecar itself is not a cryptographic notarization verifier. The landing page enables its Mac link for a notarized release or an explicit ad-hoc unsigned-preview manifest entry with the correct filename and matching metadata. Ordinary development bundles are not silently promoted.
 
 ## Release acceptance on real hardware
 

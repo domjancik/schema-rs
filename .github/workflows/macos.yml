@@ -4,6 +4,9 @@ on:
     branches: [main, 'codex/**']
   pull_request:
   workflow_dispatch:
+concurrency:
+  group: macos-${{ github.ref }}
+  cancel-in-progress: true
 permissions:
   contents: read
 jobs:
@@ -23,9 +26,9 @@ jobs:
           python-version: '3.12'
       - run: rustup update stable && rustup default stable && rustup component add rustfmt clippy
       - run: cargo fmt --check
+      - run: xcrun swiftc -swift-version 5 -O scripts/macos/Launcher.swift -o "$RUNNER_TEMP/Schema-s-launcher"
       - run: cargo test --locked
       - run: cargo clippy --locked --all-targets -- -D warnings
-      - run: xcrun swiftc -swift-version 5 -O scripts/macos/Launcher.swift -o "$RUNNER_TEMP/Schema-s-launcher"
       - run: python3 tests/macos_package_test.py && python3 tests/public_release_test.py
       - run: node --check web/app.js && node --check web/output-ui.js && node --check web/landing.js
       - run: cargo build --locked

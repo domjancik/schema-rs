@@ -17,6 +17,9 @@ const base = process.env.PUBLIC_SITE_URL || 'http://127.0.0.1:8828';
     const mac = manifest.platforms?.['macos-universal'];
     if (mac?.notarized === true) {
       assert.equal(await page.locator('#macos-universal-download').getAttribute('href'), '/downloads/Schema-s-macos-universal.zip');
+    } else if (mac?.distribution === 'unsigned-preview' && mac?.signing === 'ad-hoc') {
+      assert.equal(await page.locator('#macos-universal-download').getAttribute('href'), '/downloads/Schema-s-macos-universal-unsigned.zip');
+      assert.match(await page.locator('#macos-release-status').textContent(), /unsigned.*not notarized/i);
     } else {
       assert.equal(await page.locator('#macos-universal-download').getAttribute('href'), null);
       assert.match(await page.locator('#macos-release-status').textContent(), /pending.*native.*validation/i);
