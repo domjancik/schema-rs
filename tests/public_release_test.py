@@ -19,9 +19,25 @@ class PublicRelease(unittest.TestCase):
     self.assertEqual(tar.getmember('Schema-s/schema-rs').mode,0o755)
  def test_site_export_does_not_publish_a_nonexistent_engine(self):
   with tempfile.TemporaryDirectory() as t:
-   root=pathlib.Path(t);downloads=root/'downloads';downloads.mkdir();(downloads/'latest.json').write_text('{}');(downloads/'private.json').write_text('must never publish')
+   root=pathlib.Path(t);downloads=root/'downloads';downloads.mkdir();(downloads/'latest.json').write_text('{}');(downloads/'private.json').write_text('must never publish');(downloads/'Schema-s-macos-universal.zip').write_bytes(b'unsigned stale build')
    release.export_site(root/'site',downloads)
    html=(root/'site/index.html').read_text(encoding='utf8')
    self.assertIn('/connect?view=studio',html);self.assertNotIn('href="/?view=studio"',html)
-   self.assertFalse((root/'site/downloads/private.json').exists());self.assertFalse((root/'site/app.js').exists());self.assertFalse((root/'site/schema-project').exists())
+   self.assertFalse((root/'site/downloads/Schema-s-macos-universal.zip').exists());self.assertFalse((root/'site/downloads/private.json').exists());self.assertFalse((root/'site/app.js').exists());self.assertFalse((root/'site/schema-project').exists())
+ def test_mac_public_import_requires_notarized_matching_commit_and_hash(self):
+  import zipfile,hashlib,plistlib
+  with tempfile.TemporaryDirectory() as t:
+   root=pathlib.Path(t);archive=root/'Schema-s-macos-universal.zip'
+   with zipfile.ZipFile(archive,'w') as z:
+    z.writestr('Schema-s.app/Contents/Resources/BUILD.json',json.dumps({'commit':'abc1234','platform':'macos-universal'}))
+    z.writestr('Schema-s.app/Contents/Info.plist',plistlib.dumps({'CFBundleIdentifier':'tools.scenic.schema-s'}))
+   with self.assertRaises(ValueError):release.verify_macos_release(archive,'abc1234')
+   proof={'commit':'abc1234','platform':'macos-universal','notarized':True,'sha256':hashlib.sha256(archive.read_bytes()).hexdigest(),'bytes':archive.stat().st_size,'filename':archive.name}
+   sidecar=root/(archive.name+'.release.json');sidecar.write_text(json.dumps(proof))
+   self.assertEqual(release.verify_macos_release(archive,'abc1234')['filename'],archive.name)
+   with self.assertRaises(ValueError):release.verify_macos_release(archive,'def5678')
+   proof['notarized']=False;sidecar.write_text(json.dumps(proof))
+   with self.assertRaises(ValueError):release.verify_macos_release(archive,'abc1234')
+   proof['notarized']=True;proof['sha256']='0'*64;sidecar.write_text(json.dumps(proof))
+   with self.assertRaises(ValueError):release.verify_macos_release(archive,'abc1234')
 if __name__=='__main__':unittest.main()

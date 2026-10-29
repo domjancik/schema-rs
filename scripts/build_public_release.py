@@ -37,6 +37,30 @@ def package_linux(binary, output, platform, commit, notices):
     archive.with_suffix('.tmp').replace(archive)
     return archive
 
+def verify_macos_release(archive, commit):
+    """Import only artifacts attested by the native signing/notarization job.
+
+    The job and its artifact transport are trusted; this sidecar is not a substitute
+    for codesign/notarytool. Do not accept arbitrary uploads as release artifacts.
+    """
+    import zipfile, plistlib
+    archive=pathlib.Path(archive)
+    if archive.name != 'Schema-s-macos-universal.zip': raise ValueError('Expected universal Mac release')
+    try:
+        proof=json.loads(archive.with_name(archive.name+'.release.json').read_text(encoding='utf8'))
+        if (proof.get('notarized') is not True or proof.get('commit') != commit or
+            proof.get('platform') != 'macos-universal' or proof.get('filename') != archive.name or
+            proof.get('sha256') != digest(archive) or proof.get('bytes') != archive.stat().st_size):
+            raise ValueError('Mac release attestation mismatch')
+        with zipfile.ZipFile(archive) as z:
+            metadata=json.loads(z.read('Schema-s.app/Contents/Resources/BUILD.json'))
+            info=plistlib.loads(z.read('Schema-s.app/Contents/Info.plist'))
+            if metadata.get('commit') != commit or metadata.get('platform') != 'macos-universal' or info.get('CFBundleIdentifier') != 'tools.scenic.schema-s':
+                raise ValueError('Mac bundle metadata mismatch')
+    except (OSError, KeyError, json.JSONDecodeError, zipfile.BadZipFile, plistlib.InvalidFileException) as error:
+        raise ValueError('Native notarized Mac release and attestation required') from error
+    return {key:proof[key] for key in ['filename','sha256','bytes','notarized']}
+
 def export_site(destination, downloads):
     destination, downloads = map(pathlib.Path, (destination, downloads))
     destination.mkdir(parents=True, exist_ok=True)
@@ -52,13 +76,17 @@ def export_site(destination, downloads):
     for name in ['connect.html','connect.js']:
         shutil.copyfile(ROOT/'scripts/publication'/name,destination/name)
     target=destination/'downloads';target.mkdir(exist_ok=True)
+    manifest=json.loads((downloads/'latest.json').read_text(encoding='utf8')) if (downloads/'latest.json').is_file() else {}
+    mac=manifest.get('platforms',{}).get('macos-universal',{})
     for path in downloads.iterdir():
-        if path.is_file() and (path.name in {'latest.json','SHA256SUMS.txt','install.sh','Schema-s-Windows-x64.zip','Schema-s-linux-x64.tar.gz','Schema-s-linux-arm64.tar.gz'}): shutil.copyfile(path,target/path.name)
+        if path.name == 'Schema-s-macos-universal.zip' and (mac.get('notarized') is not True or mac.get('sha256') != digest(path)): continue
+        if path.is_file() and (path.name in {'latest.json','SHA256SUMS.txt','install.sh','Schema-s-Windows-x64.zip','Schema-s-linux-x64.tar.gz','Schema-s-linux-arm64.tar.gz','Schema-s-macos-universal.zip'}): shutil.copyfile(path,target/path.name)
     shutil.copyfile(ROOT/'scripts/publication/vercel.json',destination/'vercel.json')
     shutil.copyfile(ROOT/'docs/linux.md',destination/'linux.txt')
+    shutil.copyfile(ROOT/'docs/macos.md',destination/'macos.txt')
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--linux-x64',type=pathlib.Path,required=True);p.add_argument('--linux-arm64',type=pathlib.Path,required=True);p.add_argument('--windows',type=pathlib.Path,required=True);p.add_argument('--notices',type=pathlib.Path,required=True);p.add_argument('--commit',required=True);p.add_argument('--output',type=pathlib.Path,default=ROOT/'target/publication/downloads');p.add_argument('--site',type=pathlib.Path,default=ROOT/'target/publication/site');a=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument('--linux-x64',type=pathlib.Path,required=True);p.add_argument('--linux-arm64',type=pathlib.Path,required=True);p.add_argument('--macos',type=pathlib.Path);p.add_argument('--windows',type=pathlib.Path,required=True);p.add_argument('--notices',type=pathlib.Path,required=True);p.add_argument('--commit',required=True);p.add_argument('--output',type=pathlib.Path,default=ROOT/'target/publication/downloads');p.add_argument('--site',type=pathlib.Path,default=ROOT/'target/publication/site');a=p.parse_args()
     if not __import__('re').fullmatch('[0-9a-f]{7,40}',a.commit): raise ValueError('Source commit required')
     a.output.mkdir(parents=True,exist_ok=True)
     version=tomllib.loads((ROOT/'Cargo.toml').read_text())['package']['version']+'-preview'
@@ -70,6 +98,9 @@ def main():
         if 'Schema-s/schema-rs.exe' not in z.namelist(): raise ValueError('Invalid Windows package')
     windows=a.output/'Schema-s-Windows-x64.zip';shutil.copyfile(a.windows,windows)
     artifacts['windows-x64']={'filename':windows.name,'sha256':digest(windows),'bytes':windows.stat().st_size}
+    if a.macos:
+        artifacts['macos-universal']=verify_macos_release(a.macos,a.commit)
+        shutil.copyfile(a.macos,a.output/a.macos.name)
     shutil.copyfile(ROOT/'scripts/publication/bootstrap.sh',a.output/'install.sh')
     manifest={'available':True,'version':version,'commit':a.commit,**artifacts['windows-x64'],'platforms':artifacts}
     (a.output/'latest.json').write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf8')

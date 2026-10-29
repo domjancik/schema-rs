@@ -36,4 +36,4 @@ See [lighting/motion contracts and examples](lighting-motion.md). Position/curre
 Modify.Repeat preserves source-derived frame playback modes, duplicated bank capture and the 402-sample recording guard. The guard is a serialized runtime latch instead of an evaluation-time authored Record mutation; toggle Record off then on to re-arm it. See [the Repeat contract](lighting-motion.md#recorded-repeat).
 
 
-Windows Open DMX USB output uses the optional installed FTDI D2XX driver; Art-Net remains platform-independent. One selected universe/device, no USB input/RDM or simultaneous transports. Linux excludes Windows FFI and continues using Art-Net/OLA. See [Open DMX on Windows](open-dmx-windows.md).
+Windows and macOS Open DMX USB output use optional FTDI D2XX libraries; Art-Net remains platform-independent. One selected universe/device, no USB input/RDM or simultaneous transports. Linux excludes the D2XX loaders and continues using Art-Net/OLA. macOS uses Application Support and an optional native menu-bar launcher; real Mac execution/USB validation remains pending. See [macOS support and release limits](macos.md). See [Open DMX on Windows](open-dmx-windows.md).

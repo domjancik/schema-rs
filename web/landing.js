@@ -13,11 +13,13 @@
     detail.textContent = `${release.version} · ${(release.bytes / 1048576).toFixed(1)} MB Windows · ${release.commit.slice(0, 12)}`;
     for (const [platform, label] of [
       ['linux-x64', 'Linux x64 ↓'],
-      ['linux-arm64', 'Linux ARM64 / Raspberry Pi ↓']
+      ['linux-arm64', 'Linux ARM64 / Raspberry Pi ↓'],
+      ['macos-universal', 'macOS · Apple Silicon + Intel ↓']
     ]) {
       const file = release.platforms?.[platform],
         link = document.getElementById(platform + '-download');
-      if (file?.filename === `Schema-s-${platform}.tar.gz`) {
+      const expected = `Schema-s-${platform}.${platform === 'macos-universal' ? 'zip' : 'tar.gz'}`;
+      if (file?.filename === expected && (platform !== 'macos-universal' || file.notarized === true)) {
         link.href = '/downloads/' + file.filename;
         link.textContent = label;
         link.removeAttribute('aria-disabled');

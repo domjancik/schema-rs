@@ -191,3 +191,5 @@ Open **Projects** in Studio or **SAVE** in schémaboy to save named scenes, sele
 Automatic controller deployment: [update server and operator workflow](docs/update-server.md).
 
 Studio supports resizable, dockable view instances and saved workspace tabs: [panel and layer guide](docs/workspaces.md).
+
+macOS support: [native menu-bar app, universal builds, signing and optional USB output](docs/macos.md). Native Mac and hardware release validation is still required.
