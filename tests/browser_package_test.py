@@ -15,7 +15,7 @@ class BrowserPackage(unittest.TestCase):
  def test_existing_site_policy_is_not_broadened_for_wasm(self):
   config=json.loads((ROOT/'scripts/publication/vercel.json').read_text())
   policy=next(h['value'] for h in config['headers'][0]['headers'] if h['key']=='Content-Security-Policy')
-  self.assertNotIn('wasm-unsafe-eval',policy);self.assertIn("frame-ancestors 'none'",policy)
+  self.assertEqual(config['rewrites'][0],{'source':'/play','destination':'/studio'});self.assertNotIn('wasm-unsafe-eval',policy);self.assertIn("frame-ancestors 'none'",policy)
   worker=next(g for g in config['headers'] if g['source']=='/browser-worker.mjs')
   value=next(h['value'] for h in worker['headers'] if h['key']=='Content-Security-Policy')
   self.assertIn("script-src 'self' 'wasm-unsafe-eval'",value);self.assertNotIn("'unsafe-eval'",value);self.assertIn("connect-src 'self'",value)

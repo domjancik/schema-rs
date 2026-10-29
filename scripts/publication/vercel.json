@@ -97,19 +97,11 @@
   "rewrites": [
     {
       "source": "/play",
-      "destination": "/studio.html"
-    },
-    {
-      "source": "/mobile",
-      "destination": "/mobile.html"
-    },
-    {
-      "source": "/preview",
-      "destination": "/preview.html"
+      "destination": "/studio"
     },
     {
       "source": "/animation",
-      "destination": "/animation-demo.html"
+      "destination": "/animation-demo"
     }
   ]
 }
