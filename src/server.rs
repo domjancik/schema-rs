@@ -1,3 +1,4 @@
+pub use crate::runtime::Published;
 use crate::{
     engine::{Command, Engine, PreparedEdit},
     model::*,
@@ -20,15 +21,7 @@ use std::{
     },
     time::{Duration, Instant},
 };
-#[derive(Clone, serde::Serialize, serde::Deserialize)]
-pub struct Published {
-    #[serde(skip)]
-    pub(crate) host: Arc<crate::inputs::Inputs>,
-    #[serde(skip)]
-    pub(crate) plugins: Arc<crate::plugins::Registry>,
-    pub project: Project,
-    pub snapshot: Snapshot,
-}
+
 enum RequestMessage {
     Edit(Box<Message>),
     Plugins(

@@ -541,7 +541,7 @@ impl Inputs {
                 owner,
                 universe,
                 channels,
-                std::time::Instant::now(),
+                crate::clock::Instant::now(),
             )?,
             Event::Pixels { fixture, positions } => {
                 self.pixels.insert(fixture, positions);

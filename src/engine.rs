@@ -391,13 +391,15 @@ impl Engine {
         self.last = snapshot;
         Ok(())
     }
+    #[cfg(feature = "native")]
     pub(crate) fn paused_for_session(&self) -> bool {
         self.paused
     }
+    #[cfg(feature = "native")]
     pub(crate) fn blackout_for_session(&self) -> bool {
         self.blackout
     }
-    pub fn checkpoint(&self) -> crate::session::Session {
+    pub fn current_snapshot(&self) -> Snapshot {
         let mut snapshot = self.last.clone();
         snapshot.revision = self.revision;
         snapshot.plugin_generation = self.plugins.state.generation;
@@ -407,6 +409,10 @@ impl Engine {
         snapshot.blackout = self.blackout;
         snapshot.can_undo = !self.undo.is_empty();
         snapshot.can_redo = !self.redo.is_empty();
+        snapshot
+    }
+    pub fn checkpoint(&self) -> crate::session::Session {
+        let snapshot = self.current_snapshot();
         crate::session::Session {
             inputs: self.inputs.clone(),
             plugins: self.plugins.clone(),
@@ -663,7 +669,7 @@ impl Engine {
         scenic::with_plugins(self.plugins.clone(), || self.tick_inner(dt));
     }
     fn tick_inner(&mut self, dt: f64) {
-        let started = std::time::Instant::now();
+        let started = crate::clock::Instant::now();
         if !self.paused {
             self.time += dt.clamp(0., 0.25)
         }
@@ -920,7 +926,7 @@ impl Engine {
             &self.inputs.channel_test,
             &mut snap.universes,
             self.blackout,
-            std::time::Instant::now(),
+            crate::clock::Instant::now(),
         );
         snap
     }

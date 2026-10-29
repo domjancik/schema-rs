@@ -294,7 +294,7 @@ pub(crate) struct Resolution {
     pub events: Vec<Event>,
     pub errors: Vec<String>,
 }
-pub(crate) fn resolve(frame: &crate::server::Published) -> Resolution {
+pub(crate) fn resolve(frame: &crate::runtime::Published) -> Resolution {
     let mut result = Resolution {
         commands: vec![],
         internal: vec![],

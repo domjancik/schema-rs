@@ -1,9 +1,7 @@
 //! Short-lived manual channel overrides, never authored or restored from a project/session.
+use crate::clock::Instant;
 use crate::model::Result;
-use std::{
-    collections::BTreeMap,
-    time::{Duration, Instant},
-};
+use std::{collections::BTreeMap, time::Duration};
 #[derive(Clone, Debug)]
 pub struct Lease {
     owner: String,

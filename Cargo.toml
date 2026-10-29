@@ -6,13 +6,30 @@ rust-version = "1.88"
 license = "MIT"
 description = "Headless ScenicScript engine with scene editing, web and terminal clients"
 
+[workspace]
+members = ["crates/schema-web"]
+default-members = ["."]
+
+[features]
+default = ["native"]
+native = ["dep:axum", "dep:tokio", "dep:crossterm"]
+browser = ["rhai/wasm-bindgen", "dep:web-time"]
+
+[[bin]]
+name = "schema-rs"
+path = "src/main.rs"
+required-features = ["native"]
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+web-time = { version = "1", optional = true }
+
 [dependencies]
 serde = { version = "1", features = ["derive", "rc"] }
 serde_json = { version = "1", features = ["unbounded_depth", "float_roundtrip"] }
 serde_yaml = "0.9"
-axum = "0.8"
-tokio = { version = "1", features = ["rt-multi-thread", "net", "macros", "signal"] }
-crossterm = "0.28.1"
+axum = { version = "0.8", optional = true }
+tokio = { version = "1", features = ["rt-multi-thread", "net", "macros", "signal"], optional = true }
+crossterm = { version = "0.28.1", optional = true }
 rhai = { version = "1", features = ["sync", "no_module"] }
 
 [dev-dependencies]
