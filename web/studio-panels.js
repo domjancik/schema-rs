@@ -287,15 +287,18 @@
         view.style.marginTop = '42px';
         view.style.height = 'calc(100% - 42px)';
         const controls = make('div', undefined, 'panel-scene-controls');
-        for (const axes of ['3d', 'xz', 'xy', 'yz']) {
-          const button = make('button', axes.toUpperCase());
+        controls.onkeydown=e=>{if(e.key===' '||e.key==='Enter')e.stopPropagation();};
+        for (const axes of ['iso', '3d', 'xz', 'xy', 'yz']) {
+          const button = make('button', axes==='iso'?'Iso':axes.toUpperCase());
+          if(axes==='iso')button.setAttribute('aria-label','Isometric view');
           button.setAttribute('aria-pressed', String(axes === '3d'));
-          button.onclick = () => api.context({ axes });
+          button.onclick = () => axes==='iso'?navigation.viewpoint('iso'):api.context({ axes });
           controls.append(button);
         }
         body.append(view, controls);
         const navigation = SchemaSchematicCamera.mount(view, {
           camera: panel.context.sceneCamera,
+          directIso: false,
           data: () => a.data(),
           selected: () => a.context().fixture,
           select: (id) => {
@@ -360,9 +363,11 @@
           'aria-label': axes.toUpperCase() + ' scene view'
         }),
         controls = make('div', undefined, 'panel-scene-controls');
-      for (const axis of ['3d', 'xz', 'xy', 'yz']) {
-        const b = make('button', axis.toUpperCase());
-        b.onclick = () => api.context({ axes: axis });
+      controls.onkeydown=e=>{if(e.key===' '||e.key==='Enter')e.stopPropagation();};
+      for (const axis of ['iso', '3d', 'xz', 'xy', 'yz']) {
+        const b = make('button', axis==='iso'?'Iso':axis.toUpperCase());
+        if(axis==='iso')b.setAttribute('aria-label','Isometric view');
+        b.onclick = () => axis==='iso'?api.context({axes:'3d',sceneCamera:c.sceneCamera?{...SchemaSchematicCamera.preset(c.sceneCamera,'iso'),mode:'orbit'}:undefined}):api.context({ axes: axis });
         controls.append(b);
       }
       const fit = make('button', 'Fit');

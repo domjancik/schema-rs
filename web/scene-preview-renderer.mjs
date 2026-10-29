@@ -256,41 +256,7 @@ export class SceneView {
     this.volume.receiveShadow = true;
     this.volume.layers.set(VOLUME);
     this.scene.add(this.volume);
-    this.pipeline = new T.RenderPipeline(renderer);
-    this.mainPass = pass(this.scene, this.camera);
-    this.mainPass.setMRT(
-      mrt({
-        output,
-        diffuseColor,
-        normal: packNormalToRGB(normalView),
-        velocity,
-      }),
-    );
-    this.mainPass.getTexture("diffuseColor").type = T.UnsignedByteType;
-    this.mainPass.getTexture("normal").type = T.UnsignedByteType;
-    this.mainColor = this.mainPass.getTextureNode("output");
-    const depth = this.mainPass.getTextureNode("depth"),
-      normal = this.mainPass.getTextureNode("normal");
-    this.gi = ssgi(
-      this.mainColor,
-      depth,
-      sample((uv) => unpackRGBToNormal(normal.sample(uv))),
-      this.camera,
-    );
-    this.gi.giIntensity.value = 1.2;
-    this.gi.radius.value = 3;
-    this.gi.thickness.value = 0.1;
-    this.gi.sliceCount.value = QUALITY[this.options.quality].slices;
-    this.gi.stepCount.value = QUALITY[this.options.quality].giSteps;
-    this.gi.useTemporalFiltering = true;
-    this.volumeMaterial.depthNode = depth.sample(screenUV);
-    this.volumePass = pass(this.scene, this.camera, { depthBuffer: false });
-    const layers = new T.Layers();
-    layers.set(VOLUME);
-    this.volumePass.setLayers(layers);
-    this.volumePass.setResolutionScale(0.25);
-    this.blur = gaussianBlur(this.volumePass, uniform(0.5));
-    this.compose();
+    this.buildPipeline();
     this.resize = new ResizeObserver(() => this.setSize());
     this.resize.observe(this.canvas.parentElement);
     this.setSize();
@@ -357,6 +323,76 @@ export class SceneView {
     target.addEventListener(type, listener);
     this.listeners.push(() => target.removeEventListener(type, listener));
   }
+  buildPipeline() {
+    this.gi?.dispose();
+    this.mainPass?.dispose();
+    this.volumePass?.dispose();
+    this.blur?.dispose?.();
+    this.temporal?.dispose();
+    this.temporal = null;
+    this.pipeline?.dispose();
+    this.pipeline = new T.RenderPipeline(this.renderer);
+    this.mainPass = pass(this.scene, this.camera);
+    this.mainPass.setMRT(
+      mrt({
+        output,
+        diffuseColor,
+        normal: packNormalToRGB(normalView),
+        velocity,
+      }),
+    );
+    this.mainPass.getTexture("diffuseColor").type = T.UnsignedByteType;
+    this.mainPass.getTexture("normal").type = T.UnsignedByteType;
+    this.mainColor = this.mainPass.getTextureNode("output");
+    const depth = this.mainPass.getTextureNode("depth"),
+      normal = this.mainPass.getTextureNode("normal");
+    this.gi = ssgi(
+      this.mainColor,
+      depth,
+      sample((uv) => unpackRGBToNormal(normal.sample(uv))),
+      this.camera,
+    );
+    this.gi.giIntensity.value = 1.2;
+    this.gi.radius.value = 3;
+    this.gi.thickness.value = 0.1;
+    this.gi.sliceCount.value = QUALITY[this.options.quality].slices;
+    this.gi.stepCount.value = QUALITY[this.options.quality].giSteps;
+    this.gi.useTemporalFiltering = true;
+    this.volumeMaterial.depthNode = depth.sample(screenUV);
+    this.volumeMaterial.needsUpdate = true;
+    this.volumePass = pass(this.scene, this.camera, { depthBuffer: false });
+    const layers = new T.Layers();
+    layers.set(VOLUME);
+    this.volumePass.setLayers(layers);
+    this.volumePass.setResolutionScale(0.25);
+    this.blur = gaussianBlur(this.volumePass, uniform(0.5));
+    this.compose();
+  }
+  projectionSize(span) {
+    if (!this.camera.isOrthographicCamera) return;
+    const r = this.canvas.parentElement.getBoundingClientRect(),
+      aspect = r.width / Math.max(1, r.height),
+      h = span ?? this.orthoSpan ?? 10;
+    this.orthoSpan = h;
+    this.controls.minZoom = h / 1e7;
+    this.controls.maxZoom = h / 1e-5;
+    this.camera.left = (-h * aspect) / 2;
+    this.camera.right = (h * aspect) / 2;
+    this.camera.top = h / 2;
+    this.camera.bottom = -h / 2;
+    this.camera.updateProjectionMatrix();
+  }
+  projectionSet(projection) {
+    const pose = this.cameraState();
+    if (projection === "perspective" && pose.span) {
+      const d = Math.hypot(...pose.position.map((v, i) => v - pose.target[i])),
+        next = pose.span / (2 * Math.tan((24 * Math.PI) / 180));
+      pose.position = pose.position.map(
+        (v, i) => pose.target[i] + ((v - pose.target[i]) * next) / d,
+      );
+    }
+    this.restoreCamera({ ...pose, projection });
+  }
   setSize() {
     if (!this.renderer) return;
     const r = this.canvas.parentElement.getBoundingClientRect(),
@@ -372,6 +408,7 @@ export class SceneView {
       false,
     );
     this.camera.aspect = r.width / Math.max(1, r.height);
+    this.projectionSize();
     this.camera.updateProjectionMatrix();
   }
   compose() {
@@ -535,6 +572,12 @@ export class SceneView {
       position: this.camera.position.toArray(),
       target: this.controls.target.toArray(),
       up: this.camera.up.toArray(),
+      projection: this.camera.isOrthographicCamera
+        ? "orthographic"
+        : "perspective",
+      ...(this.camera.isOrthographicCamera
+        ? { span: (this.camera.top - this.camera.bottom) / this.camera.zoom }
+        : {}),
     };
   }
   restoreCamera(pose) {
@@ -542,6 +585,23 @@ export class SceneView {
     const damping = this.controls.enableDamping;
     this.controls.enableDamping = false;
     this.controls.update();
+    const orthographic = pose.projection === "orthographic",
+      changed = orthographic !== !!this.camera.isOrthographicCamera;
+    if (changed) {
+      const far = this.camera.far;
+      this.camera = orthographic
+        ? new T.OrthographicCamera(-1, 1, 1, -1, 0.03, far)
+        : new T.PerspectiveCamera(48, 1, 0.03, far);
+      this.controls.object = this.camera;
+    }
+    this.camera.zoom = 1;
+    this.orthoSpan =
+      pose.span ??
+      2 *
+        Math.tan((24 * Math.PI) / 180) *
+        Math.hypot(...pose.position.map((v, i) => v - pose.target[i]));
+    this.setSize();
+    if (changed) this.buildPipeline();
     this.camera.position.fromArray(pose.position);
     this.camera.up.fromArray(pose.up);
     this.controls.target.fromArray(pose.target);
@@ -554,6 +614,7 @@ export class SceneView {
   }
   viewPreset(name) {
     this.restoreCamera(cameraPreset(this.cameraState(), name));
+    if (name === "iso") this.navigationModeSet("orbit");
   }
   navigationModeSet(mode) {
     this.navigationMode = mode === "pan" ? "pan" : "orbit";
@@ -575,6 +636,9 @@ export class SceneView {
       distance = Math.hypot(...offset);
     this.restoreCamera({
       ...pose,
+      ...(pose.projection === "orthographic"
+        ? { span: 2 * Math.tan((24 * Math.PI) / 180) * 2.5 }
+        : {}),
       target: [...target],
       position: target.map((v, i) => v + (offset[i] / distance) * 2.5),
     });
@@ -594,14 +658,28 @@ export class SceneView {
     const size = bounds.getSize(new T.Vector3()),
       center = bounds.getCenter(new T.Vector3()),
       radius = Math.max(2, size.length());
+    const direction = this.camera.position
+      .clone()
+      .sub(this.controls.target)
+      .normalize();
+    const aspect =
+      this.canvas.clientWidth / Math.max(1, this.canvas.clientHeight);
     this.camera.up.set(0, 1, 0);
     this.controls.target.copy(center);
     this.camera.position
       .copy(center)
       .add(
-        new T.Vector3(0.85, 0.55, -1).normalize().multiplyScalar(radius * 1.2),
+        direction.multiplyScalar(
+          (radius * 1.2) / Math.min(1, Math.max(0.01, aspect)),
+        ),
       );
+    this.camera.zoom = 1;
     this.camera.far = Math.max(300, radius * 20);
+    this.projectionSize(
+      2 *
+        Math.tan((24 * Math.PI) / 180) *
+        this.camera.position.distanceTo(center),
+    );
     this.camera.updateProjectionMatrix();
     this.controls.update();
     this.floor.position.y = Math.min(-0.04, bounds.min.y - 0.04);

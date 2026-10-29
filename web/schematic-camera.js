@@ -3,7 +3,13 @@
   'use strict';
   const clamp = (n, a, b) => Math.max(a, Math.min(b, n)),
     dot = (a, b) => a.reduce((v, x, i) => v + x * b[i], 0);
-  const defaults = { target: [0, 0, 0], yaw: 0.55, pitch: 0.6, zoom: 20, mode: 'orbit' };
+  const defaults = {
+    target: [0, 0, 0],
+    yaw: Math.PI / 4,
+    pitch: Math.asin(1 / Math.sqrt(3)),
+    zoom: 20,
+    mode: 'orbit'
+  };
   function valid(c) {
     if (
       !c ||
@@ -68,13 +74,22 @@
   }
   function preset(c, name) {
     const values = {
-      iso: [0.55, 0.6],
+      iso: [Math.PI / 4, Math.asin(1 / Math.sqrt(3))],
       front: [0, 0],
       right: [Math.PI / 2, 0],
       top: [0, Math.PI / 2 - 0.001]
     };
     if (!values[name]) throw Error('Unknown camera viewpoint');
     return valid({ ...c, yaw: values[name][0], pitch: values[name][1] });
+  }
+  function rotate(c, steps) {
+    if (!Number.isFinite(steps)) throw Error('Invalid rotation');
+    const n = valid(c);
+    n.yaw =
+      ((((n.yaw + (steps * Math.PI) / 4 + Math.PI) % (2 * Math.PI)) + 2 * Math.PI) %
+        (2 * Math.PI)) -
+      Math.PI;
+    return n;
   }
   function fit(points, w, h, c = defaults) {
     const p = points.filter((p) => Array.isArray(p) && p.length === 3 && p.every(Number.isFinite)),
@@ -133,6 +148,18 @@
     function change(action) {
       automaticFit = false;
       camera = navigate(camera, action);
+      draw();
+      commit();
+    }
+    function viewpoint(name) {
+      camera = preset(camera, name);
+      if (name === 'iso') camera.mode = 'orbit';
+      draw();
+      commit();
+    }
+    function rotateView(steps) {
+      automaticFit = false;
+      camera = rotate(camera, steps);
       draw();
       commit();
     }
@@ -419,6 +446,13 @@
         b.textContent = label;
         b.setAttribute('aria-label', name);
         b.onclick = action;
+        b.onkeydown = (e) => {
+          if (e.key === ' ' || e.key === 'Enter') {
+            e.preventDefault();
+            e.stopPropagation();
+            if (!e.repeat) action();
+          }
+        };
         popup.append(b);
         return b;
       };
@@ -462,7 +496,13 @@
         details.open = false;
         summary.focus();
       });
-      host.append(details);
+      if (options.directIso !== false)
+        host.append(add('Isometric view', 'Iso', () => viewpoint('iso')));
+      host.append(
+        add('Rotate view left 45°', '↶', () => rotateView(-1)),
+        add('Rotate view right 45°', '↷', () => rotateView(1)),
+        details
+      );
       draw();
       return details;
     }
@@ -473,6 +513,8 @@
       fit: fitAll,
       frame,
       navigate: change,
+      viewpoint,
+      rotate: rotateView,
       get: () => valid(camera),
       destroy() {
         disposed = true;
@@ -490,7 +532,7 @@
       }
     };
   }
-  const api = { valid, project, navigate, preset, fit, mount };
+  const api = { rotate, valid, project, navigate, preset, fit, mount };
   global.SchemaSchematicCamera = api;
   if (typeof module !== 'undefined') module.exports = api;
 })(globalThis);

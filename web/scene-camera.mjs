@@ -21,6 +21,10 @@ export function validateCamera(pose) {
         pose[key].length === 3 &&
         pose[key].every((v) => Number.isFinite(v) && Math.abs(v) < 100000),
     ) ||
+    (pose.projection !== undefined &&
+      !["perspective", "orthographic"].includes(pose.projection)) ||
+    (pose.span !== undefined &&
+      (!Number.isFinite(pose.span) || pose.span < 1e-5 || pose.span > 1e7)) ||
     length(pose.up) < 0.1 ||
     length(sub(pose.position, pose.target)) < 0.001
   )
@@ -50,14 +54,18 @@ export function navigateCamera(pose, { orbit, pan, zoom } = {}) {
   }
   if (pan) {
     if (!pan.every(Number.isFinite)) throw Error("Invalid pan");
+    const panDistance =
+      pose.projection === "orthographic" && pose.span
+        ? pose.span / (2 * Math.tan((24 * Math.PI) / 180))
+        : distance;
     const forward = unit(scale(offset, -1)),
       right = unit(cross(forward, up)),
       vertical = unit(cross(right, forward));
     target = add(
       target,
       add(
-        scale(right, pan[0] * distance * 0.08),
-        scale(vertical, pan[1] * distance * 0.08),
+        scale(right, pan[0] * panDistance * 0.08),
+        scale(vertical, pan[1] * panDistance * 0.08),
       ),
     );
   }
@@ -66,7 +74,15 @@ export function navigateCamera(pose, { orbit, pan, zoom } = {}) {
     distance = clamp(distance * zoom, 0.2, 150);
     offset = scale(unit(offset), distance);
   }
-  return validateCamera({ position: add(target, offset), target, up });
+  return validateCamera({
+    position: add(target, offset),
+    target,
+    up,
+    ...(pose.projection ? { projection: pose.projection } : {}),
+    ...(pose.span !== undefined
+      ? { span: clamp(pose.span * (zoom ?? 1), 1e-5, 1e7) }
+      : {}),
+  });
 }
 export function cameraPreset(pose, name) {
   validateCamera(pose);
@@ -76,7 +92,7 @@ export function cameraPreset(pose, name) {
       right: [1, 0, 0],
       left: [-1, 0, 0],
       top: [0, 1, 0.000001],
-      iso: [0.85, 0.55, -1],
+      iso: [1, 1, 1],
     },
     direction = directions[name];
   if (!direction) throw Error("Unknown camera preset");
@@ -85,5 +101,16 @@ export function cameraPreset(pose, name) {
     position: add(pose.target, scale(unit(direction), distance)),
     target: [...pose.target],
     up: [0, 1, 0],
+    ...(name === "iso"
+      ? {
+          projection: "orthographic",
+          span: pose.span ?? 2 * Math.tan((24 * Math.PI) / 180) * distance,
+        }
+      : pose.projection
+        ? {
+            projection: pose.projection,
+            ...(pose.span ? { span: pose.span } : {}),
+          }
+        : {}),
   };
 }

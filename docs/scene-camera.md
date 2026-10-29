@@ -1,6 +1,6 @@
 # Scene camera navigation
 
-Every3D preview has an independent Camera control. On phones it starts collapsed to preserve the viewport; expand Camera to choose Orbit or Pan, use directional/zoom buttons, frame the selected fixture, fit the whole scene, or choose Top/Front/Right/Iso viewpoints. These are perspective viewpoints with a consistent world-up axis.
+Every3D preview has an independent Camera control. On phones it starts collapsed to preserve the viewport; expand Camera to choose Orbit or Pan, use directional/zoom buttons, frame the selected fixture, fit the whole scene, or choose Top/Front/Right/Iso viewpoints. Iso selects a true orthographic isometric view, with equal axis foreshortening; the rendered preview also allows returning to Perspective in Camera → Projection.
 
 - Mouse: drag to orbit; choose Pan for left-drag panning. Existing right/middle-button and wheel controls remain available.
 - Touch: one finger follows the Orbit/Pan mode; two fingers pan and pinch to zoom. Multi-touch and moved drags never select fixtures accidentally.
@@ -29,3 +29,10 @@ Fit includes authored fixture positions and currently published animated positio
 Mobile poses persist locally per origin; Studio poses persist independently per panel in workspace preferences. Camera saves update those preferences without remounting neighboring views/GPU instances, changing authored state or adding undo entries. Switching schematic modes retains the 3D pose. No device-camera or orientation permission is requested. This is an orbiting orthographic schematic, not a fly-through/perspective lighting renderer; choose the GPU preview for that rendering view.
 
 Additional verification: math/fit/adaptive-margin and workspace validation tests; real Chrome desktop drag/keyboard and touch pan/pinch, selection suppression/taps, cancellation, small-phone hit targets, persisted mobile/workspace poses, duplicate independent Scene panels, and a neighboring GPU iframe surviving navigation. Existing GPU mouse/touch camera regressions remain passing. Camera tests freeze output-disabled snapshots and intercept all engine commands.
+
+
+## Isometric and rotation controls
+
+Scene viewport controls expose **Iso** directly alongside3D/XZ/XY/YZ. Iso uses45° azimuth and35.264° elevation, with orthographic projection. Drag to rotate freely; **↶ / ↷** turn45° around world-up while preserving target, zoom and elevation. These controls are also directly available on schémaboy and the rendered3D preview. The preview rebuilds camera-dependent rendering passes when changing projection and keeps lighting/volumetrics/SSGI enabled according to the existing settings.
+
+Each viewport saves its own pose and projection locally. Split views can show different angles; navigating does not recreate neighboring GPU views or author a scene command. Touch orbit, two-finger pan/pinch and existing keyboard shortcuts remain available. Square/fractal block canvases remain planar.
