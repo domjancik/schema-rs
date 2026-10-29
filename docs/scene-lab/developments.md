@@ -211,3 +211,8 @@ Verification here: full Windows Rust tests, formatting and strict clippy pass; b
 Native Mac execution, Swift compilation, Safari, physical USB timing and signed update behavior remain pending access to a Mac and signing identity. CI is configured to compile/test natively on both Mac runner types and exercise graceful session/undo recovery; it has not run remotely (no Git remote configured). No Mac distributable or public/Pi deployment is claimed. Live local engine was not restarted; authored scene/history and physical output were untouched.
 
 Suggested lab follow-up: keep current examples output-disabled. When Mac hardware is available, retest UV model/channel-test, session undo recovery, Studio/schémaboy browser controls and scene preview on Safari; hardware DMX is a separate acceptance check. Existing SL-005/SL-006 and pending independent Iso/embedded verification are unchanged.
+
+
+## Public macOS status — f02adb7
+
+The public landing page is now updated at https://schema-s.vercel.app (deployment `dpl_FwNRp9P3gga3pPk6mTwGYLUErdNb`). It shows a visible pending Mac release status and explains that native validation/signing are required. The earlier Mac support commits were local and had not updated this static site; this deployment resolves the missing platform entry. No Mac archive or update feed has been published. Existing Windows/Linux downloads retain their previous bytes/source manifest, confirmed by independent public fetch/hash checks. Production mobile/connection/download browser regression passes, including Mac status visibility. Local engine, authored scenes and history were untouched. No scene retest is required for this static publication correction.
