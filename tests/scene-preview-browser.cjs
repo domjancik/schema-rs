@@ -68,7 +68,7 @@ const base = process.env.SCHEMA_URL || "http://127.0.0.1:8788";
       await page
         .locator("#preview-mode")
         .textContent()
-        .then((text) => text.includes("engine unchanged")),
+        .then((text) => text.includes("preview only")),
     );
     await page.locator("#preview-load-preset").click();
     await page.locator("#preview-review").waitFor({ state: "visible" });

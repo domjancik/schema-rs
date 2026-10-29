@@ -243,3 +243,10 @@ Website production `dpl_EAGPLDMzyrMjhsTHSPXs7XirRGne` now enables the Mac previe
 Public https://schema-s.vercel.app/app now aliases the browser Studio. The app status footer and product landing footer include a quiet `domj 2026` link to https://domj.net, opening separately to preserve the editor. About is integrated into the Schéma brand with an accessible label, tooltip and focus treatment; the separate toolbar link is removed. The status text still truncates rather than crowding the frame/credit. Native and development source routes also define `/app`; those route-table changes require host refresh, while existing local Studio markup/styles update after refresh. No live engine restart or authored edit occurred.
 
 Production `dpl_86bKESDBven2qPVdzVdh3Eex2v5k` verified in fresh Chrome: /app loads the WASM editor, both credit hrefs match, About is on the brand, no standalone toolbar About, no page errors, mobile landing fits390px. Full local Rust tests/fmt/clippy, JS syntax and browser/public package checks pass. Existing native archives remain unchanged; no Mac/Pi deployment is claimed for this web styling change.
+
+
+## Scene view copy cleanup — 2026-10-29
+
+Removed the implementation-oriented scene-view blurb, slogan and persistent rendering disclaimer. Scene selection now names Carpushit directly; its separate preview is labeled "preview only". Effects use Indirect light and Light beams, with the indirect-light limitation available on the control. Project replacement still confirms its effect, disables output and explains undo. No engine or project behavior changed.
+
+Chrome preview regression passed on isolated ports8822/8823: GPU rendering, preset preview without commands, explicit revisioned replacement, WebGL fallback, GLB import/recovery and lifecycle. Required Rust tests/fmt/strict clippy and JavaScript syntax checks passed. Local8788 was already stopped; no user engine/session was restarted or edited. Native archives remain unchanged.
