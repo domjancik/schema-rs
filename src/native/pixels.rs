@@ -238,7 +238,7 @@ pub(crate) fn evaluate(
                             }
                         }
                         "Modify.Color.EvenOdd" => {
-                            let even = f.setup_channel % 2 == 0;
+                            let even = f.setup_channel.is_multiple_of(2);
                             if even && flag(p, "Flip Even", true) {
                                 out.reverse();
                             }

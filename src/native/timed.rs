@@ -362,7 +362,7 @@ pub(crate) fn evaluate(
                 let forward = state.index % count;
                 let index = match n("Mode", 0.) as usize {
                     // Source Switch(Boolean) selects its second input on even passes.
-                    1 if (state.index / count) % 2 == 0 => count - 1 - forward,
+                    1 if (state.index / count).is_multiple_of(2) => count - 1 - forward,
                     2 => count - 1 - forward,
                     _ => forward,
                 };
