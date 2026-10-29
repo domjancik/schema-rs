@@ -40,4 +40,14 @@ class PublicRelease(unittest.TestCase):
    with self.assertRaises(ValueError):release.verify_macos_release(archive,'abc1234')
    proof['notarized']=True;proof['sha256']='0'*64;sidecar.write_text(json.dumps(proof))
    with self.assertRaises(ValueError):release.verify_macos_release(archive,'abc1234')
+ def test_browser_publication_verifies_artifacts_before_copying_and_preserves_landing(self):
+  import hashlib
+  with tempfile.TemporaryDirectory() as t:
+   p=pathlib.Path(t);browser=p/'browser';browser.mkdir();site=p/'site';site.mkdir();(site/'index.html').write_text('landing')
+   (browser/'studio.html').write_text('studio');(browser/'index.html').write_text('editor')
+   files={name:hashlib.sha256((browser/name).read_bytes()).hexdigest() for name in ['studio.html','index.html']}
+   (browser/'browser-build.json').write_text(json.dumps({'version':1,'files':files}))
+   release.install_browser(site,browser);self.assertEqual((site/'index.html').read_text(),'landing');self.assertEqual((site/'studio.html').read_text(),'studio');self.assertNotIn('index.html',json.loads((site/'browser-build.json').read_text())['files'])
+   (browser/'studio.html').write_text('tampered')
+   with self.assertRaises(ValueError):release.install_browser(site,browser)
 if __name__=='__main__':unittest.main()

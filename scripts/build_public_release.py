@@ -61,7 +61,24 @@ def verify_macos_release(archive, commit):
         raise ValueError('Native notarized Mac release and attestation required') from error
     return {key:proof[key] for key in ['filename','sha256','bytes','notarized']}
 
-def export_site(destination, downloads):
+def install_browser(destination, browser):
+    browser=pathlib.Path(browser).resolve();destination=pathlib.Path(destination)
+    manifest=json.loads((browser/'browser-build.json').read_text(encoding='utf8'))
+    if manifest.get('version') != 1: raise ValueError('Unknown browser artifact version')
+    preserved={'index.html','welcome.html','landing.js','landing.css','vercel.json'}
+    verified=[]
+    for name,expected in manifest['files'].items():
+        relative=pathlib.PurePosixPath(name)
+        if relative.is_absolute() or any(part.startswith('.') for part in relative.parts) or relative.parts[0]=='downloads': raise ValueError('Invalid browser artifact path')
+        source=browser.joinpath(*relative.parts)
+        if source.is_symlink() or not source.resolve().is_relative_to(browser) or digest(source)!=expected: raise ValueError('Browser artifact checksum mismatch')
+        if name not in preserved: verified.append((name,source))
+    for name,source in verified:
+        target=destination/name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(source,target)
+    manifest['files']={name:manifest['files'][name] for name,_ in verified}
+    (destination/'browser-build.json').write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf8')
+
+def export_site(destination, downloads, browser=None):
     destination, downloads = map(pathlib.Path, (destination, downloads))
     destination.mkdir(parents=True, exist_ok=True)
     html=(ROOT/'web/welcome.html').read_text(encoding='utf8')
@@ -84,9 +101,10 @@ def export_site(destination, downloads):
     shutil.copyfile(ROOT/'scripts/publication/vercel.json',destination/'vercel.json')
     shutil.copyfile(ROOT/'docs/linux.md',destination/'linux.txt')
     shutil.copyfile(ROOT/'docs/macos.md',destination/'macos.txt')
+    if browser: install_browser(destination,browser)
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--linux-x64',type=pathlib.Path,required=True);p.add_argument('--linux-arm64',type=pathlib.Path,required=True);p.add_argument('--macos',type=pathlib.Path);p.add_argument('--windows',type=pathlib.Path,required=True);p.add_argument('--notices',type=pathlib.Path,required=True);p.add_argument('--commit',required=True);p.add_argument('--output',type=pathlib.Path,default=ROOT/'target/publication/downloads');p.add_argument('--site',type=pathlib.Path,default=ROOT/'target/publication/site');a=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument('--browser',type=pathlib.Path);p.add_argument('--linux-x64',type=pathlib.Path,required=True);p.add_argument('--linux-arm64',type=pathlib.Path,required=True);p.add_argument('--macos',type=pathlib.Path);p.add_argument('--windows',type=pathlib.Path,required=True);p.add_argument('--notices',type=pathlib.Path,required=True);p.add_argument('--commit',required=True);p.add_argument('--output',type=pathlib.Path,default=ROOT/'target/publication/downloads');p.add_argument('--site',type=pathlib.Path,default=ROOT/'target/publication/site');a=p.parse_args()
     if not __import__('re').fullmatch('[0-9a-f]{7,40}',a.commit): raise ValueError('Source commit required')
     a.output.mkdir(parents=True,exist_ok=True)
     version=tomllib.loads((ROOT/'Cargo.toml').read_text())['package']['version']+'-preview'
@@ -105,6 +123,6 @@ def main():
     manifest={'available':True,'version':version,'commit':a.commit,**artifacts['windows-x64'],'platforms':artifacts}
     (a.output/'latest.json').write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf8')
     (a.output/'SHA256SUMS.txt').write_text(''.join(f"{v['sha256']}  {v['filename']}\n" for v in artifacts.values())+digest(a.output/'install.sh')+'  install.sh\n',encoding='utf8')
-    export_site(a.site,a.output)
+    export_site(a.site,a.output,a.browser)
     print(json.dumps(manifest,indent=2))
 if __name__=='__main__':main()

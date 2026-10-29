@@ -5,9 +5,9 @@
  const hardwareButtons=['audio-input','midi-input'].map(id=>document.getElementById(id));
  hardwareButtons.forEach(button=>button.hidden=true);
  const token=sessionStorage.getItem('schema-token');
- fetch('/api/catalog',{headers:token?{'x-schema-token':token}:{}}).then(r=>r.json()).then(rows=>{active=rows.some(row=>row.key==='Create.Value.OSC');hardwareButtons.forEach(button=>button.hidden=!active);}).catch(()=>{});
+ SchemaEngine.request('/api/catalog').then(rows=>{active=rows.some(row=>row.key==='Create.Value.OSC');hardwareButtons.forEach(button=>button.hidden=!active);}).catch(()=>{});
  const inflight=new Set(),pending=new Map();
- async function send(event){if(!active)return;const key=[event.type,event.index??event.slot??''].join('/');if(inflight.has(key)){pending.set(key,event);return;}inflight.add(key);try{const token=sessionStorage.getItem('schema-token');const response=await fetch('/api/inputs',{method:'POST',headers:{'Content-Type':'application/json',...(token?{'x-schema-token':token}:{})},body:JSON.stringify(event)});if(!response.ok&&response.status!==404)console.warn('Input rejected',response.status);}catch(error){console.warn('Input unavailable',error.message);}finally{inflight.delete(key);const next=pending.get(key);if(next){pending.delete(key);send(next);}}}
+ async function send(event){if(!active)return;const key=[event.type,event.index??event.slot??''].join('/');if(inflight.has(key)){pending.set(key,event);return;}inflight.add(key);try{await SchemaEngine.request('/api/inputs',event);}catch(error){console.warn('Input unavailable',error.message);}finally{inflight.delete(key);const next=pending.get(key);if(next){pending.delete(key);send(next);}}}
  window.SchemaInputs={send};
  const keys=new Set();const editing=()=>/INPUT|TEXTAREA|SELECT/.test(document.activeElement?.tagName||'');
  function keyName(e){return e.code==='Space'?'Space':e.key.length===1?e.key.toUpperCase():e.key;}

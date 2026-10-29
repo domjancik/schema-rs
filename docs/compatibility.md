@@ -37,3 +37,8 @@ Modify.Repeat preserves source-derived frame playback modes, duplicated bank cap
 
 
 Windows and macOS Open DMX USB output use optional FTDI D2XX libraries; Art-Net remains platform-independent. One selected universe/device, no USB input/RDM or simultaneous transports. Linux excludes the D2XX loaders and continues using Art-Net/OLA. macOS uses Application Support and an optional native menu-bar launcher; real Mac execution/USB validation remains pending. See [macOS support and release limits](macos.md). See [Open DMX on Windows](open-dmx-windows.md).
+
+
+## Browser host
+
+The optional WASM browser host uses the same evaluator, ScenicScript parser, native blocks, bounded Rhai scripting, command validation and undo/session schema. It supports Studio/schémaboy editing and snapshot subscribers for web animation. Browser storage replaces native project folders; physical transports, native file watches and folder-based component loading are unavailable. Existing session-embedded component definitions evaluate normally. The scene schema still uses fixture IDs/banks; its outputs can drive non-lighting consumers without an Art-Net adapter. Browser lifecycle scheduling does not provide unattended lighting guarantees. See [browser host and embedding](browser.md).

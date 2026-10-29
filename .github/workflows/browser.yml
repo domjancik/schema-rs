@@ -1,0 +1,40 @@
+name: Browser engine
+on:
+  push:
+    branches: [main, 'codex/**']
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  wasm:
+    runs-on: ubuntu-latest
+    env:
+      CARGO_BUILD_JOBS: '2'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+      - run: rustup update stable && rustup default stable && rustup target add wasm32-unknown-unknown && rustup component add rustfmt clippy
+      - run: cargo fmt --all --check
+      - run: cargo test --locked --no-default-features --test portable_runtime
+      - run: cargo clippy --locked --no-default-features --lib -- -D warnings
+      - run: cargo clippy --locked -p schema-web --target wasm32-unknown-unknown -- -D warnings
+      - name: Install matching binding generator
+        run: |
+          VERSION=$(python3 -c 'import tomllib; print(next(p["version"] for p in tomllib.load(open("Cargo.lock","rb"))["package"] if p["name"]=="wasm-bindgen"))')
+          cargo install wasm-bindgen-cli --locked --version "$VERSION"
+      - run: python3 scripts/build_browser.py --source-ref HEAD
+      - run: python3 tests/browser_package_test.py && python3 tests/public_release_test.py
+      - name: Install browser test runtime
+        run: |
+          npm install --prefix "$RUNNER_TEMP/schema-browser-tests" playwright@1.62.1
+          node "$RUNNER_TEMP/schema-browser-tests/node_modules/playwright/cli.js" install --with-deps chrome
+      - name: Test actual WASM in Chrome
+        run: PLAYWRIGHT_MODULE="$RUNNER_TEMP/schema-browser-tests/node_modules/playwright" node tests/browser-runtime.cjs
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: schema-browser-site
+          path: target/browser-site
+          if-no-files-found: error

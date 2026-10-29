@@ -1,0 +1,72 @@
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+const http = require('node:http');
+const { chromium } = require(process.env.PLAYWRIGHT_MODULE);
+const root = path.resolve('target/browser-site');
+assert(fs.existsSync(path.join(root, 'studio.html')), 'Build the browser host first');
+const types = {'.html':'text/html','.js':'text/javascript','.mjs':'text/javascript','.wasm':'application/wasm','.json':'application/json','.css':'text/css','.svg':'image/svg+xml'};
+const server = http.createServer((req,res) => {
+  const url = new URL(req.url,'http://localhost');
+  let name = url.pathname === '/play' ? '/studio.html' : url.pathname === '/mobile' ? '/mobile.html' : url.pathname === '/preview' ? '/preview.html' : url.pathname;
+  const file = path.resolve(root,'.'+name);
+  const config=JSON.parse(fs.readFileSync(path.resolve('scripts/publication/vercel.json'),'utf8'));
+  const policy=config.headers.find(group=>group.source===url.pathname)||config.headers[0];
+  for(const header of policy.headers)res.setHeader(header.key,header.value);
+  if (!file.startsWith(root+path.sep) || !fs.existsSync(file) || !fs.statSync(file).isFile()) {res.writeHead(404);res.end();return;}
+  res.setHeader('Content-Type',types[path.extname(file)]||'application/octet-stream');
+  fs.createReadStream(file).pipe(res);
+});
+(async()=>{
+  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
+  const base=process.env.SCHEMA_BROWSER_URL||'http://127.0.0.1:'+server.address().port;
+  const browser=await chromium.launch({channel:'chrome',headless:true});
+  try {
+    const page=await browser.newPage(), errors=[], apiRequests=[];
+    page.on('pageerror',error=>errors.push(error.message));
+    page.on('request',request=>{if(new URL(request.url()).pathname.startsWith('/api/'))apiRequests.push(request.url());});
+    await page.goto(base+'/play?view=studio');
+    await page.waitForFunction(()=>window.SchemaEngine?.kind==='browser'&&document.querySelector('#world .block'));
+    const state=()=>page.evaluate(()=>SchemaEngine.request('/api/state'));
+    const original=await state();
+    assert.equal(original.project.output.enabled,false);
+    await page.evaluate(async()=>{
+      const data=await SchemaEngine.request('/api/state');
+      await SchemaEngine.request('/api/import',{fixture:'fixture-1',layer:0,yaml:'name: Web motion\nstack:\n  Create.Value.LFO: {Period: 1, Type: 0}\n',expected_revision:data.snapshot.revision});
+    });
+    const a=await state();await page.waitForTimeout(180);const b=await state();
+    assert.notEqual(a.snapshot.fixtures[0].result.value,b.snapshot.fixtures[0].result.value);
+    await page.evaluate(async()=>{
+      const data=await SchemaEngine.request('/api/state');
+      await SchemaEngine.request('/api/command',{expected_revision:data.snapshot.revision,command:{type:'set_dimmer',fixture:'fixture-1',value:0.37}});
+      await SchemaEngine.request('/api/session/save',{});
+    });
+    const changed=await state();
+    const conflict=await page.evaluate(async()=>{try{await SchemaEngine.request('/api/command',{expected_revision:0,command:{type:'undo'}});return false;}catch(e){return e.message.includes('Revision conflict');}});
+    assert(conflict);
+    await page.reload();
+    await page.waitForFunction(()=>window.SchemaEngine?.kind==='browser'&&document.querySelector('#world .block'));
+    const restored=await state();assert.equal(restored.project.fixtures[0].dimmer,0.37);assert.equal(restored.snapshot.revision,changed.snapshot.revision);assert(restored.snapshot.can_undo);
+    await page.evaluate(async()=>{const d=await SchemaEngine.request('/api/state');await SchemaEngine.request('/api/command',{expected_revision:d.snapshot.revision,command:{type:'undo'}});});
+    assert.equal((await state()).project.fixtures[0].dimmer,original.project.fixtures[0].dimmer);
+    const beforeBusy=await state();await page.evaluate(()=>{const end=performance.now()+220;while(performance.now()<end){}});const afterBusy=await state();assert(afterBusy.snapshot.frame>beforeBusy.snapshot.frame+3,'Worker continues while UI thread is busy');
+    await page.evaluate(async()=>{const d=await SchemaEngine.request('/api/state');await SchemaEngine.request('/api/projects/save',{id:'browser-test',title:'Browser test',overwrite:false,expected_revision:d.snapshot.revision});});
+    assert((await page.evaluate(()=>SchemaEngine.request('/api/projects'))).projects.some(p=>p.id==='browser-test'));
+    const guarded=await page.evaluate(async()=>{const {SchemaPlayer}=await import('/schema-player.mjs');let locked=false,invalid=false;try{await SchemaPlayer.create({persist:true,sessionId:sessionStorage.getItem('schema-browser-session')});}catch(e){locked=e.message.includes('already open');}const before=await SchemaEngine.request('/api/state');const player=await SchemaEngine.ready;try{await player.restore({version:999});}catch{invalid=true;}const after=await SchemaEngine.request('/api/state');return locked&&invalid&&before.snapshot.revision===after.snapshot.revision;});assert(guarded);
+    await page.evaluate(async()=>{await SchemaEngine.request('/api/project/save',{name:'partial',scope:'layout'});await SchemaEngine.request('/api/project/save',{name:'partial',scope:'content',fixtures:['fixture-1'],layer:0});const d=await SchemaEngine.request('/api/state');await SchemaEngine.request('/api/projects/load',{id:'partial',expected_revision:d.snapshot.revision});});
+    const unavailable=await page.evaluate(async()=>{const d=await SchemaEngine.request('/api/state');try{await SchemaEngine.request('/api/command',{expected_revision:d.snapshot.revision,command:{type:'set_output',config:{...d.project.output,enabled:true}}});return false;}catch(e){return e.message.includes('unavailable');}});assert(unavailable);
+    await page.evaluate(async()=>{const d=await SchemaEngine.request('/api/state');await SchemaEngine.request('/api/projects/load',{id:'browser-test',expected_revision:d.snapshot.revision});});
+    await page.goto(base+'/animation-demo.html');
+    await page.waitForFunction(()=>document.querySelector('.shape').style.getPropertyValue('--schema-value')!=='');
+    const css=await page.locator('.shape').first().getAttribute('style');await page.waitForTimeout(100);assert.notEqual(await page.locator('.shape').first().getAttribute('style'),css);
+    await page.getByRole('button',{name:'Pause',exact:true}).click();
+    await page.waitForFunction(()=>window.demoPlayer?.lastFrame?.paused===true);
+    await page.goto(base+'/mobile');
+    await page.waitForFunction(()=>window.SchemaEngine?.kind==='browser');
+    const mobile=await page.evaluate(()=>SchemaEngine.request('/api/state'));assert.equal(mobile.project.fixtures.length,8);
+    const deterministic=await page.evaluate(async()=>{const {SchemaPlayer}=await import('/schema-player.mjs');const a=await SchemaPlayer.create({autoTick:false}),b=await SchemaPlayer.create({autoTick:false});try{const x=await a.advance(.1),y=await b.advance(.1);const same=JSON.stringify(x.snapshot.fixtures)===JSON.stringify(y.snapshot.fixtures);a.dispose();let rejected=false;try{await a.advance(.1);}catch{rejected=true;}return same&&rejected;}finally{a.dispose();b.dispose();}});assert(deterministic);
+    assert.deepEqual(apiRequests,[],'No engine API requests leave the browser');
+    assert.deepEqual(errors,[]);
+    console.log('WASM editor, animation, revision conflict, durable undo, project save and Worker isolation passed');
+  } finally {await browser.close();server.close();}
+})().catch(e=>{console.error(e);server.close();process.exitCode=1;});

@@ -38,3 +38,5 @@
       'Open Studio here, or use a Schéma host that has the desktop package available.';
   }
 })();
+
+(async()=>{try{const response=await fetch('/browser-build.json',{cache:'no-store'});if(!response.ok)return;const build=await response.json();if(build.version!==1||!build.files?.['wasm/schema_web_bg.wasm'])return;const link=document.getElementById('browser-editor');if(link){link.href='/play?view=studio';link.removeAttribute('aria-disabled');}}catch{}})();

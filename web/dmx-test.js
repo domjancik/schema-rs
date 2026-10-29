@@ -223,6 +223,7 @@
     }
     function unload() {
       if (armed || levels.size) {
+        if(window.SchemaEngine?.kind==='browser'){window.SchemaEngine.request('/api/inputs',event({})).catch(()=>{});return;}
         const token = sessionStorage.getItem('schema-token');
         fetch('/api/inputs', {
           method: 'POST',

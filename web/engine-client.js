@@ -1,5 +1,27 @@
 'use strict';
 window.SchemaEngine={async request(path,body){const token=sessionStorage.getItem('schema-token');const response=await fetch(path,{method:body===undefined?'GET':'POST',headers:{'content-type':'application/json',...(token?{'x-schema-token':token}:{})},...(body===undefined?{}:{body:JSON.stringify(body)})});if(!response.ok){let text=await response.text();try{text=JSON.parse(text).error||text;}catch{}throw Error(text);}return response.headers.get('content-type')?.includes('json')?response.json():response.text();}};
+// Browser and native transports share the same command/publication protocol.
+if(document.documentElement.dataset.engine==='browser'||new URLSearchParams(location.search).get('engine')==='browser'){
+ const remote=window.SchemaEngine;
+ let parentEngine;try{if(parent!==window&&parent.location.origin===location.origin&&parent.SchemaEngine?.kind==='browser')parentEngine=parent.SchemaEngine;}catch{}
+ let sessionId=sessionStorage.getItem('schema-browser-session');
+ if(!sessionId){sessionId=crypto.randomUUID();sessionStorage.setItem('schema-browser-session',sessionId);}
+ const ready=parentEngine?parentEngine.ready:import('/schema-player.mjs').then(({SchemaPlayer})=>SchemaPlayer.create({persist:true,sessionId}));
+ ready.catch(error=>{document.getElementById('status')?.replaceChildren(document.createTextNode(error.message));});
+ window.SchemaEngine={kind:'browser',ready,async request(path,body){return path.startsWith('/api/')?(await ready).request(path,body):remote.request(path,body);}};
+ // The browser app has no hardware transport; computed DMX remains inspectable.
+ for(const id of ['output-enabled','output-apply','connect']){const node=document.getElementById(id);if(node){node.disabled=true;node.title='Browser engine: preview and editing only';}}
+ document.addEventListener('click',event=>{
+  const link=event.target.closest('a[href]');if(!link)return;const url=new URL(link.href,location.href);
+  if(url.origin===location.origin&&url.pathname==='/'&&url.searchParams.get('view')==='studio'){event.preventDefault();location.href='/play?view=studio';}
+ });
+ const bar=document.querySelector('.header-actions');
+ if(bar){
+  const fresh=document.createElement('button');fresh.textContent='New browser session';fresh.onclick=()=>{sessionStorage.setItem('schema-browser-session',crypto.randomUUID());location.reload();};bar.append(fresh);
+  const download=document.createElement('button');download.textContent='Export project';download.onclick=async()=>{const {project}=await window.SchemaEngine.request('/api/state');const url=URL.createObjectURL(new Blob([JSON.stringify(project,null,2)],{type:'application/json'}));const link=document.createElement('a');link.href=url;link.download='schema-project.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
+  const upload=document.createElement('button');upload.textContent='Import project';upload.onclick=()=>{const input=document.createElement('input');input.type='file';input.accept='.json,application/json';input.onchange=async()=>{try{const file=input.files[0];if(!file)return;if(file.size>16*1024*1024)throw Error('Project exceeds 16 MiB');const project=JSON.parse(await file.text());if(project.output)project.output.enabled=false;const state=await window.SchemaEngine.request('/api/state');await window.SchemaEngine.request('/api/command',{expected_revision:state.snapshot.revision,command:{type:'replace_project',project}});}catch(error){alert(error.message);}};input.click();};bar.append(upload,download);
+ }
+}
 window.SchemaEditorContext={load(){try{return JSON.parse(sessionStorage.getItem('schema-editor-context')||'{}');}catch{return{};}},save(value){try{sessionStorage.setItem('schema-editor-context',JSON.stringify(value));}catch{}}};
 
 // Fullscreen is a local display preference; it never changes engine state.
