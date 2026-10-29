@@ -72,3 +72,10 @@ Public site packaging accepts `--macos PATH/Schema-s-macos-universal.zip` alongs
 ## Release acceptance on real hardware
 
 Before publishing: run both native CI jobs; launch/quit/reopen and recover undo history; confirm Safari and Chrome scene views, phone access and local-network permission behavior; test loopback Art-Net then the intended receiver; verify Open DMX on a real FTDI adapter with reconnect and sleep/wake; test a signed Sparkle upgrade and failed update with the engine running. Cross-target Rust checks and packaging fixtures do not establish these hardware results.
+
+
+## Published unsigned preview
+
+[Download the universal Mac preview](https://schema-s.vercel.app/downloads/Schema-s-macos-universal-unsigned.zip) or use the [GitHub prerelease](https://github.com/domjancik/schema-rs/releases/tag/macos-preview-f74524c). Source is public at [domjancik/schema-rs](https://github.com/domjancik/schema-rs).
+
+Build source `f74524ca3f0a49b0037b72b09955b521d5aa8cd6`, 13,559,277 bytes, SHA-256 `e7f61e0989fa1650f093256caa101b20844a07b7436f77425e23dd4832e5ec76`. Both executables contain Apple Silicon and Intel slices. The [native workflow](https://github.com/domjancik/schema-rs/actions/runs/40882769727) completed successfully on both architectures, including Rust tests/lints, Swift compilation and engine/session smoke checks. The nested engine is sealed before the app wrapper; the resulting bundle passed local ad-hoc signature verification on the Mac runner. No Developer ID or notarization was used. Physical USB and user-facing Safari/GUI hardware checks are still separate from CI.

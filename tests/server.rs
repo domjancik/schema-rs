@@ -78,7 +78,13 @@ async fn retained_ui_snapshot_does_not_stop_engine() {
     let runtime = Runtime::start(Project::demo()).unwrap();
     let snapshot = runtime.controller.current();
     let frame = snapshot.snapshot.frame;
-    tokio::time::sleep(std::time::Duration::from_millis(120)).await;
+    tokio::time::timeout(std::time::Duration::from_secs(2), async {
+        while runtime.controller.current().snapshot.frame <= frame + 2 {
+            tokio::time::sleep(std::time::Duration::from_millis(10)).await;
+        }
+    })
+    .await
+    .expect("retaining an old publication must not block evaluation");
     assert!(runtime.controller.current().snapshot.frame > frame + 2);
     assert_eq!(snapshot.snapshot.frame, frame);
 }
