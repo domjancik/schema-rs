@@ -44,26 +44,38 @@
       energy: weight / Math.max(1, width * height)
     };
   }
-  function tilt(event, angle = 0) {
-    const x = clamp(event.gamma / 60, -1, 1),
-      y = clamp(event.beta / 60, -1, 1),
+  function tilt(event, angle = 0, reference = { beta: 0, gamma: 0 }) {
+    const x = clamp((event.gamma - reference.gamma) / 60, -1, 1),
+      y = clamp((event.beta - reference.beta) / 60, -1, 1),
       a = (angle * Math.PI) / 180;
     return {
       x: Math.round((x * Math.cos(a) + y * Math.sin(a)) * 1e6) / 1e6,
       y: Math.round((y * Math.cos(a) - x * Math.sin(a)) * 1e6) / 1e6
     };
   }
+  // A shallow, uneven ridge: every triangle shares vertices with its neighbours.
+  const vertices = [[0,0,0],[.55,0,.012],[1,0,0],[1,.55,.008],
+    [1,1,0],[.42,1,.012],[0,1,0],[0,.48,.005],[.43,.42,.12],[.61,.77,.10]];
+  const triangles = [[0,1,8],[1,2,8],[2,3,8],[3,9,8],[3,4,9],
+    [4,5,9],[5,6,9],[6,7,9],[7,8,9],[7,0,8]];
+  const surface = triangles.map((indices, index) => {
+    const points = indices.map(i => vertices[i]);
+    const [a,b,c] = points;
+    const u = [b[0]-a[0], (b[1]-a[1])*1.65, b[2]-a[2]],
+      v = [c[0]-a[0], (c[1]-a[1])*1.65, c[2]-a[2]];
+    const cross = [u[1]*v[2]-u[2]*v[1], u[2]*v[0]-u[0]*v[2], u[0]*v[1]-u[1]*v[0]],
+      length = Math.hypot(...cross);
+    return { id: 'face-' + index, points, normal: cross.map(n => n / length) };
+  });
   function facets(direction) {
-    const x = clamp(direction.x, -1, 1),
-      y = clamp(direction.y, -1, 1);
-    return {
-      left: clamp(0.25 - x * 0.22),
-      right: clamp(0.25 + x * 0.22),
-      top: clamp(0.3 - y * 0.22),
-      bottom: clamp(0.12 + y * 0.12)
-    };
+    const x = clamp(direction.x, -2, 2), y = clamp(direction.y, -2, 2), z = .75,
+      length = Math.hypot(x,y,z), light = [x/length,y/length,z/length];
+    return Object.fromEntries(surface.map(face => {
+      const diffuse = Math.max(0, face.normal.reduce((sum,n,i) => sum+n*light[i], 0));
+      return [face.id, clamp(.5 + (diffuse-light[2])*1.65, .08, .92)];
+    }));
   }
-  const api = { sceneLight, cameraLight, tilt, facets };
+  const api = { sceneLight, cameraLight, tilt, facets, surface };
   global.SchemaSkinCore = api;
   if (typeof module !== 'undefined') module.exports = api;
 })(globalThis);

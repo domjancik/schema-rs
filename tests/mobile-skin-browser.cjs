@@ -30,6 +30,19 @@ if (!/^http:\/\/127\.0\.0\.1:8823$/.test(base)) throw Error('Use isolated fronte
         return { getTracks: () => [{ stop: () => sensorTest.stops++ }] };
       };
       HTMLMediaElement.prototype.play = async () => {};
+      window.cameraSide = 1;
+      Object.defineProperty(HTMLMediaElement.prototype, 'readyState', { get: () => 2 });
+      const draw = CanvasRenderingContext2D.prototype.drawImage;
+      CanvasRenderingContext2D.prototype.drawImage = function(source, ...args) {
+        if (!(source instanceof HTMLVideoElement)) return draw.call(this, source, ...args);
+        const image = this.createImageData(16,12);
+        for (let y=0;y<12;y++) for (let x=0;x<16;x++) {
+          const i=(y*16+x)*4, bright=window.cameraSide > 0 ? x>=8 : x<8;
+          image.data[i]=image.data[i+1]=image.data[i+2]=bright?255:0;
+          image.data[i+3]=255;
+        }
+        this.putImageData(image,0,0);
+      };
       Object.defineProperty(HTMLMediaElement.prototype, 'srcObject', {
         set(v) {
           this._stream = v;
@@ -40,22 +53,43 @@ if (!/^http:\/\/127\.0\.0\.1:8823$/.test(base)) throw Error('Use isolated fronte
       });
     });
     await page.goto(base + '/mobile');
+    assert.equal(await page.locator('.skin-facets i').count(), 10, 'Broad facets, not edge strips');
     await page.locator('#skin-options').waitFor({ state: 'attached', timeout: 5000 });
     assert.deepEqual(await page.evaluate(() => sensorTest), { camera: 0, tilt: 0, stops: 0 });
+    await page.screenshot({path:'target/skin-surface-neutral.png'});
+    const controlColor = await page.locator('.encoder').evaluate(el => getComputedStyle(el).backgroundColor);
     await page.getByLabel('More options', { exact: true }).click();
     await page.locator('#skin-options').click();
     await page.getByRole('button', { name: 'Enable phone tilt', exact: true }).click();
+    await page.evaluate(() => dispatchEvent(new DeviceOrientationEvent('deviceorientation', { beta: 75, gamma: 0 })));
+    await page.waitForTimeout(90);
     const beforeTilt = await page
-      .locator('.pocket')
-      .evaluate((el) => el.style.getPropertyValue('--skin-left'));
+      .locator('.skin-facets i').first()
+      .evaluate((el) => el.style.getPropertyValue('--facet-light'));
     await page.evaluate(() =>
-      dispatchEvent(new DeviceOrientationEvent('deviceorientation', { beta: 20, gamma: 30 }))
+      dispatchEvent(new DeviceOrientationEvent('deviceorientation', { beta: 85, gamma: 30 }))
     );
     assert.notEqual(
-      await page.locator('.pocket').evaluate((el) => el.style.getPropertyValue('--skin-left')),
+      await page.locator('.skin-facets i').first().evaluate((el) => el.style.getPropertyValue('--facet-light')),
       beforeTilt
     );
+    for (let i=0;i<10;i++) {
+      await page.waitForTimeout(85);
+      await page.evaluate(() => dispatchEvent(new DeviceOrientationEvent('deviceorientation', {beta:85,gamma:35})));
+    }
+    await page.getByRole('button', { name: 'Close appearance', exact: true }).click();
+    await page.screenshot({path:'target/skin-surface-tilted.png'});
+    await page.getByLabel('More options', {exact:true}).click();
+    await page.locator('#skin-options').click();
+    const beforeCamera = await page.locator('.skin-facets').evaluate(el => [...el.children].map(face => face.style.backgroundColor));
     await page.getByRole('button', { name: 'Enable camera lighting', exact: true }).click();
+    const afterCamera = await page.locator('.skin-facets').evaluate(el => [...el.children].map(face => face.style.backgroundColor));
+    assert.notDeepEqual(afterCamera,beforeCamera,'Camera samples must change visible face paint');
+    await page.evaluate(() => { window.cameraSide=-1; });
+    await page.waitForTimeout(600);
+    assert.notDeepEqual(await page.locator('.skin-facets').evaluate(el => [...el.children].map(face => face.style.backgroundColor)),afterCamera,'Light direction must change facet shading');
+    assert.equal(await page.locator('.encoder').evaluate(el => getComputedStyle(el).backgroundColor),controlColor,'Shading must not alter control contrast');
+    assert.equal(await page.locator('.screen-bezel').evaluate(el => getComputedStyle(el).clipPath),'none','No cut-out bevels on the screen');
     assert.deepEqual(await page.evaluate(() => sensorTest), { camera: 1, tilt: 1, stops: 0 });
     await page.getByRole('button', { name: 'Disable camera lighting', exact: true }).click();
     assert.equal(await page.evaluate(() => sensorTest.stops), 1);

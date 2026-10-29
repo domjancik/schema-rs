@@ -93,6 +93,7 @@ const stack = { name: "Driver removal", root: {
     await page.locator("#menu").getByRole("button", { name: "Remove current driver", exact: true }).click();
     await page.waitForFunction(async () => !(await fetch("/api/state").then(r => r.json())).project.content["fixture-1"][0].root.drivers.Minimum.drivers.Minimum);
     assert.equal((await state()).project.content["fixture-1"][0].root.drivers.Minimum.id, 3);
+    await page.waitForFunction(() => document.querySelector("#selection-meta").textContent === "DRIVER / Minimum");
     assert.equal(await page.locator("#selection-meta").textContent(), "DRIVER / Minimum");
     await undo(page);
     // Driver-root block-only deletion promotes its input; the owner survives.

@@ -12,7 +12,7 @@
     timer = null,
     request = 0,
     pending = false;
-  let tiltRequest = 0;
+  let tiltRequest = 0, tiltReference = null, tiltAngle = null;
   let lastPaint = 0,
     lastScene = 0,
     tiltMessage = 'Off',
@@ -27,18 +27,20 @@
   const faces = document.createElement('div');
   faces.className = 'skin-facets';
   faces.setAttribute('aria-hidden', 'true');
-  for (const side of ['top', 'left', 'right', 'bottom']) {
+  const paintedFaces = M.surface.map(definition => {
     const face = document.createElement('i');
-    face.className = 'skin-facet-' + side;
+    face.dataset.facet = definition.id;
+    face.style.clipPath = 'polygon(' + definition.points.map(p => `${p[0]*100}% ${p[1]*100}%`).join(',') + ')';
     faces.append(face);
-  }
+    return face;
+  });
   shell.prepend(faces);
   shell.classList.add('faceted-skin');
   const dialog = document.createElement('dialog');
   dialog.id = 'skin-dialog';
   dialog.setAttribute('aria-labelledby', 'skin-title');
   dialog.innerHTML =
-    '<div class="dialog-head"><h2 id="skin-title">Shell lighting</h2><button type="button" aria-label="Close appearance">×</button></div><p>Faceted shell · live scene light. Optional phone sensors add a local impression of the room.</p><div class="skin-settings"><button type="button" id="skin-tilt">Enable phone tilt</button><output id="skin-tilt-status"></output><button type="button" id="skin-camera">Enable camera lighting</button><output id="skin-camera-status"></output></div><p class="skin-privacy">Camera: 16 × 12 local samples, twice a second. No recording or upload. Stops when you leave this page. Room lighting is approximate, not a physical light measurement.</p>';
+    '<div class="dialog-head"><h2 id="skin-title">Shell lighting</h2><button type="button" aria-label="Close appearance">×</button></div><p>The shell follows scene lighting. Enable tilt to move the light across its facets, or use the camera for room lighting.</p><div class="skin-settings"><button type="button" id="skin-tilt">Enable phone tilt</button><output id="skin-tilt-status"></output><button type="button" id="skin-camera">Enable camera lighting</button><output id="skin-camera-status"></output></div><p class="skin-privacy">Camera: 16 × 12 local samples, twice a second. No recording or upload. Stops when you leave this page. Room lighting is approximate, not a physical light measurement.</p>';
   document.body.append(dialog);
   const tiltButton = dialog.querySelector('#skin-tilt'),
     cameraButton = dialog.querySelector('#skin-camera');
@@ -64,29 +66,43 @@
       Math.round(v * (environment ? 0.8 : 1) + (environment ? scene.rgb[i] * 0.2 : 0))
     );
     const light = M.facets({
-      x: (environment?.x || -0.25) - direction.x,
-      y: (environment?.y || -0.4) - direction.y
+      x: (environment ? environment.x * 2 : -0.45) - direction.x * 1.65,
+      y: (environment ? environment.y * 2 : -0.65) - direction.y * 1.65
     });
     shell.style.setProperty('--skin-rgb', color.join(' '));
-    shell.style.setProperty('--skin-energy', String(0.04 + Math.min(1, target.energy) * 0.12));
-    for (const [side, value] of Object.entries(light))
-      shell.style.setProperty('--skin-' + side, String(value));
+    shell.style.setProperty('--skin-energy', String(0.025 + Math.min(1, target.energy) * 0.05));
+    for (const face of paintedFaces) {
+      const value = light[face.dataset.facet];
+      face.style.setProperty('--facet-light', String(value));
+      face.style.backgroundColor = value >= .5
+        ? `rgb(255 255 255 / ${(value-.5)*.25})`
+        : `rgb(0 0 0 / ${(.5-value)*.32})`;
+    }
   }
   function orientation(event) {
     if (document.hidden || motion.matches || performance.now() - lastPaint < 80) return;
+    if (!Number.isFinite(event.beta) || !Number.isFinite(event.gamma)) return;
     lastPaint = performance.now();
-    const target = M.tilt(event, screen.orientation?.angle || 0);
+    const angle = screen.orientation?.angle || 0;
+    if (!tiltReference || tiltAngle !== angle) {
+      tiltReference = { beta: event.beta, gamma: event.gamma };
+      tiltAngle = angle;
+      direction = { x: 0, y: 0 };
+    }
+    const target = M.tilt(event, angle, tiltReference);
     direction = {
       x: direction.x * 0.75 + target.x * 0.25,
       y: direction.y * 0.75 + target.y * 0.25
     };
-    tiltMessage = 'On · relative phone tilt';
+    tiltMessage = 'On · tilt to move the light';
     controls();
     paint();
   }
   function stopTilt(message = 'Off') {
     tiltRequest++;
     tiltEnabled = false;
+    tiltReference = null;
+    tiltAngle = null;
     removeEventListener('deviceorientation', orientation);
     direction = { x: 0, y: 0 };
     tiltMessage = message;

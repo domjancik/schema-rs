@@ -29,8 +29,21 @@ for (let y = 0; y < 4; y++)
 const camera = M.cameraLight(pixels, 4, 4);
 assert.deepEqual(camera.rgb, [128, 0, 0]);
 assert(camera.x < 0);
-assert(M.facets({ x: -1, y: 0 }).left > M.facets({ x: -1, y: 0 }).right);
-assert(M.facets({ x: 1, y: 0 }).right > M.facets({ x: 1, y: 0 }).left);
+assert(M.surface.length >= 8, 'Broad triangular facets cover the shell');
+const area = M.surface.reduce((total, face) => {
+  const [a,b,c] = face.points;
+  assert.equal(face.points.length, 3);
+  assert(Math.abs(Math.hypot(...face.normal)-1) < 1e-6);
+  assert(face.normal[2] > 0.8, 'Shallow relief, no steep bevels');
+  return total + Math.abs((b[0]-a[0])*(c[1]-a[1])-(b[1]-a[1])*(c[0]-a[0]))/2;
+}, 0);
+assert(Math.abs(area-1) < 1e-6, 'The surface covers the full housing');
+const positive = M.surface.reduce((a,b) => a.normal[0] > b.normal[0] ? a : b);
+const negative = M.surface.reduce((a,b) => a.normal[0] < b.normal[0] ? a : b);
+assert(M.facets({x:1,y:0})[positive.id] > M.facets({x:-1,y:0})[positive.id]);
+assert(M.facets({x:1,y:0})[negative.id] < M.facets({x:-1,y:0})[negative.id]);
+assert.deepEqual(M.tilt({ beta: 80, gamma: 15 }, 0, { beta: 80, gamma: 15 }), {x:0,y:0});
+assert.equal(M.tilt({ beta: 95, gamma: 15 }, 0, { beta: 80, gamma: 15 }).y, .25);
 assert.deepEqual(M.tilt({ beta: NaN, gamma: null }, 0), { x: 0, y: 0 });
 assert.deepEqual(M.tilt({ beta: 0, gamma: 30 }, 90), { x: 0, y: -0.5 });
 for (const v of Object.values(M.facets({ x: 1e10, y: NaN })))
