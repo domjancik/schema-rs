@@ -12,6 +12,15 @@ const base = process.env.PUBLIC_SITE_URL || 'http://127.0.0.1:8828';
       await page.waitForFunction((id) => document.getElementById(id)?.hasAttribute('href'), id);
       assert.equal(await page.locator('#' + id).getAttribute('aria-disabled'), null);
     }
+    assert.equal(await page.locator('#macos-universal-download').count(), 1, 'Mac release status must be visible');
+    const manifest = await page.request.get(base + '/downloads/latest.json').then(r => r.json());
+    const mac = manifest.platforms?.['macos-universal'];
+    if (mac?.notarized === true) {
+      assert.equal(await page.locator('#macos-universal-download').getAttribute('href'), '/downloads/Schema-s-macos-universal.zip');
+    } else {
+      assert.equal(await page.locator('#macos-universal-download').getAttribute('href'), null);
+      assert.match(await page.locator('#macos-release-status').textContent(), /pending.*native.*validation/i);
+    }
     assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
     await page.getByRole('link', { name: 'Open Studio ↗', exact: true }).first().click();
     await page.locator('#engine-address').waitFor();

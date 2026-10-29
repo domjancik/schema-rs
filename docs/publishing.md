@@ -41,3 +41,10 @@ The website advertises only artifacts present in its manifest. Repeat publicatio
 Linux x64 executed successfully in Ubuntu/WSL, including web assets, output-disabled startup, authored edit, undo and durable restart. Installer tests cover preservation, unmanaged-service refusal, checksum failure and rollback on unhealthy startup. System files are staged under a temporary prefix during installation tests. No new service was installed on the real Orange Pi, whose SSH endpoint was unavailable during publication. The ARM64 archive is architecture-verified and contains the signed pipeline's ready binary; board/USB behavior was not retested for this public release.
 
 Known mobile issue SL-005: at320×568, the scene's footer can cover fixture markers. The scene lab reproduced this identically before and after the skin; fixture-row selection works. This publication does not claim it fixed. Existing main controls remain within the tested phone viewport.
+
+
+## macOS status publication — 2026-10-29
+
+Published the updated landing page and macOS guide to production deployment `dpl_FwNRp9P3gga3pPk6mTwGYLUErdNb` at https://schema-s.vercel.app. The Download section now explicitly displays a pending macOS build: engine/launcher tooling exists, but native Mac validation and signing are outstanding. No Mac archive or signed update feed is advertised. See [Mac release requirements](macos.md).
+
+This is a static page update. Existing Windows/Linux archives and their original source manifest were retained; all three were fetched from the public alias and verified against their published sizes/SHA-256 after deployment. The unauthenticated production mobile browser test passes for visible Mac status, existing download links, viewport fit and validated engine connection. The release test now requires a visible pending status or a valid notarized Mac download entry, preventing a repeat of the missing platform row.

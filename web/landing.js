@@ -23,6 +23,7 @@
         link.href = '/downloads/' + file.filename;
         link.textContent = label;
         link.removeAttribute('aria-disabled');
+        if (platform === 'macos-universal') document.getElementById('macos-release-status').textContent = 'Universal macOS download · Apple Silicon + Intel · signed and notarized.';
       }
     }
     if (release.platforms) {
