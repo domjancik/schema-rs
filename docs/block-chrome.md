@@ -33,3 +33,8 @@ Geometry drives card faces, scaled connection tabs, insertion buttons, drag seam
 
 
 Fit includes card/tab extents and reserves space for the canvas controls. It can zoom below25% for tall expanded square trees, resets canvas scroll offsets, and saves the resulting scale in the panel. Manual zoom keeps that fitted scale continuous. This addresses lab finding SL-007; the original Carpushit retest remains with the lab.
+
+
+## Deletion motion
+
+A successful delete first shrinks/fades its removed cards over160ms, then restacks surviving cards with a300ms settle. Block-only deletion keeps promoted inputs; branch deletion exits the whole removed subtree. Matching main, split and fixture-embedded stack views share this transition. The engine commits one normal undoable command immediately; motion is only a bounded visual presentation of the accepted result. Rejected/stale edits never play a deletion. New edits, navigation and reduced motion cancel transient ghosts safely; reduced motion applies the final layout directly. Ghosts are inert, hidden from accessibility and carry no model IDs. Deleting an entire root clears its final ghosts after the exit. The existing96-card motion budget applies per view.

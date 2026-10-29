@@ -11,7 +11,11 @@
       y: old.top - (origin.y + next.y * origin.scale)
     };
   }
-  function plan(before, after, { owner, closing, knownBeforeIds = before.map((n) => n.id) }) {
+  function plan(
+    before,
+    after,
+    { owner, closing, knownBeforeIds = before.map((n) => n.id), deleting = false }
+  ) {
     const known = new Set([...knownBeforeIds].map(String));
     const old = new Map(before.map((n) => [String(n.id), n])),
       next = new Map(after.map((n) => [String(n.id), n]));
@@ -111,6 +115,21 @@
         ]
       });
     }
+    if (deleting)
+      for (const effect of result) {
+        if (effect.kind === 'exit') {
+          effect.duration = 160;
+          effect.delay = 0;
+          effect.frames = [
+            { transform: 'none', opacity: 1 },
+            { offset: 0.35, transform: 'translateY(-5px) scale(1.04)', opacity: 0.9 },
+            { transform: 'translateY(18px) scale(.2) rotate(-4deg)', opacity: 0 }
+          ];
+        } else {
+          effect.delay = 160;
+          effect.duration = 300;
+        }
+      }
     return result;
   }
   const reduce = () =>
@@ -181,6 +200,7 @@
     states.delete(world);
     active.delete(world);
     delete world.dataset.foldAnimating;
+    delete world.dataset.deleteAnimating;
     for (const animation of state.animations) animation.cancel();
     state.layer?.remove();
     for (const e of state.entering) {
@@ -204,7 +224,7 @@
     }
     return true;
   }
-  function play(world, before, { owner, closing, scope, revision, done }) {
+  function play(world, before, { owner, closing, scope, revision, done, deleting = false }) {
     cancel(world);
     if (reduce() || typeof world.animate !== 'function' || !before?.items.size) return false;
     const current = origin(world),
@@ -229,7 +249,7 @@
         height: parseFloat(e.style.height),
         opacity: 1
       })),
-      effects = plan(old, next, { owner, closing, knownBeforeIds: before.allIds });
+      effects = plan(old, next, { owner, closing, knownBeforeIds: before.allIds, deleting });
     const state = {
       scope,
       revision,
@@ -243,6 +263,7 @@
     states.set(world, state);
     active.add(world);
     world.dataset.foldAnimating = String(owner) + (closing ? ':closed' : ':open');
+    if (deleting) world.dataset.deleteAnimating = 'true';
     const animate = (e, frames, options) => {
       const a = e.animate(frames, {
         fill: 'both',
@@ -292,7 +313,7 @@
       if (element)
         animate(element, effect.frames, { duration: effect.duration, delay: effect.delay });
     }
-    if (state.owner) {
+    if (state.owner && !deleting) {
       state.owner.style.zIndex = '4';
       const shell = state.owner.querySelector('.block-shell'),
         oldOwner = before.items.get(String(owner));
