@@ -279,6 +279,7 @@
         header.append(pin);
       }
     }
+    function sceneStacks(panel,body,controls,api){return SchemaSceneStacks.mount(body,controls,{context:panel.context,update:api.context,data:a.data,catalog:a.catalog,selected:()=>a.selected?.()||[a.context().fixture],focus:a.context,draw:a.drawStack,action:a.sceneStackAction});}
     function scene(panel, body, api, data) {
       if (panel.context.axes === '3d') {
         body.replaceChildren();
@@ -319,12 +320,15 @@
           }
         });
         navigation.toolbar(controls);
+        const stacks=sceneStacks(panel,body,controls,api);
         body._sceneCamera = navigation;
         body._panelTick = () => {
           const top = controls.getBoundingClientRect().height + 16;
           view.style.marginTop = top + 'px';
           view.style.height = `calc(100% - ${top}px)`;
           navigation.update();
+          const camera=navigation.get();const offset=view.getBoundingClientRect().top-body.getBoundingClientRect().top+body.scrollTop;
+          stacks.update(p=>{const q=SchemaSchematicCamera.project(p,camera,view.clientWidth,view.clientHeight);return{x:q.x,y:q.y+offset};},camera.zoom);
         };
         body._panelTick();
         return;
@@ -378,6 +382,9 @@
         width / 2 + pan.x + p[indices[0]] * 20 * scale,
         height / 2 + pan.y - p[indices[1]] * 20 * scale
       ];
+      const stacks=sceneStacks(panel,body,controls,api);
+      const updateStacks=()=>stacks.update(p=>{const q=point(p),rect=view.getBoundingClientRect(),parent=body.getBoundingClientRect();return{x:q[0]*rect.width/width+rect.left-parent.left+body.scrollLeft,y:q[1]*rect.height/height+rect.top-parent.top+body.scrollTop};},20*scale);
+      updateStacks();
       for (let i = -30; i <= 30; i++) {
         const x = width / 2 + pan.x + i * 20 * scale,
           y = height / 2 + pan.y + i * 20 * scale;
@@ -439,6 +446,7 @@
         view.append(dot, label);
       }
       body._panelTick = () => {
+        updateStacks();
         for (const dot of view.querySelectorAll('circle[data-fixture]')) {
           const live = a.data().snapshot.fixtures.find((f) => f.fixture.id === dot.dataset.fixture);
           if (!live) continue;

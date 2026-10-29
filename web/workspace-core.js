@@ -17,6 +17,8 @@
     return state.workspaces.find((w) => w.id === state.active);
   }
   function validContext(c) {
+    if(c.sceneStacks!==undefined&&!['off','selected','all'].includes(c.sceneStacks))throw Error('Invalid scene stack scope');
+    if(c.sceneStackScale!==undefined&&(!Number.isFinite(c.sceneStackScale)||c.sceneStackScale<.15||c.sceneStackScale>1))throw Error('Invalid scene stack size');
     for (const key of ['fractal', 'square'])
       if (c[key] !== undefined && typeof c[key] !== 'boolean') throw Error('Invalid stack layout');
     if (c.layer !== undefined && (!Number.isInteger(c.layer) || c.layer < 0 || c.layer >= 32))

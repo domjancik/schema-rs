@@ -36,3 +36,12 @@ Additional verification: math/fit/adaptive-margin and workspace validation tests
 Scene viewport controls expose **Iso** directly alongside3D/XZ/XY/YZ. Iso uses45° azimuth and35.264° elevation, with orthographic projection. Drag to rotate freely; **↶ / ↷** turn45° around world-up while preserving target, zoom and elevation. These controls are also directly available on schémaboy and the rendered3D preview. The preview rebuilds camera-dependent rendering passes when changing projection and keeps lighting/volumetrics/SSGI enabled according to the existing settings.
 
 Each viewport saves its own pose and projection locally. Split views can show different angles; navigating does not recreate neighboring GPU views or author a scene command. Touch orbit, two-finger pan/pinch and existing keyboard shortcuts remain available. Square/fractal block canvases remain planar.
+
+
+## Embedded fixture stacks
+
+Scene/Fixture setup viewport controls include **Stacks off / Selected stacks / All stacks** and a stack-size slider. Each displayed stack uses that fixture's layout position as its anchor. Its root sits above the selection dot; evaluated animation stays separate. The stack stays screen-facing while the scene camera rotates, and scales with camera zoom. This applies to the lightweight planar and isometric/3D Scene viewports, not the GPU lighting preview.
+
+Each fixture has a local layer picker. Click a block to select its fixture/node in the shared inspector and edit its properties there. Plus buttons use the existing indexed creation picker; delete uses the existing block/branch chooser; fold affects that embedded tree locally. The grip opens the Move block/branch chooser; direct pointer drag between embedded stacks is not implemented. The regular Stack editor remains available for ghost drag-and-drop, drivers and detailed layout controls. Empty layers offer Create stack.
+
+Visibility and size are saved per viewport. Selected mode follows the current fixture selection, including a multiple selection made in Studio. Embedded selection then focuses one fixture. The overlay renders at most600 authored tree nodes per viewport; an explicit notice reports omitted stacks so dense projects can use Selected mode. Overlapping stacks retain their scene anchors; selecting a fixture raises its stack. Scene controls stay above overlays. These preferences and local folds do not alter project/undo history; authored edits use the same expected-revision engine commands as the regular editor.

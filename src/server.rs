@@ -897,6 +897,7 @@ pub fn router(state: AppState) -> Router {
         .route("/api/session/save", post(session_save))
         .route("/api/session/status", get(session_status))
         .route("/api/inputs", post(input_event))
+        .route("/scene-stacks.js",get(||async{([(header::CONTENT_TYPE,"text/javascript; charset=utf-8")],include_str!("../web/scene-stacks.js"))}))
         .route("/api/output/devices", get(output_devices))
         .route("/api/state", get(state_get))
         .route("/api/catalog", get(|State(state):State<AppState>|async move{Json(state.controller.plugin_catalog())}))

@@ -29,3 +29,6 @@
 
 :is(#world,.layer-world) .scaled-block>.block-shell path{stroke-width:calc(1px * var(--block-scale))}
 :is(#world,.layer-world) .scaled-block.selected>.block-shell path{stroke-width:calc(2.4px * var(--block-scale))}
+
+.scene-stacks{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:4}.scene-stack{position:absolute;inset:0;pointer-events:none}.scene-stack .layer-world{pointer-events:none}.scene-stack .block,.scene-stack button,.scene-stack select{pointer-events:auto}.scene-stack .block:focus-visible .block-shell path{stroke:var(--focus);stroke-width:3}.scene-stack-label{position:absolute;left:0;top:0;display:flex;gap:4px;white-space:nowrap;pointer-events:auto;background:var(--paper);border:1px solid var(--line);border-radius:5px;padding:2px}.scene-stack-label button,.scene-stack-label select{font-size:11px;padding:3px;margin:0;width:auto;color:var(--ink);background:var(--paper)}.scene-stack.selected .scene-stack-label{border-color:var(--focus)}.scene-stacks-notice{position:absolute;bottom:0;left:8px;background:var(--paper);font-size:11px}.panel-scene-controls{z-index:12}.panel-scene-controls>select{width:auto;margin:0;font-size:11px;padding:5px;background:var(--paper);color:var(--ink)}.panel-scene-controls>input[type=range]{width:65px;margin:0;padding:0}
+.workspace-panel .panel-scene-controls{z-index:12}
