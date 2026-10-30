@@ -35,3 +35,16 @@ The main setup camera is a per-browser preference restored on reload. Navigating
 Set **Marker color** in Fixture setup; Shift-select fixtures in Studio to color-mark them together in one undoable edit. **Clear** returns to the default marker, including mixed selections. Marker-only undo, redo and history navigation preserve running animation and random-generator state. Schémaboy exposes the same control under its menu → Fixture setup. Swatches appear in fixture navigation/search, setup and scene markers, embedded stack headers and universe patch groups.
 
 Markers are saved layout metadata (`fixture.marker_color`, optional `#RRGGBB`), independent of emitted light color, fixture dimming and DMX. Existing unmarked files stay unmarked. Use color blocks when you actually want to change light output. Marked files require an engine with marker-color support.
+
+
+### Content and preset selection
+
+Projects lists saved projects separately from built-in presets. Selecting Carpushit offers an explicit Load preset action; loading a complete project stops output and is undoable. This uses the existing bundled reference preset and does not change its fixture roster. To restore only saved fixture layers, open Content library from Projects, Apply to… → Browse saved content, or the Schémaboy menu.
+
+Content library offers a searchable saved-content selector, a group selector, and a scope summary showing stored layers, matching fixtures and missing fixtures. Loading uses stable saved fixture IDs and intersects them with the selected group; it does not broadcast a stack to newly selected fixtures. Other layers and layout remain in place. Missing IDs are shown before loading; incompatible content reports the engine validation error. Save selected layer stores only the selected fixtures at the current layer. Existing names are suggested and overwriting requires an explicit checkbox. Stale content loads and saves are rejected; close and reopen the library after another author edits the project. Saving does not add an undo entry.
+
+Content-reference block properties also offer saved-content selectors, preserving a visible missing-reference option. Lists are fetched on demand, cached for 30 seconds for property editors, and refreshed whenever the library opens or a snapshot is saved. Runtime publications do not carry a snapshot library. Native saved-content providers now decode both legacy arrays and current versioned documents, including changes and restart.
+
+### Fixture group assignment
+
+Fixture setup uses searchable group checkboxes with membership counts and a New group name field. Shift-select multiple fixtures in Studio for mixed membership checks: checking adds a group to all selected fixtures; unchecking removes just that group. Other memberships and fixture attributes are preserved, and each edit is one revisioned native command or batch with shared Undo. Group creation does not imply membership inheritance. The same controls are available in Schémaboy Fixture setup and the Place dialog in scene viewports; position drafts remain usable after group edits.

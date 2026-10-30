@@ -255,3 +255,45 @@ pub fn save_layout(root: &Path, p: &Project, name: &str) -> Result<()> {
         &serde_json::to_vec_pretty(&layout).map_err(|e| e.to_string())?,
     )
 }
+
+/// Lightweight content scope for selection UIs; no stacks or runtime state are published.
+pub fn list_content(root: &Path) -> Result<serde_json::Value> {
+    let folder = crate::project_library::guarded(root, "registry/content")?;
+    let files = match fs::read_dir(folder) {
+        Ok(files) => files,
+        Err(error) if error.kind() == std::io::ErrorKind::NotFound => {
+            return Ok(serde_json::json!({"contents":[]}))
+        }
+        Err(error) => return Err(error.to_string()),
+    };
+    let mut names = Vec::new();
+    for entry in files {
+        let entry = entry.map_err(|e| e.to_string())?;
+        if !entry.file_type().map_err(|e| e.to_string())?.is_file() {
+            continue;
+        }
+        let path = entry.path();
+        if path.extension().is_none_or(|e| e != "json") {
+            continue;
+        }
+        let Some(name) = path.file_stem().and_then(|s| s.to_str()) else {
+            continue;
+        };
+        if filename(name).is_ok() {
+            names.push(name.to_owned());
+        }
+    }
+    names.sort();
+    let contents: Vec<_> = names.into_iter().map(|name| {
+        let result=(|| {
+            let path=crate::project_library::guarded(root,&format!("registry/content/{name}.json"))?;
+            if fs::metadata(path).map_err(|e|e.to_string())?.len()>16*1024*1024{return Err("Content exceeds 16 MiB".into());}
+            read_content(root,&name)
+        })();
+        match result {
+            Ok(entries)=>serde_json::json!({"name":name,"targets":entries.iter().map(|e|serde_json::json!({"fixture":e.fixture,"layer":e.layer})).collect::<Vec<_>>()}),
+            Err(error)=>serde_json::json!({"name":name,"targets":[],"error":error}),
+        }
+    }).collect();
+    Ok(serde_json::json!({"contents":contents}))
+}

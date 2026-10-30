@@ -12,7 +12,7 @@ use std::{
     time::{SystemTime, UNIX_EPOCH},
 };
 // User IDs never become arbitrary paths. Reject links and existing escaped ancestors too.
-fn guarded(root: &Path, relative: &str) -> Result<PathBuf> {
+pub(crate) fn guarded(root: &Path, relative: &str) -> Result<PathBuf> {
     let mut path = root.to_path_buf();
     let base = root.canonicalize().ok();
     for component in Path::new(relative).components() {

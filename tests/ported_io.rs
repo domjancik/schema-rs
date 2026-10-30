@@ -67,3 +67,74 @@ async fn osc_udp_worker_delivers_messages_to_the_running_engine() {
     assert_eq!(runtime.controller.current().snapshot.revision, 0);
     drop(services);
 }
+
+#[tokio::test]
+async fn saved_versioned_content_refreshes_provider_cache_and_survives_restart() {
+    use schema_rs::{
+        engine::Engine,
+        io::Services,
+        model::{ContentEntry, Project},
+        project,
+        server::Runtime,
+    };
+    let root = std::env::temp_dir().join(format!("schema-content-watch-{}", std::process::id()));
+    let _ = std::fs::remove_dir_all(&root);
+    project::initialize(&root).unwrap();
+    let mut p = Project::demo();
+    p.output.enabled = false;
+    let runtime = Runtime::start_engine(Engine::new(p.clone()).unwrap(), None).unwrap();
+    let entries = vec![ContentEntry {
+        fixture: p.fixtures[0].id.clone(),
+        layer: 0,
+        stack: p.content[&p.fixtures[0].id][0].clone(),
+    }];
+    project::save_content(&root, &entries, "saved").unwrap();
+    for pass in 0..2 {
+        let services = Services::start(runtime.controller.clone(), root.clone(), None).unwrap();
+        let deadline = std::time::Instant::now() + std::time::Duration::from_secs(4);
+        loop {
+            let session = runtime.controller.checkpoint().await.unwrap();
+            if session
+                .inputs
+                .content
+                .get("saved")
+                .is_some_and(|v| v[0].layer == pass)
+            {
+                break;
+            }
+            assert!(
+                std::time::Instant::now() < deadline,
+                "saved v2 content was not registered/updated"
+            );
+            tokio::time::sleep(std::time::Duration::from_millis(30)).await;
+        }
+        if pass == 0 {
+            let mut changed = entries.clone();
+            changed[0].layer = 1;
+            project::save_content(&root, &changed, "saved").unwrap();
+            let deadline = std::time::Instant::now() + std::time::Duration::from_secs(4);
+            loop {
+                if runtime
+                    .controller
+                    .checkpoint()
+                    .await
+                    .unwrap()
+                    .inputs
+                    .content["saved"][0]
+                    .layer
+                    == 1
+                {
+                    break;
+                }
+                assert!(
+                    std::time::Instant::now() < deadline,
+                    "v2 cache did not refresh"
+                );
+                tokio::time::sleep(std::time::Duration::from_millis(30)).await;
+            }
+        }
+        drop(services);
+    }
+    drop(runtime);
+    std::fs::remove_dir_all(root).unwrap();
+}

@@ -788,6 +788,7 @@ struct Import {
 #[serde(deny_unknown_fields)]
 struct Save {
     name: String,
+    expected_revision: Option<u64>,
     #[serde(default)]
     scope: SaveScope,
     #[serde(default)]
@@ -1169,6 +1170,7 @@ pub fn router(state: AppState) -> Router {
         .route("/api/projects", get(project_list))
         .route("/api/projects/save", post(project_store))
         .route("/api/projects/load", post(project_open))
+        .route("/api/content", get(content_list))
         .route("/api/content/load", post(load_content))
         .layer(DefaultBodyLimit::max(512 * 1024))
         .layer(middleware::from_fn_with_state(state.clone(), guard))
@@ -1248,6 +1250,14 @@ async fn save(
     let frame = state.controller.current();
     let root = state.root;
     let revision = frame.snapshot.revision;
+    if body
+        .expected_revision
+        .is_some_and(|expected| expected != revision)
+    {
+        return Err(ApiError(
+            "Revision conflict: refresh state before saving".into(),
+        ));
+    }
     tokio::task::spawn_blocking(move || {
         scenic::with_plugins(frame.plugins.clone(), || match body.scope {
             SaveScope::All => project::save(&root, &frame.project, &body.name),
@@ -1284,6 +1294,17 @@ async fn save(
         state.controller.persist_session().await?;
     }
     Ok(Json(serde_json::json!({"saved_revision":revision})))
+}
+async fn content_list(State(state): State<AppState>) -> ApiResult<Json<serde_json::Value>> {
+    let _io_guard = state.io_lock.lock().await;
+    let root = state.root;
+    let plugins = state.controller.current().plugins.clone();
+    let result = tokio::task::spawn_blocking(move || {
+        scenic::with_plugins(plugins, || project::list_content(&root))
+    })
+    .await
+    .map_err(|e| ApiError(e.to_string()))??;
+    Ok(Json(result))
 }
 async fn load_content(
     State(state): State<AppState>,

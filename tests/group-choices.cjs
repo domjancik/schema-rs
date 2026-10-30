@@ -1,0 +1,14 @@
+const assert=require('node:assert/strict');
+const C=require('../web/authoring-core.js');
+const fixtures=[{id:'a',name:'A',groups:['front','warm'],marker_color:'#a78bfa'},{id:'b',name:'B',groups:['back','warm']},{id:'c',name:'C',groups:['front']}];
+assert.deepEqual(C.groupChoices(fixtures,fixtures.slice(0,2)),[{name:'back',count:1,checked:false,mixed:true},{name:'front',count:2,checked:false,mixed:true},{name:'warm',count:2,checked:true,mixed:false}]);
+const command=C.groupCommand(fixtures.slice(0,2),'front',true);
+assert.equal(command.type,'batch');assert.deepEqual(command.commands.map(c=>c.fixture.groups),[['front','warm'],['back','warm','front']]);
+assert.equal(command.commands[0].fixture.marker_color,'#a78bfa');assert.deepEqual(fixtures[1].groups,['back','warm']);
+assert.deepEqual(C.groupCommand(fixtures.slice(0,2),'warm',false).commands.map(c=>c.fixture.groups),[['front'],['back']]);
+assert.equal(C.groupCommand([fixtures[0]],' new ',true).fixture.groups.at(-1),'new');
+assert.throws(()=>C.groupCommand([fixtures[0]],'  ',true),/group/i);
+assert.throws(()=>C.groupCommand([fixtures[0]],'a'.repeat(101),true),/100/);
+assert.throws(()=>C.groupCommand([fixtures[0]],'bad\nname',true),/group/i);
+assert.deepEqual(C.groupChoices(fixtures,[fixtures[2]]).find(g=>g.name==='front'),{name:'front',count:2,checked:true,mixed:false});
+console.log('Group choices: mixed selection, counts, immutable native batches, preserving memberships and validation passed');

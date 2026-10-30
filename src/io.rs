@@ -313,9 +313,15 @@ impl Services {
                                                         });
                                                     }
                                                 }
-                                            } else if let Ok(entries) =
-                                                serde_json::from_slice(&bytes)
-                                            {
+                                            } else if let Ok(document) = serde_json::from_slice::<
+                                                crate::storage_formats::Content,
+                                            >(
+                                                &bytes
+                                            ) {
+                                                if document.validate().is_err() {
+                                                    continue;
+                                                }
+                                                let entries = document.entries;
                                                 events.push(Event::Content {
                                                     name: path
                                                         .file_stem()

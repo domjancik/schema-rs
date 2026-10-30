@@ -78,6 +78,7 @@ async function request(path,body){
     await persist();return JSON.parse(result);
   }
   if(path==='/api/project/save'){
+    revision(body.expected_revision);
     const data=capture(),key=id(body.name||'init');
     if(!body.scope||body.scope==='all')return request('/api/projects/save',{id:key,title:data.project.name,overwrite:true,expected_revision:data.snapshot.revision});
     if(!['layout','content'].includes(body.scope))throw Error('Unknown save scope');
@@ -85,6 +86,17 @@ async function request(path,body){
     const resourceId=body.scope+':'+key,existing=await storageRequired().get('resources',resourceId);if(existing)migrate(body.scope,body.scope==='layout'?layoutText(existing,key):resourceText(existing));
     await storageRequired().saveResource({id:resourceId,value_text,saved_revision:data.snapshot.revision,modified_unix_ms:Date.now()},existing??null);
     if(body.scope==='content')engine.request('/api/resources/content',JSON.stringify({name:key,text:value_text}));return {saved_revision:data.snapshot.revision};
+  }
+  if(path==='/api/content') {
+    const contents=[];
+    for(const resource of await storageRequired().all('resources'))if(resource.id.startsWith('content:')) {
+      const name=resource.id.slice(8);
+      try {
+        const report=migrate('content',resourceText(resource)), document=report.document;
+        contents.push({name,targets:document.entries.map(({fixture,layer})=>({fixture,layer}))});
+      } catch(error){contents.push({name,targets:[],error:String(error.message||error)});}
+    }
+    contents.sort((a,b)=>a.name.localeCompare(b.name));return {contents};
   }
   if(path==='/api/content/load'){
     const saved=await storageRequired().get('resources','content:'+id(body.name));if(!saved)throw Error('Content snapshot not found');

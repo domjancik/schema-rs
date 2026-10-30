@@ -149,7 +149,28 @@
       .map((x) => x.a);
   }
   const markerColor = fixture => /^#[0-9a-f]{6}$/i.test(fixture?.marker_color || "") ? fixture.marker_color : null;
-  const api = { hits, labels, arrange, search, markerColor };
+  function groupChoices(fixtures, selected) {
+    const counts = new Map(), memberships = new Map();
+    for(const fixture of fixtures) for(const name of new Set(fixture.groups || [])) counts.set(name,(counts.get(name)||0)+1);
+    for(const fixture of selected) for(const name of new Set(fixture.groups || [])) memberships.set(name,(memberships.get(name)||0)+1);
+    return [...counts].sort(([a],[b])=>a.localeCompare(b)).map(([name,count]) => {
+      const assigned = memberships.get(name) || 0;
+      return {name, count, checked: selected.length > 0 && assigned === selected.length, mixed: assigned > 0 && assigned < selected.length};
+    });
+  }
+  function groupCommand(fixtures, name, enabled) {
+    name = name.trim();
+    if (!name || /[\x00-\x1f\x7f]/.test(name)) throw Error('Enter a group name without control characters.');
+    if (new TextEncoder().encode(name).length > 100) throw Error('Group names can be at most 100 bytes.');
+    const commands = fixtures.map(fixture => {
+      const groups = enabled ? [...new Set([...(fixture.groups || []), name])] : (fixture.groups || []).filter(g=>g!==name);
+      if (groups.length > 32) throw Error('A fixture can belong to at most 32 groups.');
+      return {type:'set_fixture', fixture:{...fixture, groups}};
+    });
+    if (!commands.length) throw Error('Select a fixture first.');
+    return commands.length === 1 ? commands[0] : {type:'batch', commands};
+  }
+  const api = { hits, labels, arrange, search, markerColor, groupChoices, groupCommand };
   root.SchemaAuthoringCore = api;
   if (typeof module !== "undefined") module.exports = api;
 })(globalThis);

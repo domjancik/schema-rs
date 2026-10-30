@@ -259,3 +259,56 @@ fn overwriting_keeps_prior_generation_and_does_not_clobber_unrelated_temp_files(
     );
     std::fs::remove_dir_all(root).unwrap();
 }
+
+#[tokio::test]
+async fn content_selector_lists_only_content_files_and_requires_authentication() {
+    let root = std::env::temp_dir().join(format!("schema-content-list-{}", std::process::id()));
+    let _ = std::fs::remove_dir_all(&root);
+    let mut p = Project::demo();
+    p.output.enabled = false;
+    project::save(&root, &p, "init").unwrap();
+    project::save_content(&root, &[], "night").unwrap();
+    project::save_layout(&root, &p, "layout-only").unwrap();
+    std::fs::write(root.join("registry/content/bad.name.json"), "{}").unwrap();
+    std::fs::create_dir(root.join("registry/content/directory.json")).unwrap();
+    let runtime = Runtime::start(p).unwrap();
+    let app = router(AppState::new(
+        runtime.controller.clone(),
+        root.clone(),
+        None,
+    ));
+    let (status, body) = request(app.clone(), "GET", "/api/content", serde_json::Value::Null).await;
+    assert_eq!(status, StatusCode::OK);
+    assert_eq!(
+        body["contents"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .map(|c| c["name"].as_str().unwrap())
+            .collect::<Vec<_>>(),
+        vec!["init", "night"]
+    );
+    assert_eq!(body["contents"][1]["targets"], serde_json::json!([]));
+    assert!(!body["contents"][0]["targets"]
+        .as_array()
+        .unwrap()
+        .is_empty());
+    let (status, _) = request(
+        app,
+        "POST",
+        "/api/project/save",
+        serde_json::json!({"name":"stale","scope":"content","expected_revision":999}),
+    )
+    .await;
+    assert_eq!(status, StatusCode::CONFLICT);
+    assert!(!root.join("registry/content/stale.json").exists());
+    let app = router(AppState::new(
+        runtime.controller.clone(),
+        root.clone(),
+        Some("1357".into()),
+    ));
+    let (status, _) = request(app, "GET", "/api/content", serde_json::Value::Null).await;
+    assert_eq!(status, StatusCode::UNAUTHORIZED);
+    drop(runtime);
+    std::fs::remove_dir_all(root).unwrap();
+}

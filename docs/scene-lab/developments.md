@@ -461,3 +461,12 @@ Signed release `2c905be32999-1e39cda32b4b-40` is active on managed local ports 1
 The scene lab applied the accepted family palette to all 34 fixtures in live Carpushit random-dim on 18798, using one expected-revision batch, and saved the named project. Revision 8, eight undo entries, output disabled. Comparing against the private pre-edit session proves only marker fields changed: programs, patch, dimming and positions are identical. Scalar-only playback stays neutral white. Prepared Carpushit color banks and preview emission metadata are white; violet identifies UV fixtures for navigation. Bundled preset geometry/roster and GLB are unchanged.
 
 The scene lab has the release details and an isolated-clone retest request for marker-only undo/redo/history while Random.Dim runs. Do not exercise this verification against live user history. Marker guides and evidence live under `docs/scene-lab/carpushit-markers.md` and `docs/scene-lab/evidence/carpushit-markers/`.
+
+
+## Content/preset selectors and fixture group assignment — 2026-10-30
+
+Pending activation: Projects distinguishes saved projects and the existing bundled Carpushit reference preset. Shared Content library in Projects/Apply/mobile offers search, saved-content selection, target group selection, sparse fixture/layer scope, explicit overwrite choice and revision-checked saves/loads. Content-block references use on-demand saved-content selectors. Fixture setup and scene Place dialogs share searchable group checkboxes, counts, mixed multi-selection and explicit new group creation; changes preserve other fixture metadata and memberships. No automatic scene/preset loads or roster changes.
+
+SL-008 fix: native provider now uses the validated versioned Content decoder instead of directly parsing a legacy array. Regression reproduces omission, then verifies registration, changed content and restart with v2 saves. This is source/test verification; the lab should retest after activation before closing the finding. This selector work covers the discovery/group-recall portion of SL-004, not its additional timeline/preset-authoring requests. Existing sparse targets, API layers and the canonical33 versus bundled38 reference distinction are retained.
+
+Retest content selection and save/load from Studio/Schémaboy, Assign.Content reference selection, group mixed checks and additive membership, group edits followed by position drafts, and current-format provider refresh/restart. Keep live 18798 and Pi scenes/history unchanged; use isolated output-disabled clones.

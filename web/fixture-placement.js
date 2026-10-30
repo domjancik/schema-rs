@@ -183,7 +183,8 @@
     };
     const message = el("p");
     message.setAttribute("role", "status");
-    dialog.append(head, description, grid, settings, actions, message);
+    const groups = el("div");
+    dialog.append(head, description, grid, settings, actions, groups, message);
     const arrange=el("button","Arrange fixtures…");arrange.type="button";arrange.onclick=()=>{dialog.close();global.SchemaAuthoring?.arrange();};dialog.append(arrange);
     document.body.append(dialog);
     let lastDraw = null;
@@ -216,6 +217,16 @@
       opened = { fixture: f.id, revision: data().snapshot.revision };
       description.textContent = f.name + " · layout position in metres";
       fields.forEach((field, i) => (field.value = String(f.position[i])));
+      groups.replaceChildren();
+      if (global.SchemaAuthoring?.fixtureGroupsEditor) {
+        global.SchemaAuthoring.fixtureGroupsEditor(groups, data().project.fixtures, [f], async command => {
+          const current = data().project.fixtures.find(item => item.id === f.id);
+          if (!current || !opened || disposed) return false;
+          const ok = await (options.commit || adapter.command)({ ...command, fixture: { ...current, groups: command.fixture.groups } }, opened.revision);
+          if (ok !== false) opened.revision = data().snapshot.revision;
+          return ok;
+        });
+      }
       snap.value = prefs.snap;
       plane.value = prefs.plane;
       gizmo.textContent = prefs.enabled ? "Hide move gizmo" : "Show move gizmo";

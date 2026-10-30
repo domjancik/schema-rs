@@ -883,6 +883,41 @@ window.SchemaAuthoring = (() => {
     row.append(label, clear, el('small', 'Navigation only · does not change light output'));
     box.append(row); return row;
   }
+  function fixtureGroupsEditor(box, fixtures, selected, commit) {
+    const host = el('fieldset', undefined, 'fixture-groups'), legend = el('legend', selected.length > 1 ? `Groups · ${selected.length} fixtures` : 'Groups');
+    const filter = el('input'), list = el('div', undefined, 'group-options'), create = el('div', undefined, 'group-create'), name = el('input');
+    filter.type = 'search'; filter.placeholder = 'Filter groups'; filter.setAttribute('aria-label','Filter groups');
+    name.placeholder = 'New group name'; name.maxLength = 100; name.setAttribute('aria-label','New group name');
+    const message = el('p', undefined, 'group-message'); message.setAttribute('role','status');
+    let current = selected, busy = false;
+    const controls = () => host.querySelectorAll('input,button').forEach(n => n.disabled = busy);
+    async function apply(group, enabled) {
+      if(busy)return;
+      try {
+        const command = SchemaAuthoringCore.groupCommand(current, group, enabled);
+        busy = true; controls(); message.textContent = '';
+        if(await commit(command) !== false) {
+          current = current.map(f=>({...f,groups:enabled?[...new Set([...f.groups,group.trim()])]:f.groups.filter(g=>g!==group)}));
+          name.value = ''; draw();
+        }
+      } catch(error) {message.textContent = error.message;}
+      finally {busy = false; controls(); draw();}
+    }
+    function draw() {
+      list.replaceChildren();
+      const all = fixtures.map(f=>current.find(c=>c.id===f.id)||f), groups = SchemaAuthoringCore.groupChoices(all,current).filter(g=>g.name.toLowerCase().includes(filter.value.toLowerCase()));
+      for(const group of groups) {
+        const label = el('label', undefined, 'group-option'), check = el('input'), title = el('span',group.name), count = el('small',String(group.count));
+        check.type = 'checkbox'; check.checked = group.checked; check.indeterminate = group.mixed; check.setAttribute('aria-label','Group '+group.name);
+        check.onchange = () => apply(group.name,check.checked); label.append(check,title,count); list.append(label);
+      }
+      if(!groups.length) list.append(el('p',filter.value?'No matching groups.':'No groups yet. Add one below.','group-empty'));
+    }
+    const add = button('Add group',()=>apply(name.value,true)); name.onkeydown = e=>{if(e.key==='Enter'){e.preventDefault();add.click();}};
+    filter.oninput = draw; create.append(name,add);host.append(legend,filter,list,create,message);
+    if(selected.length > 1) host.append(el('small','Mixed checks mean only some selected fixtures belong to the group.'));
+    box.append(host); draw(); return host;
+  }
   return {
     configure,
     update,
@@ -897,5 +932,6 @@ window.SchemaAuthoring = (() => {
     stateHelp,
     markFixture,
     fixtureMarkerEditor,
+    fixtureGroupsEditor,
   };
 })();
