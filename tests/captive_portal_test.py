@@ -55,6 +55,15 @@ class PortalTests(unittest.TestCase):
   code,h,_=self.login();cookie=h['Set-Cookie'].split(';')[0]
   self.backend.shutdown();self.backend.server_close();self.backend=None
   self.assertEqual(self.request('GET','/api/state',headers={'Cookie':cookie})[0],502)
+ def test_four_digit_login_and_token_keep_existing_portal_boundaries(self):
+  self.server.shutdown();self.server.server_close()
+  try:self.server=self.module.PortalServer(('127.0.0.1',0),{'schema_token':'1357','admin_pin':'1357','allowed_hosts':['127.0.0.1'],'upstream_port':self.backend.server_port})
+  except ValueError as error:self.fail('Four-digit appliance access should be supported: '+str(error))
+  threading.Thread(target=self.server.serve_forever,daemon=True).start();self.host='127.0.0.1:'+str(self.server.server_port);self.origin='http://'+self.host
+  code,_,body=self.request('GET','/login');self.assertEqual(code,200);self.assertIn(b'maxlength="4"',body);self.assertIn(b'pattern="[0-9]{4}"',body)
+  code,headers,_=self.login('1357');self.assertEqual(code,303)
+  code,_,body=self.request('GET','/api/state',headers={'Cookie':headers['Set-Cookie'].split(';')[0]});self.assertEqual(code,200);self.assertEqual(json.loads(body)['token'],'1357')
+  self.assertEqual(self.login('0000',origin='http://evil.test')[0],403)
  def test_request_framing_and_config_restrictions(self):
   self.assertEqual(self.request('POST','/login','x',{'Transfer-Encoding':'chunked'})[0],400)
   self.assertEqual(self.request('POST','/login',headers={'Content-Length':'999999999'})[0],413)

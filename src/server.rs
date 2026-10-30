@@ -530,12 +530,74 @@ impl Drop for Runtime {
         }
     }
 }
+pub fn valid_lan_token(token: &str) -> bool {
+    is_access_pin(token) || token.len() >= 16
+}
+fn is_access_pin(token: &str) -> bool {
+    token.len() == 4 && token.bytes().all(|byte| byte.is_ascii_digit())
+}
+#[derive(Default)]
+struct PinAttempts {
+    peers: std::collections::BTreeMap<std::net::IpAddr, std::collections::VecDeque<Instant>>,
+    global: std::collections::VecDeque<Instant>,
+}
+impl PinAttempts {
+    fn authorize(
+        &mut self,
+        peer: std::net::IpAddr,
+        candidate: &str,
+        expected: &str,
+        now: Instant,
+    ) -> StatusCode {
+        self.peers.retain(|_, attempts| {
+            while attempts
+                .front()
+                .is_some_and(|time| now.duration_since(*time) >= Duration::from_secs(60))
+            {
+                attempts.pop_front();
+            }
+            !attempts.is_empty()
+        });
+        while self
+            .global
+            .front()
+            .is_some_and(|time| now.duration_since(*time) >= Duration::from_secs(60))
+        {
+            self.global.pop_front();
+        }
+        if self.global.len() >= 32
+            || self
+                .peers
+                .get(&peer)
+                .is_some_and(|attempts| attempts.len() >= 5)
+        {
+            return StatusCode::TOO_MANY_REQUESTS;
+        }
+        if candidate.len() == expected.len()
+            && candidate
+                .bytes()
+                .zip(expected.bytes())
+                .fold(0, |different, (a, b)| different | (a ^ b))
+                == 0
+        {
+            self.peers.remove(&peer);
+            return StatusCode::OK;
+        }
+        if !self.peers.contains_key(&peer) && self.peers.len() >= 256 {
+            return StatusCode::TOO_MANY_REQUESTS;
+        }
+        self.peers.entry(peer).or_default().push_back(now);
+        self.global.push_back(now);
+        StatusCode::UNAUTHORIZED
+    }
+}
 #[derive(Clone)]
 pub struct AppState {
     pub plugins: Arc<crate::plugin_host::Manager>,
     pub controller: Controller,
     pub root: PathBuf,
     token: Option<Arc<String>>,
+    pin_attempts: Arc<std::sync::Mutex<PinAttempts>>,
     io_lock: Arc<tokio::sync::Mutex<()>>,
 }
 impl AppState {
@@ -551,6 +613,7 @@ impl AppState {
             controller,
             root,
             token: token.map(Arc::new),
+            pin_attempts: Arc::new(std::sync::Mutex::new(PinAttempts::default())),
             io_lock: Arc::new(tokio::sync::Mutex::new(())),
         }
     }
@@ -636,7 +699,31 @@ async fn guard(State(state): State<AppState>, request: Request, next: Next) -> R
     }
     if request.uri().path().starts_with("/api/") {
         if let Some(token) = &state.token {
-            if headers.get("x-schema-token").and_then(|v| v.to_str().ok()) != Some(token.as_str()) {
+            let candidate = headers
+                .get("x-schema-token")
+                .and_then(|v| v.to_str().ok())
+                .unwrap_or("");
+            if is_access_pin(token) {
+                // Missing/stale long tokens cannot guess a four-digit key or lock out a client.
+                if !is_access_pin(candidate) {
+                    return StatusCode::UNAUTHORIZED.into_response();
+                }
+                let peer = request
+                    .extensions()
+                    .get::<axum::extract::ConnectInfo<std::net::SocketAddr>>()
+                    .map(|info| info.0.ip())
+                    .unwrap_or(std::net::IpAddr::V4(std::net::Ipv4Addr::UNSPECIFIED));
+                let status = match state.pin_attempts.lock() {
+                    Ok(mut attempts) => attempts.authorize(peer, candidate, token, Instant::now()),
+                    Err(_) => StatusCode::SERVICE_UNAVAILABLE,
+                };
+                if status == StatusCode::TOO_MANY_REQUESTS {
+                    return (status, [(header::RETRY_AFTER, "60")]).into_response();
+                }
+                if status != StatusCode::OK {
+                    return status.into_response();
+                }
+            } else if candidate != token.as_str() {
                 return StatusCode::UNAUTHORIZED.into_response();
             }
         }
@@ -1210,4 +1297,31 @@ async fn project_open(
         )
         .await?;
     Ok(Json(serde_json::json!({"revision":revision})))
+}
+
+#[cfg(test)]
+mod pin_access_tests {
+    use super::*;
+    #[test]
+    fn failed_pin_windows_expire_without_a_sleep() {
+        let mut attempts = PinAttempts::default();
+        let peer = "10.42.0.20".parse().unwrap();
+        let now = Instant::now();
+        for _ in 0..5 {
+            assert_eq!(
+                attempts.authorize(peer, "0000", "1357", now),
+                StatusCode::UNAUTHORIZED
+            );
+        }
+        assert_eq!(
+            attempts.authorize(peer, "1357", "1357", now + Duration::from_secs(59)),
+            StatusCode::TOO_MANY_REQUESTS
+        );
+        assert_eq!(
+            attempts.authorize(peer, "1357", "1357", now + Duration::from_secs(60)),
+            StatusCode::OK
+        );
+        assert!(attempts.peers.is_empty());
+        assert!(attempts.global.is_empty());
+    }
 }

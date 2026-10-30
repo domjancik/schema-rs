@@ -105,10 +105,10 @@ class PortalServer(http.server.ThreadingHTTPServer):
     def __init__(self, address, config):
         token = config.get('schema_token', '')
         pin = config.get('admin_pin', '')
-        if not re.fullmatch(r'[A-Za-z0-9_-]{16,256}', token):
+        if not re.fullmatch(r'(?:[0-9]{4}|[A-Za-z0-9_-]{16,256})', token):
             raise ValueError('Invalid engine token configuration')
-        if not re.fullmatch(r'[0-9]{6}', pin):
-            raise ValueError('Admin PIN must be six ASCII digits')
+        if not re.fullmatch(r'(?:[0-9]{4}|[0-9]{6})', pin):
+            raise ValueError('Admin PIN must be four or six ASCII digits')
         hosts = set(config.get('allowed_hosts', []))
         if not hosts or any(not re.fullmatch(r'[a-z0-9.-]{1,253}', h) for h in hosts):
             raise ValueError('Invalid portal host configuration')
@@ -221,7 +221,7 @@ class PortalHandler(http.server.BaseHTTPRequestHandler):
                 '<p>Sign in to open the lighting control panel.</p><p class="error">' + error + '</p>'
                 '<form method="post" action="/login"><input type="hidden" name="nonce" value="' + nonce + '">'
                 '<label for="pin">Device PIN</label><input id="pin" name="pin" type="password" inputmode="numeric" '
-                'pattern="[0-9]{6}" maxlength="6" autocomplete="current-password" required autofocus>'
+                'pattern="[0-9]{' + str(len(self.server.pin)) + '}" maxlength="' + str(len(self.server.pin)) + '" autocomplete="current-password" required autofocus>'
                 '<button type="submit">Open controls</button></form><small>This Wi-Fi network provides local '
                 'lighting control. Internet access is not provided.</small></main></body></html>')
         headers = {'Set-Cookie': 'schema_login=' + nonce + '; Path=/login; Max-Age=600; HttpOnly; SameSite=Strict'}

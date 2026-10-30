@@ -25,8 +25,8 @@ python3 - "$credentials" <<'PY'
 import json,pathlib,re,sys,os
 c=json.loads(pathlib.Path(sys.argv[1]).read_text())
 assert re.fullmatch(r'[A-Za-z0-9_-]{1,32}',c['ap_ssid'])
-assert re.fullmatch(r'[A-Za-z0-9_-]{16,63}',c['ap_password'])
-assert re.fullmatch(r'[A-Za-z0-9_-]{24,128}',c['schema_token'])
+assert re.fullmatch(r'[A-Za-z0-9_-]{8,63}',c['ap_password'])
+assert re.fullmatch(r'(?:[0-9]{4}|[A-Za-z0-9_-]{16,128})',c['schema_token'])
 p=pathlib.Path('/etc/schema')
 (p/'hostapd.conf').write_text('interface=wlan0\ndriver=nl80211\nctrl_interface=/run/schema-hostapd\nssid='+c['ap_ssid']+'\ncountry_code=IL\nieee80211d=1\nhw_mode=g\nchannel=6\nwmm_enabled=1\nieee80211n=1\nauth_algs=1\nwpa=2\nwpa_key_mgmt=WPA-PSK\nrsn_pairwise=CCMP\nwpa_passphrase='+c['ap_password']+'\n')
 (p/'schema.env').write_text('SCHEMA_TOKEN='+c['schema_token']+'\n')

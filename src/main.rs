@@ -98,8 +98,12 @@ async fn run() -> Result<(), String> {
             )
             .parse()
             .map_err(|_| "Invalid bind address")?;
-            if !bind.ip().is_loopback() && token.as_ref().is_none_or(|t| t.len() < 16) {
-                return Err("LAN hosting requires SCHEMA_TOKEN with at least 16 characters".into());
+            if !bind.ip().is_loopback()
+                && token
+                    .as_ref()
+                    .is_none_or(|t| !schema_rs::server::valid_lan_token(t))
+            {
+                return Err("LAN hosting requires SCHEMA_TOKEN with four ASCII digits or at least 16 characters".into());
             }
             let is_live = project.output.enabled;
             let mut engine = if let Some(session) = session {
@@ -162,12 +166,15 @@ async fn run() -> Result<(), String> {
                     }
                 });
             }
-            axum::serve(listener, router(app_state))
-                .with_graceful_shutdown(async {
-                    let _ = tokio::signal::ctrl_c().await;
-                })
-                .await
-                .map_err(|e| e.to_string())?;
+            axum::serve(
+                listener,
+                router(app_state).into_make_service_with_connect_info::<SocketAddr>(),
+            )
+            .with_graceful_shutdown(async {
+                let _ = tokio::signal::ctrl_c().await;
+            })
+            .await
+            .map_err(|e| e.to_string())?;
             drop(plugin_watcher);
             drop(_inputs);
             runtime.controller.persist_session().await?;

@@ -35,7 +35,7 @@ python3 - <<'PY'
 import json,pathlib,secrets,os
 root=pathlib.Path('/etc/schema');access=root/'access.json';c=json.loads(access.read_text())
 pin=c.get('admin_pin')
-if not isinstance(pin,str) or len(pin)!=6 or not pin.isascii() or not pin.isdigit():pin=f'{secrets.randbelow(1000000):06d}'
+if not isinstance(pin,str) or len(pin) not in (4,6) or not pin.isascii() or not pin.isdigit():pin=f'{secrets.randbelow(10000):04d}'
 c['admin_pin']=pin
 portal={'schema_token':c['schema_token'],'admin_pin':pin,'allowed_hosts':['schema.local','schema-orangepi.local','orangepi.local','schema.lan','10.42.0.1','10.0.0.2'],'canonical_origin':'http://10.42.0.1','upstream_host':'127.0.0.1','upstream_port':8787}
 for path,data in [(root/'portal.json',portal),(access,c)]:

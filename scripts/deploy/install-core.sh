@@ -34,7 +34,7 @@ if not credential_file.exists():
  descriptor=os.open(credential_file,os.O_WRONLY|os.O_CREAT|os.O_EXCL,0o600)
  with os.fdopen(descriptor,'w') as target:json.dump(c,target)
 c=json.loads(credential_file.read_text())
-assert re.fullmatch(r'[A-Za-z0-9_-]{24,128}',c['schema_token'])
+assert re.fullmatch(r'(?:[0-9]{4}|[A-Za-z0-9_-]{16,128})',c['schema_token'])
 config=pathlib.Path('/etc/schema');(config/'schema.env').write_text('SCHEMA_TOKEN='+c['schema_token']+chr(10));(config/'access.json').write_text(json.dumps(c,indent=2)+chr(10))
 for name in ['schema.env','access.json']:os.chmod(config/name,0o600)
 root=pathlib.Path('/var/lib/schema');layout=root/'registry/layouts/init.json'

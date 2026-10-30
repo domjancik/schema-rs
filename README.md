@@ -40,7 +40,9 @@ cargo run -- serve --artnet 192.168.1.50:6454
 
 The web output panel can also configure and enable the destination. Channel addresses are 1–512; Art-Net universes are 0–32767. Dimmer, RGB and RGBW mappings are native. Overlapping fixture routes and out-of-range footprints are rejected.
 
-For LAN hosting, set a token of at least 16 characters and bind explicitly:
+For LAN hosting, explicitly set a four-digit access PIN or a token of at least 16 characters and bind explicitly:
+
+Four-digit PINs have five failed guesses per real client IP per minute and a shared32-failure budget. Missing or stale long tokens do not consume PIN attempts. Existing long tokens remain supported. See [Access PINs](docs/access-pins.md).
 
 ```powershell
 $env:SCHEMA_TOKEN = 'replace-with-a-private-random-token'
