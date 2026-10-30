@@ -48,3 +48,12 @@ Content-reference block properties also offer saved-content selectors, preservin
 ### Fixture group assignment
 
 Fixture setup uses searchable group checkboxes with membership counts and a New group name field. Shift-select multiple fixtures in Studio for mixed membership checks: checking adds a group to all selected fixtures; unchecking removes just that group. Other memberships and fixture attributes are preserved, and each edit is one revisioned native command or batch with shared Undo. Group creation does not imply membership inheritance. The same controls are available in Schémaboy Fixture setup and the Place dialog in scene viewports; position drafts remain usable after group edits.
+
+
+### Studio numeric and enum editors
+
+Numeric block properties and Fixture setup combine exact entry with sliders for common suggested ranges (including normalized values, oscillator periods, timing and spatial coordinates). Suggestions are editor aids, not authored limits: entering a value outside a suggestion extends the slider to retain it. Real fixture limits such as dimmer 0–1 and DMX addresses still apply. Unrecognized numeric parameters retain exact entry and wheel/arrow adjustment without an invented range.
+
+Focus a number to edit it with the mouse wheel or Up/Down. Shift gives finer steps; Alt gives coarser steps. Integer controls retain whole-number steps. A wheel/key burst commits once after a short pause. Dragging a slider updates its number locally and commits one native edit on release; cancellation or Escape discards the draft. Enter or leaving a valid numeric field applies exact text. Leaving an invalid field restores its previous value. A draft captures the revision at its start, so a conflicting remote edit is rejected rather than silently overwritten. Selection changes cancel abandoned controls and pending timers.
+
+Small enum properties (two to six choices), including Oscillator Type, show all options as accessible radio-style buttons. Arrow keys and Home/End choose options. Larger enums keep their dropdown. Reset and driver controls remain alongside properties. Focused numeric fields in Output and scene placement dialogs also support wheel input; their existing Save/Apply transaction remains responsible for applying those drafts. Wheel input over an unfocused field scrolls normally; Ctrl/Cmd wheel remains available for browser zoom. Schémaboy’s separate tactile editor is unchanged.

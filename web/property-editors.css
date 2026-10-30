@@ -1,0 +1,23 @@
+/* Exact entry and suggested ranges share the inspector width with driver tools. */
+.numeric-editor{display:grid;gap:5px;flex:1;min-width:0;width:100%}
+.numeric-editor input[type=number]{width:100%;box-sizing:border-box;font-variant-numeric:tabular-nums}
+.numeric-editor input[type=range]{width:100%;min-width:0;margin:0;min-height:26px;padding:0;accent-color:var(--ui-accent,var(--accent,#72dec2));cursor:ew-resize}
+.numeric-hint{color:var(--ui-muted,var(--dim));font-size:10px;line-height:1.3;font-weight:400}
+.numeric-draft input[type=number]{border-color:var(--ui-accent,var(--accent,#72dec2))}
+#inspector .row:has(.numeric-editor),#inspector .row:has(.enum-choices){align-items:flex-start}
+#inspector .row>.driver-btn{flex:0 0 auto;margin-top:0}
+.enum-choices{display:flex;flex-wrap:wrap;gap:4px;flex:1;min-width:0;padding-block:2px}
+.enum-choices button{flex:1 1 auto;min-width:40px;min-height:36px;padding:7px 9px;font:inherit;line-height:1.25;white-space:normal;overflow-wrap:anywhere;color:var(--ui-text,var(--ink));background:var(--ui-panel,var(--paper));border:1px solid var(--ui-border,var(--line));border-radius:6px;cursor:pointer}
+.enum-choices button[aria-checked=true]{color:var(--ui-accent-ink,#fff);background:var(--ui-accent-fill,#16745c);border-color:var(--ui-accent-fill,#16745c);font-weight:600}
+.enum-choices button:focus-visible{outline:2px solid var(--ui-focus,#326ba8);outline-offset:2px}.enum-choices small{flex-basis:100%;color:var(--ui-muted)}
+@media(pointer:coarse){.enum-choices button{min-height:44px}.numeric-editor input[type=range]{min-height:44px}}
+
+#inspector .row:has(.numeric-editor){display:grid;grid-template-columns:minmax(70px,1fr) repeat(3,max-content);align-items:start;column-gap:6px}
+#inspector .numeric-editor{display:contents}
+#inspector .numeric-editor input[type=number]{grid-column:1;grid-row:1}
+#inspector .numeric-editor input[type=range]{grid-column:1/-1;grid-row:2}
+#inspector .numeric-editor .numeric-hint{grid-column:1/-1;grid-row:3}
+#inspector .row:has(.numeric-editor)>.driver-btn{grid-row:1}
+#inspector .row:has(.enum-choices){flex-wrap:wrap;justify-content:flex-end}
+#inspector .enum-choices{flex-basis:100%}
+#inspector .enum-choices button{flex:1 1 70px}

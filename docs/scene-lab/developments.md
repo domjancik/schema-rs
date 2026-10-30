@@ -485,3 +485,10 @@ Retest color-derived dimmer models with saturated red (50% HSL lightness), grays
 
 
 Lightness activation verified: signed release `48ff863d43b1-e8ba54892395-42` is active on managed ports 18798/8788/8797 and the enrolled Orange Pi; Pi delivery reports scene/history preserved and OLA unchanged. Public-key signature and artifact hashes checked. Complete project, undo, redo and revision were independently identical across activation on 18798 and 8788. Full native tests/fmt/strict Clippy/build, real-WASM source selection/save/reopen/byte encoding, output/universe and content/group regressions, and browser/Linux/macOS CI passed. Live Studio source-option verification is read-only; no existing models or fixture assignments were changed. Public website activation is not claimed.
+
+
+## Studio numeric and enum editing — 2026-10-31
+
+Pending activation: a dedicated property-editors module adds exact numeric entry plus suggested sliders in Studio block/fixture editors, focused wheel/arrow changes (Shift fine, Alt coarse), one native revisioned edit per wheel burst or released slider, Escape/pointer cancellation and stale-revision rejection. Suggested ranges can expand to authored values; they do not clamp arbitrary program values. Small enums expose two-to-six visible, keyboard-accessible choices, including Oscillator Type. Bigger enums retain dropdowns. Generic focused numbers in Output/placement dialogs also receive wheel adjustment; their existing Apply/Save semantics remain intact.
+
+Tests use isolated output-disabled native/WASM workspaces. Retest oscillator Period/Type, numeric drivers, manual values beyond suggested ranges, a canceled slider, wheel history/focus, simultaneous author conflicts, fixture coordinate/dimmer controls, and enums in embedded/independent inspectors. No project/storage format changes or live scene/model assignments are part of this update.
