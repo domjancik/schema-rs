@@ -1,0 +1,41 @@
+{
+  "new_v2_registered": true,
+  "converted_v2_legacy_refreshed_to": 0.25,
+  "v2_edit_refreshed_to": 0.31,
+  "actual_api_save_registered": true,
+  "saved_entry_count": 21,
+  "scope_checks": [
+    {
+      "content": "carpushit-slow-pulse",
+      "group": "bulbs",
+      "targets": 10,
+      "layer_api": 1,
+      "exact_project_diff": true,
+      "other_layers_preserved": true,
+      "fixtures_patch_markers_preserved": true
+    },
+    {
+      "content": "carpushit-twinkle-on",
+      "group": "outside",
+      "targets": 22,
+      "layer_api": 2,
+      "exact_project_diff": true,
+      "other_layers_preserved": true,
+      "fixtures_patch_markers_preserved": true
+    }
+  ],
+  "output_enabled": false,
+  "source_commit": "97c75a312b08cc9f1f860daa54fb67938cebb627",
+  "binary_sha256": "36dca3f5a6769e6361fad28590e48190ca03e56aae65838dae5f86562a6984fa",
+  "restart_v2_providers_correct": true,
+  "recovered_revision": 3,
+  "recovered_undo": 3,
+  "selector_library_api_responds": true,
+  "ui_visual_verification": false,
+  "live18798": {
+    "revision": 8,
+    "undo": 8,
+    "output": false,
+    "writes": 0
+  }
+}

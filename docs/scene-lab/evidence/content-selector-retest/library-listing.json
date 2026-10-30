@@ -1,0 +1,768 @@
+{
+  "contents": [
+    {
+      "name": "carpushit-slow-pulse",
+      "targets": [
+        {
+          "fixture": "bulb-left-01",
+          "layer": 1
+        },
+        {
+          "fixture": "bulb-left-02",
+          "layer": 1
+        },
+        {
+          "fixture": "bulb-left-03",
+          "layer": 1
+        },
+        {
+          "fixture": "bulb-left-04",
+          "layer": 1
+        },
+        {
+          "fixture": "bulb-left-05",
+          "layer": 1
+        },
+        {
+          "fixture": "bulb-right-01",
+          "layer": 1
+        },
+        {
+          "fixture": "bulb-right-02",
+          "layer": 1
+        },
+        {
+          "fixture": "bulb-right-03",
+          "layer": 1
+        },
+        {
+          "fixture": "bulb-right-04",
+          "layer": 1
+        },
+        {
+          "fixture": "bulb-right-05",
+          "layer": 1
+        },
+        {
+          "fixture": "front-left-01",
+          "layer": 1
+        },
+        {
+          "fixture": "front-left-02",
+          "layer": 1
+        },
+        {
+          "fixture": "front-left-03",
+          "layer": 1
+        },
+        {
+          "fixture": "front-side-left-01",
+          "layer": 1
+        },
+        {
+          "fixture": "front-side-left-02",
+          "layer": 1
+        },
+        {
+          "fixture": "wing-left-01",
+          "layer": 1
+        },
+        {
+          "fixture": "wing-left-02",
+          "layer": 1
+        },
+        {
+          "fixture": "wing-left-03",
+          "layer": 1
+        },
+        {
+          "fixture": "eye-left",
+          "layer": 1
+        },
+        {
+          "fixture": "ear-left",
+          "layer": 1
+        },
+        {
+          "fixture": "watcher-left",
+          "layer": 1
+        },
+        {
+          "fixture": "front-right-01",
+          "layer": 1
+        },
+        {
+          "fixture": "front-right-02",
+          "layer": 1
+        },
+        {
+          "fixture": "front-right-03",
+          "layer": 1
+        },
+        {
+          "fixture": "front-side-right-01",
+          "layer": 1
+        },
+        {
+          "fixture": "front-side-right-02",
+          "layer": 1
+        },
+        {
+          "fixture": "wing-right-01",
+          "layer": 1
+        },
+        {
+          "fixture": "wing-right-02",
+          "layer": 1
+        },
+        {
+          "fixture": "wing-right-03",
+          "layer": 1
+        },
+        {
+          "fixture": "eye-right",
+          "layer": 1
+        },
+        {
+          "fixture": "ear-right",
+          "layer": 1
+        },
+        {
+          "fixture": "watcher-right",
+          "layer": 1
+        },
+        {
+          "fixture": "uv-roof",
+          "layer": 1
+        }
+      ]
+    },
+    {
+      "name": "carpushit-twinkle-on",
+      "targets": [
+        {
+          "fixture": "front-left-01",
+          "layer": 2
+        },
+        {
+          "fixture": "front-left-02",
+          "layer": 2
+        },
+        {
+          "fixture": "front-left-03",
+          "layer": 2
+        },
+        {
+          "fixture": "front-side-left-01",
+          "layer": 2
+        },
+        {
+          "fixture": "front-side-left-02",
+          "layer": 2
+        },
+        {
+          "fixture": "wing-left-01",
+          "layer": 2
+        },
+        {
+          "fixture": "wing-left-02",
+          "layer": 2
+        },
+        {
+          "fixture": "wing-left-03",
+          "layer": 2
+        },
+        {
+          "fixture": "eye-left",
+          "layer": 2
+        },
+        {
+          "fixture": "ear-left",
+          "layer": 2
+        },
+        {
+          "fixture": "watcher-left",
+          "layer": 2
+        },
+        {
+          "fixture": "front-right-01",
+          "layer": 2
+        },
+        {
+          "fixture": "front-right-02",
+          "layer": 2
+        },
+        {
+          "fixture": "front-right-03",
+          "layer": 2
+        },
+        {
+          "fixture": "front-side-right-01",
+          "layer": 2
+        },
+        {
+          "fixture": "front-side-right-02",
+          "layer": 2
+        },
+        {
+          "fixture": "wing-right-01",
+          "layer": 2
+        },
+        {
+          "fixture": "wing-right-02",
+          "layer": 2
+        },
+        {
+          "fixture": "wing-right-03",
+          "layer": 2
+        },
+        {
+          "fixture": "eye-right",
+          "layer": 2
+        },
+        {
+          "fixture": "ear-right",
+          "layer": 2
+        },
+        {
+          "fixture": "watcher-right",
+          "layer": 2
+        }
+      ]
+    },
+    {
+      "name": "init",
+      "targets": [
+        {
+          "fixture": "uv-1",
+          "layer": 0
+        },
+        {
+          "fixture": "uv-1",
+          "layer": 1
+        },
+        {
+          "fixture": "uv-1",
+          "layer": 2
+        },
+        {
+          "fixture": "uv-2",
+          "layer": 0
+        },
+        {
+          "fixture": "uv-2",
+          "layer": 1
+        },
+        {
+          "fixture": "uv-2",
+          "layer": 2
+        },
+        {
+          "fixture": "uv-3",
+          "layer": 0
+        },
+        {
+          "fixture": "uv-3",
+          "layer": 1
+        },
+        {
+          "fixture": "uv-3",
+          "layer": 2
+        },
+        {
+          "fixture": "uv-4",
+          "layer": 0
+        },
+        {
+          "fixture": "uv-4",
+          "layer": 1
+        },
+        {
+          "fixture": "uv-4",
+          "layer": 2
+        },
+        {
+          "fixture": "uv-5",
+          "layer": 0
+        },
+        {
+          "fixture": "uv-5",
+          "layer": 1
+        },
+        {
+          "fixture": "uv-5",
+          "layer": 2
+        },
+        {
+          "fixture": "uv-6",
+          "layer": 0
+        },
+        {
+          "fixture": "uv-6",
+          "layer": 1
+        },
+        {
+          "fixture": "uv-6",
+          "layer": 2
+        },
+        {
+          "fixture": "__director",
+          "layer": 0
+        },
+        {
+          "fixture": "__director",
+          "layer": 1
+        },
+        {
+          "fixture": "__director",
+          "layer": 2
+        }
+      ]
+    },
+    {
+      "name": "saved-v2-retest",
+      "targets": [
+        {
+          "fixture": "uv-1",
+          "layer": 0
+        },
+        {
+          "fixture": "uv-1",
+          "layer": 1
+        },
+        {
+          "fixture": "uv-1",
+          "layer": 2
+        },
+        {
+          "fixture": "uv-2",
+          "layer": 0
+        },
+        {
+          "fixture": "uv-2",
+          "layer": 1
+        },
+        {
+          "fixture": "uv-2",
+          "layer": 2
+        },
+        {
+          "fixture": "uv-3",
+          "layer": 0
+        },
+        {
+          "fixture": "uv-3",
+          "layer": 1
+        },
+        {
+          "fixture": "uv-3",
+          "layer": 2
+        },
+        {
+          "fixture": "uv-4",
+          "layer": 0
+        },
+        {
+          "fixture": "uv-4",
+          "layer": 1
+        },
+        {
+          "fixture": "uv-4",
+          "layer": 2
+        },
+        {
+          "fixture": "uv-5",
+          "layer": 0
+        },
+        {
+          "fixture": "uv-5",
+          "layer": 1
+        },
+        {
+          "fixture": "uv-5",
+          "layer": 2
+        },
+        {
+          "fixture": "uv-6",
+          "layer": 0
+        },
+        {
+          "fixture": "uv-6",
+          "layer": 1
+        },
+        {
+          "fixture": "uv-6",
+          "layer": 2
+        },
+        {
+          "fixture": "__director",
+          "layer": 0
+        },
+        {
+          "fixture": "__director",
+          "layer": 1
+        },
+        {
+          "fixture": "__director",
+          "layer": 2
+        }
+      ]
+    },
+    {
+      "name": "watch-control",
+      "targets": [
+        {
+          "fixture": "uv-1",
+          "layer": 0
+        },
+        {
+          "fixture": "uv-1",
+          "layer": 1
+        },
+        {
+          "fixture": "uv-1",
+          "layer": 2
+        },
+        {
+          "fixture": "uv-2",
+          "layer": 0
+        },
+        {
+          "fixture": "uv-2",
+          "layer": 1
+        },
+        {
+          "fixture": "uv-2",
+          "layer": 2
+        },
+        {
+          "fixture": "uv-3",
+          "layer": 0
+        },
+        {
+          "fixture": "uv-3",
+          "layer": 1
+        },
+        {
+          "fixture": "uv-3",
+          "layer": 2
+        },
+        {
+          "fixture": "uv-4",
+          "layer": 0
+        },
+        {
+          "fixture": "uv-4",
+          "layer": 1
+        },
+        {
+          "fixture": "uv-4",
+          "layer": 2
+        },
+        {
+          "fixture": "uv-5",
+          "layer": 0
+        },
+        {
+          "fixture": "uv-5",
+          "layer": 1
+        },
+        {
+          "fixture": "uv-5",
+          "layer": 2
+        },
+        {
+          "fixture": "uv-6",
+          "layer": 0
+        },
+        {
+          "fixture": "uv-6",
+          "layer": 1
+        },
+        {
+          "fixture": "uv-6",
+          "layer": 2
+        },
+        {
+          "fixture": "__director",
+          "layer": 0
+        },
+        {
+          "fixture": "__director",
+          "layer": 1
+        },
+        {
+          "fixture": "__director",
+          "layer": 2
+        }
+      ]
+    },
+    {
+      "name": "watch-current",
+      "targets": [
+        {
+          "fixture": "uv-1",
+          "layer": 0
+        },
+        {
+          "fixture": "uv-1",
+          "layer": 1
+        },
+        {
+          "fixture": "uv-1",
+          "layer": 2
+        },
+        {
+          "fixture": "uv-2",
+          "layer": 0
+        },
+        {
+          "fixture": "uv-2",
+          "layer": 1
+        },
+        {
+          "fixture": "uv-2",
+          "layer": 2
+        },
+        {
+          "fixture": "uv-3",
+          "layer": 0
+        },
+        {
+          "fixture": "uv-3",
+          "layer": 1
+        },
+        {
+          "fixture": "uv-3",
+          "layer": 2
+        },
+        {
+          "fixture": "uv-4",
+          "layer": 0
+        },
+        {
+          "fixture": "uv-4",
+          "layer": 1
+        },
+        {
+          "fixture": "uv-4",
+          "layer": 2
+        },
+        {
+          "fixture": "uv-5",
+          "layer": 0
+        },
+        {
+          "fixture": "uv-5",
+          "layer": 1
+        },
+        {
+          "fixture": "uv-5",
+          "layer": 2
+        },
+        {
+          "fixture": "uv-6",
+          "layer": 0
+        },
+        {
+          "fixture": "uv-6",
+          "layer": 1
+        },
+        {
+          "fixture": "uv-6",
+          "layer": 2
+        },
+        {
+          "fixture": "__director",
+          "layer": 0
+        },
+        {
+          "fixture": "__director",
+          "layer": 1
+        },
+        {
+          "fixture": "__director",
+          "layer": 2
+        }
+      ]
+    },
+    {
+      "name": "watch-legacy",
+      "targets": [
+        {
+          "fixture": "uv-1",
+          "layer": 0
+        },
+        {
+          "fixture": "uv-1",
+          "layer": 1
+        },
+        {
+          "fixture": "uv-1",
+          "layer": 2
+        },
+        {
+          "fixture": "uv-2",
+          "layer": 0
+        },
+        {
+          "fixture": "uv-2",
+          "layer": 1
+        },
+        {
+          "fixture": "uv-2",
+          "layer": 2
+        },
+        {
+          "fixture": "uv-3",
+          "layer": 0
+        },
+        {
+          "fixture": "uv-3",
+          "layer": 1
+        },
+        {
+          "fixture": "uv-3",
+          "layer": 2
+        },
+        {
+          "fixture": "uv-4",
+          "layer": 0
+        },
+        {
+          "fixture": "uv-4",
+          "layer": 1
+        },
+        {
+          "fixture": "uv-4",
+          "layer": 2
+        },
+        {
+          "fixture": "uv-5",
+          "layer": 0
+        },
+        {
+          "fixture": "uv-5",
+          "layer": 1
+        },
+        {
+          "fixture": "uv-5",
+          "layer": 2
+        },
+        {
+          "fixture": "uv-6",
+          "layer": 0
+        },
+        {
+          "fixture": "uv-6",
+          "layer": 1
+        },
+        {
+          "fixture": "uv-6",
+          "layer": 2
+        },
+        {
+          "fixture": "__director",
+          "layer": 0
+        },
+        {
+          "fixture": "__director",
+          "layer": 1
+        },
+        {
+          "fixture": "__director",
+          "layer": 2
+        }
+      ]
+    },
+    {
+      "name": "watch-saved",
+      "targets": [
+        {
+          "fixture": "uv-1",
+          "layer": 0
+        },
+        {
+          "fixture": "uv-1",
+          "layer": 1
+        },
+        {
+          "fixture": "uv-1",
+          "layer": 2
+        },
+        {
+          "fixture": "uv-2",
+          "layer": 0
+        },
+        {
+          "fixture": "uv-2",
+          "layer": 1
+        },
+        {
+          "fixture": "uv-2",
+          "layer": 2
+        },
+        {
+          "fixture": "uv-3",
+          "layer": 0
+        },
+        {
+          "fixture": "uv-3",
+          "layer": 1
+        },
+        {
+          "fixture": "uv-3",
+          "layer": 2
+        },
+        {
+          "fixture": "uv-4",
+          "layer": 0
+        },
+        {
+          "fixture": "uv-4",
+          "layer": 1
+        },
+        {
+          "fixture": "uv-4",
+          "layer": 2
+        },
+        {
+          "fixture": "uv-5",
+          "layer": 0
+        },
+        {
+          "fixture": "uv-5",
+          "layer": 1
+        },
+        {
+          "fixture": "uv-5",
+          "layer": 2
+        },
+        {
+          "fixture": "uv-6",
+          "layer": 0
+        },
+        {
+          "fixture": "uv-6",
+          "layer": 1
+        },
+        {
+          "fixture": "uv-6",
+          "layer": 2
+        },
+        {
+          "fixture": "__director",
+          "layer": 0
+        },
+        {
+          "fixture": "__director",
+          "layer": 1
+        },
+        {
+          "fixture": "__director",
+          "layer": 2
+        }
+      ]
+    }
+  ]
+}
