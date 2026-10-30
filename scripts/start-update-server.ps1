@@ -1,4 +1,4 @@
-param([string]$Python = "", [string]$State = "$env:LOCALAPPDATA\Schema-s\updates")
+param([string]$Python = "", [string]$State = "$env:LOCALAPPDATA\Schema-s\updates", [switch]$Foreground)
 $ErrorActionPreference = 'Stop'
 $entry = Join-Path $PSScriptRoot 'update_server\main.py'
 if (!$Python) {
@@ -14,6 +14,13 @@ if ($LASTEXITCODE -ne 0) { throw 'Update server initialization failed' }
 $config = Get-Content -LiteralPath (Join-Path $State 'config.json') -Raw | ConvertFrom-Json
 $url = "http://127.0.0.1:$($config.port)/"
 try { $health = Invoke-RestMethod ($url + 'health') -TimeoutSec 2; if ($health.service -eq 'schema-update-server') { Write-Output $url; exit 0 } } catch {}
-$arguments = @('"' + $entry + '"', 'serve', '--state', '"' + $State + '"')
-Start-Process -FilePath $Python -ArgumentList $arguments -WorkingDirectory (Split-Path $PSScriptRoot) -WindowStyle Hidden -RedirectStandardOutput (Join-Path $State 'server.log') -RedirectStandardError (Join-Path $State 'server-error.log') | Out-Null
+if ($Foreground) {
+    while ($true) {
+        & $Python $entry serve --state $State *>> (Join-Path $State 'supervisor.log')
+        $result = $LASTEXITCODE
+        if ($result -ne 75) { exit $result }
+    }
+}
+$arguments = @('-NoProfile', '-NonInteractive', '-WindowStyle', 'Hidden', '-File', '"' + $PSCommandPath + '"', '-Python', '"' + $Python + '"', '-State', '"' + $State + '"', '-Foreground')
+Start-Process -FilePath 'powershell.exe' -ArgumentList $arguments -WorkingDirectory (Split-Path $PSScriptRoot) -WindowStyle Hidden | Out-Null
 Write-Output $url

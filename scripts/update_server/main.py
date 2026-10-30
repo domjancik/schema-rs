@@ -25,8 +25,9 @@ def main():
   try:msvcrt.locking(lock.fileno(),msvcrt.LK_NBLCK,1)
   except OSError:raise SystemExit('An update server already owns this state directory')
   with ReleaseStore(root)as store:
-   manager=Manager(config,store,signer);server=Server(('127.0.0.1',int(config.get('port',8890))),manager);manager.start();print('Schéma updates: http://127.0.0.1:'+str(server.server_port)+'/',flush=True)
+   manager=Manager(config,store,signer);server=Server(('127.0.0.1',int(config.get('port',8890))),manager);manager.restart_callback=server.shutdown;manager.start();print('Schéma updates: http://127.0.0.1:'+str(server.server_port)+'/',flush=True)
    try:server.serve_forever(poll_interval=.5)
    except KeyboardInterrupt:pass
    finally:server.server_close();manager.close()
+   if manager.restart_requested:raise SystemExit(75)
 if __name__=='__main__':main()

@@ -34,7 +34,7 @@ Link only the public staging directory with `npx --yes vercel@latest link --cwd 
 
 Deploy with `npx --yes vercel@latest deploy --cwd target/publication/site --scope domjanciks-projects --prod --yes`. Verify the unauthenticated production alias, not only the deployment-specific URL (which can be protected). Set `PUBLIC_SITE_URL=https://schema-s.vercel.app` and `PLAYWRIGHT_MODULE` to run `node tests/public-site-browser.cjs`. Fetch every archive independently and compare bytes/SHA-256 against the published manifest. Test the public bootstrap with `--prefix` to stage files without changing local services.
 
-The website advertises only artifacts present in its manifest. Repeat publication manually when a new ready build is intended for public distribution; the existing Orange Pi signed updater remains a separate private workflow. Download bandwidth follows the hosting account's plan. Native/USB output and network routing remain device-local.
+The website advertises only artifacts present in its manifest. The enrolled update server now publishes ready commits automatically after exact-commit Browser engine/Linux and macOS CI succeeds; see [Automatic delivery](update-server.md). The manual command above remains available for recovery. Download bandwidth follows the hosting account's plan. Native/USB output and network routing remain device-local.
 
 ## Current verification limits
 

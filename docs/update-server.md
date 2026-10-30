@@ -1,16 +1,20 @@
-# Automatic Orange Pi updates
+# Automatic Schéma delivery
 
-Run `powershell -File scripts/start-update-server.ps1` on the Windows development host. The dashboard is [Update control](http://127.0.0.1:8890/). Python 3.11+ with `paramiko` and `cryptography`, Rust (native Windows and `aarch64-unknown-linux-musl` target), Node and Chrome are required. Pass `-Python` for another environment. The launcher reuses an existing healthy server and otherwise starts it hidden; it does not install a Windows boot task.
+Run `powershell -File scripts/start-update-server.ps1` on the Windows development host. The dashboard is [Update control](http://127.0.0.1:8890/). Python 3.11+ with `paramiko` and `cryptography`, Rust (native Windows and `aarch64-unknown-linux-musl` target), Node and Chrome are required. Pass `-Python` for another environment. The launcher reuses an existing healthy server and otherwise starts it hidden; the approved current-user “Schéma automatic updates” logon task runs the same launcher with standard permissions. PowerShell execution policy is unchanged.
 
 ## Everyday workflow
 
 1. Commit the engine/UI changes you want to ship. Uncommitted work is never released. The watcher detects changed build inputs, snapshots that exact commit and builds in its own cache, independent of the working checkout.
-2. Formatting, full Rust tests, clippy, JavaScript syntax, native startup/routes and Chrome WebGPU smoke must pass before a release is signed and marked ready. ARM64 engine and Windows download are released together.
+2. Formatting, full Rust tests, clippy, JavaScript syntax, native startup/routes and Chrome WebGPU smoke must pass before a release is signed and marked ready. ARM64 engine and Windows download are released together. Updater regression tests also gate readiness.
 3. While the update server runs, it polls the controller's configured LAN/AP endpoints over pinned SSH. A connected device receives the newest ready release automatically. An offline device catches up on reconnect. Already-installed releases are skipped.
 4. Use **Build latest commit** or **Push ready build** explicitly when needed. Pushes can queue while offline. **Pause automatic pushes** keeps builds running; **Pause commit watching** disables automatic builds. A failed release is quarantined until **Retry latest push** or a newer release.
 5. **Roll back to previous** uses a previously trusted controller release and pins it. **Resume automatic pushes** clears the pin. Rollback restores software while retaining the current authored scene/history, rather than reverting the scene to a historical release.
 
-The dashboard shows connectivity, installed/ready release, job phases, validation results and bounded logs. It binds loopback only. Same-origin session and CSRF checks protect actions; the API accepts only fixed workflow actions. It does not expose credentials or arbitrary commands.
+Configured local Studio and desktop hosts receive the same verified Windows build. A shutdown-file request flushes their final session; the new process starts behind a barrier and its migrated project, history, inputs, plugin state and clock are compared before edits resume. Failed activation restores the original checkpoint bytes and previous executable. An older unmanaged desktop with active work must be closed once before enrollment.
+
+Public delivery fast-forwards the enrolled GitHub main branch, waits for the exact commit’s Browser engine (including Linux x64) and macOS workflows, and publishes the browser app plus Windows, Linux x64/ARM64 and unsigned macOS downloads. It checks source provenance and independently verifies every production download digest. Failed CI withholds publication; disconnected devices catch up when available. This is enrollment, not network discovery: only configured targets are updated.
+
+The dashboard shows connectivity, installed/ready release, per-target delivery, job phases, validation results and bounded logs. **Retry delivery** retries failed local/public targets; automatic retries never bypass validation. It binds loopback only. Same-origin session and CSRF checks protect actions; the API accepts only fixed workflow actions. It does not expose credentials or arbitrary commands.
 
 ## State and trust
 
@@ -22,10 +26,11 @@ Each deployment checkpoints the session, stops Schéma gracefully, keeps a priva
 
 A root journal plus systemd `ExecStopPost` recovery reverses failed switches. A boot recovery dependency restores an interrupted transaction before Schéma starts. The transaction runs independently of the host SSH session. If the host disappears, the device completes or recovers; the host reconciles its operation ID when it returns. Existing AP, OLA configuration, firewall and external RTC are not modified.
 
-A ready release is trusted code from a local commit, not a sandboxed untrusted build. Keep repository and signing-host access limited to maintainers. Builds and root checkpoint backups are retained for diagnosis; disk cleanup/retention is currently manual. Schema/scene-format migrations that require irreversible writes need a separate migration strategy; this workflow verifies the current serialized format and rolls back mismatches.
+A ready release is trusted code from a local commit, not a sandboxed untrusted build. Keep repository and signing-host access limited to maintainers. Builds and root checkpoint backups are retained for diagnosis; disk cleanup/retention is currently manual. Candidate session migrations run on a comparison copy. Activation preserves the original bytes for rollback and verifies the normalized state before releasing the barrier.
 
 ## Verification
 
+- `python tests/update_delivery_test.py` checks exact-commit CI gates, rollback, session comparisons and enrolled-target validation.
 - `python tests/update_server_test.py` checks readiness/signatures/tampering, policy, durable queues/sequence and GUI authorization.
 - On Linux, `python tests/update_device_signature_test.py` verifies OpenSSL ingestion, tampered artifacts/signatures, stale sequences and nonblocking FIFO rejection using temporary data.
 - On Linux, `python tests/update_device_transaction_test.py` runs isolated fake-service transaction tests, including failed health checks and boot recovery. It never accesses the live controller paths/services.
@@ -33,3 +38,7 @@ A ready release is trusted code from a local commit, not a sandboxed untrusted b
 - Full repository checks remain mandatory. Ready-build workflows execute them again against their committed source snapshot.
 
 The first live deployment and subsequent idempotent push are recorded in [verification evidence](update-server-verification.json). The final host/helper hardening is active independently of the native engine release.
+
+## Queued scene-authoring work
+
+Named signals should alias stable properties on genuine zero-footprint virtual fixtures, using the normal native evaluation graph and driver trees. A shared Scene controls panel should expose live values and driver editing in Studio and Schémaboy. Preserve revisioned undo, project/session/bundle persistence and safe dangling-reference behavior. Global output dimming remains distinct from creative controls. Scene-lab examples are authored data, not an instruction to replace a live installation scene.

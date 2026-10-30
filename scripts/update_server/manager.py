@@ -3,16 +3,22 @@ import hashlib,pathlib,queue,threading,time,paramiko
 from builder import build,source_identity
 from core import choose_release,utc
 from device import Device
+from delivery import Delivery
 TERMINAL={'succeeded','failed','rolled_back'}
 class Manager:
  def __init__(self,config,store,signer):
-  self.config=config;self.store=store;self.signer=signer;self.stop=threading.Event();self.lock=threading.RLock();self.build_queue=queue.Queue();self.push_queue=queue.Queue();self.building=False;self.pushing=False;self.device={'online':False,'service':'unknown','checked_at':None};self.threads=[];store.db.recover()
+  self.config=config;self.store=store;self.signer=signer;self.stop=threading.Event();self.lock=threading.RLock();self.build_queue=queue.Queue();self.push_queue=queue.Queue();self.building=False;self.pushing=False;self.device={'online':False,'service':'unknown','checked_at':None};self.threads=[];self.restart_requested=False;self.restart_callback=None;self.controller_tree=self.controller_identity();self.delivery=Delivery(config,store,signer,self.stop);store.db.recover()
   for job in reversed(store.db.jobs()):
    if job['status']=='queued':
     if job['kind']=='build':self.building=True;self.build_queue.put(job['id'])
     elif job['kind']in('push','rollback'):self.pushing=True;self.push_queue.put(job)
+ def controller_identity(self):
+  try:
+   import subprocess
+   return hashlib.sha256(subprocess.check_output(['git','ls-tree','-r','HEAD','--','scripts/update_server','scripts/start-update-server.ps1'],cwd=self.config['repo'],stderr=subprocess.DEVNULL)).hexdigest()
+  except Exception:return None
  def start(self):
-  for target in [self.build_loop,self.device_loop,self.watch_loop]:
+  for target in [self.build_loop,self.device_loop,self.watch_loop,self.local_loop,self.public_loop]:
    thread=threading.Thread(target=target,daemon=True);thread.start();self.threads.append(thread)
  def close(self):
   self.stop.set()
@@ -31,6 +37,7 @@ class Manager:
  def action(self,value):
   action=value.get('action');unknown=set(value)-{'action','release_id'}
   if unknown:raise ValueError('Unknown action fields')
+  if action=='retry_delivery':self.store.db.set('delivery_retry_at',time.time());return {'retry':True}
   if action=='build':return {'job':self.enqueue_build()}
   if action in('push','retry'):
    release_id=value.get('release_id')or(self.store.latest()or{}).get('release_id')
@@ -48,7 +55,7 @@ class Manager:
   with self.lock:device=dict(self.device);building=self.building;pushing=self.pushing
   try:commit,tree=source_identity(self.config['repo'])
   except Exception:commit,tree=None,None
-  return{'service':'schema-update-server','device':device,'releases':self.store.list(),'jobs':self.store.db.jobs(),'events':self.store.db.events(),'auto_deploy':self.store.db.get('auto_deploy',True),'auto_build':self.store.db.get('auto_build',True),'pinned':self.store.db.get('pinned'),'blocked':self.store.db.get('blocked',[]),'building':building,'pushing':pushing or device.get('updating',False),'source_commit':commit,'source_tree':tree,'public_key_sha256':hashlib.sha256(self.signer.public_pem()).hexdigest(),'at':utc()}
+  return{'delivery_targets':self.delivery.state(),'service':'schema-update-server','device':device,'releases':self.store.list(),'jobs':self.store.db.jobs(),'events':self.store.db.events(),'auto_deploy':self.store.db.get('auto_deploy',True),'auto_build':self.store.db.get('auto_build',True),'pinned':self.store.db.get('pinned'),'blocked':self.store.db.get('blocked',[]),'building':building,'pushing':pushing or device.get('updating',False),'source_commit':commit,'source_tree':tree,'public_key_sha256':hashlib.sha256(self.signer.public_pem()).hexdigest(),'at':utc()}
  def build_loop(self):
   while not self.stop.is_set():
    try:job=self.build_queue.get(timeout=1)
@@ -57,12 +64,28 @@ class Manager:
    except Exception:pass
    finally:
     with self.lock:self.building=False
+ def local_loop(self):
+  while not self.stop.is_set():
+   if self.store.db.get('auto_deploy',True):
+    try:self.delivery.local_busy=True;self.delivery.local_once()
+    except Exception as error:self.store.db.event(None,'Local delivery: '+str(error))
+    finally:self.delivery.local_busy=False
+   self.stop.wait(15)
+ def public_loop(self):
+  while not self.stop.is_set():
+   if self.store.db.get('auto_deploy',True):
+    try:self.delivery.public_busy=True;self.delivery.public_once()
+    except Exception as error:self.store.db.event(None,'Publication: '+str(error))
+    finally:self.delivery.public_busy=False
+   self.stop.wait(30)
  def watch_loop(self):
   while not self.stop.wait(5):
    if not self.store.db.get('auto_build',True):continue
    try:
     _,tree=source_identity(self.config['repo'])
     if not self.building and tree!=self.store.db.get('last_attempt_tree')and tree!=self.store.db.get('last_ready_tree'):self.enqueue_build()
+    if self.restart_callback and self.controller_tree and self.controller_identity()!=self.controller_tree and tree==self.store.db.get('last_ready_tree') and not self.building and not self.pushing and not getattr(self.delivery,'local_busy',False) and not getattr(self.delivery,'public_busy',False):
+     self.restart_requested=True;self.store.db.event(None,'Validated updater changes ready; restarting supervisor');self.stop.set();self.restart_callback();return
    except(Exception):pass
  def refresh_device(self,device):
   device.connect();result=device.probe();build_info=result.get('build')or{};update=result.get('update')or{};result['installed_release']=build_info.get('release_id')or build_info.get('source_commit');result['previous_release']=update.get('previous_release');result['checked_at']=utc()
