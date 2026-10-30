@@ -166,23 +166,29 @@
       section.append(box);
     }
   }
+  function scalar(node, attrs) {
+    const output = attrs?.value, present = Number.isFinite(output);
+    const readout = node.querySelector(".node-value,.node-output");
+    const meter = node.querySelector(".node-meter");
+    for (const widget of [readout, meter]) {
+      if (!widget) continue;
+      widget.toggleAttribute("hidden", !present);
+    }
+    if (readout) {
+      readout.textContent = present ? output.toFixed(2) : "";
+      readout.title = present ? `Output value: ${readout.textContent}` : "";
+    }
+    const bar = meter?.querySelector("i");
+    if (bar) bar.style.width = `${Math.max(0, Math.min(1, present ? output : 0)) * 100}%`;
+  }
   function block(node, sample) {
     if (!sample) return;
     const signature = JSON.stringify(sample.outgoing);
     if (node._attributeSample === signature) return;
     node._attributeSample = signature;
     const attrs = sample.outgoing.attributes;
-    const output =
-      attrs.value ??
-      attrs.colors?.[0]?.slice(0, 3).reduce((a, b) => a + b, 0) / 3;
+    scalar(node, attrs);
     const readout = node.querySelector(".node-value");
-    if (readout) {
-      readout.textContent = Number.isFinite(output) ? output.toFixed(2) : "—";
-      readout.title = `${attrs.value !== undefined ? "Output value" : "Brightness · mean RGB of first pixel"}: ${readout.textContent}`;
-    }
-    const meter = node.querySelector(".node-meter i");
-    if (meter)
-      meter.style.width = `${Math.max(0, Math.min(1, output || 0)) * 100}%`;
     if (node.namespaceURI === "http://www.w3.org/2000/svg") {
       let group = node.querySelector(".block-attributes");
       if (group) group.remove();
@@ -215,13 +221,6 @@
         group.append(rect);
         x += 11;
       }
-      const text = node.querySelector(".node-output");
-      if (text)
-        text.textContent = Number.isFinite(output)
-          ? output.toFixed(2)
-          : attrs.position
-            ? "Position"
-            : "—";
       node.append(group);
       return;
     }
@@ -400,6 +399,7 @@
   }
   global.SchemaInspection = {
     configure,
+    scalar,
     mount,
     tick,
     paint,

@@ -512,3 +512,10 @@ Pending activation: audited visible HTML text, accessibility labels and app mani
 Pending activation: Studio’s active and independent/split Stack editors share fixture/layer selectors, a pinned Root action and clickable block/driver ancestry. A driver crumb returns to that driver root; Root clears the driver trail and returns to the current layer root. Layer/fixture changes and Director/empty layers are handled. Selected ancestors are revealed through folds, and invalid driver tails recover to the nearest valid prefix. Navigation stays in existing client/workspace context and never submits authored engine commands.
 
 Validation: breadcrumb core and WASM browser tests pass, alongside existing property/content/fixture-marker/browser-runtime regressions. Coverage exercises two nested drivers, parent/root navigation, hidden selected blocks, Director and empty layers, keyboard use, narrow Studio layouts, independent-pane context preservation, and exact unchanged project/undo/redo/revision. Retest nested drivers and scene-to-stack selection on isolated output-disabled examples; no live project changes are part of this feature.
+
+
+## Attribute-specific block readouts — 2026-10-31
+
+Pending activation: Studio and Schémaboy show the numeric value readout/meter only when the evaluated outgoing bank contains a finite scalar `value`. Color-only output keeps its swatches without converting mean RGB to a synthetic scalar. Zero remains visible; removing a scalar hides and clears stale numeric widgets. The shared readout function also serves Studio telemetry, initial block rendering and Schémaboy SVG blocks. No extra inspection requests or authored-state changes.
+
+The real WASM inspection regression covers color-only output, mixed color/scalar zero, scalar removal, SVG readouts, output focus, single-row/narrow/scaled layout, and bounded/on-demand polling. Retest color-only and mixed attribute stacks on isolated output-disabled examples after rollout.

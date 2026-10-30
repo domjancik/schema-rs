@@ -87,7 +87,7 @@ const server = http.createServer((req, res) => {
         return request(path, body);
       };
       document.body.innerHTML =
-        '<div id="world"><div class="block" data-fixture="fixture-1" data-layer="0" data-node="20" style="width:240px;height:130px;position:relative"><span>Dim</span><span class="node-value"></span><div class="node-meter"><i></i></div></div></div><aside id="inspector"></aside>';
+        '<div id="world"><div class="block" data-fixture="fixture-1" data-layer="0" data-node="20" style="width:240px;height:130px;position:relative"><span>Dim</span><span class="node-value"></span><div class="node-meter"><i></i></div></div></div><svg width="240" height="80"><g class="node" data-fixture="fixture-1" data-layer="0" data-node="20"><rect class="node-body" x="0" y="0" width="160" height="60"></rect><rect class="node-meter" width="100" height="2"></rect><text class="node-output">stale</text></g></svg><aside id="inspector"></aside>';
     });
     for (const url of ["/style.css", "/stack-editor.css", "/block-inspection.css"]) await page.addStyleTag({url});
     await page.addScriptTag({ url: "/block-inspection.js" });
@@ -105,7 +105,7 @@ const server = http.createServer((req, res) => {
     await page.evaluate(() => {
       SchemaInspection.configure({
         selection: () => ({ fixture: "fixture-1", layer: 0, node: 20 }),
-        revision: () => 1,
+        revision: () => window.inspectionRevision ?? 1,
       });
       SchemaInspection.mount(document.getElementById("inspector"), {
         fixture: "fixture-1",
@@ -126,14 +126,27 @@ const server = http.createServer((req, res) => {
       await outgoing.locator("[data-color]").first().getAttribute("data-color"),
       "0.5,0,0,1",
     );
-    const brightness = page.locator(".block .node-value");
-    assert(
-      await brightness.isVisible(),
-      "Color output must retain its numeric brightness readout",
-    );
-    assert.equal(await brightness.textContent(), "0.17");
-    assert((await brightness.getAttribute("title")).includes("0.17"));
-    assert.equal(await brightness.evaluate(node=>getComputedStyle(node).pointerEvents),"auto","the full value tooltip remains reachable");
+    const readout = page.locator(".block .node-value");
+    assert.equal(await readout.isVisible(), false, "Color-only output has no scalar value widget");
+    assert.equal(await page.locator('.block .node-meter').isVisible(), false, "Color readout is not a scalar value meter");
+    assert(await page.locator('.block .attribute-swatch').first().isVisible(), "Color swatches remain visible");
+    await page.waitForFunction(()=>document.querySelector('svg .node-output').hasAttribute('hidden'));
+    assert.equal(await page.locator('svg .node-output').isVisible(), false, 'Schémaboy hides synthetic color values');
+    assert.equal(await page.locator('svg .node-meter').isVisible(), false);
+    assert(await page.locator('svg .block-attributes [data-color]').first().isVisible());
+    await page.evaluate(async()=>{
+      const s=await player.request('/api/state');
+      s.project.content['fixture-1'][0].root.children.push({id:22,behavior:'Create.Value.Constant',properties:{Value:0},drivers:{},children:[]});
+      await player.request('/api/command',{expected_revision:s.snapshot.revision,command:{type:'replace_project',project:s.project}});
+      window.inspectionRevision=s.snapshot.revision+1;
+    });
+    await readout.waitFor({state:'visible'});
+    assert.equal(await readout.textContent(), '0.00', 'A real zero scalar remains visible alongside colors');
+    await page.locator('svg .node-output').waitFor({state:'visible'});
+    assert.equal(await page.locator('svg .node-output').textContent(),'0.00');
+    assert(await page.locator('.block .node-meter').isVisible());
+    assert((await readout.getAttribute('title')).includes('Output value'));
+    assert.equal(await readout.evaluate(node=>getComputedStyle(node).pointerEvents),"auto","the full value tooltip remains reachable");
     // Exercise the production cascade, wide numeric values and narrow block faces.
     for (const width of [240,178,120,96]) {
       for (const value of ['0.17','-123456789.00']) {
@@ -141,7 +154,7 @@ const server = http.createServer((req, res) => {
           const block=document.querySelector('.block');block.style.width=width+'px';
           block.querySelector('.node-value').textContent=value;
         },{width,value});
-        const attributes=await page.locator('.block .block-attributes').boundingBox(),number=await brightness.boundingBox(),block=await page.locator('.block').boundingBox();
+        const attributes=await page.locator('.block .block-attributes').boundingBox(),number=await readout.boundingBox(),block=await page.locator('.block').boundingBox();
         assert(attributes.x+attributes.width+4<=number.x,`color/attribute previews and ${value} must share space at ${width}px`);
         assert(number.x+number.width<=block.x+block.width,'value stays inside block');
         assert(attributes.width>=17,'a long value must leave at least one complete color swatch visible');
@@ -157,7 +170,7 @@ const server = http.createServer((req, res) => {
       face.className='block-face';Object.assign(face.style,{position:'absolute',left:'0',top:'0',width:'178px',height:'112px',transform:'scale(.5)',transformOrigin:'0 0'});
       while(block.firstChild)face.append(block.firstChild);block.append(face);block.style.width='89px';block.style.height='56px';
     });
-    const scaledAttributes=await page.locator('.block .block-attributes').boundingBox(),scaledValue=await brightness.boundingBox(),scaledMeter=await page.locator('.block .node-meter').boundingBox();
+    const scaledAttributes=await page.locator('.block .block-attributes').boundingBox(),scaledValue=await readout.boundingBox(),scaledMeter=await page.locator('.block .node-meter').boundingBox();
     assert(scaledAttributes.x+scaledAttributes.width+2<=scaledValue.x,'scaled layer-world faces keep the readout gap');
     assert(scaledAttributes.x+scaledAttributes.width+2<=scaledMeter.x && scaledMeter.x+scaledMeter.width+2<=scaledValue.x,'scaled faces retain a single horizontal indicator row');
     assert(Math.abs((scaledMeter.y+scaledMeter.height/2)-(scaledValue.y+scaledValue.height/2))<=1,'scaled meter stays vertically aligned with value');
@@ -168,18 +181,30 @@ const server = http.createServer((req, res) => {
       const world=block.parentElement;world.className='';world.id='world';
     });
 
+    await page.evaluate(async()=>{
+      const s=await player.request('/api/state');
+      s.project.content['fixture-1'][0].root.children.pop();
+      await player.request('/api/command',{expected_revision:s.snapshot.revision,command:{type:'replace_project',project:s.project}});
+      window.inspectionRevision=s.snapshot.revision+1;
+    });
+    await readout.waitFor({state:'hidden'});
+    await page.waitForFunction(()=>document.querySelector('svg .node-output').hasAttribute('hidden'));
+    assert.equal(await page.locator('.block .node-meter').isVisible(),false,'A removed scalar hides the old meter');
+    assert.equal(await readout.textContent(),'','No stale value remains after a color-only transition');
+
     const compact = await page.evaluate(() =>
       player.request("/api/state/compact"),
     );
     assert(
       compact.snapshot.fixtures.every((f) => Object.keys(f.nodes).length === 0),
     );
+    const beforeFlood=await page.evaluate(()=>calls);
     await page.evaluate(() => {
       window.inspectionFlood = setInterval(() => SchemaInspection.tick(), 10);
     });
     await page.waitForTimeout(1100);
     assert(
-      (await page.evaluate(() => calls)) < 12,
+      (await page.evaluate(() => calls)) - beforeFlood < 7,
       "Demand polling is throttled",
     );
     await page.evaluate(() => clearInterval(window.inspectionFlood));
@@ -205,20 +230,15 @@ const server = http.createServer((req, res) => {
     console.log("Starting phone check");
     await page.locator(".debug-control:visible").first().click();
     await page.waitForSelector(".block.is-debug-output");
-    assert(
-      await page
-        .locator(".block.is-debug-output .node-value")
-        .first()
-        .isVisible(),
-      "Output focus keeps the brightness value visible",
-    );
-    assert.notEqual(
-      await page
-        .locator(".block.is-debug-output .node-value")
-        .first()
-        .textContent(),
-      "—",
-    );
+    const focused = page.locator('.block.is-debug-output').first();
+    const producesValue = await focused.evaluate(node=>{
+      const attrs=SchemaInspection.bank({fixture:node.dataset.fixture,layer:Number(node.dataset.layer),node:Number(node.dataset.node)});
+      return Number.isFinite(attrs?.value);
+    });
+    assert.equal(await focused.locator('.node-value').isVisible(),producesValue,'Output focus shows a value only when the block produces one');
+    assert.equal(await focused.locator('.node-meter').isVisible(),producesValue,'Studio telemetry agrees with the evaluated scalar attributes');
+    if(producesValue)assert.notEqual(await focused.locator('.node-value').textContent(),'—');
+    else assert.equal(await focused.locator('.node-value').textContent(),'');
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto(
       "http://127.0.0.1:" + server.address().port + "/mobile.html",

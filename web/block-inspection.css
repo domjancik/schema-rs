@@ -191,3 +191,6 @@
   flex-shrink: 0;
   opacity: 0.8;
 }
+
+/* The scalar readout is absent when evaluation produces no scalar attribute. */
+.block-readout > [hidden], svg .node :is(.node-output,.node-meter)[hidden] { display: none !important; }
