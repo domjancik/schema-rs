@@ -33,6 +33,7 @@ pub struct Status {
     pub error: Option<String>,
 }
 struct State {
+    fingerprint: Option<(u64, std::time::SystemTime)>,
     status: Status,
 }
 pub struct Store {
@@ -44,6 +45,7 @@ impl Store {
         Self {
             path,
             state: Mutex::new(State {
+                fingerprint: None,
                 status: Status {
                     enabled: true,
                     ..Status::default()
@@ -68,15 +70,22 @@ impl Store {
         {
             return Ok(());
         }
-        let result = session.validate().and_then(|_| self.write(session));
+        let result = session
+            .validate()
+            .and_then(|_| self.write(session, state.fingerprint));
         state.status.error = result.as_ref().err().cloned();
         if result.is_ok() {
+            state.fingerprint = fingerprint(&self.path);
             state.status.saved_revision = Some(session.snapshot.revision);
             state.status.saved_frame = Some(session.snapshot.frame);
         }
         result
     }
-    fn write(&self, session: &Session) -> Result<()> {
+    fn write(
+        &self,
+        session: &Session,
+        verified: Option<(u64, std::time::SystemTime)>,
+    ) -> Result<()> {
         let parent = self.path.parent().ok_or("Session path has no parent")?;
         fs::create_dir_all(parent).map_err(|e| e.to_string())?;
         static NEXT: AtomicU64 = AtomicU64::new(0);
@@ -116,11 +125,24 @@ impl Store {
                 .sync_all()
                 .map_err(|e| e.to_string())?;
             drop(writer);
-            fs::rename(&temp, &self.path).map_err(|e| e.to_string())
+            if verified.is_none() || verified != fingerprint(&self.path) {
+                crate::migrations::backup_existing(&self.path, crate::migrations::Kind::Session)?;
+            }
+            fs::rename(&temp, &self.path).map_err(|e| e.to_string())?;
+            #[cfg(unix)]
+            File::open(parent)
+                .and_then(|directory| directory.sync_all())
+                .map_err(|e| e.to_string())?;
+            Ok(())
         })();
         if result.is_err() {
             let _ = fs::remove_file(&temp);
         }
         result
     }
+}
+
+fn fingerprint(path: &Path) -> Option<(u64, std::time::SystemTime)> {
+    let metadata = fs::metadata(path).ok()?;
+    Some((metadata.len(), metadata.modified().ok()?))
 }

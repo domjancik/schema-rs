@@ -8,6 +8,9 @@ use std::{
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(tag = "type", rename_all = "snake_case", deny_unknown_fields)]
 pub enum Command {
+    ImportProject {
+        json: String,
+    },
     SetNodeBypassed {
         fixture: String,
         layer: usize,
@@ -455,7 +458,7 @@ impl Engine {
             plugins: self.plugins.clone(),
             checkpoints: self.checkpoints.clone(),
             resources: self.resources.clone(),
-            version: 1,
+            version: crate::migrations::SESSION_VERSION,
             project: Arc::new(self.project.clone()),
             snapshot,
             undo: self.undo.iter().map(|(p, _)| p.clone()).collect(),
@@ -686,7 +689,10 @@ impl Engine {
     }
     /// Build/validate/compile on a control worker; commit only on the owning engine thread.
     pub fn prepare(mut draft: Project, command: Command) -> Result<PreparedEdit> {
-        let reset_runtime = matches!(command, Command::ReplaceProject { .. });
+        let reset_runtime = matches!(
+            command,
+            Command::ReplaceProject { .. } | Command::ImportProject { .. }
+        );
         edit(&mut draft, command, 0)?;
         draft.validate()?;
         let scripts = compile_scripts(&draft, &script_engine())?;
@@ -1183,6 +1189,16 @@ fn edit(p: &mut Project, c: Command, depth: usize) -> Result<()> {
             node,
             bypassed,
         } => target(p, &fixture, layer, node)?.bypassed = bypassed,
+        Command::ImportProject { json } => {
+            if depth != 0 {
+                return Err("Project import must be a standalone command".into());
+            }
+            let mut project: Project =
+                serde_json::from_value(crate::migrations::parse(json.as_bytes())?)
+                    .map_err(|e| e.to_string())?;
+            project.output.enabled = false;
+            *p = project;
+        }
         Command::ReplaceProject { project } => {
             if depth != 0 {
                 return Err("Project replacement must be a standalone command".into());

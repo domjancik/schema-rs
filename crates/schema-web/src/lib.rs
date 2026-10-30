@@ -22,9 +22,12 @@ impl BrowserEngine {
             session: EngineSession::new(project).map_err(error)?,
         })
     }
-    pub fn restore(&mut self, checkpoint: &str) -> Result<(), JsValue> {
-        self.session = EngineSession::decode_session(checkpoint.as_bytes()).map_err(error)?;
-        Ok(())
+    pub fn restore(&mut self, checkpoint: &str) -> Result<String, JsValue> {
+        let (session, report) =
+            EngineSession::decode_session_with_report(checkpoint.as_bytes()).map_err(error)?;
+        let report = serde_json::to_string(&report).map_err(error)?;
+        self.session = session;
+        Ok(report)
     }
     pub fn checkpoint(&self) -> Result<String, JsValue> {
         String::from_utf8(self.session.encode_session().map_err(error)?).map_err(error)
@@ -33,7 +36,7 @@ impl BrowserEngine {
         serde_json::to_string(&self.session.advance(dt).map_err(error)?).map_err(error)
     }
     pub fn request(&mut self, path: &str, body: &str) -> Result<String, JsValue> {
-        let body: Value = serde_json::from_str(body).map_err(error)?;
+        let body: Value = schema_rs::migrations::parse(body.as_bytes()).map_err(error)?;
         let expected = body.get("expected_revision").and_then(Value::as_u64);
         if body
             .get("expected_revision")
@@ -42,12 +45,91 @@ impl BrowserEngine {
             return Err(error("Expected revision must be an unsigned integer"));
         }
         let value = match path {
+            "/api/project/raw" => {
+                return self
+                    .session
+                    .storage_snapshot(schema_rs::migrations::Kind::Project, None, vec![], None)
+                    .map_err(error)
+            }
+            "/api/storage/snapshot" => {
+                let kind = serde_json::from_value(body["format"].clone()).map_err(error)?;
+                let title = body.get("title").and_then(Value::as_str).map(str::to_owned);
+                let fixtures = body
+                    .get("fixtures")
+                    .and_then(Value::as_array)
+                    .map(|a| {
+                        a.iter()
+                            .filter_map(Value::as_str)
+                            .map(str::to_owned)
+                            .collect()
+                    })
+                    .unwrap_or_default();
+                let layer = body
+                    .get("layer")
+                    .and_then(Value::as_u64)
+                    .map(|i| i as usize);
+                return self
+                    .session
+                    .storage_snapshot(kind, title, fixtures, layer)
+                    .map_err(error);
+            }
+            "/api/projects/import" => {
+                json!({"revision":self.session.command(Command::ImportProject{json:body["json"].as_str().ok_or_else(||error("Project JSON required"))?.into()},expected).map_err(error)?})
+            }
+            "/api/resources/content" => {
+                self.session
+                    .content_resource(
+                        body["name"]
+                            .as_str()
+                            .ok_or_else(|| error("Content name required"))?
+                            .into(),
+                        body["text"]
+                            .as_str()
+                            .ok_or_else(|| error("Content text required"))?,
+                    )
+                    .map_err(error)?;
+                json!({"ok":true})
+            }
+            "/api/content/load" => {
+                json!({"revision":self.session.load_content_text(body["text"].as_str().ok_or_else(||error("Content text required"))?,body.get("group").and_then(Value::as_str).map(str::to_owned),expected).map_err(error)?})
+            }
+            "/api/projects/compose" => {
+                json!({"revision":self.session.compose_project(body.get("layout").and_then(Value::as_str).map(str::to_owned),body.get("content").and_then(Value::as_str).map(str::to_owned),expected).map_err(error)?})
+            }
+            "/api/storage/versions" => schema_rs::migrations::versions(),
+            "/api/storage/migrate" => {
+                let kind: schema_rs::migrations::Kind =
+                    serde_json::from_value(body["format"].clone()).map_err(error)?;
+                let document = match (
+                    body.get("document"),
+                    body.get("text").and_then(Value::as_str),
+                ) {
+                    (Some(document), None) => document.clone(),
+                    (None, Some(text)) => {
+                        schema_rs::migrations::parse(text.as_bytes()).map_err(error)?
+                    }
+                    _ => return Err(error("Supply exactly one document or text")),
+                };
+                let result = self
+                    .session
+                    .migrate_document(kind, document)
+                    .map_err(error)?;
+                json!({"document":result.document,"report":result.report})
+            }
             "/api/history" => self.session.history(),
             "/api/projects/bundle" => {
                 if body.is_null() {
                     serde_json::to_value(self.session.bundle()).map_err(error)?
                 } else {
-                    let bundle = serde_json::from_value(body["bundle"].clone()).map_err(error)?;
+                    let value = match (body.get("bundle"), body.get("text").and_then(Value::as_str))
+                    {
+                        (Some(value), None) => value.clone(),
+                        (None, Some(text)) => {
+                            schema_rs::migrations::parse(text.as_bytes()).map_err(error)?
+                        }
+                        _ => return Err(error("Supply exactly one bundle or text")),
+                    };
+                    let bundle = serde_json::from_value(value).map_err(error)?;
                     json!({"revision":self.session.import_bundle(bundle,expected).map_err(error)?})
                 }
             }

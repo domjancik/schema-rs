@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "name": "Early v1 project",
+  "fixtures": [
+    {
+      "id": "fixture-1",
+      "name": "Wash 01",
+      "position": [
+        2.0,
+        1.0,
+        -3.0
+      ],
+      "groups": [
+        "front"
+      ],
+      "model": "rgb",
+      "universe": 0,
+      "address": 1,
+      "dimmer": 1.0
+    }
+  ],
+  "content": {
+    "fixture-1": [
+      {
+        "name": "Original constant",
+        "root": {
+          "id": 1,
+          "behavior": "Create.Value.Constant",
+          "properties": {
+            "Value": 0.25
+          },
+          "children": [],
+          "drivers": {}
+        }
+      },
+      null,
+      null
+    ]
+  },
+  "output": {
+    "enabled": false,
+    "target": "127.0.0.1:6454",
+    "fps": 40
+  }
+}

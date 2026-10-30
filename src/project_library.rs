@@ -1,32 +1,16 @@
 //! Named, immutable project generations with an atomic manifest as the save boundary.
+use crate::storage_formats::Manifest;
+pub use crate::storage_formats::ProjectEntry as Entry;
 use crate::{
     model::{Project, Result},
     project,
 };
-use serde::{Deserialize, Serialize};
 use std::{
     fs,
     path::{Path, PathBuf},
     sync::atomic::{AtomicU64, Ordering},
     time::{SystemTime, UNIX_EPOCH},
 };
-#[derive(Clone, Debug, Serialize, Deserialize)]
-#[serde(deny_unknown_fields)]
-pub struct Entry {
-    pub id: String,
-    pub title: String,
-    pub fixtures: usize,
-    pub saved_revision: u64,
-    pub modified_unix_ms: u64,
-    pub legacy: bool,
-}
-#[derive(Serialize, Deserialize)]
-#[serde(deny_unknown_fields)]
-struct Manifest {
-    version: u32,
-    generation: String,
-    entry: Entry,
-}
 // User IDs never become arbitrary paths. Reject links and existing escaped ancestors too.
 fn guarded(root: &Path, relative: &str) -> Result<PathBuf> {
     let mut path = root.to_path_buf();
@@ -66,7 +50,7 @@ fn manifest(root: &Path, id: &str) -> Result<Manifest> {
     let m: Manifest = serde_json::from_slice(&fs::read(path).map_err(|e| e.to_string())?)
         .map_err(|e| e.to_string())?;
     project::filename(&m.generation)?;
-    if m.version != 1 || m.entry.id != id || m.entry.legacy {
+    if m.version != crate::migrations::MANIFEST_VERSION || m.entry.id != id || m.entry.legacy {
         return Err("Invalid saved project manifest".into());
     }
     Ok(m)
@@ -139,6 +123,9 @@ pub fn store(
     if !overwrite && (pointer.exists() || legacy.exists()) {
         return Err("Project already exists; choose another ID or explicitly overwrite it".into());
     }
+    if pointer.exists() {
+        crate::migrations::backup_existing(&pointer, crate::migrations::Kind::ProjectManifest)?;
+    }
     let mut saved = p.clone();
     saved.name = title.trim().into();
     saved.validate()?;
@@ -164,7 +151,7 @@ pub fn store(
         legacy: false,
     };
     let m = Manifest {
-        version: 1,
+        version: crate::migrations::MANIFEST_VERSION,
         generation,
         entry: entry.clone(),
     };

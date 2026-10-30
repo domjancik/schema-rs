@@ -1035,6 +1035,11 @@ pub fn router(state: AppState) -> Router {
         .route("/api/plugins/reload",post(plugin_reload))
         .route("/api/plugins/unload",post(plugin_unload))
         .route("/api/plugins/watch",post(plugin_watch))
+        .route("/api/storage/versions",get(||async{Json(crate::migrations::versions())}))
+        .route("/api/storage/migrate",post(storage_migrate).layer(DefaultBodyLimit::max(64*1024*1024)))
+        .route("/api/project/raw",get(project_raw))
+        .route("/api/projects/import",post(project_import).layer(DefaultBodyLimit::max(64*1024*1024)))
+        .route("/api/projects/bundle/raw",get(bundle_raw))
         .route("/api/history", get(history_get))
         .route("/api/projects/bundle", get(bundle_get).post(bundle_import).layer(DefaultBodyLimit::max(64*1024*1024)))
         .route("/api/session", get(session_get))
@@ -1401,16 +1406,94 @@ async fn bundle_get(State(state): State<AppState>) -> ApiResult<Json<crate::bund
 #[derive(serde::Deserialize)]
 #[serde(deny_unknown_fields)]
 struct BundleImport {
-    bundle: crate::bundle::Bundle,
+    bundle: Option<crate::bundle::Bundle>,
+    text: Option<String>,
     expected_revision: u64,
 }
 async fn bundle_import(
     State(state): State<AppState>,
     Json(body): Json<BundleImport>,
 ) -> ApiResult<Json<serde_json::Value>> {
+    let bundle = match (body.bundle, body.text) {
+        (Some(bundle), None) => bundle,
+        (None, Some(text)) => tokio::task::spawn_blocking(move || {
+            serde_json::from_value::<crate::bundle::Bundle>(crate::migrations::parse(
+                text.as_bytes(),
+            )?)
+            .map_err(|e| e.to_string())
+        })
+        .await
+        .map_err(|e| ApiError(e.to_string()))??,
+        _ => return Err(ApiError("Supply exactly one bundle or text".into())),
+    };
     let revision = state
         .controller
-        .import_bundle(body.bundle, Some(body.expected_revision))
+        .import_bundle(bundle, Some(body.expected_revision))
+        .await?;
+    Ok(Json(serde_json::json!({"revision":revision})))
+}
+
+#[derive(serde::Deserialize)]
+#[serde(deny_unknown_fields)]
+struct StorageMigration {
+    format: crate::migrations::Kind,
+    #[serde(default, deserialize_with = "crate::migrations::optional_value")]
+    document: Option<serde_json::Value>,
+    #[serde(default)]
+    text: Option<String>,
+}
+async fn storage_migrate(
+    State(state): State<AppState>,
+    Json(body): Json<StorageMigration>,
+) -> ApiResult<Json<serde_json::Value>> {
+    let document = match (body.document, body.text) {
+        (Some(document), None) => document,
+        (None, Some(text)) => crate::migrations::parse(text.as_bytes())?,
+        _ => return Err(ApiError("Supply exactly one document or text".into())),
+    };
+    let plugins = state.controller.current_plugins();
+    let migrated = tokio::task::spawn_blocking(move || {
+        scenic::with_plugins(plugins, || {
+            crate::migrations::validated(body.format, document)
+        })
+    })
+    .await
+    .map_err(|e| ApiError(e.to_string()))??;
+    Ok(Json(
+        serde_json::json!({"document":migrated.document,"report":migrated.report}),
+    ))
+}
+
+async fn project_raw(State(state): State<AppState>) -> ApiResult<impl IntoResponse> {
+    Ok((
+        [(header::CONTENT_TYPE, "application/octet-stream")],
+        serde_json::to_vec(&state.controller.current().project)
+            .map_err(|e| ApiError(e.to_string()))?,
+    ))
+}
+async fn bundle_raw(State(state): State<AppState>) -> ApiResult<impl IntoResponse> {
+    let Json(bundle) = bundle_get(State(state)).await?;
+    Ok((
+        [(header::CONTENT_TYPE, "application/octet-stream")],
+        serde_json::to_vec(&bundle).map_err(|e| ApiError(e.to_string()))?,
+    ))
+}
+#[derive(serde::Deserialize)]
+#[serde(deny_unknown_fields)]
+struct ProjectImport {
+    json: String,
+    expected_revision: u64,
+}
+async fn project_import(
+    State(state): State<AppState>,
+    Json(body): Json<ProjectImport>,
+) -> ApiResult<Json<serde_json::Value>> {
+    let revision = state
+        .controller
+        .command(
+            Command::ImportProject { json: body.json },
+            Some(body.expected_revision),
+        )
         .await?;
     Ok(Json(serde_json::json!({"revision":revision})))
 }

@@ -59,7 +59,7 @@ async fn session_export_contains_current_project_and_both_history_stacks() {
             .unwrap(),
     )
     .unwrap();
-    assert_eq!(session["version"], 1);
+    assert_eq!(session["version"], schema_rs::migrations::SESSION_VERSION);
     assert_eq!(session["undo"].as_array().unwrap().len(), 1);
     assert_eq!(session["redo"].as_array().unwrap().len(), 1);
     assert_eq!(
@@ -148,8 +148,9 @@ fn unknown_version_bad_history_and_foreign_runtime_keys_are_rejected() {
                 states.insert("foreign/0/1".into(), state);
             }
         }
-        let session: Session = serde_json::from_value(bad).unwrap();
-        assert!(Engine::from_session(session).is_err());
+        let result = serde_json::from_value::<Session>(bad)
+            .and_then(|session| Engine::from_session(session).map_err(serde::de::Error::custom));
+        assert!(result.is_err());
     }
 }
 #[tokio::test]
@@ -247,7 +248,10 @@ fn invalid_checkpoint_cannot_replace_last_good_history() {
     store.save(&checkpoint).unwrap();
     checkpoint.version = 99;
     assert!(store.save(&checkpoint).is_err());
-    assert_eq!(session::load(&path).unwrap().version, 1);
+    assert_eq!(
+        session::load(&path).unwrap().version,
+        schema_rs::migrations::SESSION_VERSION
+    );
     std::fs::remove_file(path).unwrap();
     std::fs::remove_dir(root).unwrap();
 }

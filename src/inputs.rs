@@ -104,7 +104,7 @@ pub struct Pong {
     pub width: f64,
 }
 #[derive(Clone, Default, Serialize, Deserialize)]
-#[serde(default)]
+#[serde(default, deny_unknown_fields)]
 pub struct Inputs {
     #[serde(skip)]
     pub channel_test: Option<crate::dmx_test::Lease>,

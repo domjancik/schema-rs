@@ -1,19 +1,9 @@
+use crate::storage_formats::{Content, Layout, Output};
 use crate::{model::*, scenic};
-use serde::{Deserialize, Serialize};
 use std::{
     fs,
     path::{Path, PathBuf},
 };
-#[derive(Serialize, Deserialize)]
-struct Layout {
-    #[serde(default = "crate::output_design::default_models")]
-    dmx_models: std::collections::BTreeMap<String, crate::output_design::ModelDefinition>,
-    #[serde(default)]
-    dimming: crate::output_design::DimmingTimeline,
-    version: u32,
-    name: String,
-    fixtures: Vec<Fixture>,
-}
 pub(crate) fn filename(name: &str) -> Result<()> {
     if name.is_empty()
         || name.len() > 80
@@ -50,7 +40,12 @@ pub(crate) fn write(path: PathBuf, bytes: &[u8]) -> Result<()> {
         file.write_all(bytes).map_err(|e| e.to_string())?;
         file.sync_all().map_err(|e| e.to_string())?;
         drop(file);
-        fs::rename(&temp, &path).map_err(|e| e.to_string())
+        fs::rename(&temp, &path).map_err(|e| e.to_string())?;
+        #[cfg(unix)]
+        fs::File::open(parent)
+            .and_then(|directory| directory.sync_all())
+            .map_err(|e| e.to_string())?;
+        Ok(())
     })();
     if result.is_err() {
         let _ = fs::remove_file(&temp);
@@ -77,6 +72,22 @@ pub fn save(root: &Path, p: &Project, name: &str) -> Result<()> {
     filename(name)?;
     p.validate()?;
     initialize(root)?;
+    for (path, kind) in [
+        (
+            format!("registry/layouts/{name}.json"),
+            crate::migrations::Kind::Layout,
+        ),
+        (
+            format!("registry/content/{name}.json"),
+            crate::migrations::Kind::Content,
+        ),
+        (
+            "registry/config/output.json".into(),
+            crate::migrations::Kind::Output,
+        ),
+    ] {
+        crate::migrations::backup_existing(&root.join(path), kind)?;
+    }
     let layout = Layout {
         dmx_models: p.dmx_models.clone(),
         dimming: p.dimming.clone(),
@@ -105,11 +116,19 @@ pub fn save(root: &Path, p: &Project, name: &str) -> Result<()> {
         .collect();
     write(
         root.join(format!("registry/content/{name}.json")),
-        &serde_json::to_vec_pretty(&entries).map_err(|e| e.to_string())?,
+        &serde_json::to_vec_pretty(&Content {
+            version: crate::migrations::CONTENT_VERSION,
+            entries,
+        })
+        .map_err(|e| e.to_string())?,
     )?;
     write(
         root.join("registry/config/output.json"),
-        &serde_json::to_vec_pretty(&p.output).map_err(|e| e.to_string())?,
+        &serde_json::to_vec_pretty(&Output {
+            version: crate::migrations::OUTPUT_VERSION,
+            output: p.output.clone(),
+        })
+        .map_err(|e| e.to_string())?,
     )?;
     for (fixture, layers) in p
         .content
@@ -163,10 +182,11 @@ pub fn load(root: &Path, name: &str) -> Result<Project> {
             layers.resize(3, None);
         }
     }
-    let mut output: OutputConfig = serde_json::from_slice(
+    let output: Output = serde_json::from_slice(
         &fs::read(root.join("registry/config/output.json")).map_err(|e| e.to_string())?,
     )
     .map_err(|e| e.to_string())?;
+    let mut output = output.output;
     output.enabled = false;
     let p = Project {
         dmx_models: layout.dmx_models,
@@ -183,13 +203,19 @@ pub fn load(root: &Path, name: &str) -> Result<Project> {
 }
 pub fn read_content(root: &Path, name: &str) -> Result<Vec<ContentEntry>> {
     filename(name)?;
-    serde_json::from_slice(
+    let value = crate::migrations::parse(
         &fs::read(root.join(format!("registry/content/{name}.json"))).map_err(|e| e.to_string())?,
-    )
-    .map_err(|e| e.to_string())
+    )?;
+    let document: Content = serde_json::from_value(value).map_err(|e| e.to_string())?;
+    document.validate()?;
+    Ok(document.entries)
 }
 pub fn save_content(root: &Path, entries: &[ContentEntry], name: &str) -> Result<()> {
     filename(name)?;
+    crate::migrations::backup_existing(
+        &root.join(format!("registry/content/{name}.json")),
+        crate::migrations::Kind::Content,
+    )?;
     initialize(root)?;
     let mut targets = std::collections::HashSet::new();
     for e in entries {
@@ -202,11 +228,19 @@ pub fn save_content(root: &Path, entries: &[ContentEntry], name: &str) -> Result
     }
     write(
         root.join(format!("registry/content/{name}.json")),
-        &serde_json::to_vec_pretty(entries).map_err(|e| e.to_string())?,
+        &serde_json::to_vec_pretty(&Content {
+            version: crate::migrations::CONTENT_VERSION,
+            entries: entries.to_vec(),
+        })
+        .map_err(|e| e.to_string())?,
     )
 }
 pub fn save_layout(root: &Path, p: &Project, name: &str) -> Result<()> {
     filename(name)?;
+    crate::migrations::backup_existing(
+        &root.join(format!("registry/layouts/{name}.json")),
+        crate::migrations::Kind::Layout,
+    )?;
     p.validate()?;
     initialize(root)?;
     let layout = Layout {

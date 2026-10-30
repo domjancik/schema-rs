@@ -1,0 +1,116 @@
+{
+  "dmx_models": {
+    "uv-cob": {
+      "name": "UV COB \u00b7 2 channel",
+      "slots": [
+        {
+          "name": "Dimmer",
+          "source": "value",
+          "constant": 0,
+          "channel": "",
+          "minimum": 0,
+          "maximum": 255,
+          "fine": false
+        },
+        {
+          "name": "Program",
+          "source": "constant",
+          "constant": 0,
+          "channel": "",
+          "minimum": 0,
+          "maximum": 255,
+          "fine": false
+        }
+      ]
+    }
+  },
+  "dimming": {
+    "enabled": false,
+    "master": 1.0,
+    "utc_offset_minutes": 0,
+    "points": [
+      {
+        "minute": 480,
+        "level": 1.0
+      },
+      {
+        "minute": 1200,
+        "level": 0.2
+      }
+    ]
+  },
+  "director": [
+    null,
+    null,
+    null
+  ],
+  "version": 1,
+  "name": "Legacy v1 migration fixture",
+  "fixtures": [
+    {
+      "setup_channel": 0,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pixel_positions": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "pixel_reverse": false,
+      "id": "fixture-1",
+      "name": "Wash 01",
+      "position": [
+        2.0,
+        1.0,
+        -3.0
+      ],
+      "groups": [
+        "front"
+      ],
+      "model": "rgb",
+      "universe": 0,
+      "address": 1,
+      "dimmer": 1.0
+    }
+  ],
+  "content": {
+    "fixture-1": [
+      {
+        "name": "Legacy random gain",
+        "root": {
+          "id": 1,
+          "behavior": "Plugin.demo.Gain",
+          "properties": {
+            "Gain": 2
+          },
+          "children": [
+            {
+              "id": 2,
+              "behavior": "Create.Value.Random",
+              "properties": {
+                "Filter Time": 0.5,
+                "Interval": 1,
+                "Seed": 42
+              },
+              "children": [],
+              "drivers": {}
+            }
+          ],
+          "drivers": {}
+        }
+      },
+      null,
+      null
+    ]
+  },
+  "output": {
+    "enabled": false,
+    "target": "127.0.0.1:6454",
+    "fps": 40
+  }
+}

@@ -2,10 +2,12 @@ use crate::{
     engine::NodeState,
     model::{Project, Result, Snapshot},
 };
-use serde::{Deserialize, Serialize};
+use serde::Serialize;
 use std::{collections::HashMap, sync::Arc};
-const MAX_BYTES: u64 = 64 * 1024 * 1024;
-#[derive(Clone, Serialize, Deserialize)]
+#[cfg(feature = "native")]
+const MAX_BYTES: u64 = crate::migrations::MAX_BYTES as u64;
+crate::versioned_document! {crate::migrations::Kind::Session, SessionWire, "Session";
+#[derive(Clone, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct Session {
     #[serde(default)]
@@ -22,6 +24,7 @@ pub struct Session {
     pub undo: Vec<Arc<Project>>,
     pub redo: Vec<Arc<Project>>,
     pub(crate) states: HashMap<String, NodeState>,
+}
 }
 impl Session {
     pub fn disarm_output(&mut self) {
@@ -40,7 +43,7 @@ impl Session {
         crate::scenic::with_plugins(self.plugins.clone(), || self.validate_inner())
     }
     fn validate_inner(&self) -> Result<()> {
-        if self.version != 1 {
+        if self.version != crate::migrations::SESSION_VERSION {
             return Err("Unsupported session version".into());
         }
         if self.undo.len() > 128 || self.redo.len() > 128 || self.undo.len() + self.redo.len() > 128
@@ -127,41 +130,17 @@ impl Session {
     }
 }
 pub fn decode(bytes: &[u8]) -> Result<Session> {
-    if bytes.len() as u64 > MAX_BYTES {
-        return Err("Session exceeds 64 MiB".into());
-    }
-    // Model depth is bounded at 64; account for each node's object/children-array
-    // plus session/project wrappers before disabling serde's smaller generic limit.
-    let (mut depth, mut quoted, mut escaped) = (0_u32, false, false);
-    for byte in bytes {
-        if quoted {
-            if escaped {
-                escaped = false;
-            } else if *byte == b'\\' {
-                escaped = true;
-            } else if *byte == b'"' {
-                quoted = false;
-            }
-        } else {
-            match byte {
-                b'"' => quoted = true,
-                b'{' | b'[' => {
-                    depth += 1;
-                    if depth > 160 {
-                        return Err("Session JSON nesting exceeds 160 levels".into());
-                    }
-                }
-                b'}' | b']' => depth = depth.saturating_sub(1),
-                _ => {}
-            }
-        }
-    }
-    let mut parser = serde_json::Deserializer::from_slice(bytes);
-    parser.disable_recursion_limit();
-    let session = Session::deserialize(&mut parser).map_err(|e| format!("Session format: {e}"))?;
-    parser.end().map_err(|e| format!("Session format: {e}"))?;
+    decode_with_report(bytes).map(|(session, _)| session)
+}
+pub fn decode_with_report(bytes: &[u8]) -> Result<(Session, crate::migrations::Report)> {
+    let migrated = crate::migrations::migrate(
+        crate::migrations::Kind::Session,
+        crate::migrations::parse(bytes)?,
+    )?;
+    let session: Session =
+        serde_json::from_value(migrated.document).map_err(|e| format!("Session format: {e}"))?;
     session.validate()?;
-    Ok(session)
+    Ok((session, migrated.report))
 }
 #[cfg(feature = "native")]
 mod storage;

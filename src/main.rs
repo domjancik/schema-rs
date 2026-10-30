@@ -250,6 +250,44 @@ async fn run() -> Result<(), String> {
             Ok(())
         }
         "tui" => schema_rs::tui::run(&option("--server", "127.0.0.1:8787"), token.as_deref()),
+        "migrate" => {
+            use std::io::{Read, Write};
+            let kind: schema_rs::migrations::Kind = option("--format", "session").parse()?;
+            let input = PathBuf::from(option("--input", ""));
+            if input.as_os_str().is_empty() {
+                return Err("migrate requires --input FILE".into());
+            }
+            let file = std::fs::File::open(&input).map_err(|e| e.to_string())?;
+            let mut bytes = Vec::new();
+            file.take(schema_rs::migrations::MAX_BYTES as u64 + 1)
+                .read_to_end(&mut bytes)
+                .map_err(|e| e.to_string())?;
+            let migrated =
+                schema_rs::migrations::validated(kind, schema_rs::migrations::parse(&bytes)?)?;
+            let output = option("--output", "");
+            if !output.is_empty() {
+                let output = PathBuf::from(output);
+                let mut options = std::fs::OpenOptions::new();
+                options.write(true).create_new(true);
+                #[cfg(unix)]
+                {
+                    use std::os::unix::fs::OpenOptionsExt;
+                    options.mode(0o600);
+                }
+                let mut file = options
+                    .open(&output)
+                    .map_err(|e| format!("Migration output must be a new file: {e}"))?;
+                let bytes =
+                    serde_json::to_vec_pretty(&migrated.document).map_err(|e| e.to_string())?;
+                file.write_all(&bytes).map_err(|e| e.to_string())?;
+                file.sync_all().map_err(|e| e.to_string())?;
+            }
+            println!(
+                "{}",
+                serde_json::json!({"format":kind,"version":kind.current(),"report":migrated.report})
+            );
+            Ok(())
+        }
         "init" => {
             let root = PathBuf::from(option("--project", "schema-project"));
             if root.join("registry/layouts/init.json").exists() {

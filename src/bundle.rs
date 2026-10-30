@@ -27,7 +27,8 @@ impl Assets {
         }
     }
 }
-#[derive(Clone, Serialize, Deserialize)]
+crate::versioned_document! {crate::migrations::Kind::Bundle, BundleWire, "Bundle";
+#[derive(Clone, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct Bundle {
     pub version: u32,
@@ -35,6 +36,7 @@ pub struct Bundle {
     pub plugins: plugins::State,
     pub assets: Assets,
     pub resources: BTreeMap<String, Vec<u8>>,
+}
 }
 pub fn validate_resources(resources: &BTreeMap<String, Vec<u8>>) -> Result<()> {
     if resources.len() > 256 || resources.values().map(Vec::len).sum::<usize>() > 8 * 1024 * 1024 {
@@ -82,7 +84,7 @@ impl Bundle {
         let mut project = (*s.project).clone();
         project.output.enabled = false;
         Self {
-            version: 1,
+            version: crate::migrations::BUNDLE_VERSION,
             project,
             plugins: (*s.plugins.state).clone(),
             assets: Assets::from_inputs(&s.inputs),
@@ -90,7 +92,7 @@ impl Bundle {
         }
     }
     pub fn prepare(self, mut session: Session) -> Result<Session> {
-        if self.version != 1 {
+        if self.version != crate::migrations::BUNDLE_VERSION {
             return Err("Unsupported portable bundle version".into());
         }
         validate_resources(&self.resources)?;

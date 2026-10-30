@@ -141,7 +141,8 @@ pub struct OutputConfig {
     pub target: String,
     pub fps: u32,
 }
-#[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
+crate::versioned_document! {crate::migrations::Kind::Project, ProjectWire, "Project";
+#[derive(Clone, Debug, Serialize, PartialEq)]
 #[serde(deny_unknown_fields)]
 pub struct Project {
     #[serde(default = "crate::output_design::default_models")]
@@ -156,6 +157,7 @@ pub struct Project {
     pub content: BTreeMap<String, Vec<Option<Stack>>>,
     pub output: OutputConfig,
 }
+}
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
 #[serde(deny_unknown_fields)]
 pub struct ContentEntry {
@@ -164,7 +166,7 @@ pub struct ContentEntry {
     pub stack: Option<Stack>,
 }
 #[derive(Clone, Debug, Default, Serialize, Deserialize, PartialEq)]
-#[serde(default)]
+#[serde(default, deny_unknown_fields)]
 pub struct Bank {
     #[serde(skip_serializing_if = "BTreeMap::is_empty")]
     pub actions: BTreeMap<String, crate::native::actions::Action>,
@@ -253,6 +255,7 @@ impl Bank {
     }
 }
 #[derive(Clone, Debug, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct FixtureSnapshot {
     pub fixture: Fixture,
     pub result: Bank,
@@ -267,6 +270,7 @@ pub struct DebugFocus {
     pub node: u64,
 }
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct Snapshot {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub debug_focus: Option<DebugFocus>,
@@ -323,7 +327,7 @@ impl Project {
             dmx_models: crate::output_design::default_models(),
             dimming: Default::default(),
             director: default_layers(),
-            version: 1,
+            version: crate::migrations::PROJECT_VERSION,
             name: "Spatial light study".into(),
             fixtures,
             content,
@@ -361,7 +365,7 @@ impl Project {
             model.validate()?;
         }
 
-        if self.version != 1
+        if self.version != crate::migrations::PROJECT_VERSION
             || self.fixtures.len() > 512
             || self.name.len() > 200
             || self.name.chars().any(char::is_control)
