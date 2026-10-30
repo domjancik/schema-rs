@@ -1,4 +1,4 @@
-import pathlib,sys,tempfile,unittest,json,zipfile
+import pathlib,sys,tempfile,unittest,json,zipfile,subprocess
 from unittest.mock import patch
 sys.path.insert(0,str(pathlib.Path(__file__).resolve().parents[1]/'scripts/update_server'))
 from core import ReleaseStore,Signer
@@ -6,6 +6,18 @@ from delivery import Delivery
 from delivery import workflow_runs,Pending
 from local_host import same_session,pristine,LocalHost
 class DeliveryPolicy(unittest.TestCase):
+ def test_commit_watcher_covers_browser_crate_and_public_packaging(self):
+  from builder import source_identity
+  with tempfile.TemporaryDirectory()as directory:
+   root=pathlib.Path(directory)
+   def git(*args):subprocess.run(['git',*args],cwd=root,check=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+   git('init');git('config','user.name','Test');git('config','user.email','test@example.invalid')
+   for name in ['src/main.rs','crates/schema-web/src/lib.rs','scripts/publication/install.sh','tests/managed_shutdown.rs']:
+    p=root/name;p.parent.mkdir(parents=True,exist_ok=True);p.write_text('first')
+   git('add','.');git('commit','-m','initial');previous=source_identity(root)[1]
+   for name in ['crates/schema-web/src/lib.rs','scripts/publication/install.sh','tests/managed_shutdown.rs']:
+    (root/name).write_text('changed');git('add',name);git('commit','-m','changed');current=source_identity(root)[1];self.assertNotEqual(previous,current);previous=current
+
  def test_publication_waits_for_both_exact_commit_workflows_and_rejects_failures(self):
   commit='a'*40
   with self.assertRaises(Pending):workflow_runs([],commit)

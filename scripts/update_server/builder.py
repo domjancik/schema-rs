@@ -1,7 +1,7 @@
 """Build a committed source snapshot, validate it, and atomically sign/publish artifacts."""
 import hashlib,importlib.util,json,os,pathlib,queue,re,shutil,subprocess,threading,time,tomllib,urllib.request,zipfile
 from core import utc
-INPUTS=['src','web','Cargo.toml','Cargo.lock','.cargo','LICENSE','docs/desktop.md','scripts/build_desktop.py','scripts/update_server','scripts/start-update-server.ps1','.github/workflows']
+INPUTS=['src','crates','web','tests','scripts','Cargo.toml','Cargo.lock','.cargo','LICENSE','docs/desktop.md','docs/linux.md','docs/macos.md','.github/workflows']
 def source_identity(repo):
  commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=repo,text=True).strip();tree=subprocess.check_output(['git','ls-tree','-r',commit,'--',*INPUTS],cwd=repo);return commit,hashlib.sha256(tree).hexdigest()
 def run(args,cwd,env,log,stop,timeout=900):
