@@ -502,9 +502,9 @@ window.SchemaAuthoring = (() => {
   async function exportBundle() {
     try {
       await window.SchemaAppNavigation?.flush();
-      const data = await SchemaEngine.request("/api/projects/bundle"),
+      const data = await SchemaEngine.request("/api/projects/bundle/raw"),
         url = URL.createObjectURL(
-          new Blob([JSON.stringify(data)], { type: "application/json" }),
+          new Blob([data], { type: "application/json" }),
         ),
         a = el("a");
       a.href = url;
@@ -527,7 +527,11 @@ window.SchemaAuthoring = (() => {
         const file = input.files[0];
         if (!file) return;
         if (file.size > 64 * 1024 * 1024) throw Error("Bundle exceeds 64 MiB");
-        const bundle = JSON.parse(await file.text()),
+        const text = await file.text();
+        const { document: bundle } = await SchemaEngine.request(
+            "/api/storage/migrate",
+            { format: "bundle", text },
+          ),
           revision = adapter.getRevision(),
           d = sheet("Import portable project");
         d.append(
@@ -546,7 +550,7 @@ window.SchemaAuthoring = (() => {
             apply.disabled = true;
             try {
               await SchemaEngine.request("/api/projects/bundle", {
-                bundle,
+                text,
                 expected_revision: revision,
               });
               await adapter.afterBundle?.();

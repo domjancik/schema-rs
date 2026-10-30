@@ -22,6 +22,7 @@ export class SchemaPlayer {
   async input(event){return this.request('/api/inputs',event);}
   async advance(dt){await this.ready;return this.call('advance',{dt});}
   async checkpoint(){return this.request('/api/session');}
+  async checkpointText(){return this.request('/api/session/raw');}
   async restore(session){await this.ready;return this.call('restore',{text:typeof session==='string'?session:JSON.stringify(session)});}
   subscribe(listener){this.listeners.add(listener);this.ready.then(()=>this.call('subscribe',{enabled:true})).catch(error=>this.onerror?.(error));return()=>{this.listeners.delete(listener);if(!this.listeners.size&&!this.closed)this.call('subscribe',{enabled:false}).catch(()=>{});};}
   fail(error){this.closed=true;this.worker.terminate();this.listeners.clear();for(const request of this.pending.values()){clearTimeout(request.timer);request.reject(error);}this.pending.clear();}

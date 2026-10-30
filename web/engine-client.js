@@ -18,8 +18,8 @@ if(document.documentElement.dataset.engine==='browser'||new URLSearchParams(loca
  const bar=document.querySelector('.header-actions');
  if(bar){
   const fresh=document.createElement('button');fresh.textContent='New browser session';fresh.onclick=()=>{sessionStorage.setItem('schema-browser-session',crypto.randomUUID());location.reload();};bar.append(fresh);
-  const download=document.createElement('button');download.textContent='Export project';download.onclick=async()=>{const {project}=await window.SchemaEngine.request('/api/state');const url=URL.createObjectURL(new Blob([JSON.stringify(project,null,2)],{type:'application/json'}));const link=document.createElement('a');link.href=url;link.download='schema-project.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
-  const upload=document.createElement('button');upload.textContent='Import project';upload.onclick=()=>{const input=document.createElement('input');input.type='file';input.accept='.json,application/json';input.onchange=async()=>{try{const file=input.files[0];if(!file)return;if(file.size>16*1024*1024)throw Error('Project exceeds 16 MiB');const project=JSON.parse(await file.text());if(project.output)project.output.enabled=false;const state=await window.SchemaEngine.request('/api/state');await window.SchemaEngine.request('/api/command',{expected_revision:state.snapshot.revision,command:{type:'replace_project',project}});}catch(error){alert(error.message);}};input.click();};bar.append(upload,download);
+  const download=document.createElement('button');download.textContent='Export project';download.onclick=async()=>{const text=await window.SchemaEngine.request('/api/project/raw');const url=URL.createObjectURL(new Blob([text],{type:'application/json'}));const link=document.createElement('a');link.href=url;link.download='schema-project.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
+  const upload=document.createElement('button');upload.textContent='Import project';upload.onclick=()=>{const input=document.createElement('input');input.type='file';input.accept='.json,application/json';input.onchange=async()=>{try{const file=input.files[0];if(!file)return;if(file.size>16*1024*1024)throw Error('Project exceeds 16 MiB');const text=await file.text();const state=await window.SchemaEngine.request('/api/state');await window.SchemaEngine.request('/api/projects/import',{json:text,expected_revision:state.snapshot.revision});}catch(error){alert(error.message);}};input.click();};bar.append(upload,download);
  }
 }
 window.SchemaEditorContext={load(){try{return JSON.parse(sessionStorage.getItem('schema-editor-context')||'{}');}catch{return{};}},save(value){try{sessionStorage.setItem('schema-editor-context',JSON.stringify(value));}catch{}}};
@@ -60,7 +60,7 @@ window.SchemaAppNavigation=(()=>{
  const writes=new Set(),request=SchemaEngine.request.bind(SchemaEngine);
  SchemaEngine.request=(path,body)=>{
   const result=Promise.resolve().then(()=>request(path,body));
-  if(body!==undefined&&/^\/api\/(command|import|projects\/(save|load)|session\/save)$/.test(path)){
+  if(body!==undefined&&/^\/api\/(command|import|projects\/(save|load|import|bundle)|session\/save)$/.test(path)){
    writes.add(result);result.then(()=>writes.delete(result),()=>writes.delete(result));
   }
   return result;
