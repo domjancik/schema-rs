@@ -92,9 +92,38 @@ const server = http.createServer((req,res) => {
     await page.goto(base+'/mobile');
     await page.waitForFunction(()=>window.SchemaEngine?.kind==='browser');
     const mobile=await page.evaluate(()=>SchemaEngine.request('/api/state'));assert.equal(mobile.project.fixtures.length,8);
+    await page.locator('.app-menu summary').click();
+    await page.getByRole('button',{name:'Servers',exact:true}).click();
+    const servers=page.getByRole('dialog',{name:'Servers',exact:true});
+    await servers.getByLabel('Server address',{exact:true}).fill('stage.local:8787');
+    await servers.getByLabel('Server name',{exact:true}).fill('Test stage');
+    await servers.getByRole('button',{name:'Save server',exact:true}).click();
+    await page.evaluate(async()=>{const s=await SchemaEngine.request('/api/state');await SchemaEngine.request('/api/command',{expected_revision:s.snapshot.revision,command:{type:'set_dimmer',fixture:'fixture-3',value:.42}})});
+    const beforeUpdate=await state();
+    const blockedReload=await page.evaluate(async()=>{
+      const state=await SchemaEngine.request('/api/state'),input=document.querySelector('#servers-dialog [aria-label="Server address"]');
+      input.addEventListener('blur',()=>{SchemaEngine.request('/api/command',{expected_revision:state.snapshot.revision-1,command:{type:'undo'}}).catch(()=>{});},{once:true});
+      input.focus();
+      try{await SchemaAppNavigation.prepare();return false;}catch(error){return /Revision conflict/.test(error.message);}
+    });
+    assert(blockedReload,'A field commit that fails during preparation must block app reload');
+
+    await page.route('**/browser-build.json',route=>route.fulfill({json:{source_commit:'a'.repeat(40)}}));
+    await servers.getByRole('button',{name:'Check for app updates',exact:true}).click();
+    await servers.getByRole('button',{name:'Update app now',exact:true}).waitFor();
+    await Promise.all([page.waitForEvent('domcontentloaded'),servers.getByRole('button',{name:'Update app now',exact:true}).click()]);
+    await page.waitForFunction(()=>SchemaEngine?.kind==='browser'&&document.querySelector('#save')&&SchemaAppUpdates);
+    assert.deepEqual((await state()).project,beforeUpdate.project,'App reload preserves the authored project');
+    assert((await state()).snapshot.can_undo,'App reload preserves undo');
+    assert.equal(await page.evaluate(()=>SchemaServersCore.repository(localStorage).list()[0].origin),'http://stage.local:8787');
+    await page.evaluate(async()=>{const s=await SchemaEngine.request('/api/state');await SchemaEngine.request('/api/command',{expected_revision:s.snapshot.revision,command:{type:'undo'}})});
+    assert.notEqual((await state()).project.fixtures.find(f=>f.id==='fixture-3').dimmer,.42);
+    await page.evaluate(async()=>{const s=await SchemaEngine.request('/api/state');await SchemaEngine.request('/api/command',{expected_revision:s.snapshot.revision,command:{type:'redo'}})});
+    assert.deepEqual((await state()).project,beforeUpdate.project);
+    await page.unroute('**/browser-build.json');
     const deterministic=await page.evaluate(async()=>{const {SchemaPlayer}=await import('/schema-player.mjs');const a=await SchemaPlayer.create({autoTick:false}),b=await SchemaPlayer.create({autoTick:false});try{const x=await a.advance(.1),y=await b.advance(.1);const same=JSON.stringify(x.snapshot.fixtures)===JSON.stringify(y.snapshot.fixtures);await a.request('/api/import',{fixture:'fixture-1',layer:0,yaml:'name: Script test\nstack:\n  Script.Value: {Code: \"0.25 + 0.5\"}\n',expected_revision:0});const scripted=await a.advance(.1);const scriptWorks=scripted.snapshot.fixtures[0].result.value===.75;a.dispose();let rejected=false;try{await a.advance(.1);}catch{rejected=true;}return same&&rejected&&scriptWorks;}finally{a.dispose();b.dispose();}});assert(deterministic);
     assert.deepEqual(apiRequests,[],'No engine API requests leave the browser');
     assert.deepEqual(errors,[]);
-    console.log('WASM editor, fixture placement, animation, revision conflict, durable undo, project save and Worker isolation passed');
+    console.log('WASM editor, placement, saved servers, app update/history, animation, revision conflicts, project save and Worker isolation passed');
   } finally {await browser.close();server.close();}
 })().catch(e=>{console.error(e);server.close();process.exitCode=1;});

@@ -124,6 +124,13 @@ async fn native_studio_serves_shared_interface_assets() {
         "/interface.css",
         "/fixture-placement.js",
         "/fixture-placement.css",
+        "/servers-core.js",
+        "/servers-ui.js",
+        "/servers.css",
+        "/app-updates.js",
+        "/vendor/qrcode.js",
+        "/vendor/jsQR.js",
+        "/vendor/QR-LICENSES.txt",
     ] {
         let response = app
             .clone()
@@ -135,7 +142,13 @@ async fn native_studio_serves_shared_interface_assets() {
             .await
             .unwrap();
         let body = std::str::from_utf8(&body).unwrap();
-        if path == "/fixture-placement.js" {
+        if path.starts_with("/vendor/") {
+            assert!(!body.is_empty());
+        } else if path == "/servers.css" {
+            assert!(body.contains(".servers-dialog"));
+        } else if path.ends_with(".js") && path != "/fixture-placement.js" {
+            assert!(body.contains("use strict"));
+        } else if path == "/fixture-placement.js" {
             assert!(body.contains("SchemaPlacement"));
         } else if path == "/fixture-placement.css" {
             assert!(body.contains("fixture-placement-overlay"));

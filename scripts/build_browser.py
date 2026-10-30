@@ -25,9 +25,11 @@ def export_browser(destination, wasm, notices=None, source_root=ROOT):
         if any(part.startswith('.') for part in relative.parts) or source.is_symlink() or 'wasm' in relative.parts:continue
         if source.is_file() and source.suffix in PUBLIC_EXTENSIONS:
             target=destination/relative;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(source,target);files.add(relative.as_posix())
+    commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
     for name in ['index.html','mobile.html','preview.html']:
         source=source_root/'web'/name
         html=source.read_text(encoding='utf8').replace('<html','<html data-engine="browser"',1)
+        html=html.replace('</head>','<meta name="schema-app-build" content="'+commit+'"></head>',1)
         if name=='index.html':
             html=html.replace('href="/?view=studio"','href="/play?view=studio"')
             (destination/'studio.html').write_text(html,encoding='utf8');files.add('studio.html')
@@ -40,7 +42,6 @@ def export_browser(destination, wasm, notices=None, source_root=ROOT):
     for source in Path(notices).rglob('*'):
         if source.is_file():
             relative=Path('THIRD_PARTY_NOTICES')/source.relative_to(notices);target=destination/relative;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(source,target);files.add(relative.as_posix())
-    commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
     metadata={'version':1,'source_commit':commit,'files':{name:hashlib.sha256((destination/name).read_bytes()).hexdigest() for name in sorted(files)}}
     (destination/'browser-build.json').write_text(json.dumps(metadata,indent=2)+'\n',encoding='utf8')
     return destination

@@ -9,6 +9,8 @@ class BrowserPackage(unittest.TestCase):
    (wasm/'schema_web.js').write_text('export default async function(){}');(wasm/'schema_web_bg.wasm').write_bytes(b'\0asm\x01\0\0\0')
    notices=p/'notices';notices.mkdir();(notices/'LICENSE.txt').write_text('Test notice');out=build.export_browser(p/'out',wasm,notices)
    self.assertIn('data-engine="browser"',(out/'studio.html').read_text(encoding='utf8'))
+   self.assertIn('name="schema-app-build"',(out/'studio.html').read_text(encoding='utf8'))
+   self.assertIn('vendor/jsQR.js',json.loads((out/'browser-build.json').read_text())['files'])
    manifest=json.loads((out/'browser-build.json').read_text())
    self.assertIn('wasm/schema_web_bg.wasm',manifest['files'])
    self.assertFalse(any('.session' in name or 'schema-project' in name for name in manifest['files']))

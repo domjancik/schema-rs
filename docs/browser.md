@@ -33,3 +33,8 @@ The shared contract is commands in, frame deltas/host inputs in, and snapshots/s
 For website embedding, serve `schema-player.mjs`, `browser-worker.mjs`, `browser-storage.mjs` and the generated `wasm/` files from the same origin as the consuming page. A cross-origin CDN import alone cannot create a same-origin Worker. Named project storage is origin-local. Browsers without Web Locks do not enforce the duplicate-session lock; named saves remain IndexedDB transactions.
 
 Production editor: https://schema-s.vercel.app/play?view=studio. Animation example: https://schema-s.vercel.app/animation. Deployment `dpl_7dcBST27zJLQYkm5P2Pa22jrY7Hh` passed the real Chrome browser-runtime suite, including bounded Rhai evaluation, deterministic independent instances, rejection after disposal, partial saves/load, revision conflicts, history recovery, duplicate-session rejection, website CSS updates, and mobile transport. Native macOS packaging remains a separate release process. Browser CI has passed in the public https://github.com/domjancik/schema-rs repository.
+
+
+## Saved servers and app updates
+
+Studio and schémaboy include Servers for saved host addresses, manual/QR pairing and direct opening of a host’s own UI. This opens a separate host window; it does not switch the browser engine’s transport. Installed phone apps also retain the pairing screen and local QR tools offline. Servers → App updates checks the published app build and activates waiting service-worker updates only when requested, preserving browser sessions, projects, undo/redo and saved hosts. See [Servers and phone pairing](servers.md).

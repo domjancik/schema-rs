@@ -49,7 +49,7 @@ def bundle(binary,launcher,output,commit,notices,platform,ftdi=None,ftdi_license
  if sparkle:info.update({'SUFeedURL':update_feed,'SUPublicEDKey':update_key,'SUAllowsAutomaticUpdates':True})
  (app/'Contents/Info.plist').write_bytes(plistlib.dumps(info));(resources/'BUILD.json').write_text(json.dumps({'commit':commit,'platform':platform},indent=2)+'\n',encoding='utf8')
  shutil.copytree(notices,resources/'THIRD_PARTY_NOTICES');shutil.copyfile(ROOT/'LICENSE',resources/'LICENSE.txt');shutil.copyfile(ROOT/'web/scene-assets/carpushit-provenance.json',resources/'SCENE_ASSET_PROVENANCE.json');shutil.copyfile(ROOT/'docs/macos.md',resources/'README.md')
- for source,name in [(ROOT/'web/vendor/THREE-LICENSE.txt','THREE-LICENSE.txt'),(ROOT/'web/vendor/scene-three.mjs.LEGAL.txt','THREE-BUNDLE-NOTICES.txt')]:shutil.copyfile(source,resources/'THIRD_PARTY_NOTICES'/name)
+ for source,name in [(ROOT/'web/vendor/QR-LICENSES.txt','QR-LICENSES.txt'),(ROOT/'web/vendor/THREE-LICENSE.txt','THREE-LICENSE.txt'),(ROOT/'web/vendor/scene-three.mjs.LEGAL.txt','THREE-BUNDLE-NOTICES.txt')]:shutil.copyfile(source,resources/'THIRD_PARTY_NOTICES'/name)
  if sparkle:
   frameworks=app/'Contents/Frameworks';frameworks.mkdir(exist_ok=True);shutil.copytree(sparkle,frameworks/'Sparkle.framework',symlinks=True);shutil.copyfile(sparkle_license,resources/'THIRD_PARTY_NOTICES/SPARKLE-LICENSE.txt')
  if ftdi:

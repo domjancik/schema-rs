@@ -26,22 +26,21 @@ const base = process.env.PUBLIC_SITE_URL || 'http://127.0.0.1:8828';
     }
     assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
     await page.getByRole('link', { name: 'Open Studio ↗', exact: true }).first().click();
-    await page.locator('#engine-address').waitFor();
-    await page.locator('#engine-address').fill('javascript:alert(1)');
-    await page.locator('#connect-form button').click();
-    assert.match(await page.locator('#connect-error').textContent(), /HTTP/);
-    await page.locator('#engine-address').fill('http://schema.local:8787/?token=secret');
-    await page.locator('#connect-form button').click();
-    assert.match(await page.locator('#connect-error').textContent(), /without/);
-    await page.route('http://schema.local:8787/**', (r) =>
-      r.fulfill({ contentType: 'text/html', body: '<h1>Mock engine</h1>' })
-    );
-    await page.locator('#engine-address').fill('schema.local:8787');
-    await page.locator('#connect-form button').click();
-    await page.waitForURL('http://schema.local:8787/?view=studio');
+    await page.getByRole('heading',{name:'Servers',exact:true}).waitFor();
+    const address=page.getByLabel('Server address',{exact:true}),save=page.getByRole('button',{name:'Save server',exact:true});
+    await address.fill('javascript:alert(1)');await save.click();
+    assert.equal(await page.locator('.saved-server').count(),0);
+    await address.fill('http://schema.local:8787/?token=secret');await save.click();
+    assert.match(await page.locator('.server-status').textContent(),/without/);
+    await page.context().route('http://schema.local:8787/**',r=>r.fulfill({contentType:'text/html',body:'<h1>Host version UI</h1>'}));
+    await address.fill('schema.local:8787');await save.click();
+    const row=page.locator('.saved-server');
+    assert.equal(await row.getByRole('link',{name:'Open Studio',exact:true}).getAttribute('href'),'http://schema.local:8787/?view=studio');
+    const [host]=await Promise.all([page.waitForEvent('popup'),row.getByRole('link',{name:'Open Studio',exact:true}).click()]);
+    await host.getByRole('heading',{name:'Host version UI'}).waitFor();await host.close();
     assert.deepEqual(errors, []);
     console.log(
-      'Public mobile site, real download availability, secure device-address validation and connection redirect passed.'
+      'Public mobile site, real download availability, secure device-address validation and saved server and direct host UI opening passed.'
     );
   } finally {
     await browser.close();

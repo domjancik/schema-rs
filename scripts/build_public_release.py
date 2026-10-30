@@ -27,6 +27,7 @@ def package_linux(binary, output, platform, commit, notices):
         add(ROOT/'docs/linux.md', 'README.md')
         add(ROOT/'LICENSE', 'LICENSE.txt')
         add(ROOT/'web/vendor/THREE-LICENSE.txt', 'THIRD_PARTY_NOTICES/three/LICENSE.txt')
+        add(ROOT/'web/vendor/QR-LICENSES.txt', 'THIRD_PARTY_NOTICES/QR-LICENSES.txt')
         add(ROOT/'web/vendor/scene-three.mjs.LEGAL.txt', 'THIRD_PARTY_NOTICES/three/BUNDLE_NOTICES.txt')
         add(ROOT/'web/scene-assets/carpushit-provenance.json', 'SCENE_ASSET_PROVENANCE.json')
         for path in sorted(notices.rglob('*')):
@@ -110,6 +111,11 @@ def export_site(destination, downloads, browser=None):
     (destination/'index.html').write_text(html,encoding='utf8')
     for name in ['landing.css','landing.js','favicon.ico','app-icon-192.png','app-icon-512.png']:
         shutil.copyfile(ROOT/'web'/name,destination/name)
+    for name in ['servers-core.js','servers-ui.js','servers.css','app-updates.js','interface.css']:
+        shutil.copyfile(ROOT/'web'/name,destination/name)
+    (destination/'vendor').mkdir(exist_ok=True)
+    for name in ['qrcode.js','jsQR.js','QR-LICENSES.txt','QR-VERSIONS.json']:
+        shutil.copyfile(ROOT/'web/vendor'/name,destination/'vendor'/name)
     for name in ['connect.html','connect.js']:
         shutil.copyfile(ROOT/'scripts/publication'/name,destination/name)
     target=destination/'downloads';target.mkdir(exist_ok=True)
@@ -121,7 +127,13 @@ def export_site(destination, downloads, browser=None):
     shutil.copyfile(ROOT/'scripts/publication/vercel.json',destination/'vercel.json')
     shutil.copyfile(ROOT/'docs/linux.md',destination/'linux.txt')
     shutil.copyfile(ROOT/'docs/macos.md',destination/'macos.txt')
-    if browser: install_browser(destination,browser)
+    if browser:
+        install_browser(destination,browser)
+        commit=json.loads((pathlib.Path(browser)/'browser-build.json').read_text())['source_commit']
+        connect=destination/'connect.html'
+        html=connect.read_text(encoding='utf8').replace('<html ','<html data-app-host="browser" ',1)
+        html=html.replace('</head>','<meta name="schema-app-build" content="'+commit+'"></head>',1)
+        connect.write_text(html,encoding='utf8')
 
 def main():
     p=argparse.ArgumentParser();p.add_argument('--browser',type=pathlib.Path);p.add_argument('--linux-x64',type=pathlib.Path,required=True);p.add_argument('--linux-arm64',type=pathlib.Path,required=True);p.add_argument('--macos',type=pathlib.Path);p.add_argument('--windows',type=pathlib.Path,required=True);p.add_argument('--notices',type=pathlib.Path,required=True);p.add_argument('--commit',required=True);p.add_argument('--output',type=pathlib.Path,default=ROOT/'target/publication/downloads');p.add_argument('--site',type=pathlib.Path,default=ROOT/'target/publication/site');a=p.parse_args()

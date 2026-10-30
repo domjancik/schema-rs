@@ -59,6 +59,7 @@ assets['/scene-assets/carpushit.project.json']=['scene-assets/carpushit.project.
 assets['/scene-assets/carpushit-reference.json']=['scene-assets/carpushit-reference.json','application/json'];
 assets['/scene-assets/carpushit-lights.json']=['scene-assets/carpushit-lights.json','application/json'];
 assets['/scene-assets/carpushit-provenance.json']=['scene-assets/carpushit-provenance.json','application/json'];
+for(const [file,mime] of [['servers-core.js','text/javascript'],['servers-ui.js','text/javascript'],['app-updates.js','text/javascript'],['servers.css','text/css'],['vendor/qrcode.js','text/javascript'],['vendor/jsQR.js','text/javascript'],['vendor/QR-LICENSES.txt','text/plain']])assets['/'+file]=[file,mime];
 assets['/favicon.ico']=['favicon.ico','image/x-icon'];
 assets['/inputs.js']=['inputs.js','text/javascript; charset=utf-8'];
 assets['/catalog-browser.js']=['catalog-browser.js','text/javascript; charset=utf-8'];

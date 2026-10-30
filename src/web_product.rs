@@ -28,6 +28,69 @@ pub(crate) fn routes() -> Router<AppState> {
                 )
             }),
         )
+        .route(
+            "/servers-core.js",
+            get(|| async {
+                (
+                    [(header::CONTENT_TYPE, "text/javascript")],
+                    include_str!("../web/servers-core.js"),
+                )
+            }),
+        )
+        .route(
+            "/servers-ui.js",
+            get(|| async {
+                (
+                    [(header::CONTENT_TYPE, "text/javascript")],
+                    include_str!("../web/servers-ui.js"),
+                )
+            }),
+        )
+        .route(
+            "/app-updates.js",
+            get(|| async {
+                (
+                    [(header::CONTENT_TYPE, "text/javascript")],
+                    include_str!("../web/app-updates.js"),
+                )
+            }),
+        )
+        .route(
+            "/servers.css",
+            get(|| async {
+                (
+                    [(header::CONTENT_TYPE, "text/css")],
+                    include_str!("../web/servers.css"),
+                )
+            }),
+        )
+        .route(
+            "/vendor/qrcode.js",
+            get(|| async {
+                (
+                    [(header::CONTENT_TYPE, "text/javascript")],
+                    include_str!("../web/vendor/qrcode.js"),
+                )
+            }),
+        )
+        .route(
+            "/vendor/jsQR.js",
+            get(|| async {
+                (
+                    [(header::CONTENT_TYPE, "text/javascript")],
+                    include_str!("../web/vendor/jsQR.js"),
+                )
+            }),
+        )
+        .route(
+            "/vendor/QR-LICENSES.txt",
+            get(|| async {
+                (
+                    [(header::CONTENT_TYPE, "text/plain")],
+                    include_str!("../web/vendor/QR-LICENSES.txt"),
+                )
+            }),
+        )
         .route("/downloads/latest.json", get(release_info))
         .route("/downloads/Schema-s-Windows-x64.zip", get(download_zip))
         .route("/downloads/SHA256SUMS.txt", get(download_checksums))

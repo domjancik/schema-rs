@@ -54,3 +54,30 @@ window.SchemaEditorContext={load(){try{return JSON.parse(sessionStorage.getItem(
  };
  sync();
 })();
+
+// Reload/open actions wait for field commits and preserve the browser session.
+window.SchemaAppNavigation=(()=>{
+ const writes=new Set(),request=SchemaEngine.request.bind(SchemaEngine);
+ SchemaEngine.request=(path,body)=>{
+  const result=Promise.resolve().then(()=>request(path,body));
+  if(body!==undefined&&/^\/api\/(command|import|projects\/(save|load)|session\/save)$/.test(path)){
+   writes.add(result);result.then(()=>writes.delete(result),()=>writes.delete(result));
+  }
+  return result;
+ };
+ async function flush(){
+  document.activeElement?.blur();
+  await new Promise(resolve=>setTimeout(resolve,0));
+  const deadline=Date.now()+10000;
+  while(writes.size){
+   if(Date.now()>deadline)throw Error('An edit is still being saved. Try again in a moment.');
+   let timer;
+   try{await Promise.race([Promise.all([...writes]),new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('An edit is still being saved. Try again in a moment.')),Math.max(1,deadline-Date.now()));})]);}finally{clearTimeout(timer);}
+  }
+ }
+ return{flush,async prepare(){
+  await flush();
+  for(const frame of document.querySelectorAll('iframe'))try{if(frame.contentWindow?.location.origin===location.origin)await frame.contentWindow.SchemaAppNavigation?.flush();}catch(error){if(error.name!=='SecurityError')throw error;}
+  if(SchemaEngine.kind==='browser')await SchemaEngine.request('/api/session/save',{});
+ }};
+})();

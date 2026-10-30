@@ -1,0 +1,275 @@
+.servers-dialog {
+  box-sizing: border-box;
+  width: min(680px, calc(100vw - 24px));
+  max-height: calc(100dvh - 24px);
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: 22px;
+  border: 1px solid var(--ui-border, #40534b);
+  border-radius: 12px;
+  background: var(--ui-panel, #17201d);
+  color: var(--ui-text, #e5eaee);
+  font: 14px/1.5 system-ui;
+  text-align: left;
+}
+.servers-dialog::backdrop {
+  background: #0009;
+  backdrop-filter: blur(4px);
+}
+.servers-dialog header {
+  padding: 0;
+  min-height: 0;
+  height: auto;
+  position: static;
+  background: none;
+  border: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.servers-dialog h2 {
+  font-size: 24px;
+  margin: 0;
+}
+.servers-dialog h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 20px 0 10px;
+}
+.servers-dialog p {
+  overflow-wrap: anywhere;
+}
+.servers-dialog label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 12px;
+  color: var(--ui-muted, #b0bfb7);
+}
+.servers-dialog :is(input, select, button, .server-action) {
+  box-sizing: border-box;
+  font: inherit;
+  color: var(--ui-text, #e5eaee);
+  background: var(--ui-field, #192720);
+  border: 1px solid var(--ui-border, #40534b);
+  border-radius: 6px;
+  min-width: 0;
+  min-height: 40px;
+  padding: 9px 12px;
+}
+.servers-dialog :is(button, .server-action) {
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.servers-dialog .primary {
+  background: var(--ui-accent-fill, #72dec2);
+  color: var(--ui-accent-ink, #10241d);
+  border-color: transparent;
+}
+.servers-dialog :is(input, select) {
+  width: 100%;
+  font-size: 16px;
+}
+.servers-dialog :is(button, a, input, select):focus-visible {
+  outline: 2px solid var(--ui-accent-fill, #72dec2);
+  outline-offset: 3px;
+}
+.server-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.server-form > label:first-child {
+  grid-column: 1/-1;
+}
+.server-form > button {
+  align-self: end;
+}
+.server-pairing,
+.server-row-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+.server-pairing > label {
+  flex: 1;
+  min-width: 180px;
+}
+.server-pairing > button {
+  align-self: end;
+}
+.server-pairing input {
+  padding: 7px;
+  max-width: 100%;
+}
+.server-row-actions select {
+  width: auto;
+  max-width: 145px;
+}
+.saved-server {
+  padding: 14px 0;
+  border-top: 1px solid var(--ui-border, #40534b);
+}
+.server-row-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  overflow-wrap: anywhere;
+}
+.server-row-heading span,
+.server-hint,
+.server-empty {
+  color: var(--ui-muted, #b0bfb7);
+  font-size: 12px;
+}
+.server-status {
+  min-height: 1.5em;
+}
+.server-qr,
+.server-current,
+.server-updates {
+  border-top: 1px solid var(--ui-border, #40534b);
+  margin-top: 18px;
+  padding-top: 3px;
+}
+.server-qr canvas {
+  display: block;
+  width: min(280px, 100%);
+  height: auto;
+  image-rendering: pixelated;
+  background: white;
+  margin: 12px auto;
+}
+.server-qr input {
+  margin-bottom: 10px;
+}
+.server-qr :is(button, a),
+.server-current button,
+.server-updates button {
+  margin: 0 8px 8px 0;
+}
+.server-scanner video {
+  display: block;
+  width: 100%;
+  max-height: 240px;
+  background: #000;
+  margin: 12px 0;
+  object-fit: contain;
+}
+.server-warning {
+  color: var(--ui-text, #e5eaee);
+  font-weight: 600;
+}
+.servers-page {
+  margin: 0;
+  background: #11181d;
+  color: #e5eaee;
+  font: 14px/1.5 system-ui;
+}
+.servers-page > nav {
+  max-width: 680px;
+  margin: 20px auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+}
+.servers-page > nav a {
+  color: #72dec2;
+  text-decoration: none;
+}
+.servers-page .servers-dialog {
+  margin: 0 auto;
+  max-height: none;
+  border: 0;
+}
+.servers-dialog [hidden] {
+  display: none !important;
+}
+@media (max-width: 480px) {
+  .servers-dialog {
+    padding: 16px;
+  }
+  .servers-dialog :is(button, .server-action, select, input) {
+    min-height: 44px;
+  }
+  .server-form {
+    grid-template-columns: 1fr;
+  }
+  .server-form > label:first-child {
+    grid-column: auto;
+  }
+  .server-row-actions > select {
+    flex: 1;
+  }
+  .server-row-actions > .primary {
+    flex: 1;
+  }
+  .server-pairing > button {
+    width: 100%;
+  }
+  .server-pairing > label {
+    min-width: 0;
+    flex-basis: 100%;
+  }
+}
+
+/* Keep type and actions readable inside either host application's global styles. */
+.servers-dialog {
+  font-family: var(--ui-font, system-ui, sans-serif);
+}
+.servers-dialog > header {
+  flex: 0 0 auto;
+  position: static;
+  padding: 0;
+  background: var(--ui-panel, #17201d);
+}
+.servers-dialog h2 {
+  font: 600 24px/1.25 var(--ui-font, system-ui, sans-serif);
+}
+.servers-dialog h3 {
+  font: 600 15px/1.4 var(--ui-font, system-ui, sans-serif);
+}
+.servers-dialog p {
+  font: inherit;
+  margin: 12px 0;
+}
+.servers-dialog :is(.server-hint, .server-empty) {
+  font-size: 12px;
+}
+@media (max-width: 480px) {
+  .server-row-actions {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+  .server-row-actions > :is(select, .primary) {
+    grid-column: span 3;
+    width: 100%;
+    max-width: none;
+  }
+  .server-row-actions > button {
+    grid-column: span 2;
+  }
+  .server-row-actions :is(button, a, select) {
+    padding-inline: 8px;
+  }
+}
+
+dialog.servers-dialog[open] {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow: hidden;
+}
+.server-content {
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: 4px;
+}

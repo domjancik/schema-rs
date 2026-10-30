@@ -42,3 +42,8 @@ Windows and macOS Open DMX USB output use optional FTDI D2XX libraries; Art-Net 
 ## Browser host
 
 The optional WASM browser host uses the same evaluator, ScenicScript parser, native blocks, bounded Rhai scripting, command validation and undo/session schema. It supports Studio/schémaboy editing and snapshot subscribers for web animation. Browser storage replaces native project folders; physical transports, native file watches and folder-based component loading are unavailable. Existing session-embedded component definitions evaluate normally. The scene schema still uses fixture IDs/banks; its outputs can drive non-lighting consumers without an Art-Net adapter. Browser lifecycle scheduling does not provide unattended lighting guarantees. See [browser host and embedding](browser.md).
+
+
+## Saved host selection
+
+The client supports saved HTTP(S) host origins, direct Studio/schémaboy links and QR generation/reading. Opening a host uses its own UI and login in a separate browser/app window. There is no remote engine adapter or native/browser network discovery in this addition. Saved hosts are scoped to the app origin/profile; credentials are excluded. Camera QR input requires a secure context; image/manual pairing is available without camera access. App reload/update preserves the browser session and history; native engine upgrades remain a host operation. See [servers.md](servers.md).
