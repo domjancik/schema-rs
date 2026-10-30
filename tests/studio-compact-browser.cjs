@@ -18,23 +18,10 @@ const base = process.env.SCHEMA_URL || "http://127.0.0.1:8823";
       (await page.locator("body>header").boundingBox()).height <= 64,
       "Phone Studio header must remain one compact row",
     );
-    const picker = page.getByRole("combobox", {
-      name: "Studio panel",
-      exact: true,
-    });
+    const picker = page.getByRole('navigation',{name:'Studio panels',exact:true});
     await picker.waitFor();
-    assert.equal(
-      await page.locator(".workspace-panel:visible").count(),
-      1,
-      "A phone shows one usable full-width pane",
-    );
-    await picker.selectOption(
-      await picker
-        .locator("option")
-        .filter({ hasText: "Output" })
-        .first()
-        .getAttribute("value"),
-    );
+    assert.equal(await page.locator('.workspace-panel:visible').count(),1,'A phone shows one usable full-width pane');
+    await picker.getByRole('button',{name:'Output',exact:true}).click();
     const output = page.locator(".workspace-panel[data-view=output]:visible");
     await output.waitFor();
     assert.equal(

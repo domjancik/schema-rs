@@ -420,3 +420,11 @@ A dedicated System logs panel, menu dialog (including schémaboy) and Commands a
 Source only, not pushed or activated on the Orange Pi or public deployment. Live Carpushit, output, clocks and histories remain untouched. Retest diagnostic appearance/resolution, output errors and mobile log access on isolated output-disabled examples after activation.
 
 Validation: complete native cargo test, fmt and strict Clippy; WASM release build and strict Clippy; actual WASM Studio/menu/workspace and schémaboy logs integration; viewer search/levels/pause/restart/cleanup/safe-text/mobile tests; authenticated API/cursor/bounds/non-persistence tests; browser packaging and workspace regressions all passed.
+
+## Mobile Studio panel icon row
+
+Mobile Studio replaces the top panel dropdown with an in-layout bottom navigation row. Each existing workspace pane has an SVG icon, short label and accessible name; duplicate view instances are numbered. Selection persists per workspace, and active styling follows panel changes. Overflow scrolls inside the row, touch targets exceed 44px, keyboard arrows/Home/End work, and bottom safe-area padding reserves space rather than overlaying the editor. Tapping an icon in split mode returns to that single panel; desktop split layouts remain intact. No project/session/undo schema changes.
+
+Source only, pending publication/device activation. The running Orange Pi scene and output are untouched. Retest 320px phones, landscape, duplicate Stack instances, Output/Logs access and switching back to desktop after activation. Details in docs/workspaces.md.
+
+Validation for `Use bottom icon navigation for mobile panels`: native cargo fmt/test/strict Clippy and final embedded binary build passed; actual WASM mobile touch/overflow/duplicate/persistence/keyboard/viewport checks, full browser runtime and Commands checks passed. Final isolated native compact Studio, desktop workspace and authoring regressions passed. Navigation buttons use a separate target attribute so existing panel identity selectors remain unique.

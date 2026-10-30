@@ -13,6 +13,24 @@
     dmxtest: 'DMX test',
     gpu: '3D preview'
   };
+  const compactLabels = {stack:'Stack',setup:'Setup',scene:'Scene',inspector:'Inspect',fixtures:'Fixtures',output:'Output',telemetry:'Stats',logs:'Logs',dmxtest:'DMX',gpu:'3D'};
+  const panelIcons = {
+    stack:'M5 4h14v4H5z M5 10h14v4H5z M5 16h14v4H5z',
+    setup:'M12 3v18 M3 12h18 M12 3l-3 3 M12 3l3 3 M21 12l-3-3 M21 12l-3 3 M5 17l4-4 M5 17h4 M5 17v-4',
+    scene:'M3 17l5-8 5 5 3-4 5 7z M17 4h.01 M3 20h18',
+    inspector:'M10 3a7 7 0 1 0 0 14 7 7 0 0 0 0-14 M15 15l6 6 M7 10h6 M10 7v6',
+    fixtures:'M5 3h5v5H5z M14 3h5v5h-5z M5 12h5v5H5z M14 12h5v5h-5z M7.5 20h9',
+    output:'M4 5h10v14H4z M7 9h4 M7 13h4 M14 12h7 M18 9l3 3-3 3',
+    telemetry:'M3 19h18 M5 16v-5 M10 16V6 M15 16v-8 M20 16V3',
+    logs:'M6 3h12v18H6z M9 7h6 M9 11h6 M9 15h4',
+    dmxtest:'M5 4v16 M12 4v16 M19 4v16 M3 9h4 M10 15h4 M17 7h4',
+    gpu:'M12 3l9 5v9l-9 5-9-5V8z M3 8l9 5 9-5 M12 13v9'
+  };
+  function panelIcon(view) {
+    const icon=document.createElementNS('http://www.w3.org/2000/svg','svg');
+    icon.setAttribute('viewBox','0 0 24 24');icon.setAttribute('aria-hidden','true');icon.setAttribute('focusable','false');
+    const path=document.createElementNS(icon.namespaceURI,'path');path.setAttribute('d',panelIcons[view]);icon.append(path);return icon;
+  }
   const element = (tag, text, cls) => {
     const n = document.createElement(tag);
     if (text !== undefined) n.textContent = text;
@@ -45,7 +63,23 @@
     function compactFocused(){return compactMedia.matches&&!compactSplit;}
     let compactChoices={};try{compactChoices=JSON.parse(localStorage.getItem('schema-compact-panels-v1')||'{}');if(!compactChoices||typeof compactChoices!=='object')compactChoices={};}catch{}
     function compactId(){const all=leaves();return all.find(p=>p.id===compactChoices[state.active])?.id||all.find(p=>p.view==='stack')?.id||all[0]?.id;}
-    function applyCompact(){main.classList.toggle('workspace-compact',compactFocused());const active=compactId();for(const[id,{pane}]of bodies)pane.classList.toggle('compact-active',id===active);const picker=bar.querySelector('[aria-label="Studio panel"]');if(picker)picker.value=active;}
+    function applyCompact(){
+      main.classList.toggle('workspace-compact',compactFocused());
+      const active=compactId();
+      for(const[id,{pane}]of bodies)pane.classList.toggle('compact-active',id===active);
+      panelNav.hidden=!compactMedia.matches;
+      for(const button of panelNav.children){
+        const selected=button.dataset.targetPanel===active&&compactFocused();
+        button.setAttribute('aria-pressed',String(selected));
+        button.tabIndex=button.dataset.targetPanel===active?0:-1;
+      }
+      const selected=panelNav.querySelector('[aria-pressed="true"]');
+      if(selected&&!panelNav.hidden){
+        const item=selected.getBoundingClientRect(),row=panelNav.getBoundingClientRect();
+        if(item.left<row.left)panelNav.scrollLeft+=item.left-row.left;
+        else if(item.right>row.right)panelNav.scrollLeft+=item.right-row.right;
+      }
+    }
     function chooseCompact(id){compactChoices[state.active]=id;try{localStorage.setItem('schema-compact-panels-v1',JSON.stringify(compactChoices));}catch{}maximized=null;if(W.find(state,id)?.view==='stack')focus(id);applyMaximize();}
     compactMedia.addEventListener('change',()=>applyMaximize());
     function menuItems(details,summary){
@@ -57,6 +91,19 @@
     const bar = element('nav', undefined, 'workspace-tabs');
     bar.setAttribute('aria-label', 'Workspaces');
     main.before(bar);
+    const panelNav=element('nav',undefined,'mobile-panel-nav');
+    panelNav.setAttribute('aria-label','Studio panels');panelNav.hidden=true;
+    const footer=document.querySelector('body>footer');
+    if(footer)footer.after(panelNav);else main.after(panelNav);
+    panelNav.onkeydown=event=>{
+      if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;
+      const buttons=[...panelNav.children],current=buttons.indexOf(document.activeElement);
+      if(current<0)return;
+      event.preventDefault();
+      const index=event.key==='Home'?0:event.key==='End'?buttons.length-1:(current+(event.key==='ArrowRight'?1:-1)+buttons.length)%buttons.length;
+      buttons[index].click();panelNav.children[index]?.focus();
+    };
+
     main.classList.add('schema-workspace');
     function authoring() { return W.authoringRoot(); }
     function defaults() {
@@ -175,8 +222,7 @@
         workspaceMenuItems.append(b);
       }
       bar.append(add, menu);
-      const paneLabel=element('label',undefined,'compact-panel-label'),paneChoice=element('select');paneLabel.append(element('span','Panel'));paneChoice.setAttribute('aria-label','Studio panel');
-      const counts={};for(const p of leaves())counts[p.view]=(counts[p.view]||0)+1;const seen={};for(const p of leaves()){seen[p.view]=(seen[p.view]||0)+1;paneChoice.append(new Option(labels[p.view]+(counts[p.view]>1?' '+seen[p.view]:''),p.id));}paneChoice.value=compactId();paneChoice.onchange=()=>chooseCompact(paneChoice.value);paneLabel.append(paneChoice);bar.append(paneLabel);
+
 
       const hint = element(
         'span',
@@ -184,6 +230,25 @@
         'workspace-hint'
       );
       bar.append(hint);
+      panelNav.replaceChildren();
+      const counts={},seen={};
+      for(const panel of leaves())counts[panel.view]=(counts[panel.view]||0)+1;
+      for(const panel of leaves()){
+        const number=(seen[panel.view]||0)+1;seen[panel.view]=number;
+        const suffix=counts[panel.view]>1?' '+number:'',name=labels[panel.view]+suffix;
+        const button=element('button',undefined,'mobile-panel-button');
+        button.type='button';button.dataset.targetPanel=panel.id;button.dataset.view=panel.view;
+        button.setAttribute('aria-label',name);button.setAttribute('aria-controls','workspace-pane-'+panel.id);button.title=name;
+        button.append(panelIcon(panel.view),element('span',compactLabels[panel.view]+suffix));
+        button.onclick=()=>{
+          const wasSplit=compactSplit;compactSplit=false;
+          if(wasSplit)try{localStorage.setItem('schema-compact-split','0');}catch{}
+          chooseCompact(panel.id);
+          if(wasSplit)tabs();
+        };
+        panelNav.append(button);
+      }
+      applyCompact();
     }
     function rename() {
       const value = prompt('Workspace name', W.active(state).name);
@@ -268,6 +333,7 @@
           undefined,
           'workspace-panel' + (tree.view === 'stack' ? ' layer-viewport' : '')
         );
+        pane.id = 'workspace-pane-'+tree.id;
         pane.dataset.panel = tree.id;
         pane.dataset.view = tree.view;
         pane.dataset.layer = tree.context.layer ?? 0;
@@ -623,6 +689,7 @@
       destroy() {
         clearTimeout(timer);
         bar.remove();
+        panelNav.remove();
         Object.values(legacy).forEach((n) => main.append(n));
         stash.remove();
       }

@@ -147,17 +147,7 @@ async function wait(check) {
         s.project.fixtures[0].position[0] ===
         beforeArrange.project.fixtures[0].position[0],
     );
-    const picker = p.getByRole("combobox", {
-      name: "Studio panel",
-      exact: true,
-    });
-    await picker.selectOption(
-      await picker
-        .locator("option")
-        .filter({ hasText: "Fixture setup" })
-        .first()
-        .getAttribute("value"),
-    );
+    await p.getByRole('navigation',{name:'Studio panels',exact:true}).getByRole('button',{name:'Fixture setup',exact:true}).click();
     await p.locator('#stage [data-fixture="fixture-1"]').click({ force: true });
     const choose = p.getByRole("dialog", {
       name: "Choose fixture",
@@ -167,13 +157,7 @@ async function wait(check) {
       .getByLabel("Find overlapping fixture", { exact: true })
       .fill("Wash 02");
     await choose.getByRole("button", { name: /Wash 02/ }).click();
-    await picker.selectOption(
-      await picker
-        .locator("option")
-        .filter({ hasText: "Stack editor" })
-        .first()
-        .getAttribute("value"),
-    );
+    await p.getByRole('navigation',{name:'Studio panels',exact:true}).getByRole('button',{name:'Stack editor',exact:true}).click();
     await action("state shortcut", "State and shortcut help");
     assert(
       await p

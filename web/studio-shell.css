@@ -1,5 +1,4 @@
-.studio-action-compact,
-.compact-panel-label {
+.studio-action-compact {
   display: none;
 }
 .studio-more-menu {
@@ -206,26 +205,6 @@
   padding: 6px 8px;
   font-size: 12px;
 }
-.studio-compact .compact-panel-label {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  flex: 1;
-  min-width: 0;
-  font: 12px var(--ui-font);
-  color: var(--ui-muted);
-}
-.compact-panel-label > select {
-  min-width: 0;
-  flex: 1;
-  min-height: 36px;
-  font-size: 16px;
-  background: var(--ui-panel);
-  color: var(--ui-text);
-  border: 1px solid var(--ui-border);
-  border-radius: 6px;
-  padding: 5px;
-}
 .studio-app.studio-compact .schema-workspace {
   height: auto;
   min-height: 0;
@@ -402,11 +381,6 @@
   height: 44px;
   max-height: 44px;
 }
-.studio-compact .compact-panel-label {
-  height: 36px;
-  margin: 0;
-  padding: 0;
-}
 .studio-compact .workspace-top {
   height: auto;
   flex: none;
@@ -464,3 +438,14 @@
 .workspace-compact .panel-header > .panel-grip {
   display: none;
 }
+
+/* Mobile panel navigation occupies its own row, below the status strip. */
+.mobile-panel-nav{display:none}
+.mobile-panel-nav[hidden]{display:none!important}
+body.studio-app.studio-compact{grid-template-rows:auto auto minmax(0,1fr) auto auto}
+.studio-compact .mobile-panel-nav{position:relative;display:flex;gap:4px;align-items:stretch;min-width:0;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;scrollbar-width:thin;touch-action:pan-x;padding:4px max(6px,env(safe-area-inset-right)) max(4px,env(safe-area-inset-bottom)) max(6px,env(safe-area-inset-left));background:var(--ui-panel);border-top:1px solid var(--ui-border);box-sizing:border-box}
+.studio-compact .mobile-panel-button{position:relative;display:flex;flex:1 0 64px;min-width:64px;min-height:52px;box-sizing:border-box;align-items:center;justify-content:center;flex-direction:column;gap:3px;margin:0;padding:5px 6px;border:1px solid transparent;border-radius:7px;background:transparent;color:var(--ui-muted);font:10px/1.2 var(--ui-font);white-space:nowrap;cursor:pointer;touch-action:pan-x}
+.mobile-panel-button svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:none;pointer-events:none}
+.studio-compact .mobile-panel-button[aria-pressed="true"]{background:var(--ui-selected);color:var(--ui-accent);border-color:var(--ui-border-strong);box-shadow:inset 0 -2px var(--ui-accent)}
+.studio-compact .mobile-panel-button:focus-visible{outline:2px solid var(--ui-accent);outline-offset:-3px}
+@media(hover:hover){.studio-compact .mobile-panel-button:hover{background:var(--ui-hover);color:var(--ui-text)}}
