@@ -23,3 +23,9 @@ Old three-layer projects and enabled stacks remain compatible. Enabled is omitte
 In schémaboy, the layer control cycles through the actual fixture layer count. Hold/Shift with that control, or Help → Layers, opens selection, enable and add controls. The single-viewport layout is retained.
 
 Workspace limits are16 panels per workspace and12 named workspaces. Layout preferences are currently per browser, rather than a shared project layout or an OS window manager.
+
+## Fixture setup navigation
+
+The Fixture setup map supports dragging empty space to pan and scrolling to zoom around the pointer. On touch screens, drag empty space with one finger or pinch/pan with two. The **Pan** toggle lets a drag move the view even when it starts on a fixture; turn it off to place fixtures. Mouse middle/right drag also pans. The −/+ buttons zoom, **Fit** frames all authored fixture positions and **Reset** returns to the original top-down view. When the map has keyboard focus, arrows pan, +/− zoom, F fits and Home resets.
+
+The main setup camera is a per-browser preference restored on reload. Navigating, fitting and resetting do not edit the project or add undo entries. Dragging a fixture with Pan off still submits one undoable move, using world coordinates at the current pan/zoom and preserving height. Placement is no longer clamped to the old −10…+10 map. A two-finger gesture or pointer cancellation cancels an unfinished fixture drag rather than committing it. On overlapping handles, touch picking opens on lift, allowing a second finger to start navigation first. Animated positions remain separate from authored selection handles. The grid and coordinate readout follow the view.

@@ -41,6 +41,10 @@ jobs:
         run: PLAYWRIGHT_MODULE="$RUNNER_TEMP/schema-browser-tests/node_modules/playwright" node tests/commands-shortcuts-browser.cjs
       - name: Test daily dimming time simulation
         run: PLAYWRIGHT_MODULE="$RUNNER_TEMP/schema-browser-tests/node_modules/playwright" node tests/dimming-simulation-browser.cjs
+      - name: Fixture setup navigation math
+        run: node --test tests/stage-navigation.test.cjs
+      - name: Fixture setup navigation gestures
+        run: PLAYWRIGHT_MODULE="$RUNNER_TEMP/schema-browser-tests/node_modules/playwright" node tests/stage-navigation-browser.cjs
       - name: Mobile panel navigation
         run: PLAYWRIGHT_MODULE="$RUNNER_TEMP/schema-browser-tests/node_modules/playwright" node tests/mobile-panel-nav-browser.cjs
       - name: System logs view
