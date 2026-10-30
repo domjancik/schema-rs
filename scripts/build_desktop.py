@@ -2,7 +2,7 @@
 import argparse,hashlib,json,pathlib,subprocess,sys,tomllib,zipfile
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 ARCHIVE='Schema-s-Windows-x64.zip'
-LAUNCHER='@echo off\r\ntitle Schema-s Engine\r\n"%~dp0schema-rs.exe" desktop %*\r\nif errorlevel 1 pause\r\n'
+LAUNCHER='@echo off\r\nchcp 65001 >nul\r\ntitle Schéma-s Engine\r\n"%~dp0schema-rs.exe" desktop %*\r\nif errorlevel 1 pause\r\n'
 
 def package(binary,output,version,commit,notices):
     binary,output,notices=map(pathlib.Path,(binary,output,notices))

@@ -26,7 +26,7 @@ jobs:
           VERSION=$(python3 -c 'import tomllib; print(next(p["version"] for p in tomllib.load(open("Cargo.lock","rb"))["package"] if p["name"]=="wasm-bindgen"))')
           cargo install wasm-bindgen-cli --locked --version "$VERSION"
       - run: python3 scripts/build_browser.py --source-ref HEAD
-      - run: python3 tests/browser_package_test.py && python3 tests/public_release_test.py
+      - run: python3 tests/branding_test.py && python3 tests/desktop_package_test.py && python3 tests/macos_package_test.py && python3 tests/browser_package_test.py && python3 tests/public_release_test.py
       - name: Install browser test runtime
         run: |
           npm install --prefix "$RUNNER_TEMP/schema-browser-tests" playwright@1.62.1

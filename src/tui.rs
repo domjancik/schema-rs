@@ -265,7 +265,7 @@ pub fn run(address: &str, token: Option<&str>) -> Result<()> {
         let (width, height) = terminal::size().unwrap_or((120, 40));
         let mut screen = Vec::new();
         screen.push(format!(
-            "SCHEMA / RUST   {}   {}   frame {}   {:0.2}s   rev {}",
+            "SCHÉMA / RUST   {}   {}   frame {}   {:0.2}s   rev {}",
             if scene { "SCENE" } else { "STACK" },
             published.project.name,
             published.snapshot.frame,

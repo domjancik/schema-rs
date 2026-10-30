@@ -23,7 +23,7 @@
   "units": "metres",
   "up": "Y",
   "front": "-Z",
-  "transform": "Already transformed from sourceBlender[X,Y,Z] to Schema[X,Z,Y], winding reversed and normals regenerated. No further axis swap, reflection, recentering or rescaling.",
+  "transform": "Already transformed from sourceBlender[X,Y,Z] to Schéma[X,Z,Y], winding reversed and normals regenerated. No further axis swap, reflection, recentering or rescaling.",
   "source_blend": "Carpushit_lighting_v15.blend",
   "source_blend_sha256": "7274bfb85ef2accdcc978916a4aea7a4864ce29ef8e809177293794618568d5a",
   "source_frame": 57,

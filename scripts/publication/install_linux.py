@@ -52,7 +52,7 @@ def install(package,root,port,bind,staging=False,start=True):
     atomic(launcher,script,0o755)
     service=f'''{MARKER}
 [Unit]
-Description=Schema-s lighting engine and web controls
+Description=Schéma-s lighting engine and web controls
 After=network.target
 [Service]
 Type=simple

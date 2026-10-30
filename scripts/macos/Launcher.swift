@@ -37,7 +37,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         let login = NSMenuItem(title: "Start at Login…", action: #selector(loginHelp), keyEquivalent: "")
         login.target = self; menu.addItem(login)
         menu.addItem(.separator())
-        let quit = NSMenuItem(title: "Quit Schema-s", action: #selector(quitApp), keyEquivalent: "q")
+        let quit = NSMenuItem(title: "Quit Schéma-s", action: #selector(quitApp), keyEquivalent: "q")
         quit.target = self; menu.addItem(quit); statusItem.menu = menu
         NSApp.setActivationPolicy(.accessory)
         activity = ProcessInfo.processInfo.beginActivity(options: [.userInitiated, .latencyCritical], reason: "Run Schéma lighting engine")
@@ -76,8 +76,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     @objc func openStudio() { if ready { NSWorkspace.shared.open(studio) } }
     @objc func openDownloads() { NSWorkspace.shared.open(URL(string: "https://schema-s.vercel.app/#download")!) }
     @objc func loginHelp() {
-        let alert = NSAlert(); alert.messageText = "Start Schema-s at login"
-        alert.informativeText = "Add Schema-s.app in System Settings → General → Login Items. The app remains in the menu bar; Quit stops its engine and saves the session. For a headless service, see the included macOS guide."
+        let alert = NSAlert(); alert.messageText = "Start Schéma-s at login"
+        alert.informativeText = "Add Schéma-s in System Settings → General → Login Items. The app remains in the menu bar; Quit stops its engine and saves the session. For a headless service, see the included macOS guide."
         alert.runModal()
     }
     @objc func quitApp() { NSApp.terminate(nil) }
@@ -91,7 +91,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool { openStudio(); return false }
     func fail(_ message: String) {
-        let alert = NSAlert(); alert.messageText = "Schema-s could not run"; alert.informativeText = message; alert.runModal()
+        let alert = NSAlert(); alert.messageText = "Schéma-s could not run"; alert.informativeText = message; alert.runModal()
         quitting = false; NSApp.terminate(nil)
     }
 }

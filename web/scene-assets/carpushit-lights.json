@@ -2,7 +2,7 @@
   "version": 1,
   "name": "Carpushit / assembly preview sources",
   "geometry": "carpushit-preview.glb",
-  "coordinates": "Schema metres; X lateral, Y up, front -Z; GLB already transformed",
+  "coordinates": "Schéma metres; X lateral, Y up, front -Z; GLB already transformed",
   "fixture_project": "../carpushit.project.json",
   "sources": [
     {
