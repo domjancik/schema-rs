@@ -208,7 +208,15 @@ class PortalHandler(http.server.BaseHTTPRequestHandler):
         if length < 0:
             self.respond(400, 'Invalid content length')
             return None
-        if length > MAX_BODY:
+        limit = MAX_BODY
+        if (self.command == 'POST'
+                and urllib.parse.urlsplit(self.path).path == '/api/projects/bundle'
+                and self.headers.get_content_type() == 'application/json'
+                and self.host()
+                and self.headers.get('Origin') == 'http://' + self.host()
+                and self.authenticated()):
+            limit = 64 * 1024 * 1024
+        if length > limit:
             self.respond(413, 'Request is too large')
             return None
         return length

@@ -234,6 +234,9 @@ impl Services {
                         let frame = controller.current();
                         let names = controller.current_plugins().resource_names(&frame.project);
                         for name in names {
+                            if frame.resources.contains_key(&name) {
+                                continue;
+                            }
                             let path = resource_path(&root, &name);
                             let exists = path.as_ref().is_ok_and(|p| p.is_file());
                             if files.get(&name) != Some(&exists) {

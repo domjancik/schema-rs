@@ -5,6 +5,8 @@ pub type Result<T> = std::result::Result<T, String>;
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
 #[serde(deny_unknown_fields)]
 pub struct Node {
+    #[serde(default, skip_serializing_if = "std::ops::Not::not")]
+    pub bypassed: bool,
     pub id: u64,
     pub behavior: String,
     #[serde(default)]
@@ -257,8 +259,17 @@ pub struct FixtureSnapshot {
     pub layers: Vec<Bank>,
     pub nodes: BTreeMap<String, Bank>,
 }
+#[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(deny_unknown_fields)]
+pub struct DebugFocus {
+    pub fixture: String,
+    pub layer: usize,
+    pub node: u64,
+}
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 pub struct Snapshot {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub debug_focus: Option<DebugFocus>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub channel_test: Option<crate::dmx_test::Status>,
     #[serde(default)]

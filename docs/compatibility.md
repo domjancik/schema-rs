@@ -47,3 +47,7 @@ The optional WASM browser host uses the same evaluator, ScenicScript parser, nat
 ## Saved host selection
 
 The client supports saved HTTP(S) host origins, direct Studio/schémaboy links and QR generation/reading. Opening a host uses its own UI and login in a separate browser/app window. There is no remote engine adapter or native/browser network discovery in this addition. Saved hosts are scoped to the app origin/profile; credentials are excluded. Camera QR input requires a secure context; image/manual pairing is available without camera access. App reload/update preserves the browser session and history; native engine upgrades remain a host operation. See [servers.md](servers.md).
+
+## Authoring state additions
+
+Nodes optionally carry `bypassed: true`, also preserved in ScenicScript. Sessions optionally include named authored checkpoints and embedded portable resources. These fields are omitted when empty/default. Older engines reject projects/sessions that use these additions; update the target engine before transferring them. A rollback must retain the compatible engine if the older binary cannot validate its saved session. Portable bundles use their own versioned format and are imported through the project API rather than decoded as ordinary projects. See [authoring tools](authoring.md).

@@ -10,6 +10,8 @@ pub struct Published {
     pub(crate) host: Arc<crate::inputs::Inputs>,
     #[serde(skip)]
     pub plugins: Arc<crate::plugins::Registry>,
+    #[serde(skip)]
+    pub resources: Arc<std::collections::BTreeMap<String, Vec<u8>>>,
     pub project: Project,
     pub snapshot: Snapshot,
 }
@@ -18,6 +20,7 @@ impl Published {
         Self {
             host: engine.host(),
             plugins: engine.plugins(),
+            resources: engine.resources(),
             project: engine.project().clone(),
             snapshot: engine.current_snapshot(),
         }
@@ -86,6 +89,23 @@ impl EngineSession {
             engine: Engine::from_session(session)?,
             action_diagnostics: Vec::new(),
         })
+    }
+    pub fn history(&self) -> serde_json::Value {
+        crate::history::view(&self.engine.checkpoint())
+    }
+    pub fn bundle(&self) -> crate::bundle::Bundle {
+        crate::bundle::Bundle::from_session(&self.engine.checkpoint())
+    }
+    pub fn import_bundle(
+        &mut self,
+        bundle: crate::bundle::Bundle,
+        expected: Option<u64>,
+    ) -> Result<u64> {
+        if expected.is_some_and(|r| r != self.engine.revision()) {
+            return Err("Revision conflict: refresh state before editing".into());
+        }
+        let prepared = Engine::prepare_bundle(self.engine.checkpoint(), bundle)?;
+        self.engine.install_bundle(prepared)
     }
     pub fn catalog(&self) -> Vec<serde_json::Value> {
         let mut rows = crate::scenic::catalog()

@@ -8,6 +8,27 @@ use std::{
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(tag = "type", rename_all = "snake_case", deny_unknown_fields)]
 pub enum Command {
+    SetNodeBypassed {
+        fixture: String,
+        layer: usize,
+        node: u64,
+        bypassed: bool,
+    },
+    SetDebugFocus {
+        target: Option<DebugFocus>,
+    },
+    HistoryJump {
+        offset: i32,
+    },
+    SaveCheckpoint {
+        name: String,
+    },
+    RemoveCheckpoint {
+        name: String,
+    },
+    RestoreCheckpoint {
+        name: String,
+    },
     ReplaceProject {
         project: Box<Project>,
     },
@@ -205,6 +226,11 @@ pub struct PreparedPluginUpdate {
     undo_scripts: Vec<HashMap<String, rhai::AST>>,
     redo_scripts: Vec<HashMap<String, rhai::AST>>,
 }
+pub struct PreparedBundle {
+    engine: Engine,
+    revision: u64,
+    generation: u64,
+}
 pub struct Engine {
     plugins: Arc<crate::plugins::Registry>,
     inputs: std::sync::Arc<crate::inputs::Inputs>,
@@ -217,6 +243,9 @@ pub struct Engine {
     paused: bool,
     blackout: bool,
     last: Snapshot,
+    debug_focus: Option<DebugFocus>,
+    checkpoints: BTreeMap<String, Arc<Project>>,
+    resources: Arc<BTreeMap<String, Vec<u8>>>,
     nodes: HashMap<String, NodeState>,
     scripts: HashMap<String, rhai::AST>,
     script_engine: rhai::Engine,
@@ -238,6 +267,9 @@ impl Engine {
             paused: false,
             blackout: false,
             last: Snapshot::default(),
+            debug_focus: None,
+            checkpoints: BTreeMap::new(),
+            resources: Arc::new(BTreeMap::new()),
             nodes: HashMap::new(),
             scripts,
             script_engine,
@@ -277,6 +309,10 @@ impl Engine {
             session.project.validate()?;
             let script_engine = script_engine();
             let scripts = compile_scripts(&session.project, &script_engine)?;
+            for project in session.checkpoints.values() {
+                project.validate()?;
+                compile_scripts(project, &script_engine)?;
+            }
             let mut undo_scripts = Vec::new();
             let mut redo_scripts = Vec::new();
             for p in &session.undo {
@@ -407,6 +443,7 @@ impl Engine {
         snapshot.frame = self.frame;
         snapshot.paused = self.paused;
         snapshot.blackout = self.blackout;
+        snapshot.debug_focus = self.debug_focus.clone();
         snapshot.can_undo = !self.undo.is_empty();
         snapshot.can_redo = !self.redo.is_empty();
         snapshot
@@ -416,6 +453,8 @@ impl Engine {
         crate::session::Session {
             inputs: self.inputs.clone(),
             plugins: self.plugins.clone(),
+            checkpoints: self.checkpoints.clone(),
+            resources: self.resources.clone(),
             version: 1,
             project: Arc::new(self.project.clone()),
             snapshot,
@@ -445,12 +484,53 @@ impl Engine {
         engine.revision = session.snapshot.revision;
         engine.paused = session.snapshot.paused;
         engine.blackout = session.snapshot.blackout;
+        engine.resources = session.resources;
+        engine.checkpoints = session.checkpoints;
         engine.last = session.snapshot;
+        engine.last.debug_focus = None;
         engine.nodes = session.states;
         engine.inputs = session.inputs;
         engine.last.can_undo = !engine.undo.is_empty();
         engine.last.can_redo = !engine.redo.is_empty();
         Ok(engine)
+    }
+    pub fn prepare_bundle(
+        session: crate::session::Session,
+        bundle: crate::bundle::Bundle,
+    ) -> Result<PreparedBundle> {
+        let revision = session.snapshot.revision;
+        let generation = session.plugins.state.generation;
+        Ok(PreparedBundle {
+            engine: Self::from_session(bundle.prepare(session)?)?,
+            revision,
+            generation,
+        })
+    }
+    pub fn install_bundle(&mut self, mut prepared: PreparedBundle) -> Result<u64> {
+        if self.revision != prepared.revision
+            || self.plugins.state.generation != prepared.generation
+        {
+            return Err("Revision conflict during bundle import".into());
+        }
+        let mut inputs = (*self.inputs).clone();
+        crate::bundle::merge_assets(
+            &mut inputs,
+            &crate::bundle::Assets::from_inputs(&prepared.engine.inputs),
+        )?;
+        for name in prepared.engine.resources.keys() {
+            inputs.files.insert(name.clone(), true);
+        }
+        inputs.validate()?;
+        prepared.engine.inputs = Arc::new(inputs);
+        prepared.engine.time = self.time;
+        prepared.engine.frame = self.frame;
+        prepared.engine.paused = self.paused;
+        prepared.engine.blackout = self.blackout;
+        *self = prepared.engine;
+        Ok(self.revision)
+    }
+    pub fn resources(&self) -> Arc<BTreeMap<String, Vec<u8>>> {
+        self.resources.clone()
     }
     pub fn project(&self) -> &Project {
         &self.project
@@ -466,6 +546,86 @@ impl Engine {
     }
     fn apply_inner(&mut self, command: Command) -> Result<()> {
         match command {
+            Command::SetDebugFocus { target } => {
+                if let Some(t) = &target {
+                    if t.fixture == "__director" {
+                        return Err("Debug output requires a fixture".into());
+                    }
+                    debug_node(&self.project, t).ok_or("Node does not exist")?;
+                }
+                self.debug_focus = target;
+                return Ok(());
+            }
+            Command::HistoryJump { offset } => {
+                let count = offset.unsigned_abs() as usize;
+                if count
+                    > if offset < 0 {
+                        self.undo.len()
+                    } else {
+                        self.redo.len()
+                    }
+                {
+                    return Err("History entry is no longer available".into());
+                }
+                if count == 0 {
+                    return Ok(());
+                }
+                let (from, to) = if offset < 0 {
+                    (&mut self.undo, &mut self.redo)
+                } else {
+                    (&mut self.redo, &mut self.undo)
+                };
+                let mut span = from.split_off(from.len() - count);
+                let (project, scripts) = span.remove(0);
+                to.push((
+                    Arc::new(std::mem::replace(
+                        &mut self.project,
+                        Arc::unwrap_or_clone(project),
+                    )),
+                    self.scripts.clone(),
+                ));
+                to.extend(span.into_iter().rev());
+                self.scripts = scripts;
+                self.nodes.clear();
+                self.debug_focus = self
+                    .debug_focus
+                    .take()
+                    .filter(|t| debug_node(&self.project, t).is_some());
+                self.revision += 1;
+                return Ok(());
+            }
+            Command::SaveCheckpoint { name } => {
+                crate::session::validate_checkpoint_name(&name)?;
+                if self.checkpoints.contains_key(&name) {
+                    return Err("A checkpoint with this name already exists".into());
+                }
+                if self.checkpoints.len() >= 32 {
+                    return Err("At most 32 named checkpoints".into());
+                }
+                let mut project = self.project.clone();
+                project.output.enabled = false;
+                self.checkpoints.insert(name, Arc::new(project));
+                self.revision += 1;
+                return Ok(());
+            }
+            Command::RemoveCheckpoint { name } => {
+                self.checkpoints
+                    .remove(&name)
+                    .ok_or("Checkpoint not found")?;
+                self.revision += 1;
+                return Ok(());
+            }
+            Command::RestoreCheckpoint { name } => {
+                let project = self
+                    .checkpoints
+                    .get(&name)
+                    .ok_or("Checkpoint not found")?
+                    .as_ref()
+                    .clone();
+                return self.apply_inner(Command::ReplaceProject {
+                    project: Box::new(project),
+                });
+            }
             Command::PreparedInput { event } => {
                 std::sync::Arc::make_mut(&mut self.inputs).apply(event.0, self.frame + 1)?;
                 return Ok(());
@@ -494,6 +654,10 @@ impl Engine {
                 ));
                 self.scripts = scripts;
                 self.nodes.clear();
+                self.debug_focus = self
+                    .debug_focus
+                    .take()
+                    .filter(|t| debug_node(&self.project, t).is_some());
                 self.revision += 1;
                 return Ok(());
             }
@@ -508,6 +672,10 @@ impl Engine {
                 ));
                 self.scripts = scripts;
                 self.nodes.clear();
+                self.debug_focus = self
+                    .debug_focus
+                    .take()
+                    .filter(|t| debug_node(&self.project, t).is_some());
                 self.revision += 1;
                 return Ok(());
             }
@@ -660,6 +828,10 @@ impl Engine {
         if record_history {
             self.redo.clear();
         }
+        self.debug_focus = self
+            .debug_focus
+            .take()
+            .filter(|t| debug_node(&draft, t).is_some());
         self.project = draft;
         self.scripts = scripts;
         self.revision += 1;
@@ -720,6 +892,7 @@ impl Engine {
         lighting: &crate::lighting::Frame,
     ) -> Snapshot {
         let mut snap = Snapshot {
+            debug_focus: self.debug_focus.clone(),
             frame: self.frame,
             revision: self.revision,
             plugin_generation: self.plugins.state.generation,
@@ -799,7 +972,11 @@ impl Engine {
             }
             for bank in &results {
                 snap.actions.extend(bank.actions.clone());
-                for emitter in &bank.emitters {
+                for emitter in bank.emitters.iter().filter(|_| {
+                    self.debug_focus
+                        .as_ref()
+                        .is_none_or(|t| t.fixture != fixture.id)
+                }) {
                     if snap.emitters.len() < 1024
                         && !snap.emitters.iter().any(|e| {
                             e.fixture == emitter.fixture
@@ -812,7 +989,35 @@ impl Engine {
                 }
             }
             live_layers.insert(fixture.id.clone(), results.clone());
-            let result = results[0].clone();
+            let result = if let Some(t) = self
+                .debug_focus
+                .as_ref()
+                .filter(|t| t.fixture == fixture.id)
+            {
+                trace
+                    .get(&format!("{}/{}", t.layer, t.node))
+                    .cloned()
+                    .unwrap_or_default()
+            } else {
+                results[0].clone()
+            };
+            if self
+                .debug_focus
+                .as_ref()
+                .is_some_and(|t| t.fixture == fixture.id)
+            {
+                for emitter in &result.emitters {
+                    if snap.emitters.len() < 1024
+                        && !snap.emitters.iter().any(|e| {
+                            e.fixture == emitter.fixture
+                                && e.layer == emitter.layer
+                                && e.node == emitter.node
+                        })
+                    {
+                        snap.emitters.push(emitter.clone());
+                    }
+                }
+            }
             live_positions.insert(
                 fixture.id.clone(),
                 result.position.unwrap_or(fixture.position),
@@ -972,6 +1177,12 @@ fn edit(p: &mut Project, c: Command, depth: usize) -> Result<()> {
         return Err("Command nesting exceeds limit".into());
     }
     match c {
+        Command::SetNodeBypassed {
+            fixture,
+            layer,
+            node,
+            bypassed,
+        } => target(p, &fixture, layer, node)?.bypassed = bypassed,
         Command::ReplaceProject { project } => {
             if depth != 0 {
                 return Err("Project replacement must be a standalone command".into());
@@ -1372,6 +1583,13 @@ fn evaluate(n: &Node, c: &mut Context<'_>) -> Bank {
     c.budget -= 1;
     let inputs: Vec<_> = n.children.iter().map(|n| evaluate(n, c)).collect();
     let mut bank = inputs.iter().cloned().fold(Bank::default(), Bank::merge);
+    if n.bypassed {
+        if !c.prefix.contains("@plugin/") {
+            c.trace
+                .insert(format!("{}/{}", c.layer, n.id), bank.clone());
+        }
+        return bank;
+    }
     match crate::native::specs()
         .get(&n.behavior)
         .map(|s| s.basis.as_str())
@@ -2110,4 +2328,13 @@ pub fn encode_fixture(f: &Fixture, b: &Bank, blackout: bool) -> Vec<u8> {
         }
     }
     result
+}
+
+fn debug_node<'a>(p: &'a Project, t: &DebugFocus) -> Option<&'a Node> {
+    p.content
+        .get(&t.fixture)?
+        .get(t.layer)?
+        .as_ref()?
+        .root
+        .find(t.node)
 }

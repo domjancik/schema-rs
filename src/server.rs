@@ -23,6 +23,10 @@ use std::{
 };
 
 enum RequestMessage {
+    Bundle(
+        Box<crate::engine::PreparedBundle>,
+        tokio::sync::oneshot::Sender<Result<u64>>,
+    ),
     Edit(Box<Message>),
     Plugins(
         Box<crate::engine::PreparedPluginUpdate>,
@@ -104,6 +108,27 @@ impl Controller {
             .map_err(|e| e.to_string())??;
         Ok(revision)
     }
+    pub async fn import_bundle(
+        &self,
+        bundle: crate::bundle::Bundle,
+        expected: Option<u64>,
+    ) -> Result<u64> {
+        let session = self.checkpoint().await?;
+        if expected.is_some_and(|r| r != session.snapshot.revision) {
+            return Err("Revision conflict: refresh state before editing".into());
+        }
+        let prepared = tokio::task::spawn_blocking(move || Engine::prepare_bundle(session, bundle))
+            .await
+            .map_err(|e| e.to_string())??;
+        let (tx, rx) = tokio::sync::oneshot::channel();
+        self.commands
+            .try_send(RequestMessage::Bundle(Box::new(prepared), tx))
+            .map_err(|_| "Engine command queue is full")?;
+        tokio::time::timeout(Duration::from_secs(3), rx)
+            .await
+            .map_err(|_| "Bundle commit timed out")?
+            .map_err(|_| "Engine stopped")?
+    }
     pub async fn command(&self, command: Command, expected: Option<u64>) -> Result<u64> {
         self.dispatch(command, expected, true).await
     }
@@ -114,6 +139,18 @@ impl Controller {
         history: bool,
     ) -> Result<u64> {
         let frame = self.current();
+        if let Command::RestoreCheckpoint { name } = &command {
+            let session = self.checkpoint().await?;
+            let project = session
+                .checkpoints
+                .get(name)
+                .ok_or("Checkpoint not found")?
+                .as_ref()
+                .clone();
+            command = Command::ReplaceProject {
+                project: Box::new(project),
+            };
+        }
         if let Command::Input { event } = &command {
             let event = event.clone();
             let plugins = frame.plugins.clone();
@@ -136,6 +173,10 @@ impl Controller {
         let prepared = if matches!(
             command,
             Command::Undo
+                | Command::HistoryJump { .. }
+                | Command::SaveCheckpoint { .. }
+                | Command::RemoveCheckpoint { .. }
+                | Command::SetDebugFocus { .. }
                 | Command::Redo
                 | Command::Pause { .. }
                 | Command::Blackout { .. }
@@ -210,6 +251,7 @@ impl Runtime {
         let latest_session = Arc::new(RwLock::new(Arc::new(engine.checkpoint())));
         let published = Arc::new(RwLock::new(Arc::new(Published {
             host: engine.host(),
+            resources: engine.resources(),
             plugins: engine.plugins(),
             project: engine.project().clone(),
             snapshot: engine.snapshot(),
@@ -248,6 +290,15 @@ impl Runtime {
                     for _ in 0..4 {
                         let Ok(request) = rx.try_recv() else { break };
                         let message = match request {
+                            RequestMessage::Bundle(prepared, reply) => {
+                                let result = if updating {
+                                    Err("Engine updating; retry shortly".into())
+                                } else {
+                                    engine.install_bundle(*prepared)
+                                };
+                                replies.push((reply, result));
+                                continue;
+                            }
                             RequestMessage::Checkpoint(reply) => {
                                 checkpoint_replies.push(reply);
                                 continue;
@@ -289,6 +340,7 @@ impl Runtime {
                         .clone();
                     let next = Arc::new(Published {
                         host: engine.host(),
+                        resources: engine.resources(),
                         plugins: engine.plugins(),
                         project: engine.project().clone(),
                         snapshot,
@@ -983,6 +1035,8 @@ pub fn router(state: AppState) -> Router {
         .route("/api/plugins/reload",post(plugin_reload))
         .route("/api/plugins/unload",post(plugin_unload))
         .route("/api/plugins/watch",post(plugin_watch))
+        .route("/api/history", get(history_get))
+        .route("/api/projects/bundle", get(bundle_get).post(bundle_import).layer(DefaultBodyLimit::max(64*1024*1024)))
         .route("/api/session", get(session_get))
         .route("/api/session/save", post(session_save))
         .route("/api/session/status", get(session_status))
@@ -1324,4 +1378,39 @@ mod pin_access_tests {
         assert!(attempts.peers.is_empty());
         assert!(attempts.global.is_empty());
     }
+}
+
+async fn history_get(State(state): State<AppState>) -> ApiResult<Json<serde_json::Value>> {
+    Ok(Json(crate::history::view(
+        &state.controller.checkpoint().await?,
+    )))
+}
+async fn bundle_get(State(state): State<AppState>) -> ApiResult<Json<crate::bundle::Bundle>> {
+    let session = state.controller.checkpoint().await?;
+    let root = state.root;
+    Ok(Json(
+        tokio::task::spawn_blocking(move || {
+            let mut bundle = crate::bundle::Bundle::from_session(&session);
+            bundle.collect(&root)?;
+            Ok::<_, String>(bundle)
+        })
+        .await
+        .map_err(|e| ApiError(e.to_string()))??,
+    ))
+}
+#[derive(serde::Deserialize)]
+#[serde(deny_unknown_fields)]
+struct BundleImport {
+    bundle: crate::bundle::Bundle,
+    expected_revision: u64,
+}
+async fn bundle_import(
+    State(state): State<AppState>,
+    Json(body): Json<BundleImport>,
+) -> ApiResult<Json<serde_json::Value>> {
+    let revision = state
+        .controller
+        .import_bundle(body.bundle, Some(body.expected_revision))
+        .await?;
+    Ok(Json(serde_json::json!({"revision":revision})))
 }

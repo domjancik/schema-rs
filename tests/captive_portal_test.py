@@ -12,6 +12,7 @@ class PortalTests(unittest.TestCase):
    def do_GET(s):s.respond()
    def do_POST(s):s.respond()
    def respond(s):
+    if s.command=='POST':s.rfile.read(int(s.headers.get('Content-Length','0')))
     data=json.dumps({'path':s.path,'token':s.headers.get('x-schema-token'),'origin':s.headers.get('origin'),'cookie':s.headers.get('cookie')}).encode();s.send_response(200);s.send_header('Content-Length',len(data));s.end_headers();s.wfile.write(data)
    def log_message(*a):pass
   self.backend=http.server.ThreadingHTTPServer(('127.0.0.1',0),Backend);threading.Thread(target=self.backend.serve_forever,daemon=True).start()
@@ -48,6 +49,14 @@ class PortalTests(unittest.TestCase):
   self.assertEqual(self.request('POST','/login',urllib.parse.urlencode({'nonce':'☃','pin':'064219'}),{'Origin':self.origin,'Content-Type':'application/x-www-form-urlencoded','Cookie':'schema_login=ascii'})[0],403)
   nonce,cookie=self.challenge()
   self.assertEqual(self.request('POST','/login',urllib.parse.urlencode([('nonce',nonce),('pin','064219'),('pin','999999')]),{'Cookie':cookie,'Origin':self.origin,'Content-Type':'application/x-www-form-urlencoded'})[0],400)
+ def test_large_bundles_require_authenticated_scoped_same_origin_upload(self):
+  _,headers,_=self.login();cookie=headers['Set-Cookie'].split(';')[0]
+  payload=b' '*(self.module.MAX_BODY+1)
+  allowed={'Cookie':cookie,'Origin':self.origin,'Content-Type':'application/json'}
+  self.assertEqual(self.request('POST','/api/projects/bundle',payload,allowed)[0],200)
+  self.assertEqual(self.request('POST','/api/command',b'',{**allowed,'Content-Length':str(len(payload))})[0],413)
+  self.assertEqual(self.request('POST','/api/projects/bundle',b'',{'Origin':self.origin,'Content-Type':'application/json','Content-Length':str(len(payload))})[0],413)
+  self.assertEqual(self.request('POST','/api/projects/bundle',b'',{**allowed,'Origin':'http://other.local','Content-Length':str(len(payload))})[0],413)
  def test_expired_session_and_backend_failure(self):
   code,h,_=self.login();cookie=h['Set-Cookie'].split(';')[0];token=cookie.split('=',1)[1]
   with self.server.auth.lock:self.server.auth.sessions[token]=('127.0.0.1',time.monotonic()-1)

@@ -176,6 +176,7 @@ pub fn defaults(key: &str) -> Result<BTreeMap<String, Value>> {
 }
 pub fn new_node(key: &str, id: u64) -> Result<Node> {
     Ok(Node {
+        bypassed: false,
         id,
         behavior: key.into(),
         properties: defaults(key)?,
@@ -235,6 +236,10 @@ fn parse_node(v: &Value, next: &mut u64, depth: usize, parent: Option<&str>) -> 
     }
     let fields = fields.as_object().ok_or("Block fields must be a map")?;
     for (k, v) in fields {
+        if k == "bypassed" {
+            node.bypassed = v.as_bool().ok_or("bypassed must be boolean")?;
+            continue;
+        }
         if k == "in" {
             for child in v.as_array().ok_or("in must be an ordered sequence")? {
                 node.children
@@ -456,6 +461,9 @@ pub fn color(text: &str) -> Result<[f64; 4]> {
 pub fn encode(stack: &Stack) -> Result<String> {
     fn node(n: &Node) -> Value {
         let mut fields = serde_json::Map::new();
+        if n.bypassed {
+            fields.insert("bypassed".into(), json!(true));
+        }
         for (k, v) in &n.properties {
             fields.insert(k.clone(), v.clone());
         }

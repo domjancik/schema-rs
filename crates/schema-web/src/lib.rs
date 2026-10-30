@@ -42,6 +42,15 @@ impl BrowserEngine {
             return Err(error("Expected revision must be an unsigned integer"));
         }
         let value = match path {
+            "/api/history" => self.session.history(),
+            "/api/projects/bundle" => {
+                if body.is_null() {
+                    serde_json::to_value(self.session.bundle()).map_err(error)?
+                } else {
+                    let bundle = serde_json::from_value(body["bundle"].clone()).map_err(error)?;
+                    json!({"revision":self.session.import_bundle(bundle,expected).map_err(error)?})
+                }
+            }
             "/api/state" => serde_json::to_value(self.session.publication()).map_err(error)?,
             "/api/catalog" => json!(self.session.catalog()),
             "/api/command" => {

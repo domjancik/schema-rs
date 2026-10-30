@@ -54,3 +54,7 @@ Normal `GET /api/state` responses do not include history or private runtime stat
 `tests/session_history.rs` covers undo/redo round trips, branching after undo, seeded runtime continuation, coherent API capture, invalid-version/history/runtime rejection, invalid-save protection, repeated atomic replacement, shutdown flushing, valid deep programs and disarmed recovery across history.
 
 `node tests/session-restart.cjs` starts an isolated capture-only process, makes edits and undo, flushes, terminates the process and starts it again using only its project path. It verifies exact authored recovery, redo/undo ordering, clock continuity and Save project flushing. It never edits the live studio. `SCHEMA_BINARY` selects a built executable; the default is `target/debug/schema-rs.exe`.
+
+## Browsing and named checkpoints
+
+Commands → History and checkpoints exposes the shared retained timeline and atomically jumps to an offset using an expected revision. Named authored checkpoints are separate from the runtime recovery checkpoint described above. Up to 32 names survive restart; restore creates one undoable project replacement with physical output disabled. Embedded resources and graph packages remain available for current and historical projects. Debug output focus is transient and never resumes from a saved session. See [authoring tools](authoring.md).

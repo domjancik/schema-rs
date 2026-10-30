@@ -86,7 +86,7 @@ async function request(path,body){
   }
   const decoded=path.startsWith('/api/export/')?decodeURIComponent(path):path;
   const result=engine.request(decoded,JSON.stringify(body??null));
-  if(['/api/command','/api/import'].includes(path)){await persist();}
+  if(['/api/command','/api/import','/api/projects/bundle'].includes(path)){await persist();}
   return path.startsWith('/api/export/')?result:JSON.parse(result);
 }
 function storageRequired(){if(!storage)throw Error('This embedded engine has no persistence adapter. Use an editor workspace or export its session.');return storage;}

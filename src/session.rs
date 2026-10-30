@@ -12,6 +12,10 @@ pub struct Session {
     pub plugins: Arc<crate::plugins::Registry>,
     #[serde(default)]
     pub inputs: std::sync::Arc<crate::inputs::Inputs>,
+    #[serde(default, skip_serializing_if = "std::collections::BTreeMap::is_empty")]
+    pub resources: Arc<std::collections::BTreeMap<String, Vec<u8>>>,
+    #[serde(default, skip_serializing_if = "std::collections::BTreeMap::is_empty")]
+    pub checkpoints: std::collections::BTreeMap<String, Arc<Project>>,
     pub version: u32,
     pub project: Arc<Project>,
     pub snapshot: Snapshot,
@@ -22,7 +26,12 @@ pub struct Session {
 impl Session {
     pub fn disarm_output(&mut self) {
         Arc::make_mut(&mut self.project).output.enabled = false;
-        for project in self.undo.iter_mut().chain(&mut self.redo) {
+        for project in self
+            .undo
+            .iter_mut()
+            .chain(&mut self.redo)
+            .chain(self.checkpoints.values_mut())
+        {
             Arc::make_mut(project).output.enabled = false;
         }
     }
@@ -45,6 +54,14 @@ impl Session {
         {
             return Err("Invalid session clock/revision".into());
         }
+        if self.checkpoints.len() > 32 {
+            return Err("At most 32 named checkpoints".into());
+        }
+        for (name, project) in &self.checkpoints {
+            validate_checkpoint_name(name)?;
+            project.validate()?;
+        }
+        crate::bundle::validate_resources(&self.resources)?;
         self.inputs.validate()?;
         self.project.validate()?;
         for p in self.undo.iter().chain(&self.redo) {
@@ -150,3 +167,11 @@ pub fn decode(bytes: &[u8]) -> Result<Session> {
 mod storage;
 #[cfg(feature = "native")]
 pub use storage::{load, Status, Store};
+
+pub fn validate_checkpoint_name(name: &str) -> Result<()> {
+    if name.trim().is_empty() || name.len() > 80 || name.chars().any(char::is_control) {
+        Err("Checkpoint name must contain 1–80 printable characters".into())
+    } else {
+        Ok(())
+    }
+}

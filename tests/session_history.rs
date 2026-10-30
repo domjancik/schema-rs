@@ -260,6 +260,7 @@ fn valid_deep_program_can_be_restored_from_a_checkpoint() {
     };
     use std::collections::BTreeMap;
     let mut root = Node {
+        bypassed: false,
         id: 64,
         behavior: "Create.Value.Constant".into(),
         properties: BTreeMap::new(),
@@ -268,6 +269,7 @@ fn valid_deep_program_can_be_restored_from_a_checkpoint() {
     };
     for id in (1..64).rev() {
         root = Node {
+            bypassed: false,
             id,
             behavior: "Tool.Merge".into(),
             properties: BTreeMap::new(),

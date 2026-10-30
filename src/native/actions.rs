@@ -276,6 +276,7 @@ fn transitioned(
     if duration > 0. && transition == "Transition.Fade" {
         if let Some(previous) = previous {
             let mut root = Node {
+                bypassed: false,
                 id: 1,
                 behavior: "Transition.Fade".into(),
                 properties: BTreeMap::from([("Duration".into(), serde_json::json!(duration))]),

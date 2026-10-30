@@ -36,6 +36,7 @@ fn every_catalog_default_constructs_evaluates_and_serializes() {
             enabled: true,
             name: behavior.key.into(),
             root: Node {
+                bypassed: false,
                 id: 1,
                 behavior: behavior.key.into(),
                 properties: behavior.defaults.clone(),
