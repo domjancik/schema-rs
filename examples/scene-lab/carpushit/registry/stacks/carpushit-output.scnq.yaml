@@ -16,7 +16,7 @@ stack:
                     Layer: 1
         in:
         - Create.Color.Color:
-            Color: '#ffd19a'
+            Color: '#ffffff'
     - Modify.Value.Clamp:
         Maximum: 1.0
         Minimum: 0.0

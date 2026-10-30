@@ -36,7 +36,8 @@
         ]
       ],
       "pixel_reverse": false,
-      "setup_channel": 0
+      "setup_channel": 0,
+      "marker_color": "#E6B450"
     },
     {
       "id": "bulb-left-02",
@@ -72,7 +73,8 @@
         ]
       ],
       "pixel_reverse": false,
-      "setup_channel": 1
+      "setup_channel": 1,
+      "marker_color": "#E6B450"
     },
     {
       "id": "bulb-left-03",
@@ -108,7 +110,8 @@
         ]
       ],
       "pixel_reverse": false,
-      "setup_channel": 2
+      "setup_channel": 2,
+      "marker_color": "#E6B450"
     },
     {
       "id": "bulb-left-04",
@@ -144,7 +147,8 @@
         ]
       ],
       "pixel_reverse": false,
-      "setup_channel": 3
+      "setup_channel": 3,
+      "marker_color": "#E6B450"
     },
     {
       "id": "bulb-left-05",
@@ -180,7 +184,8 @@
         ]
       ],
       "pixel_reverse": false,
-      "setup_channel": 4
+      "setup_channel": 4,
+      "marker_color": "#E6B450"
     },
     {
       "id": "bulb-right-01",
@@ -216,7 +221,8 @@
         ]
       ],
       "pixel_reverse": false,
-      "setup_channel": 5
+      "setup_channel": 5,
+      "marker_color": "#E6B450"
     },
     {
       "id": "bulb-right-02",
@@ -252,7 +258,8 @@
         ]
       ],
       "pixel_reverse": false,
-      "setup_channel": 6
+      "setup_channel": 6,
+      "marker_color": "#E6B450"
     },
     {
       "id": "bulb-right-03",
@@ -288,7 +295,8 @@
         ]
       ],
       "pixel_reverse": false,
-      "setup_channel": 7
+      "setup_channel": 7,
+      "marker_color": "#E6B450"
     },
     {
       "id": "bulb-right-04",
@@ -324,7 +332,8 @@
         ]
       ],
       "pixel_reverse": false,
-      "setup_channel": 8
+      "setup_channel": 8,
+      "marker_color": "#E6B450"
     },
     {
       "id": "bulb-right-05",
@@ -360,7 +369,8 @@
         ]
       ],
       "pixel_reverse": false,
-      "setup_channel": 9
+      "setup_channel": 9,
+      "marker_color": "#E6B450"
     },
     {
       "id": "uv-left-rail",
@@ -394,7 +404,8 @@
         ]
       ],
       "pixel_reverse": false,
-      "setup_channel": 10
+      "setup_channel": 10,
+      "marker_color": "#A78BFA"
     },
     {
       "id": "uv-right-rail",
@@ -428,7 +439,8 @@
         ]
       ],
       "pixel_reverse": false,
-      "setup_channel": 11
+      "setup_channel": 11,
+      "marker_color": "#A78BFA"
     },
     {
       "id": "uv-roof-spine",
@@ -462,7 +474,8 @@
         ]
       ],
       "pixel_reverse": false,
-      "setup_channel": 12
+      "setup_channel": 12,
+      "marker_color": "#A78BFA"
     },
     {
       "id": "uv-cross-01",
@@ -496,7 +509,8 @@
         ]
       ],
       "pixel_reverse": false,
-      "setup_channel": 13
+      "setup_channel": 13,
+      "marker_color": "#A78BFA"
     },
     {
       "id": "uv-cross-02",
@@ -530,7 +544,8 @@
         ]
       ],
       "pixel_reverse": false,
-      "setup_channel": 14
+      "setup_channel": 14,
+      "marker_color": "#A78BFA"
     },
     {
       "id": "uv-cross-03",
@@ -564,7 +579,8 @@
         ]
       ],
       "pixel_reverse": false,
-      "setup_channel": 15
+      "setup_channel": 15,
+      "marker_color": "#A78BFA"
     },
     {
       "id": "front-left-01",
@@ -599,7 +615,8 @@
         ]
       ],
       "pixel_reverse": false,
-      "setup_channel": 16
+      "setup_channel": 16,
+      "marker_color": "#56B4E9"
     },
     {
       "id": "front-left-02",
@@ -634,7 +651,8 @@
         ]
       ],
       "pixel_reverse": false,
-      "setup_channel": 17
+      "setup_channel": 17,
+      "marker_color": "#56B4E9"
     },
     {
       "id": "front-left-03",
@@ -669,7 +687,8 @@
         ]
       ],
       "pixel_reverse": false,
-      "setup_channel": 18
+      "setup_channel": 18,
+      "marker_color": "#56B4E9"
     },
     {
       "id": "front-side-left-01",
@@ -704,7 +723,8 @@
         ]
       ],
       "pixel_reverse": false,
-      "setup_channel": 19
+      "setup_channel": 19,
+      "marker_color": "#3B82F6"
     },
     {
       "id": "front-side-left-02",
@@ -739,7 +759,8 @@
         ]
       ],
       "pixel_reverse": false,
-      "setup_channel": 20
+      "setup_channel": 20,
+      "marker_color": "#3B82F6"
     },
     {
       "id": "wing-left-01",
@@ -774,7 +795,8 @@
         ]
       ],
       "pixel_reverse": false,
-      "setup_channel": 21
+      "setup_channel": 21,
+      "marker_color": "#6CCB8A"
     },
     {
       "id": "wing-left-02",
@@ -809,7 +831,8 @@
         ]
       ],
       "pixel_reverse": false,
-      "setup_channel": 22
+      "setup_channel": 22,
+      "marker_color": "#6CCB8A"
     },
     {
       "id": "wing-left-03",
@@ -844,7 +867,8 @@
         ]
       ],
       "pixel_reverse": false,
-      "setup_channel": 23
+      "setup_channel": 23,
+      "marker_color": "#6CCB8A"
     },
     {
       "id": "eye-left",
@@ -879,7 +903,8 @@
         ]
       ],
       "pixel_reverse": false,
-      "setup_channel": 24
+      "setup_channel": 24,
+      "marker_color": "#F0E442"
     },
     {
       "id": "ear-left",
@@ -914,7 +939,8 @@
         ]
       ],
       "pixel_reverse": false,
-      "setup_channel": 25
+      "setup_channel": 25,
+      "marker_color": "#E69F00"
     },
     {
       "id": "watcher-left",
@@ -949,7 +975,8 @@
         ]
       ],
       "pixel_reverse": false,
-      "setup_channel": 26
+      "setup_channel": 26,
+      "marker_color": "#CC79A7"
     },
     {
       "id": "front-right-01",
@@ -984,7 +1011,8 @@
         ]
       ],
       "pixel_reverse": false,
-      "setup_channel": 27
+      "setup_channel": 27,
+      "marker_color": "#56B4E9"
     },
     {
       "id": "front-right-02",
@@ -1019,7 +1047,8 @@
         ]
       ],
       "pixel_reverse": false,
-      "setup_channel": 28
+      "setup_channel": 28,
+      "marker_color": "#56B4E9"
     },
     {
       "id": "front-right-03",
@@ -1054,7 +1083,8 @@
         ]
       ],
       "pixel_reverse": false,
-      "setup_channel": 29
+      "setup_channel": 29,
+      "marker_color": "#56B4E9"
     },
     {
       "id": "front-side-right-01",
@@ -1089,7 +1119,8 @@
         ]
       ],
       "pixel_reverse": false,
-      "setup_channel": 30
+      "setup_channel": 30,
+      "marker_color": "#3B82F6"
     },
     {
       "id": "front-side-right-02",
@@ -1124,7 +1155,8 @@
         ]
       ],
       "pixel_reverse": false,
-      "setup_channel": 31
+      "setup_channel": 31,
+      "marker_color": "#3B82F6"
     },
     {
       "id": "wing-right-01",
@@ -1159,7 +1191,8 @@
         ]
       ],
       "pixel_reverse": false,
-      "setup_channel": 32
+      "setup_channel": 32,
+      "marker_color": "#6CCB8A"
     },
     {
       "id": "wing-right-02",
@@ -1194,7 +1227,8 @@
         ]
       ],
       "pixel_reverse": false,
-      "setup_channel": 33
+      "setup_channel": 33,
+      "marker_color": "#6CCB8A"
     },
     {
       "id": "wing-right-03",
@@ -1229,7 +1263,8 @@
         ]
       ],
       "pixel_reverse": false,
-      "setup_channel": 34
+      "setup_channel": 34,
+      "marker_color": "#6CCB8A"
     },
     {
       "id": "eye-right",
@@ -1264,7 +1299,8 @@
         ]
       ],
       "pixel_reverse": false,
-      "setup_channel": 35
+      "setup_channel": 35,
+      "marker_color": "#F0E442"
     },
     {
       "id": "ear-right",
@@ -1299,7 +1335,8 @@
         ]
       ],
       "pixel_reverse": false,
-      "setup_channel": 36
+      "setup_channel": 36,
+      "marker_color": "#E69F00"
     },
     {
       "id": "watcher-right",
@@ -1334,7 +1371,8 @@
         ]
       ],
       "pixel_reverse": false,
-      "setup_channel": 37
+      "setup_channel": 37,
+      "marker_color": "#CC79A7"
     }
   ],
   "dmx_models": {

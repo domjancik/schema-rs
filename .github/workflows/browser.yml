@@ -49,6 +49,8 @@ jobs:
         run: PLAYWRIGHT_MODULE="$RUNNER_TEMP/schema-browser-tests/node_modules/playwright" node tests/mobile-panel-nav-browser.cjs
       - name: System logs view
         run: PLAYWRIGHT_MODULE="$RUNNER_TEMP/schema-browser-tests/node_modules/playwright" node tests/system-logs-browser.cjs
+      - name: Fixture organizational markers
+        run: node tests/fixture-markers-core.cjs && PLAYWRIGHT_MODULE="$RUNNER_TEMP/schema-browser-tests/node_modules/playwright" node tests/fixture-markers-browser.cjs
       - name: Universe fixture grouping
         run: PLAYWRIGHT_MODULE="$RUNNER_TEMP/schema-browser-tests/node_modules/playwright" node tests/universe-groups-browser.cjs
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4

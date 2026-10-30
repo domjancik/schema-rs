@@ -94,6 +94,9 @@ impl FixtureModel {
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
 #[serde(deny_unknown_fields)]
 pub struct Fixture {
+    /// Editor-only organizational color; never participates in light evaluation or DMX.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub marker_color: Option<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub dmx_model: Option<String>,
     #[serde(default)]
@@ -304,6 +307,7 @@ impl Project {
         let stack=crate::scenic::parse("name: Spatial wash\nstack:\n  Modify.Color.Dim:\n    Amount:\n      Combine.Multiply:\n        in:\n          - Modify.Value.MapTo:\n              Minimum: 0.25\n              Maximum: 1\n              in:\n                - Create.Value.LFO: {Period: 4, Type: 2}\n          - Modify.Value.MapTo:\n              Minimum: 0.2\n              Maximum: 1\n              in:\n                - Spatial.Axis: {Axis: 0, Minimum: -5, Maximum: 5}\n    in:\n      - Create.Color.Color: {Color: '#c7eb8b'}\n").expect("built-in demo");
         let fixtures: Vec<_> = (0..8)
             .map(|i| Fixture {
+                marker_color: None,
                 dmx_model: None,
                 setup_channel: 0,
                 rotation: [0.; 3],
@@ -421,6 +425,11 @@ impl Project {
                 || !ids.insert(&f.id)
                 || f.name.len() > 200
                 || f.name.chars().any(char::is_control)
+                || f.marker_color.as_ref().is_some_and(|color| {
+                    color.len() != 7
+                        || !color.starts_with('#')
+                        || !color.as_bytes()[1..].iter().all(u8::is_ascii_hexdigit)
+                })
                 || f.groups.len() > 32
                 || f.groups
                     .iter()

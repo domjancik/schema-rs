@@ -270,6 +270,7 @@ window.SchemaAuthoring = (() => {
           d.close();
           onSelect(f.id, !!event?.shiftKey);
         });
+        markFixture(b, f);
         b.append(
           el(
             "small",
@@ -867,6 +868,21 @@ window.SchemaAuthoring = (() => {
       true,
     );
   }
+  function markFixture(node, fixture) {
+    const color = SchemaAuthoringCore.markerColor(fixture);
+    node.classList.toggle('fixture-marked', !!color);
+    if (color) node.style.setProperty('--fixture-marker', color);
+    else node.style.removeProperty('--fixture-marker');
+    return node;
+  }
+  function fixtureMarkerEditor(box, fixture, commit, count = 1) {
+    const row = el('div', undefined, 'fixture-marker-editor'), label = el('label', count > 1 ? `Marker color · ${count} fixtures` : 'Marker color'), input = el('input');
+    input.type = 'color'; input.value = SchemaAuthoringCore.markerColor(fixture) || '#72dec2'; input.setAttribute('aria-label', 'Fixture marker color');
+    input.onchange = async () => { if (await commit(input.value) !== false) clear.disabled = false; }; label.append(input);
+    const clear = button('Clear', async () => { if (await commit(null) !== false) { clear.disabled = true; input.value = '#72dec2'; } }); clear.setAttribute('aria-label', 'Clear fixture marker'); clear.disabled = !SchemaAuthoringCore.markerColor(fixture);
+    row.append(label, clear, el('small', 'Navigation only · does not change light output'));
+    box.append(row); return row;
+  }
   return {
     configure,
     update,
@@ -879,5 +895,7 @@ window.SchemaAuthoring = (() => {
     exportBundle,
     importBundle,
     stateHelp,
+    markFixture,
+    fixtureMarkerEditor,
   };
 })();

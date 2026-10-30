@@ -456,7 +456,7 @@ export class SceneView {
         this.matrix.scale.setScalar(f.id === this.selected ? 1.5 : 1);
         this.matrix.updateMatrix();
         this.layoutMarkers.setMatrixAt(index, this.matrix.matrix);
-        this.color.set(f.id === this.selected ? "#72dec2" : "#637a7c");
+        this.color.set(f.markerColor || (f.id === this.selected ? "#72dec2" : "#637a7c"));
         this.layoutMarkers.setColorAt(index, this.color);
         this.layouts.push(f.id);
       }

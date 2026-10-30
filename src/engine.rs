@@ -1150,6 +1150,7 @@ impl Engine {
                 .first()
                 .cloned()
                 .unwrap_or_else(|| Fixture {
+                    marker_color: None,
                     dmx_model: None,
                     id: "__director".into(),
                     name: "Director".into(),

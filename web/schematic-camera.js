@@ -260,7 +260,7 @@
               cx: p.x,
               cy: p.y,
               r: f.fixture.id === options.selected() ? 8 : 4,
-              fill: color,
+              fill: SchemaAuthoringCore.markerColor(f.fixture) || color,
               stroke: 'var(--accent,#72dec2)',
               'stroke-width': f.fixture.id === options.selected() ? 2 : 0,
               'pointer-events': 'none',

@@ -433,7 +433,7 @@
           cy: p[1],
           r: 5,
           fill: 'var(--paper)',
-          stroke: fill,
+          stroke: SchemaAuthoringCore.markerColor(f) || fill,
           'stroke-width': 2,
           tabindex: 0,
           role: 'button',

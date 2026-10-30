@@ -24,11 +24,12 @@
         "interior",
         "pair-bulb-01"
       ],
-      "color_srgb": "#ffd19a",
+      "color_srgb": "#ffffff",
       "encoded_intensity": 0.4980392156862745,
       "captured_byte": 127,
       "universe": 0,
-      "address_1_based": 1
+      "address_1_based": 1,
+      "marker_color": "#E6B450"
     },
     {
       "fixture_id": "bulb-left-02",
@@ -45,11 +46,12 @@
         "interior",
         "pair-bulb-02"
       ],
-      "color_srgb": "#ffd19a",
+      "color_srgb": "#ffffff",
       "encoded_intensity": 0.4980392156862745,
       "captured_byte": 127,
       "universe": 0,
-      "address_1_based": 2
+      "address_1_based": 2,
+      "marker_color": "#E6B450"
     },
     {
       "fixture_id": "bulb-left-03",
@@ -66,11 +68,12 @@
         "interior",
         "pair-bulb-03"
       ],
-      "color_srgb": "#ffd19a",
+      "color_srgb": "#ffffff",
       "encoded_intensity": 0.4980392156862745,
       "captured_byte": 127,
       "universe": 0,
-      "address_1_based": 3
+      "address_1_based": 3,
+      "marker_color": "#E6B450"
     },
     {
       "fixture_id": "bulb-left-04",
@@ -87,11 +90,12 @@
         "interior",
         "pair-bulb-04"
       ],
-      "color_srgb": "#ffd19a",
+      "color_srgb": "#ffffff",
       "encoded_intensity": 0.4980392156862745,
       "captured_byte": 127,
       "universe": 0,
-      "address_1_based": 4
+      "address_1_based": 4,
+      "marker_color": "#E6B450"
     },
     {
       "fixture_id": "bulb-left-05",
@@ -108,11 +112,12 @@
         "interior",
         "pair-bulb-05"
       ],
-      "color_srgb": "#ffd19a",
+      "color_srgb": "#ffffff",
       "encoded_intensity": 0.4980392156862745,
       "captured_byte": 127,
       "universe": 0,
-      "address_1_based": 5
+      "address_1_based": 5,
+      "marker_color": "#E6B450"
     },
     {
       "fixture_id": "bulb-right-01",
@@ -129,11 +134,12 @@
         "interior",
         "pair-bulb-01"
       ],
-      "color_srgb": "#ffd19a",
+      "color_srgb": "#ffffff",
       "encoded_intensity": 0.4980392156862745,
       "captured_byte": 127,
       "universe": 0,
-      "address_1_based": 6
+      "address_1_based": 6,
+      "marker_color": "#E6B450"
     },
     {
       "fixture_id": "bulb-right-02",
@@ -150,11 +156,12 @@
         "interior",
         "pair-bulb-02"
       ],
-      "color_srgb": "#ffd19a",
+      "color_srgb": "#ffffff",
       "encoded_intensity": 0.4980392156862745,
       "captured_byte": 127,
       "universe": 0,
-      "address_1_based": 7
+      "address_1_based": 7,
+      "marker_color": "#E6B450"
     },
     {
       "fixture_id": "bulb-right-03",
@@ -171,11 +178,12 @@
         "interior",
         "pair-bulb-03"
       ],
-      "color_srgb": "#ffd19a",
+      "color_srgb": "#ffffff",
       "encoded_intensity": 0.4980392156862745,
       "captured_byte": 127,
       "universe": 0,
-      "address_1_based": 8
+      "address_1_based": 8,
+      "marker_color": "#E6B450"
     },
     {
       "fixture_id": "bulb-right-04",
@@ -192,11 +200,12 @@
         "interior",
         "pair-bulb-04"
       ],
-      "color_srgb": "#ffd19a",
+      "color_srgb": "#ffffff",
       "encoded_intensity": 0.4980392156862745,
       "captured_byte": 127,
       "universe": 0,
-      "address_1_based": 9
+      "address_1_based": 9,
+      "marker_color": "#E6B450"
     },
     {
       "fixture_id": "bulb-right-05",
@@ -213,11 +222,12 @@
         "interior",
         "pair-bulb-05"
       ],
-      "color_srgb": "#ffd19a",
+      "color_srgb": "#ffffff",
       "encoded_intensity": 0.4980392156862745,
       "captured_byte": 127,
       "universe": 0,
-      "address_1_based": 10
+      "address_1_based": 10,
+      "marker_color": "#E6B450"
     },
     {
       "fixture_id": "uv-left-rail",
@@ -232,11 +242,12 @@
         "left",
         "interior"
       ],
-      "color_srgb": "#862bff",
+      "color_srgb": "#ffffff",
       "encoded_intensity": 1.0,
       "captured_byte": 255,
       "universe": 0,
-      "address_1_based": 11
+      "address_1_based": 11,
+      "marker_color": "#A78BFA"
     },
     {
       "fixture_id": "uv-right-rail",
@@ -251,11 +262,12 @@
         "right",
         "interior"
       ],
-      "color_srgb": "#862bff",
+      "color_srgb": "#ffffff",
       "encoded_intensity": 1.0,
       "captured_byte": 255,
       "universe": 0,
-      "address_1_based": 12
+      "address_1_based": 12,
+      "marker_color": "#A78BFA"
     },
     {
       "fixture_id": "uv-roof-spine",
@@ -270,11 +282,12 @@
         "centre",
         "interior"
       ],
-      "color_srgb": "#862bff",
+      "color_srgb": "#ffffff",
       "encoded_intensity": 1.0,
       "captured_byte": 255,
       "universe": 0,
-      "address_1_based": 13
+      "address_1_based": 13,
+      "marker_color": "#A78BFA"
     },
     {
       "fixture_id": "uv-cross-01",
@@ -289,11 +302,12 @@
         "centre",
         "interior"
       ],
-      "color_srgb": "#862bff",
+      "color_srgb": "#ffffff",
       "encoded_intensity": 1.0,
       "captured_byte": 255,
       "universe": 0,
-      "address_1_based": 14
+      "address_1_based": 14,
+      "marker_color": "#A78BFA"
     },
     {
       "fixture_id": "uv-cross-02",
@@ -308,11 +322,12 @@
         "centre",
         "interior"
       ],
-      "color_srgb": "#862bff",
+      "color_srgb": "#ffffff",
       "encoded_intensity": 1.0,
       "captured_byte": 255,
       "universe": 0,
-      "address_1_based": 15
+      "address_1_based": 15,
+      "marker_color": "#A78BFA"
     },
     {
       "fixture_id": "uv-cross-03",
@@ -327,11 +342,12 @@
         "centre",
         "interior"
       ],
-      "color_srgb": "#862bff",
+      "color_srgb": "#ffffff",
       "encoded_intensity": 1.0,
       "captured_byte": 255,
       "universe": 0,
-      "address_1_based": 16
+      "address_1_based": 16,
+      "marker_color": "#A78BFA"
     },
     {
       "fixture_id": "front-left-01",
@@ -347,11 +363,12 @@
         "outside",
         "pair-front-01"
       ],
-      "color_srgb": "#fff2db",
+      "color_srgb": "#ffffff",
       "encoded_intensity": 1.0,
       "captured_byte": 255,
       "universe": 0,
-      "address_1_based": 17
+      "address_1_based": 17,
+      "marker_color": "#56B4E9"
     },
     {
       "fixture_id": "front-left-02",
@@ -367,11 +384,12 @@
         "outside",
         "pair-front-02"
       ],
-      "color_srgb": "#fff2db",
+      "color_srgb": "#ffffff",
       "encoded_intensity": 1.0,
       "captured_byte": 255,
       "universe": 0,
-      "address_1_based": 18
+      "address_1_based": 18,
+      "marker_color": "#56B4E9"
     },
     {
       "fixture_id": "front-left-03",
@@ -387,11 +405,12 @@
         "outside",
         "pair-front-03"
       ],
-      "color_srgb": "#fff2db",
+      "color_srgb": "#ffffff",
       "encoded_intensity": 1.0,
       "captured_byte": 255,
       "universe": 0,
-      "address_1_based": 19
+      "address_1_based": 19,
+      "marker_color": "#56B4E9"
     },
     {
       "fixture_id": "front-side-left-01",
@@ -407,11 +426,12 @@
         "outside",
         "pair-front-side-01"
       ],
-      "color_srgb": "#fff2db",
+      "color_srgb": "#ffffff",
       "encoded_intensity": 1.0,
       "captured_byte": 255,
       "universe": 0,
-      "address_1_based": 20
+      "address_1_based": 20,
+      "marker_color": "#3B82F6"
     },
     {
       "fixture_id": "front-side-left-02",
@@ -427,11 +447,12 @@
         "outside",
         "pair-front-side-02"
       ],
-      "color_srgb": "#fff2db",
+      "color_srgb": "#ffffff",
       "encoded_intensity": 1.0,
       "captured_byte": 255,
       "universe": 0,
-      "address_1_based": 21
+      "address_1_based": 21,
+      "marker_color": "#3B82F6"
     },
     {
       "fixture_id": "wing-left-01",
@@ -447,11 +468,12 @@
         "outside",
         "pair-wing-01"
       ],
-      "color_srgb": "#fff2db",
+      "color_srgb": "#ffffff",
       "encoded_intensity": 1.0,
       "captured_byte": 255,
       "universe": 0,
-      "address_1_based": 22
+      "address_1_based": 22,
+      "marker_color": "#6CCB8A"
     },
     {
       "fixture_id": "wing-left-02",
@@ -467,11 +489,12 @@
         "outside",
         "pair-wing-02"
       ],
-      "color_srgb": "#fff2db",
+      "color_srgb": "#ffffff",
       "encoded_intensity": 1.0,
       "captured_byte": 255,
       "universe": 0,
-      "address_1_based": 23
+      "address_1_based": 23,
+      "marker_color": "#6CCB8A"
     },
     {
       "fixture_id": "wing-left-03",
@@ -487,11 +510,12 @@
         "outside",
         "pair-wing-03"
       ],
-      "color_srgb": "#fff2db",
+      "color_srgb": "#ffffff",
       "encoded_intensity": 1.0,
       "captured_byte": 255,
       "universe": 0,
-      "address_1_based": 24
+      "address_1_based": 24,
+      "marker_color": "#6CCB8A"
     },
     {
       "fixture_id": "eye-left",
@@ -507,11 +531,12 @@
         "outside",
         "pair-eyes"
       ],
-      "color_srgb": "#fff2db",
+      "color_srgb": "#ffffff",
       "encoded_intensity": 1.0,
       "captured_byte": 255,
       "universe": 0,
-      "address_1_based": 25
+      "address_1_based": 25,
+      "marker_color": "#F0E442"
     },
     {
       "fixture_id": "ear-left",
@@ -527,11 +552,12 @@
         "outside",
         "pair-ears"
       ],
-      "color_srgb": "#ffc75f",
+      "color_srgb": "#ffffff",
       "encoded_intensity": 1.0,
       "captured_byte": 255,
       "universe": 0,
-      "address_1_based": 26
+      "address_1_based": 26,
+      "marker_color": "#E69F00"
     },
     {
       "fixture_id": "watcher-left",
@@ -547,11 +573,12 @@
         "outside",
         "pair-watchers"
       ],
-      "color_srgb": "#90d7e6",
+      "color_srgb": "#ffffff",
       "encoded_intensity": 1.0,
       "captured_byte": 255,
       "universe": 0,
-      "address_1_based": 27
+      "address_1_based": 27,
+      "marker_color": "#CC79A7"
     },
     {
       "fixture_id": "front-right-01",
@@ -567,11 +594,12 @@
         "outside",
         "pair-front-01"
       ],
-      "color_srgb": "#fff2db",
+      "color_srgb": "#ffffff",
       "encoded_intensity": 1.0,
       "captured_byte": 255,
       "universe": 0,
-      "address_1_based": 28
+      "address_1_based": 28,
+      "marker_color": "#56B4E9"
     },
     {
       "fixture_id": "front-right-02",
@@ -587,11 +615,12 @@
         "outside",
         "pair-front-02"
       ],
-      "color_srgb": "#fff2db",
+      "color_srgb": "#ffffff",
       "encoded_intensity": 1.0,
       "captured_byte": 255,
       "universe": 0,
-      "address_1_based": 29
+      "address_1_based": 29,
+      "marker_color": "#56B4E9"
     },
     {
       "fixture_id": "front-right-03",
@@ -607,11 +636,12 @@
         "outside",
         "pair-front-03"
       ],
-      "color_srgb": "#fff2db",
+      "color_srgb": "#ffffff",
       "encoded_intensity": 1.0,
       "captured_byte": 255,
       "universe": 0,
-      "address_1_based": 30
+      "address_1_based": 30,
+      "marker_color": "#56B4E9"
     },
     {
       "fixture_id": "front-side-right-01",
@@ -627,11 +657,12 @@
         "outside",
         "pair-front-side-01"
       ],
-      "color_srgb": "#fff2db",
+      "color_srgb": "#ffffff",
       "encoded_intensity": 1.0,
       "captured_byte": 255,
       "universe": 0,
-      "address_1_based": 31
+      "address_1_based": 31,
+      "marker_color": "#3B82F6"
     },
     {
       "fixture_id": "front-side-right-02",
@@ -647,11 +678,12 @@
         "outside",
         "pair-front-side-02"
       ],
-      "color_srgb": "#fff2db",
+      "color_srgb": "#ffffff",
       "encoded_intensity": 1.0,
       "captured_byte": 255,
       "universe": 0,
-      "address_1_based": 32
+      "address_1_based": 32,
+      "marker_color": "#3B82F6"
     },
     {
       "fixture_id": "wing-right-01",
@@ -667,11 +699,12 @@
         "outside",
         "pair-wing-01"
       ],
-      "color_srgb": "#fff2db",
+      "color_srgb": "#ffffff",
       "encoded_intensity": 1.0,
       "captured_byte": 255,
       "universe": 0,
-      "address_1_based": 33
+      "address_1_based": 33,
+      "marker_color": "#6CCB8A"
     },
     {
       "fixture_id": "wing-right-02",
@@ -687,11 +720,12 @@
         "outside",
         "pair-wing-02"
       ],
-      "color_srgb": "#fff2db",
+      "color_srgb": "#ffffff",
       "encoded_intensity": 1.0,
       "captured_byte": 255,
       "universe": 0,
-      "address_1_based": 34
+      "address_1_based": 34,
+      "marker_color": "#6CCB8A"
     },
     {
       "fixture_id": "wing-right-03",
@@ -707,11 +741,12 @@
         "outside",
         "pair-wing-03"
       ],
-      "color_srgb": "#fff2db",
+      "color_srgb": "#ffffff",
       "encoded_intensity": 1.0,
       "captured_byte": 255,
       "universe": 0,
-      "address_1_based": 35
+      "address_1_based": 35,
+      "marker_color": "#6CCB8A"
     },
     {
       "fixture_id": "eye-right",
@@ -727,11 +762,12 @@
         "outside",
         "pair-eyes"
       ],
-      "color_srgb": "#fff2db",
+      "color_srgb": "#ffffff",
       "encoded_intensity": 1.0,
       "captured_byte": 255,
       "universe": 0,
-      "address_1_based": 36
+      "address_1_based": 36,
+      "marker_color": "#F0E442"
     },
     {
       "fixture_id": "ear-right",
@@ -747,11 +783,12 @@
         "outside",
         "pair-ears"
       ],
-      "color_srgb": "#ffc75f",
+      "color_srgb": "#ffffff",
       "encoded_intensity": 1.0,
       "captured_byte": 255,
       "universe": 0,
-      "address_1_based": 37
+      "address_1_based": 37,
+      "marker_color": "#E69F00"
     },
     {
       "fixture_id": "watcher-right",
@@ -767,11 +804,12 @@
         "outside",
         "pair-watchers"
       ],
-      "color_srgb": "#90d7e6",
+      "color_srgb": "#ffffff",
       "encoded_intensity": 1.0,
       "captured_byte": 255,
       "universe": 0,
-      "address_1_based": 38
+      "address_1_based": 38,
+      "marker_color": "#CC79A7"
     }
   ]
 }

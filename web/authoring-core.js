@@ -148,7 +148,8 @@
       .sort((a, b) => a.score - b.score || a.i - b.i)
       .map((x) => x.a);
   }
-  const api = { hits, labels, arrange, search };
+  const markerColor = fixture => /^#[0-9a-f]{6}$/i.test(fixture?.marker_color || "") ? fixture.marker_color : null;
+  const api = { hits, labels, arrange, search, markerColor };
   root.SchemaAuthoringCore = api;
   if (typeof module !== "undefined") module.exports = api;
 })(globalThis);

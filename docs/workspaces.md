@@ -29,3 +29,9 @@ Workspace limits are16 panels per workspace and12 named workspaces. Layout prefe
 The Fixture setup map supports dragging empty space to pan and scrolling to zoom around the pointer. On touch screens, drag empty space with one finger or pinch/pan with two. The **Pan** toggle lets a drag move the view even when it starts on a fixture; turn it off to place fixtures. Mouse middle/right drag also pans. The −/+ buttons zoom, **Fit** frames all authored fixture positions and **Reset** returns to the original top-down view. When the map has keyboard focus, arrows pan, +/− zoom, F fits and Home resets.
 
 The main setup camera is a per-browser preference restored on reload. Navigating, fitting and resetting do not edit the project or add undo entries. Dragging a fixture with Pan off still submits one undoable move, using world coordinates at the current pan/zoom and preserving height. Placement is no longer clamped to the old −10…+10 map. A two-finger gesture or pointer cancellation cancels an unfinished fixture drag rather than committing it. On overlapping handles, touch picking opens on lift, allowing a second finger to start navigation first. Animated positions remain separate from authored selection handles. The grid and coordinate readout follow the view.
+
+## Fixture marker colors
+
+Set **Marker color** in Fixture setup; Shift-select fixtures in Studio to color-mark them together in one undoable edit. **Clear** returns to the default marker. Schémaboy exposes the same control under its menu → Fixture setup. Swatches appear in fixture navigation/search, setup and scene markers, embedded stack headers and universe patch groups.
+
+Markers are saved layout metadata (`fixture.marker_color`, optional `#RRGGBB`), independent of emitted light color, fixture dimming and DMX. Existing unmarked files stay unmarked. Use color blocks when you actually want to change light output. Marked files require an engine with marker-color support.

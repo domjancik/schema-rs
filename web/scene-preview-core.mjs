@@ -94,6 +94,7 @@ export function frameToScene(frame, overrides = {}) {
     return {
       id: fixture.id,
       name: fixture.name || fixture.id,
+      markerColor: /^#[0-9a-f]{6}$/i.test(fixture.marker_color || "") ? fixture.marker_color : null,
       layoutPosition,
       position,
       rotation,

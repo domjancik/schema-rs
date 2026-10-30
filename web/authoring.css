@@ -370,3 +370,19 @@ button.state-chip {
 .studio-compact > footer:has(#status[data-error="true"]) .authoring-state {
   max-width: 35%;
 }
+
+.fixture-marked{--fixture-marker:var(--accent,#72dec2)}
+button.fixture-marked::before{content:"";display:inline-block;flex:0 0 9px;width:9px;height:9px;margin-inline-end:8px;border-radius:3px;background:var(--fixture-marker);box-shadow:0 0 0 1px #0003;vertical-align:middle}
+.fixture-marker-editor{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-block:10px}
+.fixture-marker-editor label{display:flex;align-items:center;gap:10px;flex:1;min-width:140px}
+.fixture-marker-editor input[type=color]{min-width:44px;min-height:44px;width:52px;padding:3px;cursor:pointer}
+.fixture-marker-editor button{min-height:44px}
+.fixture-marker-editor small{flex-basis:100%;color:var(--muted,var(--dim,#94a39b));font-size:11px}
+#fixture-row button.fixture-marked i{background:var(--fixture-marker)}
+#scene-title.fixture-marked{border-inline-start:4px solid var(--fixture-marker);padding-inline-start:8px}
+
+#fixture-row button.fixture-marked::before{content:none}
+.patch-fixture.fixture-marked{border-inline-start:4px solid var(--fixture-marker)}
+.universe-fixture-group.fixture-marked{border-color:var(--fixture-marker)}
+
+#menu .fixture-marker-editor input[type=color]{width:52px;flex:0 0 52px}

@@ -87,6 +87,7 @@
           label.className = 'scene-stack-label';
           const title = document.createElement('button');
           title.textContent = f.name;
+          SchemaAuthoring.markFixture(title, f);
           title.onclick = () => options.action('select', f.id, local.layer, stack?.root?.id || 0);
           label.append(title);
           const picker = document.createElement('select');
