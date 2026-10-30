@@ -5,6 +5,7 @@ assert.equal(E.nudge(1,1,period),1.05);assert.equal(E.nudge(1,1,period,{shiftKey
 assert.equal(E.nudge(512,1,E.spec({},'Address')),512);assert.equal(E.nudge(1,-1,E.spec({},'Pixel count')),1);
 assert.equal(E.nudge(10,1,E.spec({parameter_types:{Seed:'Int32'}},'Seed'),{shiftKey:true}),11);
 assert.equal(E.nudge(0.1,1,{step:0.2}),0.3);
+assert.equal(E.nudge(0.00625,1,{step:0.01}),0.01625);assert.equal(E.nudge(0.00625,1,{step:0.01},{shiftKey:true}),0.00725);assert.equal(E.nudge(9007199254740990,1,{step:1,integer:true}),9007199254740991);
 assert.equal(E.bounds(period,120).max,120);assert.equal(E.bounds(E.spec({},'Value'),-3).min,-3);
 assert.equal(E.spec({},'Unknown parameter').suggested,undefined);assert.throws(()=>E.nudge(NaN,1,period),/finite/i);
 assert.equal(E.inlineEnum(['Saw','Triangle','Sine']),true);assert.equal(E.inlineEnum(Array(7).fill('x')),false);

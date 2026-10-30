@@ -50,6 +50,9 @@ const server = http.createServer((req,res) => {
  // Another author's edit during a draft must reject the old revision, not overwrite it.
  await period.fill('8');await page.evaluate(async()=>{const s=await SchemaEngine.request('/api/state');await SchemaEngine.request('/api/command',{expected_revision:s.snapshot.revision,command:{type:'set_dimmer',fixture:s.project.fixtures[0].id,value:.73}});});await period.press('Enter');await page.waitForFunction(()=>document.querySelector('#status').dataset.error==='true');assert.equal(await value(),12);
 
+
+ // Fine authored dim levels survive exact entry and precision nudging.
+ await period.fill('0.00625');await period.press('Enter');await until(async()=>await value()===0.00625);assert.equal(await period.inputValue(),'0.00625');await period.press('Shift+ArrowUp');await until(async()=>await value()===0.01125);
  // Fixture setup shares the editor and the captured revision semantics.
  const coordinate=page.locator('#fixture-form').getByRole('spinbutton',{name:'X',exact:true});await coordinate.scrollIntoViewIfNeeded();await coordinate.focus();await coordinate.hover();before=await state();const x=before.project.fixtures[0].position[0];await page.mouse.wheel(0,-100);await until(async()=>{const s=await state();return Math.abs(s.project.fixtures[0].position[0]-(x+0.1))<1e-9;});assert.equal((await state()).snapshot.revision,before.snapshot.revision+1);
  before=await state();await page.locator('#fixture-form').getByRole('slider',{name:'Fixture dimmer slider',exact:true}).evaluate(n=>{n.value='0.5';n.dispatchEvent(new Event('input',{bubbles:true}));n.dispatchEvent(new Event('change',{bubbles:true}));});await until(async()=>(await state()).project.fixtures[0].dimmer===0.5);assert.equal((await state()).snapshot.revision,before.snapshot.revision+1);

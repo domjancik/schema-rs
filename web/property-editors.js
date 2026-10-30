@@ -26,7 +26,9 @@
   function nudge(value,direction,settings={},modifiers={}){
     if(!Number.isFinite(value))throw Error('Enter a finite number.');
     const step=(settings.step||0.01)*(modifiers.shiftKey&&!settings.integer?0.1:modifiers.altKey?10:1);
-    const digits=Math.min(12,Math.max(0,Math.ceil(-Math.log10(step))+2));
+    const [mantissa,exponent='0']=String(value).toLowerCase().split('e');
+    const precision=Math.max(0,(mantissa.split('.')[1]?.length||0)-Number(exponent));
+    const digits=Math.min(20,Math.max(precision,Math.ceil(-Math.log10(step))+2,0));
     const next=Number((value+direction*step).toFixed(digits));
     if(!Number.isFinite(next))return value;
     return Math.max(settings.min??-Infinity,Math.min(settings.max??Infinity,next));
