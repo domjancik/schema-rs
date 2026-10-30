@@ -111,6 +111,15 @@ pub(crate) fn routes() -> Router<AppState> {
         }),
     );
     router = router.route(
+        "/scene-assets/bayer.png",
+        get(|| async {
+            (
+                [(header::CONTENT_TYPE, "image/png")],
+                include_bytes!("../web/scene-assets/bayer.png").as_slice(),
+            )
+        }),
+    );
+    router = router.route(
         "/scene-assets/carpushit.glb",
         get(|| async {
             (

@@ -22,6 +22,13 @@ const root = path.resolve(__dirname, "../.."),
     },
     legalComments: "linked",
   });
+  // ImageBitmapLoader fetches the Bayer texture; keep it same-origin under CSP.
+  const bundle = path.join(root, "web/vendor/scene-three.mjs");
+  const code = fs.readFileSync(bundle, "utf8");
+  const images = [...code.matchAll(/data:image\/png;base64,([A-Za-z0-9+/=]+)/g)];
+  if (images.length !== 1) throw Error("Review embedded vendor textures before updating Three.js");
+  fs.writeFileSync(path.join(root, "web/scene-assets/bayer.png"), Buffer.from(images[0][1], "base64"));
+  fs.writeFileSync(bundle, code.replace(images[0][0], "/scene-assets/bayer.png"));
   fs.copyFileSync(
     path.join(deps, "three/LICENSE"),
     path.join(root, "web/vendor/THREE-LICENSE.txt"),

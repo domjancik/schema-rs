@@ -24,6 +24,7 @@ const server = http.createServer((req,res) => {
   try {
     const page=await browser.newPage(), errors=[], apiRequests=[];
     page.on('pageerror',error=>errors.push(error.message));
+    page.on('console',message=>{if(message.type()==='error'&&/violates.*Content Security Policy|Refused.*security policy/i.test(message.text()))errors.push(message.text().slice(-400));});
     page.on('request',request=>{if(new URL(request.url()).pathname.startsWith('/api/'))apiRequests.push(request.url());});
     await page.goto(base+'/play?view=studio');
     await page.waitForFunction(()=>window.SchemaEngine?.kind==='browser'&&document.querySelector('#world .block'));

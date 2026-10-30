@@ -53,6 +53,7 @@ assets['/vendor/scene-three.mjs']=['vendor/scene-three.mjs','text/javascript'];
 assets['/vendor/scene-three.mjs.LEGAL.txt']=['vendor/scene-three.mjs.LEGAL.txt','text/plain'];
 assets['/vendor/THREE-LICENSE.txt']=['vendor/THREE-LICENSE.txt','text/plain'];
 assets['/vendor/VERSIONS.json']=['vendor/VERSIONS.json','application/json'];
+assets['/scene-assets/bayer.png']=['scene-assets/bayer.png','image/png'];
 assets['/scene-assets/carpushit.glb']=['scene-assets/carpushit.glb','model/gltf-binary'];
 assets['/scene-assets/carpushit.project.json']=['scene-assets/carpushit.project.json','application/json'];
 assets['/scene-assets/carpushit-reference.json']=['scene-assets/carpushit-reference.json','application/json'];

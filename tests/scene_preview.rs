@@ -22,6 +22,7 @@ async fn preview_assets_and_preset_do_not_mutate_the_live_project() {
         ("/scene-preview-renderer.mjs", "text/javascript"),
         ("/vendor/scene-three.mjs", "text/javascript"),
         ("/scene-assets/carpushit.glb", "model/gltf-binary"),
+        ("/scene-assets/bayer.png", "image/png"),
         ("/scene-assets/carpushit.project.json", "application/json"),
     ] {
         let response = app
@@ -44,6 +45,9 @@ async fn preview_assets_and_preset_do_not_mutate_the_live_project() {
             let mut engine = Engine::new(project).unwrap();
             engine.tick(0.1);
             assert!(engine.snapshot().diagnostics.is_empty());
+        }
+        if path.ends_with(".png") {
+            assert_eq!(&body[..8], b"\x89PNG\r\n\x1a\n");
         }
         if path.ends_with(".glb") {
             assert_eq!(&body[..4], b"glTF");
