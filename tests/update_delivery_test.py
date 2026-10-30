@@ -2,7 +2,7 @@ import pathlib,sys,tempfile,unittest,json,zipfile,subprocess,socket,os
 from unittest.mock import patch
 sys.path.insert(0,str(pathlib.Path(__file__).resolve().parents[1]/'scripts/update_server'))
 from core import ReleaseStore,Signer
-from delivery import Delivery,seal_public,prepared_public,vercel_runner
+from delivery import Delivery,seal_public,prepared_public,vercel_runner,publication_credentials,PUBLICATION_CREDENTIAL
 from delivery import workflow_runs,Pending
 from local_host import same_session,pristine,LocalHost
 class DeliveryPolicy(unittest.TestCase):
@@ -73,6 +73,12 @@ class LocalRecovery(unittest.TestCase):
     with self.assertRaises(ValueError):host.activate(folder,{'release_id':'test-release','source_commit':'a'*40})
     start.assert_not_called()
 class PublicSafety(unittest.TestCase):
+ def test_publication_credential_is_loaded_only_from_its_fixed_vault_target(self):
+  from types import SimpleNamespace
+  calls=[]
+  with patch('device.windows_vault',SimpleNamespace(read=lambda target:calls.append(target)or'sample-private-token')):
+   self.assertEqual(publication_credentials(),{'VERCEL_TOKEN':'sample-private-token'});self.assertEqual(calls,[PUBLICATION_CREDENTIAL])
+
  def test_pinned_vercel_entry_avoids_package_wrapper(self):
   with tempfile.TemporaryDirectory()as directory:
    root=pathlib.Path(directory);entry=root/'vc.js';entry.write_text('cli');node=root/'node.exe';self.assertEqual(vercel_runner(node,{'vercel_cli':str(entry)}),[node,entry]);entry.unlink()

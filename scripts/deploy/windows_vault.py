@@ -24,7 +24,7 @@ def write(target,password,username='orangepi'):
     check_target(target);blob=password.encode('utf-16-le')
     if not blob or len(blob)>2560:raise ValueError('Invalid credential size')
     buffer=ctypes.create_string_buffer(blob)
-    credential=Credential();credential.Type=CRED_TYPE_GENERIC;credential.TargetName=target;credential.Comment='Schéma Orange Pi sudo authentication';credential.UserName=username;credential.Persist=CRED_PERSIST_LOCAL_MACHINE;credential.CredentialBlobSize=len(blob);credential.CredentialBlob=ctypes.cast(buffer,ctypes.POINTER(ctypes.c_ubyte))
+    credential=Credential();credential.Type=CRED_TYPE_GENERIC;credential.TargetName=target;credential.Comment='Schéma deployment credential';credential.UserName=username;credential.Persist=CRED_PERSIST_LOCAL_MACHINE;credential.CredentialBlobSize=len(blob);credential.CredentialBlob=ctypes.cast(buffer,ctypes.POINTER(ctypes.c_ubyte))
     try:
         if not api.CredWriteW(ctypes.byref(credential),0):raise ctypes.WinError(ctypes.get_last_error())
     finally:ctypes.memset(ctypes.addressof(buffer),0,ctypes.sizeof(buffer))

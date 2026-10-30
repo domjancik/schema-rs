@@ -14,6 +14,12 @@ def workflow_runs(runs,commit):
   selected[name]=run['databaseId']
  return selected
 
+PUBLICATION_CREDENTIAL='schema-rs/updates/vercel-token'
+def publication_credentials():
+ from device import windows_vault
+ token=windows_vault.read(PUBLICATION_CREDENTIAL)
+ return {'VERCEL_TOKEN':token}if token else{}
+
 def vercel_runner(node,config):
  if config.get('vercel_cli'):
   entry=pathlib.Path(config['vercel_cli'])
@@ -59,9 +65,10 @@ class Delivery:
     if config['id']not in self.locals:self.locals[config['id']]=LocalHost(self.store.root,config)
     result=self.locals[config['id']].activate(self.store.path(release['release_id']),release);self.status(target,{**result,'name':config.get('name',config['id'])})
    except Exception as error:self.status(target,{'status':'failed','release_id':release['release_id'],'name':config.get('name',config['id']),'detail':str(error),'attempt_at':time.time()})
- def command(self,args,cwd=None,timeout=90):
+ def command(self,args,cwd=None,timeout=90,extra_env=None):
   command=[str(v)for v in args];environment={**os.environ,'CI':'1'}
   for key in ['VERCEL_TOKEN','VERCEL_OIDC_TOKEN','VERCEL_AUTH_TOKEN','VERCEL_ORG_ID','VERCEL_PROJECT_ID','VERCEL_GLOBAL_CONFIG']:environment.pop(key,None)
+  environment.update(extra_env or{})
   with subprocess.Popen(command,cwd=cwd,stdin=subprocess.DEVNULL,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,encoding='utf-8',errors='replace',env=environment,start_new_session=os.name!='nt',creationflags=getattr(subprocess,'CREATE_NO_WINDOW',0))as process:
    try:stdout,stderr=process.communicate(timeout=timeout)
    except subprocess.TimeoutExpired:
@@ -107,6 +114,7 @@ class Delivery:
   release=self.ready()
   if not release:return
   commit=release['source_commit'];previous=self.state().get('public',{})
+  if previous.get('status')=='needs_auth'and self.store.db.get('delivery_retry_at',0)<=previous.get('attempt_at',0):return
   if previous.get('release_id')==release['release_id']:
    if previous.get('status')=='current':return
    if previous.get('next_retry',0)>time.time()and self.store.db.get('delivery_retry_at',0)<=previous.get('attempt_at',0):return
@@ -144,10 +152,12 @@ class Delivery:
    self.status('public',{**info,'status':'publishing','detail':'Deploying verified app and four platform downloads'})
    node=pathlib.Path(self.command(['node','-p','process.execPath']).strip());runner=vercel_runner(node,config)
    auth_config=['--global-config',config['vercel_config']]if config.get('vercel_config')else[]
-   self.command([*runner,'deploy','--cwd',site,'--scope',config['scope'],'--prod','--yes',*auth_config],cwd=source,timeout=600)
+   self.command([*runner,'deploy','--cwd',site,'--scope',config['scope'],'--prod','--yes',*auth_config],cwd=source,timeout=600,extra_env=publication_credentials())
    url=config['url'].rstrip('/')
    expected=work/'public-expectation.json';atomic(expected,json.dumps({'commit':commit,'platforms':platforms}).encode())
    self.command([node,pathlib.Path(__file__).with_name('verify_public.mjs'),url,expected],timeout=300)
    self.status('public',{**info,'status':'current' ,'url':url+'/app','detail':'App and Windows/Linux/macOS downloads verified','platforms':{k:v['commit']for k,v in platforms.items()}})
   except Pending as error:self.status('public',{**info,'status':'waiting','detail':str(error)})
-  except Exception as error:self.status('public',{**info,'status':'failed','detail':str(error),'attempt_at':time.time(),'next_retry':time.time()+300})
+  except Exception as error:
+   detail=str(error);needs_auth=any(message in detail for message in ['specified token is not valid',"Couldn't refresh the saved login",'No existing credentials'])
+   self.status('public',{**info,'status':'needs_auth'if needs_auth else'failed','detail':'Connect a Vercel deployment token for unattended publication'if needs_auth else detail,'attempt_at':time.time(),'next_retry':time.time()+300})

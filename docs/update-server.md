@@ -42,3 +42,7 @@ The first live deployment and subsequent idempotent push are recorded in [verifi
 ## Queued scene-authoring work
 
 Named signals should alias stable properties on genuine zero-footprint virtual fixtures, using the normal native evaluation graph and driver trees. A shared Scene controls panel should expose live values and driver editing in Studio and Schémaboy. Preserve revisioned undo, project/session/bundle persistence and safe dangling-reference behavior. Global output dimming remains distinct from creative controls. Scene-lab examples are authored data, not an instruction to replace a live installation scene.
+
+## Unattended Vercel authentication
+
+An interactive OAuth login may be rejected by a Windows login task. A dedicated deployment token can be entered in a masked local dialog using `target/deploy-venv/Scripts/python.exe scripts/update_server/connect_vercel.py --state "$env:LOCALAPPDATA/Schema-s/updates"`. The helper verifies access to the enrolled project and writes the token directly to Windows Credential Manager (`schema-rs/updates/vercel-token`), then retries publication. Never paste the token into chat or project files. The publisher passes it only through the child process environment. Native device delivery continues while public publication shows **needs auth**. The configured direct `publication.vercel_cli` entry point avoids npm-wrapper credential differences.
