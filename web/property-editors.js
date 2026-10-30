@@ -127,7 +127,7 @@
       e.preventDefault();e.stopPropagation();
       const state=fallback.get(input)||{wheel:0,changed:false};clearTimeout(state.timer);state.wheel-=wheelPixels(e);
       const steps=Math.trunc(state.wheel/100);if(steps){
-        state.wheel-=steps*100;const step=Number(input.step)>0?Number(input.step):0.01,current=Number(input.value);
+        state.wheel-=steps*100;const step=input.step==='any'?0.01:Number(input.step)>0?Number(input.step):1,current=Number(input.value);
         const next=nudge(current,steps,{step,integer:step>=1,min:input.min===''?undefined:Number(input.min),max:input.max===''?undefined:Number(input.max)},e);
         if(next!==current){input.value=String(next);state.changed=true;input.dispatchEvent(new Event('input',{bubbles:true}));}
       }
