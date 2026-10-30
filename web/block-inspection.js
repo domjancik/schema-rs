@@ -178,10 +178,7 @@
     const readout = node.querySelector(".node-value");
     if (readout) {
       readout.textContent = Number.isFinite(output) ? output.toFixed(2) : "—";
-      readout.title =
-        attrs.value !== undefined
-          ? "Output value"
-          : "Brightness · mean RGB of first pixel";
+      readout.title = `${attrs.value !== undefined ? "Output value" : "Brightness · mean RGB of first pixel"}: ${readout.textContent}`;
     }
     const meter = node.querySelector(".node-meter i");
     if (meter)
@@ -228,12 +225,19 @@
       node.append(group);
       return;
     }
-    let row = node.querySelector(".block-attributes");
-    if (!row) {
-      row = element("div", undefined, "block-attributes");
-      (node.querySelector(".block-face") || node).append(row);
-      node.classList.add("has-attributes");
+    let footer = node.querySelector(".block-readout");
+    if (!footer) {
+      footer = element("div", undefined, "block-readout");
+      (node.querySelector(".block-face") || node).append(footer);
     }
+    if (readout && readout.parentNode !== footer) footer.append(readout);
+    const meterElement = node.querySelector(".node-meter");
+    if (meterElement && meterElement.parentNode !== footer)
+      footer.insertBefore(meterElement, readout?.parentNode === footer ? readout : null);
+    let row = node.querySelector(".block-attributes");
+    if (!row) row = element("div", undefined, "block-attributes");
+    if (row.parentNode !== footer) footer.prepend(row);
+    node.classList.add("has-attributes");
     row.replaceChildren();
     row.title = Object.entries(attrs)
       .map(([k, v]) => `${labels[k] || k}: ${format(v)}`)

@@ -428,3 +428,11 @@ Mobile Studio replaces the top panel dropdown with an in-layout bottom navigatio
 Source only, pending publication/device activation. The running Orange Pi scene and output are untouched. Retest 320px phones, landscape, duplicate Stack instances, Output/Logs access and switching back to desktop after activation. Details in docs/workspaces.md.
 
 Validation for `Use bottom icon navigation for mobile panels`: native cargo fmt/test/strict Clippy and final embedded binary build passed; actual WASM mobile touch/overflow/duplicate/persistence/keyboard/viewport checks, full browser runtime and Commands checks passed. Final isolated native compact Studio, desktop workspace and authoring regressions passed. Navigation buttons use a separate target attribute so existing panel identity selectors remain unique.
+
+## Block color/value layout
+
+The independently positioned attribute strip and numeric indicator are replaced by a shared flex footer in HTML blocks. Both now participate in width allocation; attribute previews clip to remaining space and very long values ellipsize while retaining their full tooltip. The color preview, meter and numeric output share one horizontal row, with the bar flexing within the block. Existing/scaled block faces use the same layout, with no DOM measurement loop, engine changes, new inspection traffic or authored/history changes.
+
+Source only, pending deployment. Retest colored/scalar blocks, long negative numbers, fractal/square faces, independent/embedded stacks and output focus after activation. Regression coverage checks 240/178/120/96px widths, the production #world cascade, scaled .layer-world faces, single-row alignment and meter containment; the real WASM Studio/phone and on-demand inspection checks also run.
+
+Validation for `Keep block color, bar and value in one flex row`: overlap and one-row regressions first failed as expected, then passed against real WASM/production styles, long-value and narrow/scaled face cases, Studio output focus, phone inspection and demand throttling. Browser runtime, layout/grid, mobile navigation and packaging checks passed; native fmt/test/strict Clippy passed. No live service or scene was changed. A separate test-only commit waits for media-query completion before the mobile navigation desktop assertion.

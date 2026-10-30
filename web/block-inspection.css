@@ -1,22 +1,53 @@
-.block-attributes {
+.block-readout {
   position: absolute;
   left: 12px;
-  right: 54px;
-  bottom: 7px;
+  right: 12px;
+  bottom: 8px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  pointer-events: none;
+}
+.block-readout > .block-attributes {
+  position: static;
+  min-width: 17px;
+  flex: 1 1 0;
+  max-width: max-content;
   height: 18px;
   display: flex;
   align-items: center;
   gap: 7px;
   overflow: hidden;
-  font:
-    10px/1.2 ui-monospace,
-    monospace;
+  font: 10px/1.2 ui-monospace, monospace;
   color: inherit;
-  pointer-events: none;
 }
-.has-attributes .node-meter { bottom: 3px; left: 12px; right: 12px; height: 2px; }
-.has-attributes .node-meter i { height: 2px; }
-.has-attributes .node-value { visibility: visible; }
+.block-readout > .node-value,
+:is(#world,.layer-world) .block .block-readout > .node-value {
+  position: static;
+  inset: auto;
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 100%;
+  margin-left: auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  visibility: visible;
+  pointer-events: auto;
+}
+.block-readout > .node-meter,
+:is(#world,.layer-world) .block .block-readout > .node-meter {
+  position: static;
+  inset: auto;
+  flex: 1 1 0;
+  min-width: 12px;
+  height: 3px;
+  margin: 0;
+  overflow: hidden;
+}
+.block-readout > .node-meter i { height: 100%; max-width: 100%; }
 .attribute-colors {
   display: inline-flex;
   gap: 3px;

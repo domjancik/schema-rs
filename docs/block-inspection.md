@@ -16,3 +16,5 @@ Regression tests check exact incoming versus outgoing color, pass-through semant
 
 
 The numeric output value and meter remain visible beside color swatches, including during output focus. Scalar banks show Value; color-only banks retain the previous brightness readout (mean RGB of the first pixel). This is a block readout before fixture/global dimming. Output focus highlights the block being routed to its fixture; simply opening Output does not enable focus.
+
+HTML block color/attribute previews and numeric output now share a flex footer. Attribute previews shrink and clip to the remaining width; long numbers ellipsize within their slot, with the full value retained in the tooltip. The color preview, value bar and numeric output all occupy the same row; the bar flexes into the available space and stays inside the block. The same footer follows scaled block faces in fractal layouts and independent/embedded stacks, without additional layout measurements or inspection requests.

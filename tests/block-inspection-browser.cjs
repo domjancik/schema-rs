@@ -87,9 +87,9 @@ const server = http.createServer((req, res) => {
         return request(path, body);
       };
       document.body.innerHTML =
-        '<div class="block" data-fixture="fixture-1" data-layer="0" data-node="20" style="width:240px;height:130px;position:relative"><span>Dim</span><span class="node-value"></span><div class="node-meter"><i></i></div></div><aside id="inspector"></aside>';
+        '<div id="world"><div class="block" data-fixture="fixture-1" data-layer="0" data-node="20" style="width:240px;height:130px;position:relative"><span>Dim</span><span class="node-value"></span><div class="node-meter"><i></i></div></div></div><aside id="inspector"></aside>';
     });
-    await page.addStyleTag({ url: "/block-inspection.css" });
+    for (const url of ["/style.css", "/stack-editor.css", "/block-inspection.css"]) await page.addStyleTag({url});
     await page.addScriptTag({ url: "/block-inspection.js" });
     assert(
       await page.evaluate(
@@ -132,6 +132,42 @@ const server = http.createServer((req, res) => {
       "Color output must retain its numeric brightness readout",
     );
     assert.equal(await brightness.textContent(), "0.17");
+    assert((await brightness.getAttribute("title")).includes("0.17"));
+    assert.equal(await brightness.evaluate(node=>getComputedStyle(node).pointerEvents),"auto","the full value tooltip remains reachable");
+    // Exercise the production cascade, wide numeric values and narrow block faces.
+    for (const width of [240,178,120,96]) {
+      for (const value of ['0.17','-123456789.00']) {
+        await page.evaluate(({width,value})=>{
+          const block=document.querySelector('.block');block.style.width=width+'px';
+          block.querySelector('.node-value').textContent=value;
+        },{width,value});
+        const attributes=await page.locator('.block .block-attributes').boundingBox(),number=await brightness.boundingBox(),block=await page.locator('.block').boundingBox();
+        assert(attributes.x+attributes.width+4<=number.x,`color/attribute previews and ${value} must share space at ${width}px`);
+        assert(number.x+number.width<=block.x+block.width,'value stays inside block');
+        assert(attributes.width>=17,'a long value must leave at least one complete color swatch visible');
+        const meter=await page.locator('.block .node-meter').boundingBox();
+        assert(attributes.x+attributes.width+4<=meter.x && meter.x+meter.width+4<=number.x,'color, meter and value must share one non-overlapping row');
+        assert(Math.abs((meter.y+meter.height/2)-(number.y+number.height/2))<=1,'bar and number must be vertically centred in the same row');
+        assert(meter.width>=12 && meter.x>=block.x && meter.x+meter.width<=block.x+block.width,'bar remains inside its block');
+      }
+    }
+    await page.evaluate(()=>{
+      const world=document.querySelector('#world'),block=world.querySelector('.block'),face=document.createElement('div');
+      world.removeAttribute('id');world.className='layer-world';
+      face.className='block-face';Object.assign(face.style,{position:'absolute',left:'0',top:'0',width:'178px',height:'112px',transform:'scale(.5)',transformOrigin:'0 0'});
+      while(block.firstChild)face.append(block.firstChild);block.append(face);block.style.width='89px';block.style.height='56px';
+    });
+    const scaledAttributes=await page.locator('.block .block-attributes').boundingBox(),scaledValue=await brightness.boundingBox(),scaledMeter=await page.locator('.block .node-meter').boundingBox();
+    assert(scaledAttributes.x+scaledAttributes.width+2<=scaledValue.x,'scaled layer-world faces keep the readout gap');
+    assert(scaledAttributes.x+scaledAttributes.width+2<=scaledMeter.x && scaledMeter.x+scaledMeter.width+2<=scaledValue.x,'scaled faces retain a single horizontal indicator row');
+    assert(Math.abs((scaledMeter.y+scaledMeter.height/2)-(scaledValue.y+scaledValue.height/2))<=1,'scaled meter stays vertically aligned with value');
+    await page.evaluate(()=>{
+      const block=document.querySelector('.block'),face=block.querySelector('.block-face');
+      while(face.firstChild)block.append(face.firstChild);face.remove();
+      block.style.width='240px';block.style.height='130px';block.querySelector('.node-value').textContent='0.17';
+      const world=block.parentElement;world.className='';world.id='world';
+    });
+
     const compact = await page.evaluate(() =>
       player.request("/api/state/compact"),
     );
