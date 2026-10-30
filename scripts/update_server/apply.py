@@ -98,6 +98,17 @@ def recover(live=False):
  journal['phase']='complete';journal['result']='rolled_back';atomic(JOURNAL,canonical(journal))
  status(journal['operation_id'],journal['release_id'],'rolled_back',journal.get('error','Interrupted deployment recovered'),installed_release=pathlib.Path(journal['previous']).name,previous_release=journal.get('previous_release'))
 
+def normalized_session(folder,checkpoint,manifest):
+ original=json.loads(checkpoint.read_bytes())
+ if manifest.get('checks',{}).get('storage_migrations') is not True:return original
+ destination=checkpoint.with_name(checkpoint.stem+'.migrated-'+uuid.uuid4().hex+'.json')
+ result=subprocess.run([str(folder/'schema-rs'),'migrate','--format','session','--input',str(checkpoint),'--output',str(destination)],check=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,timeout=60)
+ report=json.loads(result.stdout)
+ if report.get('format')!='session' or type(report.get('version')) is not int:raise ValueError('Invalid session migration report')
+ migrated=json.loads(destination.read_bytes())
+ if migrated.get('version')!=report['version']:raise ValueError('Migrated session version differs from report')
+ return migrated
+
 def activate(folder,manifest,operation,rollback=False):
  release=folder.name;previous=os.readlink(BASE/'current');current=(BASE/'current').resolve();trust=read(TRUST,{'highest_sequence':0,'releases':{}});trust['releases'][current.name]=record(current)
  if current==folder.resolve():status(operation,release,'succeeded',installed_release=release,previous_release=trust.get('previous_release'),unchanged=True);return
@@ -109,15 +120,16 @@ def activate(folder,manifest,operation,rollback=False):
  atomic(JOURNAL,canonical(journal));atomic(BARRIER,canonical({'release_id':release}));committed=False
  try:
   status(operation,release,'stopping');system('stop','schema.service');session_bytes=SESSION.read_bytes();expected=json.loads(session_bytes);backups=STATE/'backups';backups.mkdir(mode=0o700,exist_ok=True);checkpoint=backups/(operation+'.json');atomic(checkpoint,session_bytes);metadata=SESSION.stat();journal.update(checkpoint=str(checkpoint),session_owner=[metadata.st_uid,metadata.st_gid],phase='stopped');atomic(JOURNAL,canonical(journal))
+  expected=normalized_session(folder,checkpoint,manifest)
   point(BASE/'current','releases/'+release)
   if(folder/'downloads').is_dir():point(DATA/'downloads',folder/'downloads')
   journal['phase']='switched';atomic(JOURNAL,canonical(journal));status(operation,release,'verifying');system('start','schema.service');restored=ready()
-  for key in ('project','undo','redo'):
+  for key in ('version','project','undo','redo'):
    if restored[key]!=expected[key]:raise ValueError('Restored '+key+' differs')
   if restored['snapshot']['revision']!=expected['snapshot']['revision']:raise ValueError('Restored revision differs')
   if manifest.get('schema')==1 and not rollback:
-   for key in ('inputs','states','plugins'):
-    if restored.get(key)!=expected.get(key):raise ValueError('Restored '+key+' differs')
+   for key in ('inputs','states','plugins','resources','checkpoints'):
+    if restored.get(key,{})!=expected.get(key,{}):raise ValueError('Restored '+key+' differs')
    for key in ('frame','time','paused','blackout'):
     if restored['snapshot'].get(key)!=expected['snapshot'].get(key):raise ValueError('Restored clock/control '+key+' differs')
   if system('show','olad.service','-p','MainPID','--value').stdout.strip()!=ola:raise ValueError('OLA changed during update')

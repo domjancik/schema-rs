@@ -154,7 +154,7 @@ Use Light.Emitter on a source fixture and Light.Receiver on other fixtures to sa
 
 ## Session recovery
 
-The server checkpoints its project, up to 128 undo/redo transactions, clock and native runtime state in `.session/session.json`, separate from portable project files. Normal startup recovers that session with output disarmed; Save project and graceful shutdown flush it. Explicit `--resume-session FILE` supports history-preserving development restarts with the saved output settings. See [session history](docs/session-history.md) for status/export APIs, validation and durability limits.
+The server checkpoints its project, up to 128 undo/redo transactions, clock and native runtime state in `.session/session.json`, separate from portable project files. Normal startup recovers that session with output disarmed; Save project and graceful shutdown flush it. Explicit `--resume-session FILE` supports history-preserving development restarts with the saved output settings. See [session history](docs/session-history.md) for status/export APIs, validation and durability limits, and [storage migrations](docs/storage-migrations.md) for version compatibility and original-file backups.
 
 ## LAN access without restarting the engine
 

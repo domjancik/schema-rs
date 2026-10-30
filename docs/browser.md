@@ -38,3 +38,6 @@ Production editor: https://schema-s.vercel.app/play?view=studio. Animation examp
 ## Saved servers and app updates
 
 Studio and schémaboy include Servers for saved host addresses, manual/QR pairing and direct opening of a host’s own UI. This opens a separate host window; it does not switch the browser engine’s transport. Installed phone apps also retain the pairing screen and local QR tools offline. Servers → App updates checks the published app build and activates waiting service-worker updates only when requested, preserving browser sessions, projects, undo/redo and saved hosts. See [Servers and phone pairing](servers.md).
+
+
+Saved formats use shared [versioned storage migrations](storage-migrations.md). Version 1 projects, sessions and bundles remain readable; first replacement preserves their originals. New saves use version 2, including every retained undo/redo project.

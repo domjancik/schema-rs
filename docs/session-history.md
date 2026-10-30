@@ -35,7 +35,7 @@ schema-rs serve --project ./schema-project --resume-session ./schema-project/.se
 
 `--resume-session`, `--resume-state` and `--fresh-session` are mutually exclusive. Explicit `--resume-session` adopts the complete trusted checkpoint, including its output settings. The legacy `--resume-state` publication format contains no undo/redo and can only reconstruct selected node state; it remains a one-time migration path from older servers. It cannot recover undo entries the older process never exported.
 
-Session schema version is 1. Unknown versions, history over 128 entries, invalid projects/scripts, missing runtime node references, incompatible driven properties and invalid clock/runtime values are rejected. Loading and writing are capped at 64 MiB. JSON nesting is bounded at 160 levels to accommodate valid depth-64 node trees. Session files are trusted local state, not an API upload format or cross-version native plugin-resource snapshot.
+Session schema version is 2; version 1 migrates with all retained history and runtime state. See [storage migrations](storage-migrations.md) for exact original backups and recovery. Unknown future versions, history over 128 entries, invalid projects/scripts, missing runtime node references, incompatible driven properties and invalid clock/runtime values are rejected. Loading and writing are capped at 64 MiB. JSON nesting is bounded at 160 levels to accommodate valid depth-64 node trees. Session files are trusted local state, not an API upload format or cross-version native plugin-resource snapshot.
 
 ## API
 

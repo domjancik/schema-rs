@@ -14,7 +14,7 @@ class Transactions(unittest.TestCase):
   self.old=base/'releases'/('a'*12);self.new=base/'releases'/('b'*12+'-'+'c'*12+'-1')
   for folder in [self.old,self.new]:folder.mkdir();(folder/'schema-rs').write_bytes(b'executable');(folder/'downloads').mkdir()
   (base/'current').symlink_to('releases/'+self.old.name);(data/'downloads').symlink_to(self.old/'downloads')
-  self.session={'project':{'output':{'enabled':False},'name':'Keep me'},'undo':[{'name':'Previous'}],'redo':[],'snapshot':{'revision':19,'time':42}}
+  self.session={'version':1,'project':{'output':{'enabled':False},'name':'Keep me'},'undo':[{'name':'Previous'}],'redo':[],'snapshot':{'revision':19,'time':42}}
   installer.SESSION.write_bytes(canonical(self.session));self.calls=[]
   def system(*args,**kwargs):
    self.calls.append(args)
@@ -39,6 +39,17 @@ class Transactions(unittest.TestCase):
   changed={**self.session,'snapshot':{**self.session['snapshot'],'time':43}}
   with patch.object(installer,'ready',return_value=changed),self.assertRaisesRegex(ValueError,'clock/control time'):installer.activate(self.new,{'schema':1,'sequence':1},'e'*32)
   self.assertEqual((installer.BASE/'current').resolve(),self.old);self.assertFalse(installer.BARRIER.exists())
+ def test_migrated_schema_is_compared_without_replacing_the_original_backup(self):
+  normalized=json.loads(json.dumps(self.session));normalized['version']=2;normalized['project']['version']=2;normalized['undo'][0]['version']=2;normalized['checkpoints']={'Named':normalized['project']};normalized['resources']={'example.bin':[1,2]}
+  with patch.object(installer,'normalized_session',return_value=normalized),patch.object(installer,'ready',return_value=normalized):installer.activate(self.new,{'schema':1,'sequence':1,'checks':{'storage_migrations':True}},'d'*32)
+  journal=installer.read(installer.JOURNAL);self.assertEqual(json.loads(pathlib.Path(journal['checkpoint']).read_bytes()),self.session);self.assertEqual(installer.read(installer.STATUS)['phase'],'succeeded')
+ def test_failed_migration_restores_old_release_and_exact_history(self):
+  with patch.object(installer,'normalized_session',side_effect=ValueError('Unsupported future version')),self.assertRaisesRegex(ValueError,'future version'):installer.activate(self.new,{'schema':1,'sequence':1,'checks':{'storage_migrations':True}},'e'*32)
+  self.assertEqual((installer.BASE/'current').resolve(),self.old);self.assertEqual(json.loads(installer.SESSION.read_bytes()),self.session);self.assertFalse(installer.BARRIER.exists())
+ def test_missing_checkpoint_or_resource_after_upgrade_triggers_recovery(self):
+  expected={**self.session,'checkpoints':{'Saved':self.session['project']},'resources':{'example':[1,2]}};actual={**expected,'checkpoints':{}}
+  with patch.object(installer,'normalized_session',return_value=expected),patch.object(installer,'ready',return_value=actual),self.assertRaisesRegex(ValueError,'checkpoints differs'):installer.activate(self.new,{'schema':1,'sequence':1,'checks':{'storage_migrations':True}},'e'*32)
+  self.assertEqual(json.loads(installer.SESSION.read_bytes()),self.session)
  def test_boot_recovers_interrupted_switch_without_starting_services(self):
   owner=installer.SESSION.stat();backup=installer.STATE/'backup.json';backup.write_bytes(canonical(self.session));installer.atomic(installer.JOURNAL,canonical({'phase':'switched','checkpoint':str(backup),'session_owner':[owner.st_uid,owner.st_gid],'previous':'releases/'+self.old.name,'previous_download':str(self.old/'downloads'),'operation_id':'f'*32,'release_id':self.new.name}));installer.point(installer.BASE/'current','releases/'+self.new.name);installer.BARRIER.write_bytes(b'held');installer.recover()
   self.assertEqual((installer.BASE/'current').resolve(),self.old);self.assertFalse(self.calls);self.assertFalse(installer.BARRIER.exists())

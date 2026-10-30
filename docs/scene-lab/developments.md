@@ -359,3 +359,12 @@ Full native fmt/tests/clippy, true-peer throttling and deterministic expiry, leg
 - Release verification caught and fixed Commands opening before the first scene publication, plus hidden compact-footer error messages. Commands now waits for connection; errors remain visible and accessible. Dedicated delayed-start/no-mutation regression added.
 
 - Final authoring code: `22e1e52` (engine), `30654cc` (UI), `62cad51` (startup/error visibility). Published web asset/WASM hashes and ready Studio/schémaboy startup verified. Signed native activation preserved authored scene and history; fresh login, embedded authoring assets and the history endpoint were checked. Scene lab notified for independent dense-scene and workflow retests.
+
+
+## Versioned storage migrations: implementation pending activation
+
+- Shared ordered Rust migrations now upgrade v1 projects, split layouts/content/output, named-project manifests, sessions and bundles to v2 before typed decoding. All undo/redo projects and named checkpoints migrate; runtime state, clock, providers, components and bytes remain intact.
+- Loads leave sources untouched. Native legacy replacements keep exact originals in adjacent `.migration-backups`; browser backups and replacement share an IndexedDB transaction. Future versions, unknown fields and duplicate keys fail without silently losing saved data.
+- Browser recovery uses raw JSON through Rust, preserving 64-bit random-generator state. Raw project/bundle import/export and raw saved project/resource records avoid client numeric conversions. Existing output-disarming rules remain.
+- Historical v1 golden fixtures, native CLI/API/backups, actual WASM history/runtime retention, atomic IndexedDB failures and migration-aware updater rollback are tested. See [storage migration contract](../storage-migrations.md). No reverse migration is offered; retain originals for older engines.
+- Activation state: implementation only at this entry; running servers have not been replaced yet. Suggested lab retests after activation: open older examples/bundles, save/reopen partial layouts/content, exercise undo/redo and checkpoints after restart, and confirm component/resources survive. Keep isolated engines output-disabled.

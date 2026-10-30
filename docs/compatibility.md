@@ -51,3 +51,6 @@ The client supports saved HTTP(S) host origins, direct Studio/schémaboy links a
 ## Authoring state additions
 
 Nodes optionally carry `bypassed: true`, also preserved in ScenicScript. Sessions optionally include named authored checkpoints and embedded portable resources. These fields are omitted when empty/default. Older engines reject projects/sessions that use these additions; update the target engine before transferring them. A rollback must retain the compatible engine if the older binary cannot validate its saved session. Portable bundles use their own versioned format and are imported through the project API rather than decoded as ordinary projects. See [authoring tools](authoring.md).
+
+
+Saved formats use shared [versioned storage migrations](storage-migrations.md). Version 1 projects, sessions and bundles remain readable; first replacement preserves their originals. New saves use version 2, including every retained undo/redo project.

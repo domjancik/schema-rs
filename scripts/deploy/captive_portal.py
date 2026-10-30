@@ -210,7 +210,7 @@ class PortalHandler(http.server.BaseHTTPRequestHandler):
             return None
         limit = MAX_BODY
         if (self.command == 'POST'
-                and urllib.parse.urlsplit(self.path).path == '/api/projects/bundle'
+                and urllib.parse.urlsplit(self.path).path in ('/api/projects/bundle', '/api/storage/migrate', '/api/projects/import')
                 and self.headers.get_content_type() == 'application/json'
                 and self.host()
                 and self.headers.get('Origin') == 'http://' + self.host()

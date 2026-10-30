@@ -65,6 +65,11 @@ def build(repo,store,signer,config,job,stop):
   phase('build ARM64');run(['cargo','build','--locked','--release','--target','aarch64-unknown-linux-musl'],source,env,log,stop)
   phase('build Windows');run(['cargo','build','--locked','--release'],source,env,log,stop)
   phase('smoke');smoke(cache/'release/schema-rs.exe',source,work,config,log,stop);checks['smoke']=True;checks['gpu_smoke']=bool(config.get('gpu_smoke'))
+  if(source/'src/migrations.rs').exists():
+   phase('storage migration smoke');migration_output=work/'migrated-session.json';run([cache/'release/schema-rs.exe','migrate','--format','session','--input',source/'tests/fixtures/storage-v1/session-late.json','--output',migration_output],source,env,log,stop)
+   migrated=json.loads(migration_output.read_text(encoding='utf8'))
+   if migrated.get('version')!=2 or not migrated.get('undo') or not migrated.get('redo'):raise RuntimeError('Historical migration smoke failed')
+   checks['storage_migrations']=True
   phase('package');output=work/'artifacts';output.mkdir();shutil.copyfile(cache/'aarch64-unknown-linux-musl/release/schema-rs',output/'schema-rs')
   spec=importlib.util.spec_from_file_location('schema_release_packager',source/'scripts/build_desktop.py');packager=importlib.util.module_from_spec(spec);spec.loader.exec_module(packager)
   original=os.getcwd();saved=os.environ.get('CARGO_TARGET_DIR');os.environ['CARGO_TARGET_DIR']=str(cache)

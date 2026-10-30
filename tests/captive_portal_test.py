@@ -54,6 +54,8 @@ class PortalTests(unittest.TestCase):
   payload=b' '*(self.module.MAX_BODY+1)
   allowed={'Cookie':cookie,'Origin':self.origin,'Content-Type':'application/json'}
   self.assertEqual(self.request('POST','/api/projects/bundle',payload,allowed)[0],200)
+  self.assertEqual(self.request('POST','/api/storage/migrate',payload,allowed)[0],200)
+  self.assertEqual(self.request('POST','/api/projects/import',payload,allowed)[0],200)
   self.assertEqual(self.request('POST','/api/command',b'',{**allowed,'Content-Length':str(len(payload))})[0],413)
   self.assertEqual(self.request('POST','/api/projects/bundle',b'',{'Origin':self.origin,'Content-Type':'application/json','Content-Length':str(len(payload))})[0],413)
   self.assertEqual(self.request('POST','/api/projects/bundle',b'',{**allowed,'Origin':'http://other.local','Content-Length':str(len(payload))})[0],413)
