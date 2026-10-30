@@ -1,0 +1,466 @@
+.studio-action-compact,
+.compact-panel-label {
+  display: none;
+}
+.studio-more-menu {
+  display: contents;
+}
+.studio-more-menu > summary {
+  display: none;
+}
+.studio-more-items {
+  display: contents;
+}
+.studio-app .header-actions > :is(#undo, #redo, #save) {
+  order: 1;
+}
+.studio-app .workspace-menu[open],
+.studio-app .panel-menu[open] {
+  position: relative;
+  right: auto;
+  top: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.workspace-menu-items {
+  position: fixed;
+  z-index: 400;
+  max-height: calc(100dvh - 16px);
+  overflow: auto;
+  box-sizing: border-box;
+  padding: 8px;
+  display: grid;
+  gap: 5px;
+  background: var(--ui-panel);
+  border: 1px solid var(--ui-border-strong);
+  border-radius: 8px;
+  box-shadow: var(--ui-shadow);
+}
+.workspace-menu-items > button,
+.workspace-menu-items > select {
+  width: 100%;
+  min-height: 36px;
+  white-space: normal;
+  border-radius: 5px;
+  font: 12px var(--ui-font);
+  padding: 8px;
+  background: var(--ui-panel);
+  color: var(--ui-text);
+  border: 1px solid var(--ui-border);
+}
+.studio-app .workspace-menu:not([open]) > .workspace-menu-items,
+.studio-app .panel-menu:not([open]) > .workspace-menu-items {
+  display: none;
+}
+.studio-app .schema-workspace .workspace-top {
+  min-width: 0;
+}
+.studio-app .workspace-top > div:first-child {
+  min-width: 0;
+}
+.studio-app #stack-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.studio-app .panel-header {
+  min-width: 0;
+}
+.studio-app .panel-header select {
+  min-width: 0;
+}
+.studio-app .panel-header .panel-menu {
+  flex: none;
+}
+.studio-app.studio-compact > header {
+  display: flex;
+  flex-wrap: nowrap;
+  height: 56px;
+  min-height: 56px;
+  box-sizing: border-box;
+  gap: 6px;
+  padding: 6px 8px;
+}
+.studio-compact .brand {
+  min-width: 0;
+  font-size: 0;
+  gap: 0;
+}
+.studio-compact .brand img {
+  width: 24px;
+  height: 24px;
+}
+.studio-app.studio-compact > header > div:not(.header-actions) {
+  flex: 1;
+  min-width: 0;
+  max-width: none;
+}
+.studio-compact #project-name {
+  font-size: 12px;
+  max-width: none;
+}
+.studio-compact > header .muted {
+  display: none;
+}
+.studio-app.studio-compact .header-actions {
+  display: flex;
+  grid-column: auto;
+  flex: 0 0 auto;
+  flex-wrap: nowrap;
+  gap: 2px;
+  width: auto;
+  margin: 0;
+}
+.studio-compact .studio-action-text {
+  display: none;
+}
+.studio-compact .studio-action-compact {
+  display: inline;
+}
+.studio-app.studio-compact .header-actions > :is(#undo, #redo, #save) {
+  order: 0;
+  min-width: 40px;
+  min-height: 44px;
+  padding: 7px;
+  font-size: 13px;
+}
+.studio-compact .studio-more-menu {
+  display: block;
+  order: 2;
+}
+.studio-compact .studio-more-menu > summary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  list-style: none;
+  cursor: pointer;
+  width: 40px;
+  height: 44px;
+  font-size: 24px;
+  color: var(--ui-text);
+  border-radius: 6px;
+}
+.studio-more-menu > summary::-webkit-details-marker {
+  display: none;
+}
+.studio-compact .studio-more-menu[open] > .studio-more-items {
+  position: fixed;
+  z-index: 500;
+  top: 62px;
+  right: 8px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  width: min(340px, calc(100vw - 16px));
+  max-height: calc(100dvh - 78px);
+  overflow: auto;
+  box-sizing: border-box;
+  padding: 12px;
+  background: var(--ui-panel);
+  border: 1px solid var(--ui-border-strong);
+  border-radius: 10px;
+  box-shadow: var(--ui-shadow);
+}
+.studio-compact .studio-more-menu:not([open]) > .studio-more-items {
+  display: none;
+}
+.studio-app.studio-compact .studio-more-items > :is(button, a) {
+  box-sizing: border-box;
+  min-height: 44px;
+  width: 100%;
+  font: 13px/1.3 var(--ui-font);
+  padding: 10px;
+  text-align: left;
+  white-space: normal;
+  background: var(--ui-panel);
+  color: var(--ui-text);
+  border: 1px solid var(--ui-border);
+  border-radius: 6px;
+  text-decoration: none;
+}
+.studio-compact .workspace-tabs {
+  min-width: 0;
+  min-height: 44px;
+  height: auto;
+  overflow: visible;
+  gap: 8px;
+  padding: 4px 8px;
+  box-sizing: border-box;
+}
+.studio-compact .workspace-tabs > button,
+.studio-compact .workspace-hint {
+  display: none;
+}
+.studio-compact .workspace-menu {
+  margin: 0;
+  flex: none;
+}
+.studio-compact .workspace-menu > summary {
+  min-height: 36px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  padding: 6px 8px;
+  font-size: 12px;
+}
+.studio-compact .compact-panel-label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex: 1;
+  min-width: 0;
+  font: 12px var(--ui-font);
+  color: var(--ui-muted);
+}
+.compact-panel-label > select {
+  min-width: 0;
+  flex: 1;
+  min-height: 36px;
+  font-size: 16px;
+  background: var(--ui-panel);
+  color: var(--ui-text);
+  border: 1px solid var(--ui-border);
+  border-radius: 6px;
+  padding: 5px;
+}
+.studio-app.studio-compact .schema-workspace {
+  height: auto;
+  min-height: 0;
+  overflow: hidden;
+}
+.workspace-compact .panel-split,
+.workspace-compact .split-child {
+  display: contents;
+}
+.workspace-compact .panel-divider {
+  display: none;
+}
+.workspace-compact:not(.panel-maximized) .workspace-panel {
+  display: none;
+}
+.workspace-compact:not(.panel-maximized) .workspace-panel.compact-active {
+  display: flex;
+}
+.studio-compact .panel-header {
+  height: auto;
+  min-height: 44px;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 4px 6px;
+  box-sizing: border-box;
+}
+.studio-compact .panel-header :is(button, select, summary) {
+  min-height: 36px;
+  font-size: 12px;
+}
+.studio-compact .panel-header select {
+  max-width: none;
+}
+.studio-compact .panel-header > select:first-of-type {
+  max-width: 130px;
+}
+.studio-compact .panel-header .panel-context {
+  max-width: 120px;
+}
+.studio-compact .panel-header .panel-grip {
+  min-width: 28px;
+}
+.studio-compact .panel-header input[type="checkbox"] {
+  min-height: 0;
+}
+.studio-compact .workspace-top {
+  padding: 6px 10px;
+  min-height: 32px;
+  box-sizing: border-box;
+}
+.studio-compact .workspace-top > div:last-child:empty {
+  display: none;
+}
+.studio-compact .layer-bar {
+  min-height: 44px;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.studio-compact #layers {
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior: contain;
+}
+.studio-compact .scene-form {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.studio-compact .scene-form :is(input, select) {
+  box-sizing: border-box;
+  min-width: 0;
+  width: 100%;
+}
+.studio-compact .inspector :is(input, select, textarea),
+.studio-compact .scene-form :is(input, select),
+.studio-compact .studio-output :is(input, select) {
+  font-size: 16px;
+}
+.studio-compact .studio-output button {
+  min-height: 40px;
+}
+.studio-compact .panel-simple {
+  min-width: 0;
+}
+.studio-compact .workspace-menu-items > :is(button, select) {
+  min-height: 44px;
+  font-size: 14px;
+}
+.studio-compact .workspace-panel.compact-active > .panel-header {
+  box-shadow: inset 0 2px var(--ui-accent);
+}
+.studio-app.studio-compact > footer {
+  min-width: 0;
+  min-height: 22px;
+  height: auto;
+  box-sizing: border-box;
+  padding: 4px 8px;
+  gap: 8px;
+  overflow: hidden;
+}
+.studio-compact #status {
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.studio-compact #frame {
+  display: none;
+}
+.studio-compact .app-credit {
+  flex: none;
+}
+.studio-compact dialog {
+  max-width: calc(100vw - 16px);
+  max-height: calc(100dvh - 16px);
+  box-sizing: border-box;
+}
+.studio-compact #yaml {
+  min-height: 160px;
+  height: 40dvh;
+  max-width: 100%;
+  font-size: 16px;
+}
+.studio-compact .output-connection > label:first-child {
+  min-width: 100%;
+}
+.studio-compact .output-connection button {
+  margin-left: auto;
+}
+@media (pointer: coarse) {
+  .panel-divider {
+    flex-basis: 10px;
+  }
+  .studio-compact .panel-header :is(button, select, summary) {
+    min-height: 40px;
+  }
+  .studio-compact .canvas-tools button {
+    min-width: 40px;
+    min-height: 40px;
+  }
+}
+
+.studio-compact .studio-more-items > #connect {
+  display: block;
+}
+
+.studio-compact .header-actions > :is(#undo, #redo) {
+  font-size: 22px;
+}
+.studio-compact .studio-more-items > #fullscreen-toggle {
+  font-size: 0;
+  background: var(--ui-panel);
+  border: 1px solid var(--ui-border);
+}
+.studio-compact .studio-more-items > #fullscreen-toggle::after {
+  content: "Fullscreen";
+  font: 13px var(--ui-font);
+}
+.studio-compact
+  .studio-more-items
+  > #fullscreen-toggle[aria-pressed="true"]::after {
+  content: "Exit fullscreen";
+}
+.studio-more-items > [hidden] {
+  display: none !important;
+}
+
+.studio-app:not(.studio-compact) .compact-layout-toggle {
+  display: none;
+}
+
+.studio-compact .workspace-tabs {
+  height: 44px;
+  max-height: 44px;
+}
+.studio-compact .compact-panel-label {
+  height: 36px;
+  margin: 0;
+  padding: 0;
+}
+.studio-compact .workspace-top {
+  height: auto;
+  flex: none;
+}
+.studio-compact #stack-name {
+  margin: 0;
+  font: 600 13px/20px var(--ui-font);
+}
+.studio-compact .layer-bar {
+  flex-wrap: nowrap;
+  height: 44px;
+  padding: 4px 8px;
+}
+.studio-compact #layers {
+  flex: 1;
+  max-width: none;
+  min-width: 0;
+  gap: 6px;
+  overscroll-behavior: contain;
+}
+.studio-compact #layers > :is(button, .layer-tab, details) {
+  flex: none;
+}
+.studio-compact #layers .layer-tab button {
+  min-height: 36px;
+  font-size: 12px;
+}
+.studio-compact .layer-bar > #clock {
+  display: none;
+}
+.studio-compact .layer-bar > #pause {
+  flex: none;
+  width: 40px;
+  height: 36px;
+  min-height: 36px;
+  padding: 4px;
+  font-size: 0;
+}
+.studio-compact .layer-bar > #pause::after {
+  content: "Ⅱ";
+  font: 18px var(--ui-font);
+}
+.studio-compact .layer-bar > #pause[aria-label="Resume clock"]::after {
+  content: "▶";
+}
+.workspace-compact #canvas {
+  min-height: 80px;
+}
+.workspace-compact
+  .workspace-panel[data-view="stack"]
+  .panel-header
+  [aria-label="Panel layer"] {
+  display: none;
+}
+.workspace-compact .panel-header > .panel-grip {
+  display: none;
+}

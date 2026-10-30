@@ -89,6 +89,7 @@ function contrast(a, b) {
       }
       await page.getByLabel("Close projects", { exact: true }).click();
       await page.locator("#output-design").click();
+      await page.locator('.workspace-panel[data-view="output"]').getByRole("button", {name: "Dimming", exact: true}).click();
       const output = page.getByRole("dialog", { name: "Output design" });
       await output
         .getByRole("button", { name: "Daily dimming", exact: true })

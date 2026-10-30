@@ -12,7 +12,7 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE);
     const base = process.env.SCHEMA_URL || 'http://127.0.0.1:8822';
     await page.goto(base + '/?view=studio');
     await page.locator('.workspace-panel').nth(2).waitFor();
-    assert.equal(await page.locator('.workspace-panel').count(), 3);
+    assert.equal(await page.locator('.workspace-panel').count(), 4);
     const revision = await page.evaluate(() =>
       fetch('/api/state')
         .then((r) => r.json())

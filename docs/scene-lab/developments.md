@@ -338,3 +338,11 @@ Suggested lab retest: save two controller origins, switch each preferred view, e
 Native LAN hosting supports an explicitly configured four-ASCII-digit PIN or an existing16+ character token. Four-digit guesses are bounded using the real TCP peer, not forwarded headers, with per-peer/shared windows and bounded storage. Missing/stale long tokens do not consume the PIN allowance. Portal forms support configured four or six digits while preserving CSRF/session protection. Provisioning validators accept the WPA2 minimum password length. Defaults do not contain shared credentials.
 
 Full native fmt/tests/clippy, true-peer throttling and deterministic expiry, legacy-key/PIN, portal proxy/CSRF and deployment regression checks pass. Signed native builds and isolated smoke checks pass. Operational activation records are kept privately; no device addresses, credentials or deployment metadata are added here. Generic guide: docs/access-pins.md.
+
+## Compact Studio and independent Output panels
+
+- Studio uses a single-row mobile header with Undo, Redo and Save; secondary actions remain available in the overflow menu, including Connection. The panel selector opens every view at full width. Workspace offers focused-panel and full-split presentation without replacing the saved desktop arrangement.
+- Output now occupies its own vertically split pane below Stack editor in the factory Authoring layout. Custom layouts remain intact, and Output opens or focuses its own pane when requested. Fixture setup and Stack editor no longer contain output telemetry.
+- Duplicate Output instances retain independent drafts, universe and channel selection. Revision conflicts retain edits until explicit reload; incoming telemetry never overwrites an unsaved destination.
+- Verified compact bounds at 320×568, 390×844, 768×1024 and 844×390, desktop split persistence, menu access, contrast and independent Output drafts against an output-disabled isolated engine. Dense-scene marker/footer issue SL-005 remains open pending its own independent retest.
+- Scene views now retain their unchanged 3D renderer across snapshot refreshes, preserving open fixture-position dialogs. Studio/schémaboy/WebGL/WebGPU placement, camera instances and actual WASM editing/session recovery passed.

@@ -91,6 +91,42 @@ pub(crate) fn routes() -> Router<AppState> {
                 )
             }),
         )
+        .route(
+            "/output-panel.js",
+            get(|| async {
+                (
+                    [(header::CONTENT_TYPE, "text/javascript")],
+                    include_str!("../web/output-panel.js"),
+                )
+            }),
+        )
+        .route(
+            "/output-panel.css",
+            get(|| async {
+                (
+                    [(header::CONTENT_TYPE, "text/css")],
+                    include_str!("../web/output-panel.css"),
+                )
+            }),
+        )
+        .route(
+            "/studio-shell.js",
+            get(|| async {
+                (
+                    [(header::CONTENT_TYPE, "text/javascript")],
+                    include_str!("../web/studio-shell.js"),
+                )
+            }),
+        )
+        .route(
+            "/studio-shell.css",
+            get(|| async {
+                (
+                    [(header::CONTENT_TYPE, "text/css")],
+                    include_str!("../web/studio-shell.css"),
+                )
+            }),
+        )
         .route("/downloads/latest.json", get(release_info))
         .route("/downloads/Schema-s-Windows-x64.zip", get(download_zip))
         .route("/downloads/SHA256SUMS.txt", get(download_checksums))

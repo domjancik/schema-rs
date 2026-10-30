@@ -48,3 +48,12 @@ assert.equal(W.panels(W.active(dock).root).length, 3);
 W.validate(dock);
 dock = W.close(dock, dockPanels[0].id);
 assert.equal(W.panels(W.active(dock).root).length, 2);
+
+const factory=W.create(),oldSetup=W.panel('setup'),oldStack=W.panel('stack',{fixture:'fixture-2',layer:1}),oldInspector=W.panel('inspector');
+factory.workspaces[0].root={kind:'split',id:'factory-root',axis:'x',ratio:.21,a:oldSetup,b:{kind:'split',id:'factory-right',axis:'x',ratio:.72,a:oldStack,b:oldInspector}};
+const migrated=W.upgradeAuthoring(factory);assert.equal(W.panels(W.active(migrated).root).length,4);assert.deepEqual(W.find(migrated,oldStack.id).context,oldStack.context);
+const output=W.panels(W.active(migrated).root).find(p=>p.view==='output');
+const closedOutput=W.upgradeAuthoring(W.close(migrated,output.id));
+assert.equal(W.panels(W.active(closedOutput).root).filter(p=>p.view==='output').length,0,'Closing Output must survive the next load');
+const customized=structuredClone(factory);customized.workspaces[0].root.ratio=.35;assert.equal(W.panels(W.active(W.upgradeAuthoring(customized)).root).length,3,'Custom splits must not migrate');
+assert.equal(W.panels(W.active(W.ensureOutput(migrated)).root).length,4,'Opening existing Output does not duplicate it');

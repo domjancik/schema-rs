@@ -282,8 +282,34 @@
       w.name = name.trim();
     });
   }
+  function outputSplit(stack) {
+    return { kind: 'split', id: id(), axis: 'y', ratio: 0.7, a: stack, b: panel('output') };
+  }
+  function authoringRoot() {
+    return {kind:'split',id:id(),axis:'x',ratio:.21,a:panel('setup'),b:{kind:'split',id:id(),axis:'x',ratio:.72,a:outputSplit(panel('stack')),b:panel('inspector')}};
+  }
+  function upgradeAuthoring(state) {
+    const next=copy(state);
+    if(next.authoringLayoutVersion===2)return validate(next);
+    next.authoringLayoutVersion=2;
+    for(const workspace of next.workspaces){
+      const r=workspace.root;
+      if(workspace.name==='Authoring'&&r.kind==='split'&&r.axis==='x'&&r.ratio===.21&&r.a.view==='setup'&&r.b.kind==='split'&&r.b.axis==='x'&&r.b.ratio===.72&&r.b.a.view==='stack'&&r.b.b.view==='inspector') r.b.a=outputSplit(r.b.a);
+    }
+    return validate(next);
+  }
+  function ensureOutput(state,target) {
+    if(panels(active(state).root).some(p=>p.view==='output'))return copy(state);
+    return change(state,(_,workspace)=>{
+      const all=panels(workspace.root),anchor=all.find(p=>p.id===target)||all.find(p=>p.view==='stack')||all[0];
+      workspace.root=replace(workspace.root,anchor.id,outputSplit);
+    });
+  }
   const api = {
     views,
+    authoringRoot,
+    upgradeAuthoring,
+    ensureOutput,
     create,
     validate,
     panels,

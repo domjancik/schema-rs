@@ -29,7 +29,7 @@
     const storage = 'schema-workspaces-v1';
     let state;
     try {
-      state = W.validate(JSON.parse(localStorage.getItem(storage)));
+      state = W.upgradeAuthoring(W.validate(JSON.parse(localStorage.getItem(storage))));
     } catch {
       state = defaults();
     }
@@ -39,33 +39,29 @@
       timer,
       drag = null;
     const bodies = new Map();
+    const compactMedia=matchMedia('(max-width:900px), (max-width:1100px) and (max-height:500px)');
+    let compactSplit=false;try{compactSplit=localStorage.getItem('schema-compact-split')==='1';}catch{}
+    function compactFocused(){return compactMedia.matches&&!compactSplit;}
+    let compactChoices={};try{compactChoices=JSON.parse(localStorage.getItem('schema-compact-panels-v1')||'{}');if(!compactChoices||typeof compactChoices!=='object')compactChoices={};}catch{}
+    function compactId(){const all=leaves();return all.find(p=>p.id===compactChoices[state.active])?.id||all.find(p=>p.view==='stack')?.id||all[0]?.id;}
+    function applyCompact(){main.classList.toggle('workspace-compact',compactFocused());const active=compactId();for(const[id,{pane}]of bodies)pane.classList.toggle('compact-active',id===active);const picker=bar.querySelector('[aria-label="Studio panel"]');if(picker)picker.value=active;}
+    function chooseCompact(id){compactChoices[state.active]=id;try{localStorage.setItem('schema-compact-panels-v1',JSON.stringify(compactChoices));}catch{}maximized=null;if(W.find(state,id)?.view==='stack')focus(id);applyMaximize();}
+    compactMedia.addEventListener('change',()=>applyMaximize());
+    function menuItems(details,summary){
+      const items=element('div',undefined,'workspace-menu-items');details.append(summary,items);
+      details.addEventListener('toggle',()=>{if(!details.open)return;const r=summary.getBoundingClientRect(),width=Math.min(260,innerWidth-16);items.style.width=width+'px';items.style.left=Math.max(8,Math.min(innerWidth-width-8,r.right-width))+'px';items.style.top=Math.max(8,Math.min(innerHeight-items.offsetHeight-8,r.bottom+6))+'px';});
+      return items;
+    }
+
     const bar = element('nav', undefined, 'workspace-tabs');
     bar.setAttribute('aria-label', 'Workspaces');
     main.before(bar);
     main.classList.add('schema-workspace');
-    function authoring() {
-      const scene = W.panel('setup'),
-        stack = W.panel('stack'),
-        inspector = W.panel('inspector');
-      return {
-        kind: 'split',
-        id: crypto.randomUUID(),
-        axis: 'x',
-        ratio: 0.21,
-        a: scene,
-        b: {
-          kind: 'split',
-          id: crypto.randomUUID(),
-          axis: 'x',
-          ratio: 0.72,
-          a: stack,
-          b: inspector
-        }
-      };
-    }
+    function authoring() { return W.authoringRoot(); }
     function defaults() {
       const s = W.create();
       s.workspaces[0].root = authoring();
+      s.authoringLayoutVersion=2;
       return W.validate(s);
     }
     function persist() {
@@ -141,7 +137,9 @@
       };
       const menu = element('details', undefined, 'workspace-menu'),
         summary = element('summary', 'Workspace ▾');
-      menu.append(summary);
+      const workspaceMenuItems=menuItems(menu,summary),workspaceChoice=element('select');
+      workspaceChoice.setAttribute('aria-label','Choose workspace');for(const w of state.workspaces)workspaceChoice.append(new Option(w.name,w.id));workspaceChoice.value=state.active;workspaceChoice.onchange=()=>change(s=>W.workspace(s,workspaceChoice.value));workspaceMenuItems.append(workspaceChoice);const compactToggle=element('button',compactSplit?'Focus one panel':'Show split layout','compact-layout-toggle');compactToggle.onclick=()=>{compactSplit=!compactSplit;try{localStorage.setItem('schema-compact-split',compactSplit?'1':'0');}catch{}applyMaximize();tabs();};workspaceMenuItems.append(compactToggle);
+
       for (const [title, action] of [
         ['Rename workspace', rename],
         ['Delete workspace', () => change((s) => W.workspace(s, 'delete'))],
@@ -173,9 +171,12 @@
           menu.open = false;
           action();
         };
-        menu.append(b);
+        workspaceMenuItems.append(b);
       }
       bar.append(add, menu);
+      const paneLabel=element('label',undefined,'compact-panel-label'),paneChoice=element('select');paneLabel.append(element('span','Panel'));paneChoice.setAttribute('aria-label','Studio panel');
+      const counts={};for(const p of leaves())counts[p.view]=(counts[p.view]||0)+1;const seen={};for(const p of leaves()){seen[p.view]=(seen[p.view]||0)+1;paneChoice.append(new Option(labels[p.view]+(counts[p.view]>1?' '+seen[p.view]:''),p.id));}paneChoice.value=compactId();paneChoice.onchange=()=>chooseCompact(paneChoice.value);paneLabel.append(paneChoice);bar.append(paneLabel);
+
       const hint = element(
         'span',
         'Drag a header to dock · Ctrl Space maximize',
@@ -208,7 +209,7 @@
       const controls = element('details', undefined, 'panel-menu'),
         summary = element('summary', '⋯');
       summary.setAttribute('aria-label', 'Panel actions');
-      controls.append(summary);
+      const panelMenuItems=menuItems(controls,summary);
       for (const [title, action] of [
         ['Split side by side', () => change((s) => W.split(s, panel.id, 'x'))],
         ['Split above / below', () => change((s) => W.split(s, panel.id, 'y'))],
@@ -227,7 +228,7 @@
           controls.open = false;
           action();
         };
-        controls.append(b);
+        panelMenuItems.append(b);
       }
       h.append(controls);
       h.ondblclick = (e) => {
@@ -351,7 +352,7 @@
           frame.contentWindow?.postMessage(
             {
               type: 'schema-panel-visibility',
-              active: !maximized || maximized === id,
+              active: maximized ? maximized === id : !compactFocused() || compactId() === id,
               maximized: maximized === id
             },
             location.origin
@@ -367,6 +368,7 @@
       main.classList.toggle('panel-maximized', !!maximized);
       for (const [id, entry] of bodies)
         entry.pane.classList.toggle('maximized', id === maximized);
+      applyCompact();
       framePolicy();
     }
     window.addEventListener('message', (event) => {
@@ -387,7 +389,7 @@
       applyMaximize();
     });
     function draw() {
-      for(const entry of bodies.values())entry.body._dmxTest?.destroy();
+      for(const entry of bodies.values()){entry.body._dmxTest?.destroy();entry.body._outputPanel?.destroy();entry.body._sceneCamera?.destroy();}
       Object.values(legacy).forEach((n) => stash.append(n));
       bodies.clear();
       main.replaceChildren(node(W.active(state).root));
@@ -547,13 +549,18 @@
     focused = leaves().find((p) => p.view === 'stack')?.id || null;
     load(W.find(state, focused));
     draw();
+    save(true);
     return {
       refresh: attach,
       tick() {
         for (const [id, entry] of bodies) {
           const panel = W.find(state, id);
-          if (panel) options.live?.(panel, entry.body);
+          if (panel && (!maximized || maximized===id) && (!compactFocused() || maximized===id || compactId()===id)) options.live?.(panel, entry.body);
         }
+      },
+      output(){
+        if(!leaves().some(p=>p.view==='output'))change(s=>W.ensureOutput(s,focused));
+        const output=leaves().find(p=>p.view==='output');if(output){chooseCompact(output.id);bodies.get(output.id)?.pane.querySelector('.panel-header select')?.focus();}
       },
       focus,
       focused: () => focused,

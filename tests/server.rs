@@ -127,6 +127,10 @@ async fn native_studio_serves_shared_interface_assets() {
         "/servers-core.js",
         "/servers-ui.js",
         "/servers.css",
+        "/studio-shell.js",
+        "/studio-shell.css",
+        "/output-panel.js",
+        "/output-panel.css",
         "/app-updates.js",
         "/vendor/qrcode.js",
         "/vendor/jsQR.js",
@@ -152,6 +156,10 @@ async fn native_studio_serves_shared_interface_assets() {
             assert!(body.contains("SchemaPlacement"));
         } else if path == "/fixture-placement.css" {
             assert!(body.contains("fixture-placement-overlay"));
+        } else if path == "/studio-shell.css" {
+            assert!(body.contains(".studio-compact"));
+        } else if path == "/output-panel.css" {
+            assert!(body.contains(".studio-output"));
         } else if path.ends_with(".css") {
             assert!(body.contains("--ui-accent-fill"));
         } else {
