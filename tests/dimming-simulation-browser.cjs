@@ -80,6 +80,12 @@ const server = http.createServer((req, res) => {
         document.getElementById("frame")?.textContent.includes("REV " + rev),
       revision,
     );
+    await page.evaluate(() =>
+      Object.defineProperty(crypto, "randomUUID", {
+        value: undefined,
+        configurable: true,
+      }),
+    );
     await page.evaluate(() => SchemaOutput.open("dimming"));
     await page.getByLabel("Current schedule time", { exact: true }).waitFor();
     await page.locator(".timeline-now").waitFor();

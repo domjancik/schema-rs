@@ -23,7 +23,11 @@
   };
   function mount(host, options) {
     const t = structuredClone(options.timeline),
-      owner = crypto.randomUUID();
+      owner =
+        "time-" +
+        Array.from(crypto.getRandomValues(new Uint8Array(16)), (v) =>
+          v.toString(16).padStart(2, "0"),
+        ).join("");
     let preview = null,
       playing = false,
       applied = false,
