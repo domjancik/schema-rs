@@ -34,3 +34,6 @@ node scripts/gpu/build-vendor.cjs
 Verification includes pure capture/rotation/immutability adapter tests, embedded asset and preset validation, actual native-Chrome WebGPU and software-WebGL2 frames, all38Carpushitlights, point/plane/spot shader paths, effect toggles, import error recovery, explicit mocked revisioned load, closed-view lifecycle, and Studio/phone viewport entry points. Preview tests reject unintended engine commands and do not enable physical output. Native Chrome GPU verification uses an isolated browser profile with GPU test flags; no performance guarantee or physical fixture test is implied.
 
 Primary references: [Three.js universal renderer](https://threejs.org/manual/pages/webgpurenderer), [SSGI example](https://threejs.org/examples/webgpu_postprocessing_ssgi), [volume lighting](https://threejs.org/examples/webgpu_volume_lighting). Optik’s local scene view informed the workflow separation; no Optik/CUDA simulator code is required.
+
+
+Scene preview panels open directly and stay in their workspace pane; use the panel view selector to change views. A standalone preview has Return to Studio. Escape restores a maximized pane without closing its Scene view.

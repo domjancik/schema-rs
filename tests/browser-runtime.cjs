@@ -8,7 +8,7 @@ assert(fs.existsSync(path.join(root, 'studio.html')), 'Build the browser host fi
 const types = {'.html':'text/html','.js':'text/javascript','.mjs':'text/javascript','.wasm':'application/wasm','.json':'application/json','.css':'text/css','.svg':'image/svg+xml'};
 const server = http.createServer((req,res) => {
   const url = new URL(req.url,'http://localhost');
-  let name = url.pathname === '/play' ? '/studio.html' : url.pathname === '/mobile' ? '/mobile.html' : url.pathname === '/preview' ? '/preview.html' : url.pathname;
+  let name = ['/play','/app'].includes(url.pathname) ? '/studio.html' : url.pathname === '/mobile' ? '/mobile.html' : url.pathname === '/preview' ? '/preview.html' : url.pathname;
   const file = path.resolve(root,'.'+name);
   const config=JSON.parse(fs.readFileSync(path.resolve('scripts/publication/vercel.json'),'utf8'));
   const policy=config.headers.find(group=>group.source===url.pathname)||config.headers[0];
@@ -69,6 +69,20 @@ const server = http.createServer((req,res) => {
     await page.locator('#undo').click();
     await page.waitForFunction(position=>JSON.stringify(ui.data.project.fixtures[0].position)===JSON.stringify(position),beforePlacement.project.fixtures[0].position);
     assert.deepEqual((await state()).project,beforePlacement.project);
+    // Preview panels must never navigate the protected Studio inside an iframe.
+    await page.locator('.workspace-panel[data-view=scene]').getByRole('combobox',{name:'View type',exact:true}).selectOption('gpu');
+    const previewFrame=await (await page.locator('iframe.panel-preview').elementHandle()).contentFrame();
+    await previewFrame.waitForFunction(()=>Number(document.querySelector('#preview-stats')?.dataset.frames)>1);
+    assert.equal(await previewFrame.locator('a[href], #scene-preview').count(),0);
+    assert.equal(await previewFrame.locator('#preview-close').isVisible(),false);
+    await previewFrame.press('#preview-canvas','Escape');
+    assert.equal(await previewFrame.locator('#scene-preview-dialog').isVisible(),true);
+    await page.goto(base+'/preview?quality=low&backend=webgl');
+    await page.waitForFunction(()=>Number(document.querySelector('#preview-stats')?.dataset.frames)>1);
+    await page.getByRole('button',{name:'Return to Studio',exact:true}).click();
+    await page.waitForURL('**/app?view=studio');
+    await page.waitForFunction(()=>window.SchemaEngine?.kind==='browser'&&document.querySelector('#world .block'));
+    assert.deepEqual((await state()).project,beforePlacement.project,'Preview navigation preserves authored state');
     await page.goto(base+'/animation-demo.html');
     await page.waitForFunction(()=>document.querySelector('.shape').style.getPropertyValue('--schema-value')!=='');
     const css=await page.locator('.shape').first().getAttribute('style');await page.waitForTimeout(100);assert.notEqual(await page.locator('.shape').first().getAttribute('style'),css);

@@ -77,7 +77,8 @@ export async function open(adapter = {}) {
     current = null;
   }
   if (current) {
-    current.dialog.showModal();
+    if (current.page) current.dialog.show();
+    else current.dialog.showModal();
     if (current.view) current.view.start();
     else await current.initialize();
     return;
@@ -93,7 +94,18 @@ export async function open(adapter = {}) {
   link.href = "/scene-preview.css";
   document.head.append(link);
   document.body.append(dialog);
-  dialog.showModal();
+  if (adapter.page) {
+    dialog.classList.add("preview-page");
+    if (adapter.embedded) {
+      dialog.classList.add("preview-embedded");
+      dialog.querySelector(".preview-heading").hidden = true;
+    } else {
+      const back = dialog.querySelector("#preview-close");
+      back.textContent = "← Studio";
+      back.setAttribute("aria-label", "Return to Studio");
+    }
+    dialog.show();
+  } else dialog.showModal();
 
   if (matchMedia("(max-width:700px), (pointer:coarse)").matches)
     dialog.querySelector("#preview-quality").value = "low";
@@ -108,6 +120,7 @@ export async function open(adapter = {}) {
   const $ = (id) => dialog.querySelector("#" + id),
     state = (current = {
       dialog,
+      page: !!adapter.page,
       view: null,
       frame: null,
       geometry: null,
@@ -444,7 +457,11 @@ export async function open(adapter = {}) {
     }
   }
 
-  $("preview-close").onclick = () => dialog.close();
+  $("preview-close").onclick = () => {
+    if (!adapter.page) dialog.close();
+    else if (!adapter.embedded)
+      location.assign(window.SchemaEngine?.kind === "browser" ? "/app?view=studio" : "/?view=studio");
+  };
   dialog.addEventListener("close", () => {
     serial++;
     loading = false;

@@ -226,3 +226,19 @@
 }
 .preview-navigation{position:absolute;right:10px;top:10px;width:166px;z-index:5;background:#14211ee8;border:1px solid #527767;border-radius:9px;color:#dce7eb;max-height:calc(100% - 20px);overflow:auto;overscroll-behavior:contain;box-shadow:0 5px 20px #0005}.preview-navigation summary{padding:9px 12px;min-height:40px;cursor:pointer;position:sticky;top:0;background:#14211ef5;z-index:1;font-size:12px}.preview-navigation button{min-height:40px;min-width:40px;padding:5px!important;font-size:11px!important;touch-action:none}.camera-modes,.camera-zoom,.camera-presets{display:flex;gap:4px;padding:4px 7px}.camera-modes button{flex:1}.camera-modes [aria-pressed=true]{background:#72dec2!important;color:#11261f!important}.camera-pad{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:4px 7px}.camera-pad [data-camera=up]{grid-column:2}.camera-pad [data-camera=left]{grid-column:1}.camera-pad [data-camera=down]{grid-column:2}.camera-zoom button{flex:1}.camera-presets{flex-wrap:wrap}.camera-presets button{flex:1;min-width:65px}.preview-navigation output{display:block;font:10px Consolas,monospace;padding:6px 10px}.preview-navigation p{font-size:9px!important;line-height:1.55;margin:0;padding:3px 9px 10px;color:#9fb8ac}#preview-canvas:focus-visible{outline:2px solid #72dec2;outline-offset:-3px}@media(max-width:700px),(pointer:coarse){.preview-navigation{top:6px;right:6px;width:154px}.preview-navigation button{min-height:44px}.preview-navigation summary{min-height:44px}.preview-navigation:not([open]){width:auto;min-width:85px}}
 .camera-modes button,.camera-presets button{touch-action:manipulation}
+
+/* A Scene panel is the view itself; it has no modal launcher underneath. */
+.preview-app { margin: 0; padding: 0; overflow: hidden; }
+:root #scene-preview-dialog.preview-page[open] {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100dvh;
+  max-height: 100dvh;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  padding: 10px;
+}
+#scene-preview-dialog.preview-embedded .preview-heading { display: none; }
+#scene-preview-dialog.preview-page #preview-close { font-size: inherit; }

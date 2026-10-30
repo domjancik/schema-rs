@@ -39,6 +39,15 @@ const base = process.env.SCHEMA_URL || "http://127.0.0.1:8823";
       ),
     );
     for(const frame of frames){try{await frame.waitForFunction(()=>Number(document.querySelector('#preview-stats')?.dataset.frames)>1,{timeout:30000});}catch(error){console.log('Frame startup failure',frame.url(),await frame.locator('body').innerText());throw error;}}
+    for (const frame of frames) {
+      assert.equal(await frame.locator('#scene-preview').count(), 0, 'Embedded scene has no intermediate opening screen');
+      assert.equal(await frame.locator('a[href]').count(), 0, 'Embedded scene must not navigate Studio inside its iframe');
+      assert.equal(await frame.locator('#preview-close').isVisible(), false, 'A workspace view is changed through the panel controls');
+      assert.equal(await frame.locator('#scene-preview-dialog').evaluate(e => e.matches(':modal')), false, 'Embedded scene is a persistent panel, not a modal');
+      await frame.locator('#preview-canvas').focus();
+      await frame.press('#preview-canvas', 'Escape');
+      assert.equal(await frame.locator('#scene-preview-dialog').isVisible(), true, 'Escape cannot expose an opening screen');
+    }
     const pose = (frame) =>
       frame
         .locator("#preview-camera-status")
@@ -83,6 +92,12 @@ const base = process.env.SCHEMA_URL || "http://127.0.0.1:8823";
       () => !document.querySelector(".workspace-panel.maximized"),
     );
     assert.equal(await original.evaluate((e) => e.isConnected), true);
+    await page.goto(base + '/preview?quality=low&backend=webgl');
+    await page.getByRole('button', { name: 'Return to Studio', exact: true }).waitFor();
+    assert.equal(await page.locator('#scene-preview-dialog').evaluate(e => e.matches(':modal')), false);
+    await page.getByRole('button', { name: 'Return to Studio', exact: true }).click();
+    await page.waitForURL(base + '/?view=studio');
+    await page.locator('.workspace-panel').first().waitFor();
     assert.deepEqual(errors, []);
     console.log(
       "Independent GPU cameras, embedded maximize/restore, renderer preservation and hidden-preview pause passed.",

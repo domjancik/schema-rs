@@ -117,6 +117,11 @@ const base = process.env.SCHEMA_URL || "http://127.0.0.1:8788";
     assert.equal(commands[0].command.type, "replace_project");
     assert.equal(commands[0].command.project.fixtures.length, 38);
     assert.equal(commands[0].command.project.output.enabled, false);
+    // The standalone page stays open; exercise modal close/reopen in Studio.
+    await page.getByRole('button', { name: 'Return to Studio', exact: true }).click();
+    await page.waitForURL(base + '/?view=studio');
+    await page.evaluate(() => SchemaScenePreview.open());
+    await page.waitForFunction(() => Number(document.querySelector('#preview-stats')?.dataset.frames) > 1);
     await page.locator("#preview-close").click();
     const frames = await page
       .locator("#preview-stats")
@@ -127,7 +132,7 @@ const base = process.env.SCHEMA_URL || "http://127.0.0.1:8788";
       frames,
       "Closed preview stops rendering/publishing",
     );
-    await page.locator("#scene-preview").click();
+    await page.evaluate(() => SchemaScenePreview.open());
     await page.locator("#scene-preview-dialog").waitFor({ state: "visible" });
     await page.setViewportSize({ width: 390, height: 844 });
     await page.waitForTimeout(300);

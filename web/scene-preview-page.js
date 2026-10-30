@@ -1,6 +1,5 @@
 "use strict";
-document.getElementById("scene-preview").onclick = () =>
-  SchemaScenePreview.open();
+SchemaScenePreview.configure({ page: true, embedded: parent !== window });
 SchemaScenePreview.open();
 
 if (parent !== window) {
