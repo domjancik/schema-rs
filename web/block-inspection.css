@@ -1,9 +1,9 @@
 .block-attributes {
   position: absolute;
   left: 12px;
-  right: 12px;
-  bottom: 5px;
-  height: 20px;
+  right: 54px;
+  bottom: 7px;
+  height: 18px;
   display: flex;
   align-items: center;
   gap: 7px;
@@ -14,10 +14,9 @@
   color: inherit;
   pointer-events: none;
 }
-.has-attributes .node-meter,
-.has-attributes .node-value {
-  visibility: hidden;
-}
+.has-attributes .node-meter { bottom: 3px; left: 12px; right: 12px; height: 2px; }
+.has-attributes .node-meter i { height: 2px; }
+.has-attributes .node-value { visibility: visible; }
 .attribute-colors {
   display: inline-flex;
   gap: 3px;

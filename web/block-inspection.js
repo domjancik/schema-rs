@@ -172,6 +172,20 @@
     if (node._attributeSample === signature) return;
     node._attributeSample = signature;
     const attrs = sample.outgoing.attributes;
+    const output =
+      attrs.value ??
+      attrs.colors?.[0]?.slice(0, 3).reduce((a, b) => a + b, 0) / 3;
+    const readout = node.querySelector(".node-value");
+    if (readout) {
+      readout.textContent = Number.isFinite(output) ? output.toFixed(2) : "—";
+      readout.title =
+        attrs.value !== undefined
+          ? "Output value"
+          : "Brightness · mean RGB of first pixel";
+    }
+    const meter = node.querySelector(".node-meter i");
+    if (meter)
+      meter.style.width = `${Math.max(0, Math.min(1, output || 0)) * 100}%`;
     if (node.namespaceURI === "http://www.w3.org/2000/svg") {
       let group = node.querySelector(".block-attributes");
       if (group) group.remove();
@@ -184,14 +198,14 @@
         y =
           Number(body.getAttribute("y")) +
           Number(body.getAttribute("height")) -
-          8;
+          10;
       for (const color of (attrs.colors || []).slice(0, 4)) {
         const rect = document.createElementNS(node.namespaceURI, "rect");
         for (const [k, v] of Object.entries({
           x,
           y,
           width: 9,
-          height: 5,
+          height: 4,
           rx: 1,
           fill: `rgb(${color
             .slice(0, 3)
@@ -206,14 +220,11 @@
       }
       const text = node.querySelector(".node-output");
       if (text)
-        text.textContent =
-          attrs.value !== undefined
-            ? number(attrs.value)
-            : attrs.colors
-              ? "Color"
-              : attrs.position
-                ? "Position"
-                : "—";
+        text.textContent = Number.isFinite(output)
+          ? output.toFixed(2)
+          : attrs.position
+            ? "Position"
+            : "—";
       node.append(group);
       return;
     }
@@ -391,7 +402,7 @@
     format,
     bank(t) {
       const sample = cache.get(key(t));
-      return sample?.revision === adapter?.revision()
+      return sample && sample.revision === adapter?.revision()
         ? sample.outgoing.attributes
         : undefined;
     },

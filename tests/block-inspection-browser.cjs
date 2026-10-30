@@ -91,6 +91,17 @@ const server = http.createServer((req, res) => {
     });
     await page.addStyleTag({ url: "/block-inspection.css" });
     await page.addScriptTag({ url: "/block-inspection.js" });
+    assert(
+      await page.evaluate(
+        () =>
+          SchemaInspection.bank({
+            fixture: "fixture-1",
+            layer: 0,
+            node: 20,
+          }) === undefined,
+      ),
+      "Before configuration there is no captured bank",
+    );
     await page.evaluate(() => {
       SchemaInspection.configure({
         selection: () => ({ fixture: "fixture-1", layer: 0, node: 20 }),
@@ -115,6 +126,12 @@ const server = http.createServer((req, res) => {
       await outgoing.locator("[data-color]").first().getAttribute("data-color"),
       "0.5,0,0,1",
     );
+    const brightness = page.locator(".block .node-value");
+    assert(
+      await brightness.isVisible(),
+      "Color output must retain its numeric brightness readout",
+    );
+    assert.equal(await brightness.textContent(), "0.17");
     const compact = await page.evaluate(() =>
       player.request("/api/state/compact"),
     );
@@ -150,6 +167,22 @@ const server = http.createServer((req, res) => {
     await page.waitForSelector('[data-attributes="outgoing"]');
     await page.screenshot({ path: "target/inspection-studio.png" });
     console.log("Starting phone check");
+    await page.locator(".debug-control:visible").first().click();
+    await page.waitForSelector(".block.is-debug-output");
+    assert(
+      await page
+        .locator(".block.is-debug-output .node-value")
+        .first()
+        .isVisible(),
+      "Output focus keeps the brightness value visible",
+    );
+    assert.notEqual(
+      await page
+        .locator(".block.is-debug-output .node-value")
+        .first()
+        .textContent(),
+      "—",
+    );
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto(
       "http://127.0.0.1:" + server.address().port + "/mobile.html",

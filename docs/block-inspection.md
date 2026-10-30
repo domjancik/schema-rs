@@ -13,3 +13,6 @@ Arrays include their total count but return at most eight elements. Texture resp
 `POST /api/inspection` accepts `{ "targets": [{ "fixture": "fixture-1", "layer": 0, "node": 1 }] }`. The reply identifies each sample's frame/revision and incoming/outgoing attributes. It does not increment the authored revision. `GET /api/state/compact` carries the ordinary scene snapshot with node trace maps omitted; Studio/schémaboy use this route. The existing full state endpoint and internal/recovery traces remain available for compatibility. Native and browser hosts share the capture implementation; the browser worker keeps inspection and scene evaluation off the UI thread.
 
 Regression tests check exact incoming versus outgoing color, pass-through semantics, bounded large buffers, independent client caches, unchanged runtime/undo state, native compact transport, real WASM previews, full Studio/phone access and idle request suppression.
+
+
+The numeric output value and meter remain visible beside color swatches, including during output focus. Scalar banks show Value; color-only banks retain the previous brightness readout (mean RGB of the first pixel). This is a block readout before fixture/global dimming. Output focus highlights the block being routed to its fixture; simply opening Output does not enable focus.
