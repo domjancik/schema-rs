@@ -72,6 +72,9 @@ async function wait(check) {
     await p.locator(".workspace-panel:visible").waitFor();
     async function action(query, label) {
       await p.waitForFunction(() => !document.querySelector("dialog[open]"));
+      await p.waitForFunction(
+        () => !document.querySelector("#command-palette")?.disabled,
+      );
       await p.keyboard.press("Control+Shift+P");
       const d = p.getByRole("dialog", { name: "Commands", exact: true });
       await d.getByLabel("Search actions", { exact: true }).fill(query);
@@ -242,7 +245,9 @@ async function wait(check) {
       hasTouch: true,
     });
     await mobile.goto(base + "/mobile");
-    await mobile.locator("#command-palette").waitFor({ state: "attached" });
+    await mobile
+      .locator("#command-palette:not([disabled])")
+      .waitFor({ state: "attached" });
     await mobile.keyboard.press("Control+Shift+P");
     await mobile
       .getByRole("dialog", { name: "Commands", exact: true })

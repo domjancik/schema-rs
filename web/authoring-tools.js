@@ -155,6 +155,7 @@ window.SchemaAuthoring = (() => {
   function update(data) {
     latest = data;
     if (!data || !adapter) return;
+    if (paletteButton) paletteButton.disabled = false;
     syncControls();
     const s = data.snapshot,
       p = data.project,
@@ -751,6 +752,10 @@ window.SchemaAuthoring = (() => {
   }
   async function open() {
     if (!adapter) return;
+    if (!latest?.project) {
+      notify("Wait for the scene to connect");
+      return;
+    }
     try {
       await window.SchemaAppNavigation?.flush();
       for (let i = 0; adapter.pending?.() && i < 100; i++)
@@ -813,6 +818,7 @@ window.SchemaAuthoring = (() => {
     if (actions) {
       paletteButton = button("Commands", open);
       paletteButton.id = "command-palette";
+      paletteButton.disabled = true;
       paletteButton.title = "Search actions (Ctrl/Cmd+Shift+P)";
       actions.append(paletteButton);
     }

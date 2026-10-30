@@ -279,7 +279,7 @@ button.state-chip {
     padding: 2px 4px;
   }
   .studio-compact > footer #status {
-    font-size: 0;
+    font-size: 9px;
   }
   .block-state-controls button {
     min-height: 40px;
@@ -361,4 +361,12 @@ button.state-chip {
 
 .authoring-state .state-danger {
   order: -2;
+}
+
+.studio-compact > footer #status[data-error="true"] {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.studio-compact > footer:has(#status[data-error="true"]) .authoring-state {
+  max-width: 35%;
 }
