@@ -225,7 +225,7 @@ class PortalHandler(http.server.BaseHTTPRequestHandler):
         nonce = self.server.auth.challenge(self.client_address[0])
         html = ('<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1">'
                 '<title>Schéma device login</title><style>' + STYLE + '</style></head><body><main>'
-                '<div class="brand">SCHEMA / LOCAL CONTROL</div><h1>Your room. Your controls.</h1>'
+                '<div class="brand">SCHÉMA / LOCAL CONTROL</div><h1>Your room. Your controls.</h1>'
                 '<p>Sign in to open the lighting control panel.</p><p class="error">' + error + '</p>'
                 '<form method="post" action="/login"><input type="hidden" name="nonce" value="' + nonce + '">'
                 '<label for="pin">Device PIN</label><input id="pin" name="pin" type="password" inputmode="numeric" '

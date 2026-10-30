@@ -406,3 +406,9 @@ Physical output remains disabled, matching the previous state. The scene's nativ
 The universe grid now draws each fixture footprint as one labelled, coloured frame, matching the corresponding fixture card. Individual channel numbers and exact-address drop targets remain intact. Fixtures crossing rows keep the same colour/name with a continuation marker; the grid responds between 32 desktop and 16 mobile columns. Channel descriptions include custom-model slot names, including constant Program channels. Mobile fixture cards now fit their container.
 
 Source implementation only; the Orange Pi and public deployment have not been updated for this change. No live project, output, session or history changes. Browser regression covers adjacent fixtures, custom two-channel models, single-channel fixtures at 512, multi-pixel row wrapping, mobile resizing, drag/drop address preservation and close/reopen. Retest the UV two-slot example and crowded multi-channel patches when activated.
+
+## Accented frontend product name
+
+Display branding now uses Schéma-s/schéma consistently across Studio, landing-page wordmarks and copy, browser animation demo, mobile About link, server pairing/offline screens, page titles/accessibility names, installed-app full name and the Orange Pi captive-login template. Existing schémaboy names were retained. Technical identifiers, package/download filenames, API/storage keys, hostnames, routes and the PWA installation identity are unchanged.
+
+Source change only, pending publication/device activation. Browser export packaging, visible HTML/accessibility text and manifest-identity checks pass; the existing product browser assertion expects the accented page title. Retest Studio/landing/server and phone-install labels on activation. No live scene/history/output changes.
