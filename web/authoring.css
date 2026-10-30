@@ -1,0 +1,364 @@
+:root {
+  --state-selected: #326ba8;
+  --state-live: #16745c;
+  --state-preview: #46647e;
+  --state-debug: #8c5800;
+  --state-warning: #8c5800;
+  --state-danger: #af303c;
+  --state-bypassed: #68727e;
+}
+[data-theme="dark"] {
+  --state-selected: #83b8ff;
+  --state-live: #72dec2;
+  --state-preview: #9db8d1;
+  --state-debug: #ffd07b;
+  --state-warning: #ffd07b;
+  --state-danger: #ff9ba6;
+  --state-bypassed: #b2bac6;
+}
+.authoring-dialog {
+  width: min(540px, calc(100vw - 20px));
+  max-height: calc(100dvh - 20px);
+  box-sizing: border-box;
+  overflow: auto;
+  background: var(--ui-panel);
+  color: var(--ui-text);
+  border: 1px solid var(--ui-border-strong);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: var(--ui-shadow);
+  font: 14px var(--ui-font);
+}
+.authoring-dialog > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0;
+  margin: 0 0 12px;
+  background: transparent;
+}
+.authoring-dialog h2 {
+  font-size: 19px;
+  margin: 0;
+}
+.authoring-dialog p {
+  line-height: 1.5;
+  color: var(--ui-muted);
+}
+.authoring-dialog label {
+  display: grid;
+  gap: 6px;
+  margin: 10px 0;
+}
+.authoring-dialog :is(button, input, select) {
+  font: inherit;
+  background: var(--ui-panel);
+  color: var(--ui-text);
+  border: 1px solid var(--ui-border);
+  border-radius: 6px;
+  min-height: 40px;
+  padding: 8px;
+  box-sizing: border-box;
+  min-width: 0;
+}
+.authoring-dialog :is(input, select) {
+  width: 100%;
+}
+.authoring-dialog input[type="checkbox"] {
+  width: 20px;
+  min-height: 20px;
+  accent-color: var(--state-selected);
+}
+.authoring-results {
+  display: grid;
+  gap: 5px;
+  max-height: 42dvh;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+.authoring-results > button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  text-align: left;
+}
+.authoring-results > button small {
+  font-size: 11px;
+  color: var(--ui-muted);
+}
+.authoring-results > button[data-active="true"],
+.authoring-results > button[aria-current="true"] {
+  border-color: var(--state-selected);
+  box-shadow: inset 3px 0 var(--state-selected);
+}
+.authoring-results kbd {
+  font-size: 10px;
+  color: var(--ui-muted);
+  flex: none;
+}
+.checkpoint-row {
+  display: flex;
+  gap: 6px;
+}
+.checkpoint-row > button:first-child {
+  flex: 1;
+  text-align: left;
+}
+.arrange-fixtures {
+  max-height: 26dvh;
+  overflow: auto;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px;
+}
+.arrange-fixtures label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 6px;
+  min-width: 0;
+}
+.block-state-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 8px 0;
+}
+.block-state-controls button {
+  font: 12px var(--ui-font);
+  min-height: 34px;
+  border: 1px solid var(--ui-border);
+  background: var(--ui-panel);
+  color: var(--ui-text);
+  border-radius: 5px;
+  padding: 6px 9px;
+}
+.block-state-controls .bypass-control[aria-pressed="true"] {
+  border-style: dashed;
+  border-color: var(--state-bypassed);
+  color: var(--state-bypassed);
+}
+.block-state-controls .debug-control[aria-pressed="true"] {
+  border-color: var(--state-debug);
+  color: var(--state-debug);
+}
+.block.is-bypassed .block-shell path,
+.node.is-bypassed .node-body {
+  stroke: var(--state-bypassed) !important;
+  stroke-dasharray: 7 4;
+}
+.block.is-bypassed :is(strong, .node-properties, .tree-icon),
+.node.is-bypassed > text {
+  opacity: 0.58;
+}
+.block-state-badge {
+  position: absolute;
+  left: 12px;
+  top: -9px;
+  padding: 2px 5px;
+  background: var(--ui-panel);
+  color: var(--state-bypassed);
+  border: 1px dashed currentColor;
+  border-radius: 4px;
+  font: 600 8px var(--ui-font);
+  pointer-events: none;
+  z-index: 2;
+  white-space: nowrap;
+}
+.block.is-debug-output .block-shell path,
+.node.is-debug-output .node-body {
+  stroke: var(--state-debug) !important;
+  stroke-width: 3px !important;
+}
+.block.is-debug-output:not(.is-bypassed) .block-state-badge {
+  color: var(--state-debug);
+  border-style: solid;
+}
+.block.selected .block-shell path,
+.node.selected .node-body {
+  stroke: var(--state-selected);
+}
+.block.selected.is-debug-output {
+  filter: drop-shadow(0 0 3px var(--state-selected));
+}
+.studio-app .layer-tab button.active {
+  background: var(--ui-panel);
+  color: var(--state-selected);
+  box-shadow: inset 0 -3px var(--state-selected);
+}
+.studio-app .layer-tab input {
+  accent-color: var(--state-live);
+}
+.fixture-layout.active,
+.fixture-layout-dot {
+  stroke: var(--state-selected) !important;
+}
+.schematic-label {
+  paint-order: stroke;
+  stroke: var(--ui-panel);
+  stroke-width: 3px;
+  stroke-linejoin: round;
+  fill: var(--ui-text);
+}
+.authoring-state {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex: none;
+  max-width: 65%;
+  overflow: auto;
+  white-space: nowrap;
+}
+.state-chip {
+  font: 600 10px var(--ui-font);
+  padding: 3px 6px;
+  border: 1px solid currentColor;
+  border-radius: 5px;
+  display: inline-block;
+  white-space: nowrap;
+  background: var(--ui-panel);
+}
+button.state-chip {
+  cursor: pointer;
+  min-height: 0;
+}
+.state-selected {
+  color: var(--state-selected);
+}
+.state-live {
+  color: var(--state-live);
+}
+.state-preview {
+  color: var(--state-preview);
+}
+.state-paused,
+.state-bypassed {
+  color: var(--state-bypassed);
+}
+.state-debug {
+  color: var(--state-debug);
+}
+.state-warning {
+  color: var(--state-warning);
+}
+.state-danger {
+  color: var(--state-danger);
+}
+.authoring-dialog dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px;
+  font-size: 12px;
+}
+.authoring-dialog dt {
+  font-weight: 600;
+}
+.authoring-dialog dd {
+  margin: 0;
+  color: var(--ui-muted);
+}
+@media (max-width: 600px) {
+  .authoring-dialog :is(input, select) {
+    font-size: 16px;
+  }
+  .authoring-dialog :is(button, input, select) {
+    min-height: 44px;
+  }
+  .arrange-fixtures {
+    grid-template-columns: 1fr;
+  }
+  .authoring-state {
+    gap: 3px;
+    max-width: 70%;
+  }
+  .state-chip {
+    font-size: 9px;
+    padding: 2px 4px;
+  }
+  .studio-compact > footer #status {
+    font-size: 0;
+  }
+  .block-state-controls button {
+    min-height: 40px;
+  }
+}
+
+.studio-app {
+  grid-template-columns: minmax(0, 1fr);
+}
+.studio-app > header {
+  min-width: 0;
+}
+.studio-compact #project-name {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.authoring-state .state-debug {
+  order: -1;
+}
+.screen-caption .authoring-state {
+  max-width: 150px;
+  min-height: 14px;
+}
+.screen-caption .state-chip {
+  font-size: 8px;
+  padding: 1px 3px;
+}
+.preview-output-state {
+  flex: none;
+  font-size: 11px !important;
+  min-height: 30px !important;
+}
+.node.is-bypassed .node-body {
+  fill-opacity: 0.45;
+}
+
+.block.selected .block-shell path,
+.node.selected .node-body {
+  stroke: var(--state-selected) !important;
+}
+.block.is-debug-output .block-shell path,
+.node.selected.is-debug-output .node-body {
+  stroke: var(--state-debug) !important;
+}
+
+.studio-app #fixtures button.active,
+.studio-app .workspace-tab.active,
+.studio-app .workspace-tabs > button.active,
+.view-switch button[aria-pressed="true"] {
+  border-color: var(--state-selected);
+  background: color-mix(in srgb, var(--state-selected) 13%, var(--ui-panel));
+  color: var(--ui-text);
+}
+.workspace-compact .workspace-panel.compact-active > .panel-header,
+.workspace-panel.active > .panel-header {
+  box-shadow: inset 0 2px var(--state-selected);
+}
+
+.block.is-bypassed :is(strong, .node-properties) {
+  opacity: 1;
+  color: var(--ui-muted);
+}
+.node.is-bypassed > text {
+  opacity: 1;
+  fill: var(--ui-muted);
+}
+
+.authoring-dialog > header {
+  height: auto;
+  min-height: 0;
+}
+.authoring-dialog :focus-visible {
+  outline: 2px solid var(--state-selected);
+  outline-offset: 2px;
+}
+
+.authoring-state .state-danger {
+  order: -2;
+}

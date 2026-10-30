@@ -334,6 +334,13 @@ export async function open(adapter = {}) {
 
   function update(frame) {
     if (!state.view || !frame) return;
+    let outputState=dialog.querySelector('.preview-output-state');
+    if(!outputState){outputState=document.createElement('button');outputState.type='button';outputState.className='preview-output-state state-chip';dialog.querySelector('.preview-controls').append(outputState);}
+    const debug=frame.snapshot.debug_focus,blackout=frame.snapshot.blackout;
+    outputState.textContent=debug?(blackout?'Blackout · Debug · Stop focus':'Debug output · Stop'):blackout?'Blackout':state.source!=='live'?'Preset preview':window.SchemaEngine?.kind==='browser'?'Browser preview':frame.project.output?.enabled?'Live output':'Capture only';
+    outputState.className='preview-output-state state-chip state-'+(blackout?'danger':debug?'debug':frame.project.output?.enabled?'live':'preview');
+    outputState.title=debug?'Temporary block output focus is active; the program continues running. Stop to restore normal output.':outputState.textContent;
+    outputState.onclick=async()=>{if(!debug)return;try{const command={type:'set_debug_focus',target:null};if(adapter.command)await adapter.command(command,frame.snapshot.revision);else await window.SchemaEngine.request('/api/command',{command,expected_revision:frame.snapshot.revision});}catch(error){outputState.title=error.message;}};
     const useOverrides =
       state.source === "carpushit" ||
       (state.preset &&

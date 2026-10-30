@@ -34,7 +34,7 @@
   render();box.showModal();input.focus();
  }
  async function openProjects(){document.activeElement?.blur();for(let i=0;adapter.pending?.()&&i<100;i++)await new Promise(resolve=>setTimeout(resolve,50));if(adapter.pending?.()){notify('Wait for the current edit to finish before saving');return;}await SchemaProjects.open();}
- function configure(value){adapter=value;}
+ function configure(value){adapter=value;global.SchemaAuthoring?.configure(value);}
  window.addEventListener('keydown',event=>{if(!adapter||event.defaultPrevented||event.isComposing||!(event.ctrlKey||event.metaKey)||event.altKey)return;const key=event.key.toLowerCase();if(key==='s'){event.preventDefault();if(!event.repeat&&!document.querySelector('dialog[open]'))openProjects();return;}if(/INPUT|TEXTAREA|SELECT/.test(event.target.tagName)||event.target.isContentEditable||document.querySelector('dialog[open]'))return;if(key==='d'||key==='k'||key==='y'){event.preventDefault();if(!event.repeat){if(key==='d')duplicate();else if(key==='k')findFixture();else adapter.commit({type:'redo'},adapter.getRevision());}return;}if(!['c','x','v'].includes(key))return;if(key!=='v'&&window.getSelection()?.toString())return;event.preventDefault();if(key==='c'||key==='x')copy(event.shiftKey?'block':'branch',key==='x');else if(event.shiftKey)options();else paste();});
  global.SchemaBlockUI={configure,copy,paste,options,move,moveOut,drop,duplicate,findFixture,recoverSelection};
 })(globalThis);

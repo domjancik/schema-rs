@@ -127,6 +127,9 @@ async fn native_studio_serves_shared_interface_assets() {
         "/servers-core.js",
         "/servers-ui.js",
         "/servers.css",
+        "/authoring-core.js",
+        "/authoring-tools.js",
+        "/authoring.css",
         "/studio-shell.js",
         "/studio-shell.css",
         "/output-panel.js",
@@ -160,10 +163,57 @@ async fn native_studio_serves_shared_interface_assets() {
             assert!(body.contains(".studio-compact"));
         } else if path == "/output-panel.css" {
             assert!(body.contains(".studio-output"));
+        } else if path == "/authoring.css" {
+            assert!(body.contains("--state-selected"));
         } else if path.ends_with(".css") {
             assert!(body.contains("--ui-accent-fill"));
         } else {
             assert!(body.contains("href=\"/interface.css\""), "{path}");
         }
     }
+}
+
+#[tokio::test]
+async fn portable_bundle_route_accepts_large_bounded_resources_and_rejects_traversal() {
+    let runtime = Runtime::start(Project::demo()).unwrap();
+    let app = router(AppState::new(
+        runtime.controller.clone(),
+        std::env::temp_dir(),
+        None,
+    ));
+    let session = runtime.controller.checkpoint().await.unwrap();
+    let mut bundle = schema_rs::bundle::Bundle::from_session(&session);
+    bundle
+        .resources
+        .insert("media/example.bin".into(), vec![42; 600_000]);
+    let payload = serde_json::to_vec(
+        &serde_json::json!({"bundle":bundle,"expected_revision":session.snapshot.revision}),
+    )
+    .unwrap();
+    assert!(payload.len() > 512 * 1024);
+    let response = app
+        .clone()
+        .oneshot(
+            Request::builder()
+                .method("POST")
+                .uri("/api/projects/bundle")
+                .header("content-type", "application/json")
+                .body(Body::from(payload))
+                .unwrap(),
+        )
+        .await
+        .unwrap();
+    assert_eq!(response.status(), StatusCode::OK);
+    let after = runtime.controller.checkpoint().await.unwrap();
+    assert_eq!(after.resources["media/example.bin"].len(), 600_000);
+    assert!(!after.project.output.enabled);
+    let before = after.project.clone();
+    let mut invalid = schema_rs::bundle::Bundle::from_session(&after);
+    invalid.resources.insert("../escape".into(), vec![1]);
+    let response=app.oneshot(Request::builder().method("POST").uri("/api/projects/bundle").header("content-type","application/json").body(Body::from(serde_json::to_vec(&serde_json::json!({"bundle":invalid,"expected_revision":after.snapshot.revision})).unwrap())).unwrap()).await.unwrap();
+    assert_eq!(response.status(), StatusCode::BAD_REQUEST);
+    assert_eq!(
+        runtime.controller.checkpoint().await.unwrap().project,
+        before
+    );
 }

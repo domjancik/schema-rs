@@ -3,6 +3,33 @@ use axum::{http::header, routing::get, Router};
 pub(crate) fn routes() -> Router<AppState> {
     Router::new()
         .route(
+            "/authoring-core.js",
+            get(|| async {
+                (
+                    [(header::CONTENT_TYPE, "text/javascript")],
+                    include_str!("../web/authoring-core.js"),
+                )
+            }),
+        )
+        .route(
+            "/authoring-tools.js",
+            get(|| async {
+                (
+                    [(header::CONTENT_TYPE, "text/javascript")],
+                    include_str!("../web/authoring-tools.js"),
+                )
+            }),
+        )
+        .route(
+            "/authoring.css",
+            get(|| async {
+                (
+                    [(header::CONTENT_TYPE, "text/css")],
+                    include_str!("../web/authoring.css"),
+                )
+            }),
+        )
+        .route(
             "/app",
             get(|| async { axum::response::Html(include_str!("../web/index.html")) }),
         )

@@ -124,6 +124,30 @@ const server = http.createServer((req,res) => {
     const deterministic=await page.evaluate(async()=>{const {SchemaPlayer}=await import('/schema-player.mjs');const a=await SchemaPlayer.create({autoTick:false}),b=await SchemaPlayer.create({autoTick:false});try{const x=await a.advance(.1),y=await b.advance(.1);const same=JSON.stringify(x.snapshot.fixtures)===JSON.stringify(y.snapshot.fixtures);await a.request('/api/import',{fixture:'fixture-1',layer:0,yaml:'name: Script test\nstack:\n  Script.Value: {Code: \"0.25 + 0.5\"}\n',expected_revision:0});const scripted=await a.advance(.1);const scriptWorks=scripted.snapshot.fixtures[0].result.value===.75;a.dispose();let rejected=false;try{await a.advance(.1);}catch{rejected=true;}return same&&rejected&&scriptWorks;}finally{a.dispose();b.dispose();}});assert(deterministic);
     assert.deepEqual(apiRequests,[],'No engine API requests leave the browser');
     assert.deepEqual(errors,[]);
-    console.log('WASM editor, placement, saved servers, app update/history, animation, revision conflicts, project save and Worker isolation passed');
+
+    const authoring=await page.evaluate(async()=>{
+      const request=(path,body)=>SchemaEngine.request(path,body),state=()=>request('/api/state');
+      const command=async command=>request('/api/command',{command,expected_revision:(await state()).snapshot.revision});
+      await command({type:'save_checkpoint',name:'WASM before bundle'});
+      const before=await state(),fixture=before.project.fixtures[0],root=before.project.content[fixture.id][0].root;
+      await command({type:'set_node_bypassed',fixture:fixture.id,layer:0,node:root.id,bypassed:true});
+      const yaml=await request('/api/export/'+fixture.id+'/0');
+      if(!yaml.includes('bypassed'))return false;
+      await command({type:'history_jump',offset:-1});
+      if((await state()).project.content[fixture.id][0].root.bypassed)return false;
+      const bundle=await request('/api/projects/bundle');bundle.project.name='WASM portable';bundle.resources['browser/example.bin']=[5,8,13];
+      bundle.plugins.packages.demo={folder:'gain',enabled:true,manifest:{api_version:1,id:'demo',version:'1.0.0',components:[{name:'Gain',description:'Portable native graph',defaults:{Gain:2},graph:{'Modify.Value.MapTo':{Minimum:0,Maximum:'$Gain',in:[{'Plugin.Input':null}]}}}]}};
+      await request('/api/projects/bundle',{bundle,expected_revision:(await state()).snapshot.revision});
+      const catalog=await request('/api/catalog');if(!catalog.some(b=>b.key==='Plugin.demo.Gain'))return false;
+      await command({type:'set_debug_focus',target:{fixture:fixture.id,layer:0,node:root.id}});
+      await request('/api/session/save',{});
+      const session=await request('/api/session');return session.project.name==='WASM portable'&&!session.project.output.enabled&&session.resources['browser/example.bin'][2]===13&&!!session.checkpoints['WASM before bundle']&&session.undo.length>0;
+    });
+    assert(authoring,'Actual WASM supports bypass, atomic history, checkpoints and portable resources/components');
+    await page.reload();await page.waitForFunction(()=>SchemaEngine?.kind==='browser'&&document.querySelector('#save'));
+    const recovered=await page.evaluate(()=>SchemaEngine.request('/api/session'));
+    assert.equal(recovered.project.name,'WASM portable');assert(recovered.checkpoints['WASM before bundle']);assert.deepEqual(recovered.resources['browser/example.bin'],[5,8,13]);assert(!recovered.snapshot.debug_focus,'Debug output never resumes after reload');assert.equal(recovered.project.output.enabled,false);assert(recovered.undo.length>0);
+    assert.deepEqual(errors,[]);assert.deepEqual(apiRequests,[]);
+    console.log('WASM authoring, portable resources/plugins, checkpoint/history persistence, transient debug, editing and Worker isolation passed');
   } finally {await browser.close();server.close();}
 })().catch(e=>{console.error(e);server.close();process.exitCode=1;});

@@ -123,6 +123,7 @@
       camera = null;
     }
     let placement;
+    let labelKey="",labelPositions=[];
     let automaticFit = !camera;
     let width = 360,
       height = 200,
@@ -278,6 +279,7 @@
                 '0'
               )
             : f.fixture.name;
+          const fullLabel=label.textContent;if([...fullLabel].length>24)label.textContent=[...fullLabel].slice(0,23).join('')+'…';
           g.append(label);
           g.onkeydown = (e) => {
             if (e.key === 'Enter' || e.key === ' ') {
@@ -290,7 +292,13 @@
             if (e.detail === 0 && performance.now() > selectionUntil) options.select(f.fixture.id);
           };
           view.append(g);
+          if(label.getComputedTextLength()>180)label.textContent=[...fullLabel].slice(0,11).join('')+'…';
         });
+      if(global.SchemaAuthoringCore){
+        const points=[...view.querySelectorAll('[data-scene-fixture]')].map(g=>{const dot=g.querySelector('.fixture-layout-dot');return {id:g.dataset.sceneFixture,name:g.querySelector('.schematic-label').textContent,labelWidth:g.querySelector('.schematic-label').getComputedTextLength(),x:Number(dot.getAttribute('cx')),y:Number(dot.getAttribute('cy'))};});
+        const key=JSON.stringify([width,height,options.selected(),points]);if(key!==labelKey){labelKey=key;labelPositions=global.SchemaAuthoringCore.labels(points,width,height,options.selected());}
+        for(const label of labelPositions){const text=view.querySelector(`[data-scene-fixture="${CSS.escape(label.id)}"] .schematic-label`);text.setAttribute('x',label.x);text.setAttribute('y',label.y+12);text.style.display=label.visible?'':'none';}
+      }
       if (focusedFixture) {
         const item = [...view.querySelectorAll('[data-scene-fixture]')].find(
           (e) => e.dataset.sceneFixture === focusedFixture
@@ -370,7 +378,12 @@
       if (!pointers.size) {
         selectionUntil = performance.now() + 400;
         if (moved) commit();
-        else if (!multi && p.fixture) options.select(p.fixture);
+        else if (!multi) {
+          const point=new DOMPoint(e.clientX,e.clientY).matrixTransform(view.getScreenCTM().inverse());
+          const points=[...view.querySelectorAll('[data-scene-fixture]')].map(g=>{const dot=g.querySelector('.fixture-layout-dot'),fixture=state().project.fixtures.find(f=>f.id===g.dataset.sceneFixture);return {...fixture,x:Number(dot.getAttribute('cx')),y:Number(dot.getAttribute('cy'))};});
+          const near=global.SchemaAuthoringCore?.hits(points,point.x,point.y,e.pointerType==='touch'?26:18)||[];
+          if(near.length>1&&global.SchemaAuthoring)global.SchemaAuthoring.choose(near,options.select,e);else if(near[0]||p.fixture)options.select(near[0]?.id||p.fixture);
+        }
       }
     }
     view.onpointerup = (e) => end(e);

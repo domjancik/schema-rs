@@ -184,6 +184,7 @@
     const message = el("p");
     message.setAttribute("role", "status");
     dialog.append(head, description, grid, settings, actions, message);
+    const arrange=el("button","Arrange fixtures…");arrange.type="button";arrange.onclick=()=>{dialog.close();global.SchemaAuthoring?.arrange();};dialog.append(arrange);
     document.body.append(dialog);
     let lastDraw = null;
     let gesture = null,

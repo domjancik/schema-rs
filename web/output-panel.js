@@ -163,7 +163,19 @@ window.SchemaOutputPanel = (() => {
       const config = data.project.output,
         isUsb = config.transport === "open_dmx";
       title.textContent = isUsb ? "Open DMX USB output" : "Art-Net output";
-      status.textContent = data.snapshot.output_status;
+      status.textContent =
+        (data.snapshot.blackout ? "Blackout · " : "") +
+        (data.snapshot.debug_focus ? "Debug output · " : "") +
+        data.snapshot.output_status;
+      status.className =
+        "state-" +
+        (data.snapshot.blackout
+          ? "danger"
+          : data.snapshot.debug_focus
+            ? "debug"
+            : config.enabled
+              ? "live"
+              : "preview");
       if (!dirty && !busy) {
         revision = data.snapshot.revision;
         target.value = config.target;

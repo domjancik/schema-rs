@@ -291,20 +291,11 @@ export class SceneView {
         -((event.clientY - rect.top) / rect.height) * 2 + 1,
       );
       this.raycaster.setFromCamera(this.pointer, this.camera);
-      const hit = this.raycaster.intersectObjects([
-        this.layoutMarkers,
-        this.markers,
-      ])[0];
-      if (hit) {
-        const id = (
-          hit.object === this.layoutMarkers ? this.layouts : this.picked
-        )[hit.instanceId];
-        if (id) {
-          this.selected = id;
-          this.onSelect(id);
-          if (this.data) this.update(this.data);
-        }
-      }
+      const hits = this.raycaster.intersectObjects([this.layoutMarkers,this.markers]);
+      const ids=[...new Set(hits.map(hit=>(hit.object===this.layoutMarkers?this.layouts:this.picked)[hit.instanceId]).filter(Boolean))];
+      if(this.data&&globalThis.SchemaAuthoringCore){for(const fixture of this.data.fixtures){const point=new T.Vector3().fromArray(fixture.layoutPosition).project(this.camera);if(point.z<-1||point.z>1)continue;const x=(point.x+1)*rect.width/2+rect.left,y=(1-point.y)*rect.height/2+rect.top;if(Math.hypot(event.clientX-x,event.clientY-y)<(event.pointerType==='touch'?26:15)&&!ids.includes(fixture.id))ids.push(fixture.id);}}
+      const select=id=>{this.selected=id;this.onSelect(id);if(this.data)this.update(this.data);};
+      if(ids.length>1&&globalThis.SchemaAuthoring){globalThis.SchemaAuthoring.choose(ids.map(id=>{const fixture=this.data.fixtures.find(f=>f.id===id);return {id,name:fixture?.name||id};}),select,event);}else if(ids[0])select(ids[0]);
     });
     this.listen(this.canvas, "pointercancel", (event) => {
       pointers.delete(event.pointerId);
