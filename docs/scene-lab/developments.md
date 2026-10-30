@@ -450,3 +450,14 @@ Validation for `Add pan and zoom navigation to Fixture setup`: pure projection/i
 At the user’s explicit request, the retained random-dim workspace at `http://127.0.0.1:18798/?view=studio` was upgraded from its older copied lab engine to signed release `f553bb1558ec-8ef694475951-38` (source `f553bb1`). The original v1 session was backed up and migrated to v2. Carpushit - dim random breathing retains all 34 fixtures, revision 7 and seven undo entries; output remains disabled. Native executable digest/signature and served frontend content against current HEAD were checked after activation.
 
 The exact workspace is enrolled as `scene-lab-random-dim` in the existing updater. The updater reloaded enrollment and automatically advanced the first managed build to f553bb1, verifying history restoration. Use the same URL for authoring and retests. Example source data and named projects were retained.
+
+
+## Organizational fixture colors — 2026-10-30
+
+Commits `ce40419` and `2c905be` add optional `marker_color` fixture metadata and Fixture setup color/clear controls in Studio and Schémaboy. Desktop multi-selection commits one native batch. Markers appear in fixture navigation, authored layout handles/rings, embedded stack headers, overlap/finder choices and grouped universe patch borders. They never enter evaluated attributes, lighting or DMX. Older projects remain unmarked; sessions, bundles and layout saves retain marks. Marker-only Undo, Redo and HistoryJump retain running node state.
+
+Signed release `2c905be32999-1e39cda32b4b-40` is active on managed local ports 18798/8788/8797; the enrolled Pi push succeeded with scene/history preserved and OLA unchanged. Public website publication remains separately pending authentication; this note does not claim public activation. Full native tests, fmt and strict Clippy, browser marker/standalone universe regressions, and browser plus macOS CI passed. Release signature and live Studio HTTP were independently verified.
+
+The scene lab applied the accepted family palette to all 34 fixtures in live Carpushit random-dim on 18798, using one expected-revision batch, and saved the named project. Revision 8, eight undo entries, output disabled. Comparing against the private pre-edit session proves only marker fields changed: programs, patch, dimming and positions are identical. Scalar-only playback stays neutral white. Prepared Carpushit color banks and preview emission metadata are white; violet identifies UV fixtures for navigation. Bundled preset geometry/roster and GLB are unchanged.
+
+The scene lab has the release details and an isolated-clone retest request for marker-only undo/redo/history while Random.Dim runs. Do not exercise this verification against live user history. Marker guides and evidence live under `docs/scene-lab/carpushit-markers.md` and `docs/scene-lab/evidence/carpushit-markers/`.
