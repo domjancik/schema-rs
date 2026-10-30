@@ -57,6 +57,8 @@ jobs:
         run: PLAYWRIGHT_MODULE="$RUNNER_TEMP/schema-browser-tests/node_modules/playwright" node tests/dmx-lightness-browser.cjs
       - name: Studio numeric and enum editors
         run: node tests/property-editors-core.cjs && PLAYWRIGHT_MODULE="$RUNNER_TEMP/schema-browser-tests/node_modules/playwright" node tests/property-editors-browser.cjs
+      - name: Stack context breadcrumbs
+        run: node tests/stack-navigation-core.cjs && PLAYWRIGHT_MODULE="$RUNNER_TEMP/schema-browser-tests/node_modules/playwright" node tests/stack-navigation-browser.cjs
       - name: Universe fixture grouping
         run: PLAYWRIGHT_MODULE="$RUNNER_TEMP/schema-browser-tests/node_modules/playwright" node tests/universe-groups-browser.cjs
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4

@@ -505,3 +505,10 @@ Validation includes native fmt/full test/strict Clippy/build, pure range/precisi
 ## Accented product branding audit — 2026-10-31
 
 Pending activation: audited visible HTML text, accessibility labels and app manifest; local Studio and published /app already render Schéma-s. Corrected remaining native labels in the Windows console title (UTF-8 codepage before the accented title), macOS bundle display/name/menu/alerts/network-permission text, terminal heading, Linux service description and human-readable scene coordinate metadata. Stable package filenames, executable/app-data paths, service identifiers and protocol keys retain their existing spelling. A branding regression checks visible frontend/PWA names and native labels; package tests check the generated Windows launcher and macOS plist. No authored project/history changes.
+
+
+## Stack editor breadcrumbs — 2026-10-31
+
+Pending activation: Studio’s active and independent/split Stack editors share fixture/layer selectors, a pinned Root action and clickable block/driver ancestry. A driver crumb returns to that driver root; Root clears the driver trail and returns to the current layer root. Layer/fixture changes and Director/empty layers are handled. Selected ancestors are revealed through folds, and invalid driver tails recover to the nearest valid prefix. Navigation stays in existing client/workspace context and never submits authored engine commands.
+
+Validation: breadcrumb core and WASM browser tests pass, alongside existing property/content/fixture-marker/browser-runtime regressions. Coverage exercises two nested drivers, parent/root navigation, hidden selected blocks, Director and empty layers, keyboard use, narrow Studio layouts, independent-pane context preservation, and exact unchanged project/undo/redo/revision. Retest nested drivers and scene-to-stack selection on isolated output-disabled examples; no live project changes are part of this feature.

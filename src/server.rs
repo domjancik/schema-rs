@@ -1159,6 +1159,8 @@ pub fn router(state: AppState) -> Router {
         .route("/block-inspection.css",get(||async{ ([(header::CONTENT_TYPE,"text/css")],include_str!("../web/block-inspection.css")) }))
         .route("/property-editors.js", get(|| async { ([(header::CONTENT_TYPE,"text/javascript; charset=utf-8")],include_str!("../web/property-editors.js")) }))
         .route("/property-editors.css", get(|| async { ([(header::CONTENT_TYPE,"text/css; charset=utf-8")],include_str!("../web/property-editors.css")) }))
+        .route("/stack-navigation.js", get(|| async { ([(header::CONTENT_TYPE,"text/javascript; charset=utf-8")],include_str!("../web/stack-navigation.js")) }))
+        .route("/stack-navigation.css", get(|| async { ([(header::CONTENT_TYPE,"text/css; charset=utf-8")],include_str!("../web/stack-navigation.css")) }))
         .route("/stage-navigation.js", get(|| async { ([(header::CONTENT_TYPE,"text/javascript; charset=utf-8")],include_str!("../web/stage-navigation.js")) }))
         .route("/stage-navigation.css", get(|| async { ([(header::CONTENT_TYPE,"text/css; charset=utf-8")],include_str!("../web/stage-navigation.css")) }))
         .route("/system-logs.js", get(|| async { ([(header::CONTENT_TYPE,"text/javascript; charset=utf-8")], include_str!("../web/system-logs.js")) }))
