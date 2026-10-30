@@ -79,6 +79,12 @@ class PublicSafety(unittest.TestCase):
    with self.assertRaises(ValueError):prepared_public(root,'b')
    file.write_bytes(b'tampered')
    with self.assertRaises(ValueError):prepared_public(root,'a')
+ def test_commands_exclude_ambient_vercel_credentials_and_target_overrides(self):
+  import threading
+  with tempfile.TemporaryDirectory()as directory,ReleaseStore(directory)as store,patch.dict(os.environ,{'VERCEL_TOKEN':'unrelated','VERCEL_OIDC_TOKEN':'unrelated','VERCEL_PROJECT_ID':'other','VERCEL_ORG_ID':'other'}):
+   delivery=Delivery({},store,Signer.generate(),threading.Event())
+   result=delivery.command([sys.executable,'-c','import os,json;print(json.dumps({k:os.environ.get(k)for k in ["VERCEL_TOKEN","VERCEL_OIDC_TOKEN","VERCEL_PROJECT_ID","VERCEL_ORG_ID"]}))'])
+   self.assertTrue(all(value is None for value in json.loads(result).values()))
  def test_unattended_command_has_bounded_lifetime(self):
   import threading
   with tempfile.TemporaryDirectory()as directory,ReleaseStore(directory)as store:

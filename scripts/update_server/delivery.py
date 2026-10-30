@@ -51,8 +51,9 @@ class Delivery:
     result=self.locals[config['id']].activate(self.store.path(release['release_id']),release);self.status(target,{**result,'name':config.get('name',config['id'])})
    except Exception as error:self.status(target,{'status':'failed','release_id':release['release_id'],'name':config.get('name',config['id']),'detail':str(error),'attempt_at':time.time()})
  def command(self,args,cwd=None,timeout=90):
-  command=[str(v)for v in args]
-  with subprocess.Popen(command,cwd=cwd,stdin=subprocess.DEVNULL,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,encoding='utf-8',errors='replace',env={**os.environ,'CI':'1'},start_new_session=os.name!='nt',creationflags=getattr(subprocess,'CREATE_NO_WINDOW',0))as process:
+  command=[str(v)for v in args];environment={**os.environ,'CI':'1'}
+  for key in ['VERCEL_TOKEN','VERCEL_OIDC_TOKEN','VERCEL_AUTH_TOKEN','VERCEL_ORG_ID','VERCEL_PROJECT_ID','VERCEL_GLOBAL_CONFIG']:environment.pop(key,None)
+  with subprocess.Popen(command,cwd=cwd,stdin=subprocess.DEVNULL,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,encoding='utf-8',errors='replace',env=environment,start_new_session=os.name!='nt',creationflags=getattr(subprocess,'CREATE_NO_WINDOW',0))as process:
    try:stdout,stderr=process.communicate(timeout=timeout)
    except subprocess.TimeoutExpired:
     if os.name=='nt':subprocess.run(['taskkill','/PID',str(process.pid),'/T','/F'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
