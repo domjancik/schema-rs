@@ -58,7 +58,9 @@ const server = http.createServer((req,res) => {
  assert.equal(await nav.getByRole('button',{name:'Stack editor 2',exact:true}).getAttribute('aria-pressed'),'true');
  await page.keyboard.press('End');assert.equal(await nav.locator('button[aria-pressed="true"]').count(),1);
  await page.keyboard.press('Home');assert.equal(await nav.getByRole('button',{name:'Stack editor 1',exact:true}).getAttribute('aria-pressed'),'true');
- await page.setViewportSize({width:1500,height:950});assert(!await nav.isVisible(),'desktop retains split panels');
+ await page.setViewportSize({width:1500,height:950});
+ await page.waitForFunction(()=>!document.querySelector('.schema-workspace').classList.contains('workspace-compact')&&document.querySelector('.mobile-panel-nav').hidden);
+ assert(!await nav.isVisible(),'desktop retains split panels');
  assert((await page.locator('.workspace-panel:visible').count())>1);
  const after=await page.evaluate(()=>SchemaEngine.request('/api/state'));assert.deepEqual(after.project,before.project);assert.equal(after.snapshot.revision,before.snapshot.revision);
  assert.deepEqual(errors,[]);
