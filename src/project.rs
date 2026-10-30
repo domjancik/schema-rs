@@ -91,7 +91,7 @@ pub fn save(root: &Path, p: &Project, name: &str) -> Result<()> {
     let layout = Layout {
         dmx_models: p.dmx_models.clone(),
         dimming: p.dimming.clone(),
-        version: p.version,
+        version: crate::migrations::LAYOUT_VERSION,
         name: p.name.clone(),
         fixtures: p.fixtures.clone(),
     };
@@ -191,7 +191,7 @@ pub fn load(root: &Path, name: &str) -> Result<Project> {
     let p = Project {
         dmx_models: layout.dmx_models,
         dimming: layout.dimming,
-        version: layout.version,
+        version: crate::migrations::PROJECT_VERSION,
         name: layout.name,
         fixtures: layout.fixtures,
         content,
@@ -246,7 +246,7 @@ pub fn save_layout(root: &Path, p: &Project, name: &str) -> Result<()> {
     let layout = Layout {
         dmx_models: p.dmx_models.clone(),
         dimming: p.dimming.clone(),
-        version: p.version,
+        version: crate::migrations::LAYOUT_VERSION,
         name: p.name.clone(),
         fixtures: p.fixtures.clone(),
     };
