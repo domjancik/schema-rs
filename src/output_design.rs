@@ -90,6 +90,7 @@ impl DimmingTimeline {
 #[serde(rename_all = "snake_case")]
 pub enum Source {
     Value,
+    Lightness,
     Red,
     Green,
     Blue,
@@ -218,6 +219,10 @@ pub fn encode(
                     continue;
                 }
                 Source::Value => bank.value.unwrap_or((color[0] + color[1] + color[2]) / 3.),
+                Source::Lightness => {
+                    (color[0].max(color[1]).max(color[2]) + color[0].min(color[1]).min(color[2]))
+                        / 2.
+                }
                 Source::Red => color[0],
                 Source::Green => color[1],
                 Source::Blue => color[2],
@@ -241,7 +246,12 @@ pub fn encode(
                     };
             let mapped = if matches!(
                 slot.source,
-                Source::Value | Source::Red | Source::Green | Source::Blue | Source::White
+                Source::Value
+                    | Source::Lightness
+                    | Source::Red
+                    | Source::Green
+                    | Source::Blue
+                    | Source::White
             ) {
                 mapped * gain
             } else {

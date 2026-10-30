@@ -53,6 +53,8 @@ jobs:
         run: node tests/fixture-markers-core.cjs && PLAYWRIGHT_MODULE="$RUNNER_TEMP/schema-browser-tests/node_modules/playwright" node tests/fixture-markers-browser.cjs
       - name: Content and group selectors
         run: node tests/group-choices.cjs && PLAYWRIGHT_MODULE="$RUNNER_TEMP/schema-browser-tests/node_modules/playwright" node tests/content-groups-browser.cjs
+      - name: DMX Lightness source
+        run: PLAYWRIGHT_MODULE="$RUNNER_TEMP/schema-browser-tests/node_modules/playwright" node tests/dmx-lightness-browser.cjs
       - name: Universe fixture grouping
         run: PLAYWRIGHT_MODULE="$RUNNER_TEMP/schema-browser-tests/node_modules/playwright" node tests/universe-groups-browser.cjs
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4

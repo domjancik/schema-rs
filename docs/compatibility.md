@@ -56,3 +56,5 @@ Nodes optionally carry `bypassed: true`, also preserved in ScenicScript. Session
 Saved formats use shared [versioned storage migrations](storage-migrations.md). Version 1 projects, sessions and bundles remain readable; first replacement preserves their originals. New saves use version 2, including every retained undo/redo project.
 
 Fixture `marker_color` is optional layout metadata (`#RRGGBB`, absent/null means unmarked). It participates in native edits/history and project/session/bundle storage, but never automatically contributes to evaluated light banks, DMX or preview lighting. Existing files without it load unchanged; transferring marked fixtures to an older engine requires updating that engine first.
+
+DMX slot source `lightness` is the per-pixel HSL color lightness source. Existing models and sources retain their behavior; older engines must be updated before loading a model that uses this new source. It is supported by both native and WASM encoding, including serialized projects, sessions and undo history.

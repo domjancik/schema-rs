@@ -475,3 +475,10 @@ Retest content selection and save/load from Studio/Schémaboy, Assign.Content re
 Activation verified on 2026-10-31 local time: signed release `97c75a312b08-7990b809f88d-41` is installed on managed local ports 18798/8788/8797; enrolled Pi delivery succeeded with scene/history preserved and OLA unchanged. Signature and all artifact hashes were independently checked using the public verification key. A read-only real-browser check of live 18798 confirmed fixture group checks, the preset selector, and the saved-content/group selectors; full project and complete undo/redo arrays are identical before/after. Carpushit random-dim remains revision 8, eight undo entries, 34 fixtures and output disabled. Public website activation is not claimed; its separate authentication prerequisite remains pending.
 
 All native tests, fmt, strict Clippy/build, actual WASM/native selector integration, existing named-project/marker/runtime regressions, browser packaging, and browser/Linux/macOS CI passed. The scene lab independently verified SL-008 registration/change/restart and exact sparse Carpushit scope (10 bulb API1 targets for slow-pulse, 22 outside API2 targets for twinkle-on), with all other authored data preserved. SL-008 is independently verified fixed; SL-004 timeline work remains separate. See [independent report](content-selector-retest-2026-10-30.md).
+
+
+## DMX color Lightness source — 2026-10-31
+
+Pending activation: native/WASM DMX models accept `lightness`, shown as Lightness (HSL) in Output → Models → Slot source. It uses per-pixel `(max RGB + min RGB) / 2`, matching original Schéma’s LightnessMapping ToHSL conversion. Colors take precedence over a separate scalar Value; scalar-only banks use neutral gray. Alpha, fixture/master dimming and blackout apply once; program constants remain unchanged. Existing models, fixture assignments and live output are not modified automatically. New-source models need an updated engine.
+
+Retest color-derived dimmer models with saturated red (50% HSL lightness), grayscale/scalar output, master/fixture dimming, blackout and serialized model/undo roundtrips in isolated capture-only engines.

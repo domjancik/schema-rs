@@ -147,3 +147,97 @@ fn master_and_blackout_scale_intensity_after_slot_ranges_but_preserve_controls()
         vec![0, 7]
     );
 }
+
+#[test]
+fn lightness_is_per_pixel_hsl_not_scalar_value_or_average_rgb() {
+    let mut p = Project::demo();
+    let model:ModelDefinition=serde_json::from_value(json!({"name":"Color dimmer","slots":[{"name":"Lightness","source":"lightness"},{"name":"Program","source":"constant","constant":17}]})).unwrap();
+    model.validate().unwrap();
+    p.dmx_models.insert("lightness-test".into(), model);
+    let mut fixture = p.fixtures[0].clone();
+    fixture.dmx_model = Some("lightness-test".into());
+    fixture.dimmer = 1.;
+    fixture.pixel_positions = vec![[0.; 3]; 4];
+    let bank = Bank {
+        value: Some(0.9),
+        colors: Some(vec![
+            [1., 0., 0., 1.],
+            [0.2, 0.4, 0.8, 1.],
+            [0.25, 0.25, 0.25, 1.],
+            [1., 1., 1., 0.5],
+        ]),
+        ..Bank::default()
+    };
+    assert_eq!(
+        schema_rs::output_design::encode(&p, &fixture, &bank, false, 1.),
+        vec![128, 17, 128, 17, 64, 17, 128, 17]
+    );
+    fixture.dimmer = 0.5;
+    assert_eq!(
+        schema_rs::output_design::encode(&p, &fixture, &bank, false, 0.5),
+        vec![32, 17, 32, 17, 16, 17, 32, 17]
+    );
+    assert_eq!(
+        schema_rs::output_design::encode(&p, &fixture, &bank, true, 1.),
+        vec![0, 17, 0, 17, 0, 17, 0, 17]
+    );
+    fixture.dimmer = 1.;
+    fixture.pixel_positions.truncate(1);
+    let scalar = Bank {
+        value: Some(0.4),
+        ..Bank::default()
+    };
+    assert_eq!(
+        schema_rs::output_design::encode(&p, &fixture, &scalar, false, 1.),
+        vec![102, 17]
+    );
+    assert_eq!(
+        schema_rs::output_design::encode(&p, &fixture, &Bank::default(), false, 1.),
+        vec![0, 17]
+    );
+    let slot = &mut p.dmx_models.get_mut("lightness-test").unwrap().slots[0];
+    slot.minimum = 200;
+    slot.maximum = 100;
+    assert_eq!(
+        schema_rs::output_design::encode(&p, &fixture, &bank, false, 1.),
+        vec![150, 17]
+    );
+    let slot = &mut p.dmx_models.get_mut("lightness-test").unwrap().slots[0];
+    slot.minimum = 0;
+    slot.maximum = 255;
+    slot.fine = true;
+    let fine = Bank {
+        value: Some(0.2),
+        ..Bank::default()
+    };
+    assert_eq!(
+        schema_rs::output_design::encode(&p, &fixture, &fine, false, 1.),
+        vec![51, 17]
+    );
+}
+
+#[test]
+fn lightness_model_is_saved_in_projects_sessions_and_shared_undo() {
+    let mut engine = Engine::new(Project::demo()).unwrap();
+    let model: ModelDefinition = serde_json::from_value(
+        json!({"name":"Lightness dimmer","slots":[{"name":"Intensity","source":"lightness"}]}),
+    )
+    .unwrap();
+    engine
+        .apply(Command::UpsertDmxModel {
+            id: "lightness-test".into(),
+            model: model.clone(),
+        })
+        .unwrap();
+    let saved = serde_json::to_value(engine.checkpoint()).unwrap();
+    assert_eq!(
+        saved["project"]["dmx_models"]["lightness-test"]["slots"][0]["source"],
+        "lightness"
+    );
+    let session: schema_rs::session::Session = serde_json::from_value(saved).unwrap();
+    assert_eq!(session.project.dmx_models["lightness-test"], model);
+    engine.apply(Command::Undo).unwrap();
+    assert!(!engine.project().dmx_models.contains_key("lightness-test"));
+    engine.apply(Command::Redo).unwrap();
+    assert_eq!(engine.project().dmx_models["lightness-test"], model);
+}
