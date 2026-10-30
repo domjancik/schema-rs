@@ -29,6 +29,24 @@ const server = http.createServer((req,res) => {
     await page.goto(base+'/play?view=studio');
     await page.waitForFunction(()=>window.SchemaEngine?.kind==='browser'&&document.querySelector('#world .block'));
     const state=()=>page.evaluate(()=>SchemaEngine.request('/api/state'));
+    await page.getByRole('button',{name:'System logs',exact:true}).click();
+    const logs = page.locator('#system-logs-dialog');
+    await logs.locator('.system-log-row').first().waitFor();
+    assert((await logs.innerText()).includes('Schéma engine started'));
+    const logsBefore = await page.evaluate(()=>SchemaEngine.request('/api/state'));
+    const journal = await page.evaluate(()=>SchemaEngine.request('/api/logs',{after:0,limit:1}));
+    assert.equal(journal.entries.length,1);
+    const logsAfter = await page.evaluate(()=>SchemaEngine.request('/api/state'));
+    assert.equal(logsAfter.snapshot.revision,logsBefore.snapshot.revision);
+    assert.deepEqual(logsAfter.project,logsBefore.project);
+    assert(!('logs' in logsAfter));
+    await logs.screenshot({path:'target/system-logs-studio.png'});
+    await logs.getByRole('button',{name:'Close',exact:true}).click();
+    const previousView = await page.getByLabel('View type',{exact:true}).first().inputValue();
+    await page.getByLabel('View type',{exact:true}).first().selectOption('logs');
+    await page.locator('.workspace-panel .system-log-row').first().waitFor();
+    await page.getByLabel('View type',{exact:true}).first().selectOption(previousView);
+
     const original=await state();
     assert.equal(original.project.output.enabled,false);
     await page.evaluate(async()=>{
@@ -92,6 +110,9 @@ const server = http.createServer((req,res) => {
     await page.goto(base+'/mobile');
     await page.waitForFunction(()=>window.SchemaEngine?.kind==='browser');
     const mobile=await page.evaluate(()=>SchemaEngine.request('/api/state'));assert.equal(mobile.project.fixtures.length,8);
+    await page.evaluate(()=>SchemaLogs.open());
+    await page.locator('#system-logs-dialog .system-log-row').first().waitFor();
+    await page.locator('#system-logs-dialog').getByRole('button',{name:'Close',exact:true}).click();
     await page.locator('.app-menu summary').click();
     await page.getByRole('button',{name:'Servers',exact:true}).click();
     const servers=page.getByRole('dialog',{name:'Servers',exact:true});

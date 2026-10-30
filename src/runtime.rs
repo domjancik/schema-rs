@@ -40,12 +40,14 @@ impl Published {
 pub struct EngineSession {
     engine: Engine,
     action_diagnostics: Vec<String>,
+    logs: std::sync::Mutex<crate::logs::Journal>,
 }
 impl EngineSession {
     pub fn new(project: Project) -> Result<Self> {
         Ok(Self {
             engine: Engine::new(project)?,
             action_diagnostics: Vec::new(),
+            logs: std::sync::Mutex::new(crate::logs::Journal::new()),
         })
     }
     pub fn publication(&self) -> Published {
@@ -54,7 +56,17 @@ impl EngineSession {
             .snapshot
             .diagnostics
             .extend(self.action_diagnostics.iter().cloned());
+        self.logs
+            .lock()
+            .unwrap_or_else(|e| e.into_inner())
+            .observe(&frame.snapshot);
         frame
+    }
+    pub fn logs(&self, query: crate::logs::Query) -> crate::logs::Page {
+        self.logs
+            .lock()
+            .unwrap_or_else(|e| e.into_inner())
+            .read(query)
     }
     pub fn set_dimming_clock(
         &mut self,
@@ -115,6 +127,7 @@ impl EngineSession {
             Self {
                 engine: Engine::from_session(session)?,
                 action_diagnostics: Vec::new(),
+                logs: std::sync::Mutex::new(crate::logs::Journal::new()),
             },
             report,
         ))

@@ -412,3 +412,11 @@ Source implementation only; the Orange Pi and public deployment have not been up
 Display branding now uses Schéma-s/schéma consistently across Studio, landing-page wordmarks and copy, browser animation demo, mobile About link, server pairing/offline screens, page titles/accessibility names, installed-app full name and the Orange Pi captive-login template. Existing schémaboy names were retained. Technical identifiers, package/download filenames, API/storage keys, hostnames, routes and the PWA installation identity are unchanged.
 
 Source change only, pending publication/device activation. Browser export packaging, visible HTML/accessibility text and manifest-identity checks pass; the existing product browser assertion expects the accented page title. Retest Studio/landing/server and phone-install labels on activation. No live scene/history/output changes.
+
+## System logs view
+
+A dedicated System logs panel, menu dialog (including schémaboy) and Commands action expose bounded native/browser runtime events. Engine-owned 512-event memory buffers deduplicate unchanged diagnostics/output statuses and record startup, diagnostic recovery, revisions, pause/blackout; native hosts also record action errors and session-save failure/recovery. Reads are authenticated, cursor-paginated and capped at 200 events, separate from normal state publications and persistent project/session/undo formats. Independent viewers offer search, levels, pause/follow, copy/download and local Clear view; one shared poller runs only with visible unpaused demand. See docs/system-logs.md for limits, including no OS/systemd/OLA journal access.
+
+Source only, not pushed or activated on the Orange Pi or public deployment. Live Carpushit, output, clocks and histories remain untouched. Retest diagnostic appearance/resolution, output errors and mobile log access on isolated output-disabled examples after activation.
+
+Validation: complete native cargo test, fmt and strict Clippy; WASM release build and strict Clippy; actual WASM Studio/menu/workspace and schémaboy logs integration; viewer search/levels/pause/restart/cleanup/safe-text/mobile tests; authenticated API/cursor/bounds/non-persistence tests; browser packaging and workspace regressions all passed.

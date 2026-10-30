@@ -1,6 +1,6 @@
 (function (global) {
   'use strict';
-  const views = ['stack', 'setup', 'scene', 'inspector', 'fixtures', 'output', 'telemetry', 'gpu', 'dmxtest'];
+  const views = ['stack', 'setup', 'scene', 'inspector', 'fixtures', 'output', 'telemetry', 'logs', 'gpu', 'dmxtest'];
   let serial = 0;
   const id = () => `panel-${Date.now().toString(36)}-${(++serial).toString(36)}`;
   const copy = (value) => structuredClone(value),

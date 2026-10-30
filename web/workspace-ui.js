@@ -9,6 +9,7 @@
     fixtures: 'Fixtures',
     output: 'Output',
     telemetry: 'Telemetry',
+    logs: 'System logs',
     dmxtest: 'DMX test',
     gpu: '3D preview'
   };
@@ -389,7 +390,7 @@
       applyMaximize();
     });
     function draw() {
-      for(const entry of bodies.values()){entry.body._dmxTest?.destroy();entry.body._outputPanel?.destroy();entry.body._sceneCamera?.destroy();}
+      for(const entry of bodies.values()){entry.body._logsPanel?.destroy();entry.body._logsPanel=null;entry.body._dmxTest?.destroy();entry.body._outputPanel?.destroy();entry.body._sceneCamera?.destroy();}
       Object.values(legacy).forEach((n) => stash.append(n));
       bodies.clear();
       main.replaceChildren(node(W.active(state).root));

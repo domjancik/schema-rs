@@ -1,0 +1,11 @@
+# System logs
+
+Open **System logs** from Studio’s menu or Commands, or choose **System logs** in any workspace panel’s view selector. Schémaboy exposes the same viewer in its menu. Multiple panel instances can use different searches, severity filters, pause states and follow settings.
+
+The engine keeps the last 512 events in memory, with up to 1,024 characters per event. It records startup, evaluation diagnostics and their resolution, output status changes/errors, revision transitions, playback pause/resume and blackout. Native hosts additionally report node-action failures and session-save failure/recovery. Repeated unchanged diagnostics and statuses do not create events on every frame. Times are host uptime, independent of scene time and time simulation.
+
+Search matches source/message. Severity filters select Info, Warnings or Errors. Pause freezes that view while the engine continues recording. Follow scrolls to the newest event. Copy and Download export the currently filtered list. Copy uses the browser clipboard when permitted; Download also works over ordinary HTTP. **Clear view** hides existing entries in that view; it does not erase the server’s buffer or affect other clients. Restarting an engine starts a new journal and resets the viewer cursor.
+
+Native GET `/api/logs` reads the first page; POST `/api/logs` accepts `{ "after": 0, "limit": 200 }` for incremental reads. Each response includes entries, next/latest cursors, a journal generation, overflow and cursor-reset indicators. Requests require the existing API token/PIN when configured. Page sizes are capped at 200. The WASM host implements the same read contract. Visible, unpaused viewers share one request per second; hidden tabs and closed/paused views cause no further polling. Entries are rendered as text.
+
+Logs are separate from normal state publications, project files, bundles, undo/checkpoints and recovery sessions. No command bodies, input payloads, API headers or credentials are recorded. Buffers reset on engine restart and are not a replacement for persistent host logs. This view does not expose Linux systemd/OLA journals, the updater journal, OS logs or browser console history. Native service startup failures before engine initialization remain in the host service journal.

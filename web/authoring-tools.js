@@ -702,6 +702,7 @@ window.SchemaAuthoring = (() => {
         run: stateHelp,
       },
     );
+    if (globalThis.SchemaLogs) result.push({label:"System logs",keywords:"errors warnings diagnostics output engine",run:()=>SchemaLogs.open()});
     result.push(...(adapter.getActions?.() || []));
     result.push(
       {

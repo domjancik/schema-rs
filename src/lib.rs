@@ -60,3 +60,5 @@ pub mod storage_formats;
 pub mod inspection;
 
 pub mod dimming_clock;
+
+pub mod logs;

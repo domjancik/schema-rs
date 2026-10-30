@@ -133,6 +133,12 @@ impl BrowserEngine {
                     json!({"revision":self.session.import_bundle(bundle,expected).map_err(error)?})
                 }
             }
+            "/api/logs" => serde_json::to_value(self.session.logs(if body.is_null() {
+                schema_rs::logs::Query::default()
+            } else {
+                serde_json::from_value(body).map_err(error)?
+            }))
+            .map_err(error)?,
             "/api/inspection" => serde_json::to_value(
                 self.session
                     .inspection(serde_json::from_value(body["targets"].clone()).map_err(error)?)

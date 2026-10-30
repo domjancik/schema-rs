@@ -52,6 +52,7 @@ struct Message {
 #[derive(Clone)]
 pub struct Controller {
     published: Arc<RwLock<Arc<Published>>>,
+    logs: Arc<std::sync::Mutex<crate::logs::Journal>>,
     commands: SyncSender<RequestMessage>,
     session_store: Option<Arc<crate::session::Store>>,
 }
@@ -293,7 +294,13 @@ impl Runtime {
         })));
         let (tx, rx) = mpsc::sync_channel::<RequestMessage>(64);
         let stop = Arc::new(AtomicBool::new(false));
+        let logs = Arc::new(std::sync::Mutex::new(crate::logs::Journal::new()));
+        logs.lock()
+            .unwrap_or_else(|e| e.into_inner())
+            .observe(&engine.snapshot());
+        let evaluation_logs = logs.clone();
         let controller = Controller {
+            logs,
             published: published.clone(),
             commands: tx,
             session_store: session_store.clone(),
@@ -385,6 +392,10 @@ impl Runtime {
                         .read()
                         .unwrap_or_else(|e| e.into_inner())
                         .clone();
+                    evaluation_logs
+                        .lock()
+                        .unwrap_or_else(|e| e.into_inner())
+                        .observe(&snapshot);
                     let next = Arc::new(Published {
                         host: engine.host(),
                         resources: engine.resources(),
@@ -477,7 +488,19 @@ impl Runtime {
                     });
                     let error = errors.join("; ");
                     if !error.is_empty() && error != last_error {
+                        action_controller
+                            .logs
+                            .lock()
+                            .unwrap_or_else(|e| e.into_inner())
+                            .record("error", "actions", &error);
                         eprintln!("Node action: {error}");
+                    }
+                    if error.is_empty() && !last_error.is_empty() {
+                        action_controller
+                            .logs
+                            .lock()
+                            .unwrap_or_else(|e| e.into_inner())
+                            .record("info", "actions", "Node action error cleared");
                     }
                     last_error = error;
                 }
@@ -579,6 +602,7 @@ impl Runtime {
             })
             .map_err(|e| e.to_string())?;
         let persistence_stop = Arc::new(AtomicBool::new(false));
+        let persistence_logs = controller.logs.clone();
         let persistence_worker = if let Some(store) = session_store {
             let stopping = persistence_stop.clone();
             Some(
@@ -586,6 +610,7 @@ impl Runtime {
                     .name("schema-session-writer".into())
                     .spawn(move || {
                         let mut saved: Option<Arc<crate::session::Session>> = None;
+                        let mut last_error = String::new();
                         loop {
                             let checkpoint = latest_session
                                 .read()
@@ -594,9 +619,36 @@ impl Runtime {
                             if saved
                                 .as_ref()
                                 .is_none_or(|old| !Arc::ptr_eq(old, &checkpoint))
-                                && store.save(&checkpoint).is_ok()
                             {
-                                saved = Some(checkpoint);
+                                match store.save(&checkpoint) {
+                                    Ok(()) => {
+                                        if !last_error.is_empty() {
+                                            persistence_logs
+                                                .lock()
+                                                .unwrap_or_else(|e| e.into_inner())
+                                                .record(
+                                                    "info",
+                                                    "storage",
+                                                    "Session saving recovered",
+                                                );
+                                        }
+                                        last_error.clear();
+                                        saved = Some(checkpoint);
+                                    }
+                                    Err(error) => {
+                                        if error != last_error {
+                                            persistence_logs
+                                                .lock()
+                                                .unwrap_or_else(|e| e.into_inner())
+                                                .record(
+                                                    "error",
+                                                    "storage",
+                                                    &format!("Session save failed: {error}"),
+                                                );
+                                        }
+                                        last_error = error;
+                                    }
+                                }
                             }
                             if stopping.load(Ordering::Relaxed) {
                                 break;
@@ -1104,6 +1156,9 @@ pub fn router(state: AppState) -> Router {
         .route("/api/inspection",post(inspection))
         .route("/block-inspection.js",get(||async{ ([(header::CONTENT_TYPE,"text/javascript")],include_str!("../web/block-inspection.js")) }))
         .route("/block-inspection.css",get(||async{ ([(header::CONTENT_TYPE,"text/css")],include_str!("../web/block-inspection.css")) }))
+        .route("/system-logs.js", get(|| async { ([(header::CONTENT_TYPE,"text/javascript; charset=utf-8")], include_str!("../web/system-logs.js")) }))
+        .route("/system-logs.css", get(|| async { ([(header::CONTENT_TYPE,"text/css; charset=utf-8")], include_str!("../web/system-logs.css")) }))
+        .route("/api/logs", get(|State(state):State<AppState>|async move { Json(state.controller.logs.lock().unwrap_or_else(|e| e.into_inner()).read(crate::logs::Query::default())) }).post(logs_read))
         .route("/api/catalog", get(|State(state):State<AppState>|async move{Json(state.controller.plugin_catalog())}))
         .route("/api/command", post(command))
         .route("/api/import", post(import))
@@ -1575,4 +1630,18 @@ async fn dimming_clock_control(
     Json(control): Json<crate::dimming_clock::Control>,
 ) -> ApiResult<Json<crate::dimming_clock::Status>> {
     Ok(Json(state.controller.dimming_clock(control).await?))
+}
+
+async fn logs_read(
+    State(state): State<AppState>,
+    Json(query): Json<crate::logs::Query>,
+) -> Json<crate::logs::Page> {
+    Json(
+        state
+            .controller
+            .logs
+            .lock()
+            .unwrap_or_else(|e| e.into_inner())
+            .read(query),
+    )
 }
