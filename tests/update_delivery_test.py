@@ -2,7 +2,7 @@ import pathlib,sys,tempfile,unittest,json,zipfile,subprocess,socket,os
 from unittest.mock import patch
 sys.path.insert(0,str(pathlib.Path(__file__).resolve().parents[1]/'scripts/update_server'))
 from core import ReleaseStore,Signer
-from delivery import Delivery
+from delivery import Delivery,seal_public,prepared_public
 from delivery import workflow_runs,Pending
 from local_host import same_session,pristine,LocalHost
 class DeliveryPolicy(unittest.TestCase):
@@ -73,6 +73,18 @@ class LocalRecovery(unittest.TestCase):
     with self.assertRaises(ValueError):host.activate(folder,{'release_id':'test-release','source_commit':'a'*40})
     start.assert_not_called()
 class PublicSafety(unittest.TestCase):
+ def test_prepared_publication_is_immutable_and_source_bound(self):
+  with tempfile.TemporaryDirectory()as directory:
+   root=pathlib.Path(directory);(root/'site').mkdir();file=root/'site/test';file.write_bytes(b'original');self.assertIsNone(prepared_public(root,'a'));seal_public(root,'a',{'platform':{}});self.assertEqual(prepared_public(root,'a'),{'platform':{}})
+   with self.assertRaises(ValueError):prepared_public(root,'b')
+   file.write_bytes(b'tampered')
+   with self.assertRaises(ValueError):prepared_public(root,'a')
+ def test_unattended_command_has_bounded_lifetime(self):
+  import threading
+  with tempfile.TemporaryDirectory()as directory,ReleaseStore(directory)as store:
+   delivery=Delivery({},store,Signer.generate(),threading.Event());self.assertEqual(delivery.command([sys.executable,'-c','print("ok")']).strip(),'ok')
+   with self.assertRaisesRegex(RuntimeError,'timed out'):delivery.command([sys.executable,'-c','import time;time.sleep(10)'],timeout=.1)
+
  def test_invalid_target_configuration_cannot_run_commands(self):
   import threading
   with tempfile.TemporaryDirectory()as directory,ReleaseStore(directory)as store:

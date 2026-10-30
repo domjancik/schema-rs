@@ -14,6 +14,19 @@ def workflow_runs(runs,commit):
   selected[name]=run['databaseId']
  return selected
 
+def seal_public(work,commit,platforms):
+ files={p.relative_to(work).as_posix():hashlib.sha256(p.read_bytes()).hexdigest()for p in (work/'site').rglob('*')if p.is_file()}
+ atomic(work/'prepared.json',json.dumps({'commit':commit,'platforms':platforms,'files':files}).encode())
+def prepared_public(work,commit):
+ marker=work/'prepared.json'
+ if not marker.exists():return None
+ value=json.loads(marker.read_bytes())
+ if value['commit']!=commit:raise ValueError('Prepared publication source differs')
+ for name,digest in value['files'].items():
+  path=work/name
+  if path.is_symlink()or not path.resolve().is_relative_to(work.resolve())or hashlib.sha256(path.read_bytes()).hexdigest()!=digest:raise ValueError('Prepared publication checksum differs')
+ return value['platforms']
+
 class Delivery:
  def __init__(self,config,store,signer,stop):self.config=config;self.store=store;self.signer=signer;self.stop=stop;self.locals={}
  def state(self):return self.store.db.get('delivery_targets',{})
@@ -38,9 +51,17 @@ class Delivery:
     result=self.locals[config['id']].activate(self.store.path(release['release_id']),release);self.status(target,{**result,'name':config.get('name',config['id'])})
    except Exception as error:self.status(target,{'status':'failed','release_id':release['release_id'],'name':config.get('name',config['id']),'detail':str(error),'attempt_at':time.time()})
  def command(self,args,cwd=None,timeout=90):
-  result=subprocess.run([str(v)for v in args],cwd=cwd,capture_output=True,text=True,encoding='utf-8',errors='replace',timeout=timeout,creationflags=getattr(subprocess,'CREATE_NO_WINDOW',0))
-  if result.returncode:raise RuntimeError((result.stderr or result.stdout or str(args[0])+' failed')[-2000:])
-  return result.stdout
+  command=[str(v)for v in args]
+  with subprocess.Popen(command,cwd=cwd,stdin=subprocess.DEVNULL,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,encoding='utf-8',errors='replace',env={**os.environ,'CI':'1'},start_new_session=os.name!='nt',creationflags=getattr(subprocess,'CREATE_NO_WINDOW',0))as process:
+   try:stdout,stderr=process.communicate(timeout=timeout)
+   except subprocess.TimeoutExpired:
+    if os.name=='nt':subprocess.run(['taskkill','/PID',str(process.pid),'/T','/F'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
+    else:
+     import signal
+     os.killpg(process.pid,signal.SIGKILL)
+    process.communicate();raise RuntimeError('Publication command timed out: '+command[0])
+   if process.returncode:raise RuntimeError((stderr or stdout or command[0]+' failed')[-2000:])
+   return stdout
  def ensure_source(self,commit):
   if not re.fullmatch('[a-f0-9]{40}',commit):raise ValueError('Invalid source commit')
   repo=self.config['repo'];remote=self.command(['git','remote','get-url','origin'],repo).strip();expected='https://github.com/'+self.config['publication']['github_repo']+'.git'
@@ -89,41 +110,35 @@ class Delivery:
    browser_manifest=json.loads((browser/'browser-build.json').read_bytes())
    if browser_manifest.get('source_commit')!=commit:raise ValueError('Browser artifact source differs')
    source,notices=self.source(release);spec=importlib.util.spec_from_file_location('ready_public_packager',source/'scripts/build_public_release.py');packager=importlib.util.module_from_spec(spec);spec.loader.exec_module(packager)
-   downloads=work/'downloads';downloads.mkdir(exist_ok=True);folder=self.store.path(release['release_id'])
-   linux_archive=linux/'Schema-s-linux-x64.tar.gz'
-   with tarfile.open(linux_archive)as tar:
-    metadata=json.load(tar.extractfile('Schema-s/BUILD.json'))
-    if metadata.get('commit')!=commit:raise ValueError('Linux artifact source differs')
-    binary=tar.extractfile('Schema-s/schema-rs').read()
-    if hashlib.sha256(binary).hexdigest()!=metadata['sha256']:raise ValueError('Linux artifact digest differs')
-   x64=downloads/linux_archive.name;shutil.copyfile(linux_archive,x64)
-   arm=packager.package_linux(folder/'schema-rs',downloads,'linux-arm64',commit,notices)
-   windows=downloads/'Schema-s-Windows-x64.zip';shutil.copyfile(folder/windows.name,windows)
-   mac_archive=mac/'Schema-s-macos-universal-unsigned.zip';mac_info=packager.verify_macos_release(mac_archive,commit);shutil.copyfile(mac_archive,downloads/mac_archive.name)
-   platforms={name:{'filename':file.name,'sha256':packager.digest(file),'bytes':file.stat().st_size,'commit':commit}for name,file in [('linux-x64',x64),('linux-arm64',arm),('windows-x64',windows)]};platforms['macos-universal']=mac_info
-   shutil.copyfile(source/'scripts/publication/bootstrap.sh',downloads/'install.sh')
-   native=json.loads((folder/'latest.json').read_bytes());manifest={'available':True,'version':native['version'],'commit':commit,**platforms['windows-x64'],'platforms':platforms}
-   atomic(downloads/'latest.json',(json.dumps(manifest,indent=2)+'\n').encode());atomic(downloads/'SHA256SUMS.txt',(''.join(v['sha256']+'  '+v['filename']+'\n'for v in platforms.values())+packager.digest(downloads/'install.sh')+'  install.sh\n').encode())
-   site=work/'site';packager.export_site(site,downloads,browser)
-   link=site/'.vercel';link.mkdir(exist_ok=True);atomic(link/'project.json',json.dumps({'projectId':config['project_id'],'orgId':config['org_id'],'projectName':'schema-s'}).encode())
+   platforms=prepared_public(work,commit);site=work/'site'
+   if platforms is None:
+    downloads=work/'downloads';downloads.mkdir(exist_ok=True);folder=self.store.path(release['release_id'])
+    linux_archive=linux/'Schema-s-linux-x64.tar.gz'
+    with tarfile.open(linux_archive)as tar:
+     metadata=json.load(tar.extractfile('Schema-s/BUILD.json'))
+     if metadata.get('commit')!=commit:raise ValueError('Linux artifact source differs')
+     binary=tar.extractfile('Schema-s/schema-rs').read()
+     if hashlib.sha256(binary).hexdigest()!=metadata['sha256']:raise ValueError('Linux artifact digest differs')
+    x64=downloads/linux_archive.name;shutil.copyfile(linux_archive,x64)
+    arm=packager.package_linux(folder/'schema-rs',downloads,'linux-arm64',commit,notices)
+    windows=downloads/'Schema-s-Windows-x64.zip';shutil.copyfile(folder/windows.name,windows)
+    mac_archive=mac/'Schema-s-macos-universal-unsigned.zip';mac_info=packager.verify_macos_release(mac_archive,commit);shutil.copyfile(mac_archive,downloads/mac_archive.name)
+    platforms={name:{'filename':file.name,'sha256':packager.digest(file),'bytes':file.stat().st_size,'commit':commit}for name,file in [('linux-x64',x64),('linux-arm64',arm),('windows-x64',windows)]};platforms['macos-universal']=mac_info
+    shutil.copyfile(source/'scripts/publication/bootstrap.sh',downloads/'install.sh')
+    native=json.loads((folder/'latest.json').read_bytes());manifest={'available':True,'version':native['version'],'commit':commit,**platforms['windows-x64'],'platforms':platforms}
+    atomic(downloads/'latest.json',(json.dumps(manifest,indent=2)+'\n').encode());atomic(downloads/'SHA256SUMS.txt',(''.join(v['sha256']+'  '+v['filename']+'\n'for v in platforms.values())+packager.digest(downloads/'install.sh')+'  install.sh\n').encode())
+    site=work/'site';packager.export_site(site,downloads,browser)
+    link=site/'.vercel';link.mkdir(exist_ok=True);atomic(link/'project.json',json.dumps({'projectId':config['project_id'],'orgId':config['org_id'],'projectName':'schema-s'}).encode())
+    seal_public(work,commit,platforms)
    if self.store.latest()['release_id']!=release['release_id']:raise Pending('A newer ready build supersedes this publication')
    self.status('public',{**info,'status':'publishing','detail':'Deploying verified app and four platform downloads'})
    node=pathlib.Path(self.command(['node','-p','process.execPath']).strip());npx=node.parent/'node_modules/npm/bin/npx-cli.js'
    if not npx.is_file():raise ValueError('The enrolled Node installation must include npm/npx')
-   self.command([node,npx,'--yes','vercel@latest','deploy','--cwd',site,'--scope',config['scope'],'--prod','--yes'],cwd=source,timeout=600)
+   auth_config=['--global-config',config['vercel_config']]if config.get('vercel_config')else[]
+   self.command([node,npx,'--yes','vercel@latest','deploy','--cwd',site,'--scope',config['scope'],'--prod','--yes',*auth_config],cwd=source,timeout=600)
    url=config['url'].rstrip('/')
-   import urllib.request
-   for path,key in [('/browser-build.json','source_commit'),('/downloads/latest.json','commit')]:
-    with urllib.request.urlopen(urllib.request.Request(url+path,headers={'Cache-Control':'no-cache'}),timeout=30)as response:published=json.load(response)
-    if published.get(key)!=commit:raise ValueError('Published production alias is not the expected source')
-   for entry in platforms.values():
-    digest=hashlib.sha256();size=0
-    with urllib.request.urlopen(url+'/downloads/'+entry['filename'],timeout=60)as response:
-     while True:
-      block=response.read(1024*1024)
-      if not block:break
-      digest.update(block);size+=len(block)
-    if size!=entry['bytes']or digest.hexdigest()!=entry['sha256']:raise ValueError('Public download verification failed: '+entry['filename'])
+   expected=work/'public-expectation.json';atomic(expected,json.dumps({'commit':commit,'platforms':platforms}).encode())
+   self.command([node,pathlib.Path(__file__).with_name('verify_public.mjs'),url,expected],timeout=300)
    self.status('public',{**info,'status':'current' ,'url':url+'/app','detail':'App and Windows/Linux/macOS downloads verified','platforms':{k:v['commit']for k,v in platforms.items()}})
   except Pending as error:self.status('public',{**info,'status':'waiting','detail':str(error)})
   except Exception as error:self.status('public',{**info,'status':'failed','detail':str(error),'attempt_at':time.time(),'next_retry':time.time()+300})

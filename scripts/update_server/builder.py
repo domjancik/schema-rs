@@ -62,7 +62,7 @@ def build(repo,store,signer,config,job,stop):
    phase(name)
    for command in commands:run(command,source,env,log,stop)
    checks[name]=True
-  phase('updater tests');run([config.get('python',__import__('sys').executable),'tests/update_server_test.py'],source,env,log,stop);run([config.get('python',__import__('sys').executable),'tests/update_delivery_test.py'],source,env,log,stop)
+  phase('updater tests');run([config.get('python',__import__('sys').executable),'tests/update_server_test.py'],source,env,log,stop);run([config.get('python',__import__('sys').executable),'tests/update_delivery_test.py'],source,env,log,stop);run(['node','tests/update_public_verification.cjs'],source,env,log,stop)
   phase('build ARM64');run(['cargo','build','--locked','--release','--target','aarch64-unknown-linux-musl'],source,env,log,stop)
   phase('build Windows');run(['cargo','build','--locked','--release'],source,env,log,stop)
   phase('smoke');smoke(cache/'release/schema-rs.exe',source,work,config,log,stop);checks['smoke']=True;checks['gpu_smoke']=bool(config.get('gpu_smoke'))
