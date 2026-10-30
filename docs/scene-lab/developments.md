@@ -444,3 +444,9 @@ The main setup map now supports background/middle/right drag pan, pointer-centre
 Source only, pending publication/device activation. Live Pi/scene/output/history are untouched. Retest crowded picking, fixture drags after zoom, far-away layouts/Fit, touch pinch beginning on a fixture, and browser reload. See docs/workspaces.md.
 
 Validation for `Add pan and zoom navigation to Fixture setup`: pure projection/inverse/anchor/fit/grid tests, real WASM mouse/touch gestures (including overlapping handles), tap picking, 44px phone targets, saved camera, modifier shortcut preservation and world-correct one-command drag all pass. Full native fmt/test/strict Clippy, final native build/lint, WASM app/mobile navigation/packaging and isolated native layout-selection, authoring and compact-Studio regressions passed. The legacy selection regression was separately refreshed for compact state, periodic clock input stubbing and the current mobile 3D handle markup.
+
+## Port 18798 upgraded and enrolled — 2026-10-30
+
+At the user’s explicit request, the retained random-dim workspace at `http://127.0.0.1:18798/?view=studio` was upgraded from its older copied lab engine to signed release `f553bb1558ec-8ef694475951-38` (source `f553bb1`). The original v1 session was backed up and migrated to v2. Carpushit - dim random breathing retains all 34 fixtures, revision 7 and seven undo entries; output remains disabled. Native executable digest/signature and served frontend content against current HEAD were checked after activation.
+
+The exact workspace is enrolled as `scene-lab-random-dim` in the existing updater. The updater reloaded enrollment and automatically advanced the first managed build to f553bb1, verifying history restoration. Use the same URL for authoring and retests. Example source data and named projects were retained.
