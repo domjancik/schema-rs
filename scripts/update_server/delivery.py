@@ -14,6 +14,15 @@ def workflow_runs(runs,commit):
   selected[name]=run['databaseId']
  return selected
 
+def vercel_runner(node,config):
+ if config.get('vercel_cli'):
+  entry=pathlib.Path(config['vercel_cli'])
+  if not entry.is_file():raise ValueError('Enrolled Vercel CLI entry point is missing')
+  return [node,entry]
+ npx=node.parent/'node_modules/npm/bin/npx-cli.js'
+ if not npx.is_file():raise ValueError('The enrolled Node installation must include npm/npx')
+ return [node,npx,'--yes','vercel@latest']
+
 def seal_public(work,commit,platforms):
  files={p.relative_to(work).as_posix():hashlib.sha256(p.read_bytes()).hexdigest()for p in (work/'site').rglob('*')if p.is_file()}
  atomic(work/'prepared.json',json.dumps({'commit':commit,'platforms':platforms,'files':files}).encode())
@@ -133,10 +142,9 @@ class Delivery:
     seal_public(work,commit,platforms)
    if self.store.latest()['release_id']!=release['release_id']:raise Pending('A newer ready build supersedes this publication')
    self.status('public',{**info,'status':'publishing','detail':'Deploying verified app and four platform downloads'})
-   node=pathlib.Path(self.command(['node','-p','process.execPath']).strip());npx=node.parent/'node_modules/npm/bin/npx-cli.js'
-   if not npx.is_file():raise ValueError('The enrolled Node installation must include npm/npx')
+   node=pathlib.Path(self.command(['node','-p','process.execPath']).strip());runner=vercel_runner(node,config)
    auth_config=['--global-config',config['vercel_config']]if config.get('vercel_config')else[]
-   self.command([node,npx,'--yes','vercel@latest','deploy','--cwd',site,'--scope',config['scope'],'--prod','--yes',*auth_config],cwd=source,timeout=600)
+   self.command([*runner,'deploy','--cwd',site,'--scope',config['scope'],'--prod','--yes',*auth_config],cwd=source,timeout=600)
    url=config['url'].rstrip('/')
    expected=work/'public-expectation.json';atomic(expected,json.dumps({'commit':commit,'platforms':platforms}).encode())
    self.command([node,pathlib.Path(__file__).with_name('verify_public.mjs'),url,expected],timeout=300)

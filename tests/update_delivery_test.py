@@ -2,7 +2,7 @@ import pathlib,sys,tempfile,unittest,json,zipfile,subprocess,socket,os
 from unittest.mock import patch
 sys.path.insert(0,str(pathlib.Path(__file__).resolve().parents[1]/'scripts/update_server'))
 from core import ReleaseStore,Signer
-from delivery import Delivery,seal_public,prepared_public
+from delivery import Delivery,seal_public,prepared_public,vercel_runner
 from delivery import workflow_runs,Pending
 from local_host import same_session,pristine,LocalHost
 class DeliveryPolicy(unittest.TestCase):
@@ -73,6 +73,11 @@ class LocalRecovery(unittest.TestCase):
     with self.assertRaises(ValueError):host.activate(folder,{'release_id':'test-release','source_commit':'a'*40})
     start.assert_not_called()
 class PublicSafety(unittest.TestCase):
+ def test_pinned_vercel_entry_avoids_package_wrapper(self):
+  with tempfile.TemporaryDirectory()as directory:
+   root=pathlib.Path(directory);entry=root/'vc.js';entry.write_text('cli');node=root/'node.exe';self.assertEqual(vercel_runner(node,{'vercel_cli':str(entry)}),[node,entry]);entry.unlink()
+   with self.assertRaises(ValueError):vercel_runner(node,{'vercel_cli':str(entry)})
+
  def test_prepared_publication_is_immutable_and_source_bound(self):
   with tempfile.TemporaryDirectory()as directory:
    root=pathlib.Path(directory);(root/'site').mkdir();file=root/'site/test';file.write_bytes(b'original');self.assertIsNone(prepared_public(root,'a'));seal_public(root,'a',{'platform':{}});self.assertEqual(prepared_public(root,'a'),{'platform':{}})
