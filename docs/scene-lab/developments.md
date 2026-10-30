@@ -479,6 +479,9 @@ All native tests, fmt, strict Clippy/build, actual WASM/native selector integrat
 
 ## DMX color Lightness source — 2026-10-31
 
-Pending activation: native/WASM DMX models accept `lightness`, shown as Lightness (HSL) in Output → Models → Slot source. It uses per-pixel `(max RGB + min RGB) / 2`, matching original Schéma’s LightnessMapping ToHSL conversion. Colors take precedence over a separate scalar Value; scalar-only banks use neutral gray. Alpha, fixture/master dimming and blackout apply once; program constants remain unchanged. Existing models, fixture assignments and live output are not modified automatically. New-source models need an updated engine.
+Commit `48ff863`: native/WASM DMX models accept `lightness`, shown as Lightness (HSL) in Output → Models → Slot source. It uses per-pixel `(max RGB + min RGB) / 2`, matching original Schéma’s LightnessMapping ToHSL conversion. Colors take precedence over a separate scalar Value; scalar-only banks use neutral gray. Alpha, fixture/master dimming and blackout apply once; program constants remain unchanged. Existing models, fixture assignments and live output are not modified automatically. New-source models need an updated engine.
 
 Retest color-derived dimmer models with saturated red (50% HSL lightness), grayscale/scalar output, master/fixture dimming, blackout and serialized model/undo roundtrips in isolated capture-only engines.
+
+
+Lightness activation verified: signed release `48ff863d43b1-e8ba54892395-42` is active on managed ports 18798/8788/8797 and the enrolled Orange Pi; Pi delivery reports scene/history preserved and OLA unchanged. Public-key signature and artifact hashes checked. Complete project, undo, redo and revision were independently identical across activation on 18798 and 8788. Full native tests/fmt/strict Clippy/build, real-WASM source selection/save/reopen/byte encoding, output/universe and content/group regressions, and browser/Linux/macOS CI passed. Live Studio source-option verification is read-only; no existing models or fixture assignments were changed. Public website activation is not claimed.
