@@ -54,7 +54,7 @@
     const control={host,get active(){return editing;},flush,cancel,dispose(){disposed=true;cancel();controls.delete(control);}};controls.add(control);
     function begin(){if(!editing){editing=true;revision=options.revision();wheel=0;}}
     function sync(){
-      const value=Number(input.value);if(range&&input.value.trim()&&Number.isFinite(value)){const b=bounds(settings,value);range.min=b.min;range.max=b.max;range.value=value;}
+      const value=Number(input.value);if(range&&input.value.trim()&&Number.isFinite(value)){const b=bounds(settings,value);if(!pointer){range.min=b.min;range.max=b.max;}range.value=value;}
       host.classList.toggle('numeric-draft',dirty);
     }
     function draft(value){begin();input.value=String(value);input.setCustomValidity('');dirty=value!==baseline;sync();}
