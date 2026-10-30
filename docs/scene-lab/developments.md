@@ -400,3 +400,9 @@ At the user's explicit request, the current scene-revision-2 Carpushit authoring
 The previous UV project was saved separately and an exact recovery-session/registry backup retained. Loading added one undo entry. The active Carpushit scene is saved as named project `carpushit`, default `init` layout/content/output and the durable startup session. The existing boot-enabled service continues resuming its session; a real service restart restored the exact project and undo/redo (revision 13, undo 11 / redo 0), preset providers and controls. OLA, AP, DHCP and portal processes were unchanged.
 
 Physical output remains disabled, matching the previous state. The scene's native cue Director remains disarmed as authored. The patch is the authored 33-circuit scene patch; no physical fixture addressing or UV-channel remapping was assumed. No application code change or firmware update was needed.
+
+## Universe patch fixture groups
+
+The universe grid now draws each fixture footprint as one labelled, coloured frame, matching the corresponding fixture card. Individual channel numbers and exact-address drop targets remain intact. Fixtures crossing rows keep the same colour/name with a continuation marker; the grid responds between 32 desktop and 16 mobile columns. Channel descriptions include custom-model slot names, including constant Program channels. Mobile fixture cards now fit their container.
+
+Source implementation only; the Orange Pi and public deployment have not been updated for this change. No live project, output, session or history changes. Browser regression covers adjacent fixtures, custom two-channel models, single-channel fixtures at 512, multi-pixel row wrapping, mobile resizing, drag/drop address preservation and close/reopen. Retest the UV two-slot example and crowded multi-channel patches when activated.

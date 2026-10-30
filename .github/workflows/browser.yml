@@ -41,6 +41,8 @@ jobs:
         run: PLAYWRIGHT_MODULE="$RUNNER_TEMP/schema-browser-tests/node_modules/playwright" node tests/commands-shortcuts-browser.cjs
       - name: Test daily dimming time simulation
         run: PLAYWRIGHT_MODULE="$RUNNER_TEMP/schema-browser-tests/node_modules/playwright" node tests/dimming-simulation-browser.cjs
+      - name: Universe fixture grouping
+        run: PLAYWRIGHT_MODULE="$RUNNER_TEMP/schema-browser-tests/node_modules/playwright" node tests/universe-groups-browser.cjs
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: schema-browser-site

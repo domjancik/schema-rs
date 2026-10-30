@@ -14,3 +14,15 @@
 .dimming-current-time,.dimming-current-level{display:inline-block;margin:8px 18px 8px 0;font:600 13px ui-monospace,monospace}.dimming-time-controls{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:14px;margin:12px 0;border:1px solid var(--line,#8885);border-radius:8px}.dimming-time-controls strong,.dimming-time-controls input[type=range],.dimming-time-controls .dimming-notice{flex-basis:100%}.dimming-time-controls label{display:flex!important;align-items:center;gap:8px}.dimming-time-controls input[type=time]{width:150px!important}.dimming-time-controls input[type=range]{min-height:44px;padding:0!important}.dimming-time-controls output{font:12px ui-monospace,monospace}.dimming-notice{font-size:12px;margin:0;opacity:.8}.timeline-now,.timeline-preview{pointer-events:none}.timeline-now path{stroke:#269a80;stroke-width:2}.timeline-now circle{fill:#269a80;stroke:var(--paper,#15251f)}.timeline-preview path{stroke:#cc8739;stroke-width:2;stroke-dasharray:5 4}.timeline-preview circle{fill:#cc8739;stroke:var(--paper,#15251f)}
 
 .dimming-time-controls select{width:auto!important;min-width:160px;flex:1}.dimming-time-controls label{flex-direction:row!important;margin:0}.dimming-legend{font-size:12px;opacity:.8}
+
+/* A continuous frame and label identify every fixture footprint. */
+.universe-grid{grid-template-columns:repeat(var(--patch-columns,32),minmax(0,1fr));gap:4px;align-items:stretch}
+.universe-fixture-group{display:grid;grid-template-columns:repeat(var(--fixture-slots),minmax(0,1fr));grid-template-rows:20px 28px;min-width:0;border:2px solid hsl(var(--fixture-hue) 48% 48%);border-radius:6px;overflow:hidden;background:hsl(var(--fixture-hue) 40% 45% / .13)}
+.universe-fixture-label{grid-column:1/-1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 4px;font:600 10px/20px system-ui;color:var(--ink,#e3efe7);background:hsl(var(--fixture-hue) 45% 45% / .24)}
+.universe-fixture-group .universe-slot.occupied{border:0;border-left:1px solid hsl(var(--fixture-hue) 40% 50% / .4);border-radius:0;background:transparent;font-size:10px;line-height:28px}
+.universe-fixture-group .universe-slot.occupied:nth-child(2){border-left:0}
+.universe-grid>.universe-slot{align-self:end;line-height:28px;box-sizing:border-box;height:30px}
+.patch-fixture{border-left:4px solid hsl(var(--fixture-hue,155) 48% 48%)}
+.universe-slot.patch-hover{position:relative;z-index:1;outline-offset:-2px;background:#b782e555!important}
+
+.patch-fixture{box-sizing:border-box;min-width:0}
