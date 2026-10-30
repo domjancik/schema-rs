@@ -142,6 +142,14 @@ impl BrowserEngine {
             "/api/state/compact" => {
                 serde_json::to_value(self.session.publication().compact()).map_err(error)?
             }
+            "/api/dimming/clock" => serde_json::to_value(if body.is_null() {
+                self.session.publication().dimming_clock
+            } else {
+                self.session
+                    .set_dimming_clock(serde_json::from_value(body).map_err(error)?)
+                    .map_err(error)?
+            })
+            .map_err(error)?,
             "/api/state" => serde_json::to_value(self.session.publication()).map_err(error)?,
             "/api/catalog" => json!(self.session.catalog()),
             "/api/command" => {

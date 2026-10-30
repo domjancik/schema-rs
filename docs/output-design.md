@@ -1,12 +1,14 @@
 # Output design
 
-Open **Output** in Studio or schémaboy. Settings remain engine-owned authored state; accepting a timeline/model/patch transaction adds one undo entry. The current preview is capture-only. No physical UV fixture behavior is claimed from software tests.
+Open **Output** in Studio or schémaboy. Settings remain engine-owned authored state; accepting a timeline/model/patch transaction adds one undo entry. Native hosts can send physical output; the browser engine provides computed previews. No physical UV fixture behavior is claimed from software tests.
 
 ## Daily global dimming
 
 A master 0–1 gain multiplies final light intensity after scene evaluation, fixture dimming and color alpha. Enabling the daily curve adds cyclic, linear time points. Last-to-first interpolation crosses midnight without requiring duplicate 00:00 and 24:00 points; for example 18:00 at 100% and 06:00 at 20% yields 60% at midnight. The curve repeats every 24 hours; one point holds a constant level. Distinct time points, levels and master are validated before commit. Drag points or edit their HH:MM/percentage rows, then Save. Closing the panel discards unsaved edits.
 
 Times use UTC clock input plus the saved UTC offset in minutes. **Use device time zone** copies the current browser offset. This is an explicit fixed offset, not an IANA time-zone/DST calendar; update the offset when daylight-saving rules change. The host clock adapter publishes once per second, independently of UI rendering and animation pause. Disabling the curve preserves the global master gain. Program constants and movement controls are not dimmed. Blackout still disables intensity channels.
+
+The editor now shows the current schedule time and supports preview scrubbing/playback plus explicit temporary output-time simulation. See [daily dimming and time simulation](daily-dimming.md).
 
 ## Extensible native slot models
 

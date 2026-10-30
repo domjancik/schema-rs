@@ -247,6 +247,7 @@ pub struct Engine {
     blackout: bool,
     last: Snapshot,
     debug_focus: Option<DebugFocus>,
+    dimming_clock: crate::dimming_clock::Clock,
     inspection_pending: Vec<DebugFocus>,
     inspection_frame: crate::inspection::Frame,
     checkpoints: BTreeMap<String, Arc<Project>>,
@@ -273,6 +274,7 @@ impl Engine {
             blackout: false,
             last: Snapshot::default(),
             debug_focus: None,
+            dimming_clock: crate::dimming_clock::Clock::default(),
             inspection_pending: Vec::new(),
             inspection_frame: crate::inspection::Frame::default(),
             checkpoints: BTreeMap::new(),
@@ -923,6 +925,21 @@ impl Engine {
         snap.evaluation_us = started.elapsed().as_micros() as u64;
         self.last = snap;
     }
+    pub fn set_dimming_clock(
+        &mut self,
+        control: crate::dimming_clock::Control,
+    ) -> Result<crate::dimming_clock::Status> {
+        self.dimming_clock
+            .control_at(control, crate::clock::Instant::now())?;
+        Ok(self.dimming_status())
+    }
+    pub fn dimming_status(&self) -> crate::dimming_clock::Status {
+        self.dimming_clock.status_at(
+            self.inputs.clock_seconds,
+            &self.project.dimming,
+            crate::clock::Instant::now(),
+        )
+    }
     pub fn request_inspection(
         &mut self,
         targets: Vec<DebugFocus>,
@@ -966,6 +983,7 @@ impl Engine {
         lighting: &crate::lighting::Frame,
         capture: &mut crate::inspection::Capture,
     ) -> Snapshot {
+        let dimming_level = self.dimming_status().level;
         let mut snap = Snapshot {
             debug_focus: self.debug_focus.clone(),
             frame: self.frame,
@@ -1107,7 +1125,7 @@ impl Engine {
                 fixture,
                 &result,
                 self.blackout,
-                self.project.dimming.level(self.inputs.clock_seconds),
+                dimming_level,
             );
             let start = fixture.address as usize - 1;
             if start + bytes.len() <= 512 {

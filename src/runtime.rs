@@ -12,6 +12,8 @@ pub struct Published {
     pub plugins: Arc<crate::plugins::Registry>,
     #[serde(skip)]
     pub resources: Arc<std::collections::BTreeMap<String, Vec<u8>>>,
+    #[serde(default)]
+    pub dimming_clock: crate::dimming_clock::Status,
     pub project: Project,
     pub snapshot: Snapshot,
 }
@@ -29,6 +31,7 @@ impl Published {
             host: engine.host(),
             plugins: engine.plugins(),
             resources: engine.resources(),
+            dimming_clock: engine.dimming_status(),
             project: engine.project().clone(),
             snapshot: engine.current_snapshot(),
         }
@@ -52,6 +55,12 @@ impl EngineSession {
             .diagnostics
             .extend(self.action_diagnostics.iter().cloned());
         frame
+    }
+    pub fn set_dimming_clock(
+        &mut self,
+        control: crate::dimming_clock::Control,
+    ) -> Result<crate::dimming_clock::Status> {
+        self.engine.set_dimming_clock(control)
     }
     pub fn inspection(
         &mut self,

@@ -58,3 +58,5 @@ pub mod migrations;
 pub mod storage_formats;
 
 pub mod inspection;
+
+pub mod dimming_clock;

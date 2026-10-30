@@ -23,6 +23,10 @@ use std::{
 };
 
 enum RequestMessage {
+    DimmingClock(
+        crate::dimming_clock::Control,
+        tokio::sync::oneshot::Sender<Result<crate::dimming_clock::Status>>,
+    ),
     Inspection(
         Vec<DebugFocus>,
         tokio::sync::oneshot::Sender<Result<crate::inspection::Frame>>,
@@ -83,6 +87,19 @@ impl Controller {
             .await
             .map_err(|_| "Plugin commit timed out")?
             .map_err(|_| "Engine stopped".to_owned())?
+    }
+    pub async fn dimming_clock(
+        &self,
+        control: crate::dimming_clock::Control,
+    ) -> Result<crate::dimming_clock::Status> {
+        let (tx, rx) = tokio::sync::oneshot::channel();
+        self.commands
+            .try_send(RequestMessage::DimmingClock(control, tx))
+            .map_err(|_| "Engine queue full or stopped")?;
+        tokio::time::timeout(Duration::from_secs(3), rx)
+            .await
+            .map_err(|_| "Dimming clock timed out")?
+            .map_err(|_| "Engine stopped")?
     }
     pub async fn inspection(&self, targets: Vec<DebugFocus>) -> Result<crate::inspection::Frame> {
         if targets.len() > crate::inspection::MAX_TARGETS {
@@ -270,6 +287,7 @@ impl Runtime {
             host: engine.host(),
             resources: engine.resources(),
             plugins: engine.plugins(),
+            dimming_clock: engine.dimming_status(),
             project: engine.project().clone(),
             snapshot: engine.snapshot(),
         })));
@@ -320,6 +338,14 @@ impl Runtime {
                                 let _ = reply.send(engine.request_inspection(targets));
                                 continue;
                             }
+                            RequestMessage::DimmingClock(control, reply) => {
+                                let _ = reply.send(if updating {
+                                    Err("Engine updating; retry shortly".into())
+                                } else {
+                                    engine.set_dimming_clock(control)
+                                });
+                                continue;
+                            }
                             RequestMessage::Checkpoint(reply) => {
                                 checkpoint_replies.push(reply);
                                 continue;
@@ -363,6 +389,7 @@ impl Runtime {
                         host: engine.host(),
                         resources: engine.resources(),
                         plugins: engine.plugins(),
+                        dimming_clock: engine.dimming_status(),
                         project: engine.project().clone(),
                         snapshot,
                     });
@@ -1070,7 +1097,9 @@ pub fn router(state: AppState) -> Router {
         .route("/dmx-test.js",get(||async{([(header::CONTENT_TYPE,"text/javascript; charset=utf-8")],include_str!("../web/dmx-test.js"))}))
         .route("/scene-stacks.js",get(||async{([(header::CONTENT_TYPE,"text/javascript; charset=utf-8")],include_str!("../web/scene-stacks.js"))}))
         .route("/api/output/devices", get(output_devices))
+        .route("/dimming-editor.js",get(||async{ ([(header::CONTENT_TYPE,"text/javascript")],include_str!("../web/dimming-editor.js")) }))
         .route("/api/state", get(state_get))
+        .route("/api/dimming/clock",get(dimming_clock_get).post(dimming_clock_control))
         .route("/api/state/compact",get(state_compact))
         .route("/api/inspection",post(inspection))
         .route("/block-inspection.js",get(||async{ ([(header::CONTENT_TYPE,"text/javascript")],include_str!("../web/block-inspection.js")) }))
@@ -1536,4 +1565,14 @@ async fn inspection(
     Json(body): Json<InspectionRequest>,
 ) -> ApiResult<Json<crate::inspection::Frame>> {
     Ok(Json(state.controller.inspection(body.targets).await?))
+}
+
+async fn dimming_clock_get(State(state): State<AppState>) -> Json<crate::dimming_clock::Status> {
+    Json(state.controller.current().dimming_clock.clone())
+}
+async fn dimming_clock_control(
+    State(state): State<AppState>,
+    Json(control): Json<crate::dimming_clock::Control>,
+) -> ApiResult<Json<crate::dimming_clock::Status>> {
+    Ok(Json(state.controller.dimming_clock(control).await?))
 }

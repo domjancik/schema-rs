@@ -165,6 +165,7 @@ window.SchemaAuthoring = (() => {
         s.paused,
         s.blackout,
         s.debug_focus,
+        !!data.dimming_clock?.simulating,
         s.diagnostics,
       ]);
     if (key === signature) return;
@@ -206,6 +207,16 @@ window.SchemaAuthoring = (() => {
       stop.className = "state-chip state-debug";
       stop.title =
         "Temporary block output focus is active. Stop to restore normal fixture output.";
+      bar.append(stop);
+    }
+    if (data.dimming_clock?.simulating) {
+      const stop = button("Time sim · Live", () =>
+        SchemaEngine.request("/api/dimming/clock", { action: "live" }).catch(
+          (e) => notify(e.message, true),
+        ),
+      );
+      stop.className = "state-chip state-debug";
+      stop.title = "Daily dimming uses simulated time. Return to live time.";
       bar.append(stop);
     }
     if (s.diagnostics?.length)

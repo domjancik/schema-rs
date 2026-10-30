@@ -166,6 +166,7 @@ window.SchemaOutputPanel = (() => {
       status.textContent =
         (data.snapshot.blackout ? "Blackout · " : "") +
         (data.snapshot.debug_focus ? "Debug output · " : "") +
+        (data.dimming_clock?.simulating ? "Time simulation · " : "") +
         data.snapshot.output_status;
       status.className =
         "state-" +

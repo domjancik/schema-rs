@@ -382,3 +382,11 @@ Full native fmt/tests/clippy, true-peer throttling and deterministic expiry, leg
 ## Commands browser shortcut: a47ab93
 
 Commands now uses unmodified **F2**, with the Commands/menu button retained. Ctrl/Cmd+Shift+P is no longer intercepted, leaving browser print/private-window shortcuts alone. Shortcut help, tooltip, accessible keyboard metadata and canonical authoring guide use F2. Held/composing/modified F2 does not trigger the palette. Real browser regression covers Studio/schémaboy, click access, shortcut help, typing and untouched P chords. No authored/engine behavior changes. Active on the public browser app and signed appliance release from `a47ab93`. Published script/build hashes match. Live Chrome through the Pi portal verified F2 in Studio/schémaboy and F2 help, with no authored commands submitted. Signed activation preserved scene/history and OLA. Full native release checks and real WASM shortcut regression passed.
+
+
+## Brightness readouts and daily time simulation: implementation pending activation
+
+- Numeric output values/meters now stay visible alongside color swatches, including output focus; the preview strip no longer hides them. The old color-only numeric readout remains mean RGB of the first pixel. Also guarded bank lookup before the first publication.
+- Output → Dimming shows engine current schedule time, live/current-level readouts and a solid current-time marker. Preview time can be scrubbed or played at 1×/60×/3600×, with a separate dashed marker.
+- Applying simulated time to output is explicit, schedule-only and transient. A visible global indicator can return to live. Owner-scoped cleanup and a 15-second heartbeat lease prevent orphaned simulation; mode is excluded from projects/session/undo. Existing publication carries lightweight clock status; no extra frame polling.
+- Native clock/HTTP tests cover output bytes, midnight/offsets, ownership, expiry and unchanged history. Actual WASM tests cover focus brightness, clock markers, preview versus output, playback/live return, close cleanup and 320px phone layout. See [daily dimming](../daily-dimming.md). Suggested isolated retests: midnight curves, nonzero offsets, saved versus draft curves, a second view taking over simulation and disconnect recovery. Activation pending this entry.
