@@ -56,3 +56,5 @@ pub mod history;
 pub mod migrations;
 
 pub mod storage_formats;
+
+pub mod inspection;

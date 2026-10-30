@@ -33,7 +33,7 @@ impl BrowserEngine {
         String::from_utf8(self.session.encode_session().map_err(error)?).map_err(error)
     }
     pub fn advance(&mut self, dt: f64) -> Result<String, JsValue> {
-        serde_json::to_string(&self.session.advance(dt).map_err(error)?).map_err(error)
+        serde_json::to_string(&self.session.advance(dt).map_err(error)?.compact()).map_err(error)
     }
     pub fn request(&mut self, path: &str, body: &str) -> Result<String, JsValue> {
         let body: Value = schema_rs::migrations::parse(body.as_bytes()).map_err(error)?;
@@ -132,6 +132,15 @@ impl BrowserEngine {
                     let bundle = serde_json::from_value(value).map_err(error)?;
                     json!({"revision":self.session.import_bundle(bundle,expected).map_err(error)?})
                 }
+            }
+            "/api/inspection" => serde_json::to_value(
+                self.session
+                    .inspection(serde_json::from_value(body["targets"].clone()).map_err(error)?)
+                    .map_err(error)?,
+            )
+            .map_err(error)?,
+            "/api/state/compact" => {
+                serde_json::to_value(self.session.publication().compact()).map_err(error)?
             }
             "/api/state" => serde_json::to_value(self.session.publication()).map_err(error)?,
             "/api/catalog" => json!(self.session.catalog()),

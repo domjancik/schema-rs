@@ -1,0 +1,15 @@
+# Live block attributes
+
+Studio blocks display the colors they produce as swatches, alongside compact numeric/vector attribute summaries. Color-array previews include their pixel count. These are evaluated outputs, distinct from bypass/debug/status colors. The block inspector shows separate **Incoming** and **Outgoing** attributes, with RGBA values, vectors, scalars and available channel/audio/texture/emitter metadata. Incoming means the merged child banks before the block applies its own input-basis policy; it does not mean authored property values or driver parameters. A bypassed block shows its pass-through input/output.
+
+Workspace inspectors support pinned selections, and embedded/split stacks use each block's own fixture/layer identity. In schémaboy, the small swatch/value button beside the selected block opens the same incoming/outgoing inspector. Stack blocks also show color samples. The phone dialog scrolls independently, preserving the single main viewport.
+
+## Demand and limits
+
+Inspection is transient, separate from authored commands, undo and recovery files. The interface batches visible block and inspector targets at most four times a second. Hidden tabs and views without targets send no requests. At most 96 visible block cards are sampled by one UI; explicit inspector selections are prioritized separately. The server accepts at most 256 targets and retains at most 256 samples across clients, filtered by requested target and current revision. Requests queue a one-shot sample for the next actual evaluation; capture does not reevaluate nodes, advance generators again or execute actions again. Lighting probe passes do not collect samples. With no further demand, no more input/output samples are captured.
+
+Arrays include their total count but return at most eight elements. Texture responses contain dimensions and a few pixels, not the whole image. Audio responses include scalar metadata and a few bands. Channel objects are depth/size bounded, and action summaries list names. This keeps intermediate previews bounded for large pixel fixtures, audio and resources. A sample may lag live output by a polling interval; disabled/unevaluated layers show a waiting message rather than fabricated output.
+
+`POST /api/inspection` accepts `{ "targets": [{ "fixture": "fixture-1", "layer": 0, "node": 1 }] }`. The reply identifies each sample's frame/revision and incoming/outgoing attributes. It does not increment the authored revision. `GET /api/state/compact` carries the ordinary scene snapshot with node trace maps omitted; Studio/schémaboy use this route. The existing full state endpoint and internal/recovery traces remain available for compatibility. Native and browser hosts share the capture implementation; the browser worker keeps inspection and scene evaluation off the UI thread.
+
+Regression tests check exact incoming versus outgoing color, pass-through semantics, bounded large buffers, independent client caches, unchanged runtime/undo state, native compact transport, real WASM previews, full Studio/phone access and idle request suppression.

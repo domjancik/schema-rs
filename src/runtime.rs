@@ -16,6 +16,14 @@ pub struct Published {
     pub snapshot: Snapshot,
 }
 impl Published {
+    pub fn compact(mut self) -> Self {
+        for fixture in &mut self.snapshot.fixtures {
+            fixture.nodes.clear();
+        }
+        self.snapshot.director_nodes.clear();
+        self
+    }
+
     pub fn capture(engine: &Engine) -> Self {
         Self {
             host: engine.host(),
@@ -44,6 +52,12 @@ impl EngineSession {
             .diagnostics
             .extend(self.action_diagnostics.iter().cloned());
         frame
+    }
+    pub fn inspection(
+        &mut self,
+        targets: Vec<crate::model::DebugFocus>,
+    ) -> Result<crate::inspection::Frame> {
+        self.engine.request_inspection(targets)
     }
     pub fn command(&mut self, command: Command, expected: Option<u64>) -> Result<u64> {
         if expected.is_some_and(|revision| revision != self.engine.revision()) {

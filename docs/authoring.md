@@ -33,3 +33,6 @@ Imports are fully validated and prepared off the native evaluation thread, then 
 Bundles omit access credentials, network pairing details and the source session’s undo/runtime history. Physical output is disabled on import. Raw resources are limited to 256 files and 8 MiB combined; the JSON import limit is 64 MiB. Symbolic links, absolute paths and traversal paths are rejected. Large media and arbitrary native plugins require a future resource/package transport; current components are bounded graph/script definitions.
 
 Workspace arrangements and temporary meshes imported only into a preview are view preferences; they are not authored project data. Place durable project files in `resources/` before exporting a bundle.
+
+
+Blocks now show evaluated color/attribute previews. Inspectors show incoming and outgoing banks separately; schémaboy exposes them through the swatch/value button beside the selected block. See [live block attributes](block-inspection.md) for sampling and performance limits.

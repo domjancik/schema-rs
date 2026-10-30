@@ -23,6 +23,10 @@ use std::{
 };
 
 enum RequestMessage {
+    Inspection(
+        Vec<DebugFocus>,
+        tokio::sync::oneshot::Sender<Result<crate::inspection::Frame>>,
+    ),
     Bundle(
         Box<crate::engine::PreparedBundle>,
         tokio::sync::oneshot::Sender<Result<u64>>,
@@ -79,6 +83,19 @@ impl Controller {
             .await
             .map_err(|_| "Plugin commit timed out")?
             .map_err(|_| "Engine stopped".to_owned())?
+    }
+    pub async fn inspection(&self, targets: Vec<DebugFocus>) -> Result<crate::inspection::Frame> {
+        if targets.len() > crate::inspection::MAX_TARGETS {
+            return Err("At most 256 inspected blocks".into());
+        }
+        let (tx, rx) = tokio::sync::oneshot::channel();
+        self.commands
+            .try_send(RequestMessage::Inspection(targets, tx))
+            .map_err(|_| "Engine queue full or stopped")?;
+        tokio::time::timeout(Duration::from_secs(3), rx)
+            .await
+            .map_err(|_| "Inspection timed out")?
+            .map_err(|_| "Engine stopped")?
     }
     pub async fn checkpoint(&self) -> Result<crate::session::Session> {
         let (tx, rx) = tokio::sync::oneshot::channel();
@@ -297,6 +314,10 @@ impl Runtime {
                                     engine.install_bundle(*prepared)
                                 };
                                 replies.push((reply, result));
+                                continue;
+                            }
+                            RequestMessage::Inspection(targets, reply) => {
+                                let _ = reply.send(engine.request_inspection(targets));
                                 continue;
                             }
                             RequestMessage::Checkpoint(reply) => {
@@ -1050,6 +1071,10 @@ pub fn router(state: AppState) -> Router {
         .route("/scene-stacks.js",get(||async{([(header::CONTENT_TYPE,"text/javascript; charset=utf-8")],include_str!("../web/scene-stacks.js"))}))
         .route("/api/output/devices", get(output_devices))
         .route("/api/state", get(state_get))
+        .route("/api/state/compact",get(state_compact))
+        .route("/api/inspection",post(inspection))
+        .route("/block-inspection.js",get(||async{ ([(header::CONTENT_TYPE,"text/javascript")],include_str!("../web/block-inspection.js")) }))
+        .route("/block-inspection.css",get(||async{ ([(header::CONTENT_TYPE,"text/css")],include_str!("../web/block-inspection.css")) }))
         .route("/api/catalog", get(|State(state):State<AppState>|async move{Json(state.controller.plugin_catalog())}))
         .route("/api/command", post(command))
         .route("/api/import", post(import))
@@ -1496,4 +1521,19 @@ async fn project_import(
         )
         .await?;
     Ok(Json(serde_json::json!({"revision":revision})))
+}
+
+async fn state_compact(State(state): State<AppState>) -> Json<Published> {
+    Json((*state.controller.current()).clone().compact())
+}
+#[derive(serde::Deserialize)]
+#[serde(deny_unknown_fields)]
+struct InspectionRequest {
+    targets: Vec<DebugFocus>,
+}
+async fn inspection(
+    State(state): State<AppState>,
+    Json(body): Json<InspectionRequest>,
+) -> ApiResult<Json<crate::inspection::Frame>> {
+    Ok(Json(state.controller.inspection(body.targets).await?))
 }

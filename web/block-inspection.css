@@ -1,0 +1,163 @@
+.block-attributes {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 5px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  overflow: hidden;
+  font:
+    10px/1.2 ui-monospace,
+    monospace;
+  color: inherit;
+  pointer-events: none;
+}
+.has-attributes .node-meter,
+.has-attributes .node-value {
+  visibility: hidden;
+}
+.attribute-colors {
+  display: inline-flex;
+  gap: 3px;
+  align-items: center;
+  flex-shrink: 0;
+}
+.attribute-swatch {
+  display: inline-block;
+  position: relative;
+  width: 17px;
+  height: 13px;
+  border-radius: 3px;
+  border: 1px solid #7778;
+  background: repeating-conic-gradient(#777 0% 25%, #ddd 0% 50%) 50%/6px 6px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.attribute-swatch::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--sample-color);
+}
+.attribute-brief {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.block-inspection {
+  font-size: 12px;
+  min-width: 0;
+  margin-block: 14px;
+  padding-block: 10px;
+  border-block: 1px solid var(--line, #8885);
+}
+.block-inspection h3 {
+  font-size: 13px;
+  margin: 0 0 10px;
+}
+.attribute-direction h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.75;
+  margin: 12px 0 6px;
+}
+.attribute-direction dl {
+  display: grid;
+  grid-template-columns: minmax(65px, 0.7fr) minmax(0, 1.6fr);
+  gap: 7px 10px;
+  margin: 0;
+}
+.attribute-direction dt {
+  font-weight: 600;
+}
+.attribute-direction dd {
+  margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-family: ui-monospace, monospace;
+}
+.attribute-direction dd > span,
+.attribute-direction dd > small {
+  display: block;
+}
+.attribute-direction dd > .attribute-colors {
+  display: flex;
+  margin-bottom: 4px;
+}
+.attribute-direction small,
+.attribute-empty,
+.attribute-status {
+  opacity: 0.7;
+  font-size: 11px;
+}
+.attribute-numbers {
+  font-size: 10px;
+  line-height: 1.5;
+}
+.attribute-dialog {
+  width: min(440px, calc(100vw - 28px));
+  max-height: 85dvh;
+  overflow: auto;
+  background: var(--panel, #18231f);
+  color: var(--ink, #e5ede7);
+  border: 1px solid #8885;
+  border-radius: 12px;
+  padding: 18px;
+}
+.attribute-dialog::backdrop {
+  background: #0008;
+}
+#output-value[role="button"] {
+  cursor: pointer;
+}
+#output-value .attribute-colors {
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+.instrument-meta #selection-meta {
+  flex: 1;
+  min-width: 0;
+  max-width: none;
+}
+.instrument-meta #inspect-attributes {
+  flex: 0 0 44px;
+  min-width: 44px;
+  min-height: 28px;
+  padding: 3px 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font:
+    11px ui-monospace,
+    monospace;
+}
+.instrument-meta #inspect-attributes .attribute-swatch {
+  width: 26px;
+  height: 14px;
+}
+
+.attribute-dialog {
+  font:
+    400 12px/1.5 system-ui,
+    sans-serif;
+}
+.attribute-dialog > button {
+  font: inherit;
+  padding: 7px 12px;
+  color: inherit;
+  background: transparent;
+  border: 1px solid #8886;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.attribute-dialog > button:hover {
+  background: #8882;
+}
+.attribute-count {
+  flex-shrink: 0;
+  opacity: 0.8;
+}

@@ -2,7 +2,7 @@ import init,{BrowserEngine} from './wasm/schema_web.js';
 import {openStorage} from './browser-storage.mjs';
 let engine,storage,sessionId,latest,timer,persistenceError='',saving=Promise.resolve(),initialized=false,subscribed=false,manual=false,persistedSession=null,persistedNeedsBackup=false;
 const capabilities={execution:'browser-worker',network_output:false,usb_output:false,filesystem:false,scene_editing:true,session_serialization:true};
-function capture(){latest=JSON.parse(engine.request('/api/state','null'));latest.snapshot.output_status='Browser preview · no physical outputs';return latest;}
+function capture(){latest=JSON.parse(engine.request('/api/state/compact','null'));latest.snapshot.output_status='Browser preview · no physical outputs';return latest;}
 function revision(expected){const current=capture().snapshot.revision;if(expected!==undefined&&expected!==current)throw Error('Revision conflict: refresh state before editing');return current;}
 function id(value){if(typeof value!=='string'||! /^[A-Za-z0-9_-]{1,80}$/.test(value))throw Error('Use a project ID of 1–80 letters, digits, - or _.');return value;}
 function persist(){
@@ -44,7 +44,8 @@ async function start(options){
 }
 async function request(path,body){
   if(path==='/api/capabilities')return capabilities;
-  if(path==='/api/state')return capture();
+  if(path==='/api/state')return JSON.parse(engine.request('/api/state','null'));
+  if(path==='/api/state/compact')return capture();
   if(path==='/api/session/status')return {enabled:!!storage,error:persistenceError||null};
   if(path==='/api/session/save'){await persist();return {saved_revision:capture().snapshot.revision};}
   if(path==='/api/session')return JSON.parse(engine.checkpoint());

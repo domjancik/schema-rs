@@ -1,5 +1,6 @@
 'use strict';
 window.SchemaEngine={async request(path,body){const token=sessionStorage.getItem('schema-token');const response=await fetch(path,{method:body===undefined?'GET':'POST',headers:{'content-type':'application/json',...(token?{'x-schema-token':token}:{})},...(body===undefined?{}:{body:JSON.stringify(body)})});if(!response.ok){let text=await response.text();try{text=JSON.parse(text).error||text;}catch{}throw Error(text);}return response.headers.get('content-type')?.includes('json')?response.json():response.text();}};
+const sceneRequest=window.SchemaEngine.request.bind(window.SchemaEngine);window.SchemaEngine.request=(path,body)=>sceneRequest(path==='/api/state'?'/api/state/compact':path,body);
 // Browser and native transports share the same command/publication protocol.
 if(document.documentElement.dataset.engine==='browser'||new URLSearchParams(location.search).get('engine')==='browser'){
  const remote=window.SchemaEngine;
@@ -8,7 +9,7 @@ if(document.documentElement.dataset.engine==='browser'||new URLSearchParams(loca
  if(!sessionId){sessionId=crypto.randomUUID();sessionStorage.setItem('schema-browser-session',sessionId);}
  const ready=parentEngine?parentEngine.ready:import('/schema-player.mjs').then(({SchemaPlayer})=>SchemaPlayer.create({persist:true,sessionId}));
  ready.catch(error=>{document.getElementById('status')?.replaceChildren(document.createTextNode(error.message));});
- window.SchemaEngine={kind:'browser',ready,async request(path,body){return path.startsWith('/api/')?(await ready).request(path,body):remote.request(path,body);}};
+ window.SchemaEngine={kind:'browser',ready,async request(path,body){return path.startsWith('/api/')?(await ready).request(path==='/api/state'?'/api/state/compact':path,body):remote.request(path,body);}};
  // The browser app has no hardware transport; computed DMX remains inspectable.
  for(const id of ['output-enabled','output-apply','connect']){const node=document.getElementById(id);if(node){node.disabled=true;node.title='Browser engine: preview and editing only';}}
  document.addEventListener('click',event=>{

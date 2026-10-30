@@ -247,6 +247,8 @@ pub struct Engine {
     blackout: bool,
     last: Snapshot,
     debug_focus: Option<DebugFocus>,
+    inspection_pending: Vec<DebugFocus>,
+    inspection_frame: crate::inspection::Frame,
     checkpoints: BTreeMap<String, Arc<Project>>,
     resources: Arc<BTreeMap<String, Vec<u8>>>,
     nodes: HashMap<String, NodeState>,
@@ -271,6 +273,8 @@ impl Engine {
             blackout: false,
             last: Snapshot::default(),
             debug_focus: None,
+            inspection_pending: Vec::new(),
+            inspection_frame: crate::inspection::Frame::default(),
             checkpoints: BTreeMap::new(),
             resources: Arc::new(BTreeMap::new()),
             nodes: HashMap::new(),
@@ -873,7 +877,11 @@ impl Engine {
         {
             // Probe on cloned state: each actual generator/driver advances only once.
             let mut probe_nodes = self.nodes.clone();
-            let probe = self.evaluate_scene(&mut probe_nodes, &lighting);
+            let probe = self.evaluate_scene(
+                &mut probe_nodes,
+                &lighting,
+                &mut crate::inspection::Capture::default(),
+            );
             lighting.emitters = probe.emitters;
             lighting.positions = probe
                 .fixtures
@@ -887,15 +895,76 @@ impl Engine {
                 .collect();
         }
         let mut nodes = std::mem::take(&mut self.nodes);
-        let mut snap = self.evaluate_scene(&mut nodes, &lighting);
+        let mut capture =
+            crate::inspection::Capture::new(std::mem::take(&mut self.inspection_pending));
+        let mut snap = self.evaluate_scene(&mut nodes, &lighting, &mut capture);
+        if !capture.targets.is_empty() {
+            self.inspection_frame.frame = self.frame;
+            self.inspection_frame.revision = self.revision;
+            self.inspection_frame
+                .blocks
+                .retain(|b| b.revision == self.revision);
+            for mut block in capture.blocks {
+                block.frame = self.frame;
+                block.revision = self.revision;
+                self.inspection_frame
+                    .blocks
+                    .retain(|b| b.target != block.target);
+                self.inspection_frame.blocks.push(block);
+            }
+            let excess = self
+                .inspection_frame
+                .blocks
+                .len()
+                .saturating_sub(crate::inspection::MAX_TARGETS);
+            self.inspection_frame.blocks.drain(..excess);
+        }
         self.nodes = nodes;
         snap.evaluation_us = started.elapsed().as_micros() as u64;
         self.last = snap;
     }
+    pub fn request_inspection(
+        &mut self,
+        targets: Vec<DebugFocus>,
+    ) -> Result<crate::inspection::Frame> {
+        if targets.len() > crate::inspection::MAX_TARGETS {
+            return Err("At most 256 inspected blocks".into());
+        }
+        for target in &targets {
+            debug_node(&self.project, target).ok_or("Inspected block no longer exists")?;
+        }
+        let mut pending = self.inspection_pending.clone();
+        for target in &targets {
+            if !pending.contains(target) {
+                pending.push(target.clone());
+            }
+        }
+        if pending.len() > crate::inspection::MAX_TARGETS {
+            return Err("Inspection queue is full; retry shortly".into());
+        }
+        self.inspection_pending = pending;
+        Ok(crate::inspection::Frame {
+            frame: self.inspection_frame.frame,
+            revision: self.inspection_frame.revision,
+            blocks: self
+                .inspection_frame
+                .blocks
+                .iter()
+                .filter(|b| {
+                    b.revision == self.revision
+                        && self.frame.saturating_sub(b.frame) <= 120
+                        && (targets.is_empty() || targets.contains(&b.target))
+                })
+                .cloned()
+                .collect(),
+        })
+    }
+
     fn evaluate_scene(
         &self,
         nodes: &mut HashMap<String, NodeState>,
         lighting: &crate::lighting::Frame,
+        capture: &mut crate::inspection::Capture,
     ) -> Snapshot {
         let mut snap = Snapshot {
             debug_focus: self.debug_focus.clone(),
@@ -967,6 +1036,7 @@ impl Engine {
                         bindings: Vec::new(),
                         diagnostics: &mut snap.diagnostics,
                         trace: &mut trace,
+                        capture,
                         budget: 4096,
                     };
                     evaluate(&stack.root, &mut ctx)
@@ -1109,6 +1179,7 @@ impl Engine {
                         bindings: Vec::new(),
                         diagnostics: &mut snap.diagnostics,
                         trace: &mut trace,
+                        capture,
                         budget: 4096,
                     };
                     evaluate(&stack.root, &mut ctx)
@@ -1588,6 +1659,7 @@ struct Context<'a> {
     bindings: Vec<Arc<crate::plugins::Bindings>>,
     diagnostics: &'a mut Vec<String>,
     trace: &'a mut BTreeMap<String, Bank>,
+    capture: &'a mut crate::inspection::Capture,
     budget: usize,
 }
 fn evaluate(n: &Node, c: &mut Context<'_>) -> Bank {
@@ -1599,7 +1671,22 @@ fn evaluate(n: &Node, c: &mut Context<'_>) -> Bank {
     c.budget -= 1;
     let inputs: Vec<_> = n.children.iter().map(|n| evaluate(n, c)).collect();
     let mut bank = inputs.iter().cloned().fold(Bank::default(), Bank::merge);
+    let incoming = (!c.prefix.contains("@plugin/")
+        && c.capture.wants(&c.fixture.id, c.layer, n.id))
+    .then(|| crate::inspection::Attributes::capture(&bank));
     if n.bypassed {
+        if let Some(incoming) = incoming {
+            c.capture.record(
+                DebugFocus {
+                    fixture: c.fixture.id.clone(),
+                    layer: c.layer,
+                    node: n.id,
+                },
+                incoming,
+                &bank,
+                true,
+            );
+        }
         if !c.prefix.contains("@plugin/") {
             c.trace
                 .insert(format!("{}/{}", c.layer, n.id), bank.clone());
@@ -2267,6 +2354,18 @@ fn evaluate(n: &Node, c: &mut Context<'_>) -> Bank {
             bank.clone(),
         );
     }
+    if let Some(incoming) = incoming {
+        c.capture.record(
+            DebugFocus {
+                fixture: c.fixture.id.clone(),
+                layer: c.layer,
+                node: n.id,
+            },
+            incoming,
+            &bank,
+            false,
+        );
+    }
     c.nodes.insert(id, state);
     bank
 }
@@ -2347,10 +2446,13 @@ pub fn encode_fixture(f: &Fixture, b: &Bank, blackout: bool) -> Vec<u8> {
 }
 
 fn debug_node<'a>(p: &'a Project, t: &DebugFocus) -> Option<&'a Node> {
-    p.content
-        .get(&t.fixture)?
-        .get(t.layer)?
-        .as_ref()?
-        .root
-        .find(t.node)
+    (if t.fixture == "__director" {
+        &p.director
+    } else {
+        p.content.get(&t.fixture)?
+    })
+    .get(t.layer)?
+    .as_ref()?
+    .root
+    .find(t.node)
 }
