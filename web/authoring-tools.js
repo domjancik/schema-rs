@@ -616,7 +616,7 @@ window.SchemaAuthoring = (() => {
     }
     const table = el("dl");
     for (const [k, v] of [
-      ["Ctrl/Cmd+Shift+P", "Search actions"],
+      ["F2", "Search actions"],
       ["Ctrl/Cmd+K", "Find fixture"],
       ["Ctrl/Cmd+S", "Projects"],
       ["Ctrl/Cmd+Z / Shift+Z", "Undo / Redo"],
@@ -823,7 +823,8 @@ window.SchemaAuthoring = (() => {
       paletteButton = button("Commands", open);
       paletteButton.id = "command-palette";
       paletteButton.disabled = true;
-      paletteButton.title = "Search actions (Ctrl/Cmd+Shift+P)";
+      paletteButton.title = "Search actions (F2)";
+      paletteButton.setAttribute("aria-keyshortcuts", "F2");
       actions.append(paletteButton);
     }
     const footer = document.querySelector("body>footer"),
@@ -838,9 +839,13 @@ window.SchemaAuthoring = (() => {
       "keydown",
       (event) => {
         if (
-          (event.ctrlKey || event.metaKey) &&
-          event.shiftKey &&
-          event.key.toLowerCase() === "p"
+          event.key === "F2" &&
+          !event.ctrlKey &&
+          !event.metaKey &&
+          !event.altKey &&
+          !event.shiftKey &&
+          !event.repeat &&
+          !event.isComposing
         ) {
           event.preventDefault();
           event.stopImmediatePropagation();

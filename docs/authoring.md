@@ -1,6 +1,6 @@
 # Authoring tools
 
-Open **Commands** in the application menu, or press **Ctrl/Cmd+Shift+P**. Search actions by name or related words, move through results with the arrow keys, and press Enter. **State and shortcut help** explains the shared color meanings and keyboard controls. Commands work in Studio and schémaboy.
+Open **Commands** in the application menu, or press **F2**. Search actions by name or related words, move through results with the arrow keys, and press Enter. **State and shortcut help** explains the shared color meanings and keyboard controls. Commands work in Studio and schémaboy.
 
 ## Picking and arranging fixtures
 

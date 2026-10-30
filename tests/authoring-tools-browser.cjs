@@ -75,7 +75,7 @@ async function wait(check) {
       await p.waitForFunction(
         () => !document.querySelector("#command-palette")?.disabled,
       );
-      await p.keyboard.press("Control+Shift+P");
+      await p.keyboard.press("F2");
       const d = p.getByRole("dialog", { name: "Commands", exact: true });
       await d.getByLabel("Search actions", { exact: true }).fill(query);
       await d.getByRole("button", { name: label, exact: true }).click();
@@ -178,7 +178,7 @@ async function wait(check) {
     assert(
       await p
         .getByRole("dialog", { name: "State and shortcut help", exact: true })
-        .getByText("Ctrl/Cmd+Shift+P", { exact: true })
+        .getByText("F2", { exact: true })
         .isVisible(),
     );
     await p.keyboard.press("Escape");
@@ -248,7 +248,7 @@ async function wait(check) {
     await mobile
       .locator("#command-palette:not([disabled])")
       .waitFor({ state: "attached" });
-    await mobile.keyboard.press("Control+Shift+P");
+    await mobile.keyboard.press("F2");
     await mobile
       .getByRole("dialog", { name: "Commands", exact: true })
       .waitFor();

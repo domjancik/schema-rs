@@ -12,7 +12,7 @@ if (["", "8787", "8788"].includes(new URL(base).port))
     p.on("pageerror", (e) => errors.push(e.message));
     let release;
     const gate = new Promise((r) => (release = r));
-    await p.route("**/api/state", async (route) => {
+    await p.route("**/api/state/compact", async (route) => {
       await gate;
       await route.continue();
     });
@@ -23,13 +23,13 @@ if (["", "8787", "8788"].includes(new URL(base).port))
       await commands.isDisabled(),
       "Commands must wait for a scene publication",
     );
-    await p.keyboard.press("Control+Shift+P");
+    await p.keyboard.press("F2");
     assert.equal(await p.locator("dialog[open]").count(), 0);
     release();
     await p.waitForFunction(
       () => !document.querySelector("#command-palette").disabled,
     );
-    await p.keyboard.press("Control+Shift+P");
+    await p.keyboard.press("F2");
     await p.getByRole("dialog", { name: "Commands", exact: true }).waitFor();
     await p.keyboard.press("Escape");
     await p.waitForFunction(() => !document.querySelector("dialog[open]"));
