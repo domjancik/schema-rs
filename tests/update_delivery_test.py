@@ -1,4 +1,4 @@
-import pathlib,sys,tempfile,unittest,json,zipfile,subprocess
+import pathlib,sys,tempfile,unittest,json,zipfile,subprocess,socket,os
 from unittest.mock import patch
 sys.path.insert(0,str(pathlib.Path(__file__).resolve().parents[1]/'scripts/update_server'))
 from core import ReleaseStore,Signer
@@ -38,6 +38,22 @@ class DeliveryPolicy(unittest.TestCase):
   with tempfile.TemporaryDirectory()as root:
    with self.assertRaises(ValueError):LocalHost(root,{'id':'../../outside','project':root,'port':8797})
 class LocalRecovery(unittest.TestCase):
+ def test_startup_barrier_uses_the_engine_project_path(self):
+  with tempfile.TemporaryDirectory()as directory:
+   host=LocalHost(directory,{'id':'test','project':directory,'port':8788})
+   self.assertEqual(host.barrier,pathlib.Path(directory).resolve()/'.update-in-progress')
+   with self.assertRaises(ValueError):host.process_config('engine','stop',pathlib.Path(directory)/'wrong-barrier')
+   self.assertNotIn('--update-barrier',host.process_config('engine','stop',host.barrier))
+
+ @unittest.skipUnless(os.name=='nt','Windows listener query')
+ def test_actual_windows_listener_handles_unused_and_owned_ports(self):
+  from local_host import listener,ProcessHandle
+  with socket.socket()as sock:
+   sock.bind(('127.0.0.1',0));port=sock.getsockname()[1]
+   self.assertIsNone(listener(port))
+   sock.listen();owner=listener(port);self.assertEqual(owner['ProcessId'],os.getpid())
+   handle=ProcessHandle(owner['ProcessId'],owner['ExecutablePath']);handle.close()
+
  def test_failed_candidate_restores_original_checkpoint(self):
   with tempfile.TemporaryDirectory()as directory:
    root=pathlib.Path(directory);project=root/'project';(project/'.session').mkdir(parents=True)

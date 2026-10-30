@@ -15,7 +15,7 @@ def pristine(session):
 
 def listener(port):
  if type(port)is not int or not 1<=port<=65535:raise ValueError('Invalid local port')
- code="[Console]::OutputEncoding=[Text.UTF8Encoding]::new();$c=Get-NetTCPConnection -State Listen -LocalPort "+str(port)+" -ErrorAction SilentlyContinue; if($c){Get-CimInstance Win32_Process -Filter ('ProcessId='+@($c)[0].OwningProcess)|Select-Object ProcessId,ExecutablePath|ConvertTo-Json -Compress}"
+ code="[Console]::OutputEncoding=[Text.UTF8Encoding]::new();$c=@(Get-NetTCPConnection -State Listen -ErrorAction Stop | Where-Object LocalPort -eq "+str(port)+"); if($c.Count){Get-CimInstance Win32_Process -ErrorAction Stop -Filter ('ProcessId='+$c[0].OwningProcess)|Select-Object ProcessId,ExecutablePath|ConvertTo-Json -Compress};exit 0"
  result=subprocess.run(['powershell.exe','-NoProfile','-NonInteractive','-Command',code],capture_output=True,text=True,encoding='utf-8',check=True,creationflags=getattr(subprocess,'CREATE_NO_WINDOW',0))
  return json.loads(result.stdout)if result.stdout.strip()else None
 
@@ -49,13 +49,14 @@ def api(config,path,body=None):
 class LocalHost:
  def __init__(self,root,config):
   if not re.fullmatch(r'[a-zA-Z0-9_-]{1,32}',config['id']):raise ValueError('Invalid local target ID')
-  self.config=config;self.root=pathlib.Path(root)/'hosts'/config['id'];self.root.mkdir(parents=True,exist_ok=True);self.state_path=self.root/'current.json';self.journal=self.root/'transaction.json';self.project=pathlib.Path(config['project']).resolve();self.session=self.project/'.session/session.json'
+  self.config=config;self.root=pathlib.Path(root)/'hosts'/config['id'];self.root.mkdir(parents=True,exist_ok=True);self.state_path=self.root/'current.json';self.journal=self.root/'transaction.json';self.project=pathlib.Path(config['project']).resolve();self.session=self.project/'.session/session.json';self.barrier=self.project/'.update-in-progress'
   if not self.project.is_dir():raise ValueError('Local project directory does not exist')
  def read(self,path):
   try:return json.loads(path.read_bytes())
   except FileNotFoundError:return None
  def process_config(self,executable,stop_file,barrier):
-  args=[str(executable),'serve','--bind','127.0.0.1:'+str(self.config['port']),'--project',str(self.project),'--shutdown-file',str(stop_file),'--update-barrier',str(barrier)]
+  if pathlib.Path(barrier).resolve()!=self.barrier:raise ValueError('Local startup barrier must use the engine project path')
+  args=[str(executable),'serve','--bind','127.0.0.1:'+str(self.config['port']),'--project',str(self.project),'--shutdown-file',str(stop_file)]
   if self.session.exists():args+=['--resume-session',str(self.session)]
   return args
  def start(self,executable,stop_file,barrier):
@@ -83,7 +84,7 @@ class LocalHost:
   if journal.get('backup'):atomic(self.session,pathlib.Path(journal['backup']).read_bytes())
   previous=journal.get('previous')
   if previous:
-   barrier=self.root/'recovery.barrier';atomic(barrier,b'hold');stop=self.root/('shutdown-'+uuid.uuid4().hex)
+   barrier=self.barrier;atomic(barrier,b'hold');stop=self.root/('shutdown-'+uuid.uuid4().hex)
    process=self.start(previous['executable'],stop,barrier);self.ready(process);barrier.unlink(missing_ok=True)
    previous={**previous,'pid':process.pid,'shutdown_file':str(stop)};atomic(self.state_path,json.dumps(previous).encode())
   journal['phase']='complete';journal['result']='rolled_back';atomic(self.journal,json.dumps(journal).encode())
@@ -115,7 +116,7 @@ class LocalHost:
    finally:handle.close()
   backup=self.root/('checkpoint-'+uuid.uuid4().hex+'.json');expected=None
   if self.session.exists():atomic(backup,self.session.read_bytes())
-  stop=self.root/('shutdown-'+uuid.uuid4().hex);barrier=self.root/'update.barrier';atomic(barrier,b'hold')
+  stop=self.root/('shutdown-'+uuid.uuid4().hex);barrier=self.barrier;atomic(barrier,b'hold')
   journal={'phase':'stopped','backup':str(backup)if backup.exists()else None,'previous':previous,'candidate':str(candidate),'candidate_stop':str(stop)};atomic(self.journal,json.dumps(journal).encode())
   process=None
   try:
