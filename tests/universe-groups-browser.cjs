@@ -12,12 +12,14 @@ const {chromium} = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
  await page.addScriptTag({path:'web/output-ui.js'});
  await page.evaluate(()=>{
   const fixture=(id,name,address,model='dimmer',pixels=1)=>({id,name,address,model,universe:0,pixel_positions:Array(pixels).fill([0,0,0])});
-  window.p={dimming:{},dmx_models:{uv:{name:'UV',slots:[{name:'Dimmer'},{name:'Program'}]}},fixtures:[{...fixture('uv','UV COB',1),dmx_model:'uv'},fixture('rgb','RGB bar',3,'rgb'),fixture('wrap','Long bar',31,'rgb',2),fixture('last','Last channel',512)]};
+  window.p={dimming:{},dmx_models:{uv:{name:'UV',slots:[{name:'Dimmer'},{name:'Program'}]}},fixtures:[{...fixture('uv','UV COB',1),dmx_model:'uv',marker_color:'#A78BFA'},fixture('rgb','RGB bar',3,'rgb'),fixture('wrap','Long bar',31,'rgb',2),fixture('last','Last channel',512)]};
   window.commands=[];
   SchemaOutput.configure({project:()=>p,revision:()=>0,command:async c=>{commands.push(c);for(const cmd of c.commands||[])if(cmd.type==='set_fixture')p.fixtures=p.fixtures.map(f=>f.id===cmd.fixture.id?cmd.fixture:f);return true;}});
   SchemaOutput.open('patch');
  });
  const group=id=>page.locator('.universe-fixture-group[data-fixture="'+id+'"]');
+ assert.equal(await group('uv').evaluate(n=>n.style.getPropertyValue('--fixture-marker')),'#A78BFA');
+ assert.equal(await page.locator('.patch-fixture[data-fixture="uv"]').evaluate(n=>getComputedStyle(n).borderInlineStartColor),'rgb(167, 139, 250)');
  assert.equal(await group('uv').count(),1,'a two-channel fixture must have one visible group');
  assert.equal(await group('uv').locator('.universe-slot').count(),2);
  assert.match(await group('uv').innerText(),/UV COB/);

@@ -30,10 +30,27 @@ fn marking_is_metadata_only_undoable_and_survives_session_bundle_and_layout() {
         after["snapshot"]["fixtures"][0]["result"]
     );
     engine.apply(Command::Undo).unwrap();
+    assert_eq!(
+        serde_json::to_value(engine.checkpoint()).unwrap()["states"],
+        before["states"],
+        "Marker undo must not restart running nodes"
+    );
     assert!(
         serde_json::to_value(engine.project()).unwrap()["fixtures"][0]
             .get("marker_color")
             .is_none()
+    );
+    engine.apply(Command::Redo).unwrap();
+    assert_eq!(
+        serde_json::to_value(engine.checkpoint()).unwrap()["states"],
+        before["states"],
+        "Marker redo must not restart running nodes"
+    );
+    engine.apply(Command::HistoryJump { offset: -1 }).unwrap();
+    assert_eq!(
+        serde_json::to_value(engine.checkpoint()).unwrap()["states"],
+        before["states"],
+        "Marker history navigation must not restart running nodes"
     );
     engine.apply(Command::Redo).unwrap();
     let session: schema_rs::session::Session =

@@ -256,6 +256,23 @@ pub struct Engine {
     scripts: HashMap<String, rhai::AST>,
     script_engine: rhai::Engine,
 }
+// Organization-only history edits must not restart live node state.
+fn fixture_marks_only(before: &Project, after: &Project) -> bool {
+    if before.fixtures.len() != after.fixtures.len()
+        || !before
+            .fixtures
+            .iter()
+            .zip(&after.fixtures)
+            .any(|(a, b)| a.marker_color != b.marker_color)
+    {
+        return false;
+    }
+    let mut comparable = before.clone();
+    for (fixture, target) in comparable.fixtures.iter_mut().zip(&after.fixtures) {
+        fixture.marker_color.clone_from(&target.marker_color);
+    }
+    comparable == *after
+}
 impl Engine {
     pub fn new(project: Project) -> Result<Self> {
         project.validate()?;
@@ -586,6 +603,7 @@ impl Engine {
                 };
                 let mut span = from.split_off(from.len() - count);
                 let (project, scripts) = span.remove(0);
+                let keep_nodes = fixture_marks_only(&self.project, &project);
                 to.push((
                     Arc::new(std::mem::replace(
                         &mut self.project,
@@ -595,7 +613,9 @@ impl Engine {
                 ));
                 to.extend(span.into_iter().rev());
                 self.scripts = scripts;
-                self.nodes.clear();
+                if !keep_nodes {
+                    self.nodes.clear();
+                }
                 self.debug_focus = self
                     .debug_focus
                     .take()
@@ -654,6 +674,7 @@ impl Engine {
             }
             Command::Undo => {
                 let (p, scripts) = self.undo.pop().ok_or("Nothing to undo")?;
+                let keep_nodes = fixture_marks_only(&self.project, &p);
                 self.redo.push((
                     Arc::new(std::mem::replace(
                         &mut self.project,
@@ -662,7 +683,9 @@ impl Engine {
                     self.scripts.clone(),
                 ));
                 self.scripts = scripts;
-                self.nodes.clear();
+                if !keep_nodes {
+                    self.nodes.clear();
+                }
                 self.debug_focus = self
                     .debug_focus
                     .take()
@@ -672,6 +695,7 @@ impl Engine {
             }
             Command::Redo => {
                 let (p, scripts) = self.redo.pop().ok_or("Nothing to redo")?;
+                let keep_nodes = fixture_marks_only(&self.project, &p);
                 self.undo.push((
                     Arc::new(std::mem::replace(
                         &mut self.project,
@@ -680,7 +704,9 @@ impl Engine {
                     self.scripts.clone(),
                 ));
                 self.scripts = scripts;
-                self.nodes.clear();
+                if !keep_nodes {
+                    self.nodes.clear();
+                }
                 self.debug_focus = self
                     .debug_focus
                     .take()

@@ -382,7 +382,5 @@ button.fixture-marked::before{content:"";display:inline-block;flex:0 0 9px;width
 #scene-title.fixture-marked{border-inline-start:4px solid var(--fixture-marker);padding-inline-start:8px}
 
 #fixture-row button.fixture-marked::before{content:none}
-.patch-fixture.fixture-marked{border-inline-start:4px solid var(--fixture-marker)}
-.universe-fixture-group.fixture-marked{border-color:var(--fixture-marker)}
 
 #menu .fixture-marker-editor input[type=color]{width:52px;flex:0 0 52px}

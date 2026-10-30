@@ -875,11 +875,11 @@ window.SchemaAuthoring = (() => {
     else node.style.removeProperty('--fixture-marker');
     return node;
   }
-  function fixtureMarkerEditor(box, fixture, commit, count = 1) {
+  function fixtureMarkerEditor(box, fixture, commit, count = 1, hasMarker = !!SchemaAuthoringCore.markerColor(fixture)) {
     const row = el('div', undefined, 'fixture-marker-editor'), label = el('label', count > 1 ? `Marker color · ${count} fixtures` : 'Marker color'), input = el('input');
     input.type = 'color'; input.value = SchemaAuthoringCore.markerColor(fixture) || '#72dec2'; input.setAttribute('aria-label', 'Fixture marker color');
     input.onchange = async () => { if (await commit(input.value) !== false) clear.disabled = false; }; label.append(input);
-    const clear = button('Clear', async () => { if (await commit(null) !== false) { clear.disabled = true; input.value = '#72dec2'; } }); clear.setAttribute('aria-label', 'Clear fixture marker'); clear.disabled = !SchemaAuthoringCore.markerColor(fixture);
+    const clear = button('Clear', async () => { if (await commit(null) !== false) { clear.disabled = true; input.value = '#72dec2'; } }); clear.setAttribute('aria-label', 'Clear fixture marker'); clear.disabled = !hasMarker;
     row.append(label, clear, el('small', 'Navigation only · does not change light output'));
     box.append(row); return row;
   }

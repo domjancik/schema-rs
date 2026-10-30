@@ -19,8 +19,28 @@ fn request(address: &str, path: &str, body: Option<&str>) -> serde_json::Value {
         .unwrap();
     let body = body.unwrap_or("");
     write!(socket,"{} {} HTTP/1.1\r\nHost: {}\r\nConnection: close\r\nContent-Type: application/json\r\nContent-Length: {}\r\n\r\n{}",if body.is_empty(){"GET"}else{"POST"},path,address,body.len(),body).unwrap();
-    let mut response = String::new();
-    socket.read_to_string(&mut response).unwrap();
+    let mut bytes = Vec::new();
+    let mut chunk = [0u8; 8192];
+    loop {
+        let count = socket.read(&mut chunk).unwrap();
+        assert!(count > 0, "HTTP response ended before its declared body");
+        bytes.extend_from_slice(&chunk[..count]);
+        if let Some(end) = bytes.windows(4).position(|part| part == b"\r\n\r\n") {
+            let header = std::str::from_utf8(&bytes[..end]).unwrap();
+            let length = header
+                .lines()
+                .find_map(|line| {
+                    let (key, value) = line.split_once(':')?;
+                    key.eq_ignore_ascii_case("content-length")
+                        .then(|| value.trim().parse::<usize>().unwrap())
+                })
+                .expect("JSON responses have a known content length");
+            if bytes.len() >= end + 4 + length {
+                break;
+            }
+        }
+    }
+    let response = String::from_utf8(bytes).unwrap();
     assert!(response.starts_with("HTTP/1.1 200"), "{response}");
     serde_json::from_str(response.split_once("\r\n\r\n").unwrap().1).unwrap()
 }
