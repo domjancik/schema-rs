@@ -170,8 +170,28 @@ async fn run() -> Result<(), String> {
                 listener,
                 router(app_state).into_make_service_with_connect_info::<SocketAddr>(),
             )
-            .with_graceful_shutdown(async {
-                let _ = tokio::signal::ctrl_c().await;
+            .with_graceful_shutdown({
+                let shutdown_file = args
+                    .iter()
+                    .position(|arg| arg == "--shutdown-file")
+                    .map(|i| {
+                        args.get(i + 1)
+                            .map(PathBuf::from)
+                            .ok_or("--shutdown-file requires a path")
+                    })
+                    .transpose()?;
+                async move {
+                    let managed_stop = async {
+                        if let Some(path) = shutdown_file {
+                            while !path.is_file() {
+                                tokio::time::sleep(std::time::Duration::from_millis(100)).await;
+                            }
+                        } else {
+                            std::future::pending::<()>().await;
+                        }
+                    };
+                    tokio::select! { _ = tokio::signal::ctrl_c() => {}, _ = managed_stop => {} }
+                }
             })
             .await
             .map_err(|e| e.to_string())?;

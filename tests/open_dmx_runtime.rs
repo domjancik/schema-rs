@@ -71,8 +71,22 @@ async fn output_selection_is_undoable_and_missing_usb_never_stalls_evaluation() 
         .await
         .unwrap();
     let before = c.current().snapshot.frame;
-    tokio::time::sleep(std::time::Duration::from_millis(150)).await;
-    let now = c.current();
+    // Discovery runs independently; loaded CI hosts may schedule it later than evaluation.
+    let deadline = std::time::Instant::now() + std::time::Duration::from_secs(3);
+    let now = loop {
+        let frame = c.current();
+        if frame.snapshot.frame > before
+            && frame.snapshot.output_status.starts_with("Output error:")
+        {
+            break frame;
+        }
+        assert!(
+            std::time::Instant::now() < deadline,
+            "{}",
+            frame.snapshot.output_status
+        );
+        tokio::time::sleep(std::time::Duration::from_millis(20)).await;
+    };
     assert!(now.snapshot.frame > before);
     assert!(
         now.snapshot.output_status.starts_with("Output error:"),
