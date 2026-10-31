@@ -117,6 +117,45 @@ impl BrowserEngine {
                 json!({"document":result.document,"report":result.report})
             }
             "/api/history" => self.session.history(),
+            "/api/library/create" => {
+                let kind: schema_rs::library::Kind =
+                    serde_json::from_value(body["kind"].clone()).map_err(error)?;
+                let id = body["id"]
+                    .as_str()
+                    .ok_or_else(|| error("Missing library ID"))?
+                    .to_owned();
+                let title = body["title"]
+                    .as_str()
+                    .ok_or_else(|| error("Missing library title"))?
+                    .to_owned();
+                let mut bundle = self.session.bundle();
+                if let Some(text) = body["project_text"].as_str() {
+                    bundle.project = serde_json::from_value(
+                        schema_rs::migrations::parse(text.as_bytes()).map_err(error)?,
+                    )
+                    .map_err(error)?;
+                }
+                let content = body["content_text"]
+                    .as_str()
+                    .map(|text| {
+                        schema_rs::migrations::parse(text.as_bytes())
+                            .and_then(|v| serde_json::from_value(v).map_err(|e| e.to_string()))
+                    })
+                    .transpose()
+                    .map_err(error)?;
+                let item = schema_rs::library::Item::new(kind, id, title, bundle, content);
+                item.validate().map_err(error)?;
+                serde_json::to_value(item).map_err(error)?
+            }
+            "/api/library/validate" => {
+                let item: schema_rs::library::Item = serde_json::from_value(body).map_err(error)?;
+                item.validate().map_err(error)?;
+                serde_json::to_value(item.entry().map_err(error)?).map_err(error)?
+            }
+            "/api/library/apply" => {
+                let item = serde_json::from_value(body["item"].clone()).map_err(error)?;
+                json!({"revision":self.session.import_library(item,expected).map_err(error)?})
+            }
             "/api/projects/bundle" => {
                 if body.is_null() {
                     serde_json::to_value(self.session.bundle()).map_err(error)?

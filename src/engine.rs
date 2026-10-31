@@ -520,6 +520,43 @@ impl Engine {
         engine.last.can_redo = !engine.redo.is_empty();
         Ok(engine)
     }
+    pub fn prepare_library(
+        session: crate::session::Session,
+        item: crate::library::Item,
+    ) -> Result<PreparedBundle> {
+        item.validate()?;
+        let references_init = item.references_init();
+        let mut bundle = item.bundle;
+        // The startup snapshot is workspace-owned. Retain it in the archive, not as an unrelated runtime dependency.
+        if !references_init {
+            bundle.assets.content.remove("init");
+        }
+        if item.kind == crate::library::Kind::Project {
+            bundle.project.name = item.title;
+            bundle.project.output = session.project.output.clone();
+            bundle.project.output.enabled = false;
+            return Self::prepare_bundle(session, bundle);
+        }
+        let revision = session.snapshot.revision;
+        let generation = session.plugins.state.generation;
+        bundle.project = (*session.project).clone();
+        let mut merged = bundle.prepare(session.clone())?;
+        // Merge dependencies first, then use the ordinary sparse edit path. Other layers retain state.
+        merged.project = session.project;
+        merged.undo = session.undo;
+        merged.redo = session.redo;
+        merged.states = session.states;
+        merged.snapshot = session.snapshot;
+        let mut engine = Self::from_session(merged)?;
+        engine.apply(Command::ApplyContent {
+            entries: item.content.ok_or("Missing content")?.entries,
+        })?;
+        Ok(PreparedBundle {
+            engine,
+            revision,
+            generation,
+        })
+    }
     pub fn prepare_bundle(
         session: crate::session::Session,
         bundle: crate::bundle::Bundle,

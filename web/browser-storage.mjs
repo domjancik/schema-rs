@@ -1,5 +1,5 @@
 // IndexedDB schema upgrades add stores only. Rust owns document migrations and validation.
-export const DATABASE_VERSION = 2;
+export const DATABASE_VERSION = 3;
 export function openStorage(versions) {
   return new Promise((resolve, reject) => {
     const request = indexedDB.open("schema-browser", DATABASE_VERSION);
@@ -9,6 +9,7 @@ export function openStorage(versions) {
         "sessions",
         "projects",
         "resources",
+        "library",
         "migration-backups",
       ])
         if (!request.result.objectStoreNames.contains(name))
@@ -44,7 +45,7 @@ export function openStorage(versions) {
 class BrowserStorage {
   constructor(db, versions) {
     this.db = db;
-    this.versions = versions;
+    this.versions = {...versions, library:1};
   }
   access(store, mode, action) {
     return new Promise((resolve, reject) => {
@@ -79,6 +80,7 @@ class BrowserStorage {
   saveSession(record, expectedText, forceBackup = false) {
     return this.replace("sessions", record, { expectedText, forceBackup });
   }
+  saveLibrary(record, expected) { return this.replace("library",record,{overwrite:!!expected,expected,forceBackup:true}); }
   saveProject(record, overwrite, expected) {
     return this.replace("projects", record, { overwrite, expected });
   }
@@ -86,6 +88,7 @@ class BrowserStorage {
     return this.replace("resources", record, { expected });
   }
   format(store, record) {
+    if(store === "library") return {kind:"library",version:record.item.version};
     if (store === "sessions") {
       const document = JSON.parse(record.text);
       return { kind: "session", version: document.version };

@@ -52,6 +52,40 @@ async function request(path,body){
   if(path==='/api/session/raw')return engine.checkpoint();
   if(path==='/api/project/raw')return engine.request(path,'null');
   if(path==='/api/projects/bundle/raw')return engine.request('/api/projects/bundle','null');
+  if(path==='/api/library/peer')throw Error('Direct LAN transfers require a hosted Schéma server. Download a file here and import it in the other server’s manager, or open its own UI from Servers.');
+  if(path==='/api/library'){
+    const data=capture(),entries=[{key:'current',kind:'project',id:'current-project',title:data.project.name,origin:'Running project',fixtures:data.project.fixtures.length,layers:0,hash:'',bytes:0}];
+    for(const p of (await request('/api/projects')).projects)entries.push({key:'project:'+p.id,kind:'project',id:p.id,title:p.title,origin:'Saved projects',fixtures:p.fixtures,layers:0,hash:'',bytes:0});
+    for(const c of (await request('/api/content')).contents)if(!c.error)entries.push({key:'content:'+c.name,kind:'content',id:c.name,title:c.name,origin:'Content presets',fixtures:0,layers:c.targets.length,hash:'',bytes:0});
+    for(const value of await storageRequired().all('library'))entries.push(value.entry);
+    return{protocol:1,name:data.project.name,entries,direct_transfer:false};
+  }
+  if(path==='/api/library/export'){
+    if(body.key.startsWith('portable:')){const saved=await storageRequired().get('library',body.key);if(!saved)throw Error('Library item not found');engine.request('/api/library/validate',JSON.stringify(saved.item));return saved.item;}
+    const data={kind:'project',id:'current-project',title:capture().project.name};
+    if(body.key.startsWith('project:')){data.id=id(body.key.slice(8));const saved=await storageRequired().get('projects',data.id);if(!saved)throw Error('Save this legacy project as a named project before transferring');data.project_text=saved.project_text??JSON.stringify(saved.project);data.title=saved.title;}
+    else if(body.key.startsWith('content:')){data.kind='content';data.id=id(body.key.slice(8));data.title=data.id;const saved=await storageRequired().get('resources','content:'+data.id);if(!saved)throw Error('Content not found');data.content_text=resourceText(saved);}
+    else if(body.key!=='current')throw Error('Unknown library entry');
+    return JSON.parse(engine.request('/api/library/create',JSON.stringify(data)));
+  }
+  if(path==='/api/library/import'){
+    const entry=JSON.parse(engine.request('/api/library/validate',JSON.stringify(body.item))),store=storageRequired(),old=await store.get('library',entry.key);
+    if((old?.entry.hash??null)!==(body.expected_hash??null))throw Error('Revision conflict: library copy exists or changed; review before replacing');
+    await store.saveLibrary({id:entry.key,item:body.item,entry},old??null);
+    return{entry,stored_only:true};
+  }
+  if(path==='/api/library/publish'){
+    revision(body.expected_revision);const item=await request('/api/library/export',{key:body.key});if(item.kind!=='content')throw Error('Only content presets can be published');
+    const text=typeof item.content==='string'?item.content:JSON.stringify(item.content),store=storageRequired(),previous=await store.get('resources','content:'+item.id);
+    if(previous&&JSON.stringify(migrate('content',resourceText(previous)).document)!==JSON.stringify(migrate('content',text).document))throw Error('Content library name conflict; save a copy with a different ID before publishing');
+    migrate('content',text);
+    await store.saveResource({id:'content:'+item.id,value_text:text,saved_revision:capture().snapshot.revision,modified_unix_ms:Date.now()},previous??null);
+    engine.request('/api/resources/content',JSON.stringify({name:item.id,text}));
+    return{published:true,name:item.id};
+  }
+  if(path==='/api/library/load'){
+    const item=await request('/api/library/export',{key:body.key});const result=JSON.parse(engine.request('/api/library/apply',JSON.stringify({item,expected_revision:body.expected_revision})));await persist();return result;
+  }
   if(path==='/api/projects'){
     const projects=(await storageRequired().all('projects')).map(({project,project_text,...entry})=>entry),known=new Set(projects.map(p=>p.id));
     for(const resource of await storage.all('resources')){

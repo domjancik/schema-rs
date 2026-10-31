@@ -12,7 +12,7 @@ default-members = ["."]
 
 [features]
 default = ["native"]
-native = ["dep:axum", "dep:tokio", "dep:crossterm"]
+native = ["dep:axum", "dep:tokio", "dep:crossterm", "dep:reqwest"]
 browser = ["rhai/wasm-bindgen", "dep:web-time"]
 
 [[bin]]
@@ -31,6 +31,9 @@ axum = { version = "0.8", optional = true }
 tokio = { version = "1", features = ["rt-multi-thread", "net", "macros", "signal"], optional = true }
 crossterm = { version = "0.28.1", optional = true }
 rhai = { version = "1", features = ["sync", "no_module"] }
+
+sha2 = "0.10"
+reqwest = { version = "0.12", default-features = false, features = ["json", "rustls-tls"], optional = true }
 
 [dev-dependencies]
 tower = { version = "0.5", features = ["util"] }

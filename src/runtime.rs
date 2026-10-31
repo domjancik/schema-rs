@@ -303,6 +303,17 @@ impl EngineSession {
         let prepared = Engine::prepare_bundle(self.engine.checkpoint(), bundle)?;
         self.engine.install_bundle(prepared)
     }
+    pub fn import_library(
+        &mut self,
+        item: crate::library::Item,
+        expected: Option<u64>,
+    ) -> Result<u64> {
+        if expected.is_some_and(|r| r != self.engine.revision()) {
+            return Err("Revision conflict: refresh state before editing".into());
+        }
+        let prepared = Engine::prepare_library(self.engine.checkpoint(), item)?;
+        self.engine.install_bundle(prepared)
+    }
     pub fn catalog(&self) -> Vec<serde_json::Value> {
         let mut rows = crate::scenic::catalog()
             .iter()

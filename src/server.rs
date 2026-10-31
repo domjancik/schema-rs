@@ -164,6 +164,27 @@ impl Controller {
             .map_err(|_| "Bundle commit timed out")?
             .map_err(|_| "Engine stopped")?
     }
+    pub async fn import_library(
+        &self,
+        item: crate::library::Item,
+        expected: Option<u64>,
+    ) -> Result<u64> {
+        let session = self.checkpoint().await?;
+        if expected.is_some_and(|r| r != session.snapshot.revision) {
+            return Err("Revision conflict: refresh state before editing".into());
+        }
+        let prepared = tokio::task::spawn_blocking(move || Engine::prepare_library(session, item))
+            .await
+            .map_err(|e| e.to_string())??;
+        let (tx, rx) = tokio::sync::oneshot::channel();
+        self.commands
+            .try_send(RequestMessage::Bundle(Box::new(prepared), tx))
+            .map_err(|_| "Engine command queue is full")?;
+        tokio::time::timeout(Duration::from_secs(3), rx)
+            .await
+            .map_err(|_| "Bundle commit timed out")?
+            .map_err(|_| "Engine stopped")?
+    }
     pub async fn command(&self, command: Command, expected: Option<u64>) -> Result<u64> {
         self.dispatch(command, expected, true).await
     }
@@ -750,7 +771,7 @@ pub struct AppState {
     pub root: PathBuf,
     token: Option<Arc<String>>,
     pin_attempts: Arc<std::sync::Mutex<PinAttempts>>,
-    io_lock: Arc<tokio::sync::Mutex<()>>,
+    pub(crate) io_lock: Arc<tokio::sync::Mutex<()>>,
 }
 impl AppState {
     pub fn start_plugin_watcher(&self) -> Result<crate::plugin_host::Watcher> {
@@ -811,8 +832,8 @@ struct LoadContent {
     group: Option<String>,
     expected_revision: Option<u64>,
 }
-type ApiResult<T> = std::result::Result<T, ApiError>;
-struct ApiError(String);
+pub(crate) type ApiResult<T> = std::result::Result<T, ApiError>;
+pub(crate) struct ApiError(pub(crate) String);
 impl From<String> for ApiError {
     fn from(e: String) -> Self {
         Self(e)
@@ -920,6 +941,8 @@ pub fn router(state: AppState) -> Router {
 .route("/output-core.js",get(||async{ ([(header::CONTENT_TYPE,"text/javascript")],include_str!("../web/output-core.js")) }))
 .route("/output-ui.js",get(||async{ ([(header::CONTENT_TYPE,"text/javascript")],include_str!("../web/output-ui.js")) }))
 .route("/output-design.css",get(||async{ ([(header::CONTENT_TYPE,"text/css")],include_str!("../web/output-design.css")) }))
+        .route("/library-ui.js",get(||async{ ([(header::CONTENT_TYPE,"text/javascript; charset=utf-8")],include_str!("../web/library-ui.js")) }))
+        .route("/library.css",get(||async{ ([(header::CONTENT_TYPE,"text/css; charset=utf-8")],include_str!("../web/library.css")) }))
         .route("/projects-ui.js",get(||async{ ([(header::CONTENT_TYPE,"text/javascript")],include_str!("../web/projects-ui.js")) }))
         .route("/bezier-editor.js",get(||async{ ([(header::CONTENT_TYPE,"text/javascript")],include_str!("../web/bezier-editor.js")) }))
         .route("/bezier-editor.css",get(||async{ ([(header::CONTENT_TYPE,"text/css")],include_str!("../web/bezier-editor.css")) }))
@@ -1177,6 +1200,7 @@ pub fn router(state: AppState) -> Router {
         .route("/api/content", get(content_list))
         .route("/api/content/load", post(load_content))
         .layer(DefaultBodyLimit::max(512 * 1024))
+        .merge(crate::library_api::router())
         .layer(middleware::from_fn_with_state(state.clone(), guard))
         .with_state(state)
 }

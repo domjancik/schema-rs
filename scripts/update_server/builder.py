@@ -62,7 +62,11 @@ def build(repo,store,signer,config,job,stop):
    phase(name)
    for command in commands:run(command,source,env,log,stop)
    checks[name]=True
-  phase('updater tests');run([config.get('python',__import__('sys').executable),'tests/update_server_test.py'],source,env,log,stop);run([config.get('python',__import__('sys').executable),'tests/update_delivery_test.py'],source,env,log,stop);run(['node','tests/update_public_verification.cjs'],source,env,log,stop)
+  phase('updater tests')
+  if (source/'tests/cross_toolchain_test.py').is_file():run([config.get('python',__import__('sys').executable),'tests/cross_toolchain_test.py'],source,env,log,stop)
+  run([config.get('python',__import__('sys').executable),'tests/update_server_test.py'],source,env,log,stop);run([config.get('python',__import__('sys').executable),'tests/update_delivery_test.py'],source,env,log,stop);run(['node','tests/update_public_verification.cjs'],source,env,log,stop)
+  if (source/'scripts/cross_toolchain.py').is_file():
+   phase('ARM64 TLS toolchain');tool_spec=importlib.util.spec_from_file_location('schema_cross_toolchain',source/'scripts/cross_toolchain.py');tool=importlib.util.module_from_spec(tool_spec);tool_spec.loader.exec_module(tool);env.update(tool.environment(store.root/'tools'))
   phase('build ARM64');run(['cargo','build','--locked','--release','--target','aarch64-unknown-linux-musl'],source,env,log,stop)
   phase('build Windows');run(['cargo','build','--locked','--release'],source,env,log,stop)
   phase('smoke');smoke(cache/'release/schema-rs.exe',source,work,config,log,stop);checks['smoke']=True;checks['gpu_smoke']=bool(config.get('gpu_smoke'))

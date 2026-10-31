@@ -136,7 +136,7 @@ const sessionText = fs.readFileSync(
       );
     }
     let stored = await records();
-    assert.equal(stored.version, 2);
+    assert.equal(stored.version, 3);
     assert.equal(
       stored.sessions[0].text,
       sessionText,
@@ -298,7 +298,7 @@ const sessionText = fs.readFileSync(
     await page.evaluate(
       () =>
         new Promise((resolve) => {
-          const r = indexedDB.open("schema-browser", 3);
+          const r = indexedDB.open("schema-browser", 4);
           r.onupgradeneeded = () => r.result.createObjectStore("future-data");
           r.onsuccess = () => {
             const db = r.result,

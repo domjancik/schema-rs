@@ -31,6 +31,8 @@ jobs:
         run: |
           npm install --prefix "$RUNNER_TEMP/schema-browser-tests" playwright@1.62.1
           node "$RUNNER_TEMP/schema-browser-tests/node_modules/playwright/cli.js" install --with-deps chrome chromium
+      - name: Portable project and content library
+        run: PLAYWRIGHT_MODULE="$RUNNER_TEMP/schema-browser-tests/node_modules/playwright" node tests/library-manager-wasm.cjs
       - name: Test actual WASM in Chrome
         run: PLAYWRIGHT_MODULE="$RUNNER_TEMP/schema-browser-tests/node_modules/playwright" node tests/browser-runtime.cjs
       - name: Test historical storage upgrades in Chrome

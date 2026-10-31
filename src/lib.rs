@@ -62,3 +62,7 @@ pub mod inspection;
 pub mod dimming_clock;
 
 pub mod logs;
+
+pub mod library;
+#[cfg(feature = "native")]
+pub mod library_api;

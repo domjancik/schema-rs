@@ -29,7 +29,7 @@ const server = http.createServer((req,res) => {
  const color=async value=>page.getByLabel('Fixture marker color',{exact:true}).evaluate((input,value)=>{input.value=value;input.dispatchEvent(new Event('change',{bubbles:true}));},value);
  await color('#a78bfa');await page.locator('#fixtures .fixture-marked').waitFor();let after=await state();assert.equal(after.project.fixtures[0].marker_color,'#a78bfa');assert.deepEqual(after.snapshot.universes,before.snapshot.universes);assert.deepEqual(after.snapshot.fixtures[0].result,before.snapshot.fixtures[0].result);
  assert.equal(await page.locator('#stage [data-fixture="'+first.id+'"]').getAttribute('fill'),originalFill,'Organization markers must not replace the evaluated fill');
- assert.equal(await page.locator('#stage [data-fixture="'+first.id+'"]').evaluate(n=>getComputedStyle(n).stroke),'rgb(167, 139, 250)','Marker color belongs on the outline, including selection');
+ await page.waitForFunction(id=>{const n=document.querySelector('#stage [data-fixture="'+id+'"]');return n&&getComputedStyle(n).stroke==='rgb(167, 139, 250)';},first.id);
  await page.locator('#undo').click();await page.waitForFunction(()=>!document.querySelector('#fixtures .fixture-marked'));await page.locator('#redo').click();await page.locator('#fixtures .fixture-marked').waitFor();
  await page.locator('#fixtures button').filter({hasText:second.name}).click({modifiers:['Shift']});assert(await page.getByRole('button',{name:'Clear fixture marker',exact:true}).isEnabled(),'An unmarked active fixture must not disable clearing marked peers');
  await page.getByRole('button',{name:'Clear fixture marker',exact:true}).click();await page.waitForFunction(()=>!document.querySelector('#fixtures .fixture-marked'));
