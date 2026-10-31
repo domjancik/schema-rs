@@ -34,6 +34,8 @@ The main setup camera is a per-browser preference restored on reload. Navigating
 
 Set **Marker color** in Fixture setup; Shift-select fixtures in Studio to color-mark them together in one undoable edit. **Clear** returns to the default marker, including mixed selections. Marker-only undo, redo and history navigation preserve running animation and random-generator state. Schémaboy exposes the same control under its menu → Fixture setup. Swatches appear in fixture navigation/search, setup and scene markers, embedded stack headers and universe patch groups.
 
+In Fixture setup and lightweight scene views, the marker color is the fixture outline. The fill shows evaluated color output, or grayscale driven by a scalar value when no color is produced; absent output is black. Selection has a separate outer ring, so selecting a marked fixture retains its organization color. Animated output dots also follow evaluated output rather than the marker.
+
 Markers are saved layout metadata (`fixture.marker_color`, optional `#RRGGBB`), independent of emitted light color, fixture dimming and DMX. Existing unmarked files stay unmarked. Use color blocks when you actually want to change light output. Marked files require an engine with marker-color support.
 
 

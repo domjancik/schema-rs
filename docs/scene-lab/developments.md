@@ -535,3 +535,10 @@ Public Vercel publication remains blocked: delivery reports `needs_auth`, requir
 The user connected a dedicated Vercel deployment token through the local masked field. Project access was validated before saving directly to Windows Credential Manager; no secret was added to repository files, logs or command arguments. Started the existing approved Schéma automatic updates scheduled task after finding its supervisor stopped; health endpoint is healthy.
 
 The public-publication blocker above is resolved. Updater now reports `current` for signed release `dbe086bb67d3-52492b1b0c4f-47`, source `dbe086bb67d3a4ba0f80842be758a2bddefe2355`, at https://schema-s.vercel.app/app. Browser and download manifests independently return the same commit; production verification streamed and matched all Windows x64, Linux x64, Linux ARM64 and unsigned macOS universal downloads against expected lengths/checksums. Existing local/Pi deployments and scene data were not changed for credential setup.
+
+
+## Fixture marker outlines and evaluated fills — 2026-10-31
+
+Pending activation: Fixture setup and lightweight Studio/Schémaboy scene markers now use organization color on the outline while their fill displays evaluated color, falling back to scalar-driven grayscale or black when no output exists. A shared output-color helper removes the previous mint/white fallback in scene views. Selected fixtures retain their marker outline with a separate outer selection ring. Animated output markers use the same evaluated fill. Fixture/navigation/search/patch swatches retain their existing organization colors. No engine, authored scene or DMX semantics change.
+
+Regression checks cover computed marker outline with selected fixtures, marker-independent color and scalar fills, mobile linear/3D views, marker editing/clearing, undo/redo/reload and unchanged evaluated banks/DMX for marker-only edits. Scene lab should retest Carpushit UV/white fixture layout displays on isolated output-disabled examples after rollout.

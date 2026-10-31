@@ -193,8 +193,9 @@
   accent-color: var(--state-live);
 }
 .fixture-layout.active,
+.fixture-layout.fixture-marked,
 .fixture-layout-dot {
-  stroke: var(--state-selected) !important;
+  stroke: var(--fixture-marker, var(--state-selected)) !important;
 }
 .schematic-label {
   paint-order: stroke;
@@ -412,3 +413,10 @@ button.fixture-marked::before{content:"";display:inline-block;flex:0 0 9px;width
 .fixture-groups button{background:var(--ui-panel,var(--control));color:var(--ui-text,var(--ink));border:1px solid var(--ui-border,var(--line));border-radius:6px;padding:8px 12px;font:inherit;cursor:pointer}
 .content-library input,.content-library select{font-size:14px}.content-library select[size]{height:180px}
 .content-library option:checked{background:var(--ui-accent-fill,#16745c);color:var(--ui-accent-ink,#fff)}
+
+#stage .fixture-selection, .schematic-scene .fixture-selection {
+  fill: none;
+  stroke: var(--state-selected, #72dec2);
+  stroke-width: 1.5;
+  pointer-events: none;
+}

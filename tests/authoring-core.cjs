@@ -56,3 +56,8 @@ assert(
 console.log(
   "Crowded picking, collision-free labels, arrangement commands and fuzzy action search passed.",
 );
+
+assert.equal(A.outputColor({value:.25}), 'rgb(64,64,64)');
+assert.equal(A.outputColor({value:0}), 'rgb(0,0,0)');
+assert.equal(A.outputColor({colors:[[1,.2,0,1]],value:.25}), 'rgb(255,51,0)');
+assert.equal(A.outputColor({}), 'rgb(0,0,0)');

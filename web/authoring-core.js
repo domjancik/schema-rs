@@ -148,6 +148,11 @@
       .sort((a, b) => a.score - b.score || a.i - b.i)
       .map((x) => x.a);
   }
+  function outputColor(bank) {
+    const value = Number.isFinite(bank?.value) ? bank.value : 0;
+    const color = bank?.colors?.[0] || [value, value, value];
+    return `rgb(${color.slice(0, 3).map(v => Math.round(Math.max(0, Math.min(1, Number.isFinite(v) ? v : 0)) * 255)).join(',')})`;
+  }
   const markerColor = fixture => /^#[0-9a-f]{6}$/i.test(fixture?.marker_color || "") ? fixture.marker_color : null;
   function groupChoices(fixtures, selected) {
     const counts = new Map(), memberships = new Map();
@@ -170,7 +175,7 @@
     if (!commands.length) throw Error('Select a fixture first.');
     return commands.length === 1 ? commands[0] : {type:'batch', commands};
   }
-  const api = { hits, labels, arrange, search, markerColor, groupChoices, groupCommand };
+  const api = { hits, labels, arrange, search, markerColor, outputColor, groupChoices, groupCommand };
   root.SchemaAuthoringCore = api;
   if (typeof module !== "undefined") module.exports = api;
 })(globalThis);

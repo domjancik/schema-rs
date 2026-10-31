@@ -220,11 +220,7 @@
         }))
         .sort((a, b) => a.p.depth - b.p.depth)
         .forEach(({ f, p }) => {
-          const c = f.result.colors?.[0] || [0.45, 0.87, 0.76, 1],
-            color = `rgb(${c
-              .slice(0, 3)
-              .map((v) => Math.round(clamp(v, 0, 1) * 255))
-              .join(',')})`;
+          const color = SchemaAuthoringCore.outputColor(f.result);
           if (f.result.position) {
             const q = project(f.result.position, camera, width, height);
             if (Math.hypot(q.x - p.x, q.y - p.y) > 0.5) {
@@ -254,15 +250,17 @@
             'data-fixture': f.fixture.id,
             class: 'stage-fixture'
           });
+          if (f.fixture.id === options.selected()) g.append(svg('circle', {cx:p.x,cy:p.y,r:12,class:'fixture-selection','pointer-events':'none','aria-hidden':'true'}));
           g.append(
             svg('circle', { cx: p.x, cy: p.y, r: 18, fill: 'transparent', class: 'schematic-hit' }),
             svg('circle', {
               cx: p.x,
               cy: p.y,
               r: f.fixture.id === options.selected() ? 8 : 4,
-              fill: SchemaAuthoringCore.markerColor(f.fixture) || color,
+              fill: color,
+              style: `--fixture-marker:${SchemaAuthoringCore.markerColor(f.fixture) || "var(--state-selected,#72dec2)"}`,
               stroke: 'var(--accent,#72dec2)',
-              'stroke-width': f.fixture.id === options.selected() ? 2 : 0,
+              'stroke-width': 2,
               'pointer-events': 'none',
               class: 'fixture-layout-dot'
             })
