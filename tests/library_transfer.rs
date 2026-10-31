@@ -105,7 +105,13 @@ fn peer_addresses_and_keys_are_constrained() {
     .url()
     .is_ok());
     // Synthetic address-class fixtures; these are not configured deployment targets.
-    for ip in ["127.0.0.1", "10.23.45.67", "192.168.234.56", "::1", "fd00::1"] {
+    for ip in [
+        "127.0.0.1",
+        "10.23.45.67",
+        "192.168.234.56",
+        "::1",
+        "fd00::1",
+    ] {
         assert!(allowed_address(ip.parse().unwrap()));
     }
     for ip in [
