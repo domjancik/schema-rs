@@ -528,3 +528,10 @@ The eight implementation requests from recovered queue items 17–24 are active 
 Verified current on local desktop 8797, Studio 8788, scene-lab Carpushit 18798, and the configured Orange Pi at 10.0.0.2. Independently verified release signature and hashes of served app/mobile/inspection/breadcrumb assets against committed source. Exact project, undo and redo hashes were unchanged across activation. Revisions/undo counts remain 8797: 0/0; 8788: 203/10; 18798: 8/8; Pi: 36/34. Pi output remains enabled and its updater reports OLA unchanged. Read-only live 18798 browser smoke confirms Schéma-s branding, Root breadcrumb and scalar-dependent widgets with no page errors. Private hash-only evidence is retained at `target/deploy/final-queue-rollout-verification.json`.
 
 Public Vercel publication remains blocked: delivery reports `needs_auth`, requiring the dedicated Vercel deployment token already requested from the user. Do not describe the public app/downloads as updated to this commit. Scene-lab may retest activated features on isolated output-disabled engines; live scenes and history remain untouched.
+
+
+## Public deployment credential connected — 2026-10-31
+
+The user connected a dedicated Vercel deployment token through the local masked field. Project access was validated before saving directly to Windows Credential Manager; no secret was added to repository files, logs or command arguments. Started the existing approved Schéma automatic updates scheduled task after finding its supervisor stopped; health endpoint is healthy.
+
+The public-publication blocker above is resolved. Updater now reports `current` for signed release `dbe086bb67d3-52492b1b0c4f-47`, source `dbe086bb67d3a4ba0f80842be758a2bddefe2355`, at https://schema-s.vercel.app/app. Browser and download manifests independently return the same commit; production verification streamed and matched all Windows x64, Linux x64, Linux ARM64 and unsigned macOS universal downloads against expected lengths/checksums. Existing local/Pi deployments and scene data were not changed for credential setup.
